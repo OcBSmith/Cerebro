@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dll
+*.log
+
+# Virtual env
+.venv/
+.venv39/
+.venv310/
+.env
+
+# Build/Dist
+build/
+dist/
+*.spec
+
+# Caches
+.cache/
+*.cache/
+.python-version
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Data & large artifacts (keep sources small)
+models_cache/
+output/
+# Keep LlamaIndex chunks and scripts, but avoid huge intermediates
+# Uncomment if your storage is very large; otherwise keep it tracked
+# data/llamaindex/storage/
+
+data/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
