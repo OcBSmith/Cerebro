@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part001</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>ORCA Manual</h2>
+<h2>Release 6.1</h2>
+<h2>Max-Planck-Institut für Kohlenforschung</h2>
+<h2>Jul 17, 2025</h2>
+<h2>PREFACE</h2>
+<table><tbody><tr><td colspan="2">ORCA 6.1 Foreword</td><th>i</th></tr><tr><td colspan="2">ORCA 6.1 Highlights</td><td>iii</td></tr><tr><td colspan="2">How to cite</td><td>v</td></tr><tr><td colspan="2">How to use this manual</td><td>ix</td></tr><tr><td colspan="2">1 Quickstart Guide</td><td>1</td></tr><tr><td colspan="2">1.1 ORCA</td><td>. . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>1</td></tr><tr><td></td><td>About</td><td>1</td></tr><tr><td>1.2 1.3</td><td>Installation . . . . . . . . . . . . . . . . . . . . . . . . . . . Graphical User Interfaces (GUI) . . . . . . . . . . . . . . . .</td><td>3</td></tr><tr><td>1.4</td><td>Running ORCA . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>3</td></tr><tr><td>1.5</td><td>Hello water! Your first ORCA calculation . . . . . . . . . . .</td><td>4</td></tr><tr><td>1.7</td><td>Troubleshooting Problems in ORCA . . . . . . . . . . . . . .</td><td>10</td></tr><tr><td colspan="2">Essential Calculation Elements</td><td>23</td></tr><tr><td>2.1</td><td>General Structure of the Input File . . . . . . . . . . . . . . .</td><td>23</td></tr><tr><td>2.2</td><td>Input of Coordinates . . . . . . . . . . . . . . . . . . . . . .</td><td>31</td></tr><tr><td>2.3</td><td>Basic Calculation Settings . . . . . . . . . . . . . . . . . . .</td><td>37</td></tr><tr><td>2.4</td><td>Control of Output . . . . . . . . . . . . . . . . . . . . . . . .</td><td>38</td></tr><tr><td>2.5</td><td>Parallel and Multi-Process Runs . . . . . . . . . . . . . . . .</td><td>42</td></tr><tr><td>2.6</td><td>Self-Consistent-Field (SCF) . . . . . . . . . . . . . . . . . .</td><td>47</td></tr><tr><td>2.7</td><td>Basis Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>60</td></tr><tr><td>2.8</td><td>Resolution-of-the-Identity (RI) . . . . . . . . . . . . . . . . .</td><td>94</td></tr><tr><td>2.9</td><td>Numerical Integration . . . . . . . . . . . . . . . . . . . . .</td><td>103</td></tr><tr><td>2.10</td><td>Details on the Numerical Integration Grids . . . . . . . . . . .</td><td>104</td></tr><tr><td>2.11</td><td>Counterpoise Corrections . . . . . . . . . . . . . . . . . . . .</td><td>108</td></tr><tr><td>2.12</td><td>Relativistic Calculations . . . . . . . . . . . . . . . . . . . .</td><td>115</td></tr><tr><td>2.13</td><td>Implicit Solvation . . . . . . . . . . . . . . . . . . . . . . . .</td><td>126</td></tr><tr><td>2.14</td><td>Integral Handling . . . . . . . . . . . . . . . . . . . . . . . .</td><td>151</td></tr><tr><td>2.15</td><td>The SHARK Integral Package and Task Driver . . . . . . . .</td><td>163</td></tr><tr><td>2.16</td><td>SCF Stability Analysis . . . . . . . . . . . . . . . . . . . . .</td><td>167</td></tr><tr><td>2.17</td><td>Finite Electric Fields . . . . . . . . . . . . . . . . . . . . . .</td><td>169</td></tr><tr><td>2.18</td><td>Fragment Specification . . . . . . . . . . . . . . . . . . . . .</td><td>172</td></tr><tr><td>2.19</td><td>ORCA and Symmetry . . . . . . . . . . . . . . . . . . . . .</td><td>191</td></tr><tr><td>2.20</td><td>Choice of Initial Guess and Restart of SCF Calculations . . . .</td><td>197</td></tr><tr><td>2.21</td><td>Frozen Core Options . . . . . . . . . . . . . . . . . . . . . .</td><td>201</td></tr><tr><td>2.22</td><td>CP-SCF Options . . . . . . . . . . . . . . . . . . . . . . . .</td><td>203</td></tr><tr><td>2.23</td><td>Numerical Gradients . . . . . . . . . . . . . . . . . . . . . .</td><td>205</td></tr><tr><td colspan="2">3</td><td></td></tr><tr><td colspan="2">Model Chemistries</td><td>207</td></tr><tr><td>3.1</td><td>Wavefunction Types: RHF/RKS, UHF/UKS, ROKS and more</td><td>207</td></tr><tr><td>3.2</td><td>Hartree Fock Theory . . . . . . . . . . . . . . . . . . . . . .</td><td>211</td></tr></tbody></table>
+<p>4</p>
+<p>5</p>
+<table><tbody><tr><th>3.3</th><td>Density Functional Theory (DFT) . . . . . . . . . . . . . . . . . . . . . . .</td><td>211</td></tr><tr><td>3.4</td><td>Dispersion Corrections . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>235</td></tr><tr><td>3.5</td><td>Semiempirical Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>248</td></tr><tr><td>3.6</td><td>Composite Methods (3c methods) . . . . . . . . . . . . . . . . . . . . . . .</td><td>258</td></tr><tr><td>3.7</td><td>Analytic Density Functional Theory (ADFT) . . . . . . . . . . . . . . . . . .</td><td>262</td></tr><tr><td>3.8</td><td>Random Phase Approximation (RPA) . . . . . . . . . . . . . . . . . . . . .</td><td>265</td></tr><tr><td>3.9</td><td>Perturbation Theory - MP2 . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>266</td></tr><tr><td>3.10</td><td>Coupled Cluster and CI Theories (MDCI) . . . . . . . . . . . . . . . . . . .</td><td>292</td></tr><tr><td>3.11</td><td>Correlated Methods using Automatic Code Generation (AUTOCI) . . . . . .</td><td>342</td></tr><tr><td>3.12</td><td>Arbitrary Order Coupled-Cluster (MRCC interface) . . . . . . . . . . . . . .</td><td>357</td></tr><tr><td>3.13</td><td>Complete and Incomplete Active Space Self-Consistent Field (CASSCF and RAS/ORMAS)</td><td>358</td></tr><tr><td>3.14</td><td>Approximate Full CI Calculations in Subspace: ICE-CI . . . . . . . . . . . .</td><td>446</td></tr><tr><td>3.15</td><td>Density Matrix Renormalization Group (DMRG) . . . . . . . . . . . . . . .</td><td>464</td></tr><tr><td>3.16</td><td>N-Electron Valence State Perturbation Theory (NEVPT2) . . . . . . . . . . .</td><td>472</td></tr><tr><td>3.17</td><td>Complete Active Space Peturbation Theory (CASPT2 and CASPT2-K) . . . .</td><td>490</td></tr><tr><td>3.18</td><td>CASSCF and DFT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>494</td></tr><tr><td>3.19</td><td>Multireference Configuration Interaction and Pertubation Theory (uncontracted)</td><td>499</td></tr><tr><td>3.20</td><td>Multireference Equation of Motion Coupled-Cluster (MR-EOM-CC) . . . . .</td><td>557</td></tr><tr><td>3.21</td><td>Dynamic Correlation Dressed CAS . . . . . . . . . . . . . . . . . . . . . . .</td><td>584</td></tr><tr><td>3.22</td><td>Full Configuration Interaction . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>589</td></tr><tr><td>3.23</td><td>Molecular Mechanics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>593</td></tr><tr><th colspan="2">Structure and Reactivity</th><th>601</th></tr><tr><td>4.1</td><td>Geometry Optimizations . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>601</td></tr><tr><td>4.2</td><td>Surface Scans . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>620</td></tr><tr><td>4.3</td><td>Transition State Searches . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>623</td></tr><tr><td>4.4</td><td>Intrinsic Reaction Coordinate . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>631</td></tr><tr><td>4.5</td><td>Nudged Elastic Band Method . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>634</td></tr><tr><td>4.6</td><td>Nudged Elastic Band Method . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>637</td></tr><tr><td>4.7</td><td>Vibrational Frequencies . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>654</td></tr><tr><td>4.8</td><td>Thermochemistry . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>659</td></tr><tr><td>4.9</td><td>Conical Intersections . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>667</td></tr><tr><td>4.10</td><td>Minimum Energy Crossing Points (MECP) . . . . . . . . . . . . . . . . . .</td><td>670</td></tr><tr><td>4.11</td><td>GOAT: global geometry optimization and ensemble generator . . . . . . . . .</td><td>673</td></tr><tr><td>4.12</td><td>SOLVATOR: Automated Explicit Solvation . . . . . . . . . . . . . . . . . .</td><td>687</td></tr><tr><td>4.13</td><td>DOCKER: Automated Docking Algorithm . . . . . . . . . . . . . . . . . .</td><td>696</td></tr><tr><th colspan="2">Spectroscopy and Properties</th><th>709</th></tr><tr><td>5.1</td><td>Population Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>709</td></tr><tr><td></td><td>.</td><td></td></tr><tr><td>5.2</td><td>Natural Bond Orbital (NBO) Analysis . . . . . . . . . . . . . . . . . . . . .</td><td>725</td></tr><tr><td>5.3</td><td>Fractional Occupation Number Weighted Density (FOD) . . . . . . . . . . .</td><td>737</td></tr><tr><td>5.4</td><td>Excited States Calculations . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>742</td></tr><tr><td>5.5</td><td>Excited State Dynamics . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>764</td></tr><tr><td>5.6</td><td>Excited States via RPA, CIS, TD-DFT and SF-TDA . . . . . . . . . . . . . .</td><td>809</td></tr><tr><td>5.7</td><td>Excited States via ROCIS and ROCIS/DFT . . . . . . . . . . . . . . . . . .</td><td>854</td></tr><tr><td>5.8</td><td>Excited States via MCRPA . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>878</td></tr><tr><td>5.9</td><td>Excited States via EOM-CCSD . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>886</td></tr><tr><td>5.10</td><td>Excited States via STEOM-CCSD . . . . . . . . . . . . . . . . . . . . . . .</td><td>895</td></tr><tr><td>5.11</td><td>Excited States via IH-FSMR-CCSD . . . . . . . . . . . . . . . . . .</td><td>903</td></tr><tr><td>5.12</td><td>. . . . Excited States via PNO-based coupled cluster . . . . . . . . . . . . . . . . .</td><td>906</td></tr><tr><td>5.13</td><td>Excited States via DLPNO-STEOM-CCSD . . . . . . . . . . . . . . . . . .</td><td>908</td></tr><tr><td>5.14</td><td>One Photon Spectroscopy . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>909</td></tr><tr><td>5.15</td><td>Core-Level Spectroscopy with Coupled Cluster Methods . . . . . . . . . . .</td><td>918</td></tr><tr><td>5.16</td><td>Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance RamanExcitation and Spectra with the orca_asa Program . . . . . . . . . . . . . . . . . . . . .</td><td>933 978</td></tr><tr><td>5.17 5.18</td><td>Absorption and Fluorescence Bandshapes using ORCA_ASA . . . . . . . . . Vibrational Spectroscopy . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td><td>986</td></tr><tr><td>5.19</td><td>Anharmonic Analysis and Vibrational Corrections using VPT2/GVPT2 and orca_vpt2</td><td></td></tr></tbody></table>
+<p>. 1000</p>
+<table><tbody><tr><th>5.20</th><td>Electrical Properties - Electric Moments and Polarizabilities . . . .</td><td>. 1006</td></tr><tr><th>5.21</th><th>Nuclear Magnetic Resonance (NMR) Parameters . . . . . . . . . . . . . .</th><td>. 1016</td></tr><tr><th>5.22</th><th>Paramagnetic NMRShielding Tensors . . . . . . . . . .</th><td>. 1029</td></tr><tr><th>5.23</th><th>Spin-rotation Constants . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1030</td></tr><tr><th>5.24</th><th>Electron Paramagnetic Resonance (EPR) Parameters . . . . . . .</th><td>. 1031</td></tr><tr><th>5.25</th><th>MP2 Level Magnetic Properties . . . . . . . . . . . . . . . . . .</th><td>. 1045</td></tr><tr><th>5.26</th><th>CASSCF Linear Response . . . . . . . . . . . . . . . . . . . . .</th><td>. 1047</td></tr><tr><th>5.27</th><th>Mössbauer Parameters . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1051</td></tr><tr><th>5.28</th><th>The Spin-Orbit Coupling Operator . . . . . . . . . . . . . . . . .</th><td>. 1054</td></tr><tr><th>5.29</th><th>Broken-Symmetry Wavefunctions and Exchange Couplings . . . .</th><td>. 1058</td></tr><tr><th>5.30</th><th>Decomposition of the Magnetic Exchange Coupling . . . . . . . .</th><td>. 1060</td></tr><tr><th>5.31</th><th>Magnetic Properties Through Quasi Degenerate Perturbation Theory</th><td>. 1062</td></tr><tr><th>5.32</th><th>Magnetic Relaxation . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1072</td></tr><tr><th>5.33</th><th>Simulation of (Magnetic) Circular Dichroism and Absorption Spectra</th><td>. 1078</td></tr><tr><th>5.34</th><th>Interface to SINGLE_ANISO Module . . . . . . . . . . . . . . .</th><td>. 1082</td></tr><tr><th>5.35</th><th>Interface to POLY_ANISO Module . . . . . . . . . . . . . . . .</th><td>. 1100</td></tr><tr><th>5.36</th><th>DeltaSCF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1111</td></tr><tr><th>5.37</th><th>Extended Transition State with Natural Orbitals for Chemical Valence</th><td>1125</td></tr><tr><th>5.38</th><th>Local Energy Decomposition . . . . . . . . . . . . . . . . . . . .</th><td>. 1134</td></tr><tr><th>5.39</th><th>The Hartree-Fock plus London Dispersion (HFLD) Method</th><td>. 1158</td></tr><tr><th>5.40</th><th>. . . . ADLD(D): Atomic Decomposition of DFT-D London Dispersion Energy</th><td>. 1161</td></tr><tr><th>5.41</th><th>Static Ground State DFT (SGS-DFT) . . . . . . . . . . . . . . .</th><td>. 1163</td></tr><tr><th>6</th><th>Multiscale Simulations</th><td>1177</td></tr><tr><th>6.1 6.2</th><th>Overview on ORCA&#x27;s Multiscale Implementation . . . . . . . . . molecular systems . . .</th><td>. 1177</td></tr><tr><td></td><th>Multiscale Simulations of . . . . . . . . .</th><td>. 1189</td></tr><tr><th>6.3</th><th>CRYSTAL-QMMM . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1196</td></tr><tr><th>6.4</th><th>QM/MM via Interfaces to ORCA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1201 . 1206</td></tr><tr><th>6.5</th><th>Fast Multipole Method</th><td>1213</td></tr><tr><th>7</th><th>Molecular Dynamics Ab initio Molecular Dynamics . . . . . . . . . . . . . . . . . . .</th><td>. 1213</td></tr><tr><th>7.1 8</th><th>Workflows and Automatization</th><td>1243</td></tr><tr><th>8.1</th><th>ORCA Python Interface (OPI) . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1243</td></tr><tr><th>8.2</th><th>Compound . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1243</td></tr><tr><th>8.3</th><th>More Details on Compound . . . . . . . . . . . . . . . . . . . .</th><td>. 1250</td></tr><tr><th>8.4</th><th>Compound Examples . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1315</td></tr><tr><th>9</th><th>Utilities and Visualization</th><td>1339</td></tr><tr><th>9.1</th><th>Orbital and Density Plots . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1339 1348</td></tr><tr><th>9.2</th><th>Utility Programs . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>.</td></tr><tr><th>9.3</th><th>orca_2json . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1416</td></tr><tr><th>9.4</th><th>Property File . . . . . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1436</td></tr><tr><th>10</th><th>Architecture of ORCA</th><td>1507</td></tr><tr><th>10.1 10.2</th><th>The Architecture of ORCA . . . . . . . . . . . . . . . . . . . . .</th><td>. 1508</td></tr><tr><th>10.3</th><th>Units and Conversion Factors . . . . . . . . . . . . . . . . . . . .</th><td>. 1513</td></tr><tr><th>A</th><th>Detailed change log . . . . . . . . . . . . . . . . . . . . . . . .</th><td>1515 . 1515</td></tr><tr><th>A.1</th><th>Changes ORCA 6.1 . Changes ORCA 6.0.1 . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1527</td></tr><tr><th>A.2 A.3</th><th>. Changes ORCA 6.0.0 . . . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1533</td></tr><tr><th>B</th><th>Publications Related to ORCA</th><td>1537</td></tr><tr><td></td><th>Method development . . . . . . . . . . . . . . . . . . . . . .</th><td>. 1537</td></tr><tr><th>B.1</th><th>. . Relevant Applications, Benchmarks . . . . . . . . .</th><td>. 1543</td></tr><tr><td></td><th>and Reviews Classification by Topic . . . . . . . . . . .</th><td>1549</td></tr><tr><th>B.2</th><th>. . . . . . . . . . . .</th><td>.</td></tr><tr><th>B.3</th><td></td><td></td></tr></tbody></table>
+<table><tbody><tr><td>B.4</td><td>Applications that make use of or include the following</td><td>1566</td></tr><tr><td>B.5</td><td>Reviews of interest . . . . . . . . . . . . . . . . . .</td><td>1574</td></tr><tr><td colspan="2">C Glossary</td><td>1577</td></tr><tr><td colspan="2">Bibliography</td><td>1583</td></tr><tr><td colspan="2">Index</td><td>1623</td></tr></tbody></table>
+<p>- An ab initio , DFT and semiempirical SCF-MO package -</p>
+<h2>Version 6.1</h2>
+<p>Design and Scientific Directorship: Frank Neese Technical Directorship: Frank Wennmohs</p>
+<p>Max-Planck-Institut für Kohlenforschung Kaiser-Wilhelm-Platz 1, 45470 Mülheim a. d. Ruhr, Germany department-mts@kofo.mpg.de</p>
+<h2>With contributions from:</h2>
+<h2>MPI für Kohlenforschung:</h2>
+<p>Ahmet Altun, Daniel Aravena, Michael Atanasov, Alexander A. Auer, Ute Becker, Giovanni Bistoni, Markus Bursch, Dmytro Bykov, Marcos Casanova-Páez, Vijay G. Chilkuri, Pauline Colinet, Dipayan Datta, Achintya Kumar Dutta, Nicolas Foglia, Dmitry Ganyushin, Miquel Garcia-Rates, Tiago L. C. Gouveia, Yang Guo, Andreas Hansen, Ingolf Harden, Benjamin Helmich-Paris, Lee Huntington, Róbert Izsák, Riya Kayal, Emily Kempfer, Christian Kollmar, Axel Koslowski, Simone Kossmann, Lucas Lang, Marvin Lechner, Spencer Leger, Dagmar Lenk, Dimitrios G. Liakos, Dimitrios Manganas, Dimitrios A. Pantazis, Anastasios Papadopoulos, Taras Petrenko, Peter Pinski, Shashank V. Rao, Christoph Reimann, Marius Retegan, Christoph Riplinger, Michael Roemelt, Masaaki Saitow, Barbara Sandhöfer, Yorick L. A. Schmerwitz, Kantharuban Sivalingam, Bernardo de Souza, Georgi L. Stoychev, Van Anh Tran, Willem Van den Heuvel, Zikuan Wang, Hang Xu</p>
+<h2>FACCTs GmbH:</h2>
+<p>Markus Bursch, Nicolas Foglia, Miquel Garcia-Rates, Ingolf Harden, Hagen Neugebauer, Mustafa C. Ozdemir, Anastasios Papadopoulos, Christoph Plett, Christoph Riplinger, Bernardo de Souza, Georgi L. Stoychev</p>
+<h2>Other institutions:</h2>
+<p>Vilhjálmur Åsgeirsson, Christoph Bannwarth, Giovanni Bistoni, Martin Brehm, Ronald Cardenas, Garnet Chan, Martina Colucci, Sebastian Ehlert, Marvin Friede, Lars Goerigk, Stefan Grimme, Waldemar Hujo, Mihály Kállay, Holger Kruse, Marcel Müller, Jiri Pittner, Philipp Pracht, Gianluca Regni, Liviu Ungur, Edward Valeev, Lukas Wittmann</p>
+<p>Additional contributions to the manual from: Wolfgang Schneider, Gregor Giesen, Johannes Grün</p>
+<h2>ORCA 6.1 FOREWORD</h2>
+<p>It was less than one year ago, July 2024, that ORCA 6.0 was released to the general public by a proud and happy but also thoroughly exhausted development team. As we pointed out at the time, ORCA 6.0 was less an update to an existing program but rather a completely re-imagined quantum chemistry program suite in which large parts of the massive code base where re-designed and rewritten from scratch. This process took nearly three years and resulted in a program that was much leaner, much cleaner and as a result also more modern and more efficient.</p>
+<p>Our promise at the time of the release of ORCA 6.0 was that the new infrastructure would allow for much more rapid and more confident method development than ever before. With the release of ORCA 6.1, we believe that we made good on this promise. Despite less than one year has passed since the release of ORCA 6.0, version 6.1 is packed with new features and further significant improvements under the hood. This release can therefore indeed be regarded as a proof-of-principle for the new infrastructure. It turned out to be so encouraging that we have every intention to keep up the pace and aim at a release of a new ORCA version approximately every 12 months - hold us to it!</p>
+<p>ORCA 6.1 is the result of the work of many individuals. The bulk of the work has been done by the development teams at the Max Planck institute für Kohlenforschung in Mülheim an der Ruhr, Germany and at FACCTs in Cologne, Germany. However, we also very much enjoy our increasingly numerous collaborations with other research groups around the world - thank you so much, you rock!</p>
+<p>I want to express my gratitude to all the many people who have put their enthusiasm and hard work into making this release reality. All of them were, are and will continue to be instrumental for the success of what now has become a very large project! An ORCA release would not be possible without the ORCA development team, led by Frank Wennmohs and featuring Ute Becker, Dagmar Lenk, Dimitrios Liakos, Kantharuban Sivalingam and Axel Koslowski, who have done invaluable work in making sure that the code stays healthy, our libraries are up to date, that it compiles on all platforms ( and give correct results everywhere), educate the developers on good programming style, fixing countless bugs, parallelizing everything and going after each and every deviation that our massive test suite reports.</p>
+<p>Alexander Auer and Markus Bursch have taken the lead on the important but incredibly tedious task to restructure the mammoth that the ORCA manual has become, making sure that it is up to date and available in HTML and PDF versions. Thank you so much! The importance of that work cannot possibly be overemphasized.</p>
+<p>It gives me enormous pleasure to observe the increasing impact on industrial computational chemistry that FACCTs has under the outstanding leadership of Christoph Riplinger. This not only leads to rapid and sustainable growth of the company but also provides many important ideas and incentives for exciting science. The development team at FACCTscontinues to make many important contributions to the code, exciting new features, new methods, new workflows together with an unwavering commitment to precision and excellence. I should specifically mention Bernardo de Souza, Georgi Stoychev, Miquel Garcia-Rates, Ingolf Harden, Nicolas Foglia and Hagen Neugebauer. Thank you all - it is a pleasure!</p>
+<p>Working on an ORCA release is not a chore, it is a labour of passion, joy and dedication. It gives me incredible joy to work on something that proves to be useful for tens of thousands of people all around the globe. It also gives me incredible joy to work on this as part of a team that is enthusiastic, highly motivated, highly skilled and highly dedicated.</p>
+<p>Now you, the ORCA community, holds the next chapter of our journey in your hands. We are proud of ORCA 6.1 and we promise that this won't be our last rodeo in the continuing ORCA development. We hope that you enjoy it as much as we enjoyed working on it - and - of course, we hope that it helps you solving chemical problems, large or small, whatever your scientific pathway may be.</p>
+<p>Frank Neese On behalf of the ORCA development team May 26 th , 2025</p>
+<h2>ORCA 6.1 HIGHLIGHTS</h2>
+<p>Based on the greatly improved infrastrucuture introduced with ORCA 6.0 last year, we were able to make rapid progress such that we can present ORCA 6.1 to you. ORCA 6.1 features further efficiency enhancements and also a host of new functionality that we are excited about :</p>
+<ul>
+<li style="list-style-type: '· ';">Extended support for magnetic property calculations at high-level ab initio methods</li>
+<li style="list-style-type: '· ';">Auto fragmentation: fully automated fragmentation algorithm</li>
+<li style="list-style-type: '· ';">Analytical computation of Raman intensities</li>
+<li style="list-style-type: '· ';">Simplified multiscale setup: automated generation of of QM and active region</li>
+<li style="list-style-type: '· ';">RESP charges: restrained electrostatic potential charges</li>
+<li style="list-style-type: '• ';">Updates on GOAT and DOCKER</li>
+<li style="list-style-type: '· ';">Electrostatic potentials: automatic ESPs via orca_plot</li>
+</ul>
+<p>For a detailed change log of ORCA 6.1, please see the detailed change log</p>
+<h2>HOW TO CITE</h2>
+<p>As ORCA is, and will always, be free for academic use, the people behind ORCA rely on being cited for their hard work developing it and making it the useful tool it actually is. Therefore, we kindly ask you to not only cite the actual generic ORCA reference of the used version but also the individual works relevant to the methods used in your ORCA calculations. To identify these more easily, we added an automated printout to ORCA 6 that provides you with recommendations.</p>
+<p>The generic reference for ORCA is:</p>
+<p>Neese, F. The ORCA program system Wiley Interdiscip. Rev.: Comput. Mol. Sci. , 2012 , 2 , 1 , 73-78 (DOI: 10.1002/wcms.81)</p>
+<h2>BibTeX:</h2>
+<pre><code>@article{ORCA, author = {Neese,F.}, title = {The ORCA program system}, journal = {Wiley Interdiscip. Rev. Comput. Mol. Sci.}, volume = {2}, number = {1}, pages = {73-78}, DOI = {10.1002/wcms.81}, year = {2012}, type = {journal Article} }</code></pre>
+<p>The current update for ORCA 6 is:</p>
+<p>Neese, F. Software update: the ORCA program system - Version 6.0 Wiley Interdiscip. Rev.: Comput. Mol. Sci. , 2025 , 15 , 2 , e70019 (DOI: 10.1002/wcms.70019)</p>
+<h2>BibTeX:</h2>
+<pre><code>@article{ORCA6, author = {Neese, Frank}, title = {Software Update: The ORCA Program System-Version 6.0}, journal = {Wiley Interdiscip. Rev. Comput. Mol. Sci.}, volume = {15}, number = {2}, pages = {e70019}, keywords = {ab initio calculations, density functional theory, embedding methods,␣ ↪ → global optimization, quantum chemistry}, doi = {10.1002/wcms.70019}, year = {2025} }</code></pre>
+<p>Beside these ORCA provides you with a detailed list of recommended citations at the end of any ORCA run. For example for the input</p>
+<pre><code>! PBE CPCM(Water) *XYZFILE 0 1 structure.xyz</code></pre>
+<p>the end of the output will look like:</p>
+<pre><code>--------------------------------SUGGESTED CITATIONS FOR THIS RUN --------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Below you find a list of papers that are relevant to this ORCA run We neither can nor want to force you to cite these papers, but we appreciate if␣ ↪ → you do You receive ORCA, which is the product of decades of hard work by many␣ ↪ → enthusiastic individuals, for free The only thing we kindly ask in return is that you cite our papers, We deeply appreciate it, if you show your appreciation for ORCA by not just citing␣ ↪ → the generic ORCA reference. Please note that relegating all ORCA citations to the supporting information does␣ ↪ → *not* help us. SI sections are not indexed -citations you put there will not count into any␣ ↪ → citation statistics But we need these citations in order to attract the funding resources that allow␣ ↪ → us to do what we are doing Therefore, if you are a happy ORCA user, please consider citing a few of the␣ ↪ → papers listed below in the main body of your paper In addition to the list printed below, the program has created the file orca. ↪ → bibtex that contains the list in bibtex format You can import this file easily into all common literature databanks and citation␣ ↪ → aid programs List of essential papers. We consider these as the minimum necessary citations 1. Neese,F. Software update: the ORCA program system, version 6.0 WIRES Comput. Molec. Sci., 2025 15(2) e70019 doi.org/10.1002/wcms.70019 List of papers to cite with high priority. The work reported in these papers was␣ ↪ → absolutely necessary for this run to complete. Our perspective: the developers of density functionals and basis sets usually get␣ ↪ → cited in chemistry papers Good! But without the algorithms to do something with them, the functionals or␣ ↪ → basis sets would not do anything. Hence, in our opinion, the algorithm design and method developments papers are␣ ↪ → equally worthy of getting cited 1. Neese,F. An improvement of the resolution of the identity approximation for the␣ ↪ → formation of the Coulomb matrix J. Comp. Chem., 2003 24(14)1740-1747 doi.org/10.1002/jcc.10318 2. Garcia-Rates,M.; Neese,F. Effect of the Solute Cavity on the Solvation Energy and its Derivatives␣ ↪ → within the Framework of the Gaussian Charge Scheme J. Comput. Chem., 2020 41 922-939 doi.org/10.1002/jcc.26139 3. Neese,F. The SHARK Integral Generation and Digestion System J. Comp. Chem., 2022 1-16 doi.org/10.1002/jcc.26942 List of suggested additional citations. These are papers that are important in the ↪ → 'surrounding' of of this run, or papers that preceded the highly important papers. If you like your␣ ↪ → results we are grateful for a citation.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>1. Neese,F. The ORCA program system WIRES Comput. Molec. Sci., 2012 2(1)73-78 doi.org/10.1002/wcms.81 2. Neese,F. Software update: the ORCA program system, version 4.0 WIRES Comput. Molec. Sci., 2018 8(1)1-6 doi.org/10.1002/wcms.1327 3. Neese,F.; Wennmohs,F.; Becker,U.; Riplinger,C. The ORCA quantum chemistry program package J. Chem. Phys., 2020 152 Art. No. L224108 doi.org/10.1063/5.0004608 List of optional additional citations 1. Neese,F. Approximate second-order SCF convergence for spin unrestricted wavefunctions Chem. Phys. Lett., 2000 325(1-3)93-98 doi.org/10.1016/s0009-2614(00)00662-x</code></pre>
+<p>Here you see, that even a simple single point calculation in implicit water makes use of various methods that may not be obvious at first glance but may be cited. For example ORCA uses an improved CPCM treatment that should be cited as:</p>
+<pre><code>3. Garcia-Rates,M.; Neese,F. Effect of the Solute Cavity on the Solvation Energy and its Derivatives␣ ↪ → within the Framework of the Gaussian Charge Scheme J. Comput. Chem., 2020 41 922-939 doi.org/10.1002/jcc.26139</code></pre>
+<p>For convenience, ORCA further provides a .bibtex file that contains BibTeX entries that can easily be exported to any reference manager or your LaTeX bibliography.</p>
+<h2>HOW TO USE THIS MANUAL</h2>
+<p>The ORCA manual has been growing for decades and all developers take great care to document and describe all features or ORCA as good as they can. From ORCA 6.0 to ORCA 6.1 this manual has undergone a major restructuring. What you are looking at has been and is a huge team effort and should meet the needs of absolute beginners with little theory background as well as the requirements of experienced developers.</p>
+<h2>® Help us with your feedback</h2>
+<p>With the initial restructuring of the manual for ORCA 6.1, we made substantial changes that hopefully improve the readbility and general quality of the manual. However, this was only the beginning and we are glad to hear any constructive feedback from you via the ORCA forum on how to improve further future.</p>
+<p>The new structure starts with a quickstart guide and a guideline for installation that should get everyone started. The overall structure is ordered such that we first summarize the essential elements of ORCA that a user needs to know when perfoming standard calcuations like how to structure the input , which basis sets and algorithms are available etc. Next, we outline the available electronic structure approaches that can be used to compute energies, structures and properties ranging from Hartree-Fock and DFT to high level ab-initio methods. The next chapter focuses on structure and reactivity and includes all approaches to optimize geometries , find transition states and compute relative (free) energies in various settings. Molecular spectroscopy and properties includes everything that can be computed once a structure has been established and ranges from density and wavefunction analysis to ground- and excited state properties up to complex higher order properties like, for example, MCD . The last few sections deal with important features for complex tasks like running molecular dynamics , multiscalar approaches or orchestrating automated workflows with ORCA using, e.g., the compound script language. Last but not least we have notes on important [utilities] that can be used for post-processing and some technical notes on the ORCA architecture .</p>
+<p>Most sections will start with a short outline of the theory with references and some simple examples to get you started, further details like keyword lists and advanced examples are typically found later on in the sections.</p>
+<p>We hope that you will find the manual useful and would be very happy if you give feedback online in the ORCA forum.</p>
+<h2>1.1 About ORCA</h2>
+<p>ORCA 1 is a general-purpose quantum chemistry package initiated by Frank Neese in 1999 while finishing a postdoc at Stanford University. The name ORCA was inspired by a whale watching cruise of Frank Neese at the California coast and stands for itself and the association which comes with it.</p>
+<p>ORCAisfree for academic use and features a variety of quantum chemical methods including semi-empirical, density functional theory, many-body perturbation, coupled cluster, and multireference methods.</p>
+<p>It is mainly developed by the research groups of the Department of Molecular Theory and Spectroscopy at the MaxPlanck-Institut für Kohlenforschung and the FACCTs GmbH, which also manages commercial licensing to industry.</p>
+<p>ORCA also benefits from a worldwide network of external developers and contributors.</p>
+<h2>1.2 Installation</h2>
+<h2>1.2.1 Download</h2>
+<p>ORCA is available for Linux, MacOS, and Windows. Respective installers can be downloaded from the ORCA forum (registration required).</p>
+<h2>1.2.2 Installation</h2>
+<p>On Linux and MacOS the most convenient way to install ORCA is by using the command-line installer. You have to download a .run file, e.g. orca_6_1_0_linux_x86-64_shared_openmpi416.run . Then make the file executable, that is, open a terminal, enter the directory in which you stored the file and enter:</p>
+<p>chmod a+x orca_6_1_0_linux_x86-64_shared_openmpi416.run</p>
+<p>Afterwards you can simple execute the file, like</p>
+<p>./orca_6_1_0_linux_x86-64_shared_openmpi416.run</p>
+<p>The installer will install orca in a user directory, as well as set the path to include the orca directory. After opening a new window ORCA can be used as indicated.</p>
+<p>The installer has a few more options, like extract-only, setting the path interactively, and setting the path by option:</p>
+<p>1 …so why is it called ORCA ? Frank Neese made the decision to write a quantum chemistry program in the summer of 1999 while finishing a postdoc at Stanford University. While thinking about a name for the program he wanted to write he decided against having yet another 'whateverMol-something'. The name needed to be short and signify something strong yet elegant. During this time in the US Frank went on a whale watching cruise at the California coast-the name 'ORCA' stuck. It is often asked whether ORCA is an acronym and over the years, various people made suggestions what acronym this could possibly be. At the end of the day it just isn't an acronym which stands for anything. It stands for itself and the association which comes with it.</p>
+<h2>QUICKSTART GUIDE</h2>
+<pre><code>-i : Set a different install path interactively -p <path> : Set a different install path -x : Just extract</code></pre>
+<p>The options have to be given after a double dash, e. g.</p>
+<pre><code>./orca_6_1_0_linux_x86-64_shared_openmpi416.run -- -p /my/home/orca/dir</code></pre>
+<p>On Window the installer is contained in a zip file Orca6.1.0.Win64.zip that must be unzipped before you can start the installation. Than double-click Orca6.1.0.Win64.exe and follow the instructions. If you choose a typical installation only the serial modules of ORCA are copied. To also install the parallel part of ORCA please use Custom or Full installation. The ORCA default directory is C:\Orca_6.1.0 but you can choose a different folder if necessary. The required environment variables will be set accordingly.</p>
+<p>Additionally the ORCA AUTOCI executables are provided in 2 different files. Orca6.1.0.Win64_autoci. zip contains the modules for serial execution and Orca6.1.0.Win64_autoci_msmpi10.zip for the parallel execution. Please extract the zip-files into the ORCA installation directory.</p>
+<p>After opening a new command window ORCA can be used as indicated.</p>
+<p>The ORCA main modules can be uninstalled via the Apps &amp; features function of Windows but the ORCA AUTOCI modules have to be deleted manually.</p>
+<h2>1.2.3 Path Variables</h2>
+<p>Only necessary environment variables are added or modified during the ORCA installation.</p>
+<p>On Linux:</p>
+<pre><code>PATH : updated with the new orca installation directory</code></pre>
+<p>On Windows:</p>
+<pre><code>PATH : modified with the new orca installation directory` : created or modified with the new orca installation directory`</code></pre>
+<pre><code>ORCADIR XTBEXE : created or replaced with the xtb module path`</code></pre>
+<p>Please be aware that the changes of environment variables only effect newly opened command windows.</p>
+<h2>1.2.4 How do I install the xtb module?</h2>
+<p>Many feature of ORCA are connected to the xtb module. While there is a native ORCA implementation, the package of the Grimme lab is also integrated into the ORCA workflow, so installing it is advisable. Since ORCA 6 on Linux and Windows the xtb version 7.6.1 is provided with the installation of ORCA. The executable can be found in the orca installation directory (Linux) or in a sub-directory of the orca directory (Windows).</p>
+<p>For updates or other xtb versions please download the reqiured xtb version from the Grimme lab's repository Grimme lab's repository and copy the xtb binary into the orca directory and rename it to otool_xtb for Linux. On Windows you have to set the XTBEXE variable to point to the xtb executable itself.</p>
+<pre><code>set XTBEXE=<path>xtb.exe</code></pre>
+</div>
+</body>
+</html>

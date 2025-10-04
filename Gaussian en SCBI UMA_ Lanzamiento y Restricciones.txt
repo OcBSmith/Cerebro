@@ -1,0 +1,454 @@
+﻿Guía para Investigadores sobre la Ejecución de Trabajos de Gaussian en el Supercomputador Picasso del SCBI-UMA
+
+
+
+
+Sección 1: El Entorno de Cómputo de Picasso: Conceptos Fundamentales
+
+
+La utilización eficaz de los recursos de supercomputación del Centro de Supercomputación y Bioinnovación (SCBI) de la Universidad de Málaga (UMA) depende de una sólida comprensión de su arquitectura subyacente. Antes de lanzar un cálculo computacional, es imperativo que el investigador se familiarice con los protocolos de acceso al sistema, la jerarquía de los sistemas de archivos, las políticas de almacenamiento y el método para gestionar el software científico. Un conocimiento profundo de estos conceptos fundamentales es el prerrequisito para un uso eficiente y responsable del supercomputador Picasso.
+
+
+1.1 Acceso al Sistema y Conexión Inicial
+
+
+El acceso al supercomputador Picasso se realiza exclusivamente a través del protocolo Secure Shell (SSH). Este protocolo garantiza un canal de comunicación seguro entre la máquina local del usuario y el sistema de supercomputación. El comando para establecer la conexión es el siguiente, y debe ser ejecutado desde un terminal en sistemas operativos Linux o macOS, o desde una consola PowerShell en Windows 1:
+
+
+Bash
+
+
+
+
+ssh -X <usuario>@picasso.scbi.uma.es
+
+Donde <usuario> debe ser reemplazado por el nombre de usuario proporcionado por el SCBI.
+Este comando conecta al usuario al nodo de acceso (o login node) del clúster. Es fundamental comprender la función de este nodo: actúa como un centro de control, no como un recurso de cómputo. El nodo de acceso está diseñado para tareas de gestión ligeras, como la edición de ficheros de entrada, la compilación de código fuente, la preparación de scripts de envío y la sumisión de trabajos al sistema de colas. La ejecución de cálculos intensivos, como un trabajo de Gaussian, directamente en el nodo de acceso está estrictamente prohibida. Este tipo de actividad degradaría el rendimiento para todos los usuarios y comprometería la estabilidad del sistema. Por lo tanto, todas las tareas computacionalmente exigentes deben ser enviadas al sistema de colas Slurm, que las distribuirá a los nodos de cómputo designados.2
+
+
+1.2 La Jerarquía del Sistema de Archivos: Una Estrategia de Tres Niveles para Rendimiento y Persistencia
+
+
+La arquitectura de almacenamiento de Picasso está diseñada para equilibrar las necesidades de persistencia de los datos, velocidad de acceso durante los cálculos y gestión eficiente del espacio. Los usuarios interactúan principalmente con dos sistemas de archivos, pero deben ser conscientes de un tercero para optimizar el rendimiento.1
+1. $HOME (Sistema de Almacenamiento Permanente): Este es el directorio principal del usuario. Está diseñado para el almacenamiento a largo plazo de datos cruciales: ficheros de entrada originales, scripts de desarrollo propio, resultados finales curados y cualquier otro dato que deba ser preservado.1 El acceso a este directorio se puede realizar con los comandos
+cd, cd ~, o cd $HOME. No está optimizado para operaciones de entrada/salida (E/S) de alta intensidad, por lo que los trabajos no deben ejecutarse desde aquí.
+2. $FSCRATCH (Sistema de Almacenamiento Temporal): Este es un sistema de archivos paralelo de alta velocidad, diseñado específicamente para ser el espacio de trabajo donde se lanzan los cálculos.1 Su principal ventaja es el rendimiento, que es crítico para aplicaciones como Gaussian que pueden leer y escribir grandes cantidades de datos. Sin embargo, su naturaleza es temporal.
+$FSCRATCH está sujeto a una política de borrado automático que elimina ficheros con una antigüedad superior a dos meses.1 Es responsabilidad del usuario mover los resultados importantes de
+$FSCRATCH a $HOME antes de que expire este plazo. El acceso se realiza mediante el comando cd $FSCRATCH.
+3. localscratch (Almacenamiento Local del Nodo): Cada nodo de cómputo individual posee su propio disco local, denominado localscratch.3 Este almacenamiento ofrece la máxima velocidad de E/S posible, ya que los datos no viajan a través de la red del clúster. Su uso es altamente recomendado para trabajos que son particularmente intensivos en E/S.2
+La interrelación entre estos tres niveles de almacenamiento define un flujo de trabajo óptimo que maximiza tanto el rendimiento como la integridad de los datos. Para un trabajo de Gaussian, especialmente uno que genere ficheros de checkpoint voluminosos, la estrategia recomendada es la siguiente:
+   1. Preparación: Almacenar los ficheros de entrada (.gjf) originales y validados en un directorio dentro de $HOME.
+   2. Puesta en Escena: Antes de la ejecución, crear un directorio de trabajo específico para el cálculo en $FSCRATCH y copiar allí los ficheros de entrada necesarios.
+   3. Ejecución: El script de envío de Slurm debe contener comandos para:
+   * Crear un subdirectorio único en el localscratch del nodo de cómputo asignado.
+   * Copiar los ficheros de entrada desde $FSCRATCH al directorio en localscratch.
+   * Ejecutar el cálculo de Gaussian dentro de ese directorio localscratch.
+   * Una vez finalizado el cálculo, copiar los ficheros de resultados esenciales (p. ej., .log, .chk, .fchk) de vuelta al directorio de trabajo en $FSCRATCH.
+   * Limpiar el directorio creado en localscratch.
+   4. Archivo: Tras verificar los resultados en $FSCRATCH, el usuario debe mover manualmente los datos finales y valiosos a un directorio de archivo permanente en $HOME.
+Esta estrategia de puesta en escena de datos en tres niveles es una técnica avanzada que mitiga los cuellos de botella en el sistema de archivos paralelo, reduce la carga en la red y garantiza que los datos importantes se conserven de forma segura.
+
+
+1.3 Gestión de Datos: Cuotas de Almacenamiento y Administración
+
+
+Para garantizar una distribución equitativa de los recursos, el SCBI implementa un sistema de cuotas de almacenamiento para cada usuario. Estas cuotas limitan no solo el espacio total en disco ocupado, sino también el número total de ficheros (inodos) que un usuario puede almacenar. Este segundo límite es crucial, ya que un número excesivo de ficheros pequeños puede degradar el rendimiento del sistema de archivos para todos los usuarios.1
+El sistema opera con dos umbrales 1:
+   * Cuota Flexible (Soft Quota): Es el límite de uso recomendado. Si un usuario excede esta cuota, se activa un período de gracia de 7 días. Durante este tiempo, el usuario puede seguir escribiendo datos, pero debe reducir su uso por debajo del límite antes de que finalice el período.2
+   * Cuota Rígida (Hard Quota): Es el límite absoluto que no puede ser superado. Si un usuario alcanza esta cuota, cualquier intento de escribir nuevos datos será bloqueado inmediatamente, lo que puede provocar que los trabajos en ejecución fallen.3 El bloqueo también se produce si no se resuelve una situación de exceso de cuota flexible tras los 7 días de gracia.1
+Para verificar el estado actual de las cuotas, el usuario puede ejecutar el comando quota o mmlsquota en el terminal.3
+Estas políticas de cuotas no son meramente restrictivas; actúan como un mecanismo que fomenta una buena "higiene de datos". Obligan al investigador a ser un gestor activo de sus propios datos, a archivar regularmente los resultados importantes y a eliminar los ficheros temporales o intermedios que ya no son necesarios. Ignorar la gestión de datos conducirá inevitablemente a errores de "escritura bloqueada", interrumpiendo el progreso de la investigación.
+
+
+1.4 El Sistema de Módulos de Entorno: Acceso al Software Científico
+
+
+El supercomputador Picasso alberga más de trescientas aplicaciones científicas.4 Para gestionar esta vasta colección de software, que a menudo incluye múltiples versiones de un mismo programa con dependencias diferentes, el SCBI utiliza un sistema de módulos de entorno. Este sistema permite a los usuarios configurar dinámicamente su entorno de shell para acceder al software que necesitan sin tener que gestionar manualmente las rutas del sistema (
+PATH, LD_LIBRARY_PATH, etc.).
+El SCBI proporciona acceso a múltiples versiones del software Gaussian, incluyendo 09A02, 09C01, 16A03, y 16C02_22.5 La selección de una versión específica no es una mera decisión técnica, sino un parámetro crítico del experimento computacional. Diferentes versiones pueden tener correcciones de errores, algoritmos mejorados o incluso producir resultados sutilmente diferentes. Por lo tanto, para garantizar la reproducibilidad de la investigación, es esencial documentar y cargar explícitamente la versión del software utilizada.
+Los comandos básicos para interactuar con el sistema de módulos son:
+   * module avail <nombre_software>: Lista todas las versiones disponibles de un software específico. Por ejemplo, module avail gaussian mostrará todas las instalaciones de Gaussian.
+   * module load <nombre_software>/<version>: Carga una versión específica del software en el entorno actual, haciendo que sus ejecutables estén disponibles. Por ejemplo, module load gaussian/16C02_22.3
+   * module list: Muestra los módulos actualmente cargados en la sesión.
+   * module purge: Descarga todos los módulos cargados.
+La carga del módulo de software apropiado es un paso obligatorio que debe incluirse en cada script de envío de trabajos.
+
+
+Sección 2: Guía Paso a Paso para Lanzar su Primer Trabajo de Gaussian
+
+
+Esta sección proporciona un tutorial práctico que traduce los conceptos fundamentales en un flujo de trabajo concreto y reproducible. Siguiendo estos pasos, un usuario puede preparar, enviar y verificar su primer cálculo con Gaussian en el entorno de Picasso.
+
+
+2.1 Preparación y Carga de los Ficheros de Entrada de Gaussian
+
+
+El primer paso es la creación del fichero de entrada de Gaussian, que convencionalmente tiene la extensión .gjf o .com. Este fichero de texto contiene la especificación de la molécula (coordenadas), el nivel de teoría, el conjunto de base y las palabras clave que definen el tipo de cálculo a realizar. La creación de este fichero se realiza en la máquina local del investigador utilizando editores de texto o constructores moleculares.
+Una vez que el fichero de entrada está listo, debe ser transferido al supercomputador. El destino recomendado para los ficheros de trabajo es el sistema de archivos $FSCRATCH. Se aconseja crear un directorio específico para cada cálculo para mantener la organización. El método más común para transferir ficheros desde una máquina local a Picasso es el comando scp (Secure Copy). Suponiendo que el fichero de entrada se llama molecula.gjf y se desea colocar en un directorio llamado calculo_benceno en $FSCRATCH, el comando sería:
+
+
+Bash
+
+
+
+
+# Primero, crear el directorio en Picasso (requiere una sesión SSH activa)
+ssh <usuario>@picasso.scbi.uma.es "mkdir -p $FSCRATCH/calculo_benceno"
+
+# Luego, desde el terminal local, copiar el fichero
+scp molecula.gjf <usuario>@picasso.scbi.uma.es:$FSCRATCH/calculo_benceno/
+
+
+
+2.2 Selección de la Versión Apropiada de Gaussian
+
+
+Como se discutió en la sección anterior, es crucial seleccionar y cargar explícitamente una versión de Gaussian para garantizar la reproducibilidad. Antes de escribir el script de envío, el investigador debe decidir qué versión utilizar. Para ver las opciones disponibles, se debe ejecutar en el terminal de Picasso:
+
+
+Bash
+
+
+
+
+module avail gaussian
+
+El sistema devolverá una lista de los módulos de Gaussian instalados, por ejemplo: gaussian/09C01, gaussian/16A03_21, gaussian/16C02_22. A menos que haya una razón específica para usar una versión anterior (p. ej., replicar un estudio previo), se recomienda utilizar la versión más reciente y estable disponible. La línea de comando para cargar la versión 16C02_22 sería module load gaussian/16C02_22. Esta línea será una parte esencial del script de envío.
+
+
+2.3 Creación del Script de Envío de Slurm: Un Recorrido Detallado
+
+
+El script de envío de Slurm es el corazón del proceso. Es un fichero de texto que contiene directivas para el planificador de trabajos (solicitud de recursos) y los comandos que se ejecutarán en el nodo de cómputo. El SCBI proporciona una herramienta de ayuda, gen_sbatch_file, para crear una plantilla básica.2 Para un trabajo de Gaussian, se puede usar de la siguiente manera 3:
+
+
+Bash
+
+
+
+
+gen_sbatch_file script_gaussian.sh "g16 < molecula.gjf > molecula.log"
+
+Este comando genera un fichero llamado script_gaussian.sh con una estructura predefinida. Es fundamental editar este fichero para ajustar la solicitud de recursos a las necesidades específicas del cálculo. Las líneas que comienzan con #SBATCH son directivas para Slurm.
+La siguiente tabla resume las directivas #SBATCH más importantes para un usuario de Gaussian.
+Tabla 2: Directivas Esenciales de Slurm SBATCH para Usuarios de Gaussian
+Directiva
+	Propósito
+	Ejemplo
+	--job-name
+	Asigna un nombre al trabajo, que aparecerá en la cola.
+	#SBATCH --job-name=Opt_Benceno
+	--ntasks
+	Número de tareas (procesos). Para Gaussian, suele ser 1.
+	#SBATCH --ntasks=1
+	--cpus-per-task
+	Número de núcleos de CPU solicitados para la tarea. Debe coincidir con %NProcShared en el input de Gaussian.
+	#SBATCH --cpus-per-task=8
+	--mem
+	Memoria RAM total solicitada. Debe ser ligeramente superior a %Mem en el input de Gaussian.
+	#SBATCH --mem=16gb
+	--time
+	Tiempo máximo de ejecución (wall-clock). Formato: HH:MM:SS o D-HH:MM:SS.
+	#SBATCH --time=2-00:00:00
+	--output
+	Fichero para la salida estándar del script. %J se reemplaza por el ID del trabajo.
+	#SBATCH --output=job.%J.out
+	--error
+	Fichero para la salida de error del script.
+	#SBATCH --error=job.%J.err
+	--constraint
+	Solicita nodos con características específicas (p. ej., amd o intel).
+	#SBATCH --constraint=amd
+	--gres
+	Solicita recursos genéricos, principalmente GPUs.
+	#SBATCH --gres=gpu:1
+	A continuación se muestra un ejemplo de un script de envío de Slurm completo y comentado para un cálculo de optimización de geometría de Gaussian, utilizando 8 núcleos y 16 GB de RAM.
+
+
+Bash
+
+
+
+
+#!/bin/bash
+
+#==============================================================================
+# DIRECTIVAS PARA EL PLANIFICADOR SLURM
+#==============================================================================
+
+# Nombre del trabajo
+#SBATCH --job-name=Opt_Benceno
+
+# Fichero para la salida estandar (%J es el Job ID)
+#SBATCH --output=job.%J.out
+
+# Fichero para la salida de error
+#SBATCH --error=job.%J.err
+
+# Solicitud de recursos
+#SBATCH --ntasks=1                # Una unica tarea
+#SBATCH --cpus-per-task=8         # Solicitar 8 nucleos de CPU
+#SBATCH --mem=16gb                # Solicitar 16 GB de RAM
+#SBATCH --time=1-00:00:00         # Tiempo maximo de ejecucion: 1 dia
+
+#==============================================================================
+# CONFIGURACION DEL ENTORNO Y EJECUCION
+#==============================================================================
+
+# Imprimir informacion sobre el trabajo
+echo "========================================================"
+echo "Comenzando trabajo en el nodo: $(hostname)"
+echo "Job ID: $SLURM_JOB_ID"
+echo "Directorio de trabajo: $(pwd)"
+echo "========================================================"
+
+# Limpiar el entorno de modulos y cargar el software necesario
+module purge
+module load gaussian/16C02_22
+
+# Definir los ficheros de entrada y salida
+INPUT_FILE="molecula.gjf"
+OUTPUT_FILE="molecula.log"
+
+# Ejecutar Gaussian. La redireccion '<' pasa el contenido de INPUT_FILE
+# al programa g16, y '>' redirige la salida del programa a OUTPUT_FILE.
+g16 < $INPUT_FILE > $OUTPUT_FILE
+
+# Imprimir mensaje de finalizacion
+echo "========================================================"
+echo "Trabajo finalizado."
+echo "========================================================"
+
+Este script debe guardarse en el mismo directorio de $FSCRATCH donde se encuentra el fichero de entrada molecula.gjf.
+
+
+2.4 Envío, Verificación y Lanzamiento del Trabajo
+
+
+Una vez que el script de envío (p. ej., script_gaussian.sh) está preparado, se envía al sistema de colas de Slurm con el comando sbatch 6:
+
+
+Bash
+
+
+
+
+sbatch script_gaussian.sh
+
+Si el script es sintácticamente correcto, el sistema responderá con un mensaje como Submitted batch job <job_id>, donde <job_id> es un número único que identifica el trabajo.
+El envío no implica la ejecución inmediata. El trabajo entra en una cola y espera a que los recursos solicitados (8 CPUs, 16 GB de RAM, etc.) estén disponibles. Para verificar el estado del trabajo, se utiliza el comando squeue 6:
+
+
+Bash
+
+
+
+
+squeue -u <usuario>
+
+El resultado mostrará una lista de los trabajos del usuario. La columna ST (State) indica el estado actual:
+   * PD (Pending): El trabajo está en la cola esperando recursos.
+   * R (Running): El trabajo se está ejecutando en un nodo de cómputo.
+   * CG (Completing): El trabajo está finalizando.
+Una vez que el trabajo pasa al estado R, el cálculo de Gaussian ha comenzado.
+
+
+Sección 3: Dominio de la Asignación de Recursos y las Restricciones del Sistema
+
+
+El uso avanzado del supercomputador Picasso requiere ir más allá del simple envío de trabajos. Implica tomar decisiones estratégicas sobre la solicitud de recursos para equilibrar el rendimiento, minimizar el tiempo de espera en la cola y cumplir con las políticas del sistema. Esta sección detalla las características del hardware disponible y las restricciones que gobiernan su uso.
+
+
+3.1 Inventario de los Nodos Computacionales de Picasso
+
+
+Picasso es un clúster heterogéneo, compuesto por diferentes tipos de nodos de cómputo, cada uno con características específicas de CPU, memoria y arquitectura. Conocer estas diferencias es clave para solicitar los recursos más adecuados para cada tipo de cálculo.3 Un trabajo que requiere una gran cantidad de memoria, por ejemplo, debe dirigirse a los nodos diseñados para tal fin.
+La siguiente tabla consolida las especificaciones de los diferentes tipos de nodos disponibles para los usuarios a través del sistema de colas.2
+Tabla 1: Especificaciones de los Nodos de Cómputo de Picasso para la Solicitud de Trabajos
+Tipo de Nodo
+	Arquitectura del Procesador
+	Núcleos de CPU Solicitables
+	RAM Solicitables (GB)
+	Caso de Uso Típico
+	sd
+	Intel Xeon Gold 6230R
+	52
+	182
+	Trabajos de CPU estándar, cálculos de propósito general.
+	bl
+	AMD EPYC 7H12
+	128
+	1855
+	Trabajos que requieren una cantidad de memoria muy elevada (p. ej., post-HF, cálculos con bases muy grandes).
+	sr
+	AMD EPYC 7H12
+	128
+	439
+	Trabajos de CPU de alto rendimiento, cálculos paralelos en un solo nodo.
+	bc
+	AMD EPYC 9754
+	256
+	683
+	Trabajos masivamente paralelos en un solo nodo, cálculos con alta demanda de memoria.
+	exa (GPU)
+	AMD EPYC (Host) + Nvidia A100
+	128
+	878
+	Cálculos acelerados por GPU (p. ej., ciertos métodos DFT en Gaussian).
+	
+
+3.2 Solicitudes Estratégicas de Recursos: Alineando CPU, Memoria y Tiempo
+
+
+La solicitud de recursos es un acto de equilibrio. Solicitar demasiados recursos puede parecer una medida de seguridad, pero es contraproducente. El planificador de Slurm funciona como un sistema de encaje de piezas: debe encontrar un hueco en el tiempo y el espacio de los nodos que coincida exactamente con la solicitud. Un trabajo que pide muchos núcleos o una gran cantidad de memoria durante mucho tiempo es una "pieza" grande y difícil de encajar, lo que inevitablemente aumentará su tiempo de espera en la cola (PENDING).2
+Por otro lado, solicitar muy pocos recursos es igualmente problemático. Si un trabajo de Gaussian intenta usar más memoria de la que se le asignó con --mem, Slurm lo terminará inmediatamente con un error de out_of_memory. Del mismo modo, si el cálculo no ha finalizado cuando se alcanza el límite de --time, el trabajo será cancelado sin piedad.3
+La estrategia óptima es la de "ajuste correcto" (right-sizing). Se recomienda:
+   1. Para un nuevo tipo de cálculo, ejecutar primero un trabajo de prueba corto y con un sistema pequeño para estimar el uso real de memoria y el tiempo requerido.
+   2. Utilizar las herramientas de monitorización (ver Sección 4.1) para comparar los recursos solicitados con los realmente utilizados.
+   3. Ajustar las solicitudes en trabajos posteriores basándose en estos datos empíricos.
+Además, es importante reconocer que no todos los algoritmos paralelos escalan perfectamente. Doblar el número de núcleos no siempre reduce el tiempo de ejecución a la mitad. Para algunos cálculos, añadir más núcleos más allá de cierto punto puede incluso ralentizar el proceso debido a la sobrecarga de comunicación. El SCBI ofrece ayuda para analizar la escalabilidad de los trabajos si se proporciona un ejemplo que dure aproximadamente dos horas.2
+
+
+3.3 Comprensión de los Límites Impuestos por el Sistema y las Políticas de Cancelación de Trabajos
+
+
+Además de la cancelación automática por exceder los límites de tiempo o memoria solicitados, existen otras políticas para mantener la estabilidad y el buen funcionamiento del sistema 3:
+   * Cancelación Manual: El personal del SCBI puede cancelar manualmente un trabajo si detecta que está saturando el sistema (p. ej., generando una carga de E/S excesiva que afecta a otros usuarios) o si los recursos reservados están siendo drásticamente infrautilizados (p. ej., un trabajo que solicita 128 núcleos pero solo utiliza uno).
+   * Límite de Ficheros: Existe una restricción importante sobre el número de ficheros. Si se prevé que un trabajo o un flujo de trabajo va a generar un número muy elevado de ficheros (el umbral mencionado es de 15,000), es obligatorio contactar con el equipo de soporte del SCBI antes de lanzarlo. Este tipo de operación puede causar problemas graves en el rendimiento general del sistema de ficheros.3
+Estas políticas subrayan que Picasso es un recurso compartido. Un uso responsable y eficiente no solo beneficia al propio investigador al mejorar el rendimiento de sus trabajos, sino que también contribuye a la salud del ecosistema computacional para toda la comunidad de usuarios.
+
+
+3.4 Consideraciones Especiales para Cálculos Acelerados por GPU
+
+
+Gaussian puede aprovechar las Unidades de Procesamiento Gráfico (GPUs) para acelerar ciertos tipos de cálculos, especialmente los basados en la Teoría del Funcional de la Densidad (DFT). Picasso cuenta con nodos exa, equipados con potentes GPUs Nvidia A100.3
+Para solicitar estos recursos especializados, el script de Slurm debe incluir dos directivas específicas 1:
+   1. #SBATCH --gres=gpu:N: Donde N es el número de GPUs solicitadas (p. ej., gpu:1).
+   2. #SBATCH --constraint=dgx: Esta restricción asegura que el trabajo se asigne a un nodo de tipo exa.
+Es crucial entender la arquitectura de estos nodos para usarlos eficientemente. Un nodo exa no es un recurso monolítico. Es un sistema donde los recursos de CPU y memoria están equilibrados para servir a sus 8 GPUs. El SCBI proporciona una directriz fundamental: idealmente, no se deben solicitar más de 16 núcleos de CPU y 109 GB de RAM por cada GPU solicitada.3
+Esto significa que las solicitudes de CPU y memoria deben escalar proporcionalmente con las de GPU. Por ejemplo:
+   * Para 1 GPU: solicitar --cpus-per-task=16 y --mem=109gb.
+   * Para 2 GPUs: solicitar --cpus-per-task=32 y --mem=218gb.
+Solicitar 1 GPU pero todos los 128 núcleos del nodo sería extremadamente ineficiente. La GPU se vería sobrecargada por un exceso de tareas de CPU, y los recursos restantes del nodo (7 GPUs, núcleos adicionales) quedarían bloqueados e inutilizables por otros usuarios. Seguir esta regla de proporcionalidad garantiza que el trabajo utilice una "porción" equilibrada del nodo, lo que conduce a una ejecución eficiente y permite un uso compartido más efectivo de estos valiosos recursos.
+
+
+Sección 4: Post-Envío: Monitorización, Gestión y Recuperación de Resultados
+
+
+El ciclo de vida de un trabajo no termina con el comando sbatch. La fase posterior al envío es crucial para seguir el progreso, diagnosticar problemas y, finalmente, recuperar y asegurar los resultados de la investigación.
+
+
+4.1 Supervisión de Trabajos en Tiempo Real: Uso de squeue y el Monitor en Línea
+
+
+El SCBI proporciona dos herramientas principales para la supervisión de trabajos:
+   1. squeue: Como ya se ha mencionado, este comando de terminal es la forma más rápida de obtener un resumen del estado de los trabajos.6 Es ideal para comprobaciones rápidas para ver si un trabajo está en cola (
+PD) o en ejecución (R).
+   2. Monitor de Trabajos en Línea: Para un análisis mucho más detallado y en tiempo real del rendimiento, el SCBI ofrece un monitor web.2 Esta herramienta proporciona gráficos que visualizan el uso real de CPU, RAM, GPU y VRAM a lo largo del tiempo de ejecución del trabajo. El monitor es un recurso de aprendizaje inestimable. Permite al investigador ver visualmente cómo se comparan los recursos que solicitó con los que su aplicación realmente consumió.2 Por ejemplo, si un trabajo solicitó 64 GB de RAM (
+--mem=64gb) pero el gráfico muestra que el uso máximo nunca superó los 20 GB, es una clara indicación de que la próxima solicitud puede reducirse significativamente, lo que probablemente disminuirá el tiempo de espera en la cola. Se recomienda encarecidamente el uso de este monitor, especialmente durante las primeras ejecuciones de un nuevo tipo de cálculo, para aprender a "ajustar correctamente" las solicitudes de recursos.
+
+
+4.2 Interpretación de Ficheros de Salida, Registros y Errores
+
+
+Cuando un trabajo finaliza (ya sea con éxito o con un fallo), se generan varios ficheros que contienen información vital. Es esencial saber dónde buscar para diagnosticar el resultado. Típicamente, hay tres ficheros clave:
+      1. Fichero de Salida de Slurm (job.<job_id>.out): Contiene la salida estándar del script de envío. Aquí se encontrarán los mensajes impresos por los comandos echo del script, así como cualquier otra salida que no haya sido redirigida.6
+      2. Fichero de Error de Slurm (job.<job_id>.err): Captura la salida de error estándar del script. Si Slurm cancela el trabajo (p. ej., por exceder el tiempo o la memoria), los mensajes de error del sistema aparecerán aquí.6 Este es el primer lugar que se debe consultar si un trabajo falla inesperadamente.
+      3. Fichero de Registro de Gaussian (molecula.log): Este es el fichero más importante desde la perspectiva científica. Contiene toda la salida detallada del programa Gaussian, incluyendo la convergencia de la SCF, los pasos de optimización de la geometría, las energías finales, las frecuencias vibracionales, etc..3 Si el cálculo falla debido a un problema científico (p. ej., no converge), los mensajes de error de Gaussian se encontrarán al final de este fichero.
+Un flujo de trabajo de depuración eficaz sigue este orden:
+      1. Revisar el fichero .err en busca de errores a nivel de sistema (Slurm).
+      2. Si no hay errores de sistema, examinar el fichero .log de Gaussian en busca de errores de la aplicación.
+      3. Consultar el fichero .out para verificar que el script se ejecutó como se esperaba.
+
+
+4.3 Finalización del Trabajo: Transferencia Segura de Resultados desde $FSCRATCH
+
+
+La ejecución exitosa de un trabajo no es el final del proceso. El directorio de trabajo en $FSCRATCH es un espacio temporal.1 Para garantizar la preservación a largo plazo, los resultados importantes deben ser archivados en el directorio permanente
+$HOME.
+Una vez que se ha verificado que los resultados en $FSCRATCH son correctos y valiosos, se deben seguir los siguientes pasos:
+      1. Archivar en $HOME: Copiar los ficheros esenciales (p. ej., el .log final, el fichero de checkpoint .chk, y cualquier otro fichero de resultados relevante) desde el directorio de trabajo en $FSCRATCH a una estructura de directorios bien organizada en $HOME.
+Bash
+# Ejemplo de comando de archivo
+cp $FSCRATCH/calculo_benceno/molecula.log $HOME/proyectos/benceno/resultados/
+cp $FSCRATCH/calculo_benceno/molecula.chk $HOME/proyectos/benceno/resultados/
+
+      2. Descargar a la Máquina Local: Para un análisis más profundo, la creación de gráficos o la redacción de informes, los resultados pueden ser descargados a la máquina local del investigador utilizando scp.
+Bash
+# Ejemplo de comando de descarga desde el terminal local
+scp <usuario>@picasso.scbi.uma.es:$HOME/proyectos/benceno/resultados/molecula.log.
+
+      3. Limpieza: Una vez que los datos importantes están a salvo en $HOME y/o en la máquina local, es una buena práctica eliminar el directorio de trabajo de $FSCRATCH para liberar espacio y mantener las cuotas bajo control.
+
+
+Sección 5: Técnicas Avanzadas y Mejores Prácticas
+
+
+Para los investigadores que realizan cálculos a gran escala o buscan maximizar su productividad en el clúster, Slurm ofrece funcionalidades avanzadas. Adoptar un conjunto de mejores prácticas no solo optimiza el rendimiento individual, sino que también promueve un uso saludable del recurso compartido.
+
+
+5.1 Computación de Alto Rendimiento con Trabajos en Array de Slurm
+
+
+Para tareas que implican ejecutar el mismo cálculo sobre un gran número de moléculas diferentes o explorar un espacio de parámetros (p. ej., un escaneo conformacional), enviar cientos de trabajos individuales es ineficiente. La solución para esto son los trabajos en array (Array Jobs) de Slurm. Con una única directiva en el script, se puede instruir a Slurm para que lance una serie de trabajos casi idénticos.1
+La directiva clave es #SBATCH --array=<indices>. Por ejemplo:
+#SBATCH --array=1-100
+Esto le dice a Slurm que ejecute este script 100 veces. Cada ejecución es una tarea de array independiente y tendrá acceso a una variable de entorno especial, $SLURM_ARRAY_TASK_ID, que tomará un valor del 1 al 100. Esta variable se puede usar dentro del script para diferenciar cada tarea, por ejemplo, para seleccionar un fichero de entrada diferente.
+Un ejemplo conceptual para procesar 100 ficheros de entrada nombrados input_1.gjf, input_2.gjf,..., input_100.gjf sería:
+
+
+Bash
+
+
+
+
+#!/bin/bash
+#SBATCH --job-name=GaussianArray
+#SBATCH --array=1-100
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8gb
+#SBATCH --time=12:00:00
+
+# Cargar modulo
+module load gaussian/16C02_22
+
+# Usar la variable de entorno para definir los nombres de los ficheros
+INPUT_FILE="input_${SLURM_ARRAY_TASK_ID}.gjf"
+OUTPUT_FILE="output_${SLURM_ARRAY_TASK_ID}.log"
+
+# Ejecutar el calculo
+g16 < $INPUT_FILE > $OUTPUT_FILE
+
+Este único script enviaría 100 trabajos a la cola, gestionando eficientemente un gran volumen de cálculos.
+
+
+5.2 Optimización del Rendimiento de los Trabajos y Minimización del Tiempo en Cola
+
+
+A continuación se resume una serie de estrategias clave, destiladas de las secciones anteriores, para maximizar la productividad en Picasso:
+         * Ajustar Correctamente los Trabajos: La práctica más importante es solicitar solo los recursos que se necesitan. Utilizar el monitor en línea para entender el consumo real y ajustar las solicitudes futuras en consecuencia. Los trabajos más pequeños y cortos tienen una probabilidad mucho mayor de encontrar huecos en la planificación y, por lo tanto, de empezar antes.
+         * Utilizar el Nivel de Almacenamiento Adecuado: Aplicar la estrategia de tres niveles (preparar en $FSCRATCH, ejecutar en localscratch, archivar en $HOME) para trabajos intensivos en E/S. Esto mejora el rendimiento del trabajo y reduce la carga en los sistemas de ficheros compartidos.
+         * Favorecer Trabajos más Cortos con Checkpoints: Un trabajo monolítico de 7 días es frágil; si falla en el sexto día, se pierde todo el cómputo. Una serie de trabajos más cortos que se reinician desde un fichero de checkpoint es más robusta y tiene mejor rendimiento en la cola. Gaussian es excelente para esto, ya que puede reiniciar optimizaciones y otros cálculos desde un fichero .chk.
+         * Usar Trabajos en Array para Tareas de Alto Volumen: Para tareas repetitivas a gran escala, los trabajos en array son la herramienta más potente y eficiente.
+
+
+5.3 Protocolo para Contactar con el Soporte Técnico del SCBI
+
+
+El equipo de soporte técnico del SCBI es un recurso valioso para la comunidad de usuarios. Ofrecen asistencia para resolver problemas, optimizar el rendimiento y responder a preguntas sobre el uso del sistema.2 Para que la interacción sea lo más eficiente posible, es fundamental proporcionarles la información necesaria desde el primer contacto.
+El canal principal de comunicación es el correo electrónico: soporte@scbi.uma.es.3
+Un ticket de soporte eficaz debe ser visto como una colaboración. El objetivo es proporcionar al equipo técnico toda la información que necesitan para diagnosticar el problema rápidamente. Un buen correo de soporte debe incluir:
+         1. Nombre de Usuario: El nombre de usuario en el clúster Picasso.
+         2. ID del Trabajo (Job ID): Si el problema está relacionado con un trabajo específico, el ID numérico es la pieza de información más importante.
+         3. Ubicación de los Ficheros: La ruta completa al directorio de trabajo en $FSCRATCH, incluyendo el script de envío (.sh), los ficheros de salida (.out, .err) y el fichero de registro de la aplicación (.log).
+         4. Descripción Clara del Problema: Explicar cuál es el problema (p. ej., "El trabajo falla con un error de segmentación", "El rendimiento es mucho más bajo de lo esperado").
+         5. Pasos ya Realizados: Describir brevemente lo que ya se ha intentado para solucionar el problema.
+Siguiendo este protocolo, el investigador no solo acelera la resolución de su propio problema, sino que también contribuye a un uso más eficiente del tiempo del equipo de soporte, lo que beneficia a toda la comunidad científica que depende del supercomputador Picasso.
+Obras citadas
+         1. Quick Introduction Course to Picasso - SCBI UMA, fecha de acceso: octubre 4, 2025, https://www.scbi.uma.es/web/8146-2/
+         2. User's Manual - SCBI UMA, fecha de acceso: octubre 4, 2025, https://www.scbi.uma.es/web/resources/user_manual/
+         3. Manual de Usuario – SCBI UMA, fecha de acceso: octubre 4, 2025, https://www.scbi.uma.es/web/es/recursos/documentacion/
+         4. Supercomputador PICASSO - YouTube, fecha de acceso: octubre 4, 2025, https://www.youtube.com/watch?v=T2Vk3jAOpKs
+         5. Software - SCBI UMA, fecha de acceso: octubre 4, 2025, https://www.scbi.uma.es/web/resources/software/
+         6. SCBI UMA - Universidad de Málaga, fecha de acceso: octubre 4, 2025, https://www.scbi.uma.es/web/es/inicio/

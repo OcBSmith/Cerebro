@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part073</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>1-electron property integrals</h2>
+<p>Also available are 1-electron property integrals.</p>
+<pre><code>1elPropertyIntegrals -1-electron property integrals</code></pre>
+<p>Currently the following options are valid:</p>
+<table><tbody><tr><td>angular_momentum</td><td>-</td><td>Angular momentum integrals Dipole moment integrals</td></tr><tr><td>dipole</td><td>-</td><td></td></tr><tr><td>higherMoment</td><td>-</td><td>Octupole moment integrals</td></tr><tr><td>quadrupole</td><td>-</td><td>Quadrupole moment integrals</td></tr><tr><td>velocity</td><td>-</td><td>Velocity integrals</td></tr><tr><td>soc</td><td>-</td><td>Spin-orbit coupling integrals</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "1elPropertyIntegrals" : ["dipole", "quadrupole"], "JSONFormats" : ["json"] }</code></pre>
+<p>SOC integrals are computed with the settings chosen in the GBW file, except for the relativistic Hamiltonian (see 1-electron relativistic property integrals for the relativistic version). In the case of SOMF, the SCF density from the density container is used.</p>
+<h2>1-electron relativistic integrals</h2>
+<p>1-electron relativistic integrals follow the same notation as the corresponding non-relativistic ones (see 1-electron integrals ).</p>
+<h2>Example</h2>
+<pre><code>{ "1elIntegralsRel" :["H", "T", "V"], "JSONFormats" : ["json"] }</code></pre>
+<p>This example will produce and store in the corresponding json file the X2C-transformed H-Matrix, as well as the separate potential and kinetic contributions. Note that while the 'relativistic' overlap matrix is available for completeness, in X2C it is identical to the non-relativistic overlap by construction.</p>
+<h2>1-electron relativistic property integrals</h2>
+<p>Also available are 1-electron relativistic (X2C) property integrals similar to the non-relativistic ones but with reduced options.</p>
+<pre><code>1elPropertyRelIntegrals -relativistic 1-electron property integrals</code></pre>
+<p>Currently the following options are valid:</p>
+<table><tbody><tr><td>angular_momentum</td><td>-</td><td>Angular momentum integrals</td></tr><tr><td>dipole</td><td>-</td><td>Dipole moment integrals</td></tr><tr><td>quadrupole</td><td>-</td><td>Quadrupole moment integrals</td></tr><tr><td>soc</td><td>-</td><td>Spin-orbit coupling integrals</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "1elPropertyRelIntegrals" : ["dipole","quadrupole","angular_momentum"] }</code></pre>
+<h2>Origin setting</h2>
+<p>The origin of the electric property is per default the Cartesian origin but also the center of mass and the center of nuclear charges can be selected. Additionally an arbitrary position can be given as x,y,z coordinates when ori_el = 3 is chosen. Currently the following options are valid:</p>
+<table><tbody><tr><td>ori_el</td><td>-</td><td>0 - Cartesian origin</td></tr><tr><td></td><td>-</td><td>1 - center of mass</td></tr><tr><td></td><td>-</td><td>2 - center of nuclear charge</td></tr><tr><td></td><td>-</td><td>3 - arbitrary position</td></tr><tr><td>ori_el_xyz</td><td>-</td><td>position of the origin(x,y,z)</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "1elPropertyIntegrals" : ["dipole","quadrupole"], "ori_el" : 3, "ori_el_xyz" : [0.0, 1.0, 1.0] }</code></pre>
+<h2>Fock matrix contributions</h2>
+<p>The following two-electron contributions to the AO-basis Fock matrix can be exported:</p>
+<table><tbody><tr><td>J</td><td>-</td><td>Coulomb</td></tr><tr><td>K</td><td>-</td><td>Exchange</td></tr><tr><td>VXC</td><td>-</td><td>DFT XC potential</td></tr><tr><td>Vsol</td><td>-</td><td>Implicit solvent potential</td></tr><tr><td>F</td><td>-</td><td>Total Fock matrix</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">All terms are computed using the SCF (spin-)density from the .densities file (named 'scfp' and 'scfr').</li>
+<li style="list-style-type: '· ';">The same settings and approximations (RI, COSX, grids) as in the original calculation are used.</li>
+<li style="list-style-type: '· ';">All prefactors are already included, such that F = J + K + VXC + Vsol.</li>
+<li style="list-style-type: '· ';">For consistency, the output dimensions are always N spin-ops × N AO × N AO, even though all matrices are symmetric and some terms (J and Vsol) are equal for alpha/beta in the UHF case.</li>
+<li style="list-style-type: '· ';">The 1-electron contributions ('H') are not included and must be requested separately (see 1-electron integrals , as well as 1-electron relativistic integrals for the relativistic case).</li>
+</ul>
+<h2>Example</h2>
+<pre><code>{ "1elIntegrals" : ["H"], "FockMatrix" : ["F", "J", "K", "VXC", "Vsol"], "JSONFormats" : ["json"] }</code></pre>
+<h2>2-electron integrals</h2>
+<p>ORCA_2json can produce and write on disk three main categories of 2-electron integrals.</p>
+<ol>
+<li style="list-style-type: '1. ';">Two-electron integrals in atomic basis ( 2-electron integrals in AO basis )</li>
+<li style="list-style-type: '2. ';">Two-electron integrals in molecular basis ( 2-electron integrals in MO basis )</li>
+<li style="list-style-type: '3. ';">Two-electron integrals using the resolution of identity approximation (RI). ( RI 2-electron integrals )</li>
+</ol>
+<h2>2-electron integrals in AO basis</h2>
+<p>In atomic basis the two-electron integrals can be saved in Coulomb order or in Exchange order. The keywords for the two options are shown in the next table.</p>
+<table><tbody><tr><th>AO_PQRS</th><th>-</th></tr><tr><td></td><td>AO basis integrals in Coulomb order</td></tr><tr><td>AO_PRQS</td><td>- AO basis integrals in Exchange order</td></tr></tbody></table>
+<h2>2-electron integrals in MO basis</h2>
+<p>In molecular basis, ORCA follows the accepted notation where by I,J,K and L we specify 'internal' orbitals, meaning occupied in the reference wavefunction while by A,B,C and D we specify 'external' orbitals, meaning orbitals that are empty in the reference wavefunction. With P,Q,R and S we specify all possible orbitals, meaning both 'internal' and 'external'. The available keywords in 'orca_2json' for the two-electron integrals in the molecular basis are the ones shown in the table below:</p>
+<table><tbody><tr><td>MO_IJKL</td><td>-</td><td>Coulomb 0-external</td></tr><tr><td>MO_IJKA</td><td>-</td><td>Coulomb 1-external</td></tr><tr><td>MO_IJAB</td><td>-</td><td>Coulomb 2-external</td></tr><tr><td>MO_IABC</td><td>-</td><td>Coulomb 3-external</td></tr><tr><td>MO_ABCD</td><td>-</td><td>Coulomb 4-external</td></tr><tr><td>MO_PQRS</td><td>-</td><td>Coulomb ALL integrals</td></tr><tr><td>MO_IKJL</td><td>-</td><td>Exchange 0-external</td></tr><tr><td>MO_IKJA</td><td>-</td><td>Exchange 1-external</td></tr><tr><td>MO_IAJB</td><td>-</td><td>Exchange 2-external</td></tr><tr><td>MO_IBAC</td><td>-</td><td>Exchange 3-external</td></tr><tr><td>MO_ACBD</td><td>-</td><td>Exchange 4-external</td></tr><tr><td>MO_PRQS</td><td>-</td><td>Exchange ALL integrals</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "2elIntegrals" :["MO_IJKL", "MO_ABCD"], "Thresh" : 1e-8 }</code></pre>
+<h2>RI 2-electron integrals</h2>
+<p>Using the Resolution of Identity (RI) one can create the integrals in a more efficient way. There are two main categories of RI integrals: the 3-index integrals, where only only half of the transformation has taken place, and the 4-index integrlas where the integrals are totally transformed in the molecular basis. The notation of the integrals follows the one we just described for the two-electron integrals in the molecular basis.</p>
+<table><tbody><tr><td>RI_IJV</td><td>-</td><td>RI 3-index 0-external</td></tr><tr><td>RI_IAV</td><td>-</td><td>RI 3-index 1-external</td></tr><tr><td>RI_ABV</td><td>-</td><td>RI 3-index 2-external</td></tr><tr><td>RI_IJKL</td><td>-</td><td>RI 4-index Coulomb 0-external</td></tr><tr><td>RI_IJKA</td><td>-</td><td>RI 4-index Coulomb 1-external</td></tr><tr><td>RI_IJAB</td><td>-</td><td>RI 4-index Coulomb 2-external</td></tr><tr><td>RI_IABC</td><td>-</td><td>RI 4-index Coulomb 3-external</td></tr><tr><td>RI_ABCD</td><td>-</td><td>RI 4-index Coulomb 4-external</td></tr><tr><td>RI_IKJL</td><td>-</td><td>RI 4-index Exchange 0-external</td></tr><tr><td>RI_IKJA</td><td>-</td><td>RI 4-index Exchange 1-external</td></tr><tr><td>RI_IAJB</td><td>-</td><td>RI 4-index Exchange 2-external</td></tr><tr><td>RI_IBAC</td><td>-</td><td>RI 4-index Exchange 3-external</td></tr><tr><td>RI_ACBD</td><td>-</td><td>RI 4-index Exchange 4-external</td></tr></tbody></table>
+<p>In addition to the integrals in case of RI integrals also the used RI Metric is available through the option Vaux:</p>
+<h2>Example</h2>
+<pre><code>{ "2elIntegrals" :["RI_IJKL", "RI_IJV"], "Vaux" : true }</code></pre>
+<h2>Full Integral Transformation</h2>
+<p>The full transformation integrals can be selected via the FullTrafo keyword.</p>
+<h2>More 2-electron integrals</h2>
+<p>Also the non-redundant 2-electron integrals are available for the RI and the nonRI case. Therefore the options 2elNonRedIntegrals or 2elNonRedRIIntegrals must be specified.</p>
+<h2>Orbital Windows, AuxBasisType and Threshold</h2>
+<p>The orbital window can either be selected automatically by the transformation routine or given by the user via the OrbWin keyword. The internal and external space (i0,i1,a0,a1) is defined via an integer list.</p>
+<p>for example:</p>
+<p>The default AUX basis type is AuxC but can be changed with the keyword AuxBasisType. Please keep in mind that only those basis types used during the ORCA run can be selected.</p>
+<h2>Example</h2>
+<pre><code>{ "OrbWin" : [0,7,8,85,0,0,0,0], "Thresh" : 1e-8, "AuxBasisType" : "AuxC", "Vaux" : true , "2elIntegrals" : ["RI_IJKL"] }</code></pre>
+<h2>TDDFT amplitude data (CIS/RPA)</h2>
+<p>The TDDFT amplitudes and root informations can be requested (no triplet information yet). The available options are:</p>
+<table><tbody><tr><th>CIS</th><th>-</th><th>TDDFT amplitudes</th></tr><tr><td>CISNRoots</td><td>-</td><td>informations of all roots</td></tr><tr><td>CISROOT</td><td>-</td><td>List of roots</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "CIS" : true , "CISNRoots" : false , "CISRoot" : [1,4,7,12] }</code></pre>
+<h2>Example</h2>
+<pre><code>{ "CIS" : true , "CISNRoots" : true }</code></pre>
+<p>To reduce the number of the integrals the keyword Thresh can be used to decrease the selected integrals to save disk space. This effects ONLY the printing and not the accuracy of the generated integrals. The default print threshold is 1.e-15.</p>
+<pre><code>Thresh -printout threshold (default 1.e-15)</code></pre>
+<h2>JSON Format</h2>
+<p>The JSON Format that is created can also be defined in the configuration file through the JSONFormats variable.</p>
+<table><tbody><tr><td>json</td><td>-</td><td>ASCII JSON format</td></tr><tr><td>bson</td><td>-</td><td>binary JSON format</td></tr><tr><td>ubjson</td><td>-</td><td>universal binary json format</td></tr><tr><td>msgpck</td><td>-</td><td>MessagePack format</td></tr></tbody></table>
+<p>The available JSON formats are:</p>
+<h2>Example</h2>
+<pre><code>{ "JSONFormats" :["json","bson","ubjson","msgpck"] }</code></pre>
+<h2>MO Coefficients</h2>
+<h2>Example</h2>
+<pre><code>{ "MOCoefficients" : true }</code></pre>
+<h2>9.3.4 Import JSON data into ORCA</h2>
+<p>Some information like geometry, basis set and Molecular orbitals stored in the json format written by orca_2json can be used to create a new gbw-file to be specified as an orbital file in the orca input. The program is called as a standalone via command line.</p>
+<pre><code>orca_2json BaseName.json -gbw</code></pre>
+<h2>Basic Information</h2>
+<p>In order to create a functional gbw-file the following information must be provided:</p>
+<table><tbody><tr><td>per Atom</td><td>-</td><td>Basis</td></tr><tr><td></td><td>-</td><td>Coords</td></tr><tr><td></td><td>-</td><td>ElementNumber</td></tr><tr><td></td><td>-</td><td>NuclearCharge</td></tr><tr><td>per molecule</td><td>-</td><td>Charge</td></tr><tr><td></td><td>-</td><td>CoordinateUnits</td></tr><tr><td></td><td>-</td><td>HFTyp</td></tr><tr><td></td><td>-</td><td>Multiplicity</td></tr><tr><td></td><td>-</td><td>MolecularOrbitals</td></tr></tbody></table>
+<h2>NOTE</h2>
+<p>Please keep in mind that MolecularOrbitals is a composite of 2 different components, namely 'EnergyUnit' and 'MOs' . Then 'MOs' contains 'MOCoefficients' , 'Occupancy' , 'OrbitalEnergy' , 'OrbitalSymLabel'* and 'OrbitalSymmetry'*.</p>
+<h2>Example</h2>
+<p>The following file (let's call it filename.json ) is a json file for H_2 molecule with STO-3G basis set.</p>
+<pre><code>{ "Molecule" : { "Atoms" : [ { "Basis" : [ { "Coefficients" : [ 0.1543289707029839, 0.5353281424384732,0.44463454202535485], "Exponents" : [3.42525091,0.62391373,0.1688554], "Shell" : "s"}], "Coords" : [0.0,0.0,0.0], "ElementNumber" : 1, "NuclearCharge" : 1.0}, { "Basis" : [ { "Coefficients" : [0.1543289707029839, 0.5353281424384732,0.44463454202535485], "Exponents" : [3.42525091,0.62391373,0.1688554], "Shell" : "s"}], "Coords" : [0.0,0.0,0.8], "ElementNumber" : 1, "NuclearCharge" : 1.0}], "Charge" : 0, "CoordinateUnits" : "Angs", "HFTyp" : "RHF", "MolecularOrbitals" : { "EnergyUnit" : "Eh", "MOs" : [{ "MOCoefficients" : [ -0.5554171364661243,-0.5554171364661241], "Occupancy" : 2.0,</code></pre>
+<p>(continues on next page)</p>
+<pre><code>"OrbitalEnergy" : -0.5544958795933514, "OrbitalSymLabel" : "A", "OrbitalSymmetry" : 0}, { "MOCoefficients" : [ -1.1482994800696493,1.1482994800696493], "Occupancy" : 0.0, "OrbitalEnergy" : 0.6126180830925017, "OrbitalSymLabel" : "A", "OrbitalSymmetry" : 0}]}, "Multiplicity" : 1} }</code></pre>
+<p>running then the command</p>
+<pre><code>orca_2json filename.json -gbw</code></pre>
+<p>should create a gbw file that ORCA can read.</p>
+<h2>Definition of the real solid harmonic Gaussian orbitals</h2>
+<p>When integrals over real solid harmonic Gaussian orbitals are issued into a JSON file, the precise definition of these orbitals becomes important. ORCA uses its own peculiar conventions for the arrangement and the phases of the individual components of the orbital shells.</p>
+<p>The definitions of the angular parts of all shell components up to angular momentum l ( ℓ = 8 ) are documented below. These correspond to the real solid harmonics S ℓ,m ( x, y, z ) that are normalized the following way:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>R ℓ ( r ) is the common radial part of a shell with angular momentum ℓ that consists of a specific basis set dependent linear combination of Gaussian primitives. It is normalized independently:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The factors r 2 and sin ϑ in these integrals arise from the volume element in spherical polar coordinates:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>dxdy dz = r sin</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum s ( l = 0 )</h2>
+<p>(continued from previous page)</p>
+<h2>Angular momentum p ( l = 1 )</h2>
+<h2>Angular momentum d ( l = 2</h2>
+<h2>)</h2>
+<h2>Angular momentum f ( l = 3 )</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum g ( l = 4 )</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum h ( l = 5 )</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum i ( l = 6 )</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum k ( l = 7 )</h2>
+<p>Note that in ORCA 6.0 and earlier, basis functions of angular momentum quantum number 7 had the label j , in contrast to the usual convention in spectroscopy where the letter j is skipped. This inconsistency has been corrected</p>
+<p>in the current release of ORCA.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Angular momentum l ( l = 8 )</h2>
+<p>Note that in ORCA 6.0 and earlier, basis functions of angular momentum quantum number 8 were never actually supported. The likely result when attempting to use them was a crash.</p>
+<p>Also note that the symbol l is reserved in basis set files for sp shells that have a common set of Gaussian exponents.</p>
+<p>Thus for angular momentum 8 and higher, the numerical value needs to be used instead of the letter.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>9.4 Property File</h2>
+<p>One of the files that ORCA produces, during a calculation, is the property file . The name of the file is basename. property.txt , where basename is the basename of the input file.</p>
+<p>The property file has mainly two usages in ORCA. The first usage is to work as basis for the Compound scripting language. Compound reads all its information concerning properties through the property file and not through parsing of the ORCA output. The second usage of the property file is to make it easier for other programs, or potential GUIs, to create interfaces with ORCA.</p>
+<p>The advantage of the property file compared to the normal ORCA output is that it's syntax is well defined and so it is easier to parse it. It can also be converted to JSON format as shown below.</p>
+<p>Writing to the property file is enabled by default for most calculations. It can be disabled via !NoPropFile or toggled on/off in the %output block:</p>
+<pre><code>%output PropFile false # default: true end</code></pre>
+<h2>Ϫ Caution</h2>
+<p>Since the whole file is read and re-written multiple times for each single point calculation, optimizations of systems with a few thousand atoms can incur a few milliseconds of stacking I/O overhead, per optimization cycle (i.e., a few seconds per cycle after several hundred steps). Thus, it is recommended to disable the property file for such calculations and this is done by default for GOAT , MD-L-Opt , MM , or GFN-FF chosen in the simple input.</p>
+<h2>9.4.1 TXT Format</h2>
+<p>After any ORCA calculation a property file is created with the extension .property.txt . The file is a text file and one can read it and edit it with any available text editor. Below we will analyze the syntax of the file.</p>
+<p>The file always starts with the following three lines:</p>
+<pre><code>************************************************* ******************* ORCA 6.1.x ****************** *************************************************</code></pre>
+<p>where, obviously the version of ORCA changes (it is also stored in Calculation_Status -&gt; version ).</p>
+<p>Then, the file consists of a list of properties. Each property starts with the symbol $ followed by the name of the property and ends with the symbol $ followed by End .</p>
+<h2>For example:</h2>
+<pre><code>$SCF_Nuc_Gradient &GeometryIndex 1 &NAtoms [&Type "Integer"] 2 &gradNorm [&Type "Double"] 7.6940943132805237e-02 &grad [&Type "ArrayOfDoubles", &Dim (6,1)] 0 0 6.7009699964043727e-10 1 -1.3755030800675890e-10 2 5.4405462640094826e-02 3 -6.7009699282161039e-10 4 1.3755031156980307e-10 5 -5.4405462640095381e-02 &Method [&Type "String"] "SCF" &Level [&Type "String"] "Relaxed density" &Mult [&Type "Integer"] 1 &State [&Type "Integer"] 0 &Irrep [&Type "Integer"] 0 $End</code></pre>
+<p>Each property consists of components . Each component starts with the symbol &amp; and has no ending symbol.</p>
+<p>For example:</p>
+<pre><code>&gradNorm [&Type "Double"] 7.6940943132805237e-02</code></pre>
+<p>The first component in every property is GeometryIndex , which shows the geometry to which the current property belongs. For example:</p>
+<pre><code>&GeometryIndex 1</code></pre>
+<p>Note that geometry indices start from 1.</p>
+<p>The remaining components have the following syntax:</p>
+<ul>
+<li style="list-style-type: '· ';">First the start of component symbol &amp; .</li>
+<li style="list-style-type: '· ';">Then follows the name of the component.</li>
+<li style="list-style-type: '· ';">Then a bracket opens with various bracket information about the component. For details on the syntax of the bracket information please check Bracket Information .</li>
+</ul>
+<p>After the bracket there are different options.</p>
+<p>If the type is String then a string is expected starting with quotation marks. For example:</p>
+<pre><code>&Method [&Type "String"] "SCF"</code></pre>
+<p>If the type is Double or Integer then a number of the appropriate type is expected. For example:</p>
+<pre><code>&NAtoms [&Type "Integer"] 2 "Number of atoms"</code></pre>
+<p>As in the example above, a component description or comment in quotation marks may be optionally present after the value in the same line as the component name. Note that for Array components, the comment actually comes before the data.</p>
+<p>Finally, if the type is a kind of Array then, after the optional comment, an array is written starting from the next line. Arrays are written in blocks of up to 8 whitespace-sparated columns. Each block starts with a line with column indices (starting from 0). The second line in a block is reserved but currently ignored. The next lines start with the row index and continue with the data for the respective row/columns. For example:</p>
+<pre><code>&dipoleTotal [&Type "ArrayOfDoubles", &Dim (3,1)] "Total" 0 0 -5.1716015643064861e-01 1 5.1774970936823518e-02 2 7.8324050140722279e-01</code></pre>
+<p>Note that Complex scalars are printed as two consecutive values for the real and imaginary part (before the optional comment), whereas for ArrayOfComplex the real part of the whole array is printed first, followed by the imaginary part.</p>
+<h2>Bracket Information</h2>
+<p>Bracket information is a list of entries separated with ','. The first and most important bracket entry is the Type , which can be one of the following:</p>
+<ul>
+<li style="list-style-type: '· ';">Double</li>
+<li style="list-style-type: '· ';">Integer</li>
+<li style="list-style-type: '· ';">Boolean</li>
+<li style="list-style-type: '· ';">Complex</li>
+<li style="list-style-type: '· ';">String</li>
+<li style="list-style-type: '· ';">ArrayOfDoubles</li>
+<li style="list-style-type: '· ';">ArrayOfIntegers</li>
+<li style="list-style-type: '· ';">ArrayOfBooleans</li>
+<li style="list-style-type: '· ';">ArrayOfComplex</li>
+<li style="list-style-type: '· ';">Coordinates</li>
+</ul>
+<p>For example:</p>
+<pre><code>&NAtoms [&Type "Integer"] 2</code></pre>
+<p>Then, in case the Type is a kind of array, the bracket must contain the dimensions of the array, using the Dim entry. Note that all arrays are 2-dimensional! For example:</p>
+<pre><code>&ATNO [&Type "ArrayOfIntegers", &Dim (2,1)]</code></pre>
+<p>Optionally, Units may also be given, if the value is not in a.u. For example:</p>
+<pre><code>&dipoleMagnitude [&Type "Double", &Units "Debye"]</code></pre>
+<h2>9.4.2 JSON Format</h2>
+<p>The property file can be also produced in a JSON format. Internally this happens through transformation of the txt format to JSON format. There are two ways to create a JSON property file.</p>
+<p>The first way is through the normal ORCA input using the JSONPropFile keyword.</p>
+<pre><code>%Output JSONPropFile True End</code></pre>
+<p>this will create a basename.property.txt and in addition a basename.property.json file.</p>
+<p>The second way is through the orca_2json command . For this, one first has to run a normal ORCA input, that will create a basename.property.txt file, and then convert it to basename.property.json using the command:</p>
+<pre><code>orca_2json basename -property</code></pre>
+<p>The file is structured as follows:</p>
+<pre><code>{ "<GlobalPropertyName>": { "<ComponentName>": <value>, <More components> }, <More global properties> "Geometries": [ { "Geometry": { "Coordinates": { "Cartesians": [ [ "<Symbol>", <X>, <Y>, <Z> ], <More atoms> ], "Type": "Cartesians", "Units": "a.u." }, "NAtoms": <value>, <More components> }, "<PropertyName>": { "<ComponentName>": <value>, <More components></code></pre>
+<pre><code>9.4000050960598935e-01</code></pre>
+<p>(continues on next page)</p>
+<pre><code>}, <More properties for this geometry> }, <More geometries> ] }</code></pre>
+<p>The 'global', i.e. geometry-independent properties are: Calculation_Status , Calculation_Info , and Calculation_Timings .</p>
+<p>Most component data types are directly converted to the corresponding JSON types. All Array components are stored as two-dimensional using nested lists (even if one dimension is of length 1). Complex and ArrayOfComplex values are stored as separate real and imaginary parts:</p>
+<pre><code>"ComplexComponentName": { "re": <real part>, "im": <imaginary part> }, "ComplexArrayComponentName": { "re": [ [<r11>, <r12>, <...>], [<r21>, <r22>, <...>], <...> ], "im": [ [<i11>, <i12>, <...>], [<i21>, <i22>, <...>], <...> ] }</code></pre>
+<h2>9.4.3 List of Available Properties</h2>
+<table><caption><div class="caption">Table 9.1: List of available properties</div></caption><tbody><tr><th>Property 1</th><th>Component</th><th>T 3</th><th>O 4</th><th>L 5</th><th>Description</th><th>Units</th></tr><tr><td>AutoCI_Energies [ Energy ]</td><td>numOfEl</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td>numOfCorrEl</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td>numOfAlphaCorrEl</td><td>I</td><td>Y</td><td>N</td><td></td><td></td></tr><tr><td></td><td>numOfBetaCorrEl</td><td>I</td><td>Y</td><td>N</td><td></td><td></td></tr><tr><td></td><td>refEnergy</td><td>AD</td><td>N</td><td>N</td><td>Reference energy each state</td><td>for</td></tr><tr><td></td><td>corrEnergy</td><td>AD</td><td>N</td><td>N</td><td>Total correlation energy for each state</td><td></td></tr><tr><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td>totalEnergy</td><td>AD</td><td>N</td><td>N</td><td>Total energy of each state</td><td></td></tr><tr><td></td><td>Mult</td><td>AI</td><td>Y</td><td>N</td><td>Multiplicity of each state</td><td></td></tr><tr><td></td><td>Irrep</td><td>AI</td><td>Y</td><td>N</td><td>Irreducible representa- tion of each state</td><td></td></tr><tr><td></td><td>RelCorr</td><td>S</td><td>Y</td><td>N</td><td>Relativistic correction (SOC and/or SSC)</td><td></td></tr><tr><td></td><td>NBlocks</td><td>I</td><td>Y</td><td>N</td><td>Number of multiplicity blocks</td><td></td></tr><tr><td></td><td>NRoots</td><td>AI</td><td>Y</td><td>N</td><td>Number of roots in each block</td><td></td></tr><tr><td></td><td>NTotalRoots</td><td>I</td><td>Y</td><td>N</td><td>Total number of roots</td><td></td></tr><tr><td></td><td>Block</td><td>AI</td><td>Y</td><td>N</td><td>Block index of each state</td><td></td></tr><tr><td></td><td>Root</td><td>AI</td><td>Y</td><td>N</td><td>Root index within the block</td><td></td></tr><tr><td></td><td>FollowIRoot</td><td>I</td><td>Y</td><td>N</td><td>Index of the followed root</td><td></td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 9.1 - continued from previous page</div></caption><tbody><tr><td></td><td></td><th>AvgMult</th><th>AD</th><th>Y</th><th>N</th><th>Average multiplicity of each SO-/SS-coupled state</th><td></td></tr><tr><th>AutoCI_Dipole_Moment</th><th>Y</th><td>dipoleMagnitude</td><td>D</td><td>N</td><td>N</td><td></td><td>a.u.</td></tr><tr><th>[ Dipole_Moment ]</th><td></td><td>dipoleElecContrib</td><td>AD</td><td>N</td><td>N</td><td>Electronic contribution</td><td></td></tr><tr><td></td><td></td><td>dipoleNucContrib</td><td>AD</td><td>N</td><td>N</td><td>Nuclear contribution</td><td></td></tr><tr><td></td><td></td><td>dipoleTotal</td><td>AD</td><td>N</td><td>N</td><td>Total</td><td></td></tr><tr><td></td><td></td><td>doAtomicDipole</td><td>B</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>atomicDipole</td><td>AD</td><td>Y</td><td>N</td><td>Atomic dipoles (NAtoms * X,Y,Z)</td><td></td></tr><tr><td></td><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Level</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Irrep</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><th>EFG_Tensor</th><th>Y</th><td>numOfNucs</td><td>I</td><td>N</td><td>N</td><td>Number of active nuclei</td><td></td></tr><tr><td></td><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Level</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Irrep NUC</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Elems</td><td>I I</td><td>N N</td><td>Y Y</td><td>Index of the nuclei Atomic number of the nuclei</td><td></td></tr><tr><td></td><td></td><td>Isotope</td><td>D</td><td>N</td><td>Y</td><td>Atomic mass</td><td></td></tr><tr><td></td><td></td><td>I</td><td>D</td><td></td><td>Y</td><td>Spin of the nuclei</td><td></td></tr><tr><td></td><td></td><td>QFAC</td><td>D</td><td>N</td><td></td><td>Prefactor</td><td></td></tr><tr><td></td><td></td><td>V</td><td></td><td>N</td><td>Y Y</td><td>Raw tensor</td><td></td></tr><tr><td></td><td></td><td>VEigenvalues</td><td>AD AD</td><td>N N</td><td>Y</td><td>Eigenvalues Eigenvectors</td><td></td></tr><tr><td></td><td></td><td>orientation VIso</td><td>AD D</td><td>N N</td><td>Y Y</td><td></td><td></td></tr><tr><th>AutoCI_Polarizability</th><th>Y</th><td>isotropicPolar</td><td>D</td><td>N N</td><td>N</td><td></td><td>a.u</td></tr><tr><th>[ Polarizability ]</th><td></td><td>rawCartesian diagonalizedTensor</td><td>AD AD</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>orientation</td><td>AD</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>doAtomicPolar atomicPolarIso</td><td>B AD</td><td>Y</td><td>N</td><td>Atomic istotropic polar- izabilities</td><td></td></tr><tr><td></td><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Level Mult</td><td>S I</td><td>N</td><td>N N</td><td></td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Irrep</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><th>AutoCI_Quadrupole_Moment</th><th>Y</th><td>isotropicQuadMoment</td><td></td><td></td><td>N</td><td></td><td></td></tr><tr><th>[ Quadrupole_Moment ]</th><td></td><td>quadElecContrib</td><td>D AD</td><td>N N</td><td>N</td><td>Electronic contribution. Order: XX, YY, ZZ, XY, XZ, YZ</td><td>a.u.</td></tr><tr><td></td><td></td><td>quadNucContrib</td><td>AD</td><td>N</td><td>N</td><td>Nuclear contribution. Order: XX, YY, ZZ, XY, XZ, YZ</td><td></td></tr><tr><td></td><td></td><td>quadTotal</td><td>AD</td><td>N</td><td>N</td><td>Total. Order: XX, YY, ZZ, XY, XZ, YZ</td><td></td></tr><tr><td></td><td></td><td>quadDiagonalized</td><td>AD</td><td>N</td><td>N</td><td>The diagonalized tensor</td><td>a.u.</td></tr><tr><td></td><td></td><td>doAtomicQuad atomicQuad</td><td>B</td><td>N</td><td>N</td><td>Atomic quadrupoles</td><td></td></tr><tr><td></td><td></td><td></td><td>AD</td><td>Y</td><td>N</td><td>(NAtoms * XX, YY, ZZ, XY, XZ, YZ)</td><td></td></tr><tr><td></td><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Level</td><td>S</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>State</td><td></td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>N</td><td></td><td></td></tr><tr><th>AutoCI_A_Tensor [ A_Tensor ]</th><th>Y</th><td>Irrep numOfNucs</td><td>I I</td><td>N N</td><td>N</td><td>Number of active nuclei</td><td></td></tr><tr><td></td><td></td><td>Method Level</td><td>S S</td><td>N N</td><td>N N</td><td></td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Irrep</td><td>I</td><td>N</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>NUC Elem</td><td>I I</td><td>N N</td><td>Y Y</td><td>Index of the nuclei Atomic number of the nuclei</td><td></td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 9.1 - continued from previous page</div></caption><tbody><tr><td></td><td></td><td>Isotope</td><td>D</td><td>N</td><td>Y</td><td>Atomic mass</td></tr><tr><td></td><td></td><td>I</td><td>D</td><td>N</td><td>Y</td><td>Spin of the nuclei</td></tr><tr><td></td><td></td><td>PFAC</td><td>D</td><td>N</td><td>Y</td><td>Prefactor PFAC=ge gN be*bN (in MHz)</td></tr><tr><td></td><td></td><td>ARaw</td><td>AD</td><td>N</td><td>Y</td><td>Raw tensor</td></tr><tr><td></td><td></td><td>AEigenvalues</td><td>AD</td><td>N</td><td>Y</td><td>Eigenvalues</td></tr><tr><td></td><td></td><td>orientation</td><td>AD</td><td>N</td><td>Y</td><td>Eigenvectors</td></tr><tr><td></td><td></td><td>AIso</td><td>D</td><td>N</td><td>Y</td><td></td></tr><tr><td>AUTOCI_Chemical_Shift</td><td>Y</td><td>numOfNucs</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td>[ Chemical_Shift ]</td><td></td><td>Method</td><td>S</td><td>N</td><td>N N</td><td></td></tr><tr><td></td><td></td><td>Level</td><td>S</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Irrep</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>NUC</td><td>I</td><td>N</td><td>Y</td><td>Index of the nuclei</td></tr><tr><td></td><td></td><td>Elems</td><td>I</td><td>N</td><td>Y</td><td>Atomic number of the nuclei</td></tr><tr><td></td><td></td><td>SDSO</td><td>AD</td><td>N</td><td>Y</td><td>Diamagnetic contribu- tion</td></tr><tr><td></td><td></td><td>SPSO</td><td>AD</td><td>N</td><td>Y</td><td>Paramagnetic contribu- tion</td></tr><tr><td></td><td></td><td>STot</td><td>AD</td><td>N</td><td>Y</td><td>Total tensor</td></tr><tr><td></td><td></td><td>orientation</td><td>AD</td><td>N</td><td>Y</td><td>Eigenvectors</td></tr><tr><td></td><td></td><td>sTotEigen</td><td>AD</td><td>N</td><td>Y</td><td></td></tr><tr><td></td><td></td><td>siso</td><td></td><td></td><td>Y</td><td>Eigenvalues</td></tr><tr><td></td><td></td><td>saniso</td><td>D D</td><td>N N</td><td>Y</td><td></td></tr><tr><td>AutoCI_D_Tensor [ D_Tensor ]</td><td>Y</td><td>d_raw</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>d_eigenvalues</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>d_eigenvectors</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>D</td><td>D</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>E</td><td>D</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Method</td><td>S</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Level</td><td>S</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td></td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td>AutoCI_G_Tensor [ G_Tensor ]</td><td>Y</td><td>Irrep g_matrix</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>g_elec</td><td>D</td><td>N</td><td>N</td><td>The free electron g-value contribution The reduced mass cor-</td></tr><tr><td></td><td></td><td>g_RMC</td><td>D</td><td>N</td><td>N</td><td>rection</td></tr><tr><td></td><td></td><td>g_DSO</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>g_PSO</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>g_Tot</td><td>AD</td><td>N</td><td>N N</td><td></td></tr><tr><td></td><td></td><td>g_iso</td><td>D</td><td>N</td><td></td><td></td></tr><tr><td></td><td></td><td>Delta_g</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Delta_g_iso</td><td>D</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>orientation</td><td>AD</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Method Level</td><td>S S</td><td>N N</td><td>N</td><td></td></tr><tr><td></td><td></td><td>Mult</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>N</td><td></td></tr><tr><td></td><td></td><td>State</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td>AutoCI_Spin_Spin_Coupling [ Spin_Spin_Coupling ]</td><td>Y</td><td>numOfNucPairs</td><td>I</td><td>N</td><td>N</td><td>Numberofnuclei pairs to calculate</td></tr><tr><td></td><td></td><td>numOfNucPairsDSO</td><td>I</td><td>N</td><td>N</td><td>number of nuclear pairs to calculate DSO</td></tr><tr><td></td><td></td><td>numOfNucPairsPSO</td><td>I</td><td>N</td><td>N</td><td>number of nuclear pairs to calculate PSO</td></tr><tr><td></td><td></td><td>numOfNucPairsFC</td><td>I</td><td>N</td><td>N</td><td>number of nuclear pairs</td></tr><tr><td></td><td></td><td>numOfNucPairsSD</td><td>I</td><td>N</td><td>N</td><td>to calculate FC number of nuclear pairs to calculate SD</td></tr><tr><td></td><td></td><td>numOfNucPairsSD_FC</td><td>I</td><td></td><td></td><td>number of nuclear pairs</td></tr><tr><td></td><td></td><td></td><td></td><td>N</td><td>N</td><td>to calculate SD/FC Pairs Info: Col1-&gt;Index of A. Col2-&gt;Atom.</td></tr><tr><td></td><td></td><td>pairsInfo</td><td>AI</td><td>N</td><td>N</td><td>Num. of A. Col3-&gt;Index of B. Col4-&gt;Atom. Num. of B.</td></tr></tbody></table>
+<p>continues on next page</p>
+</div>
+</body>
+</html>

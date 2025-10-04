@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part037</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>with now two structures being read from file, and the Docking approach is labeled as independent , meaning each structure will be docked independently of each other.</p>
+<p>After everything, the output is:</p>
+<pre><code>-------------------------------------LOWEST INTERACTION ENERGY: -18.482854 kcal/mol (structure 6) -------------------------------------Total time for docking: 4.84 minutes The lowest energy structure was 2, with energy -49.259349. Docked structures saved to Basename.docker.xyz</code></pre>
+<p>and one can see that the lowest interaction energy was that of structure 2 (the uracil), meaning it interacts strongly with the HOST than the water molecule given. Now the file Basename.docker.xyz will contain all final structures, ordered by interaction energy.</p>
+<p>Fig. 4.21: Independent docking of water and uracil on top of an uracil molecule</p>
+<h2>Note</h2>
+<p>By default, the docking approach uses a fixed random seed and should always give the same result on the same machine. To make it always completely random add %DOCKER RANDOMSEED TRUE END .</p>
+<h2>Note</h2>
+<p>In order to use the faster GFN-FF instead of GFN2-XTB, use !DOCK(GFNFF) . For a quicker (and less accurate) docking, use !QUICKDOCK .</p>
+<h2>Note</h2>
+<p>Totry multiple conformers of the GUEST , the ensemble file printed by GOAT Basename.finalensemble. xyz can be directly given here and the whole ensemble will be tested against a give HOST .</p>
+<p>A detailed summary of the other options can be found on Keywords .</p>
+<h2>4.13.5 Underlying theory</h2>
+<p>The basic idea behind the DOCKER is to use a type of swarm intelligence [573] to find local minima for where the HOST would best be positioned, based on the energies and gradients of a given Potential Energy Surface (PES).</p>
+<p>Swarm intelligence algorithms were invented trying to mimic the behavior of animals such as bees and ants, and it actually fits the problem here quite well (as shown below). The basic steps needed for the algorithm are:</p>
+<ol>
+<li style="list-style-type: '1. ';">Optimize HOST and GUEST ;</li>
+<li style="list-style-type: '2. ';">Create a spacial grid around the HOST ;</li>
+<li style="list-style-type: '3. ';">Initialize a possible set of random solutions;</li>
+<li style="list-style-type: '4. ';">Let the swarm intelligence find local minima;</li>
+<li style="list-style-type: '5. ';">Preoptimize with GFN-FF a large number of these minima;</li>
+<li style="list-style-type: '6. ';">Collect a fraction of the best solutions found on 4. and fully optimize them;</li>
+<li style="list-style-type: '7. ';">The structure with the lowest energy is considered the best solution.</li>
+</ol>
+<p>To quickly demonstrate how the initial set of solutions 'evolve' to find different local minima, take as an example the substituted biphenyl as HOST below. The figure below demonstrates how a water molecule ( GUEST ) is docked onto the initial HOST .</p>
+<p>Each gray ball represents one possible placing of the water molecule (ignoring here its rotation angle). At the start, they are all distributed over the HOST without any bias. As the iterations go by, the algorithm starts to detect that both sides of the molecule have lower energy solutions than the aromatic rings, as expected, and the possible solutions start to converge to those points.</p>
+<p>In the end, solutions containing water molecules binding to both sides are taken, the system is then fully optimized and one finds that the best biding occurs with the hydroxy group to the right.</p>
+<figure><figcaption><div class="caption">Fig. 4.22: The docking process of a water molecule on the substituted biphenyl.</div></figcaption></figure>
+<h2>ǩ Important</h2>
+<p>Right now the DOCKER can only be used together with the fast GFN-XTB methods, it will be generalized later. It is also not fully exploring the parallelization potential yet, and can be much faster for the next versions.</p>
+<h2>4.13.6 Looking Deeper into the Output</h2>
+<p>The details related to the grid and the swarm optimization can be found on the output, here is one example taken from the water dimer example from the earlier section:</p>
+<pre><code>Creating spatial grid Grid Max Dimension 5.50 Angs Angular Grid Step 32.73 degrees Cartesian Grid Step 0.50 Angs Points per Dimension 11 points Initializing workers Population Density 0.50 worker/Ang^2 Population Size 57 Swarm intelligence search Minimization Algorithm mutant particle swarm Min, Max Iterations (3 , 10)</code></pre>
+<p>The Population Density here defines how many solutions will be placed on the initial grid around the HOST and can be controlled by %DOCKER SWARMPOPDENSITY 0.50 END , while the population size is a direct consequence of that, unless specified by SWARMPOPSIZE under %DOCKER .</p>
+<p>Another important piece of information is the Min, Max Iterations , which define the minimum number of iterations before checking for convergence, and the maximum possible number of iterations. These can be changed by setting SWARMMINITER and SWARMMAXITER under the %DOCKER .</p>
+<p>Then during the swarm search itself (here called the 'evolution step'), the HOST and GUEST are partially optimized using the same criteria as from !SLOPPYOPT , and their energy at convergence is taken as a convergence criteria. The printing, still for the previous example, reads:</p>
+<p>®</p>
+<h2>Note</h2>
+<p>All of the optimizations respect constraints and/or wall potentials given on the %GEOM block. The HOST can be easily frozen with %DOCKER FIXHOST TRUE END .</p>
+<table><tbody><tr><th>Iter</th><th>Emin (Eh)</th><th>avDE</th><th>stdDE</th><th>Time</th></tr><tr><td></td><td></td><th>(kcal/mol)</th><th>(kcal/mol)</th><th>(min)</th></tr><tr><td>1 -10.147462</td><td>2.756033</td><td>1.821981</td><td></td><td>0.03</td></tr><tr><td>2 -10.147462</td><td>2.121389</td><td></td><td>1.610208</td><td>0.03</td></tr><tr><td>3 -10.148583</td><td>2.313606</td><td></td><td>1.365227</td><td>0.03</td></tr><tr><td>4 -10.148583</td><td>1.846998</td><td></td><td>1.188680</td><td>0.02</td></tr><tr><td>5 -10.148583</td><td>1.587332</td><td></td><td>1.168207</td><td>0.02</td></tr></tbody></table>
+<p>Here we have the number of iterations, the energy of the best solution found during the process, the average energy difference from the lowest solutions and its standard deviation. The first number shows if the system is evolving towards a lower energy solutions and the later two give an idea of the 'spread' of the energies found.</p>
+<p>If no new minimum is found over SWARMMINITER iterations, the algorithm is considered to be converged and the best solutions are taken to the final optimization step.</p>
+<h2>4.13.7 The final steps</h2>
+<p>After the evolution step, a total of max ( sqrt ( SwarmPopSize ) , 5) structures are taken from the set of solutions for a final full optimization. The output looks like:</p>
+<pre><code>Running final optimization Maximum number of structures 7 Minimum energy difference 0.10 kcal/mol Maximum RMSD 0.25 Angs Optimization strategy regular Coordinate system redundant 2022 Fixed host false</code></pre>
+<p>To avoid redundant solutions being optimized here, a check is made such that only structures with an energy difference of at least a Minimum energy difference and Maximum RMSD (obtained after an optimal rotation using the quaternion approach) are taken. The coordinate system is also be automatically set to Cartesian if there are more than 300 atoms in total. Set AUTOCOORDSYS FALSE to avoid that or %GEOM COORDSYS CARTESIAN END to use Cartesian coordinates all the way during the docking process.</p>
+<p>If some optimizations fail during the process, they will be flagged as optimization failed , as in the example below:</p>
+<pre><code>Struc Eopt Interaction Energy Time (Eh) (kcal/mol) (min) ------------------------------------------------1 -10.149006 -4.968378 0.01 2 -10.149005 -4.967965 0.01 3 optimization failed 0.01 4 -10.149007 -4.968641 0.01 (...)</code></pre>
+<p>That only means some of the solutions failed to fully optimize at the end, and on the printed file their energy is set to 1000 Eh to show the job was not completed. If you want to increase the number of iterations, or change the final convergence criteria, just change them using the %GEOM block as usual.</p>
+<h2>4.13.8 Adding a bond bias to the docking process</h2>
+<p>The bond biases available for geometry optimization (see Section Bond Bias Potentials ) can also be applied to the DOCKER, but the input here is slightly different.</p>
+<p>As the DOCKER does not know the total number of atoms from the start, the %DOCKER block needs the first atom numbers from GUEST and HOST in that order and not the number of atoms from the final complex.</p>
+<p>For example, to add a bond bias between atom 2 from the GUEST and atom 19 from the HOST during the docking process, please use:</p>
+<pre><code>%DOCKER BIAS { B 2 19 } END END</code></pre>
+<p>The same parameters and their defaults from the %GEOM block are used here.</p>
+<p>This will also be applied to the SOLVATOR if the CLUSTERMODE DOCKING (default) is used. The GUEST atom number corresponds to that of the solvent, as printed in the output.</p>
+<h2>ǩ Important</h2>
+<p>If biases are added from the %DOCKER block, they will override any other bias from the %GEOM block.</p>
+<h2>4.13.9 Defining the center and extent of the grid</h2>
+<p>As explained above, the placement of GUEST molecules is done with the help of a spatial grid. By default, the grid is built around the centroid of the host molecule. However, in cases a different position for the grid is wanted, it can be changed by setting an arbitrary center and extents.</p>
+<p>Its center can be defined in terms of Cartesian coordinates simple via:</p>
+<pre><code>%DOCKER GRIDCENTER 1.00, 0.642, -1.234 # coordinates in Angstroem END</code></pre>
+<p>or a list of atoms can also be given, and the centroid of those atoms will be taken. If a single atom is given, that will of course be the center:</p>
+<pre><code>%DOCKER GRIDCENTERATOMS {0:5 7} END # numbers starting from 0, as usual END</code></pre>
+<h2>ǩ Important</h2>
+<p>If GRIDCENTERATOMS were given and the HOST is optimized, which is the default case, the grid center will be defined only after the geometry is optimized. For the GRIDCENTER option, the center will be fixed at the desired Cartesian coordinates.</p>
+<p>The extent of the grid around that center can be controlled by:</p>
+<pre><code>%DOCKER GRIDEXTENT 15 # extent in Angstroem</code></pre>
+<pre><code>END</code></pre>
+<p>and all x, y and z coordinates will expand that much from the center. It has to be a cube, and all dimensions will be the same. If an extent is not given, the default values will be used.</p>
+<h2>Note</h2>
+<p>There is no problem setting the grid extent to regions where atoms are present. The grid will be only built around these, same as for the default case.</p>
+<h2>4.13.10 General Tips</h2>
+<ol>
+<li style="list-style-type: '1. ';">In order to quick change the PES of the docking process, you can use !DOCK(GFN2-XTB) , ! DOCK(GFN1-XTB) , !DOCK(GFN0-XTB) or !DOCK(GFN-FF) .</li>
+<li style="list-style-type: '2. ';">For a quicker and less accurate docking the input !QUICKDOCK is also available.</li>
+<li style="list-style-type: '3. ';">There are four levels of 'docking' procedure, from simple to more elaborate: SCREENING , QUICK , NORMAL (default) and COMPLETE , which can be given as %DOCK DOCKLEVEL COMPLETE END .</li>
+<li style="list-style-type: '4. ';">To increase the final number of structures optimized in the end, just change NOPT under %DOCKER .</li>
+<li style="list-style-type: '5. ';">If the guest topology is somehow changed during the docking process, that structure will be discarded. This can be turned off by setting %DOCK CHECKGUESTTOPO FALSE END .</li>
+</ol>
+<h2>ǩ Important</h2>
+<p>By the time of the ORCA6.1 release, this algorithm was still not published. Publications are under preparation.</p>
+<h2>4.13.11 Keywords</h2>
+<p>A collection of GOAT related simple input keywords is given in Table 4.11. All %docker block options are summarized in Table 4.12.</p>
+<table><caption><div class="caption">Table 4.11: Simple input keywords for the DOCKER algorithm.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>QUICKDOCK</td><td>Set DOCKLEVEL QUICK</td></tr><tr><td>NORMALDOCK</td><td>Set DOCKLEVEL NORMAL</td></tr><tr><td>COMPLETEDOCK</td><td>Set DOCKLEVEL COMPLETE</td></tr><tr><td>DOCK(GFN-FF)</td><td>Set EVPES GFNFF</td></tr><tr><td>DOCK(GFN0-XTB)</td><td>Set EVPES GFN0XTB</td></tr><tr><td>DOCK(GFN1-XTB)</td><td>Set EVPES GFN1XTB</td></tr><tr><td>DOCK(GFN2-XTB)</td><td>Set EVPES GFN2XTB</td></tr></tbody></table>
+<table><caption><div class="caption">Table 4.12: %docker block input keywords for</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>GUEST</td><td>&quot;filename.xyz&quot;</td><td>An .xyz file (can be multistructure), from where the guest(s) will be read. Can contain different charges a Defines a general strategy for docking.</td></tr><tr><td>DOCKLEVEL</td><td>screening quick normal</td><td>Will alter things like that population density and final number of optimized structrures. default is norma</td></tr><tr><td>PRINTLEVEL</td><td>complete low normal</td><td>Default</td></tr><tr><td>NREPEATGUEST CUMULATIVE GUESTCHARGE GUESTMULT RAMDOMSEED FIXHOST OPTLEVEL AUTOCOORDSYS</td><td>high 1 true 0 3 true true sloppyopt looseopt normalopt false true 1.0 1.00, 0.642, {0:5 7} end</td><td>Will print many extra files! Number of times to repeat the content of the &#x27;GUEST&#x27; file Add the contents of the &#x27;GUEST&#x27; file one on top of each other? default is false , meaning each will be Can be used to defined a charge for the guest (default 0) Same for multiplicty (default 1) both can also be given via the comment line of the &#x27;filename.xyz&#x27;, see ab Whether to allow for the process to be trully random and will give different results everytime (default fa Freeze coordinatef for the HOST during all steps? (default false ) Use default optimization criteria inside the DOCKER Automatically use Cartesian coordinates for the docking process (default false ) will allow the DOCKER to place atoms close enough to metals such as to create coordination bonds. by A multiplying factor for the radii when defining a bond with metals. Default is 1.0</td></tr><tr><td>ALLOWMETALCOORD MBONDFAC Grid options: GRIDCENTER</td><td></td><td>d coordinates for the center in Angström</td></tr><tr><td></td><td>-1.234</td><td>list of atoms from which the centroid will be taken</td></tr><tr><td>GRIDCENTERATOMS GRIDEXTENT Swarm intelligence step:</td><td>15</td><td>Cartesian A The extent, from the center, in one dimension in Angström</td></tr><tr><td>POPDENSITY POPSIZE</td><td>5.0 500 10</td><td>Population density per Angström squared. Default depends on the Docking level A fixed number for the population size</td></tr><tr><td>SWARMMAXITER SWARMMINITER</td><td>3 0.5</td><td>Maximum number of iterations</td></tr><tr><td>SWARMPOPDENSITY SWARMPOPSIZE</td><td></td><td>Minimum number to check for convergence and minimum required of equal steps to signal convergence The population density based on the HOST grid A fixed number for the swarm population size</td></tr><tr><td>SWARMPES</td><td>150 cdp</td><td>Which PES to use only during the evolution step. The default cdp is a lot faster than the others. Can be different from the final optimization.</td></tr><tr><td></td><td>gfnff gfn0xtb gfn1xtb gfn2xtb</td><td></td></tr><tr><td>CHECKTOPO Pre optimizations</td><td>false false</td><td>Check the topology of both host and guest during the docking process? Default is true. Controls whether the PreOpt step will be done. Default true .</td></tr><tr><td>PREOPT</td><td></td><td></td></tr><tr><td>Final optimizations:</td><td>10</td><td></td></tr><tr><td></td><td></td><td>A fixed number of structures to be optimized</td></tr><tr><td>NOPT</td><td>false</td><td></td></tr><tr><td>NOOPT</td><td></td><td>not optimize any structure at all? (default false )</td></tr><tr><td></td><td></td><td>Do</td></tr></tbody></table>
+<h2>5.1 Population Analysis</h2>
+<p>Atomic population related quantities are not real molecular properties since they are not observables. They are nevertheless highly useful for interpreting experimental and computational findings. Various ways of analyzing a computed SCFwavefunction are available within ORCA. By default, ORCA provides very detailed information about calculated molecular orbitals and bonds through Mulliken , Löwdin , and Mayer population analyses.</p>
+<h2>µ See also</h2>
+<p>As these methods typically create a very large amount of specific output, we generally recommend to read the Control of Output section.</p>
+<p>The !ReducedPOP keyword is of particular use as it reduces the printed information in the population analysis section, providing orbital population of each atom with percent contribution per basis function type. This is highly useful in figuring out the character of the MOs.</p>
+<h2>5.1.1 Mulliken Population Analysis</h2>
+<p>The Mulliken population analysis [574] is, despite all its known considerable weaknesses, the standard in most quantum chemical programs. It partitions the total density using the assignment of basis functions to given atoms in the molecules and the basis function overlap. If the total charge density is written as ρ ( ⃗ r ) and the total number of electrons is N we have:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and from the density matrix P and the basis functions ϕ :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>After assigning each basis function to a given center this can be rewritten:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>therefore:</p>
+<h2>SPECTROSCOPY AND PROPERTIES</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Mulliken proposed to divide the second term equally between each pair of atoms involved and define the number of electrons on center A , N A , as:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>such that ∑ A N A = N . The charge of an atom in the molecule is then:</p>
+<p>where Z A is the core charge of atom A . The cross terms between pairs of basis functions centered on different atoms is the overlap charge and is used in ORCA to define the Mulliken bond order:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Basic Usage</h2>
+<p>The Mulliken population analysis can be invoked by the !MULLIKEN input keyword:</p>
+<pre><code>! MULLIKEN</code></pre>
+<p>It can further be requested via the Print[ P_Mulliken ] 1 keyword in the %output block</p>
+<pre><code>%output Print[ P_Mulliken ] 1 # default = on end</code></pre>
+<p>A number of additional options can be specified in the %output block to control the details of the Mulliken population analysis. By default the Mulliken population analysis is turned on.</p>
+<pre><code>%output Print[ P_AtCharges_M ] 1 # Print atomic charges Print[ P_OrbCharges_M ] 1 # Print orbital charges Print[ P_FragCharges_M] 1 # Print fragment charges Print[ P_BondOrder_M ] 1 # Print bond orders Print[ P_FragBondOrder_M ] 1 # Print fragment b.o. Print[ P_ReducedOrbPop_M ] 1 # Print reduced orb. Charges Print[ P_AtPopMO_M ] 1 # Print atomic charges in each MO Print[ P_OrbPopMO_M ] 1 # Print orbital populaiton for each MO Print[ P_ReducedOrbPopMO_M] 1 # Print reduced orbital pop for each MO Print[ P_FragPopMO_M ] 1 # Print the fragment population for for each MO end</code></pre>
+<p>These options allow to get very detailed information about the computed wavefunctions and is much more convenient than to look at the MOs directly. A 'reduced orbital population' is a population per angular momentum type. For example the sum of populations of each p z orbital at a given atom is the reduced orbital population of the p z function.</p>
+<p>Note that for finite temperature HF or KS-DFT calculations ( SmearTemp &gt; 0 K, fractional occupation numbers or FOD analysis ), only the Mulliken reduced orbital charges based on ρ FOD will be printed.</p>
+<h2>5.1.2 Löwdin Population Analysis</h2>
+<p>The Löwdin analysis [180] is somewhat more straightforward than the Mulliken analysis. In the Löwdin method one changes to a basis where all overlap integrals vanish. This is accomplished via Löwdins symmetric orthogonalization matrix S -1/2 . Using this transformation matrix the new basis functions are multicentered but are in a least square sense as similar as possible to the original, strictly localized, atomic basis functions. The similarity of the transformed functions and original functions is explored in the population analysis. The density matrix transforms as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The bond order is defined from the Wiberg index [575] that was first used in the context of semiempirical methods (that are formulated in the Löwdin basis right from the start):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Then the atomic populations are:</p>
+<h2>Basic Usage</h2>
+<p>The Löwdin population analysis can be invoked by the !LOEWDIN input keyword. By default the Löwdin population analysis is turned on and provides some more detail than the Mulliken analysis.</p>
+<pre><code>! MULLIKEN</code></pre>
+<p>It can further be requested via the Print[ P_Loewdin ] 1 keyword in the %output block:</p>
+<pre><code>%output Print[ P_Loewdin ] 1 # default = on end</code></pre>
+<p>The details of the Löwdin population analysis printout can be controlled via the %output block:</p>
+<pre><code>%output Print[ P_AtCharges_L ] 1 # Print atomic charges Print[ P_OrbCharges_L ] 1 # Print orbital charges Print[ P_FragCharges_L] 1 # Print fragment charges Print[ P_BondOrder_L ] 1 # Print bond orders Print[ P_FragBondOrder_L ] 1 # Print fragment b.o. Print[ P_ReducedOrbPop_L ] 1 # Print reduced orb. Charges Print[ P_AtPopMO_L ] 1 # Print atomic charges in each MO Print[ P_OrbPopMO_L ] 1 # Print orbital population for each MO Print[ P_ReducedOrbPopMO_L] 1 # Print reduced orbital pop for each MO Print[ P_FragPopMO_L ] 1 # Print the fragment population for each MO end</code></pre>
+<p>In addition one can set the threshold for the printing of the bond order in the %method block.</p>
+<pre><code>%method LOEWDIN_BONDORDERTHRESH 0.05 end</code></pre>
+<h2>5.1.3 Frontier Molecular Orbital Populations</h2>
+<p>As the frontier orbitals are typically of specific interest, Mulliken and Löwdin populations of the HOMO and LUMO can be requested via the ' FMOPop ' keyword:</p>
+<pre><code>! FMOPop</code></pre>
+<p>The respective Mulliken and Loewdin population of the HOMO and LUMO frontier orbitals will be printed in the output:</p>
+<pre><code>----------------------------------------------FRONTIER MOLECULAR ORBITAL POPULATION ANALYSIS ----------------------------------------------ANALYZING ORBITALS: HOMO= 6 LUMO= 7 -------------------------------------------------------------------------Atom Q(Mulliken) Q(Loewdin) Q(Mulliken) Q(Loewdin) <<<<<<<<<<<<HOMO>>>>>>>>>>>> <<<<<<<<<<<<LUMO>>>>>>>>>>>> -------------------------------------------------------------------------0-C 0.937186 0.906827 0.804044 0.755610 1-O 0.062814 0.093173 0.195956 0.244390 -------------------------------------------------------------------------</code></pre>
+<h2>5.1.4 Mayer Population Analysis</h2>
+<p>Mayers bonding analysis [576, 577, 578, 579] is another creative attempt to define chemically useful indices. The Mayer atomic charge is identical to the Mulliken charge. The Mayer bond order is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here P is the total electron density matrix and R is the spin-density matrix. These Mayer bond orders are very useful. Mayer's total valence for atom A is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In normal bonding situations and with normal basis sets V A should be reasonably close to the valence of atom A in a chemical sense (i.e. close to four for a carbon atom). The bonded valence is given by:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and finally the free valence (a measure of the ability to form further bonds) is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Basic Usage</h2>
+<p>The Mayer population analysis can be invoked via the !MAYER keyword:</p>
+<pre><code>! MAYER</code></pre>
+<p>It can further be requested via the Print[ P_Mayer ] 1 keyword in the %output block:</p>
+<pre><code>%output Print[ P_Mayer ] 1 # default = on end</code></pre>
+<p>The output is rather simple and short and can not be further controlled. By default the Mayer population analysis is turned on. In addition one can set the threshold for the printing of the bond order in the %method block.</p>
+<pre><code>%method MAYER_BONDORDERTHRESH 0.1 end</code></pre>
+<h2>5.1.5 Natural Population Analysis</h2>
+<p>If you have access to a version of the gennbo program from Weinhold's group 1 you can request the Natural Population analysis via the NBO interface .</p>
+<h2>ǩ Important</h2>
+<p>The NPA is only performed if the NBO program is provided properly. If not, ORCA will skip the NPA analysis.</p>
+<h2>Basic Usage</h2>
+<p>The Natural population analysis can be invoked via the !NPA keyword:</p>
+<pre><code>! NPA</code></pre>
+<p>It can further be requested via the Print[ P_NPA ] 1 keyword in the %output block:</p>
+<pre><code>%output Print[ P_NPA ] 1 # default = off end</code></pre>
+<h2>5.1.6 Hirshfeld Population Analysis</h2>
+<p>The partitioning method by Hirshfeld is one of the most used approaches in the so-called atoms in molecules (AIM) methods.[580] In this case, the AIM density of atom A, ρ A ( ⃗ r ) is written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, ρ ( ⃗ r ) is the total charge density at position ⃗ r , and w A ( ⃗ r ) a weighting function, that within the Hirshfeld method is equal to:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ρ 0 A ( ⃗ r ) is the pro-atomic density of atom A and ρ 0 ( ⃗ r ) = ∑ A ρ 0 A ( ⃗ r ) the pro-molecular density. The ratio in eq. (5.17) is known as stockholder . From eqs. (5.17) and (5.18) one can calculate the Hirshfeld charges as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In ORCA, the pro-atomic density within the Hirshfeld method is calculated via density fitting with a set of Gaussian s-functions per element.</p>
+<p>1 Information about the NBO program can be found at http://nbo7.chem.wisc.edu</p>
+<h2>Basic Usage</h2>
+<p>The Hirshfeld population analysis can be invoked by the !HIRSHFELD input keyword.</p>
+<pre><code>! HIRSHFELD</code></pre>
+<p>It can further be requested via the Print[ P_Hirshfeld ] 1 keyword in the %output block:</p>
+<pre><code>%output Print[ P_Hirshfeld ] 1 # default = off end</code></pre>
+<h2>Example</h2>
+<p>As an example we request the Hirshfeld charges for a water molecule:</p>
+<pre><code>!HF cc-pVDZ TightSCF HIRSHFELD * xyz 0 1 O 0.00000006589375 0.00157184228646 0.00000000004493 H 0.77316868532439 -0.58666889665624 -0.00000000000005 H -0.77316876182122 -0.58666895650640 -0.00000000000005 *</code></pre>
+<p>ORCA prints the following information in the output file:</p>
+<pre><code>------------------HIRSHFELD ANALYSIS ------------------Total integrated alpha density = 4.999998580 Total integrated beta density = 4.999998580 ATOM CHARGE SPIN 0 O -0.333756 0.000000 1 H 0.166879 0.000000 2 H 0.166879 0.000000 TOTAL 0.000003 0.000000</code></pre>
+<h2>5.1.7 MBIS Charges</h2>
+<p>The Minimal Basis Iterative Stockholder (MBIS) method is a variant of the Hirshfeld method.[581] The idea behind this approach is that the pro-atomic density ρ 0 A ( ⃗ r ) is expanded in a minimal set of atom-centered s-type Slater functions ρ 0 Ai ( ⃗ r ) :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with ρ 0 Ai ( ⃗ r ) equal to:</p>
+<p>Here, m A is the number of shells of atom A . The populations N Ai , and the widths σ Ai can be written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In order to compute the AIM densities ρ A ( ⃗ r ) , the MBIS method uses an iterative algorithm where: (1) an initial guess is generated for the set of N Ai and σ Ai and the pro-atomic densities are calculated through eqs. (5.20) and (5.21), (2) the new set of N Ai and σ Ai are obtained via eqs. (5.22) and (5.23), (3) if convergence is reached for ρ A ( ⃗ r ) , the iterative process stops, otherwise we go back to (1) but now one uses the last estimates for N Ai and σ Ai .</p>
+<p>Once, the MBIS iterative process stops, the MBIS charges are calculated as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Basic Usage</h2>
+<p>The MBIS population analysis can be invoked by the !MBIS input keyword.</p>
+<pre><code>! MBIS</code></pre>
+<p>It can further be requested via the Print[ P_MBIS ] 1 keyword in the %output block:</p>
+<pre><code>%output Print[ P_MBIS ] 1 # default = off end</code></pre>
+<p>The convergence threshold for the MBIS charges is set to 10 -6 . However, it can be changed via the tag MBIS_CHARGETHRESH in the %method block:</p>
+<pre><code>%method MBIS_CHARGETHRESH 0.0001 end</code></pre>
+<h2>MBIS Quantities</h2>
+<p>ORCA can also print the following MBIS-related quantities:</p>
+<ol>
+<li style="list-style-type: '1. ';">atomic dipole moments,</li>
+<li style="list-style-type: '2. ';">atomic quadrupole moments,</li>
+<li style="list-style-type: '3. ';">atomic octupole moments, and</li>
+<li style="list-style-type: '4. ';">third radial moment of the MBIS density ( ⟨ r 3 ⟩ A = ∫ ∣ ∣ ∣ ⃗ r -R ⃗ A ∣ ∣ ∣ 3 ρ A ( ⃗ r ) d⃗ r ) . The printing of these properties is controlled by the MBIS_LARGEPRINT in the %method block:</li>
+</ol>
+<pre><code>%method MBIS_LARGEPRINT true # default = false end</code></pre>
+<p>If this option is activated, an extra iteration is performed after reaching the convergence threshold for the charges.</p>
+<p>The origin for the calculation of the atomic dipole, quadrupole and octupole moments is the center of each atom (default). The user can also define a global origin (independent of the atom) through the MBIS_ORIGIN_MULT keyword in the %method block:</p>
+<pre><code>%method MBIS_ORIGIN_MULT CenterOfCoords # origin of coordinate system (0,0,0) CenterOfMass # center of mass CenterOfNucCharge # center of nuclear charge CenterXYZ # arbitrary position, set coordinates with␣</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → MBIS_ORIMULT_XYZ CenterOfEachAtom # center of each atom (default) MBIS_ORIMULT_XYZ x,y,z # set the coordinates, otherwise 0,0,0 (unit: Angstrom) end</code></pre>
+<h2>Example</h2>
+<p>If we request the MBIS charges for a HF calculation at the cc-pVDZ level of a chloroform molecule:</p>
+<pre><code>!HF cc-pVDZ TightSCF MBIS * xyz 0 1 C -0.00000997794639 -0.00091664148112 0.45499807439812 H 0.00000069467312 0.00031189002174 1.53703126401237 Cl 0.00003188789531 1.69433732001280 -0.08420513240263 Cl 1.46635420502892 -0.84684178730039 -0.08421103795485 Cl -1.46637680965097 -0.84689178125304 -0.08420916805301 *</code></pre>
+<p>ORCA prints the following information at the end of the output file:</p>
+<pre><code>------------------MBIS ANALYSIS ------------------Convergence threshold (charges) ... 1.000e-06 Number of iterations ... 46 Total integrated alpha density ... 29.000001385 Total integrated beta density ... 29.000001385 ATOM CHARGE POPULATION SPIN 0 C 0.208633 5.791367 0.000000 1 H 0.169417 0.830583 0.000000 2 Cl -0.126877 17.126877 0.000000 3 Cl -0.125586 17.125586 0.000000 4 Cl -0.125590 17.125590 0.000000 TOTAL -0.000003 58.000003 0.000000 MBIS VALENCE-SHELL DATA: ATOM POPULATION WIDTH(A.U.) 0 C 4.122213 0.508675 1 H 0.830583 0.358785 2 Cl 8.532439 0.524031 3 Cl 8.531380 0.523959 4 Cl 8.531381 0.523959</code></pre>
+<p>The second block corresponds to the valence Slater function, which is caracterized by its population N A,v and width σ A,v .</p>
+<h2>5.1.8 CHELPG Charges</h2>
+<p>Atomic charges can also be calculated using the CHarges from ELectrostatic Potentials using a Grid-based (CHELPG) method according to Breneman and Wiberg.[582] In this approach, the atomic charges are fitted to reproduce the electrostatic potential on a regular grid around the molecule, while constraining the sum of all atomic charges to the molecule's total charge. An additional constraint can be added, so the CHELPG charges also reproduce the total dipole moment of the molecule.</p>
+<h2>Basic Usage</h2>
+<p>In ORCA the CHELPG charges can be (i) requested within a calculation, or (ii) calculated via the standalone orca_chelpg utility. To follow path (i) one has to add the !CHELPG simple input keyword to the input file.</p>
+<pre><code>! CHELPG</code></pre>
+<p>Further settings can be controlled via the %chelpg block.</p>
+<pre><code>%chelpg GRID 0.3 # Spacing of the regular grid in Angstroems RMAX 2.8 # Maximum distance of all atoms to any gridpoint in Angstroems VDWRADII COSMO # VDW Radii of Atoms, COSMO default BW # Breneman, Wiberg radii DIPOLE FALSE # If true, then the charges also reproduce the total dipole moment end</code></pre>
+<p>By default the program uses the COSMO VDW radii for the exclusion of gridpoints near the nuclei, as these are defined for all atoms. The BW radii are similar, but only defined for very few atom types.</p>
+<p>The charges may exhibit some dependence on the molecule's orientation in space, or some artificial variations in symmetric molecules. These effects can be minimized by increasing the CHELPG grid size, either by setting the GRID parameter in the %chelpg block, or by using the !CHELPG(LARGE) simple input keyword.</p>
+<pre><code>! CHELPG(LARGE)</code></pre>
+<p>If one wants that the calculated CHELPG charges reproduce the total dipole moment of the molecule, as well as the electrostatic potential, then the following tag has to be added to the %chelpg block:</p>
+<pre><code>%chelpg DIPOLE TRUE # The default is set to FALSE end</code></pre>
+<p>In particular, the constraint affects the x , y , z components of the total dipole moment, so they reproduce the exact three components of the total dipole moment calculated via one-electron integrals.</p>
+<h2>5.1.9 RESP Charges</h2>
+<p>ORCA also features the possibility of calculating the so-called RESP charges [583], which are essentially CHELPG charges with some restraint to avoid over fitting. These can be invoked with the defaults by simply using !RESP on the main input.</p>
+<p>These RESP charges can have two types of penalty function: quadratic or hyperbolic (default), as described on the original paper. These require up to two penalty values, which are by default given by a = 0 . 0005 and b = 0 . 1 .</p>
+<p>These values can be changed inside the %CHELPG block by using:</p>
+<pre><code>%chelpg RESPA 0.01 # for the a value RESPB 0.002 # for the b value end</code></pre>
+<p>and the penalty function can be chosen with:</p>
+<pre><code>%chelpg RESPPENALTY QUADRATIC # default is HYPREBOLIC end</code></pre>
+<p>Also, if needed, the individual values for the a parameters and reference charges q 0 can be given via a special file with:</p>
+<pre><code>%chelpg RESPWFILE "wfilename" # these will define the weights (or a parameters)␣ ↪ → for each atom RESPQREFFILE "qfilename" # these might define reference charges different␣ ↪ → from zero end</code></pre>
+<p>The format for both these files is similar to a .xyz file, where the first line has the number of atoms, the second line is just a comment, and every subsequent line contains a single number which is either the weights or the reference charges per atom. They can not be given on a single file, there must be two different ones.</p>
+<h2>Note</h2>
+<p>The results from the RESP files obtained here are not necessarily the same one would get from other software. Two main reasons are: the grids are not the same and some other software use a multilevel approach, first starting with a certain value for the weights and then switching to a different value, which is not the case here.</p>
+<h2>5.1.10 Local Spin Analysis</h2>
+<p>It is common practice in chemistry to think about the interaction of open-shell systems in terms of local spin states. For example, in dimeric or oligomeric transition metal clusters, the 'exchange coupling' between open shell ions that exist locally in high-spin states is extensively studied. Diradicals would be typical systems in organic chemistry that show this phenomenon. In quantum mechanics, however, the total spin is not a local property, but instead a property of the system as a whole. The total spin squared, S 2 , and its projection onto the z-axis, S z , commute with the nonrelativistic Hamiltonian and hence, the eigenfunctions of the non-relativistic Hamiltonian can be classified according to good quantum numbers S and M according to:</p>
+<p>S 2 ∣ ∣ Ψ SM 〉 = S ( S +1) ∣ ∣ Ψ SM 〉 S z ∣ ∣ Ψ SM 〉 = M ∣ ∣ Ψ SM 〉 where ∣ ∣ Ψ SM 〉 is an exact eigenfunction of the non-relativistic Hamiltonian or an approximation to it that conserves the total spin as a good quantum number. The total spin itself is given by the sum over the individual electron spins as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>And hence, is a two-electron property of the system. It is obviously not trivial to relate the chemically very meaningful concept of local spin to a rigorous quantum mechanical treatment. While there are various proposals of how to deal with this problem, we follow here a proposal of Clark and Davidson[584]. The following equations are implemented in the SCF and CASSCF modules of Orca.</p>
+<p>Clark and Davidson define fragment projection operators with the property:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and:</p>
+<p>Then using this identity:</p>
+<p>Hence</p>
+<p>But then importantly:</p>
+<p>With the first- and second-order density matrix:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>they show that the local spin operators obey the standard relations for spin operators:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>(with ( N 2 ) = 1 2 N ( N -1) ). Then:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In terms of the number of electrons on site 'A'and the expectation value of S A z in terms of molecular orbitals:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>McWeeny and Kutzelnigg[585] show that for the expectation value of s(1)s(2), the relevant irreducible part of the two-body density can be expressed in terms of the spinless density matrix of second order:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and the density as:</p>
+<p>The fragment projector is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with a normalization factor of 3 4 after spin integration. Hence using this:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>And then performing the integral:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This is the final and perhaps most compact equation. The projection operator can be defined in very many different ways. The easiest is to Löwdin orthogonalize the basis set:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where L denotes the Löwdin basis. This means that molecular orbitals are expressed in the orthogonal basis as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Clark and Davidson suggest a slightly more elaborate projector in which first, the intra-fragment overlap is eliminated. This happens with a matrix U that for two fragments takes form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where is the block of basis functions belonging to fragment A. Likewise:</p>
+<p>Then the 'pre-overlap'is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This contains the unit matrix in the intra-fragment blocks and non-zero elements elsewhere. This overlap matrix is the finally orthogonalized to obtain the globally orthogonal Löwdin basis. We finally transform the MO coefficients by the following transformation:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For the projectors, operating with the two MOs i and j gives:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Herrmann et al.[586] give the correct expression of the expectation values for a single spin-unrestricted determinant</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Which is used in the Orca implementation.</p>
+<p>The use of the Local spin-implementation is very easy. All that is required is to divide the molecule into fragments . The rest happens automatically. For example, let us consider two nitrogen atoms at the dissociation limit. While the total spin state is S=0, the tow nitrogen atoms local exist in high-spin states (S=3/2). Consider the following test job:</p>
+<pre><code>! HF def2-SVP UHF TightSCF PModel %scf brokensym 3,3 end * xyz 0 1 N(1) 0 0 0 N(2) 0 0 1094 *</code></pre>
+<h2>and the output:</h2>
+<pre><code>-------------------LOCAL SPIN ANALYSIS (Loewdin* projector) -------------------(1) A.E. Clark; E.R. Davison J. Chem. Phys. (2001), 115(16), pp 7382-7392 (2) C. Herrmann, M. Reiher, B.A. Hess J. Chem. Phys. (2005) 122, art 034102-1 Number of fragments = 2 Number of basis functions = 28 Number of atoms = 2 ... Fragment AO indices were mapped ... intra-fragment orthogonalization completed ... Global Loewdin orthogonalizer constructed ... Loewdin orthogonalized occupied orbitals constructed <SA*SB> 1 2 ----------------------------------1 : 3.7568 2 : -2.2500 3.7568 <SzA> Seff(A) --------------------------1 : 1.5000 1.5017 2 : -1.5000 1.5017</code></pre>
+<p>thus perfectly corresponding to the expectations. The same can be done at the CASSCF level:</p>
+<pre><code>! HF def2-SVP UHF TightSCF PModel %casscf nel 6 norb 6 nroots 1 end * xyz 0 1 N(1) 0 0 0 N(2) 0 0 1094 *</code></pre>
+<h2>With the result:</h2>
+<pre><code><SA*SB> 1 2 ----------------------------------1 : 3.7500 2 : -3.7500 3.7500 <SzA>* Seff(A) --------------------------1 : n.a. 1.5000 2 : n.a. 1.5000 * = for a singlet state all <SzA> values are zero by definition</code></pre>
+<p>Thus, cleanly confirming the expectations. In addition, if nroots &gt; 1, the printing will contain the state-specific analysis of all roots.</p>
+<p>As a less trivial example, consider a typical Fe(III) antiferromatically coupled transition metal dimer. An appropriate input may be:</p>
+<pre><code>! PBE def2-SV(P) TightSCF KDIIS SOSCF PModel %scf brokensym 5,5 end * xyz -2 1 Fe(1) -1.93818 0.53739 -0.00010 Fe(2) 1.06735 0.47031 0.00029 S(3) -0.38935 2.59862 -0.00983 S(3) -0.48170 -1.59050 0.01091 S(1) 2.68798 0.43924 1.99710 S(1) 2.68692 0.42704 -1.99712 S(2) -3.55594 0.56407 -1.99889 S(2) -3.55850 0.58107 1.99646 H(1) 3.91984 0.39462 1.47608 H(1) 3.91940 0.39536 -1.47662 H(2) -4.78410 0.69179 -1.48280 H(2) -4.78991 0.49249 1.47983 *</code></pre>
+<p>Where one of the bridging sulfurs was assigned to each site respectively.</p>
+<table><tbody><tr><td colspan="2">&lt;SA*SB&gt;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>1</td><td>:</td><td>7.3346</td><td></td><td></td></tr><tr><td>2</td><td>:</td><td>-4.5300</td><td>7.3349</td><td></td></tr><tr><td>3</td><td>:</td><td>-0.7229</td><td>-0.7230</td><td>1.9403</td></tr><tr><td></td><td></td><td>&lt;SzA&gt;</td><td>Seff(A)</td><td></td></tr></tbody></table>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

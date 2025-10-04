@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part041</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>Calculating correlation function: ...done Last element of the correlation function: -0.000000,-0.000000 The calculated internal conversion rate constant is 3.823146e+08 s-1 Total run time: 0 hours 2 minutes 50 seconds ****ORCA ESD FINISHED WITHOUT ERROR****</code></pre>
+<p>For more accurate results, one may add explicit solvation shells, since implicit solvation models only describe the electrostatic and dispersive effects of the solvent on the solute, but cannot provide the extra vibrational degrees of freedom that can help dissipating the excitation energy. Conversely, by using an implicit solvent one also misses the effect of the solvent viscosity on inhibiting the internal conversion, which is particularly important when one wants to compare against experiments conducted at low temperatures.</p>
+<h2>5.5.6 Resonant Raman Spectrum</h2>
+<h2>General Aspects</h2>
+<p>Using a theoretical framework similar to what was published for Absorption and Fluorescence, we have also developed a method to compute resonant Raman spectra for molecules [609]. In this implementation, one can employ all the methods to obtain the excited state potential energy surfaces (PES) mentioned earlier using HESSFLAG, and include Duschinsky rotations and even consider the Herzberg-Teller effect on top of it. This calculation can be initiated by using ESD(RR) or ESD(RRAMAN) on the first input line. It is important to note that by default, we calculate the 'Scattering Factor' or 'Raman Activity,' as described by D. A. Long [610] (see Sec. Resonant Raman Spectrum for more information).</p>
+<p>When using this module, the laser energy can be controlled by the LASERE flag. If no laser energy is specified, the 0-0 energy difference is used by default. You can select multiple energies by using LASERE 10000, 15000, 20000, etc., and if multiple energies are specified, a series of files named BASENAME.spectrum.LASERE will be saved. Additionally, it is possible to specify several states of interest using the STATES flag, but not both simultaneously.</p>
+<p>As an example, let's predict the resonant Raman spectrum of the phenoxyl radical. You need at least a ground state geometry and Hessian, and then you can initiate the ESD calculation using:</p>
+<pre><code>!PBE0 DEF2-SVP TIGHTSCF ESD(RR) %TDDFT NROOTS 5 IROOT 3 END %ESD GSHESSIAN "PHE.hess" LASERE 28468 END * XYZFILE 0 2 PHE.xyz</code></pre>
+<h2>ǩ Important</h2>
+<p>The LASERE used in the input is NOT necessarily the same as the experimental one. It should be proportional to the theoretical transition energy. For example, if the experimental 0-0 ∆ E is 30000 cm -1 and the laser energy used is 28000 cm -1 , then for a theoretical ∆ E of 33000 cm -1 , you should use a laser energy of 31000 cm -1 to obtain the corresponding theoretical result. At the end of the ESD output, the theoretical 0-0 ∆ E is printed for your information.</p>
+<figure><figcaption><div class="caption">Fig. 5.13: The theoretical (solid black - vacuum and solid blue - water) and experimental (dashed red - water) resonant Raman spectrum for the phenoxyl radical.</div></figcaption></figure>
+<p>OBS.: The actual Raman Intensity collected with any polarization at 90 degrees, the I( π /2; ∥ s + ⊥ s , ⊥ i ) [610], can be obtained by setting RRINTES to TRUE under %ESD.</p>
+<p>And the result is shown in Fig. 5.13. In this case, the default method VG was used. If one wants to include solvent effects, then CPCM(WATER) should be added. As can be seen, there is a noticeable difference in the main peak when calculated in water.</p>
+<p>It is important to clarify some differences from the ORCA_ASA usage here. Using the ESD module, you do not need to select which modes you will account for in the spectra; we include all of them. Additionally, we can only operate at 0 K, and the maximum 'Raman Order' is 2. This means we account for all fundamental transitions, first overtones, and combination bands, without including hot bands. This level of approximation is generally sufficient for most applications.</p>
+<p>If you are working with a very large system and want to reduce calculation time, you can request RORDER 1 under the %ESD options. This setting includes only the fundamental transitions, omitting higher-order bands. This approach may be relevant, especially when including both Duschinsky rotations and the Herzberg-Teller effect, which can significantly increase computation time.</p>
+<p>The rRaman spectra are printed with the contributions from 'Raman Order' 1 and 2 separated as follows:</p>
+<table><tbody><tr><th>Energy</th><th>TotalSpectrum</th><th>IntensityO1</th><td></td></tr><tr><td>0.000000</td><td>2.722264e-08</td><td>2.722264e-08</td><td>8.</td></tr><tr><td>↪ → 436299e-30 0.305176</td><td>2.824807e-08</td><td>2.824807e-08</td><td>9.</td></tr><tr><td>↪ → 043525e-30 0.610352 ↪ → 693968e-30</td><td>2.931074e-08</td><td>2.931074e-08</td><td>9.</td></tr><tr><td>...</td><td></td><td></td><td></td></tr></tbody></table>
+<p>IntensityO2</p>
+<h2>Isotopic Labeling</h2>
+<p>If you want to simulate the effect of isotopic labeling on the rRaman spectrum, there is no need to recalculate the Hessian again. Instead, you can directly modify the masses of the respective atoms in the Hessian files. This can be done by editing the $ atoms section of the input file or directly in the Hessian file itself (see also Sec. Isotope Shifts ). After making these adjustments, you can rerun ESD using the modified Hessian files, for example:</p>
+<pre><code>!PBE0 DEF2-SVP TIGHTSCF ESD(RR) CPCM(WATER) %TDDFT NROOTS 5 IROOT 3 END %ESD GSHESSIAN "PHE_WATER_ISO.hess" ESHESSIAN "PHE_WATER_ISO.ES.hess" END * XYZFILE 0 2 PHE_WATER.xyz</code></pre>
+<p>As depicted in Fig. 5.14, the distinction between phenoxyl and its deuterated counterpart is evident. The peak around 1000 cm -1 corresponds to a C-H bond, which shifts to lower energy after deuteration. This difference of approximately 150 cm -1 aligns closely with experimental findings [611].</p>
+<figure><figcaption><div class="caption">Fig. 5.14: The theoretical (solid black - C 6 H 5 O and solid blue - C 6 D 5 O) and experimental (dashed red) resonant Raman spectrum for the phenoxyl radical.</div></figcaption></figure>
+<p>OBS: Whenever an ES Hessian is calculated using the HESSFLAG methods, it is saved in a file named BASENAME.ES.hess. If you want to repeat a calculation, you can simply use this file as an input without the need to recalculate everything.</p>
+<h2>RRaman and Linewidths</h2>
+<p>The keywords LINEW and INLINEW control the LINES function used in the calculation of the correlation function and are related to the lifetime of intermediate states and energy disordering. However, they do not determine the spectral linewidth itself, but rather the lineshape. The spectral linewidth is set independently using the RRSLINEW keyword, which defaults to 10 cm -1 .</p>
+<p>It's important to note that LINEW and INLINEW significantly influence the final shape of the spectrum and should be chosen appropriately based on your specific needs. While the defaults are generally suitable, you may need to adjust them according to your requirements.</p>
+<h2>5.5.7 ESD and STEOM-CCSD or other higher level methods - the APPROXADEN option</h2>
+<p>If you plan to use the ESD module together with STEOM-CCSD, or other higher level methods such as EOM-CCSD, CASSCF/NEVPT2, some special advice must be given.</p>
+<p>Since these methods currently do not have analytic gradients, numerical ones will be requested by default to compute the excited state geometries. This, of course, can take a significant amount of time, as they require approximately 3 × N atoms single-point calculations. We strongly recommend that, in these cases, you should use DFT/TD-DFT to obtain the ground/excited/triplet state geometry and Hessians, and only use the higher-level method for the final ESD step.</p>
+<p>Also, we recommend using APPROXADEN under the %ESD options.</p>
+<pre><code>%ESD APPROXADEN TRUE END</code></pre>
+<p>In this case, only one single point at the geometry of the ground state needs to be done, and the adiabatic energy difference will be automatically obtained from the ES Hessian information, without the need of a second single point at the extrapolated ES geometry, which could be unstable.</p>
+<h2>5.5.8 Circularly Polarized Spectroscopies</h2>
+<h2>General Aspects of the Theory</h2>
+<p>When circularly polarized (CP) light interacts with a chiral chemical structure (optically active), it differentially absorbs left and right CP lights ( I LCP = I RCP ) resulting in the electronic circular dichroism (ECD). Similarly, it can differentially emit left and right CP lights leading to CP luminescence (CPL), which includes CP fluorescence (CPF) and phosphorescence (CPP) spectra.</p>
+<p≯</p>
+<p>Starting from ORCA 6, the ESD module has been expanded to include calculations of CP rates and spectra for chemical system. This enables the computation of the vibronic effect on ECD, CPF, and CPP spectra. The methodology is generally similar to the interaction of unpolarized light with matter, including absorption and photoluminescence. However, when a CP photon interacts with an optically active system, the electric field of the photon induces a linear displacement of the charge (transition electric dipole), while the magnetic field induces a circulation of the charge (transition magnetic dipole). These combined interactions cause an electron to be excited in a helical motion, involving both translation and rotation, along with their associated operators.</p>
+<p>In a commonly use practice by defining a laboratory frame in which the z-axis defines the direction of the light trajectory, CP light interactions can be generated with the use of the complex vectors E± = 1 √ 2 (ˆ x ± i ˆ y )</p>
+<p>In this framework the FFMIO operator transforms as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In both ECD and CPL (CPF or CPP) spectroscopies the measured intensities are related to the difference of absorption or luminescence of the left and right polarized transition moments given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which leads to the following expressions for the sum and the difference of the square moduli | T ± IF | 2 :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>∣ ∣ ∣ ∣ Hence within the ED approximation, ECD and CPL radiative transition rates can be calculated through the orientational average of Equation (5.31), employing the Fermi's Golden rule:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ω ECD / CPL are the excitation and emission CP photon energies, respectively while ω FI are the energies between the initial and final states reached in the absorption or the photoluminescent processes. Similarly E FI is the transition energy and δ refers to the line-broadening mechanism arising from the lifetimes of the relevant final states and c is the speed of light. In the above expressions ˆ µ defines electric dipole operator while ˆ m is the respective magnetic dipole operator ˆ m = 1 2 m e c ∑ i r i × ̂ p i and m e is the electron mass. In the above expressions Im ( |⟨ Ψ I | ˆ µ | Ψ F ⟩ ⟨ Ψ F | ˆ m | Ψ I ⟩| ) represents the rotatory strength ( R IF ). As discussed above the transition rates including the vibronic coupling, on the Frank-Condon (FC) and Herzenberg-Teller (HT) limits, can be efficiently proceed through the path integral approach[600] in which it is possible to calculate k obs ECD / CPL from the Fourier Transform (FT) of the respective correlation function χ ( t ) that is computed from the path integral of the multidimensional harmonic oscillator according to[612]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with α being a collection of constants and for CP transition one-photon rates (ECD, CPL) considering electric dipole and magnetic dipole interactions in the expression of the rotatory strengths it takes the form:[612]</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where µ e and m e represent the respective transition dipole ⟨ Ψ I | ˆ µ | Ψ F ⟩ and magnetic dipole ⟨ Ψ F | ˆ m | Ψ I ⟩ moment integrals between initial and final states I, F while:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where, these traces can be evaluated following the approach discussed in Ref[600].</p>
+<p>Finally, it is quite commonly that the ECD and CPL spectral intensities are represented against normalized absorption and photoluminescent intensities defining, similar expressions for, the dissymmetry factors g abs and g lum :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>∣ Implying that the associated dissymmetry spectra can also be calculated, where D and R the square of the transition dipole and the rotatory strength, respectively.</p>
+<h2>Vibration effects on ECD spectra</h2>
+<p>Vertically excited (VE) computed ECD spectra are known to often be unable to describe the experiment. This is for example the case in (R) methyl oxirane. The unshifted or shifted VE ECD BP86 computed spectra do not much the experiment in terms of shape and intensity. It has been shown that these spectra need to be computed by taking into account vibronic interactions[613].</p>
+<p>Hence following structure optimization and frequencies calculations according to the input:</p>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF OPT FREQ * xyz 0 1 C 0.02461655377138 0.08670067686058 -5.20436273663217 C -0.23485307714882 -0.31738971302751 -3.80610272711970 O -0.15359212444282 1.06795113221760 -4.17749263689755 H 1.05055243293426 -0.00333310016875 -5.61325012342071 H -0.78323750369168 0.02252140387747 -5.95969728166753 H -1.26417590138099 -0.65347889194363 -3.56065466091728 C 0.84884023150886 -0.84537627906508 -2.89604274193698 H 0.68194744925825 -0.50794125098111 -1.85197471265376 H 0.85716491819315 -1.95559179229870 -2.89420656551675 H 1.84600617099845 -0.48435690147087 -3.21751813823758 *</code></pre>
+<p>we can compute ESD spectrum within in VE approximation and within the ESD modules according to the following input:</p>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF PAL4 %TDDFT NROOTS 10 END %ESD ESDFlag ECD GSHESSIAN "c3h6o_opt_freq.hess " PRINTLEVEL 2 DOHT TRUE LINEW 500 SPECRANGE 40000, 70000 STATES 1,2,3,4,5,6,7,8,9,10 END * xyzfile 0 1 c3h6o_opt_freq.xyz</code></pre>
+<p>The result is provided in Figure Fig. 5.15 where one can see that according to the expectations the computed spectrum agrees with the experiment only when FC and HT vibronic coupling schemes are taken into account</p>
+<figure><figcaption><div class="caption">Fig. 5.15: Experimental (black) versus BP86/TDDFT (VE, blue and FC+HT red) ECD spectra for C3H6O molecule</div></figcaption></figure>
+<h2>Computation of CP-FLUOR vs CP-PHOS spectra. The case of C 3 H 6 O .</h2>
+<p>Following the strategy described for the computation of PL (Fluorescence (PF) of Phosphorescence (PP)) spectra in the case of C 3 H 6 O one can also access the respective CPL and CPP spectra.</p>
+<p>For this one needs to compute the hessian of the 1st excited singlet (ES1) and triplet states respectively (ET0) according to the following inputs</p>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF OPT FREQ %TDDFT NROOTS 10</code></pre>
+<p>(continues on next page)</p>
+<pre><code>IROOT 1 IMULT 1 END * xyzfile 0 1 c3h6o_opt_freq.xyz</code></pre>
+<h2>and</h2>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF OPT %TDDFT NROOTS 10 IROOT 1 IMULT 3 SOCGRAD TRUE TRIPLETS TRUE END * xyzfile 0 3</code></pre>
+<pre><code>FREQ c3h6o_opt_freq.xyz</code></pre>
+<p>Then one can setup the respective PL and CPL inputs as:</p>
+<h2>PF:</h2>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF %TDDFT NROOTS 10 IROOT 1 IMULT 1 END %ESD ESDFlag FLUOR GSHESSIAN "C3H6O_opt.hess" PRINTLEVEL 2 DOHT TRUE LINEW 500 SPECRANGE 40000, 70000 END * xyzfile 0 1 c3h6o_opt_freq.xyz</code></pre>
+<h2>CPF:</h2>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF %TDDFT NROOTS 10 IROOT 1 IMULT 1 END %ESD ESDFlag CPF GSHESSIAN "C3H6O_opt.hess" PRINTLEVEL 2 DOHT TRUE LINEW 500 SPECRANGE 40000, 70000 END</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>* xyzfile 0 1 c3h6o_opt_freq.xyz</code></pre>
+<h2>PP:</h2>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF "C3H6O_opt_freq.hess"</code></pre>
+<pre><code>%TDDFT NROOTS 10 IROOT 1 IMULT 3 DoSOC true TRIPLETS TRUE SOCGRAD TRUE END %ESD ESDFlag PHOSP GSHESSIAN TSHESSIAN "C3H6O_et0.hess" PRINTLEVEL 2 DELE 62313 DOHT TRUE LINEW 500 TEMP 295 SPECRANGE 40000, 70000 END * xyzfile 0 1 C3H6O_opt.xyz</code></pre>
+<h2>CPP:</h2>
+<pre><code>!BP86 DEF2-SVP TIGHTSCF "C3H6O_opt_freq.hess"</code></pre>
+<pre><code>%TDDFT NROOTS 10 IROOT 1 IMULT 3 DoSOC true TRIPLETS TRUE SOCGRAD TRUE END %ESD ESDFlag CPP GSHESSIAN TSHESSIAN "C3H6O_et0.hess" PRINTLEVEL 2 DELE 62313 DOHT TRUE LINEW 500 TEMP 295 SPECRANGE 40000, 70000 END * xyzfile 0 1 C3H6O_opt.xyz</code></pre>
+<p>The results are summarized in Figure Fig. 5.16</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 5.16: a) Computed ABS and ECD (in blue) and Florescence and CPF (in red) under FC+HT vibronic coupling schemes b) Computed Phosphorescence and CPP under FC (in blue ) and FC+HT (in red) vibronic coupling schemes</div></figcaption></figure>
+<h2>Use of ABS, ECD PL and CPL as a routine analysis computational tools</h2>
+<p>Having at hand the possibility to compute the above spectroscopic properties quartet. Consisting of Absorption, ECD, Luminescent/Emission and CPL spectroscopies creates an arsenal of useful analysis computational tools. Let us consider a practical example from the the N- bridged triarylamine heterohelicenoid chiral family of molecules, which are known to be very good CPL emitters in the CPL community. [614] Namely the R-, L- isomers of oxygen-bridged diphenylnaphthylamine for which both ABS ECD, PL and CPL experimental spectra are available [615]</p>
+<p>In a first step one needs to compute to calculate the ECD and CPL spectra, this implies that one needs to optimize the ground state (GS) geometry and at least the GS hessian of both isomers, (see examples in Fluorescence Rates and Spectrum and Vibration effects on ECD spectra ). Lets suppose that we have generated the GSHessian file R_OptFreq.hess file for the R-isomer Then one can employ the ESD to calculate the Absorption, ECD, Fluorescence and CPL (CPluorescecne) as follows.</p>
+<h2>For Absorption or ECD spectra a representative input is given by:</h2>
+<pre><code>! PBE0 def2-TZVP def2/J def2-TZVP VeryTightSCF PAL8 %MaxCore 5120 %TDDFT NROOTS 5 End %ESD ESDFlag ABS or ECD GSHessian "R_diphenylnaphthylamine_OptFreq.hess" DoHT True Lines Gauss InLineW 500 STATES 1,2,3,4,5 End *xyz 0 1 C 0.51103659781880 -1.54799809918165 -0.46957711710367 C -0.67682083480241 -2.19898547218227 -0.76456508506476</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>C C</td><td>1.59698089595014 1.49004594789848</td><td>-2.23913762447750 -3.60107534512753</td><td>0.04536520831045 0.24696861333386</td></tr><tr><td>C</td><td>-0.75027591609003</td><td>-3.56343872947031</td><td>-0.57021086417552</td></tr><tr><td>C</td><td>0.33765559244610</td><td>-4.27346122451739</td><td>-0.10341675327345</td></tr><tr><td>N</td><td>0.21984508391204</td><td>-5.66346290617628</td><td>0.07289766826829</td></tr><tr><td>O</td><td>2.52716581975956</td><td>-4.28847037580032</td><td>0.82258958688483</td></tr><tr><td>C</td><td>2.54101738078760</td><td>-5.65282427633174</td><td>0.65190453446035</td></tr><tr><td>C</td><td>1.43184892145219</td><td>-6.36105379222857</td><td>0.25831057061542</td></tr><tr><td>C</td><td>3.77147940706722</td><td>-6.27965254373750</td><td>0.89001683729049</td></tr><tr><td>C</td><td>3.89719111077242</td><td>-7.62085864051752</td><td>0.70851807608572</td></tr><tr><td>C</td><td>1.58029288205151</td><td>-7.74060974139699</td><td>-0.06585842329724</td></tr><tr><td>C</td><td>2.81811727341129</td><td>-8.37881977445777</td><td>0.20527726022176</td></tr><tr><td>O</td><td>-1.91500963727701</td><td>-4.25152600059560</td><td>-0.80702339426568</td></tr><tr><td>C</td><td>-2.13250715287481</td><td>-5.31470429649343</td><td>0.04909464399864</td></tr><tr><td>C</td><td>-1.05242665026610</td><td>-6.06056594251354</td><td>0.52598562255970</td></tr><tr><td>C</td><td>-3.42444532048472</td><td>-5.61905191519688</td><td>0.41037068048411</td></tr><tr><td>C</td><td>-3.66399173496155</td><td>-6.68754268865431</td><td>1.26210310826770</td></tr><tr><td>C</td><td>-1.29901325564529</td><td>-7.09753540866930</td><td>1.41085143603056</td></tr><tr><td>C</td><td>-2.60176522746573</td><td>-7.41491597190339</td><td>1.76502960065907</td></tr><tr><td>H</td><td>-4.22973438581776</td><td>-5.01558835826860</td><td>0.01489276124005</td></tr><tr><td>H</td><td>-4.67873778203345</td><td>-6.93777656190575</td><td>1.53843511994436</td></tr><tr><td>H</td><td>-0.47290745868829</td><td>-7.66765085401275</td><td>1.80929822862278</td></tr><tr><td>H</td><td>-2.77926863803574</td><td>-8.23774715258380</td><td>2.44386581691750</td></tr><tr><td>H</td><td>0.58624233693590</td><td>-0.48095844424254</td><td>-0.62562692246504</td></tr><tr><td>H</td><td>2.51652973024519</td><td>-1.73662559987765</td><td>0.30924801794967</td></tr><tr><td>H</td><td>-1.54272285055189</td><td>-1.66670869597130</td><td>-1.13102495882678</td></tr><tr><td>H</td><td>4.59563142014220</td><td>-5.66684912938550</td><td>1.22771972849030</td></tr><tr><td>H</td><td>4.83828110533620</td><td>-8.11484947410606</td><td>0.91089239524435</td></tr><tr><td>C</td><td>0.56233992156145</td><td>-8.49575213625774</td><td>-0.69451663429121</td></tr><tr><td>C</td><td>2.96252715039542</td><td>-9.75415434575818</td><td>-0.08347675768224</td></tr><tr><td>C</td><td>0.74593486971180</td><td>-9.81550692161063</td><td>-0.98488391710801</td></tr><tr><td>C</td><td>1.95147468552282</td><td>-10.46257812809982</td><td>-0.65848843248314</td></tr><tr><td>H</td><td>-0.36538542100730</td><td>-8.01665224889233</td><td>-0.96504181763392</td></tr><tr><td>H</td><td>-0.04242675451776</td><td>-10.36879326589460</td><td>-1.47770458618347</td></tr><tr><td>H</td><td>2.07785937833070</td><td>-11.51320955617077</td><td>-0.88255640316097</td></tr><tr><td>H</td><td>3.90687057621082</td><td>-10.23141194413179</td><td>0.14665882143507</td></tr></tbody></table>
+<h2>For Fluorescence or CP Fluorescence spectra a representative input is given by:</h2>
+<pre><code>! PBE0 def2-TZVP def2/J def2-TZVP VeryTightSCF PAL8 %MaxCore 5120 %TDDFT NROOTS 5 End %ESD ESDFlag FLUOR or CPF GSHessian "R_diphenylnaphthylamine_OptFreq.hess" DoHT True Lines Gauss InLineW 500 STATES 1,2,3,4,5 End *xyz 0 1 C 0.51103659781880 -1.54799809918165 -0.46957711710367 C -0.67682083480241 -2.19898547218227 -0.76456508506476 C 1.59698089595014 -2.23913762447750 0.04536520831045 C 1.49004594789848 -3.60107534512753 0.24696861333386 C -0.75027591609003 -3.56343872947031 -0.57021086417552 C 0.33765559244610 -4.27346122451739 -0.10341675327345</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>N</td><td>0.21984508391204</td><td>-5.66346290617628</td><td>0.07289766826829</td></tr><tr><td>O</td><td>2.52716581975956</td><td>-4.28847037580032</td><td>0.82258958688483</td></tr><tr><td>C</td><td>2.54101738078760</td><td>-5.65282427633174</td><td>0.65190453446035</td></tr><tr><td>C</td><td>1.43184892145219</td><td>-6.36105379222857</td><td>0.25831057061542</td></tr><tr><td>C</td><td>3.77147940706722</td><td>-6.27965254373750</td><td>0.89001683729049</td></tr><tr><td>C</td><td>3.89719111077242</td><td>-7.62085864051752</td><td>0.70851807608572</td></tr><tr><td>C</td><td>1.58029288205151</td><td>-7.74060974139699</td><td>-0.06585842329724</td></tr><tr><td>C</td><td>2.81811727341129</td><td>-8.37881977445777</td><td>0.20527726022176</td></tr><tr><td>O</td><td>-1.91500963727701</td><td>-4.25152600059560</td><td>-0.80702339426568</td></tr><tr><td>C</td><td>-2.13250715287481</td><td>-5.31470429649343</td><td>0.04909464399864</td></tr><tr><td>C</td><td>-1.05242665026610</td><td>-6.06056594251354</td><td>0.52598562255970</td></tr><tr><td>C</td><td>-3.42444532048472</td><td>-5.61905191519688</td><td>0.41037068048411</td></tr><tr><td>C</td><td>-3.66399173496155</td><td>-6.68754268865431</td><td>1.26210310826770</td></tr><tr><td>C</td><td>-1.29901325564529</td><td>-7.09753540866930</td><td>1.41085143603056</td></tr><tr><td>C</td><td>-2.60176522746573</td><td>-7.41491597190339</td><td>1.76502960065907</td></tr><tr><td>H</td><td>-4.22973438581776</td><td>-5.01558835826860</td><td>0.01489276124005</td></tr><tr><td>H</td><td>-4.67873778203345</td><td>-6.93777656190575</td><td>1.53843511994436</td></tr><tr><td>H</td><td>-0.47290745868829</td><td>-7.66765085401275</td><td>1.80929822862278</td></tr><tr><td>H</td><td>-2.77926863803574</td><td>-8.23774715258380</td><td>2.44386581691750</td></tr><tr><td>H</td><td>0.58624233693590</td><td>-0.48095844424254</td><td>-0.62562692246504</td></tr><tr><td>H</td><td>2.51652973024519</td><td>-1.73662559987765</td><td>0.30924801794967</td></tr><tr><td>H</td><td>-1.54272285055189</td><td>-1.66670869597130</td><td>-1.13102495882678</td></tr><tr><td>H</td><td>4.59563142014220</td><td>-5.66684912938550</td><td>1.22771972849030</td></tr><tr><td>H</td><td>4.83828110533620</td><td>-8.11484947410606</td><td>0.91089239524435</td></tr><tr><td>C</td><td>0.56233992156145</td><td>-8.49575213625774</td><td>-0.69451663429121</td></tr><tr><td>C</td><td>2.96252715039542</td><td>-9.75415434575818</td><td>-0.08347675768224</td></tr><tr><td>C</td><td>0.74593486971180</td><td>-9.81550692161063</td><td>-0.98488391710801</td></tr><tr><td>C</td><td>1.95147468552282</td><td>-10.46257812809982</td><td>-0.65848843248314</td></tr><tr><td>H</td><td>-0.36538542100730</td><td>-8.01665224889233</td><td>-0.96504181763392</td></tr><tr><td>H</td><td>-0.04242675451776</td><td>-10.36879326589460</td><td>-1.47770458618347</td></tr><tr><td>H</td><td>2.07785937833070</td><td>-11.51320955617077</td><td>-0.88255640316097</td></tr><tr><td>H</td><td>3.90687057621082</td><td>-10.23141194413179</td><td>0.14665882143507</td></tr></tbody></table>
+<p>The results are summarized in Figure Fig. 5.17</p>
+<figure><figcaption><div class="caption">Fig. 5.17: Black Experimental vs Calculated ABS, ECD, Fluorescence and CPF spectra for R- (in blue) and L- (in red) isomers of diphenylnaphthylamine under FC+HT vibronic coupling schemes of the π → π ∗ transition located at 25000 cm -1 .</div></figcaption></figure>
+<h2>5.5.9 Magnetic Circular Dichroism</h2>
+<h2>General Aspects of the Theory</h2>
+<p>The formulation presented for the calculation of the absorption spectrum may be extended to the absorption of circularly polarized light (CPL) of a system under the effect of an external magnetic field in order to compute the MCDspectrum.[616] By assuming an electric dipolar approximation under a length formulation for the light-matter interaction, the molar absorptivity contribution by the transition between an initial state i and a final state f of one fixed oriented molecule may be expressed as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where E is the polarization vector of the incident light, and α is a positive collection of constants.</p>
+<p>By considering the case in which the light is propagating in the laboratory fixed ˆ z ′′ direction, the circularly polarized light is described by E = 1 √ 2 (ˆ x ′′ ± i ˆ y ′′ ) where the ' -' sign corresponds to the left circularly polarized light and the ' + ' to the right circularly polarized light.</p>
+<p>Similarly, as the MCD calculations presented in section Simulation of (Magnetic) Circular Dichroism and Absorption Spectra , the total absorptivity may be obtained by summing over all possible transitions and averaging the molecular orientations by using 3 rotation angles θ , ϕ , and χ .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Considering χ the angle which rotates the molecule in the plane perpendicular to the magnetic field perturbation (which is colinear with the incident light propagation direction), the integrals of eq. (5.43) may be computed conveniently in a seminumerical scheme by using an intermediate r ′ frame.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where θ and ϕ values are defined by a point p in a numerical grid, x ′ , and y ′ are determined by θ and ϕ values according to eq. (5.45), and χ has been integrated analytically in the E βγ values.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Finally, by applying the Born-Oppenheimer approximation and writing the Dirac delta function in the time domain, we get:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and by taking the difference of absorbance between left and right CPL produce we reach an expression of the MCD intensities:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ˜ χ under a first-order approximation of the transitions moments with respect to the nuclear displacement is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Similarly, as section Simulation of (Magnetic) Circular Dichroism and Absorption Spectra , the transition moments under the effect of an external magnetic field perturbation may be estimated by using a QDPT (eq. (5.184)), and the derivatives are approximated numerically in a similar way as the ESD-Absorption case.</p>
+<p>By applying a quasi-degenerate perturbative theory, similar to the inclusion of spin-orbit coupling effects in the phosphorescence calculations, the effect of an external magnetic field may be included in the representation of the quantum states [616]. As a result, the differential absorption of left and right circularly polarized light may be computed to obtain the vibrationally-corrected magnetic circularly dichroism spectrum. The input for the calculation is similar to the absorption case described above; nevertheless, ESD(MCD) should be used. Additionally, the intensity of the external magnetic field 'B' (in Gauss) should be included, and a Lebedev grid for a semi-numerical molecular orientational average should be selected.</p>
+<p>The method is only available with an electronic structure generated by TDDFT. The calculation supports the inclusion of Herzberg-Teller effects by setting DOHT TRUE, the ground state Hessian needs to be provided similarly to the absorption case, while the excited state Hessian can be provided or computed under a no external magnetic field approximation. An input example is:</p>
+<pre><code>!B3LYP DEF2-TZVP TIGHTSCF ESD(MCD) %TDDFT NROOTS 40 TDA FALSE END %ESD GSHESSIAN "pbq.hess" Hessflag AHAS DOHT TRUE STATES 1 B 50000.0 END * xyzfile 0 1 pbq.xyz</code></pre>
+<p>Similarly, to the ESB(ABS) calculation the MCD spectrum is saved in a BASENAME.MCD file as:</p>
+<table><tbody><tr><td>Energy 4817.11 5026.55 5235.99 5445.43 5654.87</td><td>TotalSpectrum -6.324671e-05 -6.717718e-05 -7.126386e-05 -7.551756e-05</td><td>IntensityFC -4.528264e-06 -4.809014e-06 -5.100843e-06 -5.404513e-06 -5.720850e-06</td><td>IntensityHT</td></tr><tr><td></td><td></td><td></td><td>-5.871844e-05</td></tr><tr><td></td><td></td><td></td><td>-6.236816e-05</td></tr><tr><td></td><td></td><td></td><td>-6.616302e-05</td></tr><tr><td></td><td></td><td></td><td>-7.011304e-05</td></tr><tr><td></td><td>-7.994996e-05</td><td></td><td>-7.422911e-05</td></tr><tr><td>5864.31</td><td>-8.457379e-05</td><td>-6.050750e-06</td><td>-7.852304e-05</td></tr><tr><td>...</td><td></td><td></td><td></td></tr></tbody></table>
+<h2>Specific Keywords and recommendations</h2>
+<p>Once selected the ESD(MCD) calculation two variables need to be defined in the %esd block:</p>
+<ul>
+<li style="list-style-type: '· ';">The intensity of the magnetic field in Gauss 'B'</li>
+<li style="list-style-type: '· ';">The grid to make the molecular orientational average 'LEBEDEVINTEGRATIONPOINTS'</li>
+</ul>
+<p>The MCD signals use to be much more sensitive than the corresponding absorption intensities. As result, the MCD calculations are much more sensitive to errors in the electronic structure. So it is highly recommended to first fully understand the electronic structure problem and verify there are no important problems. In this direction we suggest the following recommendations:</p>
+<ul>
+<li style="list-style-type: '· ';">Be sure the obtained electronic states are in the correct order by assigning point group symmetry labels and comparing them with better electronic structure methods. Due to the MCD intensities emerging as a result of the interaction of states by the magnetic field perturbation, a wrong-located state in energy may affect the MCD intensities, even if it is not in the energy range you are computing. We do not recommend using the method as a black box.</li>
+<li style="list-style-type: '· ';">It is recommended to do first an ESD-absorption calculation on the exact same level of theory, verify the intensities and also solve any problem related to the PES representation.</li>
+<li style="list-style-type: '· ';">The lineshape for the best agreement of the MCD intensities compared against the experimental measurements may differ for the best value for absorption intensities.</li>
+</ul>
+<h2>5.5.10 Tips, Tricks and Troubleshooting</h2>
+<ul>
+<li style="list-style-type: '· ';">Currently, the ESD module works optimally with TD-DFT (Sec. Excited States Calculations ), but also with ROCIS (Sec. Excited States with Restricted Open-shell CIS - ROCIS ), EOM/STEOM (Sec. Excited States via EOM-CCSD and Sec. Excited States via STEOM-CCSD ) and CASSCF/NEVPT2 (Sec. Complete and Incomplete Active Space Self-Consistent Field (CASSCF and RAS/ORMAS) and Sec N-Electron Valence State Perturbation Theory (NEVPT2) ). Of course you can use any two Hessian files and input a custom DELE and TDIP obtained from any method (see Sec. Excited State Dynamics ), if your interested only in the FC part.</li>
+<li style="list-style-type: '· ';">If you request for the HT effect, calculating absorption or emission, you might encounter phase changes during the displacements during the numerical derivatives of the transition dipole moment. There is a phase correction for TD-DFT and CASSCF, but not for the other methods. Please be aware that phase changes might lead to errors.</li>
+<li style="list-style-type: '· ';">Please check the K*K value if you have trouble. When it is too large (in general larger than 7), a warning message is printed and it means that the geometries might be too displaced and the harmonic approximation might fail. You can try removing some modes using TCUTFREQ or use a different method for the ES PES.</li>
+<li style="list-style-type: '· ';">If using DFT, the choice of functional can make a big difference on the excited state geometry, even if it is small on the ground state. Hybrid functionals are much better choices than pure ones.</li>
+<li style="list-style-type: '· ';">In CASSCF/NEVPT2, the IROOT flag has a different meaning from all other modules. In this case, the ground state is the IROOT 1, the first excited state is IROOT 2 and so on. If your are using a state-averaged calculation with more than one multiplicity, you need also to set an IMULT to define the right block, IMULT 1 being the first block, IMULT 2 the second and etc.</li>
+<li style="list-style-type: '· ';">If using NEVPT2 the IROOT should be related to the respective CASSCF root, don't consider the energy ordering after the perturbation.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">After choosing any of the HESSFLAG options, a BASENAME.ES.hess file is saved with the geometry and Hessian for the ES. If derivatives with respect to the GS are calculated, a BASENAME.GS.hess is also saved. Use those to avoid recalculating everything over and over. If you just want to get an ES PES, you can set WRITEHESS TRUE under</li>
+<li style="list-style-type: '· ';">Although in principle more complete, the AH is not NECESSARILY better, for we rely on the harmonic approximation and large displacements between geometries might lead to errors. In some cases the VG, AHAS and so one might be better options.</li>
+<li style="list-style-type: '· ';">If you use these .hess files with derivatives over normal modes in one coordinate system, DO NOT MIX IT with a different set of coordinates later! They will not be converted.</li>
+<li style="list-style-type: '· ';">Sometimes, low frequencies have displacements that are just too large, or the experimental modes are too anharmonic and you might want to remove them. It is possible to do that setting the TCUTFREQ flag (in cm -1 ), and all frequencies below the given threshold will be removed.</li>
+<li style="list-style-type: '· ';">If you want to change the parameters related to the frequency calculations, you can do that under %FREQ (Sec. Vibrational Frequencies ). The numerical gradient settings are under %NUMGRAD (Sec. Numerical Gradients ).</li>
+<li style="list-style-type: '· ';">When computing rates, the use of any LINES besides DELTA is an approximation. It is recommended to compute the rate at much smaller lineshape (such as 10 cm -1 ) to get a better value, even if the spectrum needs a larger lineshape than that.</li>
+<li style="list-style-type: '· ';">When in doubt, try setting a higher PRINTLEVEL. some extra printing might help with your particular problem.</li>
+</ul>
+<h2>5.5.11 More on the Excited State Dynamics module</h2>
+<p>ORCAhas now a module designed to calculate properties related to excited states named ORCA_ESD . It can be used to predict absorption/emission spectra, transition rates, resonant Raman, and MCD spectra, based on a path integral approach to the dynamic process [600]. It has some of the functionalities of ORCA_ASA and even more, as it will be discussed. What we do here is NOT a conventional dynamics with trajectories along time points, we rather solve the equation for the transition rates or intensities depending on the different cases considered.</p>
+<p>This formulation works because there is an analytic solution to the path integral of the Multidimensional Harmonic Oscillator and the assumption of Harmonic nuclear movement is critical. In many cases that approximation does hold and the results are in very good agreement with the experiment. The general usage of the ORCA_ESD module and some examples are already presented on Sec. Excited State Dynamics and it is recommended to read that before going into the details here. We now will discuss the specifics and keywords related to of each part of the module. A complete keyword list can be found at the end of this section.</p>
+<h2>Absorption and Emission Rates and Spectrum</h2>
+<h2>General Aspects of the Theory</h2>
+<p>The idea behind calculating the absorption or emission rates starts with the equation from the quantization of the electromagnetic field for the transition rates between and initial and a final state:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>One way to obtain k ( ω ) is to compute it in the frequency domain, by calculating the Franck-Condon Factors between all initial and final states that satisfy the Dirac delta in Eq. (5.51) , considering the thermally accessible initial states with the appropriate weight, with ¯ hω being the energy of the photon, ̂ µ the dipole operator and n the refractive index of the solvent, as suggested by Strickler and Berg [604].</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where P i ( T ) = e -glyph[epsilon1] i k B T / Z is the Boltzmann population of a given initial state at temperature T , ϵ i is the total vibrational energy of state i and Z is the vibrational partition function. However, this can lead to a very large number of states to be included, particularly if there are low frequency modes. In this work we will take the a different approach and switch to the time domain, by using the Fourier Transform representation of the Dirac delta,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>so that the equation to solve, in atomic units, is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with ⃗ µ e being the 'electronic transition dipole' and | Θ ⟩ the vibrational wavefunction of the initial or final state.</p>
+<p>After some extra steps, redefinition of the time variable and insertion of a resolution of identity, it can be shown that this equation is ultimately simplified to a Discrete Fourier Transform (DFT) of a correlation function χ ( t ) with a timestep ∆ t , multiplied by a prefactor α [600]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and this correlation function is then calculated using path integrals analytically at each time point t .</p>
+<p>If one considers that the electronic part of the transition dipole varies with nuclear displacements and we allow for it to depend on the normal coordinates ( Q ), such as:</p>
+<p>we can even include vibronic coupling or the so-called Herzberg-Teller (HT) effect. The Frank-Condon (FC) approximation keeps only the coordinate-independent term. The correlation function for the HT cases can then be derived recursively from the FC one and the calculation is done quite efficiently. It is important to say the one must choose ONE set of coordinates in order to expand the transition dipole. In our formulation, it is always that of the FINAL state and that has some implications discussed below.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Other important aspect of this theory is that, in order to solve the path integrals, one has to work in one set of coordinates, the initial ( Q ) or the final state ones ( 2/7 Q , with the bar indicating final coordinates). As we have a transition matrix element, one set of coordinates have to be transformed into the other and it is easy to show that they are related by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>That was first proposed by Duschinsky in the late 1930s[603] with the Duschinsky rotation matrix J and the displacement vector K defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with L x being the matrix containing the normal modes, here described in Cartesian coordinates ( x ), and q0 begin mass weighted coordinates ( q i = √ m i x i ).</p>
+<p>The program runs by first reading and obtaining the initial and final state geometries and Hessians, then computes the Duschinsky rotation matrix and displacement vector, calculates the derivatives for the transition dipoles and computes the correlation function. After that, the DFT is done and the rates are obtained and printed when necessary. As the intensities observed experimentally are proportional to the rates, the spectrum is also calculated and printed on a BASENAME.spectrum file. If PRINTLEVEL HIGH is requested under %ESD, the correlation function is also printed on a BASENAME.corrfunc file.</p>
+<p>OBS: The units for the Emission spectra are rather arbitrary, but for Absorption they are the experimental 'molar absorptivity ( ε )' in L mol -1 cm -1 [600]. Be aware that these are dependent on the line width of the curves.</p>
+<h2>Approximations to the excited state PES</h2>
+<p>As already mentioned in Sec. Excited State Dynamics , in order to predict the rates we need at least a ground state (GS) and an excited state (ES) geometry and Hessian. In ORCA, we have seven different ways to approximate this ES PES: AHAS, VH, VG, HHBS, HHAS, UFBS and UFAS. Those can can be choosen by setting the HESSFLAG under %ESD. If you actually optimize the ES geometry and input the Hessian, that will be called an Adiabatic Hessian (AH) method an no keyword must be given on the input.</p>
+<p>OBS: In the present version, these approximations are only available for Absorption, Fluorescence and resonant Raman. They cannot be directly used for phosphorescence and ISC rate calculations. However, one can do the latter calculations by generating approximate ES Hessians from 'fake' fluorescence or absorption runs, and then using the ES Hessians in AH calculations (vide infra).</p>
+<p>The idea behind these approximations is to do a geometry update step ( 2/7S = -gH -1 for Quasi-Newton and 2/7S = -g ( H + S ) -1 for Augmented Hessian) to obtain the ES structure and somehow approximate the ES Hessian. The gradient ( g ) and Hessian ( H ) used on the step are on column Step of Table Table 5.5 below, with a description of the final ES Hessian:</p>
+<table><caption><div class="caption">Table 5.5: Methods used to estimate the ES PES</div></caption><tbody><tr><th>Method</th><th>Step</th><th>ES Hessian</th></tr><tr><td>AHAS</td><td>ES grad + GS Hessian</td><td>calculated on the ES geometry</td></tr><tr><td>VH</td><td>ES grad + ES Hessian at GS geometry</td><td>calculated on the GS geometry</td></tr><tr><td>VG (de- fault)</td><td>ES grad + GS Hessian</td><td>equal to GS Hessian</td></tr><tr><td>VGFC</td><td>ES grad + GS Hessian</td><td>equal to GS Hessian (+ APPROXADEN TRUE)</td></tr><tr><td>HHBS</td><td>ES grad + Hybrid ES Hessian on GS geometry</td><td>Hybrid Hessian on GS geometry</td></tr><tr><td>HHAS</td><td>ES grad + GS Hessian</td><td>Hybrid Hessian on ES geometry</td></tr><tr><td>UFBS</td><td>ES grad + Updated frequencies ES Hessian on GS geometry</td><td>Updated frequencies ES Hessian on GS ge- ometry</td></tr><tr><td>UFAS</td><td>ES grad + GS Hessian</td><td>Updated frequencies ES Hessian on ES ge- ometry</td></tr></tbody></table>
+<p>OBS: Always use the GS geometry on the input file, equal to the one in the GSHESSIAN! If you asked for OPT FREQ at the input, a .xyz file is generated with the same geometry found on the .hess. If you picked the geometry from the .hess file, remember that it is in atomic units, so you have to use BOHRS on the main input.</p>
+<p>After the calculation of the ES PES, a file named BASENAME.ES.hess is printed and can be used in future calculations. For example, one can use it in a separate AH calculation, as if the file contains the optimized ES geometry and the exact ES Hessian (of course, in reality both are approximate). This allows one to perform e.g. phosphorescence and ISC rate calculations with approximate ES PESs even though ESD does not support these calculations directly. For example, the phosphorescence rate from a triplet state to the S 0 state, with the VG approximation for the triplet PES and the ES gradient computed at the TDDFT level, can be computed as follows:</p>
+<ul>
+<li style="list-style-type: '· ';">Run an ESD fluorescence calculation using the VG approximation, but where 'IROOTMULT TRIPLET' is added to the %TDDFT block. The resulting rate and spectrum are not meaningful, but the BASENAME.ES.hess file generated from this calculation is the correct VG approximation to the triplet PES.</li>
+<li style="list-style-type: '· ';">Run an ESD phosphorescence calculation using the AH method, with the aforementioned BASENAME.ES.hess file as the TSHESSIAN.</li>
+</ul>
+<p>This way, the first ESD calculation only uses the information of the scalar triplet state in computing the VG step, while the second ESD calculation only uses the SOC-corrected states. The same ES Hessian file can therefore be used in the calculations of all three spin sublevels of the triplet state.</p>
+<p>In addition to the BASENAME.ES.hess file, if there was any updates on the GS Hessian, like transition dipole derivatives, a BASENAME.GS.hess is also printed.</p>
+<ul>
+<li style="list-style-type: '· ';">The step can be controlled with the GEOMSTEP flag, with QN or AUGHESS options.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">Currently all ES Hessians are calculated numerically, if you want to change the parameters related to the frequency calculations, you can do that under %FREQ (Sec. Vibrational Frequencies ). The numerical gradient settings are under %NUMGRAD (Sec. Numerical Gradients ).</li>
+<li style="list-style-type: '· ';">The ES hybrid Hessian is calculated in the same way as described in Sec. Hybrid Hessian , except that the 'model' Hessian is the GS one.</li>
+<li style="list-style-type: '· ';">The ES Hessian with updated frequencies is recalculated from the same GS normal modes, after an update on the frequencies, as H up = L ω 2 up L T . With L being the normal modes and ω up the updated frequencies, with negative sign being kept after the square.</li>
+<li>•</li>
+<li>The frequencies are updated depending on a calculation of the energy after a given step. If the ES modes are equal to the GS, then a step over a coordinate δq i that would result in an energy difference δE is given by δq i = ( -g i √ ω i + √ g 2 i ω i +2 δEω i )/ ω i . The default δE used is 10 -4 Eh, in general above the error of the methods. If the error in energy after the step is larger than a threshold given by the UPDATEFREQERR flag (default 0.20 or 20%), the gradients are calculated and the frequency recomputed. If not not, that mode and frequency are assumed to be the same.</li>
+<li style="list-style-type: '· ';">The Updated Frequencies method can greatly accelerate the calculation of the Hessian, for much fewer gradient calculation are necessary, although you do not correct the modes. Also, the derivatives over the modes are already computed simultaneously.</li>
+<li style="list-style-type: '· ';">The expected energy error δE can be changed using the UF_DELE flag.</li>
+<li style="list-style-type: '· ';">The default method is the VG, but the AHAS is more trustworthy for unknown systems, although a lot heavier (Sec. A better model, Adiabatic Hessian After a Step (AHAS) and [600]).</li>
+<li style="list-style-type: '· ';">Always check the sum of K 2 i printed on the output. If that number is too high (above 8 or so), it means that the geometries are too displaced and the theory might not work on these cases (check for different coordinate systems then, Sec. Normal modes coordinate systems ).</li>
+<li style="list-style-type: '· ';">Also check for RMSD between the geometries after a step. If the difference is too big, there might be problems with the step.</li>
+</ul>
+<h2>Mixing methods</h2>
+<p>In principle, it is possible to use different methods to compute different parts needed for the ORCA_ESD module. You could, for instance use (TD)DFT analytical gradients for the ground/excited state geometries and Hessians and a more elaborate method such as STEOM-CCSD to get the energies and transition dipoles. If you want to do that, just input the Hessians and use the DELE flag for the energy difference between the states - at their own geometry! and TDIP x,y,z to input the transition dipole. If there is SOC and the transition dipole is complex, use TDIP x.real, x.imag, y.real, y.imag, z.real, z.imag. The program will automatically detect each case. If you don't input these, they will be obtained by the module during the run, so you can set the excited method you want and let the program figure out DELE and TDIP.</p>
+<p>OBS: It is not advisable to mix different levels of theory during a geometry step though. If you obtained a GS Hessian from DFT, doing a step based on a CASSCF ES numerical gradient might not lead to reasonable results. The same would be problematic even for different DFT functionals.</p>
+<h2>Removal of frequencies</h2>
+<p>If, after calculating an ES Hessian you end up with negative frequencies, the calculation of the correlation function might run into trouble. The default for the module is to turn all negative frequencies positive, printing a warning if any of them was lower than -300 cm -1 . If that is the case, you are probably on a saddle point and not even a minimum, so results should be taken with care,</p>
+<p>You can also choose to completely remove the negative frequencies (and the corresponding from the GS), by setting IFREQFLAG REMOVE or leave them as negative with IFREQFLAG LEAVE under %ESD.</p>
+<p>Sometimes, low frequencies have displacements that are just too large (check on the K vector), or the experimental low frequency modes are too anharmonic and you might want to remove them. It is also possible to do that setting the TCUTFREQ flag (in cm -1 ), and all frequencies below the given threshold will be removed.</p>
+<h2>Normal modes coordinate systems</h2>
+<p>When working with systems with weak bonds, such as hydrogen bonds and π stacking, or with biphenyls and similar planar molecules it is common that there will be low frequency-high amplitude modes related to the angular bending. It has been shown that, in some cases, the normal modes transformed from Cartesian coordinates might be not sufficient to describe systems with these large amplitude motion [617]. In those, the definition of normal modes in terms of some curvilinear set of coordinates such as the internal ones are more suitable.</p>
+<p>The first order transformation from Cartesian ( x ) to internal ( s ) coordinates is given by Wilson's B matrix[618] as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and here we use Baker's[619] delocalized internal coordinates as default. First, a redudant set is build and an singular value decomposition of the G = BB T matrix is performed to obtain the non-redundant set. The latter can be generated by B ′ = U T B , where U are the eigenvectors correponding to non-zero eigenvalues of G . Then an orthogonal set is contructed from B ′′ = G ′ -1/2 U T B . As the eigenvectors are not conitnuous functions of the coordinates, in order to avoid using an arbitrary selection, we will follow the work of Reimers[620] and set G -1/2 U T = 2/7 G -1/2 2/7 U T , or use the same transformation for the initial an final coordinates. Please note that this may lead to numbers larger than 1 on the Duschinsky rotation matrix, for it is an approximation and the calculated rates may vary a little. The normal modes in internal coordinates ( L s ) are then obtained from those in Cartesian ones ( L x ) as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and the Duschinsky relation ((5.54)) still holds[617], with the displacement vector being simply</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The options available for coordinate systems can be set under COORDSYS, and can be CARTESIAN, INTERNAL (for Baker delocalized - default), WINT (for weighted internals following Swart and Bickelhaupt [621]), FCWL (force constant weighted following Lindh [622]) and FCWS (same as before, but using Swart's model Hessian).</p>
+<p>OBS: Calculating in internal coordinates is usually better but not necessarily. If something goes wrong, you may also want to try the Cartesian option.</p>
+<h2>Geometry rotation and Duschinsky matrices</h2>
+<p>The electronic transition should not to take place simultaneously with translations and rotations[623] of the molecular structure. Before further calculations take place, the initial and final state structures are superimposed to satisfy Eckart's conditions by obtaining a rotation matrix B that ensures ∑ m i ( B Ri × 2/7 Ri ) = 0 [624], with R being Cartesian coordinates. As the initial geometry is rotated, so must be the corresponding normal modes L x also. This can be turned of by setting the flag USEB FALSE.</p>
+<p>By the default the Duschinsky rotation matrix is set to Identity, to take advantage of our much faster algorithm. To turn that on, just set USEJ TRUE. You can check the 'diagonality' of this matrix by looking at the Diagonality Index (DI), here defined as √ ∑ i J 2 ii / ∑ ij J 2 ij . A DI=1 would be a perfectly diagonal matrix. The amount of mixing between modes is rpresented by the Mixing Index, with is here is given by ⟨| J max |⟩ , or the average value of the maximum J i of each line. If DI=1, it means each normal coordinate from the initial state is equal to a mode of the final state. When USEJ=TRUE, the largest components of the J matrix are printed along with the K vector, so you can have a better idea of how the mixing is occuring.</p>
+</div>
+</body>
+</html>

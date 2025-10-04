@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 from pathlib import Path
 from typing import List
 
@@ -36,9 +37,11 @@ def main():
     parser = argparse.ArgumentParser(description="Build and persist a LlamaIndex vector index from chunks.jsonl")
     parser.add_argument("--chunks", default=str(DEFAULT_CHUNKS), help="Path to chunks.jsonl")
     parser.add_argument("--persist", default=str(DEFAULT_PERSIST), help="Directory to persist the index")
+    # Allow override via env var, then fall back to default
+    default_embed = os.getenv("EMBED_MODEL_ID", "BAAI/bge-m3")
     parser.add_argument(
         "--embed-model",
-        default="BAAI/bge-m3",
+        default=default_embed,
         help="HuggingFace embedding model (multilingual recommended: BAAI/bge-m3)",
     )
     parser.add_argument("--batch-size", type=int, default=32, help="Embedding batch size")

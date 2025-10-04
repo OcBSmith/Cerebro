@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part083</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>A</h2>
+<h2>INDEX</h2>
+<table><tbody><tr><td>Absorption Spectrum via ESD , 764 ADC2 , 753 additive , 1189</td><td>Cartesian Index Conventions for EPR and NMR Tensors , 1026 CAS-DFT , 494</td></tr><tr><td>ADEX , 1150</td><td>CASPT2 , 490</td></tr><tr><td>ADFT , 262</td><td>CASSCF , 358</td></tr><tr><td>Ahlrichs Basis Sets , 63</td><td>CASSCF Linear Response , 1046</td></tr><tr><td>AIMD , 1213</td><td>CASSCF Theory , 359</td></tr><tr><td>AMFI , 1054</td><td>CC2 , 343</td></tr><tr><td>Analytic DFT , 262</td><td>CC3 , 343</td></tr><tr><td>Angular Momentum Limits and</td><td>CCSDT , 343</td></tr><tr><td>Nomenclature , 160</td><td>CCSDT-n , 343</td></tr><tr><td>ANO Basis Sets , 71</td><td>CHELP Charges , 717</td></tr><tr><td>Architecture of ORCA , 1505</td><td>CHELPG , 716</td></tr><tr><td>ASA , 978</td><td>Circular Dichroism , 1078</td></tr><tr><td>Atomic Decomposition Methods , 1150</td><td>Circularly Polarized Spectroscopies</td></tr><tr><td>ADEX , 1152</td><td>via ESD , 786</td></tr><tr><td>ADLD , 1150</td><td>CIS , 809</td></tr><tr><td>ADLD(D) , 1161</td><td>CNDO , 248</td></tr><tr><td>ADLD(D4) , 1161</td><td>Collinear Spin-Flip TDA , 815</td></tr><tr><td>Atomic Dipole Moment and</td><td>Combination Bands , 987</td></tr><tr><td>Polarizabilities , 1014</td><td>Common Errors and Problems , 10</td></tr><tr><td>AutoAux , 81</td><td>Compound , 1243</td></tr><tr><td>AUTOCI , 342</td><td>Configuration Interaction , 292</td></tr><tr><td>AUTOCI Keywords , 355</td><td>Configuration Interaction Hierarchy ,</td></tr><tr><td>Aux Basis Sets , 79</td><td>292</td></tr><tr><td>AuxC , 79</td><td>Conical Intersections , 667</td></tr><tr><td>AuxJ , 79</td><td>Core Excitations ( CC ), 918</td></tr><tr><td>AuxJK , 79</td><td>COSMO , 138 Counterpoise Corrections</td></tr><tr><td>B</td><td>, 107 Counterpoise Corrections Keywords , 115</td></tr><tr><td>B3LYP-3c , 261</td><td>Coupled Cluster , 292</td></tr><tr><td>B97-3c , 260</td><td>Coupled Cluster and CI Theories ( MDCI</td></tr><tr><td>Basis Set Extrapolation , 312</td><td>292</td></tr><tr><td>Basis Set Keywords , 92</td><td>Coupled Cluster S-Diagnostic , 309</td></tr><tr><td>Basis Sets , 60</td><td>Coupled-Cluster , 357</td></tr><tr><td>Basis Sets Linear Dependencies , 90</td><td>Coupled-Cluster Density , 302 CP-SCF , 203</td></tr><tr><td>BLOCK Interface , 464</td><td>Crystal-QMMM , 1195</td></tr><tr><td>Broken-Symmetry Wavefunctions and Exchange Couplings , 1058</td><td></td></tr><tr><td>BubblePole Approximation , 158 BUPO , 158</td><td>D</td></tr><tr><td></td><td>DCD-CAS , 584</td></tr><tr><td></td><td>def2 Basis Sets , 64</td></tr><tr><td>C</td><td>DeltaSCF , 1111</td></tr><tr><td>C-PCM , 127</td><td>Density Functional Theory , 211</td></tr><tr><td>C-PCM Computing Terms Options , 137</td><td>Custom Functionals , 214</td></tr></tbody></table>
+<table><tbody><tr><td>DFT , 211</td><td>Excited States via STEOM , 895</td></tr><tr><td>Double-Hybrid Functionals , 223</td><td>Excited States via TDDFT , 809</td></tr><tr><td>GGA , 213 Global Double-Hybrid Functionals ,</td><td>F</td></tr><tr><td>224</td><td>F12 Basis Sets , 71</td></tr><tr><td>Global Hybrid Functionals , 217</td><td>F12-CCSD(T) , 310</td></tr><tr><td>Hybrid Functionals , 216</td><td>F12-MP2 , 310</td></tr><tr><td>LibXC , 230</td><td>Fast Multipole Method ( FMM ), 1205</td></tr><tr><td>Local Functionals , 213</td><td>FCI , 588</td></tr><tr><td>Range-Separated Double-Hybrid</td><td>Fermi Smearing , 57</td></tr><tr><td>Functionals , 227</td><td>FIC-MRCC , 352</td></tr><tr><td>Range-Separated Hybrid</td><td>FIC-MRCI , 350</td></tr><tr><td>Functionals , 220</td><td>FIC-NEVPT , 353</td></tr><tr><td>DFT-3c , 258</td><td>Fluorescence Rates via ESD , 771</td></tr><tr><td>DFT-D3 , 235</td><td>Fluorescence Spectra via ESD , 771</td></tr><tr><td>DFT-D4 , 235</td><td>Foreword by F. Neese , i</td></tr><tr><td>DFT-NL , 243</td><td>Fractional Occupation , 58</td></tr><tr><td>Diagonal Born-Oppenheimer Correction , 664</td><td>Fractional Occupation Number Weighted Density ( FOD ), 736</td></tr><tr><td>DIIS , 53</td><td>Frontier MO Population Analysis , 712</td></tr><tr><td></td><td>Frozen Core , 201</td></tr><tr><td>Dispersion Corrections , 234 Distance Dependent Pre-Screening</td><td>Frozen Core Options MDCI , 301</td></tr><tr><td>, 154 DKS Basis Sets , 74</td><td>FT-DFT , 57</td></tr><tr><td>DLPNO Keywords , 330</td><td></td></tr><tr><td>DLPNO-EOM-CC , 762</td><td>Full-CI , 588</td></tr><tr><td>DLPNO-NEVPT2-F12 , 478</td><td>G</td></tr><tr><td>DLPNO-STEOM-CCSD , 907</td><td>G-Tensor , 1031</td></tr><tr><td>DMRG , 464 DOCKER , 696</td><td>G-Tensor Keywords , 1033 g-Tensor with MRCI , 534</td></tr><tr><td>Double-Hybrid DFT and MP2 ,</td><td>Geometry Optimization</td></tr><tr><td>284 Douglas-Kroll-Hess ( DKH ), 120</td><td>, 601 GFN-xTB ( interfaced ), 251</td></tr><tr><td>DRACO , 141</td><td></td></tr><tr><td>Dunning Basis Sets , 68</td><td>GFN-xTB ( native ), 255 Ghost Atoms - , 85</td></tr><tr><td>Dynamic Correlation , 304</td><td>Basis Sets GOAT , 673</td></tr><tr><td></td><td>Graphical User Interfaces ( 2 GVPT2 , 1000</td></tr><tr><td>E</td><td>GUI ),</td></tr><tr><td>EDA ,</td><td></td></tr><tr><td>1124 EDA Keywords , 1134 Effective Core Potentials ( ECPs ),</td><td>H ( HF ), 210</td></tr><tr><td>81 Electric Moments , 1006</td><td>Hartree-Fock Theory HF-3c , 258 HFLD , 1158</td></tr><tr><td>Electrical Properties , 1006 Electrical Properties Keywords ,</td><td>HFLD Keywords High Accuracy</td></tr><tr><td>1015 EOM-CCSD , 886</td><td>, 1161 HEAT</td></tr><tr><td>EOM-CCSD Keywords , 893 EOM-CCSD Theory , 886</td><td>Thermochemistry: protocol , 665 Hirshfeld Population Analysis ,</td></tr><tr><td></td><td>the 713 Hyperfine Coupling , 1034</td></tr><tr><td>EPR , 1030 EPR Tensors Index Conventions , 1026</td><td>Hyperfine Coupling Keywords , 1038</td></tr><tr><td>ESD and STEOM-CCSD , 786</td><td></td></tr><tr><td>Essential Calculation Elements , 22</td><td></td></tr><tr><td></td><td>I</td></tr><tr><td>Excited State Dynamics ( ESD ), 764</td><td></td></tr><tr><td>Excited States Calculations , 742</td><td>ICE-CI , 446 ICE-NEVPT2</td></tr><tr><td>Excited States via DFT , 815</td><td>, 481 IH-FSMR , 903</td></tr><tr><td>Excited States via EOM-CCSD , 886 Excited States via HF , 814</td><td>IH-FSMR-CCSD ,</td></tr><tr><td></td><td>758 Implicit , 126</td></tr><tr><td>Excited States via IH-FSMR , 903</td><td>Solvation INDO , 248</td></tr><tr><td>Excited States via PNO-CC , 906</td><td>Infrared 986 Initial Guess</td></tr><tr><td></td><td>Spectra ,</td></tr><tr><td>Excited States via Semiempirical</td><td>, 197</td></tr><tr><td>Methods , 811</td><td></td></tr><tr><td></td><td>Installation , 1</td></tr></tbody></table>
+<pre><code>Integral Compression and Storage , 153 Integral Handling , 151 Interfaces , 1201 Internal Conversion Rates via ESD , 782 Intersystem Crossing Rates via ESD , 777 IR , 986 IRC , 631 Isomer Shift , 1052 Isotope Shifts in Vibrational Spectra , 999 J Jensen Basis Sets , 65 K KDIIS , 54 L L-Edges , 861 LANL Basis Sets , 68 Literature Computational Chemistry , 6 Local Correlation , 317 Local Energy Decomposition ( LED ), 1134 Local Spin Analysis , 718 Löwdin Population Analysis , 711 M Magnetic Circular Dichroism , 1078 Magnetic Circular Dichroism via ESD , 795 Magnetic Exchange Coupling Decomposition , 1060 Magnetic Exchange Properties , 1099 Magnetic Properties via MP2 , 1045 Magnetic Properties via QDPT , 1061 Magnetic Properties via ROCIS , 875 Magnetic Properties with MRCI , 538 Magnetic Relaxation , 1071 Magrelax Keywords , 1077 Mayer Population Analysis , 712 MBIS , 714 MBIS Population Analysis , 714 MC-RPA , 750 MCD Keywords , 1081 MCD with MRCI , 540 MCPDFT , 494 MCRPA , 878 MCRPA Keywords , 886 MDCI , 292 MDCI Keywords , 330, 339 MECP , 670 meta-GGA , 213 MM , 592 MNDO , 248 Modelchemistries , 206 Molecular Dynamics , 1211 Molecular Dynamics ( MD ), 1213 Molecular Mechanics , 592 MP2 Derivatives , 272 MP2 Local , 275 MP2 Magnetic Properties , 1045 MP3 , 343 MP4 , 343 MP5 , 343 MR-CI Tutorial , 503 MR-EOM-CC , 557 MRCI , 498 MRCI Keywords , 551 MRPT , 498 Mulliken Population Analysis , 709 Multiscale Simulations , 1176 Mössbauer Spectroscopy , 1051 Mössbauer Spectroscopy Keywords , 1054 Møller-Plesset Perturbation Theory ( MP2 ), 266 N Natural Bond Orbital Analysis , 725 Natural Chemical Shielding Analysis , 736 Natural Population Analysis , 713 Natural Transition Orbitals ( MCRPA ), 881 NBO , 725 NBO Analysis , 713 NCS , 736 NDDO , 248 NDO , 248 Near IR ( NIR ), 989 NEARIR , 987 NEB , 634 NEVPT2 , 472 NEVPT2 Keywords , 488 NEVPT2-F12 , 478 NICS , 1024 NL , 243 NMR , 1016 NMR Keywords EPRNMR , 1027 NMR NCS , 736 NMR Shielding Tensor Orbital Decomposition , 1025 NMR Spin-Spin Coupling Constants , 1019 NMR Tensors Index Conventions , 1026 NOCV , 1124 NOCV Keywords , 1134 Non-Adiabatic Coupling Matrix Elements , 853 NRVS Spectra , 994 NTOs and NDOs via ROCIS , 876 NTOs in TD-DFT , 831 Nuclear Magnetic Resonance , 1016 Nucleus-independent chemical shielding , 1024 O One Photon Spectroscopy , 909</code></pre>
+<pre><code>ONIOM , 1177 OO-MP2 , 288 openCOSMO-RS , 142 OPI , 1243 ORCA citations , v ORCA Name , 1 ORCA Python Interface , 1243 orca_2json , 1415 orca_mapspc , 1349 Overtones , 987 P Paramagnetic NMR Shielding Tensors , 1029 PBEh-3c , 260 Phosphorescence Rates via ESD , 774 Phosphorescence Spectrum via ESD , 774 Picture Change Effects with MRCI , 545 PictureChange , 124 PNMR , 1029 PNO-CC , 760 PNO-EOM-CC , 906 Polarizabilities , 1006 POLY ANISO Interface , 1099 Population Analysis , 709 Population Analysis Keywords , 723 Population Analysis of Excited States ( TDDFT ), 820 Population Analysis of UNOs , 723 Post-HF Magnetic Properties , 1045 Potential Energy Surface Scans via TD-DFT , 845 Property File , 1436 Pseudospin Hamiltonians , 1082 PTE , 146 PTES , 146 Q QDPT , 1061 QM/QM2 , 1189 QM/QM2/MM , 1189 QMMM , 1177, 1189, 1201 QRO , 210 Quadrupole Splitting , 1053 Quasi-Degenerate SC-NEVPT2 , 485 Quickstart Guide , 1 R Raman Spectra , 992 Random Phase Approximation , 265 Relaxation , 1071 Resolution-of-the-Identity ( RI ), 94 Resolution-of-the-Identity Keywords , 102 Resonance Raman Spectra , 994 Resonant Raman Spectrum via ESD , 783 RESP , 717 RESP Charges , 717 RI-J , 95 RI-JK , 101 RI-MP2 , 268 RIJCOSX , 97 RIXS via ROCIS , 868 ROCIS , 747, 854 ROCIS Keywords , 877 ROCIS Magnetic Properties , 875 RPA , 265, 809 RRHO , 659 Running ORCA , 3 r²SCAN-3c , 260 S Sapporo Basis Sets , 67 SARC Basis Sets , 76 SCF Convergence , 48 SCF Convergence Issues , 58 SCF Damping , 52 SCF Keywords , 56 SCF Level Shift , 53 Self-Consistent-Field ( SCF ), 47 Semiempirical Methods , 247 SF-TD-DFT , 815 SF-TDA , 809 Simplified TDA and TD-DFT , 823 SINGLE ANISO Interface , 1082 SMD , 138 SOLVATOR , 686 SOMF , 1054 SOSCF , 54 Spectroscopy & Properties , 708 Spin-Orbit Coupling , 1054 Spin-Orbit Coupling Correction to the Total Energy , 665 Spin-Rotation Constants , 1030 Spin-Spin Coupling Constants , 1019 srDFT , 495 Stability Analysis , 167 starting ORCA , 3 State-averaged SC-NEVPT2 , 484 Static Correlation , 304 STEOM , 895 STEOM-CCSD , 755 STEOM-CCSD and ESD , 786 Structure and Reactivity , 600 subtractive , 1189 Symmetry , 191 T TCutPairs , 330 TCutPNO , 330 TD-DFT , 742, 809 TD-DFT Keywords , 854 TD-DFT NTOs , 831 Thermochemistry , 659 TRAH , 55</code></pre>
+<pre><code>Transition Metal L-Edges with ROCIS , 861 Transition States , 623 U UCO , 210 UHF Natural Orbitals , 210 UNO , 210 Utilities , 1348 Utilities and Visualization , 1338 V Vibrational Circular Dichroism , 991 Vibrational Corrections via VPT2 , 1002 Vibrational Frequencies , 653 Vibrational Spectroscopy , 986 VPT2 , 1000 W Why is ORCA called ORCA ? , 1 Workflows and Automatization , 1241 X X2C , 121 X-Ray Spectroscopy with MRCI , 546 XAS via MCRPA , 883 XES , 1162 Z Zero-Field Splitting , 1039 Zero-Field Splitting Keywords , 1045 Zero-Field Splitting with MRCI , 530 ZORA , 118 ZORA Basis Sets , 74 � ΔSCF , 1111 � ωB97X-3c , 261</code></pre>
+</div>
+</body>
+</html>

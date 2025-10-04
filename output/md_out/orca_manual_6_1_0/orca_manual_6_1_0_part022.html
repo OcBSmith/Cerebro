@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part022</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<figure><figcaption><div class="caption">Fig. 3.19: State averaged CASSCF(2,2) calculations on H 2 (two singlets, one triplet; Def2-SVP basis). The grey curve is the ground state CASSCF(2,2) curve</div></figcaption></figure>
+<p>One observes, that the singlet and triplet ground states become degenerate for large distances (as required) while the second singlet becomes the ionic singlet state which is high in energy. If one compares the lowest root of the stateaveraged calculation (in green) with the dedicated ground state calculation (in gray) one gets an idea of the energetic penalty that is associated with averaged as opposed to dedicated orbitals.</p>
+<p>A more involved example is the rotation around the double bond in C 2 H 4 . Here, the π -bond is broken as one twists the molecule. The means the proper active space consists of two active electron in two orbitals.</p>
+<p>The input is (for fun, we average over the lowest two singlets and the triplet):</p>
+<p>(continues on next page)</p>
+<pre><code>H 2 1 3 1.07 120 {Alpha+180} edn</code></pre>
+<p>Wecan see from this plot, that the CASSCF method produces a nice ground state surface with the correct periodicity and degeneracy at the end points, which represent the planar ethylene molecule. At 90 ◦ one has a weakly coupled diradical and the singlet and triplet states become nearly degenerate, again as expected. Calculations with larger basis sets and inclusion of dynamic correlation would give nice quantitative results.</p>
+<h2>3.13.10 Example: Excited States</h2>
+<p>Asafinal example, we do a state-average calculation on H 2 COinorder to illustrate excited state treatments. We expect from the ground state (basically closed-shell) a n → π ∗ and a π → π ∗ excited state which we want to describe. For the n → π ∗ we also want to calculate the triplet since it is well known experimentally. First we take DFT orbitals as starting guess.</p>
+<pre><code>! BP86 Def2-SVP TightSCF *int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 end</code></pre>
+<p>In this example the DFT calculation produces the desired active space (n, π and π ∗ orbitals) without further modification (e.g. swapping orbitals). In general it is advised to verify the final converged orbitals.</p>
+<p>(continued from previous page)</p>
+<pre><code>! Def2-SVP TightSCF MOREAD %moinp "orbs.gbw" %casscf nel 4 norb 3 mult 1,3 nroots 3,1 end *int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 end</code></pre>
+<h2>We get:</h2>
+<pre><code>-----------------------------SA-CASSCF TRANSITION ENERGIES ------------------------------LOWEST ROOT (ROOT 0 ,MULT 1) = -113.805194041 Eh -3096.797 eV STATE ROOT MULT DE/a.u. DE/eV DE/cm**-1 1: 0 3 0.129029 3.511 28318.5 2: 1 1 0.141507 3.851 31057.3 3: 2 1 0.453905 12.351 99620.7</code></pre>
+<p>The triplet n → π ∗ states is spot on with the experiment excitation energy of 3.5 eV.[451] Similarly, the singlet n → π ∗ excited state is well reproduced compared to 3.79 eV and 4.07 eV reported in the literature.[451, 452] Only the singlet π → π ∗ excited state stands out compared to the theoretical estimate of 9.84 eV computed with MR-AQCC.[453]. The good results are very fortuitous given the small basis set, the minimal active space and the complete neglect of dynamical correlation.</p>
+<p>The state-average procedure might not do justice to the different nature of the states (n → π ∗ versus π → π ∗ ). The agreement should be better with the orbitals optimized for each state. In ORCA, state-specific optimization are realized adjusting the weights i.e. for the second singlet excited root:</p>
+<pre><code>Second-Singlet: %casscf # define CAS(5,4) nel 4 norb 3 # define singlet with and compute the 3 lowest # states mult 1 nroots 3 weights[0] = 0,0,1 # weights for the roots end</code></pre>
+<p>Note, that state-specific orbital optimization are challenging to converge and often prone to root-flipping.[454]</p>
+<p>To analyze electronic transitions, natural transition orbitals (NTO) are available for state-averaged CASSCF (and also CASCI) calculations. NTOs are switched on for every ground- to excited-state transition by just adding DoNTO true to the %casscf ... end input block, i.e.</p>
+<pre><code>%casscf # define CAS(4,3) nel 4</code></pre>
+<p>(continues on next page)</p>
+<pre><code>norb 3 # state-average mult 1,3 nroots 3,1 DoNTO true end</code></pre>
+<p>For each excitation, the most dominant natural occupation numbers (singular values &gt;1.e-4) are printed for each transition. A set of donor orbitals and a set of acceptor orbitals, each of dimension Nbf x (Nocc + Nact), are created and stored in files with unique names. We obtain for the previous formamide example the following CASSCF NTO output</p>
+<pre><code>========================================== CASSCF Natural Transition Orbitals ========================================== ------------------------------------------------NATURAL TRANSITION ORBITALS FOR STATE 1 1A ------------------------------------------------STATE 1 1A : E= 0.141508 au 3.851 eV 31057.3 cm**-1 Threshold for printing occupation numbers 1.0000e-04 0 : n= 1.30882812 1 : n= 0.02641080 => Natural Transition Orbitals (donor ) were saved in Test-CASSCF.H2CO-1.casscf. ↪ → 1-1A_nto-donor.gbw => Natural Transition Orbitals (acceptor) were saved in Test-CASSCF.H2CO-1.casscf. ↪ → 1-1A_nto-acceptor.gbw ------------------------------------------------NATURAL TRANSITION ORBITALS FOR STATE 2 1A ------------------------------------------------STATE 2 1A : E= 0.453905 au 12.351 eV 99620.7 cm**-1 Threshold for printing occupation numbers 1.0000e-04 0 : n= 1.30519478 1 : n= 0.24869813 2 : n= 0.00471742 => Natural Transition Orbitals (donor ) were saved in Test-CASSCF.H2CO-1.casscf. ↪ → 2-1A_nto-donor.gbw => Natural Transition Orbitals (acceptor) were saved in Test-CASSCF.H2CO-1.casscf. ↪ → 2-1A_nto-acceptor.gbw</code></pre>
+<p>For each transition, plots of the NTO pairs can be generated with the orca_plot program (see Sec. Orbital and Density Plots for details), , e.g., acceptor orbitals of the 2 1A1 state in interactive mode:</p>
+<pre><code>orca_plot Test-CASSCF.H2CO-1.casscf.2-1A_nto-acceptor.gbw -i</code></pre>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 3.21: Most dominant natural transition orbital (NTO) pair for the 2 1A1 (S2) transition in formaldehyde.</div></figcaption></figure>
+<p>Alternatively, NTOs can also be computed directly in orca_plot from the CASSCF transition density matrices. Those need to be stored and kept in the density container by invoking</p>
+<p>! KeepTransDensity</p>
+<h2>3.13.11 Example: Large Active Spaces using ICE-CI</h2>
+<p>The state-averaged CASSCF procedure can be used for the calculation of spin-state energetics of molecules showing a multi-reference character. The main obstacle in getting qualitatively accurate spin-state energetics for molecules with many transition metal centers is the proper treatment of the static-correlation effects between the large number of open-shell electrons. In this section, we describe how one can effectively perform CASSCF calculations on such systems containing a large number of high-spin open-shell transition metal atoms.</p>
+<p>As an example, consider the Iron-Sulfur dimer [ Fe(III) 2 SR 2 ] 2 -molecule. In this system, the Fe(III) centers can be seen as being made up mostly of S=5/2 local spin states (lower spin states such as 3/2 and 1/2 will have small contributions due to Hunds' rule.) The main hurdle while using the CASSCF protocol on such systems (with increasing number of metal atoms) is the exponential growth of the Hilbert space although the physics can be effectively seen as occurring in a very small set of configuration state functions (CSFs). Therefore, in order to obtain qualitatively correct spin-state energetics, one need not perform a Full-CI on such molecules but rather a CIPSI like procedure using the ICE-CI solver should give chemically accurate results. In the case of the Fe(III) dimer, one can imagine that the ground singlet state is composed almost entirely of the CSF where the two Fe(III) centers are coupled antiferromagnetically. Such a CSF is represented as follows:</p>
+<p>In order to make sense of this CSF representation, one needs to clarify a few points which are as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<ul>
+<li style="list-style-type: '· ';">First, in the above basis the 10 orbitals are localized to 5 on each Fe center (following a high-spin UHF/UKS calculation.)</li>
+<li style="list-style-type: '· ';">Second, the orbitals are ordered (as automatically done in ORCA_LOC) such that the first five orbitals lie on one Fe(III) center and the last five orbitals on the second Fe(III) center.</li>
+</ul>
+<p>Using this ordering, one can read the CSF shown above in the following way: The first five 1 represent the five electrons on the first Fe(III) coupled in a parallel fashion to give a S=5/2 spin. The next five -1 represent two points:</p>
+<ul>
+<li style="list-style-type: '· ';">First, the five consecutive -1 signify the presence of five ferromagnetically coupled electrons on the second Fe(III) center resulting in a local S=5/2 spin state.</li>
+<li style="list-style-type: '· ';">Second, the second set of spins are coupled to the first 1 via anti-parallel coupling as signified by the sign of the last five -1 entries.</li>
+</ul>
+<p>Therefore, we can see that using the CSF representation, one can obtain an extremely compact representation of the wave function for molecules consisting of open-shell transition metal atoms. This protocol of using localized orbitals in a specified order to form compact CSF representations for transition metal systems can be systematically extended for large molecules.</p>
+<p>We will use the example of the Iron-Sulfur dimer [ Fe(III) 2 SR 2 ] 2 -to demonstrate how to prepare a reference CSF and perform spin-state energetics using the state-averaged CASSCF protocol. In such systems, often one can obtain</p>
+<p>an estimate of the energy gap between the singlet-state and the high-spin states from experiment. Ab initio values for this gap be obtained using the state-averaged CASSCF protocol using the input shown below.</p>
+<pre><code>! def2-SVP MOREAD %moinp "locorbs.gbw" %casscf nel 10 norb 10 mult 11,1 nroots 1,1 refs # reference for multiplicity 11 { 1 1 1 1 1 1 1 1 1 1} end refs # reference for multiplicity 1 { 1 1 1 1 1 -1 -1 -1 -1 -1} end cistep ice ci icetype 1 end actorbs unchanged end * xyz -2 11 Fe 0.000000000 0.000000000 -1.343567812 Fe 0.000000000 0.000000000 1.343567812 S 1.071733501 1.373366082 0.000000000 S 1.346714284 -1.345901486 -2.651621449 S -1.346714284 1.345901486 -2.651621449 S -1.071733501 -1.373366082 0.000000000 S -1.346714284 1.345901486 2.651621449 S 1.346714284 -1.345901486 2.651621449 C -2.485663304 0.362543393 -3.600795276 H -3.319937516 0.596731755 -3.505882795 H -2.347446507 0.388292903 -4.463380590 H -2.472404709 -0.485711203 -3.404167343 C 2.485663304 -0.362543393 -3.600795276 H 3.319937516 -0.596731755 -3.505882795 H 2.347446507 -0.388292903 -4.463380590 H 2.472404709 0.485711203 -3.404167343 C 2.485663304 -0.362543393 3.600795276 H 2.347446507 -0.388292903 4.463380590 H 3.319937516 -0.596731755 3.505882795 H 2.472404709 0.485711203 3.404167343 C -2.485663304 0.362543393 3.600795276 H -3.319937516 0.596731755 3.505882795 H -2.472404709 -0.485711203 3.404167343 H -2.347446507 0.388292903 4.463380590 *</code></pre>
+<p>The main keyword that needs to be used here (unlike in other CAS-SCF calculations) is the actorbs keyword. Since we are using a local basis with a specific ordering of the orbitals, in order to represent our wave function it is imperative to preserve the local nature of the orbitals as well as the orbital ordering. Therefore, we do not calculate natural orbitals at the end of the CASSCF calculation (as is traditionally done) instead we impose the orbitals to be as similar to the input orbitals as possible. This is automatically enabled for intermediate CASSCF macro iterations. The resulting CASSCF calculation provides a chemically intuitive and simple wave function and transition energy as shown below:</p>
+<pre><code>---------------------------------------------CAS-SCF STATES FOR BLOCK 1 MULT=11 NROOTS= 1 ---------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>STATE 0 MULT=11: E= -5066.8462457411 Eh W= 0.5000 DE= 0.000 eV 0.0 cm**-1 1.00000 ( 1.000000000) CSF = 1+1+1+1+1+1+1+1+1+1+ ---------------------------------------------CAS-SCF STATES FOR BLOCK 2 MULT= 1 NROOTS= 1 ---------------------------------------------STATE 0 MULT= 1: E= -5066.8548894831 Eh W= 0.5000 DE= 0.000 eV 0.0 cm**-1 0.98159 (-0.990753235) CSF = 1+1+1+1+1+1-1-1-1-1------------------------------SA-CASSCF TRANSITION ENERGIES ------------------------------LOWEST ROOT (ROOT 0 ,MULT 1) = -5066.854889483 Eh -137876.131 eV STATE ROOT MULT DE/a.u. DE/eV DE/cm**-1 1: 0 11 0.008644 0.235 1897.1</code></pre>
+<p>As we can see from the output above, 98% of the wave function for the singlet-state is given by a single CSF which we gave as a reference CSF. This CSF has a very simple chemical interpretation representing the anti-parallel coupling between the two high-spin Fe(III) centers. Since Iron-Sulfur molecules show a strong anti-ferromagnetic coupling, we expect the singlet state to be lower in energy than the high-spin (S=5) state. The CASSCF transition energies show essentially this fact. The transition energy is about 2000cm -1 which is what one expects from a CASSCF calculation on such sulfide bridged transition-metal molecules.</p>
+<h2>3.13.12 Example: Geometry Optimization</h2>
+<p>In this section, we want to optimize the geometry of formaldehyde with CASSCF. The present implementation of analytic gradients are only implemented in the case that the solution is fully variational (orbitals are optimized for a single state).</p>
+<p>To define the active space, lets first look at the natural orbitals from a simple correlation calculation like MP2 or a calculation with the MRCI module. Both are usually a good choice and easily generated. For example:</p>
+<pre><code># # First job provides reasonable natural orbitals # ! RI-MP2 SVP def2-SVP/C %mp2 natorbs true density unrelaxed # or relaxed (more expensive) end * int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 *</code></pre>
+<p>Now examine the occupation numbers of the natural orbitals (you will find that in the output of the MP2 part of the calculation):</p>
+<pre><code>Natural Orbital Occupation Numbers: N[ 0] = 2.00000000 N[ 1] = 2.00000000 N[ 2] = 1.98676733 N[ 3] = 1.97726840 N[ 4] = 1.97500109 N[ 5] = 1.96759239 N[ 6] = 1.96423113 N[ 7] = 1.93719340 N[ 8] = 0.05427454 N[ 9] = 0.02555886 N[ 10] = 0.02530580 N[ 11] = 0.01358500 N[ 12] = 0.01096092 N[ 13] = 0.01028129 N[ 14] = 0.00702048 N[ 15] = 0.00627820</code></pre>
+<p>Arule of thumb is that orbitals with occupation numbers between 1.98 and 0.02 should be in the active space. Thus, in the present case we speculate that a 10 electrons in 8 orbitals active space would be appropriate for the CASSCF of the ground state. Let's try:</p>
+<pre><code># # Run a CASSCF calculation for the ground state of H2CO # ! SVP def2-SVP/C SmallPrint ! moread # reading mp2 natural orbitals %moinp "Test-CASSCF-MP2-H2CO.mp2nat" %casscf # define CAS(10,8) nel 10 norb 8 # singlet ground state mult 1 nroots 1 end * int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 *</code></pre>
+<p>If we run that calculation, it converges and produces the following:</p>
+<pre><code>MACRO-ITERATION 10: --- Inactive Energy E0 = -82.97337099 Eh E(CAS)= -113.889438276 Eh DE= -0.000000807 --- Energy gap subspaces: Ext-Act = -0.431 Act-Int = -0.240 N(occ)= 1.99763 1.99696 1.98360 1.97923 1.94253 0.05958 0.02153 0.01894 ||g|| = 0.000361782 Max(G)= 0.000189613 Rot=9,2 ---- THE CAS-SCF GRADIENT HAS CONVERGED ------- FINALIZING ORBITALS ------- DOING ONE FINAL ITERATION FOR PRINTING ------- Forming Natural Orbitals --- Canonicalize Internal Space --- Canonicalize External Space</code></pre>
+<p>From which we see that we had two orbitals too many in the active space with occupation numbers very close to two.</p>
+<p>The presence of barely correlated orbitals (occupation close to 0.0 or 2.0) can cause convergence problems. Their inclusion in the active space does not significantly change the energy and it might better to omit these orbitals from the start.</p>
+<p>In the present case, we re-run the CASSCF with 6 active electrons in six orbitals. The result is:</p>
+<pre><code>... MACRO-ITERATION 8: --- Inactive Energy E0 = -100.52457962 Eh E(CAS)= -113.885584276 Eh DE= -0.000001152 --- Energy gap subspaces: Ext-Act = -0.438 Act-Int = -0.283 N(occ)= 1.98134 1.97931 1.94184 0.05868 0.02101 0.01781 ||g|| = 0.000752012 Max(G)= -0.000357510 Rot=13,4 ---- THE CAS-SCF GRADIENT HAS CONVERGED ------- FINALIZING ORBITALS ------- DOING ONE FINAL ITERATION FOR PRINTING ------- Forming Natural Orbitals --- Canonicalize Internal Space --- Canonicalize External Space MACRO-ITERATION 9: --- Inactive Energy E0 = -100.52457962 Eh --- All densities will be recomputed E(CAS)= -113.885584276 Eh DE= -0.000000000 --- Energy gap subspaces: Ext-Act = -0.858 Act-Int = -0.283 N(occ)= 1.98172 1.97932 1.94207 0.05845 0.02100 0.01743 ||g|| = 0.000752012 Max(G)= -0.000327367 Rot=12,4 --------------CASSCF RESULTS --------------Final CASSCF energy : -113.885584276 Eh -3098.9843 eV</code></pre>
+<p>The calculation converges very quickly and the occupation numbers show you that all of these orbitals are actually needed in the active space. The omission of the two orbitals from the active space came at an increase of the energy by ∼ 4 mEh which seems to be tolerable. Let's look what we have in the active space in figure Fig. 3.22.</p>
+<figure><figcaption><div class="caption">Fig. 3.22: Orbitals of the active space for the CASSCF(6,6) calculation of H 2 CO.</div></figcaption></figure>
+<p>Thus, we can see that we got a fairly nice result: our calculation has correlated the in-plane oxygen lone pair, the C-O σ and the C-O π bond. For each strongly occupied bonding orbital, there is an accompanying weakly occupied antibonding orbital in the active space that is characterized by one more node. In particular, the correlating lone pair and the C-O σ ∗ orbital would have been hard to find with any other procedure than the one chosen based on natural orbitals. We have now done it blindly and looked at the orbitals only after the CASSCF - a better approach is normally to look at the starting orbitals before you enter a potentially expensive CASSCF calculation. If you have bonding/antibonding pairs in the active space plus perhaps the singly-occupied MOs of the system you probably have chosen a reasonable active space.</p>
+<p>Now that we establish the good active space, let us optimize the geometry of the molecule using a reasonable basis set:</p>
+<pre><code>! def2-TZVP def2-TZVP/C SmallPrint Opt ! moread %moinp "Test-CASSCF-MP2-H2CO.mp2nat" %casscf nel 6 norb 6 end * int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 *</code></pre>
+<p>and get:</p>
+<pre><code>---------------------------------------------------------------------------Redundant Internal Coordinates ---Optimized Parameters ---(Angstroem and degrees) Definition OldVal dE/dq Step FinalVal ----------------------------------------------------------------------------1. B(O 1,C 0) 1.2101 0.000259 -0.0002 1.2100 2. B(H 2,C 0) 1.0942 -0.000029 0.0001 1.0943 3. B(H 3,C 0) 1.0942 -0.000029 0.0001 1.0943 4. A(O 1,C 0,H 3) 122.07 0.000023 -0.00 122.07 5. A(H 2,C 0,H 3) 115.85 -0.000046 0.01 115.86 6. A(O 1,C 0,H 2) 122.07 0.000023 -0.00 122.07 7. I(O 1,H 3,H 2,C 0) -0.00 -0.000000 0.00 -0.00 ----------------------------------------------------------------------------</code></pre>
+<p>Let us compare to MP2 geometries (this job was actually run first):</p>
+<pre><code>! RI-MP2 def2-TZVP def2-TZVP/C Opt %mp2 natorbs true end * int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.10 120.0 0.00 H 1 2 3 1.10 120.0 180.00 *</code></pre>
+<p>The results are actually extremely similar (better than 1 pm agreement). Compare to RHF:</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>5. A(H 2,C 0,H 3) 116.13 0.000005 0.00 116.13 6. A(O 1,C 0,H 2) 121.93 -0.000003 -0.00 121.93 7. I(O 1,H 3,H 2,C 0) 0.00 0.000000 -0.00 -0.00 ----------------------------------------------------------------------------</code></pre>
+<p>Thus, one can observe that the correlation brought in by CASSCF or MP2 has an important effect on the C = O distance ( ∼ 4 pm), while the rest of the geometry is not much affected.</p>
+<h2>3.13.13 Example: Natural Orbitals as Input for Coupled-Cluster Calculations</h2>
+<p>Consider the possibility that you are not sure about the orbital occupancy of your system. Hence you carry out some CASSCF calculation for various states of the system in an effort to decide on the ground state. You can of course follow the CASSCF by MR-MP2 or MR-ACPF or SORCI calculations to get a true multireference result for the state ordering. Yet, in some cases you may also want to obtain a coupled-cluster estimate for the state energy difference. Converging coupled-cluster calculation on alternative states in a controlled manner is anything but trivial. Here a feature of ORCA might be helpful. The best single configuration that resembles a given CASSCF state is built from the natural orbitals of this state. These orbitals are also ordered in the right way to be input into the MDCI program. The convergence to excited states is, of course, not without pitfalls and limitations as will become evident in the two examples below.</p>
+<p>As an example, consider some ionized states of the water cation:</p>
+<p>First, we generate the natural orbitals for each state with the help of the MRCI module. To this end we run a state average CASSCF for the lowest three doublet states and pass that information on to the MRCI module that does a CASCI calculation and produces the natural orbitals:</p>
+<pre><code>! ano-pVDZ TightSCF %casscf nel 7 norb 6 nroots 3 mult 2 end %mrci tsel 0 tpre 0 donatorbs 2 densities 5,1 newblock 2 * nroots 3 excitations none refs cas(7,6) end end end * int 1 2 O 0 0 0 0.000000 0.000 0.000 H 1 0 0 1.012277 0.000 0.000 H 1 2 0 1.012177 109.288 0.000 end</code></pre>
+<p>This produces the files Basename.bm_sn.nat where 'm' is the number of the block (m = 0 correspond to the doublet in this case) and 'n' stands of the relevant state (n = 0,1,2).</p>
+<p>These natural orbitals are then fed into unrestricted QCISD(T) calculations:</p>
+<pre><code>! ano-pVDZ TightSCF QCISD(T) MOREAD NoIter %moinp "H2O+.b0_s0.nat" * int 1 2 O 0 0 0 0.000000 0.000 0.000 H 1 0 0 1.012277 0.000 0.000 H 1 2 0 1.012177 109.288 0.000 *</code></pre>
+<p>As a reference we also perform a SORCI on the same system</p>
+<pre><code>! ano-pVDZ TightSCF SORCI %casscf nel 7 norb 6 nroots 3 mult 2 end * int 1 2 O 0 0 0 0.000000 0.000 0.000 H 1 0 0 1.012277 0.000 0.000 H 1 2 0 1.012177 109.288 0.000 *</code></pre>
+<p>we obtain the transition energies:</p>
+<pre><code>SORCI QCISD(T) (in cm-1) D0 0 0.0 D1 16269 16293 D2 50403 50509</code></pre>
+<p>Thus, in this example the agreement between single- and multireference methods is good and the unrestricted QCISD(T) method is able to describe these excited doublet states. The natural orbitals have been a reliable way to guide the CC equations into the desired solutions. This will work in many cases.</p>
+<h2>3.13.14 CASSCF Densities</h2>
+<p>In general, densities are stored in the so-called density container ( .densities file). Using the orca_plot program we can print a list of the available densities:</p>
+<pre><code>orca_plot jobname.densities</code></pre>
+<p>By default, the state-averaged density ('.scfp') and spin-density ('.scfr') are stored. With the keyword !KeepDens , ORCA stores all of the computed densities. Below is an example snippet from a QD-NEVPT2 calculation with spinorbit coupling.</p>
+<pre><code>---------------------List of density names ---------------------Index: Name of Density ------------------------------------------------------------------------0: cas.scfp 1: cas.scfr 2: Tdens-CAS.mult.3.root.0.p 3: Tdens-CAS.mult.3.root.1.p 4: Tdens-CAS.mult.3.root.2.p</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>5: Tdens-CAS.mult.1.root.0.p 6: Tdens-CAS.mult.1.root.1.p 7: Tdens-CAS.mult.1.root.2.p 8: Tdens-CAS.mult.3.root.0.r 9: Tdens-CAS.mult.3.root.1.r 10: Tdens-CAS.mult.3.root.2.r 11: Tdens-CAS.mult.1.root.0.r 12: Tdens-CAS.mult.1.root.1.r 13: Tdens-CAS.mult.1.root.2.r 14: Tdens-CAS-DPDICPT2.mult.3.root.0.r 15: Tdens-CAS-DPDICPT2.mult.3.root.1.r 16: Tdens-CAS-DPDICPT2.mult.3.root.2.r 17: Tdens-CAS-DPDICPT2.mult.1.root.0.r 18: Tdens-CAS-DPDICPT2.mult.1.root.1.r 19: Tdens-CAS-DPDICPT2.mult.1.root.2.r 20: Tdens-CASQDSOCMO.root.0.p 21: Tdens-CASQDSOC.root.0.p 22: Tdens-CASPTQDSOCMO.root.0.p 23: Tdens-CASPTQDSOC.root.0.p 24: Tdens-CAS-DPDICPT2QDSOCMO.root.0.p 25: Tdens-CAS-DPDICPT2QDSOC.root.0.p</code></pre>
+<p>Here, the densities 2-12 are CASSCF state-specific densities denoted with 'Tdens-CAS' and a string flagging its multiplicity (potentially also irreducible representation) and root count. Similarly, densities 13-19 arise from the QD-NEVPT2 procedure and carry the prefix 'Tdens-CAS-DPDICPT2'. The latter is shared with other diagonalizeperturb-diagonalize type theories (DPD). The remaining densities containing the 'SOC' substring, belong to densities computed in the framework of quasi-degenerate peturbation theory and differ in the handling of the reference wavefunction and the choice of the diagonal energies. The prefix 'Tdens-CASQDSOC' refers to the canonical CASSCF results. Densities with the NEVPT2 diagonal energies are maked as 'TDens-CASPTQDSOC'. And finally the density using the QD-NEVPT2 revised reference wavefunction contain the string 'Tdens-CAS-DPDICPT2QDSOC'.</p>
+<pre><code>Á Warning Densities with the 'MO' substring in the prefix should be ignored as they are intermediates.</code></pre>
+<h2>3.13.15 CASSCF Properties</h2>
+<p>The CASSCF program is able to calculate UV transition, CD spectra, SOC, SSC, Zeeman splittings, EPR g-matrices and A-matrices (the latter implemented in the same way as in the DCD-CAS(2) method[432]), magnetization, magnetic susceptibility and MCD spectra. Note that the results for the Fermi contact contribution to A will not be reliable if the spin density is dominated by spin polarization, which is a dynamic correlation effect. The properties are exercised in more detail in the CASSCF tutorial.</p>
+<p>In ORCA, the UV/CD spectra are computed using via the one photon spectrocopy tool . A few selected properties, such as the Zeeman splitting, are available through linear response described in the section CASSCF Linear Response . The majority of magnetic properties are computed in the framework of quasi-degenrate perturbation theory , which is also used in the orca_mrci program. Input and keywords mimic the ones in the MRCI module described in section Section 3.19.14. As an example, the input file to calculate g-values and HFC constants A of CO + is listed below:</p>
+<pre><code>!TZVPP Bohrs TightSCF #TightSCF for more accurate integrals %casscf nel 9 norb 8 nroots 9 mult 2 switchstep NR</code></pre>
+<p>(continues on next page)</p>
+<pre><code>etol 1e-7 #reset energy convergence rel dosoc true #spin-orbit coupling (and ZFS) gtensor true amatrix true amatrixnuc 0,1 end end * xyz 1 2 C 0 0 0.0 O 0 0 2.3504 *</code></pre>
+<p>In addition to pseudo-spin 1/2 A-tensors for individual Kramers doublets, the CASSCF module also features the calculation of 'intrinsic' HFC A-tensors for the whole lowest nonrelativistic spin multiplet in the effective Hamiltonian approach.[455]</p>
+<p>In contrast to the MRCI module, the CASSCF module also supports the calculation of susceptibility tensors at nonzero magnetic fields. The corresponding keywords are</p>
+<pre><code>... %casscf ... rel dosoc true dosusceptibility true susctensor_nfields 2 # number of user-defined magnetic␣ ↪ → fields susctensor_magfields[0] = 35000,0,0 # 1st user-defined magnetic field susctensor_magfields[1] = 70000,0,0 # 2nd user-defined magnetic field end end</code></pre>
+<p>This example input calculates the susceptibility tensor at the two (vector-valued!) magnetic fields (35000,0,0) and (70000,0,0) (in Gauss). Note that for practical reasons it is necessary to specify the number of user-defined magnetic fields using the keyword susctensor_nfields .</p>
+<p>Until ORCA 4.0 it was possible to access spin-spin couplings only via running CAS-CI type calculations in MRCI. Converged CASSCF orbitals can be read setting the following flags</p>
+<pre><code>!MOREAD NOITER ALLOWRHF TZVPP TightSCF Bohrs %moinp "convergedCASSCF.gbw" %mrci ... TPre 0.0 citype mrci newblock 2 * excitations none refs CAS(9,8) end end soc DoSSC true # spin-spin coupling DoSOC true # spin-orbit coupling ... end end * xyz 1 2 C 0 0 0.0</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>O 0 0 2.3504 *</code></pre>
+<p>Starting with ORCA 4.1, spin-spin couplings are also directly accessible in the CASSCF module via the keyword DoSSC true in the rel subblock. Note that the calculation of SSC requires the definition of an auxiliary basis set ( AuxC auxiliary basis set slot), since it is only implemented in conjunction with RI integrals. A common way to introduce dynamical correlation for the property computation, is to replace the energies entering the quasi-degenerate perturbation theory. If the NEVPT2 energy correction is computed in CASSCF, there will be additional printings where CASSCF energies are replaced by the more accurate NEVPT2 values. Alternatively, these diagonal energies can be taken from the input file similarly how it is described for the MRCI module. A more detailed documentation is presented in the MRCI property section.</p>
+<ul>
+<li style="list-style-type: '· ';">The program does NOT print the SOC matrix by default! To obtain SOCMEs at the CASSCF/NEVPT2/… levels, please set the PrintLevel in the rel block to at least 2.</li>
+</ul>
+<h2>3.13.16 1- and 2-shell Abinitio Ligand Field Theory (AILFT)</h2>
+<p>Starting from ORCA 5.0, ORCA features a 1- and 2-shell AILFT module. AILFT was originally developed for 1shell d- and f- LFT problems [433, 434]. In ORCA 5.0 an extenion to 2-shell AILFT was devloped by increasing the parameter space of the LFT hamiltonian. This provides access to all common 1- and 2-shell AILFT problems namely:</p>
+<ol>
+<li style="list-style-type: '1. ';">Valence LFT problems, involving the d-, f-, sp-, ds- and df-shells</li>
+<li style="list-style-type: '2. ';">Core LFT problems involving the sd-, pd-, sf- and pf-shells become readily accesible.</li>
+</ol>
+<p>(Note: Since ORCA 6.1 it is also possible to project the ab initio hamiltonian of an extended active space calculation onto the 1-shell AILFT problem. This way one recover improved 1-shell parameters without introducing new parameters. This is covered in detail in the subsequent section.)</p>
+<p>Requesting an CAS-AILFT calcultion withing the CASSCF module is provided in two ways:</p>
+<ol>
+<li style="list-style-type: '1. ';">Through the ActOrbs xOrbs keywords (e.g. xOrbs: dOrbs, fOrbs spOrbs, psOrbs, sdOrbs, dsOrbs, sfOrbs, fsOrbs, pdOrbs, dpOrbs, pfOrbs, fpOrbs, dfOrbs, fdOrbs)</li>
+<li style="list-style-type: '2. ';">Through the LFTCase keyword where particular LFT problems can be requested according to the above 1and 2-shell combinations (e.g. LFTCase 3d, LFTCase 4f, LFTCase 1s3d, LFTCase 2p3d …)</li>
+</ol>
+<p>Note: that the LFTCase keyword overwrites the ActOrbs keyword and as it will be discussed below provides a particular utility that simplifies the 2-shell AILFT input.</p>
+<p>A simple input for the Ni 2+ d 8 ion is provided below:</p>
+<pre><code>!NEVPT2 def2-SVP def2-SVP/C %casscf nel 8 norb 5 ActOrbs dOrbs mult 3,1 nroots 10,15 rel dosoc true end end *xyz 2 3 Ni 0.0000000000 0.0000000000 0.0000000000 *</code></pre>
+<p>(continued from previous page)</p>
+<p>The programm after the CASSCF convergence will undergo few important steps and sanity checks which involve</p>
+<ol>
+<li style="list-style-type: '1. ';">an Orbital purification step</li>
+<li style="list-style-type: '2. ';">a Phase correction of the 1 and 2-electron integrals</li>
+</ol>
+<p>It is then important from the user's perspective to monitor that these steps have been succesfully performed. The relevant parts of the output are provided below:</p>
+<pre><code>----THE CAS-SCF GRADIENT HAS CONVERGED ------- FINALIZING ORBITALS -------DOING ONE FINAL ITERATION FOR PRINTING ------ d-orbitals (depends on the molecular axis frame) L-Center: 0 Ni [0.000, 0.000, 0.000] --- The active space contains 5 d Orbitals : OK Setting 9 active MO to AO dz2 (11) Setting 10 active MO to AO dxz (12) Setting 11 active MO to AO dyz (13) Setting 12 active MO to AO dx2y2 (14) Setting 13 active MO to AO dxy (15) --- Canonicalize Internal Space --- Canonicalize External Space ... ============================= AB INITIO LIGAND FIELD THEORY d8 configuration 2 CI blocks MOs 9 to 13 ============================= Metal/Atom center is atom 0 orbital phases = 1.0 1.0 1.0 1.0 1.0 Metal/Atom d-orbital parts of active orbitals Shell 7 9 10 11 12 13 dz2 : 0.848522 -0.000000 0.000000 -0.000000 -0.000000 dxz : -0.000000 0.848522 0.000000 -0.000000 0.000000 dyz : 0.000000 0.000000 0.848522 -0.000000 -0.000000 dx2y2 : -0.000000 -0.000000 -0.000000 0.848522 0.000000 dxy : -0.000000 0.000000 -0.000000 0.000000 0.848522 Shell 8 9 10 11 12 13 dz2 : 0.300072 0.000000 -0.000000 0.000000 0.000000 dxz : 0.000000 0.300072 -0.000000 0.000000 -0.000000 dyz : -0.000000 -0.000000 0.300072 0.000000 0.000000 dx2y2 : 0.000000 0.000000 0.000000 0.300072 -0.000000 dxy : 0.000000 -0.000000 0.000000 -0.000000 0.300072 Adjusting phases of one-electron integrals ... done Adjusting phases of two-electron integrals ... done</code></pre>
+<p>In a subsequent step the program will</p>
+<ol>
+<li style="list-style-type: '1. ';">compute the AI Hamiltonian</li>
+<li style="list-style-type: '2. ';">construct the parameterized LFT Hamiltonian</li>
+<li style="list-style-type: '3. ';">and perform the fit</li>
+</ol>
+<p>The relevant output can be seen below:</p>
+<pre><code>Calculating ab initio Hamiltonian matrices ... ------------------------------------------------------------NRoots (NEVPT2) for this block = 10 NEVPT2 correction for this block is calculated Full NEVPT2 Hamiltonian constructed Full NEVPT2 Hamiltonian diagonalized ------------------------------------------------------------------------------------------------------------------------NRoots (NEVPT2) for this block = 15 NEVPT2 correction for this block is calculated Full NEVPT2 Hamiltonian constructed Full NEVPT2 Hamiltonian diagonalized ------------------------------------------------------------Calculating fit matrices ... done Fitting ... done</code></pre>
+<p>In following the fitted 1-electron energies and SCP parameters also Racah parameters for 1-shells will be printed at the CASSCF and NEVPT2 levels of theory</p>
+<pre><code>------------------------------AILFT MATRIX ELEMENTS (CASSCF) --------------------------------Ligand field one-electron matrix VLFT (a.u.) : Orbital dz2 dxz dyz dx2-y2 dxy dz2 -8.111733 -0.000000 -0.000000 0.000000 -0.000000 dxz -0.000000 -8.111733 -0.000000 -0.000000 0.000000 dyz -0.000000 -0.000000 -8.111733 -0.000000 0.000000 dx2-y2 0.000000 -0.000000 -0.000000 -8.111733 -0.000000 dxy -0.000000 0.000000 0.000000 -0.000000 -8.111733 -------------------------------------------------Slater-Condon Parameters (electronic repulsion) : -------------------------------------------------F0dd(from 2el Ints) = 0.980960738 a.u. = 26.693 eV = 215296.0 cm**-1␣ ↪ → (fixed) F2dd = 0.451725025 a.u. = 12.292 eV = 99142.2 cm**-1 F4dd = 0.280604669 a.u. = 7.636 eV = 61585.6 cm**-1 -------------------Racah Parameters : -------------------A(F0dd from 2el Ints) = 0.949782441 a.u. = 25.845 eV = 208453.2 cm**-1 B = 0.006037419 a.u. = 0.164 eV = 1325.1 cm**-1 C = 0.022270212 a.u. = 0.606 eV = 4887.7 cm**-1 C/B = 3.689 ------------------------------------------------------------------------------------------------------------------------The ligand field one electron eigenfunctions: -----------------------------------------Orbital Energy (eV) Energy(cm-1) dz2 dxz dyz dx2-y2 ␣ ↪ → dxy 1 0.000 0.0 -0.999978 -0.000164 -0.001934 0.005783 -0. ↪ → 002568 2 0.000 0.0 -0.005768 -0.000269 -0.000262 -0.999967 -0. ↪ → 005788 3 0.000 0.0 0.002600 0.000424 0.001046 0.005773 -0. ↪ → 999979 4 0.000 0.0 0.000241 -0.999246 -0.038831 0.000280 -0. ↪ → 000462 5 0.000 0.0 0.001930 0.038832 -0.999243 0.000246 -0. ↪ → 001022</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<h2>Note that:</h2>
+<ul>
+<li style="list-style-type: '· ';">At the CASSCF level F0 (and subsequently racah A) is computed from CASSCF 2-electron coulomb integrals</li>
+<li style="list-style-type: '· ';">On the other hand at the NEVPT2 level F0 is not defined hence F0 and racah A are not printed. Below an alternative using the effective Slater exponnets will be provided.</li>
+<li style="list-style-type: '· ';">The LFT orbitals are saved in *.lft.gbw files which can be processed by the orca_plot to generate orbital visualization files.</li>
+</ul>
+<p>AILFT provides a Fit quality analysis (see the original paper [433, 434])</p>
+<p>Note: That at the CASSCF level the AI matrix of free atoms and ions is exactly parameterized in the chosen LFT parameterization scheme. As a result the RMS AI-LFT fitting errors is expected to be practically zero. This is not the case when a correlation treatment is chosen like NEVPT2 and the errors are expected to be somewhat larger.</p>
+<p>The above is shown below:</p>
+<table><tbody><tr><th colspan="5">Calculating statistical</th><th colspan="5">parameters</th><th colspan="6">... done</th></tr><tr><th colspan="4">Reference energy Reference energy</th><th>AI-LFT AI</th><th>= =</th><th colspan="5">-38.134150221 -38.134150221</th><td>au au</td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><th>AB INITIO</th><th>AND</th><th colspan="5">------------------------------------------------</th><td></td><td></td><td></td></tr><tr><th>COMPARISON</th><td></td><th>OF</th><td></td><td></td><th>LIGAND</th><th>FIELD</th><th>RESULTS</th><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><th>------------------------------------------------</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>--------- AI-Root</td><td>0: eV</td><td>E(AI)=</td><td></td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>0:</td><td>0.000</td><td>eV</td><td>S= 0.998</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>1:</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>1:</td><td>0.000</td><td>eV</td><td>S= 0.981</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV 2:</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>2:</td><td>0.000</td><td>eV</td><td>S= 0.980</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root ↪ → 0.000</td><td>eV 3: eV</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>3:</td><td>0.000</td><td>eV</td><td>S= 0.773</td><td>Delta=</td><td>␣</td></tr><tr><td>AI-Root 0.000</td><td>4: eV</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>4:</td><td>0.000</td><td>eV</td><td>S= 0.774</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → AI-Root 0.000</td><td>5:</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>5:</td><td></td><td>0.000 eV</td><td>S= 0.985</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → AI-Root</td><td>eV 6:</td><td></td><td>E(AI)=</td><td>0.000</td><td>eV</td><td>-&gt; LF-Root</td><td>6:</td><td>0.000</td><td>eV</td><td>S= 0.986</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV 7:</td><td></td><td>E(AI)=</td><td>2.464</td><td>eV</td><td>-&gt; LF-Root</td><td>7:</td><td>2.464</td><td>eV</td><td>S= 0.998</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root ↪ → 0.000</td><td>eV</td><td>8:</td><td>E(AI)=</td><td>2.464</td><td>eV</td><td>-&gt; LF-Root</td><td>8:</td><td>2.464</td><td>eV</td><td>S= 0.998</td><td>Delta=</td><td>-</td></tr><tr><td>AI-Root ↪ 0.000</td><td>eV 9: eV</td><td>E(AI)=</td><td></td><td>2.464</td><td>eV</td><td>-&gt; LF-Root</td><td>9:</td><td></td><td>2.464 eV</td><td>S= 1.000</td><td>Delta=</td><td>-</td></tr><tr><th>→ RMS error</th><td></td><th>this</th><th>block</th><th>=</th><td></td><th>0.000 eV =</th><th>0.0</th><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>for</th><td></td><td></td><td></td><td></td><td></td><th>cm**-1</th><td></td><td></td><td></td><td></td></tr><tr><th>Block</th><th>2</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>--------- AI-Root ↪ 0.000</td><td>0: eV</td><td></td><td>E(AI)=</td><td>2.033</td><td>eV</td><td>-&gt; LF-Root</td><td>0:</td><td>2.033</td><td>eV</td><td>S= 1.000</td><td>Delta=</td><td>-</td></tr><tr><td>→ AI-Root 0.000</td><td>1: eV</td><td></td><td>E(AI)=</td><td>2.033</td><td>eV</td><td>-&gt; LF-Root</td><td>1:</td><td>2.033</td><td>eV</td><td>S= 1.000</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → AI-Root</td><td>2:</td><td></td><td>E(AI)=</td><td>2.033</td><td>eV</td><td>-&gt; LF-Root</td><td>2:</td><td>2.033</td><td>eV</td><td>S= 0.903</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV 3:</td><td></td><td>E(AI)=</td><td>2.033</td><td>eV</td><td>-&gt; LF-Root</td><td>3:</td><td>2.033</td><td>eV</td><td>S= 0.967</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV 4:</td><td></td><td>E(AI)=</td><td>2.033</td><td>eV</td><td>-&gt; LF-Root</td><td>4:</td><td>2.033</td><td>eV</td><td>S= 0.935</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV 5:</td><td></td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>5:</td><td>3.183</td><td>eV</td><td>S= 0.996</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root</td><td>eV</td><td>6:</td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt;</td><td>6:</td><td>3.183</td><td>eV</td><td>S= 0.999</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root ↪ 0.000</td><td>eV 7:</td><td></td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>LF-Root -&gt; LF-Root</td><td>7:</td><td>3.183</td><td>eV</td><td>S= 0.996</td><td>Delta=</td><td>-</td></tr><tr><td>→ AI-Root</td><td>eV 8:</td><td></td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>8:</td><td>3.183</td><td>eV</td><td>S= 0.999</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → AI-Root ↪</td><td>eV</td><td>9:</td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td></td><td></td><td>eV</td><td>S= 0.999</td><td>Delta=</td><td>-</td></tr><tr><td>0.000 → 0.000 AI-Root</td><td>10:</td><td>eV E(AI)=</td><td></td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>9: 10:</td><td>3.183</td><td>3.183 eV</td><td>S= 0.995</td><td>Delta=</td><td>-</td></tr><tr><td>↪ → 0.000 AI-Root ↪ → 0.000</td><td>eV 11:</td><td></td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>11:</td><td>3.183</td><td>eV</td><td>S= 0.992</td><td>Delta=</td><td>-</td></tr><tr><td>AI-Root ↪ → 0.000</td><td>eV 12:</td><td></td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>12:</td><td>3.183</td><td>eV</td><td>S= 0.999</td><td>Delta=</td><td>-</td></tr><tr><td>AI-Root</td><td>eV</td><td>13:</td><td>E(AI)=</td><td>3.183</td><td>eV</td><td>-&gt; LF-Root</td><td>13:</td><td>3.183</td><td>eV</td><td>S= 0.996</td><td>Delta=</td><td>-</td></tr></tbody></table>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

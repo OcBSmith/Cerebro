@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part067</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>V.GetDouble()</h2>
+<p>This function works on a variable. It will return a double value in case the variable is integer or double. In all other cases the program will crash providing a relevant message.</p>
+<h2>Syntax:</h2>
+<p>myVar.GetDouble();</p>
+<p>where:</p>
+<p>myVar is an already initialized variable.</p>
+<h2>Example</h2>
+<pre><code># ----------------------------------------------------# This is an example script for # Variable functions # -----------------------------------------------------%Compound Variable double=1.0; Variable integer=2; Variable iToBool = integer.GetBool(); Variable boolean=false; print("----------------------------------------\n"); print(" Results for translation functions \n"); print("Double to integer : %d (it should print 1)\n", double.GetInteger()); print("Integer to double : %.2lf (it should print 2.00)\n", integer. ↪ → GetDouble()); print("Boolean to string : %s (it should print FALSE)\n", boolean. ↪ → GetString()); print("Integer to boolean : %s (it should print TRUE)\n", iToBool. ↪ → GetString()); print("Double to string : %s (it should print 1.00000000000000000000e+00)\n ↪ → ", double.GetString()); print("Integer to string : %s (it should print 2)\n", integer.GetString()); End</code></pre>
+<h2>V.GetInteger()</h2>
+<p>This function works on a variable. It will return an integer value in case the variable is integer or double. In all other cases the program will crash providing a relevant message.</p>
+<h2>Syntax:</h2>
+<p>myVar.GetInteger();</p>
+<p>where:</p>
+<p>myVar is an already initialized variable.</p>
+<h2>Example</h2>
+<pre><code># ----------------------------------------------------# This is an example script for # Variable functions # -----------------------------------------------------%Compound Variable double=1.0; Variable integer=2; Variable iToBool = integer.GetBool(); Variable boolean=false;</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>print("----------------------------------------\n"); print(" Results for translation functions \n"); print("Double to integer : %d (it should print 1)\n", double.GetInteger()); print("Integer to double : %.2lf (it should print 2.00)\n", integer. ↪ → GetDouble()); print("Boolean to string : %s (it should print FALSE)\n", boolean. ↪ → GetString()); print("Integer to boolean : %s (it should print TRUE)\n", iToBool. ↪ → GetString()); print("Double to string : %s (it should print 1.00000000000000000000e+00)\n ↪ → ", double.GetString()); print("Integer to string : %s (it should print 2)\n", integer.GetString()); End</code></pre>
+<h2>V.GetSize()</h2>
+<p>This function works on a variable. If the variable is a scalar it will return 1. If the variable is a 1-Dimensional array it will return the size of the array which is the same with the GetDim1() . If the variable is a 2-Dimensional array it will return the results Dim1*Dim2.</p>
+<h2>Syntax:</h2>
+<p>myVar.GetSize();</p>
+<p>where:</p>
+<p>myVar is an already initialized variable.</p>
+<h2>Example</h2>
+<pre><code># ----------------------------------------------------# This is an example script for # Variable functions # -----------------------------------------------------%Compound Variable dim1, dim2, size; Variable A; Variable B[3]; Variable C[3][2]; print("----------------------------------------\n"); print(" Results for scalar \n"); print("Dim1 : %d (it should print 1)\n", A.GetDim1()); print("Dim2 : %d (it should print 1)\n", A.GetDim2()); print("Size : %d (it should print 1)\n", A.GetSize()); print("----------------------------------------\n"); print(" Results for 1D-Array \n"); print("Dim1 : %d (it should print 3)\n", B.GetDim1()); print("Dim2 : %d (it should print 1)\n", B.GetDim2()); print("Size : %d (it should print 3)\n", B.GetSize()); print("----------------------------------------\n"); print(" Results for 2D-Array \n"); print("Dim1 : %d (it should print 3)\n", C.GetDim1()); print("Dim2 : %d (it should print 2)\n", C.GetDim2()); print("Size : %d (it should print 6)\n", C.GetSize()); End</code></pre>
+<h2>V.GetString()</h2>
+<p>This function works on a variable. It will return a string of the value of the variable. It works for doubles, integers and booleans.</p>
+<h2>Syntax:</h2>
+<p>myVar.GetString();</p>
+<p>where:</p>
+<p>myVar is an already initialized variable.</p>
+<h2>Example</h2>
+<pre><code># ----------------------------------------------------# This is an example script for # Variable functions # -----------------------------------------------------%Compound Variable double=1.0; Variable integer=2; Variable iToBool = integer.GetBool(); Variable boolean=false; print("----------------------------------------\n"); print(" Results for translation functions \n"); print("Double to integer : %d (it should print 1)\n", double.GetInteger()); print("Integer to double : %.2lf (it should print 2.00)\n", integer. ↪ → GetDouble()); print("Boolean to string : %s (it should print FALSE)\n", boolean. ↪ → GetString()); print("Integer to boolean : %s (it should print TRUE)\n", iToBool. ↪ → GetString()); print("Double to string : %s (it should print 1.00000000000000000000e+00)\n ↪ → ", double.GetString()); print("Integer to string : %s (it should print 2)\n", integer.GetString()); End</code></pre>
+<h2>V.PrintMatrix()</h2>
+<p>This function works on variables. It will print print an array on a format with 8 columns.</p>
+<p>Syntax: myVar.PrintMatrix([NCols=numOfColumns]);</p>
+<p>where:</p>
+<p>myVar is an already initialized variable.</p>
+<p>numOfColumns is the desired number of columns for the printing. This is not obligatory and if not used then by default ORCA will print using 4 columns.</p>
+<h2>Example</h2>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------# A script to check PrintMatrix # ----------------------------------------------%Compound Variable Dim1 = 5; Variable Dim2 = 16; Variable x[Dim1][Dim2]; for i from 0 to Dim1-1 Do</code></pre>
+<p>(continues on next page)</p>
+<pre><code>for j from 0 to Dim2-1 Do x[i][j] = i+j; EndFor; EndFor; x.PrintMatrix(); # This should print with 4 columns x.PrintMatrix(NCols=8); # This should print with 8 columns EndRun</code></pre>
+<p>NOTE In case of scalars it will only print the header without any values.</p>
+<p>NOTE It only works for arrays of type 'double' or type 'integer' . With all variables of other types the program will exit providing an error message.</p>
+<h2>With</h2>
+<p>The purpose of the 'with' command is to add the ability to call compound while adjusting some of the variables that are already defined in the compound file. This means that if there is a variable defined in the compound file and a value is assigned to it, we can during the call change the assigned value of this variable.</p>
+<p>One can pass numbers, string or boolean variables.</p>
+<p>It should be noted that it is not possible to call array variables this way. Beside this restriction, the syntax of the variable assignment in the case of with is the same with the variable assignment in a normal Compound script.</p>
+<p>An important note here is that in case we use the With command the %Compound block should end with an 'End' even if we call a Compound script file.</p>
+<h2>Syntax:</h2>
+<pre><code>%compound 'filename' With var1 = val1 ; var2 = val2 ; End Example:</code></pre>
+<pre><code># -------------------------------------------------------------# This is to check all available ways of variable assignement # in combination with the 'with' calls. # -------------------------------------------------------------# ---------------------------------# Some necessary initial definitions # ----------------------------------Variable x1, x2, x3, x4; # -----------------------------------# Now the assignments # -----------------------------------#Scalars doubles x1 = 1.0; #Scalars integers x2 = 1; #Scalars strings x3 = "test"; #Scalars bools x4 = True; print( " ---------------------------------------------\n"); print( " -------SUMMARY OF WITH ASSIGNMENTS --------\n"); print( " ---------------------------------------------\n"); print( " The calling input:\n");</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>print("%Compound \"0975.cmp\"\n"); print(" with\n"); print(" x1 = 3.0;\n"); print(" x2 = 2;\n"); print(" x3 = \"with\";\n"); print(" x4 = False;\n"); print("end\n"); print( " ----------------Scalars --------------------\n"); print( " x1 (1.0) : %.2lf\n", x1); print( " x2 (1) : %d\n", x2); print( " x3 (\"test\") : %s\n", x3); print( " x4 (True) : %s\n", x4.GetString()); #print( " x6 : %s\n", x6); #if (x4) then # print(" x4 : TRUE\n"); #else # print(" x4 : FALSE\n"); #endIfo End</code></pre>
+<h2>Write2File</h2>
+<p>With the Print command (see Print ) one can write in the ORCA output. Nevertheless it might be that one would prefer to write to a different file. In Compound one can achieve this using the write2File command. The syntax follows closely the syntax of 'fprintf' command of the programming language C. The arguments definition and the syntax is identical with the syntax of the Compound 'Print' command with the addition that one should define a file object to send the printing.</p>
+<h2>Syntax:</h2>
+<p>Write2File(file variable, format string, [variables]);</p>
+<p>Where:</p>
+<p>file variable: is a predefined variable corresponding to an already open, through the OpenFile command, file.</p>
+<p>format string and variables follow exactly the syntax of the Print command, so for more details please refere to section Print .</p>
+<p>NOTE Please remember once everything is writen to the file to close the file, using the CloseFile command (see CloseFile ).</p>
+<h2>Example:</h2>
+<pre><code>%Compound # -------------------------------------------------------------# This is to check all available write2String and # write2File options # -------------------------------------------------------------Variable xS = "test_"; Variable xI = 1; Variable final; Variable fp; Variable myFilename = "0955.txt"; #Create also a file object fp = OpenFile(myFilename, "w"); write2String(final, " -----Test ----- \n"); write2File(fp, "%s", final); CloseFile(fp);</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>print( " ---------------------------------------------\n"); print( " ------SUMMARY OF WRITE2STRING AND ---------\n"); print( " ------WRITE2FILE --------- \n"); print( " ---------------------------------------------\n"); write2String(final, "%s", "constant" ); print( " Final : %s\n", final); write2String(final,"%s", "constant" ); #No space before the quotation marks print( " Final : %s\n", final); write2String(final, "%s", "constant" ); #More than one spaces before print( " Final : %s\n", final); write2String(final," %s", "constant" ); #No spaces before but more␣ ↪ → afterwards print( " Final : %s\n", final); write2String(final, " %s", "constant" ); #More spaces before and more␣ ↪ → afterwards print( " Final : %s\n", final); write2String(final, "%s", xS); print( " Final : %s\n", final); write2String(final, "%s_%d", xS, xI); print( " Final : %s_%d\n", final, xI); write2String(final, "%s_%d", xS,2*xI+1); print( " Final : %s\n", final); End</code></pre>
+<h2>Write2String</h2>
+<p>In case one needs to construct a string using some variables, Compound provides the Write2String command. The syntax of the command is identical with the Write2File (see Write2File ) command with the only exception that instead of a file we should provide the name of a variable that is already declared in the file. The syntax of the format and the variables used is identical with the Print command (please refer to Print . )</p>
+<h2>Syntax:</h2>
+<p>Write2String(variable, format string, [variables]);</p>
+<p>where:</p>
+<p>variable: is the name of a variable that should already be declared.</p>
+<p>format string and variables follow exactly the syntax of the Print command, so for more details please refer to section Print .</p>
+<h2>Example:</h2>
+<pre><code>%Compound # -------------------------------------------------------------# This is to check all available write2String and # write2File options # -------------------------------------------------------------Variable xS = "test_"; Variable xI = 1; Variable final; Variable fp; Variable myFilename = "0955.txt"; #Create also a file object fp = OpenFile(myFilename, "w"); write2String(final, " -----Test ----- \n"); write2File(fp, "%s", final); CloseFile(fp);</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>print( " ---------------------------------------------\n"); print( " ------SUMMARY OF WRITE2STRING AND ---------\n"); print( " ------WRITE2FILE --------- \n"); print( " ---------------------------------------------\n"); write2String(final, "%s", "constant" ); print( " Final : %s\n", final); write2String(final,"%s", "constant" ); #No space before the quotation marks print( " Final : %s\n", final); write2String(final, "%s", "constant" ); #More than one spaces before print( " Final : %s\n", final); write2String(final," %s", "constant" ); #No spaces before but more␣ ↪ → afterwards print( " Final : %s\n", final); write2String(final, " %s", "constant" ); #More spaces before and more␣ ↪ → afterwards print( " Final : %s\n", final); write2String(final, "%s", xS); print( " Final : %s\n", final); write2String(final, "%s_%d", xS, xI); print( " Final : %s_%d\n", final, xI); write2String(final, "%s_%d", xS,2*xI+1); print( " Final : %s\n", final); End</code></pre>
+<h2>8.3.2 List of known Properties</h2>
+<p>The name and a sort explanation of all the known variables that can be automatically recovered, from the property file, are given in the next table</p>
+<figure><figcaption><div class="caption">Table 8.2: Variables, known to the compound block, with short e</div></figcaption></figure>
+<table><tbody><tr><td>====================================== ====================================== ====================================== ++++++++++++++++++++++++++++++++++++++ AUTOCI_REF_ENERGY AUTOCI_CORR_ENERGY AUTOCI_TOTAL_ENERGY ++++++++++++++++++++++++++++++++++++++ AUTOCI_NUCLEAR_GRADIENT AUTOCI_NUCLEAR_GRADIENT_NORM AUTOCI_NUCLEAR_GRADIENT_ATOM_NUMBERS ++++++++++++++++++++++++++++++++++++++ AUTOCI_DIPOLE_MAGNITUDE AUTOCI_DIPOLE_ELEC_CONTRIB AUTOCI_DIPOLE_NUC_CONTRIB AUTOCI_DIPOLE_TOTAL SCF_ENERGY ++++++++++++++++++++++++++++++++++++++</td><td>=============================================== ==========================================AUTO =============================================== ++++++++++++++++++++++++++++++++++++++Energies+++ AutoCI Reference Energy AutoCI Correlatioin Energy AutoCI Total Energy +++++++++++++++++++++++++++++++++++ ENERGY Gradie AutoCI Energy nuclear gradient AutoCI Norm of the nuclear gradient AutoCI The atomic numbers of the atoms in the gradient +++++++++++++++++++++++++ Electric Properties (Dipole mo AutoCI The value of the dipole moment AutoCI The electronic contribution to the dipole moment AutoCI The nuclear contribution to the dipole moment AutoCI The total dipole moment SCF Energy ++++++++++++++++++++++++ Electric Properties (Polarizability</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><td>AUTOCI_QUADRUPOLE_MOMENT_ISOTROPIC AUTOCI_QUADRUPOLE_MOMENT_DIAG_TENSOR AUTOCI_QUADRUPOLE_MOMENT_ELEC_CONTRIB AUTOCI_QUADRUPOLE_MOMENT_NUC_CONTRIB AUTOCI_QUADRUPOLE_MOMENT_TOTAL ++++++++++++++++++++++++++++++++++++++ AUTOCI_D_TENSOR_EIGENVALUES AUTOCI_D_TENSOR_EIGENVECTORS AUTOCI_D_TENSOR_RAW AUTOCI_D_TENSOR_D AUTOCI_D_TENSOR_E AUTOCI_D_TENSOR_MULTIPLICITY ++++++++++++++++++++++++++++++++++++++ AUTOCI_G_TENSOR_RAW AUTOCI_G_TENSOR_ELEC AUTOCI_G_TENSOR_TOT AUTOCI_G_TENSOR_ISO AUTOCI_G_TENSOR_ORIENTATION SCF_ENERGY VDW_CORRECTION</td><td>AutoCI The quadrupole moment isotropic value AutoCI The quadrupole moment diagonalized tensor AutoCI The elctronic contribution to the quadrupole moment tensor AutoCI The nuclear contribution to the quadrupole moment tensor AutoCI The total quadrupole moment ++++++++++++++++++++++++++ Magnetic Properties (D Tenso AutoCI The D Tensor eigenvalues AutoCI The D Tensor eigenvectors AutoCI The Raw D Tensor AutoCI The final D value for the D Tensor AutoCI The final E value for the D Tensor AutoCI The spin-multiplicity used for the D Tensor calculation ++++++++++++++++++++++++++ Magnetic Properties (G Tenso AutoCI The Raw G Tensor AutoCI The Electronic part of the G Tensor AutoCI The Total G Tensor AutoCI The isotropic g value AutoCI The G Tensor orientation (eigenvectors) SCF Energy van der Waals correction</td></tr><tr><th>SCF Electric properties</th><td></td></tr><tr><td>SCF_DIPOLE_MAGNITUDE. SCF_DIPOLE_ELEC_CONTRIB SCF_DIPOLE_NUC_CONTRIB SCF_DIPOLE_TOTAL SCF_QUADRUPOLE_ISOTROPIC SCF_QUADRUPOLE_DIAG_TENSOR SCF_QUADRUPOLE_ELEC_CONTRIB SCF_QUADRUPOLE_NUC_CONTRIB SCF_QUADRUPOLE_TOTAL SCF_POLAR_ISOTROPIC SCF_POLAR_RAW</td><td>SCF dipole moment (debye) SCF Electronic contribution to dipole moment SCF Nuclear contribution to dipole moment SCF Total dipole moment SCF isotropic quadrupole moment SCF quadrupole moment diagonalised tensor SCF electronic contribution to the quadrupole moment SCF nuclear contribution to the quadrupole moment SCF total quadrupole moment SCF isotropic polarizability SCF polarizability raw tensor</td></tr><tr><th>DBOC Energy Correction</th><th>The Diagonal Born-Oppenheimer energy correction</th></tr><tr><td>DFT_NUM_OF_ALPHA_EL DFT_NUM_OF_BETA_EL DFT_NUM_OF_TOTAL_EL</td><td>Number of alpha electrons Number of beta electrons Total number of electrons</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><td colspan="2">MP2</td></tr><tr><td>MP2 Electric properties MP2_DIPOLE_MAGNITUDE. MP2_DIPOLE_ELEC_CONTRIB MP2_DIPOLE_NUC_CONTRIB MP2_DIPOLE_TOTAL MP2_QUADRUPOLE_ISOTROPIC MP2_QUADRUPOLE_DIAG_TENSOR MP2_QUADRUPOLE_ELEC_CONTRIB</td><td>Reference SCF Energy MP2 Correlation energy MP2 dipole moment (debye)</td></tr><tr><td>MP2_REF_ENERGY MP2_CORR_ENERGY</td><td></td></tr><tr><td>MP2_TOTAL_ENERGY</td><td>Total Energy (SCF + MP2)</td></tr><tr><td>MP2_QUADRUPOLE_TOTAL MP2_POLAR_ISOTROPIC MP2_POLAR_RAW MP2_POLAR_DIAG_TENSOR MDCI MDCI_REF_ENERGY MDCI_CORR_ENERGY MDCI_TOTAL_ENERGY MDCI_DTRIPLET_CORR_ENERGY MDCI_SSINGLET_CORR_ENERGY MDCI_STRIPLET_CORR_ENERGY MDCI_TRIPLES_ENERGY MDCI_ALL_ELECTRONS MDCI_CORR_ELECTRONS MDCI_CORR_ALPHA_ELECTRONS</td><td>tensor MP2 electronic contribution to the quadrupole moment MP2 nuclear contribution to the quadrupole moment MP2 total quadrupole moment MP2 isotropic polarizability MP2 polarizability raw tensor MP2 diagonaised polarizability tensor Reference SCF Energy Total Correlation Energy Total Energy (SCF + Correlation) Correlation energy from αα electron pairs Correlation energy from ββ electron pairs Correlation energy from αβ electron pairs Correlation energy from singlet electron pairs (only for Correlation energy from triplet electron pairs (only for Correlation energy from singlet electron pairs (only for closed-shell)</td></tr><tr><td></td><td>MP2 Electronic contribution to dipole moment</td></tr><tr><td></td><td>MP2 Nuclear contribution to dipole moment</td></tr><tr><td></td><td>MP2 Total dipole moment</td></tr><tr><td></td><td>MP2 isotropic quadrupole moment</td></tr><tr><td></td><td>MP2 quadrupole moment diagonalised</td></tr><tr><td>MP2_QUADRUPOLE_NUC_CONTRIB</td><td></td></tr><tr><td>MDCI_ALPHA_ALPHA_CORR_ENERGY</td><td></td></tr><tr><td>MDCI_BETA_BETA_CORR_ENERGY</td><td></td></tr><tr><td>MDCI_ALPHA_BETA_CORR_ENERGY</td><td></td></tr><tr><td>MDCI_DSINGLET_CORR_ENERGY</td><td>closed-shell)(</td></tr><tr><td></td><td>closed-shell)</td></tr><tr><td></td><td>Correlation energy from triplet electron pairs (only for closed-shell)</td></tr><tr><td></td><td>Perturbative triples correlation energy</td></tr><tr><td></td><td>Total number of electrons</td></tr><tr><td></td><td>Number of correlated electrons</td></tr><tr><td></td><td>Number of correlated α electrons</td></tr><tr><td>MDCI_CORR_BETA_ELECTRONS</td><td>Number of correlated β electrons</td></tr><tr><td>MDCI Electric properties</td><td></td></tr><tr><td>MDCI_DIPOLE_MAGNITUDE</td><td>MDCI dipole moment (debye)</td></tr><tr><td>MDCI_DIPOLE_ELEC_CONTRIB</td><td>MDCI Electronic contribution to dipole moment</td></tr><tr><td>MDCI_DIPOLE_NUC_CONTRIB</td><td>MDCI Nuclear contribution to dipole moment</td></tr><tr><td>MDCI_DIPOLE_TOTAL</td><td>MDCI Total dipole moment</td></tr><tr><td>MDCI_QUADRUPOLE_ISOTROPIC</td><td>MDCI isotropic quadrupole moment</td></tr><tr><td>MDCI_QUADRUPOLE_DIAG_TENSOR</td><td>MDCI quadrupole moment diagonalised tensor</td></tr><tr><td>MDCI_QUADRUPOLE_ELEC_CONTRIB</td><td>MDCI electronic contribution to the quadrupole moment moment</td></tr><tr><td>MDCI_QUADRUPOLE_NUC_CONTRIB</td><td>MDCI nuclear contribution to the quadrupole MDCI total quadrupole moment</td></tr><tr><td>MDCI_QUADRUPOLE_TOTAL MDCI_POLAR_ISOTROPIC</td><td>MDCI isotropic polarizability</td></tr><tr><td>MDCI_POLAR_RAW</td><td>MDCI polarizability raw tensor</td></tr><tr><td>MDCI_POLAR_DIAG_TENSOR</td><td>MDCI diagonaised polarizability tensor</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><th>CASSCF</th><td></td></tr><tr><td>CASSCF_NUM_OF_MULTS</td><td>The number of CASSCF spin multiplicities</td></tr><tr><td>CASSCF_NUM_OF_IRREPS</td><td>The number of CASSCF irreps</td></tr><tr><td>CASSCF_FINAL_ENERGY</td><td>The CASSCF final energy</td></tr><tr><td>PT2_NUM_OF_MULTS</td><td>The CASPT2 spin multiplicities</td></tr><tr><td>PT2_NUM_OF_IRREPS</td><td>The number of CASPT2 irreps</td></tr><tr><td>PT2_FINAL_ENERGY</td><td>The CASPT2 Energy</td></tr><tr><td>DCDCAS_NUM_OF_MULTS</td><td>The number of DCDCAS spin multiplicities</td></tr><tr><td>DCDCAS_NUM_OF_IRREPS</td><td>The number of DCDCAS irreps</td></tr><tr><td>DCDCAS_FINAL_ENERGY</td><td>The DCDCAS Energy</td></tr><tr><td>CASSCF_ABS_SPECTRUM</td><td>The CASSCF Absorption spectrum</td></tr><tr><td>CASSCF_ABS_SPECTRUM_INFO</td><td>Information about the excitations of the CASSCF spectrum</td></tr><tr><td>CASSCF_ABS_SPECTRUM_NROOTS</td><td>The number of Roots</td></tr><tr><td>CASSCF_CD_SPECTRUM</td><td>The CASSCF CD spectrum</td></tr><tr><td>CASSCF_CD_SPECTRUM_INFO</td><td>Information about the excitations of the CASSCF CD spectrum</td></tr><tr><td>CASSCF_CD_SPECTRUM_NROOTS</td><td>The number or roots</td></tr><tr><td>CASPT2_ABS_SPECTRUM</td><td>The CASPT2 Absorption spectrum</td></tr><tr><td>CASPT2_ABS_SPECTRUM_INFO</td><td>Information about the excitations of the CASPT2 spectrum</td></tr><tr><td>CASPT2_ABS_SPECTRUM_NROOTS</td><td>The number of roots</td></tr><tr><td>CASPT2_CD_SPECTRUM</td><td>The CASPT2 CD spectrum</td></tr><tr><td>CASPT2_CD_SPECTRUM_INFO</td><td>Information about the excitations of the CASPT2 CD spectrum</td></tr><tr><td>CASPT2_CD_SPECTRUM_NROOTS</td><td>The number of roots</td></tr><tr><td>CAS_CUSTOM_ABS_SPECTRUM</td><td>The Custom CASSCF Absorption spectrum</td></tr><tr><td>CAS_CUSTOM_ABS_SPECTRUM_INFO</td><td>Information about the excitations of the custom CASSCF absorption</td></tr><tr><td>CAS_CUSTOM_ABS_SPECTRUM_NROOTS</td><td>The number of roots</td></tr><tr><td>CAS_CUSTOM_CD_SPECTRUM</td><td>The Custom CASSCF CD spectrum excitations</td></tr><tr><td>CAS_CUSTOM_CD_SPECTRUM_INFO</td><td>Information about the of the custom CASSCF CD spectr</td></tr><tr><td>CAS_CUSTOM_CD_SPECTRUM_NROOTS</td><td>The number of roots</td></tr><tr><td>DCDCAS_ABS_SPECTRUM</td><td>The DCDCAS Absorption spectrum</td></tr><tr><td>DCDCAS_ABS_SPECTRUM_INFO</td><td>Information about the excitations of the DCDCAS absorption spectr</td></tr><tr><td>DCDCAS_ABS_SPECTRUM_NROOTS</td><td>The number of roots CASSCF D Tensor eigenvalues</td></tr><tr><td>CASSCF_DTENSOR_EIGENVALUES</td><td></td></tr><tr><td>CASSCF_DTENSOR_D</td><td>D value of CASSCF ZFS</td></tr><tr><td>CASSCF_DTENSOR_E</td><td>E value of CASSCF ZFS</td></tr><tr><td>CASSCF_DTENSOR_MULTIPLICITY</td><td>Spin multiplicity</td></tr><tr><td>CASPT2_DTENSOR_EIGENVALUES</td><td>CASPT2 D Tensor eigenvalues</td></tr><tr><td>CASPT2_DTENSOR_RAW_EIGENVECTORS</td><td>CASPT2 D Tensor raw eigenvectors</td></tr><tr><td>CASPT2_DTENSOR_D</td><td>D value of CASPT2 ZFS</td></tr><tr><td>CASPT2_DTENSOR_E</td><td>E value of CASPT2 ZFS</td></tr><tr><td>CASPT2_DTENSOR_MULTIPLICITY</td><td>Spin multiplicity</td></tr><tr><td>CAS_CUSTOM_DTENSOR_EIGENVALUES</td><td>custom CASSCF D Tensor eigenvalues</td></tr><tr><td>CAS_CUSTOM_DTENSOR_RAW_EIGENVECTORS</td><td>custom CASSCF D Tensor Raw eigenvectors</td></tr><tr><td>CAS_CUSTOM_DTENSOR_D</td><td>D value of custom CASSCF ZFS</td></tr><tr><td>CAS_CUSTOM_DTENSOR_E</td><td>E value of custom CASSCF ZFS</td></tr><tr><td></td><td>Spin multiplicity</td></tr><tr><td>CAS_CUSTOM_DTENSOR_MULTIPLICITY</td><td></td></tr><tr><th>CIPSI</th><td></td></tr><tr><td>CIPSI_SPIN_MULTIPLICITY</td><td>The CIPSI spin multiplicity</td></tr><tr><td>CIPSI_NUM_OF_ROOTS</td><td>The CIPSI number of roots</td></tr><tr><td>CIPSI_FINAL_ENERGY</td><td>The CIPSI Final energy</td></tr><tr><td>CIPSI_ENERGIES</td><td>The CIPSI Energies</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><th>CIS</th><td></td></tr><tr><th>CIS_FINAL_ENERGY</th><td>The final total energy</td></tr><tr><th>CIS_ESCF</th><td>The SCF Energy</td></tr><tr><th>CIS_E0</th><td>The Energy of the ground state</td></tr><tr><th>CIS_ENERGIES</th><td>The singlet energies</td></tr><tr><th>CIS_ENERGIESP1</th><td>The triplet energies</td></tr><tr><th>CIS_MODE</th><td>One of the CIS modes</td></tr><tr><th>CIS_NUM_OF_ROOTS</th><td>The number of roots</td></tr><tr><th>CIS_ROOT</th><td>State to be optimized</td></tr><tr><th>CIS_ABS_SPECTRUM_NROOTS</th><td>The number of roots</td></tr><tr><th>CIS_ABS_SPECTRUM</th><td>The CIS absorption spectrum</td></tr><tr><th>CIS_ABS_SPECTRUM_VELOCITY</th><td>The CIS absorptioin spectrum in velocity representation</td></tr><tr><th>CIS_ABS_SOC_SPECTRUM_NROOTS</th><td>The number or roots</td></tr><tr><th>CIS_ABS_SOC_SPECTRUM</th><td>The CIS absorption spectrum including SOC</td></tr><tr><th>CIS_CD_SPECTRUM_NROOTS</th><td>The number of roots</td></tr><tr><th>CIS_CD_SPECTRUM</th><td>The CIS CD spectrum</td></tr><tr><th>CIS_CD_SOC_SPECTRUM_NROOTS</th><td>The number of roots</td></tr><tr><th>CIS_CD_SOC_SPECTRUM</th><td>The CIS CD spectrum including SOC</td></tr><tr><th>ROCIS</th><td></td></tr><tr><th>ROCIS_STATE</th><td>ROCIS State</td></tr><tr><th>ROCIS_REF_ENERGY</th><td>ROCIS Reference energy</td></tr><tr><th>ROCIS_CORR_ENERGY</th><td>ROCIS correlation energy</td></tr><tr><th>ROCIS_TOTAL_ENERGY</th><td>ROCIS total energy</td></tr><tr><th>ROCIS_ABS_SPECTRUM_NROOTS</th><td>Number of roots</td></tr><tr><th>ROCIS_ABS_SPECTRUM</th><td>ROCIS Absorption spectrum</td></tr><tr><th>ROCIS_ABS_SOC_SPECTRUM_NROOTS</th><td>Number of roots</td></tr><tr><th>ROCIS_ABS_SOC_SPECTRUM</th><td>ROCIS absorption spectrum including SOC</td></tr><tr><th>ROCIS_CD_SPECTRUM_NROOTS</th><td>Number of roots</td></tr><tr><th>ROCIS_CD_SPECTRUM</th><td>ROCIS CD spectrum</td></tr><tr><th>ROCIS_CD_SOC_SPECTRUM_NROOTS</th><td>Number of roots</td></tr><tr><th>ROCIS_CD_SOC_SPECTRUM</th><td>ROCIS CD spectrum including SOC</td></tr><tr><th>MRCI</th><td></td></tr><tr><th>MRCI_ABS_SPECTRUM</th><td>The MRCI absorption spectrum</td></tr><tr><th>MRCI_ABS_SPECTRUM_INFO</th><td>Information about the absorption spectrum</td></tr><tr><th>MRCI_ABS_SPECTRUM_NROOTS</th><td>The number of roots</td></tr><tr><th>MRCI_CD_SPECTRUM</th><td>The MRCI CD spectrum</td></tr><tr><th>MRCI_CD_SPECTRUM_INFO</th><td>Information about the MRCI CD spectrum</td></tr><tr><th>MRCI_CD_SPECTRUM_NROOTS</th><td>The number of roots</td></tr><tr><th>MRCI_DIPOLE_MOMENTS</th><td>The MRCI dipole moments</td></tr><tr><th>MRCI_DIPOLE_MOMENTS_INFO</th><td>Information about the MRCI dipole moments</td></tr><tr><th>MRCI_DTENSOR_EIGENVECTORS</th><td>The eigenvectors of the MRCI D tensor</td></tr><tr><th>MRCI_DTENSOR_EIGENVALUES</th><td>The eigenvalues of the MRCI D tensor</td></tr><tr><th>MRCI_DTENSOR_RAW_EIGENVECTORS</th><td>The raw eigenvectors of the MRCI D tensor</td></tr><tr><th>MRCI_DTENSOR_D</th><td>The MRCI D value for the ZFS</td></tr><tr><th>MRCI_DTENSOR_E</th><td>The MRCI E value for the ZFS</td></tr><tr><th>MRCI_DTENSOR_MULTIPLICITY</th><td>The MRCI spin multiplicity</td></tr><tr><th>EXTRAPOLATION</th><td></td></tr><tr><th>EXTRAP_SCF_ENERGIES</th><td>The SCF energies with the different basis sets</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><td>EXTRAP_CBS_SCF</td><td>The extrapolated SCF energy</td></tr><tr><td>EXTRAP_CORR_ENERGIES</td><td>The correlation energies with the different basis sets</td></tr><tr><td>EXTRAP_CBS_CORR</td><td>The extrapolated correlatioin energy</td></tr><tr><td>EXTRAP_CBS_TOTAL</td><td>The extrapolated total energy</td></tr><tr><td>EXTRAP_CCSDT_X</td><td>The (T) contribution to the energy</td></tr><tr><td>EXTRAP_NUM_OF_ENERGIES</td><td>The number of energies (basis sets) used for the extrapolation</td></tr><tr><td>THERMOCHEMISTRY</td><td></td></tr><tr><td>THERMO_TEMPERATURE</td><td>Temperature ( o K )</td></tr><tr><td>THERMO_PRESSURE</td><td>Pressure (Atm)</td></tr><tr><td>THERMO_TOTAL_MASS</td><td>Total Mass of the molecule (AMU)</td></tr><tr><td>THERMO_SPIN_DEGENERACY</td><td>Electronic degeneracy</td></tr><tr><td>THERMO_ELEC_ENERGY</td><td>Electronic energy (Eh)</td></tr><tr><td>THERMO_TRANS_ENERGY</td><td>Translational energy (Eh)</td></tr><tr><td>THERMO_ROT_ENERGY</td><td>Rotational energy (Eh)</td></tr><tr><td>THERMO_VIB_ENERGY</td><td>Vibrational energy (Eh)</td></tr><tr><td>THERMO_NUM_OF_FREQS</td><td>The number of vibrational frequencies</td></tr><tr><td>THERMO_FREQS</td><td>Frequencies</td></tr><tr><td>THERMO_ZPE</td><td>Zero point energy (Eh)</td></tr><tr><td>THERMO_INNER_ENERGY_U</td><td>Inner Energy (Eh)</td></tr><tr><td>THERMO_ENTHALPY_H</td><td>Enthalpy (Eh)</td></tr><tr><td>THERMO_ELEC_ENTROPY</td><td>(Electronic Entropy)*T (Eh)</td></tr><tr><td>THERMO_ROR_ENTROPY</td><td>(Rotational Entropy)*T (Eh)</td></tr><tr><td>THERMO_VIB_ENTROPY</td><td>(Vibrational Entropy)*T (Eh)</td></tr><tr><td>THERMO_TRANS_ENTROPY</td><td>(Translational Entropy)*T (Eh)</td></tr><tr><td>THERMO_ENTROPY_S</td><td>(Total Entropy)*T (Eh)</td></tr><tr><td>THERMO_FREE_ENERGY_G</td><td>Free Energy (Eh)</td></tr><tr><td>EPR-NPR Spin-Spin coupling</td><td></td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS</td><td>Number of nuclear pairs to calculate something</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS_DSO</td><td>Number of nuclear pairs to calculate DSO terms</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS_PSO</td><td>Number of nuclear pairs to calculate PSO terms</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS_FC</td><td>Number of nuclear pairs to calculate FC terms</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS_SD</td><td>Number of nuclear pairs to calculate SD terms</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUC_PAIRS_SD_FC</td><td>Number of nuclear pairs to calculate SD/FC terms</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUCLEI_PSO</td><td>Number of nuclei to calculate PSO perturbations</td></tr><tr><td>EPRNMR_SSC_NUM_OF_NUCLEI_FC</td><td>Number of nuclei to calculate SD/FC perturbations</td></tr><tr><td>SOC Energy Correction</td><td></td></tr><tr><td>SOC_NUCLEAR_ENERGY</td><td>The nuclear energy</td></tr><tr><td>SOC_2C_ENERGY</td><td>The total 2-component energy</td></tr><tr><td>SOC_NON_SOC_ENERGY</td><td>The non-SOC total energy</td></tr><tr><td>SOC_ENERGY_CORRECTION</td><td>The SOC energy correction</td></tr><tr><th>Solvation</th><td></td></tr><tr><td>SOLVATION_EPSILON</td><td>Dielectric constant</td></tr><tr><td>SOLVATION_REFRAC</td><td>Refractive index</td></tr><tr><td>SOLVATION_RSOLV</td><td>Solvent probe radius</td></tr><tr><td>SOLVATION_SURFACE_TYPE</td><td>Cavity surface</td></tr><tr><td>SOLVATION_CPCM_DIEL_ENERGY</td><td>Total energy including the CPCM dielectric correction</td></tr><tr><td>SOLVATION_NPOINTS</td><td>Number of points for the Gaussian surface</td></tr></tbody></table>
+<table><caption><div class="caption">Table 8.2 - continued from previous page</div></caption><tbody><tr><td>SOLVATION_SURFACE_AREA</td><td>Surface area</td></tr><tr><th>General Job Information</th><td></td></tr><tr><td>JOB_INFO_MULT</td><td>Job Multiplicity</td></tr><tr><td>JOB_INFO_CHARGE</td><td>Job Charge</td></tr><tr><td>JOB_INFO_NUM_OF_ATOMS</td><td>Total number of atoms</td></tr><tr><td>JOB_INFO_NUM_OF_EL</td><td>Total number of electrons</td></tr><tr><td>JOB_INFO_NUM_OF_FC_EL</td><td>Number of frozen core electrons</td></tr><tr><td>JOB_INFO_NUM_OF_CORR_ELC</td><td>Number of correlated electrons</td></tr><tr><td>JOB_INFO_NUM_OF_BASIS_FUNCS</td><td>Number of basis functions</td></tr><tr><td>JOB_INFO_NUM_OF_AUXC_BASIS_FUNCS</td><td>Number of auxilliary C basis functions</td></tr><tr><td>JOB_INFO_NUM_OF_AUXJK_BASIS_FUNCS</td><td>Number of auxilliary J basis functions</td></tr><tr><td>JOB_INFO_NUM_OF_AUX_CABS_BASIS_FUNCS</td><td>Number of auxilliary JK basis functions</td></tr><tr><td>JOB_INFO_NUM_OF_AUX_CABS_BASIS_FUNCS</td><td>Number of auxilliary CABS basis functions</td></tr><tr><td>JOB_INFO_TOTAL_EN</td><td>Final energy</td></tr><tr><th>HESSIAN</th><td></td></tr><tr><td>HESSIAN_MODES</td><td>The hessian</td></tr><tr><th>Math Functions</th><td></td></tr><tr><td>ABS</td><td>Absolute value</td></tr><tr><td>COS</td><td>Cosine</td></tr><tr><td>SIN</td><td>Sine</td></tr><tr><td>TAN</td><td>Tangent</td></tr><tr><td>ACOS</td><td>Inverse cosine</td></tr><tr><td>ASIN</td><td>Inverse sine</td></tr><tr><td>ATAN</td><td>Inverse tangent</td></tr><tr><td>COSH</td><td>Hyperbolic cosine</td></tr><tr><td>SINH</td><td>Hyperbolic sine</td></tr><tr><td>TANH</td><td>Hyperbolic tangent</td></tr><tr><td>EXP</td><td>Exponential</td></tr><tr><td>LOG</td><td>Common logarithm</td></tr><tr><td>LN</td><td>Natural logarithm</td></tr><tr><td>SQRT</td><td>Square root</td></tr><tr><td>ROUND</td><td>Round down to nearest integer</td></tr></tbody></table>
+<h2>8.4 Compound Examples</h2>
+<h2>8.4.1 Introduction</h2>
+<p>A library of compound scripts exist in page https://github.com/ORCAQuantumChemistry/CompoundScripts .</p>
+<h2>8.4.2 Hello World</h2>
+<h2>Introduction</h2>
+<p>This is the simplest script that nevertheless points to an important feature of Compound . That is the fact that Compound does not have to run an actual 'normal' ORCA calculation but it can also be used as a driver for various tasks, in this case to just print a message.</p>
+<h2>Filename</h2>
+<p>helloWorld.inp</p>
+<h2>SCRIPT</h2>
+<pre><code>%Compound print("Hellow World!\n"); EndRun</code></pre>
+<h2>8.4.3 New Job</h2>
+<h2>Introduction</h2>
+<p>One of the features of ORCA that will be deprecated in the future and should not be used any more is the 'New_Job' feature. The current script is a simple example how Compound can be used to just run a series of calculations.</p>
+<h2>Filename</h2>
+<p>replaceNewJob.inp</p>
+<h2>SCRIPT</h2>
+<pre><code># This is a small script thas shows how # 'Compound' can replace the previous # ORCA '$New_Job' feature %Compound # ------------------------------------# First job # ------------------------------------New_Step !BP86 *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End # ------------------------------------# Second job with same goemetry # but different functional # ------------------------------------New_Step !B3LYP *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End EndRun</code></pre>
+<h2>Comments</h2>
+<p>From the Compound point of view the syntax in this script is not the most efficient one. It can be rewritten in more compact, cleaner, general way. Neverteless this is meant only as an exmample of how Compound can replace older ORCA calculations that used the, to be deprecated, 'New_Job' feature.</p>
+<h2>8.4.4 High Accuracy</h2>
+<h2>Introduction</h2>
+<p>This is a script that utilizes the scheme by N. J. DeYonker, T. R. Cundari, and A. K. Wilson published on: J. Chem. Phys. 124, 114104 (2006). The script calculates accurate total energies of molecules.</p>
+<h2>Filename</h2>
+<p>ccCA_CBS_2.cmp</p>
+<h2>SCRIPT</h2>
+<pre><code># This is a small script thas shows how # 'Compound' can replace the previous # ORCA '$New_Job' feature %Compound # ------------------------------------# First job # ------------------------------------New_Step !BP86 *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End # ------------------------------------# Second job with same goemetry # but different functional # ------------------------------------New_Step !B3LYP *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End EndRun</code></pre>
+<h2>Comments</h2>
+<p>It is interesting that in this scheme the total energy is treated and there is not separation in extrapolation between HF energy and correlation energy.</p>
+<h2>8.4.5 Scan</h2>
+<h2>Introduction</h2>
+<p>This is an example script for a 1-Dimensional geometry scan. It is set up for the Ne-Ne bond distance but can be modified to suit the user's specific needs.</p>
+<h2>Filename</h2>
+<p>scan_1D_1M_1P.cmp</p>
+<h2>SCRIPT</h2>
+<pre><code># Author : Dimitrios G. Liakos # Date : May of 2024 # # This is a script that will calculate and potentially # plot ONE property(1P) along a scan in ONE dimesion (1D) # using only ONE method (1M) # # It is part of a series of scripts for different # combinations of scans for dimensions, methods, # and properties # # Here as an example we use for: # - dimension: the Ne-Ne bond (dist) # - method : "HF" (method) # - property : the SCF energy (propName) # # The script creates a csv file with the absolute energies # and an additional one with the potential energies in # kcal/mol. Both will be saved on disk. # # If 'DoPython' is set to true it will also create a python # script that plots the generated values and then run # it. The python script will be saved on disk and thus one # can afterwards manipulate it. # # NOTE The boolean option plotPotential will choose between # plotting absolute values or potential. # # NOTE The boolean obtion doKcal if set to true multiplies # the potential values with the HartreeToKcal factor. # # NOTE In case the doPython is set to true the script expects # that python3 is avaiable and also the following libraries: # - pandas # - seaborn # - matplotlib.pyplot # # -------------------------------------------------------------# # ----------------Variables to change (e.g. through 'with') -----------------↪ → ---------Variable method = "HF"; # The methods of the calculation Variable basis = "cc-pVDZ"; # The basis set of the calculation Variable restOfInput = "TightSCF"; # Maybe something common for the simple␣ ↪ → input Variable charge = 0; # Charge Variable mult = 1; # Spin multiplicity Variable myPropName = "SCF_Energy"; # The properties we want to read # Variable lowerLimit = 2.5; # Lower limit value Variable UpperLimit = 5.0; # Upper limit value</code></pre>
+<p>(continues on next page)</p>
+<pre><code>(continued from previous page) Variable NSteps = 13; # Number of steps for the grid Variable baseFilename = "myPotential"; # The basename for the created files Variable plotPotential= true; # Plot the potential instead of absolute␣ ↪ → values Variable DoKcal = true; # Multiply the potential values with the␣ ↪ → HartreeToKcal factor Variable removeFiles = true; # Remove *_Compound_*, *bas* files # ------------------python plot relevant variables ------------------------------↪ → ---------Variable DoPython = true; # if we want python or not Variable lw = 4; # The line width in case we plot with␣ ↪ → python Variable marker = "o"; # The type of markers Variable markerSize = 10; # The size of the markers in case we plot Variable fontSize = 18; # # -----------------------Rest of the variables ------------------------↪ → ---------# Variable HartreeToKcal = 627.5096080305927; # Hartree to kcal/ ↪ → mol conversion factor Variable stepSize = (UpperLimit-LowerLimit)/(NSteps-1); # The stepsize of␣ ↪ → the grid Variable calcValues[NSteps]; # An array to store␣ ↪ → the calculated values Variable res, dist, calcValue; Variable myFilename, csvFilename; Variable fPtr; # A file to write # ---------------------------------------------------# Open and Write file header for the absolute values # ---------------------------------------------------write2String(csvFilename, "%s_absValues.csv", baseFilename); fPtr = OpenFile(csvFilename, "w"); write2File(fptr, "distance,method,property,calcValue\n"); # ---------------------------------------------------# Perform the calculations and update the file # ---------------------------------------------------for iStep from 0 to NSteps-1 Do dist = lowerLimit + (iStep)*stepSize; New_Step !&{method} &{basis} &{restOfInput} *xyz &{charge} &{mult} Ne 0.0 0.0 0.0 Ne 0.0 0.0 &{dist} * Step_end res = calcValue.readProperty(propertyName=myPropName); write2File(fPtr, "%.4lf,%20s,%20s,%20.10lf\n", dist, method,myPropName,␣ ↪ → calcValue); calcValues[iStep]=calcValue; EndFor CloseFile(fPtr); # Close the file # ---------------------------------------------------# Evaluate and write the relative values # ---------------------------------------------------write2String(csvFilename, "%s_relValues.csv", baseFilename); fPtr = OpenFile(csvFilename, "w"); write2File(fPtr, "distance,method,property,calcValue\n");</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>for iStep from 0 to NSteps-1 Do dist = lowerLimit + (iStep)*stepSize; if (DoKcal) then calcValue = (calcValues[iStep]-calcValues[NSteps-1])*HartreeToKcal; else calcValue = calcValues[iStep]-calcValues[NSteps-1]; EndIf write2File(fPtr, "%.4lf,%20s,%20s,%20.10lf\n", dist, method,myPropName,␣ ↪ → calcValue); EndFor CloseFile(fPtr); # Close the file if (removeFiles) then sys_cmd("rm *_Compound_* *.bas*"); EndIf # ---------------------------------------------------# Create a python file and run it # ---------------------------------------------------if (DoPython) then if (plotPotential) then write2String(csvFilename, "%s_relValues.csv", baseFilename); else write2String(csvFilename, "%s_absValues.csv", baseFilename); endIf write2String(myFilename, "%s.py", baseFilename); fPtr = openFile(myFilename, "w"); # Import necessary libraries write2File(fPtr, "import pandas as pd\n"); write2File(fPtr, "import seaborn as sns\n"); write2File(fPtr, "import matplotlib.pyplot as plt\n"); # Read the csv file write2File(fPtr, "df = pd.read_csv('%s')\n", csvFilename); #Make a lineplot write2File(fPtr, "sns.lineplot(data=df, x=\"distance\", y=\"calcValue\", hue=\ ↪ → "property\", \n lw=%d, markers=True, marker='%s', markersize=%d,␣ ↪ → dashes=False)\n", lw, marker, markersize); write2File(fPtr, "plt.axhline(y=0, color='black', linestyle='-', linewidth=1)\n ↪ → "); write2File(fPtr, "plt.title(\"Energy Potential\", fontsize=%d)\n", fontsize+4); write2File(fPtr, "plt.xlabel(\"Ne-Ne Distance\", fontsize=%d)\n", fontsize); write2File(fPtr, "plt.ylabel(\"Energy (kcal/mol)\", fontsize=%d)\n", fontsize); write2File(fPtr, "plt.xticks(fontsize=%d)\n", fontSize); write2File(fPtr, "plt.yticks(fontsize=%d)\n", fontSize); write2File(fPtr, "plt.show()\n"); closeFile(fPtr); sys_cmd("python3 %s", myFilename); EndIf End</code></pre>
+<h2>Comments</h2>
+<p>This script has some interesing features. It contains two variables removeFiles and DoPython . If the first of them is set to true then the script will use a system command to remove files that are not needed anymore after the end of the calculation. The latter, DoPython , if set to true will read the .csv file that is created and write a python file to make a plot of the results. Then it will run the python script to actually make the plot.</p>
+<h2>8.4.6 Numerical polarizabilities</h2>
+<h2>Introduction</h2>
+<p>This script calculates numerically the polarizability of the molecule using single point calculations with an electric field.</p>
+<h2>Filename</h2>
+<p>numericalPolarizability.cmp</p>
+<h2>SCRIPT</h2>
+<pre><code># Authors: Dimitrios G. Liakos / Frank Neese / Zikuan Wang # Date : May of 2024 # # This is a compound script that calculates the # dipole-dipole polarizability tensor numerically # using the double derivative of energy. # # The idea is the following: # # 1 Perform a field free calculation # # 2 Loop over directions I=X,Y,Z # # 3 Loop over directions J=X,Y,Z # # - put a small Q-field in directions I and J # - Solve equations to get the energy for each combination # - Polarizability alpha(I,J) =- ( E(+I,+J) - E(+I,-J)-E(-I,+J)+ E(-i,-j)/ ↪ → (4*Field^2) # 4 Print polarisability # # ----------------------------------------------------------------------# ----------------------Variables -------------------------------# ---Variables to be adjusted (e.g. using 'with' ----------------------Variable molecule = "h2o.xyz"; Variable charge = 0; Variable mult = 1; Variable method = "HF"; Variable basis = " "; Variable restOfInput = "VeryTightSCF"; Variable blocksInput = " "; Variable E_Field = 0.0001; Variable enPropName = "JOB_Info_Total_En"; Variable removeFiles = true; # --------------Rest of the variables -------------------------------Variable FField[3]; Variable EFree, EPlusPlus, EPlusMinus, EMinusPlus, EMinusMinus, a[3][3]; Variable FFieldStringPlusPlus, FFieldStringPlusMinus; Variable FFieldStringMinusPlus, FFieldStringMinusMinus; Variable aEigenValues, aEigenVectors; # -----------------------------------------# Calculation without field # -----------------------------------------New_Step !&{method} &{basis} &{restOfInput} &{blocksInput} *xyzfile &{charge} &{mult} &{molecule} Step_End EFree.ReadProperty(propertyName=enPropName);</code></pre>
+<p>(continues on next page)</p>
+<pre><code># ------------------------------------------------------------# Loop over the x, y, z directions # ------------------------------------------------------------for i from 0 to 2 Do for j from 0 to 2 Do # ----------------------------------------------------------# Create the appropriate direction oriented field string # ----------------------------------------------------------# ----------------------(++) ------------------------------for k from 0 to 2 Do FField[k] = 0.0; EndFor FField[i] = FField[i] + E_Field; FField[j] = FField[j] + E_Field; write2String(FFieldStringPlusPlus, " %lf, %lf, %lf", FField[0], FField[1], FField[2]); # # ---------------------(+-) ------------------------------for k from 0 to 2 Do FField[k] = 0.0; EndFor FField[i] = FField[i] + E_Field; FField[j] = FField[j] - E_Field; write2String(FFieldStringPlusMinus, " %lf, %lf, %lf", FField[0], FField[1], FField[2]); # # ---------------------(-+) ------------------------------for k from 0 to 2 Do FField[k] = 0.0; EndFor FField[i] = FField[i] - E_Field; FField[j] = FField[j] + E_Field; write2String(FFieldStringMinusPlus, " %lf, %lf, %lf", FField[0], FField[1], FField[2]); # # ---------------------(--) ------------------------------for k from 0 to 2 Do FField[k] = 0.0; EndFor FField[i] = FField[i] - E_Field; FField[j] = FField[j] - E_Field; write2String(FFieldStringMinusMinus, " %lf, %lf, %lf", FField[0], FField[1], FField[2]); # ----------------------------------------# Perform the calculations. # The plus_plus (++) one # ----------------------------------------ReadMOs(1); New_Step !&{method} &{basis} &{restOfInput} %SCF EField = &{FFieldStringPlusPlus} End &{blocksInput} Step_End EPlusPlus.readProperty(propertyName=enPropName); # ----------------------------------------# The plus_minus (+-) one # ----------------------------------------ReadMOs(1);</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

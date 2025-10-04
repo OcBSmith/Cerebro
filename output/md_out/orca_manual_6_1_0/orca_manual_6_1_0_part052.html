@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part052</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>Running ORCA successively on both of these input files in the same directory will yield an output that contains the zero-point vibrational corrections to the shielding tensors for each atom. For Atom 0, which is the carbon in methanol, it looks like this:</p>
+<p>So the absolute shielding constant of carbon in methanol needs to be corrected by -4.8 ppm due to zero-point vibration. From the mean and mean square displacements and the first and second derivatives of the shieldings with respect to the normal modes, one can also identify degrees of freedom which give rise to larger contributions of the vibrational correction.</p>
+<p>A similar input for the HH spin-spin coupling constants would look like this :</p>
+<pre><code>!TPSS pcJ-2 Autoaux ExtremeSCF NMR %geom inhess read inhessname "vpt2_methanol_FF.hess" end %maxcore 4096 %vpt2 VPT2 on AvgProp JCOUPLING AnharmDisp 0.05 HessianCutoff 1e-12 end %method Z_Tol 1e-12 end %eprnmr Tol 1e-10 end * xyz 0 1 C -1.09849212248373 0.14540972773089 -0.00000275092982 O 0.32138758531316 0.08706714755687 -0.00001212477411 (continues on next page)</code></pre>
+<pre><code>H 0.66732439683790 0.98510769198508 0.00001819506998 H -1.45583606337199 -0.88374271593276 0.00000595999622 H -1.49206267729630 0.64725244577978 0.89143349761200 H -1.49208273899904 0.64724452288014 -0.89144277697426 * %eprnmr Nuclei = all H {ssfc} end</code></pre>
+<p>As mentioned above, the exact same procedure is also available for A-tensors. Here is an example for the NH 2 radical with the VPT2 input file vpt2_NH2_FF.inp :</p>
+<pre><code>!UKS BP86 def2-svp def2/J ExtremeSCF defgrid3 %vpt2 VPT2 On end %method Z_Tol 1e-12 end * xyz 0 2 N -0.01498947828047 -0.01894387811818 0.00000000000000 H 1.03197835263254 0.00908678452370 0.00000000000000 H -0.22855980523269 1.00639225931822 0.00000000000000 *</code></pre>
+<p>and the input file - something like vpt2_NH2_A.inp - for the level of theory that will be used in the A-tensor computation:</p>
+<pre><code>!UKS BP86 def2-SVP TightSCF %geom inhess read inhessname "vpt2_NH2_FF.hess" end %vpt2 VPT2 On AvgProp Atensor end *xyz 0 2 N -0.01498947828047 -0.01894387811818 0.00000000000000 H 1.03197835263254 0.00908678452370 0.00000000000000 H -0.22855980523269 1.00639225931822 0.00000000000000 * %eprnmr Nuclei = all N { aiso, adip } Nuclei = all H { aiso, adip } end</code></pre>
+<p>and similarly for the g-tensor if Atensor is replaced by Gtensor in the %vpt2 block (the %eprnmr block can be omitted then).</p>
+<p>Note that a convenient way to compute vibrational corrections is the usage of a compound script. With an input file called NH2.inp :</p>
+<p>(continued from previous page)</p>
+<pre><code>* xyz 0 2 N 0.00312611577632 0.00395297373474 0.00000000000000 H 1.01930353842041 0.00049997276783 0.00000000000000 H -0.23400058507735 0.99208221922117 0.00000000000000 * %Compound "NH2.cmp"</code></pre>
+<p>and the corresponding compound script NH2.cmp :</p>
+<pre><code>New_Step !UHF def2-SVP VeryTightSCF %vpt2 VPT2 On end %method Z_Tol 1e-12 end * xyz 0 2 N 0.00312611577632 0.00395297373474 0.00000000000000 H 1.01930353842041 0.00049997276783 0.00000000000000 H -0.23400058507735 0.99208221922117 0.00000000000000 * Step_End New_Step !UHF def2-SVP VeryTightSCF %geom inhess read inhessname "NH2_Compound_1.hess" end %vpt2 VPT2 On AvgProp Atensor end *xyz 0 2 N 0.00312611577632 0.00395297373474 0.00000000000000 H 1.01930353842041 0.00049997276783 0.00000000000000 H -0.23400058507735 0.99208221922117 0.00000000000000 * %eprnmr Nuclei = all N { aiso, adip } Nuclei = all H { aiso, adip } end Step_End END</code></pre>
+<p>a similar result can be obtained in one calculation.</p>
+<p>Make sure the correct hessian file names are given and the input files MUST not contain a compound block. You can also rerun the VPT2 analysis using orca_vpt2 directly. If you have an anharmonic force field cal-</p>
+<p>culation named myjob_ff and a property derivative calculation named myjob_prop just call orca_vpt myjob_ff.vpt2 myjob_prop.vpt2 .</p>
+<h2>5.20 Electrical Properties - Electric Moments and Polarizabilities</h2>
+<p>Afew basic electric properties can be calculated in ORCA although this has never been a focal point of development. The properties can be accessed straightforwardly through the %elprop block:</p>
+<pre><code>! B3LYP DEF2-SVP TightSCF %elprop Dipole true # dipole moment Quadrupole true # quadrupole moment Polar true # dipole-dipole polarizability 1 # equivalent to true (for backward compatibility) # Note: the flags "polar 2" and "polar 3" for␣ ↪ → seminumeric # and fully numeric polarizabilities are not supported # anymore! For numerical polarizability calculations # please use the respective compound scripts Hyperpol true # the dip/dip/dip hyperpolarizability PolarVelocity true # polarizability w.r.t. velocity perturbations PolarDipQuad true # dipole-quadrupole polarizability PolarQuadQuad true # quadrupole-quadrupole polarizability end * int 0 1 C 0 0 0 0 0 0 H 1 0 0 1.09 109.4712 0 H 1 2 0 1.09 109.4712 0 H 1 2 3 1.09 109.4712 120 H 1 2 3 1.09 109.4712 240 *</code></pre>
+<p>The polarizability (dipole-dipole, dipole-quadrupole, quadrupole-quadrupole) is calculated analytically through solution of the coupled-perturbed (CP-)SCF equations for HF and DFT runs (see CP-SCF Options ) and through the CP-CASSCF equations for CASSCF runs (see CASSCF Linear Response ). Analytic polarizabilities are also available for CCSD/CCSD(T) (see AUTOCI Response Properties via Analytic Derivatives ), RI-MP2 and DLPNO-MP2, as well as double-hybrid DFT methods. For canonical MP2 one can use AUTOCI for analytic calculations (see AUTOCI Response Properties via Analytic Derivatives ) or differentiate the analytical dipole moment calculated with relaxed densities. For other correlation methods only a fully numeric approach is possible.</p>
+<pre><code>---------------------------------------------------STATIC POLARIZABILITY TENSOR (Dipole/Dipole) ---------------------------------------------------Method : SCF Type of density : Electron Density Type of derivative : Electric Field (Direction=X) Multiplicity : 1 Irrep : 0 Relativity type : Basis : AO The raw cartesian tensor (atomic units): 12.852429555 -0.002199911 0.000000170 -0.002199911 12.860507003 -0.000000346</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>0.000000170</td><td>-0.000000346</td><td>12.868107945</td></tr><tr><td>diagonalized tensor: 12.851869269</td><td>12.861067290</td><td>12.868107945</td></tr><tr><th>Orientation:</th><td></td><td></td></tr><tr><td>0.969064588</td><td>-0.246807263</td><td>0.000017958</td></tr><tr><td>0.246807263</td><td>0.969064586</td><td>-0.000050696</td></tr><tr><td>-0.000004890</td><td>0.000053560</td><td>0.999999999</td></tr><tr><td>Isotropic polarizability</td><td>: 12.86035</td><td></td></tr></tbody></table>
+<p>As expected the polarizability tensor is isotropic.</p>
+<p>Dipole-quadrupole polarizability tensors are printed as a list of 18 different components, with the first index running over x,y,z and the second index running over xx,yy,zz,xy,xz,yz. This is known as the 'pure Cartesian' version of the tensor, although other conventions may exist in the literature that differ from the ORCA values by a constant factor.</p>
+<pre><code>---------------------------------------------------STATIC POLARIZABILITY TENSOR (Dipole/Quadrupole) ---------------------------------------------------Method : SCF Type of density : Electron Density Type of derivative : Electric Field (Direction=X) Multiplicity : 1 Irrep : 0 Relativity type : Basis : AO The raw cartesian tensor (atomic units): X- X X : 11.577165985 X- Y Y : -5.795339382 X- Z Z : -5.797320742 X- X Y : 0.001285565 X- X Z : 0.000000155 X- Y Z : -0.000000077 Y- X X : 0.001386387 Y- Y Y : 8.200445841 Y- Z Z : -8.198375727 Y- X Y : -5.794687548 Y- X Z : 0.000000228 Y- Y Z : -0.000000121 Z- X X : -0.000000151 Z- Y Y : 0.000000627 Z- Z Z : -0.000000812 Z- X Y : -0.000000312 Z- X Z : -5.798359323 Z- Y Z : -8.205110537</code></pre>
+<p>After this, the 'traceless' version of the tensor is printed, which is usually denoted by A x,xx , A x,xy etc. in the literature[682, 683, 684]. This is the preferred format for reporting dipole-quadrupole polarizability tensors. Certain references use the opposite sign convention than reported here, but generally the conventions of traceless polarizability tensors are more unified than those of pure Cartesian polarizability tensors.</p>
+<pre><code>-------------------------------------------------------------STATIC TRACELESS POLARIZABILITY TENSOR (Dipole/Quadrupole) -------------------------------------------------------------Method : SCF Type of density : Electron Density Type of derivative : Electric Field (Direction=X) (continues on next page)</code></pre>
+<pre><code>Multiplicity : 1 Irrep : 0 Relativity type : Basis : AO The raw cartesian tensor (atomic units): X- X X : 17.373496046 X- Y Y : -8.685262003 X- Z Z : -8.688234043 X- X Y : 0.001928347 X- X Z : 0.000000232 X- Y Z : -0.000000116 Y- X X : 0.000351329 Y- Y Y : 12.298940512 Y- Z Z : -12.299291841 Y- X Y : -8.692031322 Y- X Z : 0.000000342 Y- Y Z : -0.000000181 Z- X X : -0.000000058 Z- Y Y : 0.000001109 Z- Z Z : -0.000001050 Z- X Y : -0.000000468 Z- X Z : -8.697538984 Z- Y Z : -12.307665806</code></pre>
+<p>The quadrupole-quadrupole polarizability tensor is similarly printed in both the pure Cartesian and traceless forms. Again, the traceless form (usually denoted as C xx,xx , C xx,xy etc.[682, 683, 684]) is the preferred format for reporting.</p>
+<table><tbody><tr><td colspan="19">--------------------------------------------------- STATIC POLARIZABILITY TENSOR (Quadrupole/Quadrupole)</td></tr><tr><td>The order in</td><td>each direction</td><td>is XX, YY,</td><td>ZZ, XY, XZ, YZ</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Method Type of density Type of Multiplicity Irrep Relativity type</td><td>: : derivative : : :</td><td>SCF Electron Density Quadrupolar Field 1 0</td><td>(Direction=X)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Basis</td><td></td><td>: : AO</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>The</td><td></td><td>tensor (atomic units): 8.024072323</td><td>8.017351959</td><td>-0.002591466</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>8.024072323 -0.000000954 8.017351959</td><td>55.906127614 -0.000000529</td><td>12.837825709</td><td>-6.821368242</td><td colspan="14">␣</td></tr><tr><td>↪</td><td>0.000000232</td><td>12.837825709 0.000000422</td><td>55.938851507</td><td>6.815300773</td><td colspan="14">␣</td></tr><tr><td>↪ →</td><td>-0.002591466 0.000000169</td><td>-6.821368242 -0.000000030</td><td>6.815300773</td><td>16.716647772</td><td colspan="14">␣</td></tr><tr><td>↪ →</td><td>0.000000801 16.715850196 -0.000000184</td><td>-0.000000954 6.818791255 -0.000000529</td><td>0.000000232</td><td>0.000000169</td><td colspan="14">␣</td></tr><tr><td>raw cartesian 60.656194448 ↪ → 0.000000801 ↪ → → ↪ →</td><td>6.818791255 diagonalized tensor:</td><td>-0.000000184 21.534628724 13.566719080</td><td>0.000000422</td><td>-0.000000030</td><td colspan="14">␣</td></tr><tr><td>↪ →</td><td>11.893291534</td><td></td><td>26.357187387</td><td>46.234564137 -0.001433194</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>52.663246003</td><td>76.753292120</td><td>-0.000000013</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>-0.000019986</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>-0.000000018</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Orientation:</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td colspan="14">␣</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>↪ →</td><td>0.817436692 0.000000006</td><td>0.576016666 0.219691224</td><td>0.000000038</td><td>0.673107563</td><td>␣</td></tr><tr><td>↪ →</td><td>-0.405967809 0.000000008</td><td>0.577799371 -0.219450737</td><td>-0.000000021</td><td>-0.671194117</td><td>␣</td></tr><tr><td>↪ →</td><td>-0.408640606 -0.000000035</td><td>0.578232381</td><td>-0.000000034</td><td>-0.310519906</td><td>␣</td></tr><tr><td>↪ →</td><td>-0.000497156 0.816443231</td><td>0.950566746 -0.000034103 0.000000038</td><td></td><td>-0.000000037</td><td></td></tr><tr><td>↪ →</td><td>0.000000027 -0.577425709</td><td>0.000000000</td><td>0.577425709</td><td></td><td>␣</td></tr><tr><td>↪</td><td>0.000000002</td><td>-0.000000003</td><td>0.816443231</td><td>-0.000000036</td><td>␣</td></tr><tr><td>→</td><td></td><td>-0.000000003</td><td></td><td></td><td></td></tr><tr><td colspan="3">Isotropic polarizability : 37.91138</td><td></td><td></td><td></td></tr><tr><td>------------------------------------------------------------- The</td><td>order in each direction</td><td>is XX, YY,</td><td>ZZ, XY, XZ, YZ</td><td></td><td></td></tr><tr><td>Method</td><td>:</td><td>SCF</td><td></td><td></td><td></td></tr><tr><td>Type of Type of</td><td>density : derivative :</td><td>Electron Density Quadrupolar Field</td><td></td><td></td><td></td></tr><tr><td>Multiplicity</td><td>:</td><td>1</td><td>(Direction=X)</td><td></td><td></td></tr><tr><td>Irrep</td><td>:</td><td>0</td><td></td><td></td><td></td></tr><tr><td>Relativity</td><td>type</td><td></td><td></td><td></td><td></td></tr><tr><td>Basis</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>:</td><td>AO</td><td></td><td></td><td></td></tr><tr><td></td><td>:</td><td></td><td></td><td></td><td></td></tr><tr><td>The</td><td>raw cartesian tensor 26.331642600</td><td>(atomic units): -13.160050722</td><td>-13.171591878</td><td>0.000221134</td><td>␣</td></tr><tr><td>↪ →</td><td colspan="2">0.000000581 -13.160050722</td><td>-0.000000065 22.733889017 -9.573838294</td><td>-5.113861448</td><td>␣</td></tr><tr><td>↪ → -0.000000324 -9.573838294</td><td colspan="2">-0.000000735 -13.171591878</td><td>22.745430172</td><td>5.113640314</td><td>␣</td></tr><tr><td>↪ → 0.000000389 -5.113861448</td><td colspan="2">0.000000154 0.000221134</td><td>5.113640314</td><td>12.537485829</td><td>␣</td></tr><tr><td>↪ →</td><td colspan="2">0.000000127 0.000000581</td><td>-0.000000022 -0.000000735 0.000000154</td><td>0.000000127</td><td>␣</td></tr><tr><td>↪ → 5.114093442 -0.000000324</td><td colspan="2">12.536887647 -0.000000065</td><td>0.000000389</td><td>-0.000000022</td><td>␣</td></tr><tr><td>↪ →</td><td colspan="2">5.114093442 16.150971543</td><td></td><td></td><td></td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">Like the quadrupole moments themselves, the dipole-quadrupole and quadrupole-quadrupole polarizabilities depend on the gauge origin of the %elprop module. The latter can be changed using the Origin keyword in %elprop ; see section Electrical Properties - Electric Moments and Polarizabilities .</li>
+</ul>
+<p>At the SCF level, dynamic (frequency-dependent) dipole polarizabilities can be computed using either purely real or purely imaginary frequencies.</p>
+<pre><code>%elprop polar 1 freq_r 0.08 # purely real frequencies #freq_i 0.08 # purely imaginary frequencies end</code></pre>
+<p>In the example above, the dynamic dipole polarizability tensor for a single real frequency of 0.8 a.u. is computed. For every frequency, linear response equations must be solved for all component of the perturbation operator (3 Cartesian components of the electric dipole). Note that imaginary-frequency polarizabilities are computed with the same costs as real-frequency polarizabilities. By a simple contour integration they can be used to compute dispersion coefficients.</p>
+<p>For methods that do not support analytic polarizabilities, one can calculate numeric dipole-dipole and quadrupolequadrupole polarizabilities, either by finite differentiation of dipole/quadrupole moments with respect to a finite dipole/quadrupole electric field, or by double finite differentiation of the total energy with respect to a finite dipole/quadrupole electric field. The latter can be done using compound scripts (see Compound , Compound Examples ).</p>
+<p>At the MP2 level, polarizabilities can currently be calculated analytically using the RI ( RI-MP2 and Double-Hybrid DFT Response Properties ) or DLPNO ( Local MP2 Second Derivatives and Response Properties ) approximations or in all-electron canonical calculations, but for canonical MP2 with frozen core orbitals the dipole moment has to be differentiated numerically in order to obtain the polarizability tensor. In general in such cases, you should keep in mind that tight SCF convergence is necessary in order to not get too much numerical noise in the second derivative. Also, you should experiment with the finite field increment in the numerical differentiation process.</p>
+<p>As an example, the following Compound job can be used to calculate the seminumeric polarizability at the MP2 level (replacing the now deprecated usage of Polar 2 ):</p>
+<pre><code>*xyz 0 1 O 0.00000000000000 0.05591162058341 0.05591162058342 H 0.00000000000000 -0.06629333722358 1.01038171664016 H 0.00000000000000 1.01038171664017 -0.06629333722358 * %Compound "semiNumericalPolarizability.cmp" with method = "MP2"; basis = "aug-cc-pVDZ cc-pVDZ/C"; restOfInput = "VeryTightSCF PModel NoFrozenCore"; end</code></pre>
+<p>with the file semiNumericalPolarizability.cmp containing:</p>
+<pre><code># ---------------------------------------------------------------------# Authors: Dimitrios G. Liakos and Frank Neese # Date : March-May of 2024 # # This is a compound script that calculates the # raw porarizability tensor semi-numerically # using the dipole moments. # # The idea is the following: # # 1. Calculate dipole moment in the field free case # # 2. Loop over directions I=X,Y,Z # - put a small E-field in direction I+Delta # - Solve equations to get the dipole moment D+ # - put s small E-field in direction I-Delta # - Solve equations to get the dipole moment D-# - Polarizability alpha(I,J). (D+(I)-D-(I))/(2Delta) # - Diagonalize to get eigenValues, eigenVectors, a_iso # # 3. Print polarisability # # NOTE: We use the last dipole_moment found in the file. If a specific # one is needed the 'myProperty' option should be accordingly # adjusted and remove the 'property_Base = true' option. #</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># NOTE: This is not the most general version. It is adjusted for testsuite # with 'method' and 'mp2' blocks. # ----------------------------------------------------------------------# ----------------------------------------------------------------------# ----------------------Variables ------------------------------# # ---Variables to be adjusted (e.g. using 'with' ---------------------Variable molecule = "h2o.xyz"; # xyz file with coordinates Variable charge = 0; Variable mult = 1; Variable method = "HF"; Variable basis = " " ; Variable restOfInput = "NoFrozenCore VeryTightSCF"; Variable E_Field = 0.0001; # Size of Electric field Variable myProperty = "Dipole_Moment_Total"; Variable removeFiles = true; # Remove files in the end of the␣ ↪ → calculation # ---------------------------------------------------------------------# --------------Rest of the variables -------------------------------Variable D_Free, D_Minus, D_Plus, a[3][3]; #dipole moment and polarizability Variable aEigenValues[3], aEigenVectors[3][3], a_iso; Variable FFieldStringPlus, FFieldStringMinus; Variable res = -1; # ----------------------------------------------------------------------# Field Free # ----------------------------------------------------------------------New_Step !&{method} &{basis} &{restOfInput} %Method z_tol 1e-8 End %MP2 Density Relaxed End #*xyzFile &{charge} &{mult} &{molecule} Step_End res = D_Free.readProperty(propertyName=myProperty, property_Base=true); # ------------------------------------------------------------------# Loop over the x, y, z directions and create the appropriate string # ------------------------------------------------------------------for direction from 0 to 2 Do #Create the appropriate direction oriented field string if (direction = 0) then #( X direction) write2String(FFieldStringPlus, " %lf, 0.0, 0.0", E_Field); write2String(FFieldStringMinus, "-%lf, 0.0, 0.0", E_Field); else if (direction = 1) then #( Y direction) write2String(FFieldStringPlus, " 0.0, %lf, 0.0", E_Field); write2String(FFieldStringMinus, " 0.0, -%lf, 0.0", E_Field); else #( Z direction) write2String(FFieldStringPlus, " 0.0, 0.0, %lf", E_Field); write2String(FFieldStringMinus, " 0.0, 0.0, -%lf", E_Field); EndIf # ----------------------------------------# Perform the calculations. # First the plus (+) one # ----------------------------------------ReadMOs(1); New_Step !&{method} &{basis} &{restOfInput}</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>%SCF EField = &{FFieldStringPlus} End %Method z_tol 1e-8 End %MP2 Density Relaxed End Step_End res = D_Plus.readProperty(propertyName=myProperty, property_Base=true); # ----------------------------------------# And the minus (-) one # ----------------------------------------ReadMOs(1); New_Step !&{method} &{basis} &{restOfInput} %SCF EField = &{FFieldStringMinus} End %Method z_tol 1e-8 End %MP2 Density Relaxed End Step_End res = D_Minus.readProperty(propertyName=myProperty, property_Base=true); # ------------------------------------------# Construct and store SCF polarizability # ------------------------------------------a[direction][0] = (D_Plus[0]-D_Minus[0])/(2*E_Field); a[direction][1] = (D_Plus[1]-D_Minus[1])/(2*E_Field); a[direction][2] = (D_Plus[2]-D_Minus[2])/(2*E_Field); EndFor # -----------------------------------------# Diagonalize # -----------------------------------------a.Diagonalize(aEigenValues, aEigenVectors); # -----------------------------------------# Do some printing # -----------------------------------------print( "\n\n"); print( " -------------------------------------------------------\n"); print( " COMPOUND \n"); print( " Semi analytical calculation of polarizability\n"); print( " -------------------------------------------------------\n"); print( " Method: %s\n", method); print( " Basis : %s\n", basis); print( " The electric field perturbation used was: %.5lf a.u.\n", E_Field); print( " \n\n"); print( " -------------------------------------------------------\n"); print( " Raw electric semi-analytical polarizability tensor\n"); print( " -------------------------------------------------------\n"); For i from 0 to 2 Do print("%13.8lf %13.8lf %13.8lf\n", a[i][0], a[i][1], a[i][2]);</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>EndFor print( " -------------------------------------------------------\n"); print("\n"); print( " -------------------------------------------------------\n"); print( " Raw electric semi-analytical polarizability Eigenvalues\n"); print( " -------------------------------------------------------\n"); print("%13.8lf %13.8lf %13.8lf\n", aEigenValues[0], aEigenValues[1],␣ ↪ → aEigenValues[2]); print( " -------------------------------------------------------\n"); print("\n"); print( " -------------------------------------------------------\n"); print( " Raw electric semi-analytical polarizability Eigenvectors\n"); print( " -------------------------------------------------------\n"); For i from 0 to 2 Do print("%13.8lf %13.8lf %13.8lf\n", aEigenVectors[i][0], aEigenVectors[i][1],␣ ↪ → aEigenVectors[i][2]); EndFor print( "\n a isotropic value : %.5lf\n",␣ ↪ → (aEigenValues[0]+aEigenValues[1]+aEigenValues[2])/3.0); # # # ---------------------------------------------------# Maybe remove unneccesary files # ---------------------------------------------------if (removeFiles) then sys_cmd("rm *_Compound_* *.bas* "); EndIf End</code></pre>
+<p>For more details on Compound jobs in general, see Compound .</p>
+<p>For other correlation methods, where not even relaxed densities are available, only a fully numeric approach (using compounds scripts) is possible and requires obnoxiously tight convergence.</p>
+<p>Note that polarizability calculations have higher demands on basis sets. A rather nice basis set for this property is the Sadlej one (see Orbital Basis Sets ). In relation to electric properties, it might be interesting to know that it is possible to carry out finite electric field calculations in ORCA. See section Finite Electric Fields for more information on such calculations.</p>
+<p>The static hyperpolarizability tensor is calculated as an analytical third derivative of the energy with respect to three dipole perturbations. It is currently available for SCF methods (HF, DFT). For example, consider the input:</p>
+<pre><code>! RHF def2-SVP TightSCF %elprop hyperpol 1 end *xyz 0 1 C 0.000000 -0.000000 -0.528012 O -0.000000 0.000000 0.650528 H -0.000000 0.931690 -1.116318 H -0.000000 -0.931690 -1.116318 *</code></pre>
+<p>The hyperpolarizability can be found printed in the output as</p>
+<pre><code>---------------------------------------------------STATIC HYPERPOLARIZABILITY TENSOR ---------------------------------------------------Method : SCF Type of density : Electron Density Type of derivative : Electric Field (Direction=X) Multiplicity : 1 Irrep : 0 Basis : AO The raw Cartesian tensor (atomic units): ( x x x ): -0.000000 ( x x y ): -0.000000 ( x x z ): 7.076938 ( x y x ): -0.000000 ( x y y ): -0.000000 ( x y z ): -0.000000 ( x z x ): 7.076938 ( x z y ): -0.000000 ( x z z ): -0.000000 ( y x x ): -0.000000 ( y x y ): -0.000000 ( y x z ): -0.000000 ( y y x ): -0.000000 ( y y y ): 0.000000 ( y y z ): 49.371503 ( y z x ): -0.000000 ( y z y ): 49.371503 ( y z z ): 0.000000 ( z x x ): 7.076938 ( z x y ): -0.000000 ( z x z ): -0.000000 ( z y x ): -0.000000 ( z y y ): 49.371503 ( z y z ): 0.000000 ( z z x ): -0.000000 ( z z y ): 0.000000 ( z z z ): 44.368713</code></pre>
+<h2>5.20.1 Atomic Dipole Moment and Polarizabilities</h2>
+<p>ORCAincludes a mechanism by which electric properties can be decomposed into atomic contributions. In a nutshell, the method relies on the partitioning of real space into atomic regions. These regions are defined by a smooth weighting function for atom A</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The quantities ϱ (0) A ( r ) are spherically symmetric atomic densities (expanded in a reasonably large set of Gaussian s-functions) for the neutral atoms that exit pretabulated in the code.</p>
+<p>Using these partitioning functions, an atomic multipole moment is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here P is the density matrix and ˆ q l m the operator for a multipole moment of order l with component m. For example, for the dipole moment l=1 and m=0,+1,-1. Likewise, for a quadrupole moment l=2, m=2,1,0,-1,-2 and so on. The</p>
+<p>partitioned integration over space is carried out by numerical integration. In the limit of exact numerical integration, the construction guarantees that the atomic moments sum to the overall multipole moment. Because numerical integration introduces a small error, the accumulated moments</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Will show small deviation from the analytically integrated moments that the program also calculates prints.</p>
+<p>Clearly, the same strategy can be used for response properties. For example, for polarizabilities, one decomposes it into the atomic components as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here F is an external electric field and the derivative of the density matrix is the response density with respect to this field.</p>
+<p>In order to trigger this calculation use:</p>
+<pre><code>%elprop Polar true PolarAtom true Dipole true DipoleAtom true Quadrupole true QuadrupoleAtom true end</code></pre>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">Atomic electric properties are available presently at the SCF level for dipole moments, quadrupole moments and polarizabilities</li>
+<li style="list-style-type: '· ';">The dipole moment is well-known to be gauge dependent for charged molecules. Hence, the way the dipole moment is decomposed here, the atomic dipole moments refer to the global origin and there is a gauge dependence for charged atoms. Consequently, one needs to proceed with some caution in the interpretation of these local dipole moments.</li>
+</ul>
+<h2>PAPER:</h2>
+<ul>
+<li style="list-style-type: '· ';">Grigorash, D.; Müller, S.; Heid, E.; Neese, F.; Liakos, D.; Riplinger, C.; Garcia-Rates, M.; Paricaud, P. Erling H.S.; Smirnova, I.; Yan, W. A comprehensive approach to incorporating intermolecular dispersion into the openCOSMO-RS model. Part 2: Atomic polarizabilities, 2025, submitted</li>
+</ul>
+<h2>5.20.2 Elprop Keywords</h2>
+<p>Calculation of first order (electric dipole and quadrupole moments) and second order (polarizabilities) electric properties can be requested in the %elprop input block. The second order properties can be calculated through the solution of the CP-SCF (see CP-SCF Options ) or CP-CASSCF (see CASSCF Linear Response ) equations. Details are shown below:</p>
+<pre><code>%elprop Dipole true Quadrupole true Polar true PolarVelocity true # polarizability w.r.t. velocity perturbations PolarDipQuad true # dipole-quadrupole polarizability PolarQuadQuad true # quadrupole-quadrupole polarizability</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Hyperpol true # the dip/dip/dip hyperpolarizability freq_r 0.00 # purely real frequency (default: static calculation) freq_i 0.00 # purely imaginary frequency (default: static calculation) Solver CG # CG(conjugate gradient) # other options: DIIS or POPLE(default) MaxDIIS 5 # max. dimension of DIIS method Shift 0.2 # level shift used in DIIS solver Tol 1e-3 # Convergence of the CP-SCF equations # (norm of the residual) MaxIter 64 # max. number of iterations in CPSCF PrintLevel 2 Origin CenterOfElCharge # center of electronic charge CenterOfNucCharge # center of nuclear charge CenterOfSpinDens # center of spin density CenterOfMass # center of mass (default) N # position of atom N (starting at 0) X,Y,Z # explicit position of the origin # in coordinate input units (Angstrom by default) end</code></pre>
+<p>The most efficient and accurate way to calculate the polarizability analytically is to use the coupled-perturbed SCF method. The most time consuming and least accurate way is the numerical second derivative of the total energy. Note that the numerical differentiation requires: (a) tightly or even very tightly converged SCF calculations and (b) carefully chosen field increments. If the field increment is too large then the truncation error will be large and the values will be unreliable. On the other hand, if the field increment is too small the numerical error associated with the finite difference differentiation will get unacceptably large up to the point where the whole calculation becomes useless.</p>
+<h2>5.21 Nuclear Magnetic Resonance (NMR) Parameters</h2>
+<h2>5.21.1 NMR Chemical Shifts</h2>
+<p>NMR chemical shifts at the HF, DFT (standard GGA and hybrid functionals), CASSCF, as well as the RI- and DLPNO-MP2 and double-hybrid DFT levels (see section MP2 Level Magnetic Properties and references therein), plus Coupled Cluster (GIAO-CCSD, GIAO-CCSD(T), see AUTOCI Response Properties via Analytic Derivatives ) can be obtained from the EPR/NMR module of ORCA. For the calculation of the NMR shielding tensor the program utilizes Gauge Including Atomic Orbitals (GIAOs - sometimes also referred to as London orbitals). [685, 686, 687] In this approach, field dependent basis functions are introduced, which minimizes the gauge origin dependence and ensures rapid convergence of the results with the one electron basis set. [688] Note that GIAOs are NOT currently available with CASSCF linear response and a gauge origin must be provided in the %eprnmr block (see CASSCF Linear Response ). GIAOs for CASSCF response are coming soon to ORCA! A complete list of possible keywords for the eprnmr module can be found in EPRNMR - keywords for magnetic properties .</p>
+<p>The use of the chemical shift module is simple:</p>
+<pre><code># Ethanol -Calculation of the NMR chemical shieldings at the HF/SVP level of ␣ ↪ → theory ! RHF SVP Bohrs NMR * xyz 0 1 C -1.22692181 0.24709455 -0.00000000 C -0.01354839 -0.54677253 0.00000000 H -2.09280406 -0.41333631 0.00000000 H -1.24962478 0.87541936 -0.88916500 H -1.24962478 0.87541936 0.88916500 O 1.09961824 0.30226226 -0.00000000 H 0.00915178 -1.17509696 0.88916500</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>H H</td><td>0.00915178</td><td>-1.17509696</td><td>-0.88916500</td></tr><tr><td></td><td>1.89207683</td><td>-0.21621566</td><td>0.00000000</td></tr><tr><td>*</td><td></td><td></td><td></td></tr></tbody></table>
+<p>The output for the shieldings contains detailed information about the para- and diamagnetic contribution, the orientation of the tensor, the eigenvalues, its isotropic part etc. For each atom, an output block with this information is given :</p>
+<table><tbody><tr><td>Nucleus</td><td>0C :</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="4">Diamagnetic contribution to the shielding tensor</td><td>(ppm)</td><td>:</td><td></td></tr><tr><td colspan="5">209.647 -10.519 0.000 -26.601 215.858 0.000 -0.000 0.000 200.382 Paramagnetic contribution to the shielding tensor (ppm): 59.273 18.302</td><td></td><td></td></tr><tr><td>Total Diagonalized sDSO</td><td>13.380 0.000 shielding tensor 268.920 -13.220 0.000 sT*s matrix: 200.382</td><td>6.063 -0.000 (ppm): 7.783 221.921 0.000 214.507</td><td>-0.000 -0.000 -2.770 -0.000 -0.000 197.611</td><td>210.998</td><td>iso=</td><td>208.629</td></tr><tr><td>sPSO Total</td><td>-2.770 ---------------</td><td>7.279 ---------------</td><td>---------------</td><td>58.057</td><td>iso=</td><td>20.855</td></tr><tr><td></td><td>197.611</td><td></td><td></td><td>269.055</td><td>iso=</td><td>229.484</td></tr><tr><td></td><td></td><td>221.786</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>Note that all units are given in ppm and the chemical shieldings given are absolute shieldings (see below). At the end of the atom blocks, a summary is given with the isotropic shieldings and the anisotropy [689] for each nucleus:</p>
+<table><tbody><tr><th>Nucleus -------</th><th>Element -------</th><th>Isotropic ------------</th><th>Anisotropy ------------</th></tr><tr><td>0</td><td>C</td><td>229.484</td><td>59.356</td></tr><tr><td>1</td><td>C</td><td>227.642</td><td>62.878</td></tr><tr><td>2</td><td>H</td><td>56.015</td><td>12.469</td></tr><tr><td>3</td><td>H</td><td>55.460</td><td>15.284</td></tr><tr><td>4</td><td>H</td><td>55.460</td><td>15.284</td></tr><tr><td>5</td><td>O</td><td>334.125</td><td>110.616</td></tr><tr><td>6</td><td>H</td><td>47.337</td><td>27.101</td></tr><tr><td>7</td><td>H</td><td>47.337</td><td>27.101</td></tr><tr><td>8</td><td>H</td><td>64.252</td><td>32.114</td></tr></tbody></table>
+<p>Thus, the absolute, isotropic shielding for the 13 C nuclei are predicted to be 229.5 and 227.6 ppm and for 17 O it is 334.1 ppm. While basis set convergence using GIAOs is rapid and smooth, it is still recommended to do NMR calculations with basis sets including tight exponents, such as the purpose-built pcSsegn . However, TZVPP or QZVP should be sufficient in most cases. [690, 691]</p>
+<p>An important thing to note is that in order to compare to experiment, a standard molecule for the type of nucleus of interest has to be chosen. In experiment, NMR chemical shifts are usually determined relative to a standard, for example either CH 4 or TMS for proton shifts. Hence, the shieldings for the molecule of interest and a given standard molecule are calculated, and the relative shieldigs are obtained by subtraction of the reference value from the computed value. It is of course important that the reference and target calculations have been done with the same basis set and functional. This also helps to benefit from error cancellation if the standard is chosen appropriately (one</p>
+<p>option is even to consider an 'internal standard' - that is to use for example the 13 Cshielding of a methyl group inside the compound of interest as reference).</p>
+<p>Let us consider an example - propionic acid (CH 3 -CH 2 COOH). In databases like the AIST (http://sdbs.db.aist.go.jp) the 13 C spectrum in CDCl 3 can be found. The chemical shifts are given as δ 1 = 8.9 ppm, δ 2 = 27.6 ppm, δ 3 = 181.5 ppm. While intuition already tells us that the carbon of the carboxylic acid group should be shielded the least and hence shifted to lower fields (larger δ values), let's look at what calculations at the HF, BP86 and B3LYP level of theory using the SVP and the TZVPP basis sets yield:</p>
+<table><tbody><tr><td>method</td><th>σ 1</th><th>σ 2</th><th>σ 3</th></tr><tr><th>HF/SVP</th><td>191.7</td><td>176.6</td><td>23.7</td></tr><tr><th>HF/TZVPP</th><td>183.5</td><td>167.1</td><td>9.7</td></tr><tr><th>B86/SVP</th><td>181.9</td><td>165.8</td><td>26.5</td></tr><tr><th>B86/TZVPP</th><td>174.7</td><td>155.5</td><td>7.6</td></tr><tr><th>B3LYP/SVP</th><td>181.8</td><td>165.8</td><td>22.9</td></tr><tr><th>B3LYP/TZVPP</th><td>173.9</td><td>155.0</td><td>2.9</td></tr></tbody></table>
+<p>Looking at these results, we can observe several things - first of all, the dramatic effect of using too small basis sets, which yields differences of more than 10 ppm. Second, the results obviously change a lot upon inclusion of electron correlation by DFT and are functional dependent. Last but not least, these values have nothing in common with the experimental ones (they change in the wrong order), as the calculation yields absolute shieldings like in the table above, but the experimental ones are relative shifts , in this case relative to TMS.</p>
+<p>In order to obtain the relative shifts, we calculate the shieldings σ TMS of the standard molecule (TMS HF/TZVPP: 194.1 ppm, BP86/TZVPP: 184.8 ppm, B3LYP/TZVPP: 184.3 ppm) and by using δ mol = σ ref -σ mol we can evaluate the chemical shifts (in ppm) and directly compare to experiment:</p>
+<table><tbody><tr><td>method</td><th>δ 1</th><th>δ 2</th><th>δ 3</th></tr><tr><th>HF/TZVPP</th><td>10.6</td><td>27.0</td><td>184.4</td></tr><tr><th>B86/TZVPP</th><td>10.1</td><td>29.3</td><td>177.2</td></tr><tr><th>B3LYP/TZVPP</th><td>10.4</td><td>29.3</td><td>181.4</td></tr><tr><th>Exp.</th><td>8.9</td><td>27.6</td><td>181.5</td></tr></tbody></table>
+<p>A few notes on the GIAO implementation in ORCA are in order. The use of GIAOs lead to some fairly complex molecular one- and two-electron integrals and a number of extra terms on the right hand side of the coupled-perturbed SCF equations. The two-electron contributions in particular can be time consuming to calculate. Thus, the RIJK, RIJDX, and RIJCOSX approximations were implemented and tested.[692] By default, the approximation used for the SCF is also applied to the GIAO integrals, but the latter can be changed using the GIAO_2el keyword in the eprnmr input block (see section EPRNMR - keywords for magnetic properties ). Note that, while the default COSX grids are typically sufficiently accurate for chemical shifts, the use of defgrid3 is recommended for special cases or post-HF calculations.</p>
+<p>The user can finely control for which nuclei the shifts are calculated (although this will not reduce the computational cost very much, which is dominated by the CP-SCF equations for the magnetic field). This works in exactly the same way as for the hyperfine and quadrupole couplings described in the next section. For example:</p>
+<pre><code>! B3LYP def2-TZVP TightSCF * int 0 1 C 0 0 0 0 0 0 C 1 0 0 1.35 0 0 H 1 2 0 1.1 120 0 H 1 2 3 1.1 120 180 H 2 1 3 1.1 120 0 H 2 1 3 1.1 120 180 *</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%eprnmr Ori = GIAO Nuclei = all C { shift } Nuclei = all H { shift } end</code></pre>
+<p>NMR chemical shifts are also implemented in combination with implicit solvent models, hence the NMR keyword can be combined with the CPCM input block. Note that for calculations including implicit solvent, it is highly recommended to also optimize the geometries using the same model. Regardless, explicit solvent-solute interactions observable in NMR (e.g. H-bonds), cannot be modelled with such a model: solvent molecules must be included explicitly in the calculation.</p>
+<h2>5.21.2 NMR Spin-Spin Coupling Constants</h2>
+<p>The indirect spin-spin coupling constants observed in NMR spectra of molecules in solution consist of four contributions: The diamagnetic spin orbit term:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>While the Fermi contact term is usually the most significant, all contributions can be computed at the HF and DFT level of theory using ORCA. For this purpose, the keyword ssall has to be invoked in the eprnmr input block, while each of the four terms can be requested using ssdso , sspso , ssfc , and sssd , respectively. For example:</p>
+<pre><code>! PBE0 pcJ-1 *xyz 0 1 O 0.00000 0.00000 0.11779 H 0.00000 0.75545 -0.47116 H 0.00000 -0.75545 -0.47116 * %eprnmr Nuclei = all O { ssall } Nuclei = all H { ssfc, sssd } end</code></pre>
+<p>Results will be given in Hz. Note that the default isotopes used might not be the ones desired for the calculation of NMRproperties, so it is recommended to define the corresponding isotopes using the ist flag. It is possible to also print the reduced coupling constants K (in units of 10 19 · T · J -2 ), which are independent of the nuclear isotopes, using the flag PrintReducedCoupling=True .</p>
+<p>The CP-SCF equations must be solved for one of the nuclei in each pair and are the bottleneck of the computation. Therefore, spin-spin coupling constants are calculated only between nuclei within a certain distance of eachother (5 Ångstrom by default). The latter can be changed using the SpinSpinRThresh keyword.</p>
+<p>The paramagnetic spin orbit term:</p>
+<p>The Fermi contact term:</p>
+<p>And the spin dipole term:</p>
+<p>(continued from previous page)</p>
+<p>If mulitple nuclides are requested, it is also possible to select only certain element pairs (e.g. only C-H and H-H, without C-C) using the SpinSpinElemPairs keyword. Analogously, the SpinSpinAtomPairs keyword selects the actual pairs of nuclei to consider. The union of the latter two options is used to reduce the selection made using the Nuclei input, after which SpinSpinRThresh is applied.</p>
+<p>Here is another example illustrating these additional options:</p>
+<pre><code>! B3LYP EPR-II * xyz 0 1 C -1.226922 0.247095 -0.000000 C -0.013548 -0.546773 0.000000 H -2.092804 -0.413336 0.000000 H -1.249625 0.875419 -0.889165 H -1.249625 0.875419 0.889165 O 1.099618 0.302262 -0.000000 H 0.009152 -1.175097 0.889165 H 0.009152 -1.175097 -0.889165 H 1.892077 -0.216216 0.000000 * %eprnmr nuclei = all C { ssall, ist = 13 }; nuclei = all H { ssall, ist = 1 }; nuclei = all O { ssall, ist = 17 }; PrintReducedCoupling true SpinSpinRThresh 3.0 # Angstrom SpinSpinElemPairs {C C} {O *} # "*" means any element SpinSpinAtomPairs {8 *} # indices start from 0 # Final selection: # C 0 -C 1 # C 0 -O 5 # C 1 -O 5 # C 1 -H 8 # H 3 -O 5 # H 4 -O 5 # O 5 -H 6 # O 5 -H 7 # O 5 -H 8 # H 6 -H 8 # H 7 -H 8 end</code></pre>
+<h2>5.21.3 Simulating NMR Spectra</h2>
+<p>From the computed NMR shieldings and spin-spin coupling constants, the coupled NMR spectra can be simulated. The most typical NMR experiments are decoupled 13 C and coupled 1 H spectra, so we will focus on these here. For simulating a full NMR spectrum, we will use ethyl crotonate as an example, and three steps are required: 1) computation of the spin-spin coupling constants, 2) computation of the chemcial shieldings and 3) simulation of the spectrum using a spin-Hamiltonian formalism. Note that these steps can be carried out independently and different levels of theory can be used for shieldings and couplings and the order of steps 1 and 2 doesn't matter.</p>
+<p>Furthermore, if the spectra are to be simulated with TMS as reference, the shieldings for TMS are required (the hydrogen and carbon values in this case are 31.77 and 188.10 ppm, respectively). Here is the input for the calculation for the coupling constants, which is named ethylcrotonate_sscc.inp :</p>
+<pre><code>! PBE pcJ-3 autoaux tightscf *xyzfile 0 1 ethylcrotonate.xyz</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%eprnmr Nuclei = all H {ssall} end</code></pre>
+<p>The spin-spin coupling constants will be stored in the file ethylcrotonate_sscc.property.txt , which the simulation of the NMR spectrum will need to read. The NMR shieldings and will be computed in the next step, for which the input ethylcrotonate_nmr.inp looks like this:</p>
+<pre><code>!TPSS pcSseg-3 autoaux tightscf NMR *xyzfile 0 1 ethylcrotonate.xyz</code></pre>
+<p>The final NMR spectrum simulation is carried out using orca_nmrspectrum , which requires a separate input file ethylcrotonate.nmrspec which looks like this (note the required final END statement):</p>
+<pre><code>NMRShieldingFile = "ethylcrotonate_nmr" #property file for shieldings NMRCouplingFile = "ethylcrotonate_sscc" #property file for couplings NMRSpecFreq = 80.00 #spectrometer freq [MHz] (default 400) PrintLevel = 0 #PrintLevel for debugging info NMRCoal = 1.0 #threshold for merged lines [Hz]␣ ↪ → (default 1) NMRREF[1] 31.77 #shielding for 1H reference [ppm] NMRREF[6] 188.10 #shielding for 13C reference [ppm] NMREquiv #lists of NMR-equivalent nuclei 1 {13 14 15} end #H 13,14,15 are equivalent (methyl) 2 {16 17} end #H 16 and 17 equivalent (ethyl) 3 {8 10 11} end #H 8,10,11 again equivalent methyl end #end equiv nucl block END #essential end of input</code></pre>
+<h2>and contains the following keywords:</h2>
+<p>NMRShieldingFile and NMRCouplingFile denote the .property.txt files from which the shielding tensors and coupling constants will be read by the NMR spectrum module. If this line is not given, the program will exepect the shieldings or couplings in the property file of the current calculation.</p>
+<p>NMRSpecFreq The NMR spectrometer frequency in MHz is decisive for the looks of the spectrum as shieldings are given in ppm and couplings are given in Hz. Default is 400 MHz.</p>
+<p>NMRCoal If two lines are closer than this threshold (given in Hz) then the module will coalesce the lines to one line with double intensity. Default it 1 Hz.</p>
+<p>NMRREF[X] Reference value for the absolute shielding of element X used in the relative shifts of the simulated spectrum. Typically, these are the absolute shielding values from a separate calculation of TMS, for example, and will be zero ppm in the simulated spectrum.</p>
+<p>NMREquiv The user has to specify groups of NMR equivalent nuclei. These are typically atoms which interchange on the NMR timescale, like methyl group protons. The shieldings and couplings will be averaged for each group specified by the user.</p>
+<p>with this input, orca_nmrspectrum is called with two arguments, the first one is a gbw file which contains all informations about the molecule, typically this is the gbw file of the nmr or the sscc calculation, and the name of the input file given above:</p>
+<pre><code>orca_nmrspectrum ethylcrotonate_nmr.gbw ethylcrotonate.nmrspec > output</code></pre>
+<h2>If this calculation is carried out, the NMR spectrum module will read the files</h2>
+<p>ethylcrotonate_sscc.property.txt and ethylcrotonate_nmr.property.txt , extract the shieldings and couplings, average the equivalent nuclei and set up an effective NMR spin Hamiltonian for each nucleus:</p>
+<p>H NMR ( p, q ) = σ p δ pq + J pq I p I q . (5.95)</p>
+<p>(continued from previous page)</p>
+<h2>Ϫ Caution</h2>
+<p>This includes all nuclei this nuclear spin couples to and should not contain too many spins (see SpinSpinRThres ), as the spin Hamiltonian for each atom and the nuclei it couples to is diagonalized brute force. Afterwards, all spin excitations are accumulated and merged into the final spectrum for each element. For ethyl crotonate the NMR spectrum output looks like this:</p>
+<p>The first column denotes the atom number of the nucleus the signal arises from, the second column denotes the line position in ppm and the third line denotes the relative intensity of the signal. For oxygen, no reference value was given, so the program will autmatically set the lowest value obtained in the calculation as reference value.</p>
+<p>Using gnuplot, for example, to plot the spectrum, the following plots for 13 C and 1 H are obtained 1 :</p>
+<p>1 The basic plot options for using gnuplot are plot "mydata" using 2:3 w i, "mydata" using 2:3:1 with labels</p>
+</div>
+</body>
+</html>

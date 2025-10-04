@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part035</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>-------ENTROPY -------The entropy contributions are T*S = T*(S(el)+S(vib)+S(rot)+S(trans)) S(el) -electronic entropy S(vib) -vibrational entropy S(rot) -rotational entropy S(trans)translational entropy The entropies will be listed as multiplied by the temperature to get units of energy Note: Rotational entropy computed according to Herzberg Infrared and Raman Spectra, Chapter V,1, Van Nostrand Reinhold, 1945 Point Group: C2v, Symmetry Number: 1 Rotational constants in cm-1: 0.000000 18.628159 18.628159 Vibrational entropy computed according to the QRRHO of S. Grimme Chem.Eur.J. 2012 18 9955 -------ENTROPY -------The entropy contributions are T*S = T*(S(el)+S(vib)+S(rot)+S(trans)) S(el) -electronic entropy S(vib) -vibrational entropy S(rot) -rotational entropy S(trans)translational entropy The entropies will be listed as multiplied by the temperature to get units of energy Electronic entropy ... 0.00065446 Eh 0.41 kcal/mol Vibrational entropy ... 0.00000000 Eh 0.00 kcal/mol Rotational entropy ... 0.00321884 Eh 2.02 kcal/mol Translational entropy ... 0.01636225 Eh 10.27 kcal/mol -----------------------------------------------------------------------Final entropy term ... 0.02023555 Eh 12.70 kcal/mol -------------------GIBBS FREE ENERGY -------------------The Gibbs free energy is G = H - T*S Total enthalpy ... -75.72324785 Eh Total entropy correction ... -0.02023555 Eh -12.70 kcal/mol -----------------------------------------------------------------------Final Gibbs free energy ... -75.74348340 Eh For completeness -the Gibbs free energy minus the electronic energy G-E(el) ... -0.00855802 Eh -5.37 kcal/mol</code></pre>
+<p>Let us calculate the free energy change for the reaction: H 2 O 2 → 2 OH</p>
+<p>The individual energy terms are:</p>
+<p>Electronic Energy: -151.46985 a.u. -(-151.55084) a.u. = 0.08099 a.u. (50.82 kcal/mol)</p>
+<p>Zero-point Energy: 0.01675 a.u. - 0.02631 a.u. = -0.00956 a.u. (-6.00 kcal/mol)</p>
+<p>Thermal Correction(translation/rotation): 0.00472 a.u. - 0.00283 a.u. = 0.00189 a.u. (1.19 kcal/mol)</p>
+<p>Thermal Enthalpy Correction: 0.00189 a.u. - 0.00094 a.u. = 0.00095 a.u. (0.60 kcal/mol)</p>
+<p>Entropy: -0.04047 a.u. -(-0.02584) a.u. = -0.01463 a.u. (-9.18 kcal/mol)</p>
+<p>Final ∆ G: 37.43 kcal/mol</p>
+<p>Thus, both the zero-point energy and the entropy terms contribute significantly to the total free energy change of the reaction. The entropy term is favoring the reaction due to the emergence of new translational and rotational degrees of freedom. The zero-point correction is also favoring the reaction since the zero-point vibrational energy of the O-O bond is lost. The thermal correction and the enthalpy correction are both small.</p>
+<h2>b Tip</h2>
+<ul>
+<li style="list-style-type: '· ';">You can run the thermochemistry calculations at several user defined temperatures and pressure by providing the program with a list of temperatures / pressures:</li>
+<li style="list-style-type: '· ';">Once a Hessian is available you can rerun the thermochemistry analysis at several user defined temperatures / pressures by providing the keyword PrintThermoChem and providing the name of the Hessian file:</li>
+</ul>
+<pre><code>Kelvin</code></pre>
+<pre><code>%freq Temp 290, 295, 300 # in Pressure 1.0, 2.0, 3.0 # in atm end</code></pre>
+<pre><code>! PrintThermoChem default: job-basename.hess</code></pre>
+<pre><code>%geom inhessname "FreqJob.hess" # end %freq Temp 290, 295, 300 # in Kelvin Pressure 1.0, 2.0, 3.0 # in atm end</code></pre>
+<h2>4.8.1 Diagonal Born-Oppenheimer Correction</h2>
+<p>For high-accuracy thermochemistry, one of the higher-order corrections to the energy that is required is the 'diagonal Born-Oppenheimer correction' (DBOC). The expression for the DBOC correction is derived by first-order perturbation theory and reads:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In order to evaluate the DBOC correction it is required to calculate the response of the orbitals (and the density) with respect to nuclear perturbations, which is the most expensive step of an analytic Hessian calculation. The correction is therefore best be evaluated in parallel with the usual thermochemical corrections. The implementation in ORCA covers the SCF level (e.g. closed-shell and spin-unrestricted Hartree-Fock and DFT).</p>
+<pre><code>! DBOC # or NoDBOC to turn it off (which is the default)</code></pre>
+<h2>Relevant Papers:</h2>
+<ol>
+<li style="list-style-type: '1. ';">Handy, Nicholas C.; Yamaguchi, Yukio; Schaefer, Henry F., III. The diagonal correction to the BornOppenheimer approximation: Its effect on the singlet-triplet splitting of CH2 and other molecular effects. The Journal of Chemical Physics , 1986 , 84 (8), 4481-4484. arXiv:https://pubs.aip.org/aip/jcp/articlepdf/84/8/4481/18958051/4481\_1\_online.pdf, DOI: 10.1063/1.450020.</li>
+</ol>
+<h2>4.8.2 Spin-Orbit Coupling Correction to the Total Energy</h2>
+<p>Another correction that is required for high-accuracy thermochemistry is the estimation of the energetic effect of SpinOrbit-Coupling (SOC) on the total energy. While most of ORCA treats the SOC as a perturbation and estimates its effect on molecular properties and spectra, the total energy contribution would require relativistic two-component theory. This is not yet implemented in ORCA. Thus, for the time being, there is a first-order perturbation correction for the SOC that proceeds as follows:</p>
+<p>The SCF energy is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In two-component theory, the Fock operator is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where T x,y,z are the 3 components of the SOC matrix.</p>
+<p>We then solve the eigenvalue problem:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Now we calculate the 2C density matrix from the eigenvectors</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where ˘ C is the occupied part of C . This then leads to the approximate 2 component energy:</p>
+<p>And the SOC correction is then simply:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This is obviously neglecting the relaxation of the orbitals due to the SOC. The approximation is necessarily rather crude and consequently, this term does require a bit of empirical scaling in actual applications to reach high accuracy.</p>
+<h2>Relevant Papers:</h2>
+<ul>
+<li style="list-style-type: '· ';">Kayal, R.; Neese, F. 2025 , in preparation</li>
+</ul>
+<h2>4.8.3 High Accuracy Thermochemistry: the HEAT protocol</h2>
+<p>The HEAT (High accuracy Extrapolated Ab initio Thermochemistry) protocol was established by Gauss, Stanton, Kallay and co-workers and aims at high accuracy total energies that are systematically within 1 kJ/mol of the most accurate experimental energies.</p>
+<p>The original HEAT formula contains eight terms:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where the individual contributions are:</p>
+<p>With the two-component overlap matrix</p>
+<table><tbody><tr><th>Term</th><th>Original Definition</th><th>Implementation in ORCA</th></tr><tr><td>Geometry</td><td>Optimized using CCSD(T)/cc-pVQZ</td><td>Same</td></tr><tr><td>E ∞ HF</td><td>Complete basis set limit extrapolated Hartree-Fock energy using aug-cc-pCVXZ (X=T,Q,5) and the formula E X HF = E ∞ HF + a exp ( - bX ) E ∞ , a, b are determined</td><td>Same</td></tr><tr><td>∆ E ∞ CCSD ( T )</td><td>Complete basis set limit extrapolated CCSD(T) energy using aug-cc-pCVXZ (X=Q,5) and the formula E X CCSD ( T ) = E ∞ + aX - 3</td><td>Same</td></tr><tr><td>∆ E CCSDT</td><td>Compensation of the difference between CCSD(T) and CCSDT. Difference between two-point extrapolated frozen-core CCSDT and CCSD(T) using ∆ E CCSDT = E TQ ( FC ) - E TQ ( FC )</td><td>Same</td></tr><tr><td>∆ E CCSDTQ</td><td>Compensation of the difference between CCSDT and CCSDTQ using the cc-pVDZ basis set ∆ E CCSDTQ = E DZ CCSDTQ ( FC ) - E DZ CCSDT ( FC )</td><td>Same</td></tr><tr><td>∆ E rel</td><td>Effects of scalar relativity. Expectation value of the CCSD(T)/ aug-cc-pCVTZ-DK density with the Darwin and Mass-Velocity Hamiltonians.</td><td>Estimated using the difference in CCSD(T) energies betweeen aug-cc-pCVTZ and aug-cc-pCVTZ-DK basis sets (with the DKH Hamiltonian).</td></tr><tr><td>∆ E ZPE</td><td>Zero-point energy using an anharmonic Force Field calculated at CCSD(T)/cc-pVQZ ∆ E ZPE = 1 2 ∑ i ω i + 1 4 ∑ i ≤ j x ij Where ω and x are harmonic and cubic force constants.</td><td>With the harmonic approximation at the CCSD(T)/cc-pVQZ level with a scaling factor for linear and symmetric top molecules, with the VPT2 module for rest of the molecules.</td></tr><tr><td>∆ E DBOC</td><td>Diagonal Born-Oppenheimer correction calculated at the SCF level.</td><td>Same</td></tr><tr><td>∆ E SOC</td><td>Spin-Orbit-Coupling correction. Full Valence CASSCF with singles- and doubles CI together with spin-orbit effective core potentials.</td><td>SCF level first order correction as described in Spin-Orbit Coupling Correction to the Total Energy</td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 4.7 - continued from previous page</div></caption><tbody><tr><th>Term</th><th>Original Definition</th><th>Implementation in ORCA</th></tr><tr><td></td><td></td><td>and empirically scaled.</td></tr></tbody></table>
+<p>Thus, for the most part, the ORCA implementation follows the original prescription with some limited changes that arise from the unavailability of all energy components in ORCA. The HEAT protocol is computed by a compound script HEAT.cmp that is delivered with ORCA.</p>
+<h2>Relevant Papers:</h2>
+<ol>
+<li style="list-style-type: '1. ';">Tajti, Attila; Szalay, Péter G.; Császár, Attila G.; Kállay, Mihály; Gauss, Jürgen; Valeev, Edward F.; Flowers, Bradley A.; Vázquez, Juana; Stanton, John F. HEAT: High accuracy extrapolated ab initio thermochemistry. The Journal of Chemical Physics , 2004 , 121 (23), 11599-11613. arXiv:https://pubs.aip.org/aip/jcp/articlepdf/121/23/11599/19246319/11599\_1\_online.pdf, DOI: 10.1063/1.1811608.</li>
+<li style="list-style-type: '· ';">Kayal, R.; Neese, F. 2025 , in preparation</li>
+</ol>
+<h2>4.9 Conical Intersections</h2>
+<p>The minima in the conical intersection seam-space between two states (named here I and J) can be found by using regular geometry optimization algorithms, except that the gradient to be optimized is [565]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where g ′ diff = 2( E I -E J )( ∂E I / ∂q -∂E J / ∂q ) is parallel to the gradient difference vector; g mean is the gradient mean and P is a projection matrix that projects out the gradient difference ( x ) and non-adiabatic coupling ( y ) direction components:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Now we have three approaches to solve this problem in ORCA, that will be explained next.</p>
+<h2>4.9.1 Gradient Projection</h2>
+<p>This is exactly what has been described above, and will be chosen as default whenever NACMEs between I and J are available. It is in principle the fastest and most accurate method. It can be invoked by setting:</p>
+<pre><code>%CONICAL METHOD GRADIENT_PROJECTION #or simply GP END</code></pre>
+<p>OBS.: Turning on the ETF (see Sec. Section 5.6.18) can improve the optimization when using the full Gradient Projection method.</p>
+<h2>4.9.2 Gradient Projection without NACME</h2>
+<p>It is an approximation to the method above, that one gets by completely neglecting the NACMEs. It is essentially equivalent to finding a surface crossing point, and will not necessarily find minima inside the CI seam-space, although the final ∆ E IJ should be zero.</p>
+<pre><code>%CONICAL METHOD GP_NONACME END</code></pre>
+<h2>4.9.3 Updated Branching Plane</h2>
+<p>Here the idea is to start from a guess NACME, which is any unit vector perpendicular to x , and do a progressive update on it, similar to the BFGS update on the Hessian [565]. The 'Branching Plane' defined by x and y then becomes iteratively more accurate until covergence is achieved. It has been shown to be quite accurate and is the default whenever NACMEs are not available. Can be used with:</p>
+<pre><code>%CONICAL METHOD UBP END</code></pre>
+<p>Finally, the ∆ E IJ energy threshold for the optimization can be altered with:</p>
+<pre><code>%CONICAL ETOL 1e-4 #default END</code></pre>
+<p>As a further example for such an analysis we show the conical intersection optimization of the ground and first excited state of singlet ethylene.</p>
+<p>This is currently only available using TD-DFT, will be expanded in future versions. More details about the specific options on Excited States via RPA, CIS, TD-DFT and SF-TDA .</p>
+<h2>Note</h2>
+<p>Even though locating the CI of a TD-DFT excited state and the reference state is supported, it is not the recommended way of finding the ground state-excited state CI, because such CIs are not described properly by TD-DFT (in particular, TD-DFT even predicts the wrong dimensionality for the intersection space). Instead, it is advised to use SF-TD-DFT for this purpose, e.g. use the T 1 state as the reference state, and calculate both the S 0 and S 1 states as excited states. ( vide infra )</p>
+<pre><code>!B3LYP DEF2-SVP CI-OPT %TDDFT IROOT 1 END * xyz 0 1 C 0.595560237 -0.010483480 -0.000284187 C -0.831313750 0.167231832 0.001482505 H -1.381857976 0.227877089 0.963419721 H 1.265119434 0.874806815 0.006897459 H -1.382258208 0.243775568 -0.959090898 H 1.027489724 -1.032962768 -0.008829646 *</code></pre>
+<h2>Tip</h2>
+<p>You can often use a structure between the optimized structures of both states for your CI-optimization. If this doesn't work, you might try a scan to get a better initial guess.</p>
+<p>The results of the CI-optimization are given in the following output. The energy difference between the ground and excited state is printed as E diff. (CI), being reasonably close for a conical intersection. For a description of the calculation of the non-adiabatic couplings at this geometry, see section Section 5.6.18.</p>
+<pre><code>.--------------------. ----------------------|Geometry convergence|-------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th colspan="5">Item</th><th colspan="3">value</th><th colspan="2">Tolerance</th><th colspan="11">Converged</th><td></td><td></td><td></td></tr><tr><td colspan="5">--------------------------------------------------------------------- Energy change</td><td colspan="4">0.0000164283</td><td>0.0000050000</td><td colspan="11">NO</td><td></td><td></td><td></td></tr><tr><td colspan="5">E diff. (CI)</td><td colspan="4">0.0000025162</td><td>0.0001000000</td><td colspan="11">YES</td><td></td><td></td><td></td></tr><tr><td colspan="5">RMS gradient</td><td colspan="4">0.0000068173</td><td>0.0001000000</td><td colspan="11">YES</td><td></td><td></td><td></td></tr><tr><td colspan="5">MAX gradient</td><td colspan="4">0.0000136891</td><td>0.0003000000</td><td colspan="11">YES</td><td></td><td></td><td></td></tr><tr><td colspan="5">RMS step</td><td colspan="4">0.0000358228</td><td>0.0020000000</td><td colspan="11">YES</td><td></td><td></td><td></td></tr><tr><td colspan="5">MAX step</td><td colspan="4">0.0000821130</td><td>0.0040000000</td><td colspan="11">YES</td><td></td><td></td><td></td></tr><tr><td colspan="5">Max(Bonds)</td><td></td><td colspan="3">........................................................</td><td>0.00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Max(Dihed)</td><td colspan="3">Max(Angles) Max(Improp)</td><td>0.00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td colspan="3">0.00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td colspan="19">---------------------------------------------------------------------</td></tr><tr><td>final evaluation at the new geometry represents the equilibrium␣</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Convergence will therefore be signaled now</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>***********************HURRAY******************** *** THE OPTIMIZATION HAS CONVERGED *** ************************************************* --------------------------------------------------------------------------- Redundant Internal Coordinates --- Optimized Parameters ---</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Definition ---------------------------------------------------------------------------- 1. B(C</td><td>1,C</td><td></td><td></td><td></td><td></td><td></td><td></td><td>-0.0000</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>A(H 3,C A(C 1,C</td><td></td><td>0) 1)</td><td></td><td></td><td>1.3254</td><td>-0.000005</td><td></td><td></td><td></td><td></td><td colspan="8">1.3254</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>2,C</td><td>1)</td><td>5)</td><td>5)</td><td>1.1271</td><td>0.000004</td><td>-0.0000</td><td></td><td></td><td colspan="10">1.1270</td><td></td><td></td><td></td></tr><tr><td>2. B(H</td><td></td><td>0)</td><td>106.00 126.97</td><td></td><td></td><td>-0.0000</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4. B(H 6.</td><td>5,C</td><td>0)</td><td>-0.000002 0.000001</td><td></td><td>1.1271 106.00</td><td></td><td>1.1271</td><td>0.0000 -0.00</td><td></td><td></td><td></td><td>1.1271</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3. B(H</td><td></td><td>0,H</td><td></td><td></td><td>1.1270</td><td></td><td>0.0000</td><td></td><td></td><td></td><td></td><td>1.1271</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>5. B(H 7.</td><td>3,C</td><td>0,H</td><td>-0.000002 0.000000 -0.000013</td><td></td><td>1.1271 126.97</td><td></td><td></td><td>0.00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>4,C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<h2>4.9.4 CI Minima Between Excited States</h2>
+<p>In an analogous way, the conical intersection minima between two excited states can be requested by selection both an IROOT and a JROOT, shown below.</p>
+<pre><code>!B3LYP DEF2-SVP CI-OPT %TDDFT IROOT 2 JROOT 1 #IROOTMULT TRIPLET would search in the triplet PES #SF TRUE would search for the S0-S1 CI from a T1 reference, using SF-TD-DFT # (but remember to set the multiplicity as 3 instead of 1) END * xyz 0 1 C 0.595560237 -0.010483480 -0.000284187 C -0.831313750 0.167231832 0.001482505 H -1.381857976 0.227877089 0.963419721 H 1.265119434 0.874806815 0.006897459 H -1.382258208 0.243775568 -0.959090898 H 1.027489724 -1.032962768 -0.008829646 *</code></pre>
+<h2>4.10 Minimum Energy Crossing Points (MECP)</h2>
+<p>The MECP optimization allows the user to optimize to structures where two different potential energy surfaces (PES1 and PES2) cross each other. In this optimization two conditions apply: the energy E 1 of PES1 is minimized while at the same time the energy difference ( E 1 -E 2 ) 2 of both surfaces is minimized. For the implementation we follow in principle the suggestions of Harvey et al. in [541].</p>
+<p>For the minimization two different gradients are constructed:</p>
+<p>The first gradient chosen for the minimization is</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where x 1 is the gradient difference vector</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which is orthogonal to the crossing hyperline near the MECP.</p>
+<p>The gradient is orthogonal to x 1 .</p>
+<p>Both gradients are combined to yield the effective surface crossing gradient</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The crossing hyperline is defined as the 3 N -7 dimensional subspace of PES1, which is orthogonal to x 1 . In the MECP optimization we want to find the point of lowest energy within this subspace.</p>
+<p>Our calculation of normal modes and force constants for movements along the crossing hyperline differ from the one proposed by Harvey et al. A standard frequency analysis cannot be performed, but a similar procedure is applied:</p>
+<p>Let us regard the second-order Taylor expansion for the energy of both surfaces near the MECP for a displacement along the crossing hyperline (orthogonal to x 1 ):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with:</p>
+<table><tbody><tr><td>E A H eff ,A ∆ q</td><td>Energy E 1 on PES1 or E 2 on PES2 effective Hessian for PES1 or PES2 displacement along the crossing hyperline</td></tr></tbody></table>
+<p>Diagonalization of this effective Hessian gives us the normal modes of the crossing hyperline and thus allows us to decide whether the MECP optimization converged to a minimum in the 3 N -7 dimensional subspace of the crossing hyperline.</p>
+<p>The procedure for the calculation of the effective Hessian is now as follows: For each of both surfaces the second derivative matrix is calculated. Then the 6 rotations and translations and additionally the direction of the gradient difference vector x 1 (this ensures that movement orthogonal to the crossing hyperline, for which we do NOT satisfy the conditions of a stationary point, is excluded) are projected out from the Hessian matrix.</p>
+<p>As an example we show the MECP optimization of the quartet and sextet state of [FeO] + .</p>
+<pre><code>! B3LYP TZVP Opt SurfCrossOpt SlowConv %mecp Mult 4 end * xyz +1 6 Fe 0.000000 0.000000 0.000000 O 0.000000 0.000000 1.670000 *</code></pre>
+<p>b</p>
+<p>Tip</p>
+<p>You can often use a minimum or TS structure of one of the two spin states as initial guess for your MECPoptimization. If this doesn't work, you might try a scan to get a better initial guess.</p>
+<p>The results of the MECP optimization are given in the following output. The distance where both surfaces cross is at 1.994 Å. In this simple example there is only one degree of freedom and we can also locate the MECP via a parameter scan. The results of the scan are given in Fig. 4.5 for comparison. Here we see that the crossing occurs at a Fe-O-distance of around 2 Å.</p>
+<p>For systems with more than two atoms a scan is not sufficient any more and you have to use the MECP optimization.</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 4.5: Parameter scan for the quartet and sextet state of [FeO] + (B3LYP/SV(P)).</div></figcaption></figure>
+<p>A more realistic example with more than one degree of freedom is the MECP optimization of a structure along the reaction path of the CH 3 O ↔ CH 2 OH isomerization.</p>
+<pre><code>! B3LYP SV SurfCrossOpt SurfCrossNumFreq %mecp Mult 1 end *xyz 1 3 C 0.000000 0.000000 0.000000 H 0.000000 0.000000 1.300000 H 1.026719 0.000000 -0.363000 O -0.879955 0.000000 -1.088889 H -0.119662 -0.866667 0.961546 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">To verify that a stationary point in a MECP optimization is a minimum, you have to use an adapted frequency analysis, called by SurfCrossNumFreq .</li>
+</ul>
+<h2>4.10.1 Keywords</h2>
+<p>For MECP optimizations the following options exist:</p>
+<pre><code>%mecp SurfCrossOpt true # switches on the MECP optimization # alternatively use: ! SurfCrossOpt SurfCrossNumFreq true # switches on the MECP effective Hessian # calculation # alternatively use: ! SurfCrossNumFreq # separate MO input for the second spin state (PES2) moinp "Myfile.gbw"# MO input for PES2 # information on the electronic structure of PES 2 Mult 3 # multiplicity of PES2 brokenSym 1,1 # broken symmetry for PES2 # CASSCF options for PES2 (also see the CASSCF chapter) casscf_nel 6 # number of active space electrons casscf_norb 6 # number of active orbitals casscf_mult 1,3 # multiplicities singlet and triplet casscf_nroots 4,2 # four singlets, two triplets casscf_bweight 2,1 # singlets and triplets weighted 2:1 casscf_weights[0] = 0.5,0.2,0.2,0.2 # singlet weights casscf_weights[1] = 0.7,0.3 # triplet weights end</code></pre>
+<h2>4.11 GOAT:global geometry optimization and ensemble generator</h2>
+<p>If instead of trying to optimize a single structure, starting from a given guess geometry, you want to find the global minimum or the ensemble around it, ORCA features a Global Optimizer Algorithm (GOAT)[566] inspired by Wales and Doye's basin-hopping [567], Goedecker's minima hopping [568], Simulated Annealing and Taboo Search.</p>
+<p>The idea is to start from somewhere on the potential energy surface (PES; red ball on Fig. 4.6), go first to the nearest local minimum (blue ball), and from there start pushing 'uphill' on a random direction until a barrier is crossed. Then a new minimum is found and the process is restarted, with another uphill push followed by an optimization. After several of these GOAT iterations (uphill + downhill), if no new global minimum was found between the two last global iterations.</p>
+<figure><figcaption><div class="caption">Fig. 4.6: A simple depiction of the difference between a regular geometry optimization (above), and the GOAT global optimizer (below). By using the latter, one finds not only one local minimum but the global one and the conformational ensemble around it.</div></figcaption></figure>
+<p>Since structures are collected along the way to the global minimum, we have in the end not only the global minimum, but also the conformational ensemble for that molecule, meaning all the conformations it can have and their relative energies. This is also useful later to compute Boltzmann-averaged spectra and properties.</p>
+<p>The idea is similar to what is done with CREST from the group of Prof. Grimme [569], except that no metadynamics is required and thus much less gradient runs are needed. It is thus suitable not only for super fast methods such as XTB and force-fields, but can also be used directly using DFT or with any method available in ORCA.</p>
+<p>Please note that there is no ab initio way to find global minima for arbitrary unknown functions, and stochastic methods are the most efficient on finding these. The drawback is that it is based on random choices, so that many geometry optimizations are needed - here in the order of 100 × the number of atoms. Good news is: these can be efficiently parallelized (even multinode) and this number can be brought down to less than 3 × the number of atoms (see below)!</p>
+<h2>4.11.1 GOAT simple usage example - Histidine</h2>
+<p>Let's start with a simple example, the amino acid histidine:</p>
+<figure><figcaption><div class="caption">Fig. 4.7: A histidine molecule.</div></figcaption></figure>
+<p>By simply looking at its Lewis structure, it is not at all evident that there are actually at least 20 conformers in the 3 kcal/mol range from the global minimum on the XTB PES! In order to find them, one can run:</p>
+<p>The command to call the global optimizer is simply !GOAT , like you would with !OPT , and its options can be given under the %GOAT block as usual. You can give it together with any other method available in ORCA, but it needs to be a fast one because a lot of geometry optimizations need to be done. Here we will just use GFN2 (or !XTB ). What will happen next is:</p>
+<ol>
+<li style="list-style-type: '1. ';">First a regular geometry optimization will be done to find the minimum closest to the input structure.</li>
+<li style="list-style-type: '2. ';">With that information in hand, the number of necessary GOAT iterations will be computed and divided among NWorkers (8 by default).</li>
+<li style="list-style-type: '3. ';">Each Worker has its own parameters and will run a certain number of geometry optimizations.</li>
+<li style="list-style-type: '4. ';">After all workers in a global cycle are done, data will be collected and a new cycle will begin. There will be at least a 'Minimum global steps' number of global cycles like this.</li>
+<li style="list-style-type: '5. ';">Once the difference between two global steps is negligible, it stops, collects everything and prints the ensemble energies and a file with all structures.</li>
+</ol>
+<h2>4.11.2 Understanding the output</h2>
+<p>After the usual geometry optimization, the output looks like:</p>
+<pre><code>Global parameters -----------------GOAT version ... default Minimum global steps ... 3 Number of base workers ... 4 Split workers by ... 2 Final number of workers ... 8 Number of available CPUs ... 16 Parameter list (worker : temperature) ... 0 : 2903.97, 1 : 1451.98, 2 : 725.99, 3 : 363.00, 4 : 2903.97, 5 : 1451.98, 6 : 725.99, 7 : 363.00 GradComp (mean : sigma) ... 1.00 : 0.50 Number of atoms ... 20 Number of fragments ... 1 Flexibility parameter ... 0.45 Optimizations per global step ... 160 Optimizations per worker ... 20 Filtering criteria ------------------RMSD ... 0.125 Angs (atom. pos.) EnDiff ... 0.100 kcal/mol RotConst ... 1.00-2.50 % Maximum Conf. Energy ... 6.000 kcal/mol Thermodynamics --------------Ensemble temperature ... 298.15 K Degeneracy of conformers ... 1 *No rotamers will be included in Gconf</code></pre>
+<p>On the top there is some general information. Most important here is that we have 8 workers and 1 CPU, meaning each worker will run only after the other is done. If you want to speed up, just add more CPUs via e.g., !PAL8 and workers will run in parallel making it 8x faster. GOAT can also run multinode, so feel free to use any number of processors via %PAL . In the end the filtering criteria used to differentiate conformers and rotamers is printed.</p>
+<p>The default filtering is precisely the same as that of CREST: RMSD of atomic positions together with the rotational constant, considering its anisotropy. For GOAT-EXPLORE , the default RMSD metric is based on the eigenvalues of the distance matrix instead, since it is invariant to translations, rotations and the atom ordering, which changes quite often in these cases.</p>
+<p>After that, the algorithm starts:</p>
+<table><tbody><tr><th>Iter</th><th>MinTemp</th><th colspan="2">MaxEn GradComp</th><td></td><td></td><th>NOpt</th><th>NProcs</th><th>Output</th><td></td></tr><tr><td>0</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td>HIS.goat.0.0.out</td><td></td></tr><tr><td>1</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td>HIS.goat.0.1.out</td><td></td></tr><tr><td>2</td><td>725.99</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td>HIS.goat.0.2.out</td><td></td></tr><tr><td>3</td><td>363.00</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td>HIS.goat.0.3.out</td><td></td></tr><tr><td>4</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>: 0.50</td><td></td><td>20</td><td>2</td><td>HIS.goat.0.4.out</td><td></td></tr><tr><td>5</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>: 0.50</td><td>20</td><td></td><td>2</td><td>HIS.goat.0.5.out</td><td></td></tr><tr><td>6</td><td>725.99</td><td>60.00</td><td>1.00</td><td>: 0.50</td><td>20</td><td></td><td>2</td><td>HIS.goat.0.6.out</td><td></td></tr><tr><td>7</td><td>363.00</td><td>60.00</td><td>1.00</td><td>: 0.50</td><td>20</td><td></td><td>2</td><td>HIS.goat.0.7.out</td><td></td></tr><tr><td colspan="10">GOAT Global Iter 1</td></tr><tr><td></td><td></td><th>Iter</th><th>Min En</th><th colspan="2">Sconf</th><th colspan="3">Gconf</th><td></td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td></td><td></td><th colspan="4">Hartree =========================================</th><th colspan="5">cal/(molK) kcal/mol</th></tr><tr><td></td><td></td><th>1</th><th colspan="3">-34.346656</th><th>4.432</th><th>-0.551</th><td></td><td></td><td></td></tr><tr><td>0</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.0.out</td></tr><tr><td>1</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.1.out</td></tr><tr><td>2</td><td>725.99</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.2.out</td></tr><tr><td>3</td><td>363.00</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.3.out</td></tr><tr><td>4</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.4.out</td></tr><tr><td>5</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.5.out</td></tr><tr><td>6</td><td>725.99</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.6.out</td></tr><tr><td>7</td><td>363.00</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.7.out</td></tr><tr><td></td><td></td><th>Iter Min</th><th>GOAT En</th><td></td><th>Global</th><th>Iter 2</th><th>Gconf</th><th colspan="3">Sconf</th></tr><tr><td></td><td></td><th>Hartree</th><td></td><td></td><td></td><td></td><th>kcal/mol</th><th colspan="3">cal/(molK)</th></tr><tr><td></td><td></td><th>========================================= 1</th><th>-34.346656</th><td></td><td></td><th>4.432</th><th>-0.551</th><td></td><td></td><td></td></tr><tr><td></td><td></td><th>2</th><th>-34.346656</th><td></td><td></td><th>4.528</th><th>-0.559</th><td></td><td></td><td></td></tr><tr><td>0</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.0.out</td></tr><tr><td>1</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.1.out</td></tr><tr><td>2</td><td>725.99</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.2.out</td></tr><tr><td>3</td><td>363.00</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.3.out</td></tr><tr><td>4</td><td>2903.97</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.4.out</td></tr><tr><td>5</td><td>1451.98</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.5.out</td></tr><tr><td>6</td><td>725.99</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.6.out</td></tr><tr><td>7</td><td>363.00</td><td>60.00</td><td>1.00</td><td>:</td><td>0.50</td><td>20</td><td>2</td><td colspan="3">HIS.goat.0.7.out</td></tr><tr><td></td><td></td><th>Global</th><td></td><td></td><td></td><th>Iter 3</th><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>GOAT</th><td></td><td></td><td></td><th>Sconf</th><th>Gconf</th><td></td><td></td><td></td></tr><tr><td></td><td></td><th>Iter Min En</th><td></td><td></td><td></td><td></td><th>kcal/mol</th><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><th>Hartree</th><td></td><td></td><td></td><td></td><th colspan="3">cal/(molK)</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><th colspan="3">=========================================</th></tr><tr><td></td><td></td><th>1</th><th>-34.346656</th><td></td><td></td><th>4.432</th><td></td><th colspan="3">-0.551 4.528 -0.559</th></tr><tr><td></td><td></td><th>2 3</th><th>-34.346656</th><th>-34.346656</th><td></td><td></td><th>-0.560</th><th colspan="3">4.541</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><th>Global</th><td></td><th colspan="3">minimum</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><th>found!</th><td></td><td></td><td></td></tr><tr><td></td><td></td><th>Writing</th><td></td><td></td><td></td><th>to</th><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><th colspan="3">structure</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><th colspan="3">HIS.globalminimum.xyz</th></tr></tbody></table>
+<p>Onthe top header one can see what are the temperatures used, the maximum energy allowed during an uphill step, the maximum coefficient for gradient reflection, the number of optimizations done per worker, the number of processors used for each and the local output file name.</p>
+<p>The names of the output files are chosen as BaseName.goat.globaliteration.workernumber.out . These are deleted after the run by default, but can be kept by setting KEEPWORKERDATA TRUE under %GOAT .</p>
+<p>During each global iteration, the minimum energy so far, the conformational entropy S conf and the conformational Gibbs free energy G conf are printed. Since there are no rotamers here , the entropy is calculated only on the basis of the conformer energies and its convergence hints to the completeness of the ensemble created.</p>
+<h2>4.11.3 The final ensemble</h2>
+<p>In this case, as you can see, it already found the global minimum after the first global cycle with E = -34.346656 Hartree, but it keeps running for at least 3 cycles, following the defaults. This happens because it is a small molecule, but it is not necessarily so and more cycles will be done if needed.</p>
+<p>The final relative energies of the ensemble are printed afterwards, together with a BaseName.finalensemble. xyz file:</p>
+<table><tbody><tr><td></td><th colspan="2"># Final ensemble info #</th><td></td><td></td><td></td></tr><tr><td></td><th>Conformer</th><th>Energy (kcal/mol)</th><th>Degen.</th><th>% total</th><th>% cumul.</th></tr><tr><td>------------------------------------------------------</td><td>0</td><td>0.000</td><td>1</td><td>37.96</td><td>37.96</td></tr><tr><td></td><td>1</td><td>0.503</td><td>1</td><td>16.25</td><td>54.20</td></tr><tr><td></td><td>2</td><td>0.914</td><td>1</td><td>8.11</td><td>62.32</td></tr><tr><td></td><td>3</td><td>1.159</td><td>1</td><td>5.37</td><td>67.68</td></tr><tr><td></td><td>4</td><td>1.297</td><td>1</td><td>4.25</td><td>71.94</td></tr><tr><td></td><td>5</td><td>1.320</td><td>1</td><td>4.09</td><td>76.03</td></tr><tr><td></td><th colspan="5">(...)</th></tr><tr><td></td><td>41</td><td>5.180</td><td>1</td><td>0.01</td><td>99.98</td></tr><tr><td></td><td>42</td><td>5.199</td><td>1</td><td>0.01</td><td>99.99</td></tr><tr><td></td><td>43</td><td>5.491</td><td>1</td><td>0.00</td><td>99.99</td></tr><tr><td></td><td>44</td><td>5.547</td><td>1</td><td>0.00</td><td>99.99</td></tr><tr><td></td><td>45</td><td>5.861</td><td>1</td><td>0.00</td><td>100.00</td></tr><tr><td>Conformers below 3 kcal/mol: Lowest energy conformer : Sconf at 298.15 K : Gconf at 298.15 K :</td><td></td><td>22 -34.346656 Eh 4.54 cal/(molK) -0.56 kcal/mol</td><td></td><td></td><td></td></tr></tbody></table>
+<p>Just for the record, here is how the four lowest lying conformers look like:</p>
+<figure><figcaption><div class="caption">Fig. 4.8: The four lowest conformers found for histidine on the XTB PES.</div></figcaption></figure>
+<p>Whenever using GOAT , the EnforceStrictConvergence policy from ORCA's optimizer is set to TRUE . This is recommended here the ensure equal criteria for different molecules in the ensemble. It can be turned off by setting %GEOM EnforceStrictConvergence FALSE END .</p>
+<p>The regular optimization thresholds are already good, but it might also be a good idea to use !TIGHTOPT to make sure all your ensemble molecules are well converged, specially for the GOAT-EXPLORE !</p>
+<h2>4.11.4 GOAT-ENTROPY: expanding ensemble completeness by maximizing entropy</h2>
+<p>If you want to be as complete as possible in terms of the ensemble, you can use the !GOAT-ENTROPY keyword instead. This will not only try to find the global minimum until the energy is converged, but will actually only stop when the ∆ S conf also converges to less than 0.1 cal/(molK), which is equivalent to maximizing the conformational entropy (the threshold can be altered - see keyword list below).</p>
+<p>This will push the algorithm so that all conformers around the global minimum should be found together with it. Both temperature and ∆ S conf can be changed via specific keywords shown at the list below. A higher temperature will make the ∆ S conf more sensitive to changes in high energy conformational regions and should make the search even more complete.</p>
+<p>Being more explicit, the conformational entropy, enthalpy and Gibbs free energy are calculated according to:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where β = 1 k B T and g i is the 'degeneracy' of conformer i , i.e. its number of rotamers. This is the correct approach to deal with degenerate states [570]. The only difference from the reference above is that g ′ i is always one and we don't discriminate any factor for 'geometrical enantiomers'.</p>
+<h2>4.11.5 More on the ∆ S conf</h2>
+<p>It is important to say that, by default, the ∆ S conf is not the same as that found by a default CREST run . There it includes also the rotamer degeneracy on the calculation of the entropy, while here that is 1. The reasons for that are:</p>
+<ol>
+<li style="list-style-type: '1. ';">There are formal arguments for using only one, assuming that rotamers are indistinguishable. Please check Grimme's reference [570] for details.</li>
+<li style="list-style-type: '2. ';">For systems with many rotamers, e.g. molecules with 3 tert -butyl groups which give rise to at least ( 27 3 ) 19683 rotamers per conformer, the algorithm will never find all of these anyway.</li>
+<li style="list-style-type: '3. ';">When calling GOAT-ENTROPY , it is the entropy of the conformers that will be maximized, not of the ensemble. That guarantees the maximal distribution of different conformers during these searches.</li>
+</ol>
+<p>Once the final ensemble is found and if you know how many rotamers per conformer you have (assuming a constant number, like the tert -butyl case), one can reset that number by using READENSEMBLE "ensemble.xyz" to read it and CONFDEGEN to set a degeneracy. In the previous example that would be CONFDEGEN 19683 and would give you the desired ∆ G conf for that given ensemble.</p>
+<h2>Finding rotamers automatically</h2>
+<p>It is always possible to switch on the automatic search for rotamers and their degeneracy by setting CONFDEGEN AUTO if that is what you want. They will be added to the ensemble instead of being filtered out and the full ensemble will be saved in files named .confrot.xyz .</p>
+<p>Another approach would be to assume that, since the algorithm might find all rotamers for some conformers but not for all, one might set the degeneracy of all equal to the maximum value found so far ( CONFDEGEN AUTOMAX ). Let's take as an example a system with a tert -butyl + a methyl group with 81 rotamers per conformer. GOAT will hardly find 81 rotamers for every single conformer, but if it finds them for one conformer, all the others will also have that same number.</p>
+<p>Please be aware that there are cases where different conformers might have different numbers of rotamers (e.g. decane or long alkyl chains), and these cases should be treated with care.</p>
+<h2>4.11.6 GOAT-EXPLORE: global minima of atomic clusters or topology-free PES searches</h2>
+<p>In case you want to find the lowest energy conformer for a cluster or don't want to keep the initial topology at all, you can use the !GOAT-EXPLORE option instead. This will possibly break all bonds and find the lowest energy structure for that given set of atoms, be that a nanoparticle or an organic molecule.</p>
+<p>For instance, let's find the minimum of an Au 8 nanoparticle on the GFN1 PES, starting from just a random agglomeration of gold atoms:</p>
+<pre><code>!XTB1 GOAT-EXPLORE PAL16 #XTB version 6.4.0 %GOAT NWORKERS 16 END * xyz 0 1 Au -1.39858 2.62611 -0.79278 Au -2.50552 -0.07122 0.67538 Au -0.52174 -2.57892 -0.02415 Au 0.78881 0.39733 0.21816 Au 1.21116 1.90621 -2.64617 Au -1.19205 -0.30099 -2.30429 Au -0.33808 -1.07129 2.90822 Au -0.85565 2.15342 2.41956 *</code></pre>
+<p>Please note that there is a minimum number of optimizations per worker that must be respected in order for the algorithm to make sense. Otherwise, on the limit, one optimization per worker would mean almost nothing happens. This minimum number is max(N, 15) for the regular GOAT and max(3N, 45) for GOAT-EXPLORE and GOAT-REACT (see below), where N is the number of atoms. The searches using free topology are more demanding because there are many more degrees of freedom.</p>
+<p>When the minimum number of optimizations per worker is reached, the information is printed on the bottom of the header as:</p>
+<pre><code>GOAT version ... explore Minimum global steps ... 3 Number of base workers ... 4 Split workers by ... 4 Final number of workers ... 16 Number of available CPUs ... 1 Parameter list (worker : temperature) ... 0 : 2903.97, 1 : 1451.98, 2 : 725.99, 3 : 363.00, 4 : 2903.97, 5 : 1451.98, 6 : 725.99, 7 : 363.00, 8 : 2903.97, 9 : 1451.98, 10 : 725.99, 11 : 363.00,</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>12 : 2903.97, 13 : 1451.98, 14 : 725.99, 15 : 363.00 GradComp (mean : sigma) ... 1.00 : 0.50 Number of atoms ... 8 Number of fragments ... 1 Flexibility parameter ... 1.00 Optimizations per global step ... 528 Optimizations per worker ... 66 *Reached the minimum optimizations per worker [fmax(3 * NAtoms, 45)]!</code></pre>
+<p>The global minimum found is a D 4 h planar structure, the same as found on the literature for the Au 8 cluster using other DFT methods [571]:</p>
+<figure><figcaption><div class="caption">Fig. 4.9: The lowest energy conformer of the Au 8 cluster on the GFN1-xTB PES.</div></figcaption></figure>
+<h2>4.11.7 GOAT-REACT: an algorithm for automatic reaction pathway exploration</h2>
+<p>Another variant of the GOAT algorithm was created to allow for automatic reaction exploration, which in the end is nothing more than an exploration on the collective PES of reactant and product.</p>
+<p>Here the user can be really creative and there are many different ways to explore this algorithm, but let us start with a simple reaction: the gas phase reaction of ethylene and singlet oxygen.</p>
+<figure><figcaption><div class="caption">Fig. 4.10: What could be the products of the reaction between ethylene and singlet oxygen?</div></figcaption></figure>
+<p>After running the following input:</p>
+<pre><code>!XTB GOAT-REACT * XYZ 0 1 C -3.26482 -0.47497 0.33191 C -2.16518 0.24269 0.35382 H -4.23539 -0.01923 0.27823 H -3.23979 -1.54754 0.37118 H -2.19035 1.31540 0.31866 H -1.19481 -0.21295 0.41157 O -3.42426 -0.30941 2.30779 O -2.17088 0.05188 2.32517 *</code></pre>
+<p>the output looks more or less similar to the regular GOAT-EXPLORE , except for a few differences:</p>
+<ol>
+<li style="list-style-type: '1. ';">The maximum barriers GOAT is allowed to cross are higher.</li>
+<li style="list-style-type: '2. ';">The very initial geometry optimization is skipped by default.</li>
+<li style="list-style-type: '3. ';">AUTOWALL is set to TRUE which means that an ellipsoid wall potential is added using the maximum x,y,z dimensions of the molecule + 5 Angs as radii.</li>
+</ol>
+<p>Another important factor is the maximum topological difference ( MAXTOPODIFF ), which is set to 8 by default, as printed on the output:</p>
+<pre><code>Global parameters -----------------GOAT version ... react Max. topological diff. ... 8 Minimum global steps ... 3 Number of base workers ... 4</code></pre>
+<p>MAXTOPODIFF is a key concept here. If one simply looks for all possible topological permutations between reactants and products, even simple systems such as this could lead to an enormous number of combinations.</p>
+<p>We defined the topological difference simply as the sum of broken bonds + formed bonds from some reference structure, which is taken from the structure obtained after the first geometry optimization inside the GOAT iterations (before any uphill step).</p>
+<p>There will be more files printed than usual, the most important ones are:</p>
+<ol>
+<li style="list-style-type: '1. ';">Basename.products.xyz - contains all reactomers and all their conformers for the reaction. It is usually a very large file.</li>
+<li style="list-style-type: '2. ';">Basename.products.topodiff2.xyz - contains only those separated with topodiff 2 from the reference structure, and so on.</li>
+<li style="list-style-type: '3. ';">Basename.products.unique.xyz - contains a list of all topologically unique products, without their conformers or rotamers, only the lowest energy conformer is printed. Here the reference structure will come first and the others will be shown with their relative energy difference in kcal/mol.</li>
+</ol>
+<p>Some of the products found as an example for this reaction are:</p>
+</div>
+</body>
+</html>

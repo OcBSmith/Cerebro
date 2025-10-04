@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part027</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>3.19.4 A Tutorial Type Example of a MR Calculation</h2>
+<p>Perhaps, the most important use of the MR-CI module is for the calculation of transition energies and optical spectra. Let us first calculate the first excited singlet and triplet state of the formaldehyde molecule using the MR-CI method together with the Davidson correction to approximately account for the effect of unlinked quadruple substitutions. We deliberately choose a somewhat small basis set for this calculation which is already reasonable since we only look at a valence excited state and want to demonstrate the principle.</p>
+<p>Suppose that we already know from a ground state calculation that the HOMO of H 2 COis an oxygen lone pair orbitals and the LUMO the π ∗ MO. Thus, we want to calculate the singlet and triplet n → π ∗ transitions and nothing else. Consequently, we only need to correlate two electrons in two orbitals suggesting a CAS(2,2) reference space.</p>
+<pre><code># A simple MRCI example ! def2-SVP def2-SVP/C UseSym %method frozencore fc_ewin end %mrci ewin -3,1000 CIType MRCI EUnselOpt FullMP2 DavidsonOpt Davidson1 UseIVOs true tsel 1e-6 tpre 1e-2 MaxMemInt 256 MaxMemVec 32 IntMode FullTrafo AllSingles true Solver Diag # ground state 1A1 NewBlock 1 0 NRoots 1 Excitations cisd Refs CAS(2,2) end End # HOMO LUMO transition 1A2 NewBlock 1 1 NRoots 1 Excitations cisd Refs CAS(2,2) end End # HOMO LUMO triplet transition 3A2 NewBlock 3 1 NRoots 1 Excitations cisd Refs CAS(2,2) end end end * int 0 1 C 0 0 0 0.000000 0.000 0.000 O 1 0 0 1.200371 0.000 0.000 H 1 2 0 1.107372 121.941 0.000 H 1 2 3 1.107372 121.941 180.000 *</code></pre>
+<p>This input - which is much more than what is really required - needs some explanations: First of all, we choose a standard RHF calculation with the SVP basis set and we assign the SV/C fitting basis although it is not used in the SCF procedure at all. In the %mrci block all details of the MR-CI procedure are specified. First, EWin ( %method frozencore fc_ewin ) selects the MOs within the given orbital energy range to be included in the correlation treatment. The CIType variable selects the type of multireference treatment. Numerous choices are possible and</p>
+<p>MRCI is just the one selected for this application.</p>
+<p>The CIType statement selects several default values for other variables. So it is a very good idea to place this statement at the beginning of the MR-CI block and possibly overwrite the program selected defaults later. If you place the CIType statement after one of the values which it selects by default your input will simply be overwritten!</p>
+<p>The variables EUnselOpt and DavidsonOpt control the corrections to the MR-CI energies. EUnselOpt specifies the way in which the MR-CI energies are extrapolated to zero threshold TSel. Here we choose a full MR-MP2 calculation of the missing contributions to be done after the variational step, i.e. using the relaxed part of the reference wavefunction as a 0 th order state for MR-PT. The DavidsonOpt controls the type of estimate made for the effect of higher substitutions. Again, multiple choices are possible but the most commonly used one (despite some real shortcomings) is certainly the choice Davidson1 . The flag UseIVOs instructs the program to use 'improved virtual orbitals'. These are virtual orbitals obtained from a diagonalization of the Fock operator from which one electron has been removed in an averaged way from the valence orbitals. Thus, these orbitals 'see' only a N -1 electron potential (as required) and are not as diffuse as the standard virtual orbitals from Hartree-Fock calculations. If you input DFT orbitals in the MR-CI moldule (which is perfectly admittable and also recommended in some cases, for example for transition metal complexes) then it is recommended to turn that flag off since the DFT orbitals are already o.k. in this respect. The two thresholds Tsel and Tpre are already explained above and represent the selection criteria for the first order interacting space and the reference space respectively. Tsel is given in units of Eh and refers to the second order MR-MP2 energy contribution from a given excited CSF. 10 -6 Eh is a pretty good value. Reliable results for transition energies start with ≈ 10 -5 ; however, the total energy is converging pretty slowly with this parameter and this is one of the greatest drawbacks of individually selecting CI procedures! (see below). Tpre is dimensionless and refers to the weight of a given initial reference after diagonalization of the given initial reference space (10 -4 is a pretty good value and there is little need to go much lower. Aggressive values such as 10 -2 only select the truly leading configurations for a given target state which can be time saving. Intermediate values are not really recommended). The parameters MaxMemInt and MaxMemVec tell the program how much memory (in MB) it is allowed to allocate for integrals and for trial and sigma-vectors respectively.</p>
+<p>The flag IntMode tells the program to perform a full integral transformation. This is possible for small cases with less than, say, 100-200 MOs. In this case that it is possible it speeds up the calculations considerably. For larger molecules you have to set this flag to RITrafo which means that integrals are recomputed on the fly using the RI approximation which is more expensive but the only way to do the calculation. To switch between the possible modes use:</p>
+<pre><code>%mrci IntMode FullTrafo # exact 4 index transformation RITrafo # use auxiliary basis sets</code></pre>
+<p>For small molecules or if high accuracy in the total energies is required it is much better to use the exact four index transformation. The limitations are that you will run out of disk space or main memory with more than ca. 200-300 MOs.</p>
+<p>The variable Solver can be diag (for Davidson type diagonalization) or DIIS for multirrot DIIS type treatments.</p>
+<pre><code>%mrci Solver Diag # Davidson solver DIIS # Multiroot DIIS</code></pre>
+<p>For CI methods, the diag solver is usually preferable. For methods like ACPF that contain nonlinear terms, DIIS is imperative.</p>
+<p>Next in the input comes the definition of what CI matrices are to be constructed and diagonalized. Each multiplicity defines a block of the CI matrix which is separately specified. Here we ask for two blocks - singlet and triplet. The general syntax is:</p>
+<pre><code>NewBlock Multiplicity Irrep NRoots 1 # Number of roots to determine Excitations cisd # Type of excitations</code></pre>
+<p>(continues on next page)</p>
+<pre><code>Refs CAS(NEl,NOrb) end # Reference space def. end # Finalize the block</code></pre>
+<p>Now that all input is understood let us look at the outcome of this calculation:</p>
+<p>The first thing that happens after the SCF calculation is the preparation of the frozen core Fock matrix and the improved virtual orbitals by the program orca_ciprep . From the output the energies of the IVOs can be seen. In this case the LUMO comes down to -8.2 eV which is much more reasonable than the SCF value of + 3…. eV. Concomitantly, the shape of this MO will be much more realistic and this important since this orbital is in the reference space!</p>
+<pre><code>------------------------------------------------------------------------------ORCA CI-PREPARATION ------------------------------------------------------------------------------Reading the GBW file ... done Symmetry usage ... ON One-Electron Matrix ... test1.H.tmp GBW-File ... test1.gbw Improved virtual orbitals ... test1.ivo First MO in the CI ... 2 Internal Fock matrix ... test1.fi.tmp LastInternal Orbital ... 6 Integral package used ... LIBINT Reading the GBW file ... done Symmetry usage ... ON Reading the one-electron matrix ... done Forming inactive density ... done Forming averaged valence density ... Scaling the occupied orbital occupation numbers First MO ... 2 Last MO ... 7 Number of electrons in the range ... 12 Scaling factor ... 0.917 done Forming internal density ... done Forming Fock matrix/matrices ... Nuclear repulsion ... 31.371502 Core repulsion ... 31.371502 One-electron energy ... -114.942080 Fock-energy ... -94.993431 Final value ... -73.596254 done Modifying virtual orbitals ... Last occupied MO ... 7 Total number of MOs ... 38 Number of virtual MOs ... 30 Doing diagonalization with symmetry The improved virtual eigenvalues: 0: -0.2955 au -8.041 eV 2B2 1: -0.0701 au -1.907 eV 6A1 2: -0.0176 au -0.479 eV 3B1 3: 0.0064 au 0.175 eV 7A1 4: 0.2922 au 7.951 eV 8A1 5: 0.2948 au 8.021 eV 3B2 6: 0.3836 au 10.439 eV 4B1 7: 0.4333 au 11.790 eV 9A1 8: 0.4825 au 13.128 eV 5B1</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>9: 0.5027 au 13.680 eV 10A1 10: 0.7218 au 19.642 eV 11- A1 11: 0.8351 au 22.723 eV 4- B2 12: 0.9371 au 25.501 eV 6- B1 13: 1.0265 au 27.933 eV 1- A2 14: 1.1141 au 30.317 eV 12- A1 15: 1.2869 au 35.017 eV 5- B2 16: 1.4605 au 39.743 eV 7- B1 ... done Transforming integrals ... done Storing passive energy ... done ( -73.59625384 Eh) Transforming internal FI ... done .... done with the Frozen Core Fock matrices</code></pre>
+<p>The next step is to transform the electron-electron repulsion integrals into the MO basis:</p>
+<pre><code>-------------------------SHARK HALF TRANSFORMATION -------------------------Number of basis functions ... 38 Number of operators ... 1 Operator 0: 237 Integral generator used ... SHARK Contraction scheme used ... SEGMENTED CONTRACTION MaxCore in resort ... 256 MB Half transformed integrals for op= 0 ... test1.SHARK_MNPQ0.tmp Resorted half transformed integrals ... test1.JAO.tmp Starting integral generation + half trafo... Half trafo (segmented) done. Total time = 0.1 sec. integrals= 0.0 sec trafo= 0. ↪ → 0 sec Starting integral resorting ... done ( 0.0 sec) SHARK half integral transformation done. Total time = 0.1 sec. -------------------FULL TRANSFORMATION -------------------Processing MO 10 Processing MO 20 Processing MO 30 Full transformation done Number of integrals made ... 222111 Number of integrals stored ... 59070 Timings: Time for first half transformation ... 0.068 sec Time for second half transformation ... 0.014 sec Total time ... 0.086 sec</code></pre>
+<p>This will result in a few additional disk files required by orca_mrci . The program then tells you which multiplicities will be treated in this MRCI run:</p>
+<pre><code>------------------CI-BLOCK STRUCTURE ------------------</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Number of CI-blocks ... 3 =========== CI BLOCK 1 =========== Multiplicity ... 1 Irrep ... 0 Number of reference defs ... 1 Reference 1: CAS(2,2) Excitation type ... CISD Excitation flags for singles: 1 1 1 1 Excitation flags for doubles: 1 1 1 / 1 1 1 / 1 1 1 =========== CI BLOCK 2 =========== Multiplicity ... 1 Irrep ... 1 Number of reference defs ... 1 Reference 1: CAS(2,2) Excitation type ... CISD Excitation flags for singles: 1 1 1 1 Excitation flags for doubles: 1 1 1 / 1 1 1 / 1 1 1 =========== CI BLOCK 3 =========== Multiplicity ... 3 Irrep ... 1 Number of reference defs ... 1 Reference 1: CAS(2,2) Excitation type ... CISD Excitation flags for singles: 1 1 1 1 Excitation flags for doubles: 1 1 1 / 1 1 1 / 1 1 1 ---------------------------------------------------------------------------------------- ALL SETUP TASKS ACCOMPLISHED --------------------------------------( 0.139 sec) --------------------------------------------------------------------------------------</code></pre>
+<p>Now that all the setup tasks have been accomplished the MRCI calculation itself begins.</p>
+<pre><code>################################################### # # # M R C I # # # # TSel = 1.000e-06 Eh # # TPre = 1.000e-02 # # TIntCut = 1.000e-10 Eh # # Extrapolation to unselected MR-CI by full MP2 # # DAVIDSON-1 Correction to full CI #</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># # ################################################### ---------------------INTEGRAL ORGANIZATION ---------------------Reading the one-Electron matrix ... done E0 read was -73.596253835266 Reading the internal Fock matrix ... assuming it to be equal to the one-↪ → electron matrix!!! done Preparing the integral list ... done Loading the full integral ... done Making the simple integrals ... done *************************************** * CI-BLOCK 1 * *************************************** Configurations with insufficient # of SOMOs WILL be rejected Building a CAS(2,2) for multiplicity 1 and irrep=A1 Reference Space: Initial Number of Configurations : 2 Internal Orbitals : 2 -6 Active Orbitals : 7 -8 External Orbitals : 9 -37 The number of CSFs in the reference is 2 Calling MRPT_Selection with N(ref)=2</code></pre>
+<p>In the first step, the reference space is diagonalized. From this CI, the most important configurations are selected with Tpre :</p>
+<pre><code>------------------REFERENCE SPACE CI ------------------Pre-diagonalization threshold : 1.000e-02 Warning: Setting NGuessMat to 512 N(ref-CFG)=2 N(ref-CSF)=2 ****Iteration 0**** Lowest Energy : -113.779221580786 Maximum Energy change : 113.779221580786 (vector 0) Maximum residual norm : 0.000000000000 *** CONVERGENCE OF RESIDUAL NORM REACHED *** Reference space selection using TPre= 1.00e-02 ... found 1 reference configurations (1 CSFs) ... now redoing the reference space CI ... Warning: Setting NGuessMat to 512 N(ref-CFG)=1 N(ref-CSF)=1 ****Iteration 0**** Lowest Energy : -113.778810013503 Maximum Energy change : 113.778810013503 (vector 0) Maximum residual norm : 0.000000000000</code></pre>
+<p>(continues on next page)</p>
+<pre><code>*** CONVERGENCE OF RESIDUAL NORM REACHED ***</code></pre>
+<p>In this case, the CAS space only has 2 correctly symmetry adapted CSFs one of which (the closed-shell determinant) is selected. In general, larger CAS spaces usually carry around a lot of unnecessary CSFs which are not needed for anything and then the selection is important to reduce the computational effort. The result of the second reference space CI is printed:</p>
+<pre><code>----------CI-RESULTS ----------The threshold for printing is 0.30 percent The weights of configurations will be printed. The weights are summed over all CSFs that belong to a given configuration before printing STATE 0: Energy= -113.778810014 Eh RefWeight= 1.0000 0.00 eV 0.0 cm**-1 1.0000 : h---h---[20]</code></pre>
+<p>Energy is the total energy in Eh. In the present case we can compare to the SCF energy -113.778810014 Eh and find that the reference space CI energy is identical, as it has to be since the lowest state coincides with the reference space. RefWeight gives the weight of the reference configurations in a CI state. This is 1.0 in the present case since there were only reference configurations. The number 1.000 is the weight of the following configuration in the CI vector. The description of the configuration h-h-[20]p-pis understood as follows: 2 The occupation of the active orbitals is explicitly given in square brackets. Since the HOMO orbitals is number 7 from the SCF procedure, this refers to MOs 7 and 8 in the present example since we have two active orbitals. The 2 means doubly occupied, the 0 means empty. Any number (instead of -) appearing after an h gives the index of an internal orbital in which a hole is located. Simarly, any number after a p gives the index of an virtual (external) MO where a particle is located. Thus h-h-[20] is a closed shell configuration and it coincides with the SCF configuration-this was of course to be expected. The second root (in CI-Block 2) h-h-[11] by comparison refers to the configuration in which one electron has been promoted from the HOMO to the LUMO and is therefore the desired state that we wanted to calculate. Things are happy therefore and we can proceed to look at the output.</p>
+<p>The next step is the generation of excited configurations and their selection based on Tsel :</p>
+<pre><code>------------------------------MR-PT SELECTION TSel= 1.00e-06 ------------------------------Setting reference configurations WITH use of symmetry Building active patterns WITH use of symmetry Selection will be done from 1 spatial configurations Selection will make use of spatial symmetry ( 0) Refs : Sel: 1CFGs/ 1CSFs Gen: 1CFGs/ ␣ ↪ → 1CSFs ( 0.000 sec) Building active space densities ... 0.002 sec Building active space Fock operators ... 0.000 sec ( 1) (p,q)->(r,s): Sel: 1CFGs/ 1CSFs Gen: 1CFGs/ ␣ ↪ → 1CSFs ( 0.000 sec) ( 2) (i,-)->(p,-): Sel: 1CFGs/ 1CSFs Gen: 1CFGs/ ␣ ↪ → 1CSFs ( 0.000 sec) ( 3) (i,j)->(p,q): Sel: 8CFGs/ 8CSFs Gen: 8CFGs/ ␣ ↪ → 8CSFs ( 0.000 sec) ( 4) (i,p)->(q,r): Sel: 0CFGs/ 0CSFs Gen: 1CFGs/ ␣ ↪ → 1CSFs ( 0.000 sec) ( 5) (p,-)->(a,-): Sel: 8CFGs/ 8CSFs Gen: 8CFGs/ ␣ ↪ → 8CSFs ( 0.000 sec)</code></pre>
+<p>2 Note that for printing we always sum over all linearly independent spin couplings of a given spatial configuration and only print the summed up weight for the configuration rather than for each individual CSF of the configuration.</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><th>(continued from</th><th>page)</th><td></td></tr><tr><td>( ↪</td><td>6) (i,-)-&gt;(a,-): 52CSFs (</td><td>Sel: 0.000 sec)</td><td>52CFGs/</td><td>52CSFs</td><td>Gen:</td><td>52CFGs/</td><td>␣</td><td></td></tr><tr><td>→ ( ↪ →</td><td>7) (i,j)-&gt;(p,a): 167CSFs (</td><td>Sel: 0.000 sec)</td><td>95CFGs/</td><td>166CSFs</td><td>Gen:</td><td>96CFGs/</td><td>␣</td><td></td></tr><tr><td>( ↪</td><td>8) (i,p)-&gt;(q,a): 44CSFs (</td><td>Sel: 0.000 sec)</td><td>21CFGs/</td><td>42CSFs</td><td>Gen:</td><td>22CFGs/</td><td>␣</td><td></td></tr><tr><td>→ ( ↪ →</td><td>9) (p,q)-&gt;(r,a): 5CSFs (</td><td>Sel: 0.000 sec)</td><td>3CFGs/</td><td>3CSFs</td><td>Gen:</td><td>5CFGs/</td><td>␣</td><td></td></tr><tr><td>(10) ↪ →</td><td>(i,p)-&gt;(a,b): 1139CSFs (</td><td>Sel: 0.001 sec)</td><td>555CFGs/</td><td>1082CSFs</td><td>Gen:</td><td>584CFGs/</td><td>␣</td><td></td></tr><tr><td>(11) ↪ → 148CSFs</td><td>(p,q)-&gt;(a,b): (</td><td>Sel: 0.000 sec)</td><td>124CFGs/</td><td>124CSFs</td><td>Gen:</td><td>148CFGs/</td><td>␣</td><td></td></tr><tr><td>(12) ↪ →</td><td>(i,j)-&gt;(a,b): 2947CSFs (</td><td>Sel: 0.001 sec)</td><td>1688CFGs/</td><td>2685CSFs</td><td>Gen:</td><td>1887CFGs/</td><td>␣</td><td></td></tr><tr><th colspan="4">Selection results:</th><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Total number of generated configurations:</td><td>2814</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Number of selected configurations :</td><td>2557</td><td>( 90.9%)</td><td></td><td></td><td></td></tr><tr><td colspan="5">Total number of generated CSFs :</td><td>4522</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Number of selected CSFS :</td><td>4173</td><td>( 92.3%)</td><td></td><td></td><td></td></tr><tr><th colspan="9">The selected tree structure:</th></tr><tr><td>Number</td><td>of selected</td><td>Internal</td><td>Portions</td><td>11</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Number of selected Singly External Portions: :</td><td>27 6.39</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">average number of VMOs/Portion percentage of selected singly externals :</td><td>22.83</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">Number of selected Doubly External Portions:</td><td>21</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">average number of VMOs/Portion :</td><td>107.59</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="5">percentage of selected doubly externals :</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>Here, the program loops through classes of excitations. For each excitation it produces the excited configurations (CFGs) and from it the linearly independent spin functions (CSFs) which are possible within the configuration. It then calculates the interaction with the contracted 0 th order roots and includes all CSFs belonging to a given CFG in the variational space if the largest second order perturbation energy is larger or equal to Tsel . In the present case ≈ 136,000 CSFs are produced of which 25% are selected. For larger molecules and basis sets it is not uncommon to produce 10 9 -10 10 configurations and then there is no choice but to select a much smaller fraction than 20%. For your enjoyment, the program also prints the total energies of each state after selection:</p>
+<pre><code>Diagonal second order perturbation results: State E(tot) E(0)+E(1) E2(sel) E2(unsel) Eh Eh Eh Eh ----------------------------------------------------------------0 -114.108350270 -113.778810014 -0.329433 -0.000107</code></pre>
+<p>You can ignore this output if you want. In cases that the perturbation procedure is divergent (not that uncommon!) the total energies look strange-don't worry-the following variational calculation is still OK. The second order perturbation energy is here divided into a selected part E2(sel) and the part procedure by the unselected configurations E2(unsel) . Depending on the mode of EUnselOpt this value may already be used later as an estimate of the energetic contribution of the unselected CSFs. 3</p>
+<p>Now we have ≈ 4,200 CSFs in the variational space of CI block 1 and proceed to diagonalize the Hamiltonian over these CSFs using a Davidson or DIIS type procedure:</p>
+<pre><code>------------------------DAVIDSON-DIAGONALIZATION ------------------------(continues on next page)</code></pre>
+<p>3 In this case the maximum overlap of the 0 th order states with the final CI vectors is computed and the perturbation energy is added to the 'most similar root'. This is of course a rather crude approximation and a better choice is to recomputed the second order energy of the unselected configurations rigorously as is done with EUnselOpt = FullMP2 .</p>
+<pre><code>Dimension of the eigenvalue problem ... 4173 Number of roots to be determined ... 1 Maximum size of the expansion space ... 4 Maximum number of iterations ... 35 Convergence tolerance for the residual ... 1.000e-06 Convergence tolerance for the energies ... 1.000e-06 Orthogonality tolerance ... 1.000e-14 Level Shift ... 0.000e+00 Constructing the preconditioner ... o.k. Building the initial guess ... o.k. Number of trial vectors determined ... 4 ****Iteration 0**** Size of expansion space: 3 Lowest Energy : -113.937028067251 Maximum Energy change : 113.937028067251 (vector 0) Maximum residual norm : 0.741727830968 ****Iteration 1**** Size of expansion space: 4 Lowest Energy : -114.082265676116 Maximum Energy change : 0.145237608865 (vector 0) Maximum residual norm : 0.012707561344 Rebuilding the expansion space ****Iteration 2**** Size of expansion space: 2 Lowest Energy : -114.085350429118 Maximum Energy change : 0.003084753001 (vector 0) Maximum residual norm : 0.002880697397 ****Iteration 3**** Size of expansion space: 3 Lowest Energy : -114.086043274125 Maximum Energy change : 0.000692845007 (vector 0) Maximum residual norm : 0.000098595378 ****Iteration 4**** Size of expansion space: 4 Lowest Energy : -114.086074300143 Maximum Energy change : 0.000031026018 (vector 0) Maximum residual norm : 0.000004959126 Rebuilding the expansion space ****Iteration 5**** Size of expansion space: 2 Lowest Energy : -114.086076038587 Maximum Energy change : 0.000001738444 (vector 0) Maximum residual norm : 0.000000572348 *** CONVERGENCE OF RESIDUAL NORM REACHED *** Storing the converged CI vectors ... test1.mrci.vec *** DAVIDSON DONE *** Returned from DIAG section</code></pre>
+<p>The procedure converges on all roots simultaneously and finishes after six iterations which is reasonable. Now the program calculates the Davidson correction ( DavidsonOpt ) which is printed for each root.</p>
+<p>(continued from previous page)</p>
+<pre><code>Davidson type correction: Root= 0 W= 0.912 E0= -113.778810014 ECI= -114.086076039 DE=-0.026913</code></pre>
+<p>Already in this small example the correction is pretty large, ca. 27 mEh for the ground state (and ≈ 36 mEh for the excited state, later in the output). Thus, a contribution of ≈ 9 mEh = 0.25 eV is obtained for the transition energy which is certainly significant. Unfortunately, the correction becomes unreliable as the reference space weight drops or the number of correlated electrons becomes large. Here 0.912 and 0.888 are still OK and the system is small enough to expect good results from the Davidson correction.</p>
+<p>The next step is to estimate the correction for the unselected configurations:</p>
+<pre><code>Unselected CSF estimate: Full relaxed MR-MP2 calculation ... Selection will be done from 1 spatial configurations Selection will make use of spatial symmetry Selection will make use of spatial symmetry Selection will make use of spatial symmetry done Selected MR-MP2 energies ... Root= 0 E(unsel)= -0.000106931</code></pre>
+<p>In the present case this is below 1 mEh and also very similar for all three states such that it is not important for the transition energy.</p>
+<pre><code>----------CI-RESULTS ----------The threshold for printing is 0.30 percent The weights of configurations will be printed. The weights are summed over all CSFs that belong to a given configuration before printing STATE 0: Energy= -114.113096211 Eh RefWeight= 0.9124 0.00 eV 0.0 cm**-1 0.9124 : h---h---[20] 0.0114 : h 6h 6[22]</code></pre>
+<p>The final ground state energy is -114.113096211 which is an estimate of the full CI energy in this basis set. The leading configuration is still the closed-shell configuration with a weight of ≈ 91%. However, a double excitation outside the reference space contributes some 1%. This is the excitation MO6,MO6 → LUMO,LUMO. This indicates that more accurate results are expected once MO6 is also included in the reference space (this is the HOMO-1). The excited state is dominated by the HOMO-LUMO transition (as desired) but a few other single- and double- excitations also show up in the final CI vector.</p>
+<p>Nowthat all CI vectors are known we can order the states according to increasing energy and print (vertical) transition energies:</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -114.113096211 Eh State Mult Irrep Root Block mEh eV 1/cm 0 1 A1 0 0 0.000 0.000 0.0 1 3 A2 0 2 134.086 3.649 29428.4 2 1 A2 0 1 148.499 4.041 32591.8</code></pre>
+<p>This result is already pretty good and the transition energies are within ≈ 0 . 1 eV of their experimental gas phase values ( ≈ 3 . 50 and ≈ 4 . 00 eV) and may be compared to the CIS values of 3.8 and 4.6 eV which are considerably in error.</p>
+<p>In the next step the densities and transition densities are evaluated and the absorption and CD spectra are calculated (in the dipole length formalism) for the spin-allowed transitions together with state dipole moments:</p>
+<p>Here the transition is symmetry forbidden and therefore has no oscillator strength. The state dipole moment for the ground state is 2.33 Debye which is somewhat lower than 2.87 Debye from the SCF calculation. Thus, the effect of correlation is to reduce the polarity consistent with the interpretation that the ionicity of the bonds, which is always overestimated by HF theory, is reduced by the correlation. Finally, you also get a detailed population analysis for each generated state density which may be compared to the corresponding SCF analysis in the preceding part of the output.</p>
+<p>This concludes the initial example on the use of the MR-CI module. The module leaves several files on disk most of which are not yet needed but in the future will allow more analysis and restart and the like. The .ivo file is a standard .gbw type file and the orbitals therein can be used for visualization. This is important in order to figure out the identity of the generated IVOs. Perhaps they are not the ones you wanted and then you need to re-run the MR-CI with the IVOs as input, NoIter and the IVO feature in the new run turned off! We could use the IVOs as input for a state averaged CASSCF calculation:</p>
+<pre><code>! moread UseSym KDIIS %moinp "Test-SYM-MRCI-H2CO.ivo" %casscf nel 2 norb 2 irrep 0,1,1</code></pre>
+<p>(continues on next page)</p>
+<pre><code>mult 1,1,3 nroots 1,1,1 end</code></pre>
+<p>If we based a MR-ACPF calculation on this reference space we will find that the calculated transition energies are slightly poorer than in the MRCI+Q calculation. This is typical of approximate cluster methods that usually require somewhat larger reference spaces for accurate results. A similar result is obtained with SORCI.</p>
+<pre><code>%mrci CIType SORCI tsel 1e-6 tpre 1e-4 tnat 1e-5 AllSingles true doNatOrbs true IntMode FullTrafo # ground state 1A1 NewBlock 1 0 NRoots 1 Excitations cisd Refs CAS(2,2) end End # HOMO LUMO transition 1A2 NewBlock 1 1 NRoots 1 Excitations cisd Refs CAS(2,2) end End # HOMO LUMO triplet transition 3A2 NewBlock 3 1 NRoots 1 Excitations cisd Refs CAS(2,2) end End end</code></pre>
+<h2>This gives:</h2>
+<table><tbody><tr><td>State</td><td>Mult</td><td>Irrep</td><td>Root</td><td>Block</td><td>mEh</td><td>eV</td><td>1/cm</td></tr><tr><td>0</td><td>1</td><td>A1</td><td>0</td><td>0</td><td>0.000</td><td>0.000</td><td>0.0</td></tr><tr><td>1</td><td>3</td><td>A2</td><td>0</td><td>2</td><td>144.563</td><td>3.934</td><td>31728.0</td></tr><tr><td>2</td><td>1</td><td>A2</td><td>0</td><td>1</td><td>161.179</td><td>4.386</td><td>35374.7</td></tr></tbody></table>
+<p>This is systematically 0.4 eV too high. But let us look at the approximate average natural orbital (AANOs) occupation numbers:</p>
+<pre><code>------------------------AVERAGE NATURAL ORBITALS ------------------------Trace of the density to be diagonalized = 12.000000 Sum of eigenvalues = 12.000000 Natural Orbital Occupation Numbers: N[ 2] ( A1)= 1.99831062 N[ 3] ( A1)= 1.99761604 N[ 4] ( A1)= 1.99479313 N[ 5] ( B1)= 1.99016881 N[ 6] ( B2)= 1.95818285 N[ 7] ( B1)= 1.33014178 N[ 8] ( B2)= 0.70688423 N[ 9] ( B1)= 0.00988561 N[ 10] ( A1)= 0.00436843</code></pre>
+<p>(continued from previous page)</p>
+<p>This shows that there is a low-occupancy orbital (MO6) that has not been part of the reference space. Thus, we try the same calculation again but now with one more active orbital and two more active electrons:</p>
+<pre><code>! moread %moinp "Test-SYM-MRCI-H2CO.gbw" %casscf nel 4 norb 3 irrep 0,1,1 mult 1,1,3 nroots 1,1,1 end %mrci CIType SORCI tsel 1e-6 tpre 1e-4 tnat 1e-5 AllSingles true doNatOrbs true IntMode FullTrafo # ground state 1A1 NewBlock 1 0 NRoots 1 Excitations cisd Refs CAS(4,3) end End # HOMO LUMO transition 1A2 NewBlock 1 1 NRoots 1 Excitations cisd Refs CAS(4,3) end End # HOMO LUMO triplet transition 3A2 NewBlock 3 1 NRoots 1 Excitations cisd Refs CAS(4,3) end End end</code></pre>
+<h2>This gives:</h2>
+<table><tbody><tr><th>State</th><th>Mult</th><th>Irrep</th><th>Root</th><th>Block</th><th>mEh</th><th>eV</th><th>1/cm</th></tr><tr><td>0</td><td>1</td><td>A1</td><td>0</td><td>0</td><td>0.000</td><td>0.000</td><td>0.0</td></tr><tr><td>1</td><td>3</td><td>A2</td><td>0</td><td>2</td><td>145.494</td><td>3.959</td><td>31932.3</td></tr><tr><td>2</td><td>1</td><td>A2</td><td>0</td><td>1</td><td>162.222</td><td>4.414</td><td>35603.6</td></tr></tbody></table>
+<p>Which is now fine since all essential physics has been in the reference space. Inspection of the occupation numbers show that there is no suspicious orbital any more. Note that this is still a much more compact calculation that the MRCI+Q.</p>
+<p>Likewise, we get an accurate result from MRACPF with the extended reference space.</p>
+<table><tbody><tr><td>State</td><td>Mult</td><td>Irrep</td><td>Root</td><td>Block</td><td>mEh</td><td>eV</td><td>1/cm</td></tr><tr><td>0</td><td>1</td><td>A1</td><td>0</td><td>0</td><td>0.000</td><td>0.000</td><td>0.0</td></tr><tr><td>1</td><td>3</td><td>A2</td><td>0</td><td>2</td><td>134.985</td><td>3.673</td><td>29625.8</td></tr><tr><td>2</td><td>1</td><td>A2</td><td>0</td><td>1</td><td>148.330</td><td>4.036</td><td>32554.6</td></tr></tbody></table>
+<p>However, the SORCI calculation is much more compact. For larger molecules the difference becomes more and more pronounced and SORCI or even MRDDCI2 (with or without +Q) maybe the only feasible methods-if at all.</p>
+<h2>3.19.5 Excitation Energies between Different Multiplicities</h2>
+<p>As an example for a relatively accurate MRCI+Q calculation consider the following job which calculates the tripletground and as the first excited singlet states of O 2 .</p>
+<pre><code>! ano-pVQZ RI-AO cc-pVQZ/JK VeryTightSCF NoPop Conv UseSym RI-MP2 PModel %mp2 density relaxed natorbs true end %base "O2" * xyz 0 3 O 0 0 0 O 0 0 1.2 * $new_job ! ano-pVQZ RI-AO cc-pVQZ/JK VeryTightSCF NoPop Conv UseSym KDIIS ! moread %moinp "O2.mp2nat" %casscf nel 8 norb 6 irrep 1,0,1 nroots 1,2,1 mult 3,1,1 trafostep ri switchstep nr end %mrci citype mrci tsel 1e-7 tpre 1e-5 newblock 3 1 nroots 1 refs cas(8,6) end end newblock 1 0 nroots 2 refs cas(8,6) end end newblock 1 1 nroots 1 refs cas(8,6) end end end * xyz 0 3 O 0 0 0 O 0 0 1.2 *</code></pre>
+<p>Note that the linear molecule is run in D 2 h . This creates a slight problem as the CASSCF procedure necessarily breaks the symmetry of the 1 ∆ state.</p>
+<table><tbody><tr><td>LOWEST</td><td>ROOT</td><td>(ROOT</td><td>0, MULT</td><td>3, IRREP</td><td>B1g)</td><td>= -149.765383866 Eh -4075.323 eV</td></tr><tr><td>STATE</td><td>ROOT</td><td>MULT</td><td>IRREP</td><td>DE/a.u.</td><td>DE/eV</td><td>DE/cm**-1</td></tr><tr><td>1:</td><td>0</td><td>1</td><td>B1g</td><td>0.033334</td><td>0.907</td><td>7316.0</td></tr><tr><td>2:</td><td>0</td><td>1</td><td>Ag</td><td>0.033650</td><td>0.916</td><td>7385.3</td></tr><tr><td>3:</td><td>1</td><td>1</td><td>Ag</td><td>0.062381</td><td>1.697</td><td>13691.1</td></tr></tbody></table>
+<p>The result of the MRCI+Q is:</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -150.176905551 Eh State Mult Irrep Root Block mEh eV 1/cm 0 3 B1g 0 0 0.000 0.000 0.0 1 1 B1g 0 2 36.971 1.006 8114.2 2 1 Ag 0 1 38.021 1.035 8344.7 3 1 Ag 1 1 62.765 1.708 13775.2</code></pre>
+<p>These excitation energies are accurate to within a few hundred wavenumbers. Note that the ≈ 200 wavenumber splitting in the degenerate 1 ∆ state is due to the symmetry breaking of the CAS and the individual selection. Repeating the calculation with the MP2 natural orbitals gives an almost indistinguishable result and a ground state energy that is even lower than what was found with the CASSCF orbitals. Thus, such natural orbitals (that might often be easier to get) are a good substitute for CASSCF orbitals and at the same time the symmetry breaking due to the use of symmetry appears to be difficult to avoid.</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -150.177743426 Eh State Mult Irrep Root Block mEh eV 1/cm 0 3 B1g 0 0 0.000 0.000 0.0 1 1 B1g 0 2 37.369 1.017 8201.5 2 1 Ag 0 1 38.237 1.040 8392.1 3 1 Ag 1 1 62.731 1.707 13767.9</code></pre>
+<h2>3.19.6 Correlation Energies</h2>
+<p>The logic we are following here is the following: CID minus SCF gives the effect of the doubles; going to CISD gives the effect of the singles; QCISD(=CCD) minus CID gives the effect of the disconnected quadruples. QCISD minus QCID gives simultaneously the effect of the singles and the disconnected triples. They are a bit difficult to separate but if one looks at the singles alone and compares with singles + disconnected triples, a fair estimate is probably obtained. Finally, QCISD(T) minus QCISD gives the effect of the connected triples. One could of course also use CCSD instead of QCISD but I felt that the higher powers of T 1 obscure the picture a little bit-but this is open to discussion of course.</p>
+<p>First H 2 O/TZVPP at its MP2/TZVPP equilibrium geometry ( T pre = 10 -6 and T sel = 10 -9 Eh for the MRCI and MRACPF calculations):</p>
+<table><tbody><tr><th>Excitation class</th><th>Energy (Eh)</th><th>Delta-Energy (mEh)</th></tr><tr><td>None (RHF)</td><td>-76.0624</td><td></td></tr><tr><td>Doubles (CID)</td><td>-76.3174</td><td>255</td></tr><tr><td>+Singles (CISD)</td><td>-76.3186</td><td>1</td></tr><tr><td>+Disconnected Quadruples (QCID)</td><td>-76.3282</td><td>11</td></tr><tr><td>+Disconnected Triples (QCISD)</td><td>-76.3298</td><td>2</td></tr><tr><td>+Connected Triples (QCISD(T))</td><td>-76.3372</td><td>7</td></tr><tr><td>CASSCF(8,6)</td><td>-76.1160</td><td></td></tr><tr><td>CASSCF(8,6) + MRCI</td><td>-76.3264</td><td>210</td></tr><tr><td>CASSCF(8,6) + MRCI+Q</td><td>-76.3359</td><td>10</td></tr><tr><td>CASSCF(8,6) + MRACPF</td><td>-76.3341</td><td>218</td></tr></tbody></table>
+<p>One observes quite good agreement between single- and multireference approaches. In particular, the contribution of the disconnected triples and singles is very small. The estimate for the disconnected quadruples is fairly good from either the multireference Davidson correction or the ACPF and the agreement between CCSD(T) and these MRmethods is 2-3 mEh in the total energy which is roughly within chemical accuracy.</p>
+<p>In order to also have an open-shell molecule let us look at NH with a N-H distance of 1.0 Å using the TZVPP basis set.</p>
+<table><tbody><tr><th>Excitation class</th><th>Energy (Eh)</th><th>Delta-Energy (mEh)</th></tr><tr><td>None (UHF)</td><td>-54.9835</td><td></td></tr><tr><td>Doubles (CID)</td><td>-55.1333</td><td>150</td></tr><tr><td>+Singles (CISD)</td><td>-55.1344</td><td>1</td></tr><tr><td>+Disconnected Quadruples (QCID)</td><td>-55.1366</td><td>3</td></tr><tr><td>+Disconnected Triples (QCISD)</td><td>-55.1378</td><td>1</td></tr><tr><td>+Connected Triples (QCISD(T))</td><td>-55.1414</td><td>4</td></tr><tr><td>CASSCF(6,5)</td><td>-55.0004</td><td></td></tr><tr><td>CASSCF(6,5) + MRCI</td><td>-55.1373</td><td>137</td></tr><tr><td>CASSCF(6,5) + MRCI+Q</td><td>-55.1429</td><td>6</td></tr><tr><td>CASSCF(6,5) + MRACPF</td><td>-55.1413</td><td>141</td></tr></tbody></table>
+<p>Again, the agreement is fairly good and show that both single- and multiple reference approaches converge to the same limit.</p>
+<h2>3.19.7 Thresholds</h2>
+<p>Now we choose the CO molecule (1.128 Ångström) with the SVP basis set and study the convergence of the results with respect to the selection threshold. Comparison to high level single-reference approaches is feasible (The SCF energy is -112.645 946 Eh ).</p>
+<h2>Reference Values for Total Energies</h2>
+<p>The single-reference values are:</p>
+<pre><code>BD: -112.938 48002 CCSD: -112.939 79145 QCISD: -112.941 95700 BD(T): -112.950 17278 CCSD(T): -112.950 63889 QCISD(T): -112.951 37425 MP4(SDTQ): -112.954 80113</code></pre>
+<p>The calculations without connected triples (BD, CCSD, QCISD) are about the best what can be achieved without explicitly considering triple excitations. The CCSD is probably the best in this class. As soon as connected triples are included the CCSD(T), QCISD(T) and BD(T) values are close and from experience they are also close to the full CI values which is then expected somewhere between -112.950 and -112.952 Eh.</p>
+<h2>Convergence of Single Reference Approaches with Respect to Tsel</h2>
+<p>Next it is studied how these single reference methods converge with Tsel :</p>
+<table><tbody><tr><th colspan="2">Closed-Shell ACPF:</th></tr><tr><th>Tsel</th><th>Energy (NCSF) Energy (NCSF)</th></tr><tr><td>(Eh)</td><td>AllSingles=true AllSingles=false</td></tr><tr><td>TSel=0</td><td>-112.943 387 (5671)</td></tr><tr><td>TSel=1e-14</td><td>-112.943 387 (2543) -112.943 387 (2478)</td></tr><tr><td>TSel=1e-10</td><td>-112.943 387 (2543) -112.941 023 (2453)</td></tr><tr><td>TSel=1e-08</td><td>-112.943 387 (2451) -112.937 087 (2346)</td></tr><tr><td>TSel=1e-06</td><td>-112.943 350 (2283) -112.937 046 (2178)</td></tr><tr><td>TSel=1e-05</td><td>-112.943 176 (1660) -112.936 821 (1555)</td></tr><tr><td>TSel=1e-04</td><td>-112.944 039 ( 782) -112.938 381 ( 677)</td></tr></tbody></table>
+<p>It is clear that the convergence is erratic if the singles are not automatically included. This is the reason for making this the default from release 2.6.35 on. In the present case singles will only be selected due to round-off errors since by Brillouin's theorem the singles have zero-interaction with the ground state determinant. Thus, for individually selecting single-reference methods it is a good idea to automatically include all single-excitations in order to get converged results. The alternative would be a different singles selection procedure which has not yet been developed however. The selection of doubles appear to converge the total energies reasonably well. It is seen that the selection selects most CSFs between 10 -5 and 10 -7 Eh. Already a threshold of 10 -6 Eh yields an error of less than 0.1 mEh which is negligible in relation to reaction energies and the like. Even 10 -5 Eh gives an error of less than 0.1 kcal/mol.</p>
+<h2>Convergence of Multireference Approaches with Respect to Tpre</h2>
+<p>We next turn to multireference treatments. Here we want to correlate all valence electrons in all valence orbitals and therefore a CAS(10,8) is the appropriate choice. We first ask for the converged value of Tpre by using Tsel = 10 -14 and obtain for MRCI + Q:</p>
+<pre><code>TPre = 1e-1: -112.943 964 1e-2: -112.952 963 1e-3: -112.953 786 1e-4: -112.954 019 1e-5: -112.954 336 1e-6: -112.954 416 1e-7: -112.954 440</code></pre>
+<p>Thus, pretty good convergence is obtained for Tpre = 10 -4 -10 -6 . Hence 10 -4 is the default.</p>
+<p>To show a convenient input consider the following:</p>
+<pre><code># # Here we calculate the CO ground state correlation energy with several methods # ! Def2-SVP Def2-SV/C RI-MP2 CCSD(T) %base "1" %mp2 density relaxed donatorbs true end * int 0 1 C 0 0 0 0.000000 0.000 0.000 O 1 0 0 1.128 0.000 0.000 * $new_job ! aug-SVP MRACPF ! moread %moinp "1.mp2nat" # the CASSCF is done with MP2 natural orbitals which is a good idea and # secondly we use a large level shift in order to help convergence %casscf nel 10 norb 8 mult 1 nroots 1 shiftup 2 shiftdn 2 end %mrci tsel 1e-8 tpre 1e-6 end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>* int 0 1 C 0 0 0 0.000 0.000 0.000 O 1 0 0 1.128 0.000 0.000 *</code></pre>
+<p>This job computes at the same time all of the below and demonstrates once more the agreement between consequent single- and multireference correlation methods</p>
+<pre><code>SCF = -112.6459 RI-MP2 = -112.9330 CCSD = -112.9398 CCSD(T) = -112.9506 CASSCF(10,8) = -112.7769 MRACPF = -112.9514</code></pre>
+<h2>3.19.8 Energy Differences - Bond Breaking</h2>
+<p>For the calculation of energy differences we start again with the reference CCSD(T) calculation; this method is one of the few which can claim chemical accuracy in practical applications:</p>
+<pre><code>Reference Total Energies for N2 at 1.0977 Angstr\"{o}m with The SVP basis E(CCSD) = -109.163 497 E(CCSD(T))= -109.175 625 Nitrogen Atom (4S), SVP basis, unrestricted E(CCSD) = -54.421 004 E(CCSD(T))= -54.421 7183 Energy Difference: Delta-E(CCSD) = -0.321 489 = 8.75 eV Delta-E(CCSD(T))= -0.332 188 = 9.04 eV</code></pre>
+<p>The basis set is of course not suitable for quantitative comparison to experimental values. However, this is not the point here in these calculations which are illustrative in nature. The SVP basis is just good enough to allow for a method assessment without leading to excessively expensive calculations.</p>
+<p>This is now to be compared with the corresponding energy differences computed with some single-reference approaches. A typical input is (this is a somewhat old-fashioned example - in the present program version you would do a full valence CASSCF(10,8) or CASSCF(6,6) and invoke the MR-methods with a single keyword):</p>
+<pre><code>! HF def2-SVP def2-TZVPP/C VeryTightSCF NoPop %base "1" * xyz 0 1 N 0 0 0 N 0 0 1.0977 * %method frozencore fc_ewin end %mrci EWin -3,1000 CIType MRACPF2a Solver DIIS IntMode FullTrafo UseIVOs true AllSingles true TSel 1e-14</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>TPre 1e-05 TNat 0.0 ETol 1e-10 RTol 1e-10 NewBlock 1 * NRoots 1 Excitations CISD refs CAS(0,0) end end end $new_job ! ROHF def2-SVP def2-TZVPP/C VeryTightSCF NoPop PModel %base "2" * xyz 0 4 N 0 0 0 * %method frozencore fc_ewin end %mrci EWin -3,1000 CIType MRACPF2a IntMode FullTrafo UseIVOs true AllSingles true TSel 1e-14 TPre 1e-05 TNat 0.0 ETol 1e-10 RTol 1e-10 NewBlock 4 * NRoots 1 Excitations CISD refs CAS(3,3) end end end</code></pre>
+<h2>The results are:</h2>
+<pre><code>Single reference approaches: Method N2-Molecule N-Atom Delta-E CISD+Q : -109.167 904 -54.422 769 8.77 eV ACPF : -109.166 926 -54.421 783 8.80 eV ACPF2 : -109.166 751 -54.421 333 8.82 eV ACPF2a : -109.166 730 -54.421 186 8.83 eV CEPA1 : -109.159 721 -54.422 564 8.56 eV CEPA2 : -109.172 888 -54.422 732 8.91 eV CEPA3 : -109.161 034 -54.422 589 8.59 eV AQCC : -109.160 574 -54.420 948 8.67 eV CEPA-0 : -109.174 924 -54.422 951 8.95 eV</code></pre>
+<p>With exception is CEPA1 and CEPA3, the results are OK. The reason for the poor performance of these methods is simply that the formalism implemented is only correct for closed shells - open shells require a different formalism which we do not have available in the MRCI module (but in the single reference MDCI module). Due to the simple approximations made in CEPA2 it should also be valid for open shells and the numerical results are in support of that.</p>
+<p>Next we turn to the multireference methods and take a CAS(10,8) reference as for CO in order to correlate all valence</p>
+<p>(continued from previous page)</p>
+<p>electrons. 4</p>
+<pre><code>Multi reference approaches: Method N2-Molecule N-Atom Delta-E MRCISD+Q: -109.180 089 -54.422 667 9.11 eV MRACPF : -109.178 708 -54.421 685 9.12 eV MRACPF2 : -109.177 140 -54.421 236 9.11 eV MRAQCC : -109.175 947 -54.420 851 9.10 eV SORCI : -109.179 101 -54.422 703 9.08 eV</code></pre>
+<p>This test calculation pleasingly shows the high consistency of multireference approaches which all converge more or less to the same result which must be accurate.</p>
+<h2>3.19.9 Energy Differences - Spin Flipping</h2>
+<p>There are a number of interesting situations in which one is interested in a small energy difference which arises from two states of different multiplicity but same orbital configuration. This is the phenomenon met in diradicals or in magnetic coupling in transition metal complexes. As a primitive model for such cases one may consider the hypothetical molecule H-Ne-H in a linear configuration which will be used as a model in this section.</p>
+<p>The reference value is obtained by a MR-ACPF calculation with all valence electrons active (again, this example is somewhat old fashioned - in the present program version you would do a CASSCF calculation followed by MR methods with a single keyword):</p>
+<pre><code>! ROHF def2-SVP def2-TZVPP/C VeryTightSCF NoPop %basis NewAuxCGTO Ne "AutoAux" end end * xyz 0 3 H 0 0 0 Ne 0 0 2.0 H 0 0 4.0 * %method frozencore fc_ewin end %mrci EWin -3,1000 CIType MRACPF2a IntMode FullTrafo Solver DIIS UseIVOs true TSel 0 TPre 1e-10 ETol 1e-09 RTol 1e-09 DoDDCIMP2 true NewBlock 1 * NRoots 1 Excitations CISD refs CAS(10,6) end end NewBlock 3 * NRoots 1 Excitations CISD refs CAS(10,6) end end end</code></pre>
+<p>4 Most of these results have been obtained with a slightly earlier version for which the MR energies are a little different from that what the present version gives. The energy differences will not be affected.</p>
+</div>
+</body>
+</html>

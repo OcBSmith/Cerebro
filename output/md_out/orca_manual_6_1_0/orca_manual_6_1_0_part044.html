@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part044</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<pre><code>%cis NRoots 1 IRoot 1 end * int 0 1 C 0 0 0 0.00 0.0 0.00 O 1 0 0 1.20 0.0 0.00 H 1 2 0 1.08 120 0.00 H 1 2 3 1.08 120 180.00 *</code></pre>
+<p>Note that this example converges to a saddle point as can be verified through the numerical frequency calculation:</p>
+<pre><code>-----------------------VIBRATIONAL FREQUENCIES -----------------------Scaling factor for frequencies = 1.000000000 (already applied!) 0: 0.00 cm**-1 1: 0.00 cm**-1 2: 0.00 cm**-1 3: 0.00 cm**-1 4: 0.00 cm**-1 5: 0.00 cm**-1 6: -365.27 cm**-1 ***imaginary mode*** 7: 949.68 cm**-1 8: 1396.45 cm**-1 9: 1688.28 cm**-1 10: 3200.58 cm**-1 11: 3313.95 cm**-1</code></pre>
+<p>The excited state relaxed density matrixis available from such gradient runs ( MyJob.cisp when using the KeepDens keyword) and can be used for various types of analysis.</p>
+<h2>Root Following Scheme for Difficult Cases</h2>
+<p>In case there is a root flipping after a step during the geometry optimization, it might be impossible to converge an excited state geometry using the regular methods. To help in those cases, the flag FOLLOWIROOT might be set to TRUE. Then, excited state wavefunction will be analyzed and compared with the reference one (more below), and the IROOT will be automatically adjusted to keep homing the target state.</p>
+<p>One example of such a calculation is:</p>
+<pre><code>! wB97X OPT %tddft NRoots 5 IRoot 3 FOLLOWIROOT TRUE end * xyz 0 1 N 0.0 0.0 0.0 H 0.0 0.0 1.0 H 0.0 -0.9 0.5 H 0.0 0.9 0.5 *</code></pre>
+<p>(continued from previous page)</p>
+<p>This will ask for an optimization of the third excited state of ammonia. At some point, there is a state crossing and what was state 3 now becomes state 2. The algorithm will recognize this and automatically change the IROOT flag, to keep following the same state:</p>
+<pre><code>The IROOT now is: ... 2</code></pre>
+<p>FOLLOWIROOT also works with spin-adapted triplets and spin-flip states.</p>
+<p>In cases where you want to keep the comparison only with the density from the very first computed excited state, e.g. the one you get on the first cycle of a geometry optimization, you can use FIRKEEPFIRSTREF, as in:</p>
+<pre><code>%tddft NRoots 5 IRoot 3 FOLLOWIROOT TRUE FIRKEEPFIRSTREF TRUE # default false end</code></pre>
+<h2>Criteria to Follow IROOTs - starting from ORCA6</h2>
+<p>Starting from ORCA6 we have a much more robust algorithm to follow these excited states, inspired by some of the recent literature [651] [652]. The algorithm now works as follows, after each excited state calculation using CIS/TDDFT:</p>
+<ol>
+<li style="list-style-type: '1. ';">Given a reference state, take all states within an energy difference of up to 1 eV to it. We don't want to check states that are too far apart in energy. Controlled by %TDDFT FIRENTHRESH 1.0 END , number in eV.</li>
+<li style="list-style-type: '2. ';">Now take all states with a difference of ˆ S 2 not larger than 0.5. We don't want to compare singlets to triplets. Controlled by %TDDFT FIRS2THRESH 0.5 END .</li>
+<li style="list-style-type: '3. ';">Calculate the overlap between the transition densities of all states with the reference - this is the core part.</li>
+<li style="list-style-type: '4. ';">In case there is ambiguity - that is if two states have overlaps differing by only 0.05 - take the one with the closer transition dipole angle. Controlled by %TDDFT FIRSTHRESH 0.05 END .</li>
+<li style="list-style-type: '5. ';">Update the IROOT to the state that went best on all these tests.</li>
+</ol>
+<h2>® Note</h2>
+<p>These FIR keywords are specific to F ollow IR oot.</p>
+<p>Now by default we might also update the reference state from time to time in case the separation of states is very clear. The way it work is:</p>
+<ol>
+<li style="list-style-type: '1. ';">If the best overlap is larger than FIRMINOVERLAP , which is 0.5 by default and FIRDYNOVERLAP is FALSE , we will assume that the overlap is good enough and we will always update the reference. However, the default is FIRDYNOVERLAP TRUE , which means also have a second check for robustness.</li>
+<li style="list-style-type: '2. ';">If FIRDYNOVERLAP TRUE and the best overlap is larger than 0.5 (or FIRMINOVERLAP ), we will check for the ratio between the best and the second best states. If this ratio is between 0.3 and 0.6 (controlled by %TDDFT FIRDYNOVERRATIO 0.3,0.6 END ), it means that there is a clear separation between the best and the second best and the reference can be updated safely. If the ratio is too close to 1, both states are too similar and it would be dangerous to update the reference state. If it is too close to zero, they are easy to distinguish and we don't need to update the reference yet [651].</li>
+</ol>
+<h2>ǩ Important</h2>
+<p>It is important to stress that this will not necessarily solve all problems (root flipping can be particularly bad if the system is highly symmetric), for the excited states may change too much during the optimization. If that happens, it is advisable to restart the calculation after some steps and check which IROOT you still want. This</p>
+<p>can also be used when calculating numerical gradients and Hessians, in case you suspect of root flipping after the displacements.</p>
+<h2>ǩ Important</h2>
+<p>This algorithm is completely general and should work for any excited state method, as long as there are transition densities. We will include more methods in the future when possible.</p>
+<h2>Geometry Optimization of SOC States</h2>
+<p>If you want to compute geometries for the SOC states, just choose SOCGRAD TRUE and a given IROOT . The weigthed 'unrelaxed' gradient will then be calculated after selecting the CIS/TD-DFT states with contribution larger than 0.01%. Each gradient will be calculated separately and, after that, the final SOC gradient will be computed as a weighted sum. Setting IROOT 0 in this case corresponds to ask for the SOC ground state, which is NOT necessarily equal to the ground state from HF/DFT.</p>
+<h2>5.6.17 Potential Energy Surface Scans</h2>
+<p>ORCA allows the combination the scan feature with CIS or TD-DFT. This can be used to map out the excited state potential energy surfaces as a function of one- two- or three parameters. The output of the 'trajectory' run automatically contains the excited state energies in addition to the ground state energy. For example consider the following simple job.</p>
+<pre><code>! def2-TZVPD %method scanguess pmodel # this assignment forces a PModel guess at each step # which is often better if diffuse functions are present end %cis NRoots 7 end %paras rCO = 0.85,1.45,21; end * xyz 0 1 O 0 0 0 C 0 0 {rCO} *</code></pre>
+<p>The output file from this job contains the total energies (i.e. the ground state energy plus the excitation energy) for each excited state as a function of C-O bondlength as shown below. Howerver, the assignment of the individual states will change with geometry due to curve crossings. Thus, the state-to-state correlation must be worked out 'by hand'. These calculations are nevertheless very helpful in obtaining at least a rough idea about excited state energy surfaces.</p>
+<figure><figcaption><div class="caption">Fig. 5.23: Result of a potential energy surface scan for the excited states of the CO molecule using the orca_cis module.</div></figcaption></figure>
+<h2>Potential Energy Surface Scans along Normal Coordinates</h2>
+<p>The ground and excited state potential energy surfaces can also be mapped as a function of normal coordinates. The normal mode trajectory run is invoked by the keyword !MTR . In addition several parameters have to be specified in the block %mtr . The following example illustrates the use:</p>
+<p>First you run a frequency job:</p>
+<pre><code># ! BP86 def2-SV(P) def2/J TightSCF AnFreq * xyz 0 1 C 0.000001 -0.000000 -0.671602 C 0.000000 0.000000 0.671602 H -0.000000 -0.940772 -1.252732 H -0.000000 -0.940772 1.252732 H -0.000000 0.940772 -1.252732 H -0.000000 0.940772 1.252732 *</code></pre>
+<h2>and then:</h2>
+<pre><code>! BP86 def2-SV(P) def2/J TightSCF MTR %tddft NRoots 3 triplets false end %mtr HessName "ethene.hess" modetype normal MList 9,13 RSteps 4,5 LSteps 4,5 ddnc 1.0, 0.5 end * xyz 0 1 C 0.000001 -0.000000 -0.671602 C 0.000000 0.000000 0.671602 H -0.000000 -0.940772 -1.252732 H -0.000000 -0.940772 1.252732 H -0.000000 0.940772 -1.252732 H -0.000000 0.940772 1.252732 *</code></pre>
+<p>The HessName parameter specifies the name of the file which contains nuclear Hessian matrix calculated in the frequency run. The Hessian matrix is used to construct normal mode trajectories. The keyword MList provides the list of the normal modes to be scanned. The parameters RSteps and LSteps specify the number of steps in positive and negative direction along each mode in the list. In general, for a given set of parameters</p>
+<pre><code>mlist m1,m2,...mn rsteps rm1,rm2,...rmn lsteps lm1,lm2,...lmn</code></pre>
+<p>the total number of the displaced geometries for which single point calculations will be performed is equal to ∏ m i ( r m i + l m i +1) . Thus, in the present case this number is equal to (4 + 4 + 1) (5 + 5 + 1) = 99 .</p>
+<p>The ddnc parameter specifies increments δq α for respective normal modes in the list in terms of dimensionless normal coordinates (DNC's). The trajectories are constructed so that corresponding normal coordinates are varied in the range from -l α δq α to r α δq α . The measure of normal mode displacements in terms DNC's is appropriate choice</p>
+<p>since in spectroscopical applications the potential energy function U is usually expressed in terms of the DNC's. In particular, in the harmonic approximation U ( q α ) has a very simple form around equilibrium geometry:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ω α is the vibrational frequency of the α -th mode.</p>
+<p>Dimensionless normal coordinate q α can be related to the vector of atomic Cartesian displacements δ X as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where { L kα } is the orthogonal matrix obtained upon numerical diagonalization of the mass-weighted Hessian matrix, and M is the vector of atomic masses. Accordingly, the atomic Cartesian displacements corresponding to a given dimensionless normal coordinate q α are given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Alternatively, it is possible to specify in the input the Cartesian increment for each normal mode. In such a case, instead of the ddnc parameter one should use the dxyz keyword followed by the values of Cartesian displacements, for example:</p>
+<pre><code>%mtr HessName "ethene.hess" modetype normal MList 9,13 RSteps 4,5 LSteps 4,5 dxyz 0.01, 0.02 # increments in the Cartesian basis # are given in angstrom units end</code></pre>
+<p>For a given Cartesian increment d X,α along the α -th normal mode the atomic displacements are calculated as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The vector T α in the Cartesian basis has components T iα = L kα ( M k ) -1 2 and length (norm) ∥ T k ∥ .</p>
+<p>The increment length can also be selected on the basis of an estimate for the expected change in the total energy ∆ E due to the displacement according to eq.(3.92). The value of ∆ E can be specified via the EnStep parameter:</p>
+<pre><code>%mtr HessName "ethene.hess" modetype normal MList 9,13 RSteps 4,5 LSteps 4,5 EnStep 0.001, 0.001 # the values are given in Eh end</code></pre>
+<p>All quantum chemical methods have to tolerate a certain amount of numerical noise that results from finite convergence tolerances or other cutoffs that are introduced into the theoretical procedures. Hence, it is reasonable to choose ∆ E such that it is above the characteristic numerical noise level for the given method of calculation.</p>
+<p>At the beginning of the program run the following trajectory files which can be visualized in gOpenMol will be created:</p>
+<ul>
+<li style="list-style-type: '· ';">BaseName.m9.xyz and BaseName.m13.xyz contain trajectories along normal modes 9 and 13, respectively.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">BaseName.m13s1.m9.xyz BaseName.m13s5.m9.xyz contain trajectories along normal mode 9 for different fixed displacements along mode 13, so that the file BaseName.m13sn.m9.xyz corresponds to the n -th step in the positive direction along mode 13.</li>
+<li style="list-style-type: '· ';">BaseName.m13s-1.m9.xyz BaseName.m13s-5.m9.xyz contain trajectories along normal mode 9 for different fixed displacements along mode 13, so that the file BaseName.m13s-n.m9.xyz corresponds to the n -th step in the negative direction along mode 13.</li>
+<li style="list-style-type: '· ';">BaseName.m9s1.m13.xyz BaseName.m9s4.m13.xyz contain trajectories along normal mode 13 for different fixed displacements along mode 9, so that the file BaseName.m9sn.m13.xyz corresponds to the n -th step in the positive direction along mode 9.</li>
+<li style="list-style-type: '· ';">BaseName.m9s-1.m13.xyz BaseName.m9s-4.m13.xyz contain trajectories along normal mode 13 for different fixed displacements along mode 9, so that the file BaseName.m9s-n.m13.xyz corresponds to the n -th step in the negative direction along mode 9.</li>
+</ul>
+<p>The results of energy single point calculations along the trajectories will be collected in files BaseName.mtr. escf.S.dat (for the SCF total energies) and files BaseName.mtr.ecis.S.dat (for the CIS/TDDFT total energies), where 'S' in the suffix of *.S.dat filenames provides specification of the corresponding trajectory in the same way as it was done for the case of trajectory files *.xyz (e.g. S='m9s-1.m13' ). Likewise, the calculated total energies along the trajectories will be collected in files BaseName.mtr.emp2.S.dat in the case of MP2 calculations, BaseName.mtr.emdci.S.dat (MDCI), BaseName.mtr.ecasscf.S.dat (CASSCF), BaseName.mtr.emrci.S.dat (MRCI).</p>
+<h2>® Note</h2>
+<p>In principle normal coordinate trajectories can be performed for an arbitrary number normal modes. This implies that in general trajectories will contain geometries which involve simultataneous displacement along several (&gt;2) modes. However, trajectory files *.xyz and corresponding *.dat files will be generated only for the structures which are simultaneously displaced along not more than 2 normal coordinates.</p>
+<figure><figcaption><div class="caption">Fig. 5.24: Result of a potential energy surface scan along C-C stretching normal coordinate (mode 13 in the present example) for the excited states of the ethene molecule using the orca_cis module.</div></figcaption></figure>
+<h2>Normal Mode Scan Calculations Between Different Structures</h2>
+<p>This type of job allows to map PES between two different structures as a function of normal coordinates. The H 2 O molecule represent a trivial case which has formally 2 equivalent equilibrium structures which differ by angle H 1 -O-H 2 ( 103.5 ◦ and 256.5 ◦ , respectively, as follows from the BP86/SV(P) calculations). In such a case the input for the nomal mode trajectory run would require the calculation of geometry difference between both structures in terms of the dimensionless normal coordinates. This can be done in orca_vib run as follows :</p>
+<pre><code>> orca_vib water.hess ddnc geom.xyz</code></pre>
+<p>The second parameter ddnc in the command line invokes the calculation of geometry difference in terms of the DNC's. Both structures are specified in the file geom.xyz which has a strict format:</p>
+<pre><code>2 3 0 0.000000 0.000000 0.000000 0.000000 0.607566 0.770693 0.000000 0.607566 -0.770693 1 0.000000 0.000000 0.000000 0.000000 -0.607566 0.770693 0.000000 -0.607566 -0.770693</code></pre>
+<p>The first line of the input specifies the number of the structures and total number of atoms (2 and 3, respectively). Specification of each structure in sequence starts with a new line containing the number of the structure. The number 0 in the second line is used to denote the reference structure. Note that atomic coordinates should be given in units of Å and in the same order as in the ORCA input for the frequency run from which the file water.hess was calculated.</p>
+<p>At the end of the orca_vib run the file geom.ddnc is generated. It contains the geometry difference in terms of the dimensionless normal coordinates between the structures with nonzero numbers and the reference one in geom.</p>
+<p>xyz</p>
+<p>:</p>
+<pre><code>1 1 9 0 0.000000 1 0.000000 2 0.000000 3 0.000000 4 0.000000 5 0.000000 6 9.091932 7 -9.723073 8 0.000000</code></pre>
+<p>The output file indicates that the structural difference occurs along 2 normal coordinates: 6 (bending mode) and 7 (totally symmetric O-H stretching mode). On the basis of the calculated displacement pattern the following input for the normal mode trajectory run between two structures can be designed:</p>
+<pre><code>! RKS BP86 SV(P) def2/J RI TightScf MTR %mtr HessName "water.hess" modetype normal mlist 6,7 rsteps 10,0 lsteps 0, 10 ddnc 0.9091932, 0.9723073 end * xyz 0 1</code></pre>
+<p>(continues on next page)</p>
+<pre><code>O 0.000000 0.000000 0.000000 H 0.000000 0.607566 0.770693 H 0.000000 0.607566 -0.770693 *</code></pre>
+<p>Here the parameters RSteps , LSteps and ddnc are chosen in such a way that in the scan along modes 6 and 7 the corresponding dimensionless normal coordinates will be varied in the range 0 -9.091932 and -9.723073 -0, respectively, in accordance with the projection pattern indicated in the file geom.ddnc . Note that normal modes are only defined up to an arbitrary choice of sign. Consequently, the absolute sign of the dimensionless displacements is ambiguous and in principle can vary in different orca_vib runs. It is important that the normal mode scan between different structures exemplified above is performed using the same sign of normal modes as in the calculation of normal mode displacements. This condition is fulfilled if the same normal modes are used in orca_vib run and trajectory calculation. Thus, since in orca_vib calculation normal modes are stored in .hess file it is necessary to use the same Hessian file in the trajectory calculation.</p>
+<h2>5.6.18 Non-adiabatic coupling matrix elements</h2>
+<p>The CIS module can compute the non-adiabatic coupling matrix elements (NACME) between ground and an excited state given by an IROOT, ⟨ Ψ GS | ∂ ∂R x | Ψ IROOT ⟩ [653]. These can also include LR-CPCM effects if !CPCM(solvent) is chosen in the main input, ZORA effects and will make use of RIJ and COSX, if they are chosen for the SCF. The usage is simple, e.g.:</p>
+<pre><code>!PBE0 DEF2-SVP TIGHTSCF %TDDFT NROOTS 5 IROOT 2 NACME TRUE END * xyz 0 1 O 0.000000000 0.000000000 0.611403292 C 0.000000000 0.000000000 -0.613232096 H 0.931880792 0.000000000 -1.200880848 H -0.931880792 0.000000000 -1.200880848 *</code></pre>
+<p>By choosing NACME TRUE under %TDDFT, a regular gradient calculation will be done, and the NACMEs will be computed together with it. After the usual gradient output, the NACMEs will be printed as:</p>
+<pre><code>---------------------------------CARTESIAN NON-ADIABATIC COUPLINGS <GS|d/dx|ES> ---------------------------------1 O : -0.161958900 -0.000000135 0.000001029 2 C : -0.088213027 -0.000000024 0.000000167 3 H : 0.226241398 0.000000001 -0.109102154 4 H : 0.226241406 -0.000000000 0.109102161 Difference to translation invariance: : 0.2023108777 -0.0000001585 0.0000012017 Norm of the NACs ... 0.4002363416 RMS NACs ... 0.1155382798 MAX NAC ... 0.2262414063</code></pre>
+<p>The NACMEs are given under the Cartesian basis; this may differ from some other programs where NACMEs are given under the normal mode basis. To obtain NACMEs under the normal mode basis, one can perform an internal conversion (IC) rate calculation (see Internal Conversion Rates (unpublished) ) and obtain them from the output file.</p>
+<p>(continued from previous page)</p>
+<h2>NACMEs with built-in electron-translation factor</h2>
+<p>As you can see, the calculation above does not have full translation invariance! That is a feature of NACs calculated from CI wavefunctions, due to the Born-Oppenheimer approximation. It can be somehow fixed by including the so-called 'electron-translation factors' (ETFs) [654], and those are added with ETF TRUE under %TDDFT. By now using the input:</p>
+<pre><code>!PBE0 DEF2-SVP %TDDFT NROOTS 5 IROOT 2 NACME TRUE ETF TRUE END * xyz 0 1 O 0.000000000 0.000000000 0.611403292 C 0.000000000 0.000000000 -0.613232096 H 0.931880792 0.000000000 -1.200880848 H -0.931880792 0.000000000 -1.200880848 *</code></pre>
+<p>one gets the following output:</p>
+<pre><code>---------------------------------CARTESIAN NON-ADIABATIC COUPLINGS <GS|d/dx|ES> with built-in ETFs ---------------------------------1 O : -0.071334028 -0.000001941 0.000003727 2 C : -0.362514525 -0.000000130 -0.000000776 3 H : 0.217014763 0.000000003 -0.128968922 4 H : 0.217014813 -0.000000002 0.128968939 Difference to translation invariance: : 0.0001810232 -0.0000020693 0.0000029689 Norm of the NACs ... 0.5137724505 RMS NACs ... 0.1483133313 MAX NAC ... 0.3625145251</code></pre>
+<p>where the residual translation variance is due to the DFT and COSX grids only.</p>
+<h2>Á Warning</h2>
+<p>These are the recommended NACs to be used with any kind of dynamics or conical intersection optimization, otherwise moving the center of mass of you system would already change the couplings!</p>
+<h2>Numerical non-adiabatic coupling matrix elements</h2>
+<p>The numerical non-adiabatic coupling matrix elements between ground and excited states from CIS/TD-DFT can be calculated in a numerical fashion, by setting the NumNACME flag on the main input line:</p>
+<ul>
+<li>! NumNACME</li>
+</ul>
+<p>ORCAwill then calculate both the NACMEs and the numerical gradient for a given IROOT at the same cost. Please be careful with the SCF options and GRID sizes since there are displacements involved, for more information check Numerical Gradients . All options regarding step size and so on can be changed from %NUMGRAD.</p>
+<p>These are current implemented in both RHF/RKS and UHF/UKS, but only for CIS/TDA and RPA/TD-DFT, no multireference methods yet. For the latter case, the overlap of the | X -Y ⟩ vector is used [655].</p>
+<h2>5.6.19 Keyword List</h2>
+<table><caption><div class="caption">Table 5.8: %tddft or %cis block input keywords.</div></caption><tbody><tr><th>Keyword</th><th>Option Value</th><th>/</th><th>Description</th></tr><tr><td>NRoots</td><td>3</td><td></td><td>The number of desired roots.</td></tr><tr><td>IRoot</td><td>1</td><td></td><td>The root to be optimized.</td></tr><tr><td>IRootMult</td><td>singlet triplet</td><td></td><td>Multiplicity of the root to be optimized.</td></tr><tr><td>MaxDim</td><td>5</td><td></td><td>Davidson expansion space = MaxDim * NRoots.</td></tr><tr><td>MaxIter</td><td>35</td><td></td><td>Maximum CI Iterations.</td></tr><tr><td>NGuessMat</td><td>512</td><td></td><td>The dimension of the guess matrix.</td></tr><tr><td>MaxCore</td><td>4096</td><td></td><td>The maximum memory to be used on this calculation.</td></tr><tr><td>ETol</td><td>1e-6</td><td></td><td>Energy convergence tolerance.</td></tr><tr><td>RTol</td><td>1e-6</td><td></td><td>Residual Convergence tolerance.</td></tr><tr><td>TDA</td><td>false</td><td></td><td>Switch off for full TDDFT.</td></tr><tr><td>LRCPCM</td><td>true</td><td></td><td>Use LRCPCM.</td></tr><tr><td>CPCMEQ</td><td>false</td><td></td><td>Which epsilon is used to compute the charges.</td></tr><tr><td>DoNTO</td><td>true</td><td></td><td>Generate Natural Transition Orbitals. (For double hybrids, the NTOs do not contain PT2 contribu- tions)</td></tr><tr><td>NTOStates</td><td>1,2,3</td><td></td><td>States to consider for NTO analysis. If empty, all will be done.</td></tr><tr><td>NTOThresh</td><td>1e-4</td><td></td><td>Threshold for printing occupation numbers.</td></tr><tr><td>SaveUnrNatOrb</td><td>true</td><td></td><td>Saves natural orbitals (not NTO) from unrelaxed densities for the IROOT chosen (including IROOTLISTs).</td></tr><tr><td>DoSoc</td><td>false</td><td></td><td>Include spin-orbit coupling.</td></tr><tr><td>SocGrad</td><td>false</td><td></td><td>Set true to compute the SOC gradient for a given IROOT.</td></tr><tr><td>DOTRANS</td><td>false</td><td></td><td>Transient spectra - starting from IROOT.</td></tr><tr><td></td><td>ALL</td><td></td><td>Compute all possible transitions.</td></tr></tbody></table>
+<h2>5.7 Excited States via ROCIS and ROCIS/DFT</h2>
+<p>The ORCA program package can perform configuration interaction with single excitations (CIS) calculations using a restricted open-shell Hartee-Fock (ROHF) reference function. It produces excitation energies, absorption energies and CD intensities. It was designed with the aim to reproduce and - even more importantly - reliably predict transition metal L-edges as observed in X-ray absorption spectroscopy (XAS).</p>
+<p>The original ROCIS implementation [589], [590] is able to perform the CIS calculations only on top of a high-spin ROHFreference function. Starting in ORCA 6.0 the new General Spin ROCIS (GS-ROCIS) implementation [591] is also available upon request by the user. This new implementation can perform the CIS calculation on top of any spin coupling situation obtained with the CSF-ROHF method. This includes the high-spin situations covered previously by the original implementation.</p>
+<h2>5.7.1 General Description</h2>
+<h2>General Spin ROCIS</h2>
+<p>The GS-ROCIS method is described as follows:</p>
+<p>Starting from a reference CSF constructed in the genealogical coupling scheme (obtained by a CSF-ROHF calculation), four classes of excited CSFs are defined according to the occupation number of the orbitals involved in the excitation.</p>
+<p>These excitation classes are:</p>
+<ul>
+<li style="list-style-type: '· ';">DOMOto SOMO excitations -| Φ t i ⟩</li>
+<li style="list-style-type: '· ';">SOMO to VMO excitations -| Φ a t ⟩</li>
+<li style="list-style-type: '· ';">DOMOto VMO excitations -| Φ a i ⟩</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">DOMOto VMO excitations coupled with SOMO to SOMO excitations -| Φ at ui ⟩</li>
+</ul>
+<p>This way, the GS-ROCIS wavefunction is defined as:</p>
+<pre><code>Ψ GS -ROCIS = c 0 | Φ 0 ⟩ + ∑ i,t c t i | Φ t i ⟩ + ∑ t,a c a t | Φ a t ⟩ + ∑ i,a c a i | Φ a i ⟩ + ∑ i,t,a,u = t c at ui | Φ at ui ⟩</code></pre>
+<p>Where the expansion coefficients c q p are determined in the CI procedure.</p>
+<p>GS-ROCIS can be requested by:</p>
+<pre><code>%rocis DoGenROCIS true # Turns the general-spin ROCIS procedure on ReferenceMult 1 # The reference wavefunction multiplicity (it needs to agree␣ ↪ → with the ROHF solution) end</code></pre>
+<p>Anumber of basic variables in the %rocis block control the settings of the Davidson procedure that is used to solve the CI problem:</p>
+<pre><code>%rocis NRoots 6 # Number of desired roots. MaxDim 5 # Davidson expansion space = MaxDim * NRoots. ETol 1e-6 # Energy convergence tolerance. RTol 1e-6 # Residual vector convergence tolerance. MaxIter 35 # Maxmimum number of iterations. NGuessMat 512 # Dimension of the guess matrix: 512x512. end</code></pre>
+<p>The amount of output produced during the calculation is controlled via the PrintLevel variable:</p>
+<pre><code>%rocis PrintLevel 3 end</code></pre>
+<p>Note, that this does not influence which spectra are calculated or printed.</p>
+<p>The orca_rocis module provides two ways of choosing the orbital excitation space: by orbital energy or orbital number. In the former case an energy window has to be specified and the program will then take all orbitals, whose orbital energies lie within this window, into account. Note, that one actually has to define two orbital windows: One for the donor and the second for the acceptor orbital. The input of the windows is done as an array: The first two numbers define the donor space while the last two numbers define the acceptor space.</p>
+<pre><code>%rocis NRoots 3 EWin = -5,5,-5,5 end</code></pre>
+<p>The default is to keep core orbitals and very high lying virtual orbitals out of their respective orbital excitation spaces. Since these orbitals span a space that is usually not reachable with regular UV/Vis spectroscopy, this is a reasonable approximation. One has to keep in mind that an orbital energy window makes only sense if the orbitals used in the calculation have a well-defined orbital energy. As a consequence one cannot use an orbital energy window for a calculation with localized orbitals. The second way to specify the excitation space is by orbital numbering.</p>
+<pre><code>%rocis NRoots 3 OrbWin = 1,13,9,22 end</code></pre>
+<p>In restricted calculations only one set of spatial orbitals is created. Hence it is not necessary to provide orbital windows for α and β electrons separately. Of course, only doubly or singly occupied orbitals can act as donor orbitals and only singly and nonoccupied orbitals can act as acceptor orbitals. The program recognises nonoccupied orbitals in the donor space and doubly occupied orbitals in the acceptor space and removes both.</p>
+<p≯</p>
+<p>The absorption spectrum calculated on the basis of the pure dipole approximation for your calculation is always printed.</p>
+<p>Furthermore like in TD-DFT (section Excited States via RPA, CIS, TD-DFT and SF-TDA ) or CASSCF one may obtain intensities by evaluating the 2nd order oscillation strengths, or the full semi-classical oscillation strengths.</p>
+<ul>
+<li style="list-style-type: '· ';">The exact oscillation strengths behave like the multipole expansion in the velocity representation.</li>
+<li style="list-style-type: '· ';">They are by definition origin independent they do not suffer from artificial negative values like the multipole moments beyond 1st order.</li>
+<li style="list-style-type: '· ';">They are used with the multipole moments up to 2nd order to regenerate the electric dipole, electric quadrupole and magnetic dipole contributions in either length or the velocity representation.</li>
+</ul>
+<pre><code>%rocis DoDipoleLength true DoDipoleVelocity true DecomposeFosc true DoFullSemiclassical true DoCD true end</code></pre>
+<p>Further details can be found in the section One Photon Spectroscopy .</p>
+<p>The user can control which orbital excitations to include in the ROCIS problem:</p>
+<pre><code>%rocis Do_is true # Include DOMO->SOMO excitations Do_sa true # Include SOMO->Virtual excitations Do_ia true # Include DOMO->Virtual excitations Do_ista true # Include DOMO->SOMO coupled to # SOMO->Virtual excitations with s not equal t # For GS-ROCIS, the following excitation is included in the DOMO->VMO class # Only on the original ROCIS implementation it is a separate class. Do_isa true # Include DOMO->SOMO coupled to # SOMO->Virtual excitations with s = t end</code></pre>
+<p>By default, all excitations are included.</p>
+<p>When the program finishes the ROCIS calculation it gives the excitation energy together with the composition for each root and the respective spin coupling situation. According to the number of labels of the respective functions | Φ ⟩ , contributions from excited configuration state functions belonging to the different excitation classes are given by two, three or four numbers.</p>
+<pre><code>STATE 16 Exc. Energy: 27294.664mEh 742.726eV 5990486.3cm**-1 8->50 : 0.0145 (-0.120499) : spin coupling: +1-1+1+1+1+1 8->51 : 0.0317 (0.178098) : spin coupling: +1+1+1+1+1-1 8->51 : 0.2212 (-0.470333) : spin coupling: +1+1-1+1+1+1 8->51 : 0.4135 (-0.643076) : spin coupling: +1-1+1+1+1+1 6->46 ; 48->51 : 0.0843 (-0.290338) : spin coupling: +1 2+1 0+1+1 6->47 ; 49->51 : 0.1252 (-0.353805) : spin coupling: +1+1 2+1 0+1 7->46 ; 49->51 : 0.0452 (-0.212665) : spin coupling: +1 2+1+1 0+1 7->47 ; 48->51 : 0.0133 (0.115519) : spin coupling: +1+1 2 0+1+1 7->49 ; 46->51 : 0.0109 (0.104242) : spin coupling: +1 0+1+1 2+1</code></pre>
+<p>Furthermore the ROCIS is able to calculate the effect of spin-orbit coupling (SOC) on the calculated ground and excited states. It introduces SOC in the framework of quasi-degenerate perturbation theory (QDPT). The SOC Hamiltonian is diagonalized in the basis of the calculated ROCIS states ∣ ∣ Ψ SM I 〉 , where I is the root label and S and M are the spin and magnetic spin quantum numbers, respectively[656], [589].</p>
+<p>(continues on next page)</p>
+<pre><code>%rocis rel</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>DoSOC true # invokes the calculation of SOC effects TEMPERATURE 10 # temperature for SOC corrected spectra in Kelvin end end</code></pre>
+<p>After the SOC calculation the program will produce additional spectra for the SOC corrected results. The spectra contain transitions from the 2 S + 1 lowest lying states into all excited states, where S is the spin quantum number of the electronic ground state. These 2 S +1 lowest states may be split up in the order of 1-100 cm -1 . Due to the small magnitude of the splitting, all of the 2 S + 1 states can be significantly populated even at low temperatures. Experimentally, the intensity of a given transition is dependent on the population of the corresponding initial state. With the TEMPERATURE keyword the population of the theoretically calculated states can be manipulated by the varying the fictive temperature of the system. It has to be mentioned that the electric quadrupole transitions between spin-orbit coupled states are not well defined and are likely to give unreasonable results. Hence it is recommended to use the Decomposefosc keyword only for calculations that do not include SOC.</p>
+<pre><code>-----------------------------------------------------------------------------------↪ → ---------------------SOC CORRECTED ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → ---------------------Transition Energy Energy Wavelength fosc(D2) D2 |DX|␣ ↪ → |DY| |DZ| (eV) (cm-1) (nm) (*population) (au**2) (au)␣ ↪ → (au) (au) -----------------------------------------------------------------------------------↪ → ---------------------0-5.0A -> 1-5.0A 0.000000 0.0 0.0 0.000000000 0.00000 0. ↪ → 00000 0.00000 0.00000 2-5.0A -> 3-5.0A 0.000000 0.0 2927278012.6 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 3-5.0A -> 4-5.0A 0.000001 0.0 2013441147.3 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 2-5.0A -> 4-5.0A 0.000001 0.0 1192923906.3 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 1-5.0A -> 2-5.0A 0.000002 0.0 559585326.1 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 0-5.0A -> 2-5.0A 0.000002 0.0 554991701.4 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 1-5.0A -> 3-5.0A 0.000003 0.0 469780906.9 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 0-5.0A -> 3-5.0A 0.000003 0.0 466539107.5 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 1-5.0A -> 4-5.0A 0.000003 0.0 380906816.8 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 0-5.0A -> 4-5.0A 0.000003 0.0 378772788.3 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 4-5.0A -> 5-5.0A 715.072294 5767447.6 1.7 0.000853852 0.00024 0. ↪ → 00000 0.01494 0.00454 3-5.0A -> 5-5.0A 715.072294 5767447.6 1.7 0.000001143 0.00000 0. ↪ → 00021 0.00018 0.00050 2-5.0A -> 5-5.0A 715.072295 5767447.6 1.7 0.000001245 0.00000 0. ↪ → 00024 0.00053 0.00012 1-5.0A -> 5-5.0A 715.072297 5767447.6 1.7 0.000000330 0.00000 0. ↪ → 00000 0.00029 0.00010 0-5.0A -> 5-5.0A 715.072297 5767447.6 1.7 0.000024144 0.00001 0. ↪ → 00000 0.00251 0.00076 4-5.0A -> 6-5.0A 715.089740 5767588.3 1.7 0.000002661 0.00000 0. ↪ → 00067 0.00036 0.00042 3-5.0A -> 6-5.0A 715.089741 5767588.3 1.7 0.000008083 0.00000 0. ↪ → 00000 0.00145 0.00045</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><caption><div class="caption">If the PrintLevel value is set to 3 or higher, the program will print out the composition of the SOC corrected states in the basis of states ∣ ∣ Ψ SM I 〉 . Eigenvectors</div></caption><tbody><tr><td>2-5.0A ↪ → 00001</td><td>-&gt; 6-5.0A 715.089742 0.01423 0.00432</td><td>5767588.3</td><td>1.7</td><td>0.000775076</td><td>0.00022</td><td>0.</td></tr><tr><td>1-5.0A ↪ 00002</td><td>-&gt; 6-5.0A 715.089744 0.00015 0.00035</td><td>5767588.4</td><td>1.7</td><td>0.000000497</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 0-5.0A ↪ → 00056</td><td>-&gt; 6-5.0A 715.089744 0.00035 0.00007</td><td>5767588.4</td><td>1.7</td><td>0.000001537</td><td>0.00000</td><td>0.</td></tr><tr><td>4-5.0A ↪ 00027</td><td>-&gt; 7-5.0A 715.115140 0.00020 0.00056</td><td>5767793.2</td><td>1.7</td><td>0.000001500</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 3-5.0A ↪ 00001</td><td>-&gt; 7-5.0A 715.115141 0.01476 0.00449</td><td>5767793.2</td><td>1.7</td><td>0.000834113</td><td>0.00024</td><td>0.</td></tr><tr><td>→ 2-5.0A</td><td>-&gt; 7-5.0A 715.115141 0.00150 0.00050</td><td>5767793.2</td><td>1.7</td><td>0.000008694</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00002 1-5.0A ↪ 00026</td><td>-&gt; 7-5.0A 715.115143 0.00025 0.00018</td><td>5767793.2</td><td>1.7</td><td>0.000000562</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 0-5.0A ↪ → 00036</td><td>-&gt; 7-5.0A 715.115143 0.00031 0.00085</td><td>5767793.2</td><td>1.7</td><td>0.000003341</td><td>0.00000</td><td>0.</td></tr><tr><td>4-5.0A ↪ → 00004</td><td>-&gt; 8-5.0A 715.184940 0.00020 0.00001</td><td>5768356.2</td><td>1.7</td><td>0.000000146</td><td>0.00000</td><td>0.</td></tr><tr><td>3-5.0A ↪ → 00206 ...</td><td>-&gt; 8-5.0A 715.184940 0.00012 0.00120</td><td>5768356.2</td><td>1.7</td><td>0.000019943</td><td>0.00001</td><td>0.</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<table><tbody><tr><td colspan="8">Eigenvectors of SOC calculation:</td></tr><tr><td colspan="8">the threshold for printing is: 0.010000</td></tr><tr><td>weight</td><td>real</td><td>image</td><td>:</td><td>Root</td><td>Block</td><td>Spin</td><td>Ms</td></tr><tr><td colspan="8">State 0: 0.00 cm**-1 0.00000 eV</td></tr><tr><td>0.135363</td><td>-0.028407</td><td>0.366819</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.181749</td><td>0.224125</td><td>0.362653</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.367330</td><td>-0.135925</td><td>-0.590639</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.180828</td><td>0.039792</td><td>-0.423372</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.134728</td><td>0.185875</td><td>0.316510</td><td>:</td><td>0</td><td></td><td></td><td>-2</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>0</td><td>2</td><td></td></tr><tr><td colspan="8">State 1: 0.00 cm**-1 0.00000 eV</td></tr><tr><td>0.078367</td><td>-0.271364</td><td>0.068762</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.306783</td><td>0.460606</td><td>0.307612</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.228162</td><td>0.440545</td><td>0.184613</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.307656</td><td>-0.543907</td><td>-0.108722</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.079031</td><td>-0.142362</td><td>-0.242414</td><td>:</td><td>0</td><td>0</td><td></td><td>-2</td></tr><tr><td>State</td><td></td><td></td><td></td><td></td><td></td><td>2</td><td></td></tr><tr><td colspan="8">2: 0.02 cm**-1 0.00000 eV</td></tr><tr><td>0.416636</td><td>0.252581</td><td>0.594003</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.072004</td><td>-0.082420</td><td>0.255363</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.022669</td><td>-0.134504</td><td>0.067662</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.071994</td><td>0.254211</td><td>0.085850</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.416695</td><td>-0.326890</td><td>-0.556631</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><td colspan="8">State 3: 0.02 cm**-1 0.00000 eV</td></tr><tr><td>0.080023</td><td>-0.256741</td><td>0.118772</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.319001</td><td>0.556244</td><td>0.097947</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.201858</td><td>-0.134225</td><td>0.428768</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.319074</td><td>0.512787</td><td>0.236903</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.080042</td><td>0.143270</td><td>0.243959</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><td colspan="8">State 4: 0.03 cm**-1 0.00000 eV</td></tr><tr><td>0.289609</td><td>-0.315623</td><td>-0.435879</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.120461</td><td>0.303600</td><td>-0.168190</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.179979</td><td>-0.232115</td><td>-0.355108</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.120448</td><td>0.275975</td><td>-0.210441</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>0.289502</td><td>-0.272469</td><td>-0.463963</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th colspan="2">State 5: 5767447.63 cm**-1</th><td colspan="6">715.07230 eV</td></tr><tr><td>0.191190</td><td>-0.086278</td><td>0.428656</td><td>:</td><td>1</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.061035</td><td>-0.247045</td><td>-0.001820</td><td>:</td><td>1</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.055460</td><td>-0.038920</td><td>0.232262</td><td>:</td><td>1</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.061035</td><td>-0.234143</td><td>-0.078813</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.191190</td><td>-0.058171</td><td>0.433366</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-2</td></tr><tr><td>0.109587</td><td>-0.316206</td><td>-0.097982</td><td>:</td><td>2</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.026192</td><td>-0.108605</td><td>-0.119987</td><td>:</td><td>2</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.010968</td><td>0.017308</td><td>-0.103287</td><td>:</td><td>2</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.026192</td><td>-0.141786</td><td>0.078029</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.109587</td><td>0.330874</td><td>0.010450</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-2</td></tr><tr><td>0.015452</td><td>0.114128</td><td>-0.049265</td><td>:</td><td>3</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.041882</td><td>-0.204634</td><td>-0.002607</td><td>:</td><td>3</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.027697</td><td>0.027504</td><td>-0.164135</td><td>:</td><td>3</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.041882</td><td>-0.194305</td><td>-0.064244</td><td>:</td><td>3</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.015452</td><td>-0.091834</td><td>-0.083778</td><td>:</td><td>3</td><td>0</td><td>2</td><td>-2</td></tr><tr><th colspan="2">State 6: 5767588.34 cm**-1</th><td colspan="6">715.08974 eV</td></tr><tr><td>0.198585</td><td>-0.131642</td><td>0.425741</td><td>:</td><td>1</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.047453</td><td>-0.161434</td><td>0.146261</td><td>:</td><td>1</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.019867</td><td>-0.139025</td><td>-0.023213</td><td>:</td><td>1</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.047453</td><td>0.105160</td><td>0.190773</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.198585</td><td>0.013812</td><td>-0.445415</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-2</td></tr><tr><td>0.160559</td><td>-0.388214</td><td>-0.099243</td><td>:</td><td>2</td><td>0</td><td>2</td><td>2</td></tr><tr><td>0.044707</td><td>-0.072788</td><td>-0.198517</td><td>:</td><td>2</td><td>0</td><td>2</td><td>1</td></tr><tr><td>0.014352</td><td>-0.118163</td><td>-0.019729</td><td>:</td><td>2</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.044707</td><td>0.133333</td><td>-0.164102</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.160559</td><td>-0.399398</td><td>-0.032262</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-2</td></tr><tr><td>0.012669</td><td>-0.111020</td><td>-0.018537</td><td>:</td><td>3</td><td>0</td><td>2</td><td>0</td></tr></tbody></table>
+<p>Further details of the SOC calculation such as the procedure of SOC integral calculation can be controlled via the %rel block (section Relativistic Calculations .</p>
+<h2>Original ROCIS Implementation</h2>
+<p>It is still possible to use the original implementation of ROCIS[589], [590] which is able to perform CIS calculations only on top of a high-spin ROHF reference function. All spins of the unpaired electrons have to be coupled ferromagnetically to give a total spin of S = 1 2 N , where N is the number of unpaired electrons.</p>
+<p>The usage of the original ROCIS implementation can be requested by:</p>
+<pre><code>%rocis DoGenROCIS false end</code></pre>
+<p>In our experience ROHF calculations suffer a lot from convergence problems. UHF calculations generally exhibit better convergence properties. In most cases the quasi-restricted orbitals (qro's) of a UHF calculation resemble the ROHF orbitals. Thus the original ROCIS features the ability to start a calculation on top of a UHF calculation. It will automatically create the qro's and build the reference determinant with them. If one wants to avoid the (small) errors that are introduced by this procedure, one may take the qro's of a UHF calculation as starting orbitals for a subsequent ROHF calculation.</p>
+<h2>ROCIS/DFT</h2>
+<pre><code>ǩ Important · Currently, ROCIS/DFT is not implemented for the general-spin ( GS-ROCIS ) procedure.</code></pre>
+<p>For many transition metal compounds the description of the electronic ground and excited states by Hartree-Fock theory and CIS is of rather poor quality. Especially covalency and relative spin state energetics are not reproduced correctly. This in turn might lead to wrong intensity distributions in the calculated L-edge spectra. In the majority of these cases the quality of the description and hence the predicted L-edge spectra can be significantly improved with the ROCIS/DFT method[589]. It features the usage of a restricted open-shell Kohn-Sham matrix as reference and also uses the DFT orbitals for setting up the excited configuration state functions in the CI expansion. The two electron integrals that include the DFT orbitals are scaled according to their nature and their position in the CI matrix by the parameters c 1 , c 2 and c 3 . They all lie in the interval [0;1]. Parameters c 1 and c 2 scale coulomb- and exchangelike terms in the diagonal part of the CI matrix, whereas c 3 reduces the size of all off-diagonal elements of the CI matrix. For example:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The three default parameters c 1 = 0 . 18 , c 2 = 0 . 20 and c 3 = 0 . 40 have been optimized for a test set of molecules and their excited states on a B3LYP/def2-TZVP(-f) level of theory but can be freely chosen[589]. It is most likely that for a different combination of test molecules, functional and basis set, a different set of parameters gives better results. Since the parameters are chosen with regard of a good 'balance' between orbital energies, Coulomb and exchange integrals, a new set of parameters should at least crudely resemble their relative proportions.</p>
+<p>The ROCIS/DFT method can be requested by the following keywords:</p>
+<pre><code>%rocis DoGenROCIS false # ROCIS/DFT is available only for the high-spin␣ ↪ → implementation of ROCIS. DoDFTCIS true # Switches on the ROCIS/DFT method. DFTCIS_c = 0.18, 0.20, 0.40 # Array input of the three parameters. end</code></pre>
+<h2>Resolution of the Identity</h2>
+<p>If calculations on large molecules are conducted, the integral transformation will be the most time-consuming part. Therefore it is strongly recommended to use the resolution of the identity (RI) approximation in those cases. It effectively reduces the computational costs of the transformation step by only introducing minor errors to the calculation. It has to be kept in mind that in order to keep the introduced errors small, one has to provide a reasonable auxiliary basis sets along with your normal basis set input.</p>
+<pre><code>! def2-SVP def2-SVP/C TightSCF %scf HFTyp ROHF ROHF_Case HighSpin ROHF_Nel[1] = 1 end %rocis NRoots 5 DoRI true # invokes the RI approximation end * xyz 0 2</code></pre>
+<p>(continues on next page)</p>
+<pre><code>N 0 0 0 O 0 0 1.15 *</code></pre>
+<h2>5.7.2 Core PNO-ROCIS, PNO-ROCIS/DFT</h2>
+<p>It has been shown [657] that it is possible to combine the powerful machinery of Pair Natural Orbitals (PNOs) with the ROCIS and ROCIS/DFT methods to formulate the core PNO-ROCIS and PNO-ROCIS/DFT methods. The usage of PNOs here is somewhat unconventional since they are not used to treat electron correlation effects in a state specific manner. Rather, the PNOs are used to identify the relevant part of the virtual space that can be reached by excitation out of local core orbitals. This subspace of the virtual space is local, thus leading to a linear scaling, state universal method.</p>
+<p>The PNO-ROCIS calculations can be requested with the following keywords:</p>
+<pre><code>%rocis DoPNO true # Flag to call the PNO truncation TCutPNO 1e-11 # Threshold to cutout the PNO populations XASElems 0 # Number of the involved element to the calculated core XAS␣ ↪ → calculation end</code></pre>
+<p>As shown in reference[657], a universal TCutPNO 1e-11 threshold can be defined for all edges provided that the PNOs are constructed by taking into account all the available core orbitals in the systems. For example in the case of a 1st row transition metal this will be the 9 1s, 2s, 2p, 3s and 3p MOs. These orbitals will be identified automatically by the program provided that the elements for which the XAS calculation will be performed are specified within the XASElems keyword.</p>
+<pre><code>=============================================================== Core PNO/ROCIS truncation =============================================================== ... ================================================================ TCutPNO: 1.000e-13 Virtual orbitals before selection: 303 ... 2772 (2470 MO's) Virtual orbitals after selection: 303 ... 558 (256 MO's) PNO transformation completed in: 3253.03 sec ================================================================</code></pre>
+<p>From this point and on the programm will proceed the usual way. This will result in extraordinary computation speeding ups without loss in accuracy.</p>
+<h2>5.7.3 Transition Metal L-Edges with ROCIS or DFT/ROCIS</h2>
+<p>The ROCIS method was designed to calculate transition metal L-edge spectra of large molecules as they are observed in X-ray absorption spectroscopy (XAS). An L-edge results when an electron is promoted from the 2p shell of a transition metal ion into the valence d shell by an X-ray photon. Strong spin-orbit coupling in the 2p shell and p-d coupling phenomena complicate the interpretation and even more so the prediction of these spectra. It has to be kept in mind that the present program applies a variety of approximations which might lead to observable deviations from experimentally determined spectra. However, we believe that the results obtained from the program are in general qualitatively correct and in most cases accurate close to the experimental uncertainty. In cases where quantitative accuracy is not met, the provided results might still give some insight into the mechanisms of intensity distribution in the spectra.</p>
+<p>The special input structure for orbital windows described in Excited States with Restricted Open-shell CIS - ROCIS allows the user to restrict the donor orbital space to the transition metal 2p shell. The acceptor orbital space is the</p>
+<p>(continued from previous page)</p>
+<p>same as in regular UV/Vis spectroscopy. It should include all singly occupied molecular orbitals and as many virtual orbitals as one can afford in the calculation (preferably all). The number of roots should be chosen large enough so that at least all 2p-3d single excitations are calculated. In many cases even more roots are required since doubly excited or charge transfer states may become important. Moreover the strong SOC apparent in the 2p shell of transition metal ions necessitates the additional calculation of excited states with a total spin of S ′ = S +1 and S ′ = S -1 where S is the total spin of the electronic ground state. Accordingly, additional excitation classes introduce excited configuration state functions with a lower and higher spin multiplicity.</p>
+<p>for S ′ = S +1 :</p>
+<ul>
+<li style="list-style-type: '· ';">DOMOto SOMO excitations -∣ ∣ Φ t + i 〉</li>
+</ul>
+<p>for S ′ = S -1 :</p>
+<ul>
+<li style="list-style-type: '· ';">SOMO to VMO excitations -∣ ∣ Φ a + t 〉 · DOMOto VMO excitations -∣ ∣ Φ a + i 〉</li>
+<li>〉 · DOMOto VMO excitations -∣ ∣ Φ a -i 〉</li>
+<li style="list-style-type: '· ';">DOMOto SOMO excitations -∣ Φ t -i 〉</li>
+<li style="list-style-type: '· ';">SOMO to SOMO excitations -∣ ∣ Φ u -t 〉</li>
+<li>∣ · SOMO to VMO excitations -∣ ∣ Φ a -t</li>
+</ul>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">Depending on the ground state multiplicity and/or occupation of the involved orbitals, some excitations are not possible. The program automatically includes only the allowed excitations into the respective multiplicities.</li>
+</ul>
+<p>Inclusion of configuration state functions with higher or lower multiplicity is invoked with the keywords DoLowerMult and DoHigherMult , respectively.</p>
+<pre><code>%rocis DoLowerMult true #Invokes a CI calculation #with S'=S-1 DoHigherMult true #Invokes a CI calculation #with S'=S+1 end</code></pre>
+<p>The program will conduct a separate Davidson procedure for each multiplicity. Subsequently it gives the excitation energies and compositions of the calculated excited states for all included multiplicities.</p>
+<p>Here is an example calculation of L-edge XAS on [FeCl 4 ] 2 -:</p>
+<pre><code># [Fe(II)Cl4]2--ROCIS L-edge !x2c x2c-SVPall AutoAux TightSCF %pal nproc 12 end %scf HFTyp ROHF ROHF_CASE HIGHSPIN ROHF_NEL[1] 4 end %rocis DoGenROCIS true ReferenceMult 5 NRoots 50</code></pre>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

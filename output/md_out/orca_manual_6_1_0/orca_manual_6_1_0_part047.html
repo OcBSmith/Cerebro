@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part047</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>5.10.9 Spin-Orbit Coupling (Experimental)</h2>
+<p>You can compute the spin-orbit coupling between singlet and triplets states in STEOM-CCSD using the keyword STEOMSOC true . Please note that all SOC matrix elements and properties are currently computed from the right vector only !</p>
+<h2>5.10.10 Core excitation</h2>
+<p>The STEOM-CCSD (and bt-PNO-STEOM-CCSD) method can also be used to compute the K-edge core-excitation energy of molecules. See Core-Excitation for more details.</p>
+<h2>5.10.11 Transient absorption</h2>
+<p>Transient absorption spectra can be computed using the keyword DoTrans true . The IRoot keyword will select the targeted excited state.</p>
+<h2>5.11 Excited States via IH-FSMR-CCSD</h2>
+<p>An alternative approach for decoupling the singles excitation space from the space of double and higher excitations is to use the so called Fock space multi-reference coupled cluster (FSMRCC) method. The method is similar to STEOM-CCSD, but much more flexible in terms of formulation.</p>
+<h2>5.11.1 General Description</h2>
+<p>FSMRCCisoriginally based on an effective Hamiltonian (EH). The basic idea of EH theory is to obtain some selective eigenvalues of the Hamiltonian operator from the total eigenvalue spectrum. For this purpose, the entire configuration space is divided into a model and an outer space with projection operators P M and Q M , respectively (see Fig. 5.30). The diagonalization of the EH takes care of the non-dynamic correlation coming from the interactions between the model space configurations. On the other hand, the dynamic correlation arises due to the interactions of the model space configurations with the outer space configurations. This interaction is introduced through a universal wave operator Ω , which is parametrized such that it generates the exact wave function when acting on the model space. The valence universal wave operator Ω has the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the braces indicate normal ordering of the cluster operators and ˜ S ( p,h ) is defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The cluster operator ˜ S ( k,l ) is capable of destroying exactly k active particles and l active holes, in addition to creation of holes and particles. The ˜ S ( p,h ) subsumes all lower sector Fock space ˜ S ( k,l ) operators. The ˜ S (0 , 0) is equivalent to standard single-reference coupled cluster ˆ T operator. The EH for (p,h) valence system can be defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>However, Ω -1 may not be well defined in all the cases. Therefore, the above definition for the EH is seldom used. Instead, the Block-Lindgren approach is generally used for solving the equations, which is defined by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Effective Hamiltonian</h2>
+<h2>Intermediate Hamiltonian</h2>
+<p>Fig. 5.30: Division of the configuration space into model and outer space in effective Hamiltonian (EH) theory and into model, intermediate, and outer space in intermediate Hamiltonian (IH) theory. P and Q denote the respective projection operators.</p>
+<p>When the model space is not energetically well separated from the outer space, this method faces convergence problems. This is commonly termed as the intruder state problem. In the intermediate Hamiltonian (IH) formulation, configuration space is divided into three subspaces, namely, the main(M), the intermediate(I), and the outer(O) space (see Fig. 5.30) with projection operators P M , P I and Q O , respectively. The intermediate space acts as a buffer between the model and the outer space. When diagonalization the IH, a subset of the eigenvalues correspond to the main space obtained through EH theory. The IH is for the singly excited state sector (1,1) is defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The S (1 , 0) and S (0 , 1) are extracted from converged EOMIP-CCSD and EOMEA-CCSD calculations, respectively, by invoking intermediate normalization on the suitably chosen eigenvectors corresponding to active holes and active particles. The total procedure can be described as following</p>
+<ul>
+<li style="list-style-type: '· ';">solve the ground state coupled cluster equations</li>
+<li style="list-style-type: '· ';">construct ˆ ¯ H = e -ˆ T ˆ He ˆ T</li>
+<li style="list-style-type: '· ';">solve the EOMIP and EOMEA equations</li>
+<li style="list-style-type: '· ';">extract the ˆ S amplitudes</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">construct the second similarity transformed Hamiltonian as H (1 , 1) I</li>
+<li style="list-style-type: '· ';">diagonalize the H (1 , 1) I in CIS space</li>
+</ul>
+<p>The automatic active space selection scheme and all the speed up options which are available for STEOM-CCSD, including bt-PNO and COSX, are also available for IH-FSMR-CCSD. All the keywords controlling the IH-FSMRCCSD are similar to STEOM-CCSD as described in Excited States via STEOM-CCSD .</p>
+<p>No UHF variant of IH-FSMR-CCSD is currently available.</p>
+<h2>5.11.2 Properties</h2>
+<p>The transition properties can be calculated using a simple CIS-like formulation, employing the converged IH-FSMRCC eigenvectors. The transition moments are computed by default in an IH-FSMR-CCSD calculation.</p>
+<h2>5.11.3 Solvation Correction</h2>
+<p>Solvent effects can be approximated by a simple perturbative correction to the IH-FSMR-CCSD via</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The CPCM correction directly enters the H (1 , 1) I , the modified Hatree-Fock orbitals. In the non-equilibrium regime, one can simply write the perturbative correction as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>A typical input file looks like</h2>
+<pre><code>! aug-cc-pVDZ IH-FSMR-CCSD !CPCM(water) %mdci NROOTS 8 DoSOLV true DTol 1e-10 end *xyz 0 1 O 0.0000 0.0000 0.1173 H 0.0000 0.7572 -0.4692 H 0.0000 -0.7572 -0.4692 *</code></pre>
+<p>For the above input, the following output is obtained:</p>
+<pre><code>---------------------------------CALCULATED SOLVENT SHIFTS CPCM MODEL ---------------------------------Contributions of the 'fast' term to the solvent shift State Shift(Eh) Shift(eV) Shift(cm**-1) Shift(nm) E_FSMRCC(eV) E_FSMRCC+SHIFT(eV)</code></pre>
+<p>(continues on next page)</p>
+<p>where where</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th colspan="6">-------------------------------------------------------------------------------</th></tr><tr><td>0: -0.0058000</td><td>-0.158</td><td>-1273.0</td><td>3.3</td><td>7.814</td><td>7.656</td></tr><tr><td>1: -0.0133523</td><td>-0.363</td><td>-2930.5</td><td>5.0</td><td>9.650</td><td>9.287</td></tr><tr><td>2: -0.0053622</td><td>-0.146</td><td>-1176.9</td><td>1.8</td><td>10.144</td><td>9.998</td></tr><tr><td>3: -0.0078092</td><td>-0.212</td><td>-1713.9</td><td>2.2</td><td>10.958</td><td>10.746</td></tr><tr><td>4: -0.0040294</td><td>-0.110</td><td>-884.4</td><td>1.0</td><td>11.534</td><td>11.424</td></tr><tr><td>5: -0.0137147</td><td>-0.373</td><td>-3010.0</td><td>3.3</td><td>12.003</td><td>11.630</td></tr><tr><td>6: -0.0093172</td><td>-0.254</td><td>-2044.9</td><td>2.2</td><td>12.131</td><td>11.878</td></tr><tr><td>7: -0.0077514</td><td>-0.211</td><td>-1701.2</td><td>1.7</td><td>12.562</td><td>12.352</td></tr></tbody></table>
+<p>Thee perturbative correction only changes the transition energies and neither the wave function nor the transition moment.</p>
+<h2>5.12 Excited States via PNO-based coupled cluster</h2>
+<p>Despite the successes of the DLPNO-CC approximation for ground states, the use of PNOs for excited states has been less fruitful. Defining a PNO-based scheme for excited states that maintains the balance between speed and accuracy observed for ground states is not straightforward. As an intermediate solution, the basis for ground-state DLPNO quantities is transformed back to the canonical basis and used within the canonical EOM routine. This procedure is justified, as the main bottleneck of the EOM-CCSD or STEOM-CCSD methods lies in the ground-state calculation. Approximating the ground-state CCSD amplitudes with MP2 amplitudes is also possible, as done in the EOM-CCSD(2) approach. However, it is not reliable and can lead to large errors when the reference HF wave function does not provide a reasonable zeroth-order approximation to the ground-state wave function. Note that the back-transformed PNO scheme (bt-PNO) described here is available for both open-shell (UHF (QROs) or ROHF reference) and closed-shell (RHF reference) systems.</p>
+<h2>5.12.1 General Description</h2>
+<p>The back-transformation of the ground-state DLPNO-CCSD amplitudes to the virtual space involves three steps. The amplitudes in the PNO basis are first converted to the PAO basis, then to the atomic orbital (AO) basis, and finally to the canonical MO basis[640]. For example, in the closed-shell case, we have</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The AO basis functions are denoted as µ, ν, . . . , while ˜ µ, ˜ ν, . . . refers to PAOs. The missing pairs are treated using MP2 amplitudes. If all the thresholds are set to zero, the back-transformed amplitudes match exactly with the canonical RI-EOM-CCSD ones. On the other hand, when all the thresholds are made infinitely tight, one obtains the EOM-CCSD(2) results. This PNO-based excited state approach is available for all the flavors of EOM-CCSD and for STEOM-CCSD in both open- and closed-shell systems.</p>
+<p>Below, we list all the parameters that influence the DLPNO-CCSD-based excited state calculations</p>
+<pre><code>%mdci #bt-PNO-EOM and STEOM parameters - defaults displayed DoEOMMP2 true # MP2 correction for missing pairs DoRECAN true # recanonicalization of the occupied # orbitals before the excited state calculation #(only relevant for the RHF implementation) end</code></pre>
+<h2>5.12.2 Reference State Energy</h2>
+<p>It should be noted that the reference energy for PNO-based EOM-CCSD or STEOM-CCSD differs slightly from the energy printed for a converged ground-state DLPNO-CCSD calculation, as it includes perturbative corrections for various truncated quantities.</p>
+<pre><code>----------------------COUPLED CLUSTER ENERGY ----------------------E(0) ... -113.913498239 E(CORR)(strong-pairs) ... -0.401457078 E(CORR)(weak-pairs) ... -0.000339627 E(CORR)(corrected) ... -0.401796705 E(TOT) ... -114.315294944</code></pre>
+<p>In the bt-PNO-EOM-CCSD scheme, the CI-like excited state treatment of the reference state is defined by backtransformed DLPNO amplitudes (or MP2 amplitudes for the weak pairs). The energy corresponding to this set of amplitude is printed at the beginning of the EOM calculations.</p>
+<pre><code>Dressing integrals for EOM-CCSD ... Reference state energy for EOM-DLPNO-CCSD ... -114.314954945 done ( 0.4)</code></pre>
+<p>Therefore, to calculate the total energy of an excited (ionized or electron attached) state, one needs to add the excitation energy to the reference state energy in bt-PNO-EOM-CCSD.</p>
+<h2>5.12.3 Use of Local Orbitals</h2>
+<p>The use of local orbitals makes it difficult to follow a particular guess vector during the Davidson diagonalization process in EOM-CC and STEOM-CC. Therefore, it is advisable to recanonicalize the occupied orbitals after the ground-state DLPNO-CCSD calculation by setting DoRECAN to true (this is only relevant for the closed-shell RHF implementation). It is important to note that recanonicalization does not affect the EOM-CCSD energies. However, STEOM-CCenergies are not invariant to orbital rotations and may differ slightly between local and canonical orbitals. In the open-shell bt-PNO implementation, a different procedure is followed: all quantities are transformed to the delocalized basis before proceeding with the back-transformation and the excited-state calculation.</p>
+<h2>5.12.4 Some tips and tricks for bt-PNO calculations</h2>
+<ul>
+<li style="list-style-type: '· ';">The bt-PNO scheme with tightPNO settings gives results, which are within 0.01 eV of the canonical EOMCCSD numbers, at a fraction of the computational cost[668]. So, use of bt-PNO scheme is always preferable over canonical calculations.</li>
+<li style="list-style-type: '· ';">In the case of an RHF reference, one should set 'DLPNOLINEAR true' and 'NEWDOMAINS true' in the mdci block input to use the 2015 fully linear scaling implementation, which is more robust than the 2013 implementation used as default in bt-PNO scheme.</li>
+<li style="list-style-type: '· ';">The transition moment in bt-PNO-EOM (RHF only) and bt-PNO-STEOM (RHF, UHF (QROs) or ROHF) is only available using the linear approximation.</li>
+</ul>
+<h2>5.13 Excited States via DLPNO-STEOM-CCSD</h2>
+<p>The powerful coupled cluster methods can be used for excited states also. STEOM-CCSD is an improvement over the costly EOM-CCSD method which allows a lower computational scaling for calculating excitation energies. The DLPNO approximation on the orbital space makes the theory even more compact by further optimizing the computational cost. For general description, please read Excited States via STEOM-CCSD .</p>
+<h2>5.13.1 PNO dressing (experimental keyword)</h2>
+<p>In STEOM-DLPNO-CCSD method most of the steps are done using the powerful PNO approximation except the last one corresponding to the STEOM-CCSD calculation itself. In the canonical version of the dressing (default in ORCA) all the amplitudes previously computed at the PNO level are recanonicalized which increases the calculation cost.PNO dressing uses some of the PNO intermediates to reduce the dressing time. It has however no effect on the storage size.</p>
+<p>Using this PNO dressing will reduce the calculation timing but at a reduce accuracy for the excitation energies. We thus recommend this option only for specific large systems (&gt;2500 basis functions).</p>
+<p>The keyword DirectDressSTEOM is set to true enable this option.</p>
+<h2>5.13.2 Keywords from STEOM-CCSD</h2>
+<p>Most of the keywords from STEOM-CCSD can be used within the DLPNO version. More information on the Excited States via STEOM-CCSD section.</p>
+<h2>5.13.3 Example</h2>
+<p>We would recommend this input for standard organic molecules. Formaldehyde is used as an example with def2TZVP basis set.</p>
+<p>As a general guideline we will discuss some of the keywords used there:</p>
+<pre><code>! STEOM-DLPNO-CCSD def2-TZVP def2-TZVP/C def2/J TightSCF %mdci NRoots 6 DoRootWise true OThresh 0.005 VThresh 0.005 TCutPNOSingles 1e-11 NDAV 400 DoStoreSTEOM true DoSimpleDens false AddL2Term True DTol 1e-5 end * xyz 0 1 C 0.016227 -0.000000 0.000000 O 1.236847 0.000000 -0.000000 H -0.576537 0.951580 -0.000000 H -0.576537 -0.951580 -0.000000 *</code></pre>
+<h2>5.13.4 Tips and Tricks</h2>
+<h2>ǩ Important</h2>
+<p>For DLPNO calculations we need at least one auxiliary basis set. Therefore we have used def2-TZVP/C def2/J for this input. Without using explicit auxiliary basis sets, a generic keyword 'AutoAux' can also be used.</p>
+<p>In that case, the first line of the same input would look like</p>
+<p>! STEOM-DLPNO-CCSD def2-TZVP AutoAux TightSCF</p>
+<p>®</p>
+<h2>Note</h2>
+<p>DLPNO-STEOM-CCSD is not yet available for UHF wavefunctions. Therefore open shell calculations are currently not possible.</p>
+<ul>
+<li style="list-style-type: '· ';">TIGHTSCF is a must for any CCSD calculation.</li>
+<li style="list-style-type: '· ';">We will recommend using TIGHTPNO for all molecules as it is not a lot more expensive and helps achieving a better convergence.</li>
+<li style="list-style-type: '· ';">The OTHRESH, VTHRESH and TCutPNOSingles keywords help with converging the calculations, increasing the percentage active of each root. In contrary to standard STEOM-CCSD, we would acknowledge that the roots are converged when the percentage active character is at least 96%. Of course you have to check that the amplitude and orbitals associated with the excitation are correct (and what you expect). Tightening the 3 keywords mentioned above will increase this percentage active character. The most important being the TCutPNOSingles one. Be careful, the computational cost increases exponentially when thresholds are tightened. In most cases 10 -12 or 5 × 10 -12 should be enough. For OTHRESH and VTHRESH you should not go below 10 -3 , as the benefits are not so obvious. A trick to achieve a better convergence is to play with the number of roots. It is often not necessary to compute a lot of roots if you are only interested in the first 3 for example. If some high energy roots have some low percentage active character, removing them can help for the convergence of other roots.</li>
+<li style="list-style-type: '· ';">As shown in the related paper[669], the STEOM density with the L2term is now the default for computing the excited state properties.</li>
+<li style="list-style-type: '· ';">The choice of the basis set can also speed up the calculation without a significant loss of accuracy. For most organic molecules def2-TZVP(-f) is enough. Trying def2-SVP is also a good idea for preliminary tests.</li>
+<li style="list-style-type: '· ';">The STEOM-CCSD excitation energies are very dependent from the starting geometry. Geometries optimised with several DFT functional can yield significant differences for the excitation energies (about 0.1 eV).</li>
+<li style="list-style-type: '· ';">It has happened that some roots were missing with the keyword Dorootwise set to true. Turning it off solved the issue but this keyword should be on by default.</li>
+</ul>
+<h2>5.14 One Photon Spectroscopy</h2>
+<h2>5.14.1 General Description</h2>
+<p>Introduced in Orca 6.0, the One Photon Spectroscopy (OPS) tool takes charge of computing one-photon absorption (OPA), emission (OPE), and natural electric circular dichroism (ECD) intensities. In each case, the intensity of the spectrum ( I ( ω ) ) resulting from a transition between an initial state I and a final state J is determined by the square modulus of the transition moment T IJ = ⟨ Ψ I | ˆ H 1 | Ψ J ⟩ , weighted by the populations N I and N J of states I and J , respectively.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where, α represents a positive constant, ℏ ω stands for photon energy, and the expression for ˆ H 1 hinges on the specific modeling of photon-matter interaction.</p>
+<h2>5.14.2 Light-matter interaction approaches</h2>
+<p>Expressions for ˆ H 1 can be derived from different theoretical perspectives. For instructional purposes, a classical electrodynamic approach is adopted here. By representing light classically through a vector potential ( A ) and a scalar potential ( ϕ = 0 ), the radiation can be integrated into the Hamiltonian that models the molecular system.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>By disregarding the coupling between the magnetic field of light and the spin, as well as the | A | 2 term, and applying Fermi's golden rule, an expression for ⟨ Ψ I | ˆ H 1 | Ψ J ⟩ under the Full-Semiclassical Light-Matter interaction can be derived.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where T FFMIO IJ is the transition moment for the F ull (semiclassical) F ieldM atter I nteraction O perator (FFMIO), while k and E denote the wave and polarization vectors describing the light, respectively. r i and p i represent the position and linear momentum operators for the i-th electron.</p>
+<p>Proceeding from eq. (5.85) and approximating the exponential term of T FFMIO IJ with a Taylor expansion yields various orders of interaction. The zeroth order ( T [0] IJ ) results in the electric dipolar velocity formulation ( ED vel ), which, upon molecular orientational averaging, yields:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For exact solutions of the Hamiltonian, or in theories that satisfy the Hypervirial theorem by construction, equation (5.86) can be transformed into a length formulation (5.87) ( ED len ).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The absorption spectrum under EDlen and EDvel formulations can be obtained in all Orca modules utilizing OPS by setting DoDipoleLength and DoDipoleVelocity to true, respectively, in the corresponding module's block. The results are then presented in the following tables:</p>
+<table><tbody><tr><th colspan="9">-----------------------------------------------------------------------------------</th></tr><tr><th>↪ → ↪ →</th><th colspan="2">----------------- ----------------- Transition</th><td>Energy</td><th>ABSORPTION SPECTRUM</th><th>VIA Energy Wavelength</th><th>TRANSITION ELECTRIC fosc(D2)</th><th>DIPOLE ----------------------------------------------------------------------------------- D2</th><th>MOMENTS DX</th><th>␣</th></tr><tr><th>↪ →</th><th>DY</th><th>DZ (eV)</th><th>(cm-1)</th><th>(nm)</th><td></td><th>(au**2)</th><th>(au)</th><th>␣</th></tr><tr><td>↪ →</td><td>(au)</td><td>(au)</td><td></td><td></td><td></td><td></td><td>-----------------------------------------------------------------------------------</td><td></td></tr><tr><td>↪ → 0-1Ag -&gt;</td><td>-----------------</td><td>1-1B3g 0.00000</td><td>2.507275</td><td>20222.5 494.5</td><td>0.000000000</td><td>0.00000</td><td>-0.00000</td><td>␣</td></tr><tr><td>↪ → 0.00000 0-1Ag 0.00000</td><td>-&gt; -0.00000</td><td>2-1Au</td><td>2.726731</td><td>21992.6 454.7</td><td>0.000000000</td><td>0.00000</td><td>-0.00000</td><td>␣</td></tr><tr><td>↪ → 0-1Ag -&gt; ↪ → 0.00000</td><td>3-1B2g -0.00000</td><td>3.892633</td><td>31396.2</td><td>318.5</td><td>0.000000000</td><td>0.00000</td><td>0.00000</td><td>␣</td></tr><tr><td>0-1Ag -&gt; ↪ 0.00000</td><td>4-1B3u</td><td>4.973431</td><td>40113.4</td><td>249.3</td><td>0.301976959</td><td>2.47833</td><td>1.57427</td><td></td></tr><tr><td>→</td><td>-0.00025</td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr></tbody></table>
+<p>Here, transitions are denoted using spectroscopic notation, such as 1-3B3g representing 1 3 B 3 g . If symmetry is not specified in the calculation (or is unavailable in the selected method), the system defaults to C 1 point group. The fosc(D2) and fosc(P2) columns indicate the computed oscillator strengths in length and velocity formulations respectively. Additionally, D2 , P2 , DX , DY , DZ , PX , PY , and PZ represent the square modulus of the electric transition dipole moment, square modulus of the transition linear momentum, and its Cartesian components, respectively (with the imaginary unit in the linear momentum being implicit).</p>
+<p>Alternatively, intensity computation directly using T FFMIO IJ is achievable in OPS through the utilization of the keyword DoFullSemiclassical set to true. In this scenario, the orientational average is computed seminumerically due to the absence of available analytical expressions.</p>
+<p>Contributions to the intensity can also be decomposed beyond the dipole approximation; however, origin dependence must be treated carefully and typically requires expert-level understanding of the theory. The first-order term ( T [1] IJ ) in the Taylor expansion of T FFMIO IJ gives rise to the electric quadrupole velocity formulation and the magnetic dipole contributions.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Under the same conditions applied to the electric dipole transition moment, the quadrupole contribution can be reformulated in terms of a length representation.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>By squaring the modulus of ( T [0] IJ + T [1] IJ ), six terms emerge in the oscillation strength: the dipole square contribution as listed previously in the dipole-approximation tables, a magnetic dipole square, an electric quadrupole square, and three cross-product terms: electric dipole-electric quadrupole, electric dipole-magnetic dipole, and magnetic dipoleelectric quadrupole. Enabling DecomposeFosc to true allows for the estimation of spectrum intensity by including all three squared terms in the calculation of the intensity.</p>
+<table><tbody><tr><td>----------------------------------------------------------------------------------- ↪ → --------------------------------------------- ABSORPTION SPECTRUM COMBINED ELECTRIC DIPOLE + MAGNETIC␣ ↪ DIPOLE + ELECTRIC QUADRUPOLE SPECTRUM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>→</td><th>-----------------------------------------------------------------------------------</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>↪ → Transition ↪ → fosc(D2+M2+Q2)</td><td>Energy D2/TOT (eV)</td><td>Energy M2/TOT (cm-1)</td><td>--------------------------------------------- Wavelength Q2/TOT (nm)</td><td>fosc(D2) (au) -----------------------------------------------------------------------------------</td><td>fosc(M2) (au*1e6)</td><td>fosc(Q2) (au*1e6)</td><td>␣</td></tr><tr><td>↪ → --------------------------------------------- 0-1Ag -&gt; 1-1B3g ↪ → 00000049901544 0-1Ag -&gt; 2-1Au ↪ → 0-1Ag -&gt; ↪ → 00000116202090</td><td>2.507275 0.00000 2.726731 0.00000 3.892633 0.00000</td><td>20222.5 0.99979 21992.6 0.00000 31396.2 0.97162</td><td>494.5 0.00021 454.7 0.00000 318.5 0.02838</td><td>0.00000 0.00000</td><td>0.49891 0.00000</td><td>0.00010 0.00000</td><td>0. 0.</td></tr><tr><td>00000000000000 3-1B2g</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td>0.00000</td><td>1.12904</td><td>0.03298</td><td>0.</td></tr><tr><td>0-1Ag -&gt; 4-1B3u ↪ 30197695902797</td><td>4.973431</td><td>40113.4</td><td>249.3</td><td>0.30198</td><td>0.00000</td><td>0.00000</td><td>0.</td></tr><tr><td>→</td><td>1.00000</td><td>0.00000</td><td>0.00000</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<table><tbody><tr><td colspan="8">-----------------------------------------------------------------------------------</td></tr><tr><td>↪ → DIPOLE + ELECTRIC ↪ → Transition ↪ → fosc(P2+M2+Q2)</td><td>Energy P2/TOT (eV)</td><td>SPECTRUM ----------------------------------------------------------------------------------- Energy M2/TOT (cm-1)</td><td>QUADRUPOLE (Velocity) --------------------------------------------- Wavelength Q2/TOT (nm)</td><td>fosc(P2) (au)</td><td>fosc(M2) (au*1e6)</td><td>fosc(Q2) (au*1e6)</td><td>␣</td></tr><tr><td>↪ → 0-1Ag -&gt; 1-1B3g ↪ → 00000049901234</td><td>2.507275 0.00000</td><td>20222.5 0.99980</td><td>--------------------------------------------- 494.5 0.00020</td><td>0.00000</td><td>0.49891</td><td>0.00010</td><td>0.</td></tr><tr><td>0-1Ag -&gt; 2-1Au ↪ → 00000000000006 0-1Ag -&gt; 3-1B2g ↪ → 00000116403924</td><td>2.726731 0.99964 3.892633 0.00051</td><td>21992.6 0.00012 31396.2 0.96993</td><td>454.7 0.00024 318.5 0.02956</td><td>0.00000 0.00000</td><td>0.00000</td><td>0.00000</td><td>0.</td></tr><tr><td>0-1Ag -&gt; 4-1B3u ↪</td><td>4.973431</td><td></td><td></td><td></td><td>1.12904</td><td>0.03441</td><td>0.</td></tr><tr><td>→ 29285232633663</td><td>1.00000</td><td>40113.4 0.00000</td><td>249.3 0.00000</td><td>0.29285</td><td>0.00000</td><td>0.00000</td><td>0.</td></tr></tbody></table>
+<p>Here, the columns fosc(D2+M2+Q2) and fosc(P2+M2+Q2) refer to the total oscillator strengths obtained in length and velocity formulations, respectively, while the columns fosc(D2) (or fosc(P2) ), fosc(M2) , and fosc(Q2) refer to the individual contributions of each term.</p>
+<p>In scenarios where the dipolar contribution to the intensity is non-zero, dividing the total intensity into D2 (or P2 ), M2 , and Q2 contributions becomes challenging due to the dependence of M2 and Q2 terms on the chosen origin. To address this origin-dependence issue, OPS offers additional formulations to the multipolar expansion. One possible approach devised by our group describes each transition from an origin that minimizes the contributions of M2 and Q2 , thereby redistributing the intensity from these terms to all other components in the expansion of e i k · r i . This refined formulation is readily accessible in an 'origin-adjusted' table. [670], [645]</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → ---------------------------------------------0-1Ag -> 1-1B3g 2.507275 20222.5 494.5 0.00000 0.49891 0.00010 0. ↪ → 00000049901544 0.00000 0.99979 0.00021 0-1Ag -> 2-1Au 2.726731 21992.6 454.7 0.00000 0.00000 0.00000 0. ↪ → 00000000000000 0.00000 0.00000 0.00000 0-1Ag -> 3-1B2g 3.892633 31396.2 318.5 0.00000 1.12904 0.03298 0. ↪ → 00000116202090 0.00000 0.97162 0.02838 0-1Ag -> 4-1B3u 4.973431 40113.4 249.3 0.30198 0.00000 0.00000 0. ↪ → 30197695902797 1.00000 0.00000 0.00000</code></pre>
+<p>Alternatively, the intensity described through a truncated expansion of e i k · r i be achieved in an origin-independent manner. In this scenario, the cross-terms between the electric dipole moment and the electric octupole, as well as between the electric dipole moment and the magnetic quadrupole moments, arise from the second-order expansion ( T [2] IJ ), resolving the origin dependence on the D2 , M2 , and Q2 contributions. This formulation is provided in both length and velocity representations for the electric operators by setting the keyword DecomposeFosc to true, and the results are presented in the tables 'Origin Independent, Length' and 'Origin Independent, Velocity,' respectively.'</p>
+<pre><code>-----------------------------------------------------------------------------------↪ → ---------------------------------------------ABSORPTION SPECTRUM COMBINED ELECTRIC DIPOLE + MAGNETIC␣ ↪ → DIPOLE + ELECTRIC QUADRUPOLE SPECTRUM (Origin Independent, Length) -----------------------------------------------------------------------------------↪ → ---------------------------------------------Transition Energy Energy Wavelength fosc(D2) fosc(M2) fosc(Q2)␣ ↪ → fosc(D2+M2+Q2+DM+DO) D2/TOT M2/TOT Q2/TOT (eV) (cm-1) (nm) (au) (au*1e6) (au*1e6) -----------------------------------------------------------------------------------↪ → ---------------------------------------------0-1Ag -> 1-1B3g 2.507275 20222.5 494.5 0.00000 0.49891 0.00010 0. ↪ → 00000049901544 0.00000 0.99979 0.00021 0-1Ag -> 2-1Au 2.726731 21992.6 454.7 0.00000 0.00000 0.00000 0. ↪ → 00000000000000 0.00000 0.00000 0.00000 0-1Ag -> 3-1B2g 3.892633 31396.2 318.5 0.00000 1.12904 0.03298 0. ↪ → 00000116202090 0.00000 0.97162 0.02838 0-1Ag -> 4-1B3u 4.973431 40113.4 249.3 0.30198 0.00000 0.00000 0. ↪ → 30197506344159 1.00001 0.00000 0.00000</code></pre>
+<pre><code>-----------------------------------------------------------------------------------↪ → ----------------------------------------------ABSORPTION SPECTRUM COMBINED ELECTRIC DIPOLE + MAGNETIC␣ ↪ → DIPOLE + ELECTRIC QUADRUPOLE SPECTRUM (Origin Independent, Velocity) -----------------------------------------------------------------------------------↪ → ----------------------------------------------Transition Energy Energy Wavelength fosc(P2) fosc(M2) fosc(Q2)␣ ↪ → fosc(P2+M2+Q2+PM+PO) P2/TOT M2/TOT Q2/TOT (eV) (cm-1) (nm) (au) (au*1e6) (au*1e6) -----------------------------------------------------------------------------------↪ → ----------------------------------------------0-1Ag -> 1-1B3g 2.507275 20222.5 494.5 0.00000 0.49891 0.00010 0. ↪ → 00000049901234 0.00000 0.99980 0.00020 0-1Ag -> 2-1Au 2.726731 21992.6 454.7 0.00000 0.00000 0.00000 0. ↪ → 00000000000006 0.99962 0.00012 0.00024 0-1Ag -> 3-1B2g 3.892633 31396.2 318.5 0.00000 1.12904 0.03441 0. ↪ → 00000116403924 0.00051 0.96993 0.02956 0-1Ag -> 4-1B3u 4.973431 40113.4 249.3 0.29285 0.00000 0.00000 0. ↪ → 29285049443551 1.00001 0.00000 0.00000</code></pre>
+<p>The tables presented in this section can be generated using the following input example:</p>
+<p>!B3LYP def2-TZVPP UseSym</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>%sym SymThresh 1.0e-2 end %CIS Nroots 4 Tda false DoDipoleLength true DoDipoleVelocity true DecomposeFosc true DoFullSemiclassical true END * xyz 0 1 C -0.03361342468929 0.00165373985356 -0.01949461738929 C 0.00156939445126 0.00011912087577 1.46272959096597 C 1.15884465742251 0.00010247651897 2.13104196345420 C 2.45992795249087 0.00152015393852 1.42032876326693 C 2.42474592208737 0.00010359895701 -0.06189678799337 C 1.26746963770198 0.00012121580349 -0.73020920027406 H -0.96132586605922 -0.00069823088896 1.95925560299438 H 1.20967888389840 -0.00071666462249 3.21322810501222 O 3.51487697965937 -0.00034474583300 2.02878006087658 H 3.38764113128475 -0.00071842966522 -0.55842278191419 H 1.21663501697728 -0.00069837665390 -1.81239534279079 O -1.08856228522528 -0.00044385828375 -0.62794535620861 *</code></pre>
+<h2>5.14.3 Natural electric circular dichroism</h2>
+<p>In the case of ECD modeling, intensity is determined by computing the difference between two absorption spectra: one acquired using left-circularly polarized light and the other utilizing right-circularly polarized light.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>To initiate these calculations, the keyword DoCD should be set to true. There are three available implementations, which involve utilizing the length or velocity representations for the electric dipole moment, and also using the FFMIO, selected by including the keywords DoDipoleLength , DoDipoleVelocity , and DoFullSemiclassical respectively.</p>
+<p>The following input example may be used to generate the CD tables presented in this section:</p>
+<pre><code>!B3LYP def2-QZVPP %CIS Nroots 4 Tda false Docd true DoDipoleLength true DoDipoleVelocity true DoFullSemiclassical true END * xyz 0 1 O 0.00292203187063 -0.00094788357265 0.00607763745451 H -0.01058222980812 0.00702286262037 0.97110447138368 O 1.43049571483128 -0.00638910838156 -0.24427444074129 H 1.54056670040621 -0.87944353346616 -0.64068822569690 *</code></pre>
+<h2>5.14.4 SOC and SSC corrected spectrum</h2>
+<p>All the OPS keywords and tables listed above are available for the cases in which spin-orbit coupling and spin-spin coupling effects are taken into account by a QDPT formulation (when the method is available in the selected ORCA module). In those cases, ORCA 6.0 does not provide symmetry after the relativistic correction; therefore, C 1 group symmetry transitions are reported. Additionally, the multiplicity of the relativistically corrected roots are not well defined anymore; therefore, the average value is reported.</p>
+<p>For the last case example presented in this section, when DoSOC is set to true in the input, OPS reports:</p>
+<p>In this case, due to the complex nature of the relativistically-corrected wave functions, dipole moments are not necessarily real values, and their modulus are reported in the '|DX|', '|DY|', and '|DZ|' columns. Real and imaginary components may be obtained in extended tables by increasing the selected print level. In this instance, selecting Printlevel 4 in the %CIS block.</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th>SOC CORRECTED ↪ → Extended -) ↪ → ↪ → ---------</th><th>ABSORPTION Energy DX(im)</th><th>SPECTRUM VIA TRANSITION ----------------------------------------------------------------------------------- --------------------------------------------------------------------------------- Energy Wavelength DY(re)</th><th>ELECTRIC DIPOLE fosc(D2) DY(im) DZ(re) (au)</th><th>MOMENTS (-␣ D2 ␣ ␣ ␣</th></tr><tr><th>Transition ↪ → DX(re) ↪ → DZ(im)</th><td></td><td></td><td></td><td></td></tr><tr><td>↪ → (au) ↪ (au)</td><td>(eV) (au)</td><td>(cm-1) (nm) (au)</td><td></td><td>(au**2)␣</td></tr><tr><td>→ ----------------------------------------------------------------------------------- ↪ → --------------------------------------------------------------------------------- ↪ → --------- 0-1.0A -&gt; 1-3.0A ↪ → 4.10e-04 ↪ → 4.24e-04 0-1.0A -&gt; 2-3.0A</td><td>4.620455 6.80e-04</td><td>37266.5 268.3 -1.22e-04</td><td>1.05e-07 -2.02e-04</td><td>9.31e-07␣ -2.55e-04 -</td></tr><tr><td>↪ → -2.25e-05 ↪ → 7.78e-05</td><td>4.620460 1.30e-05</td><td>37266.5 268.3 2.05e-04</td><td>9.18e-09 -1.18e-04 -1.35e-04</td><td>8.11e-08␣ ␣</td></tr><tr><td>0-1.0A -&gt; 3-3.0A ↪ → 4.17e-04 ↪ 3.17e-04</td><td>4.620491 -8.35e-04</td><td>37266.8 268.3 1.51e-04</td><td>1.26e-07 -3.01e-04</td><td>1.11e-06␣ 1.58e-04 -</td></tr><tr><td>→ 0-1.0A -&gt; 4-3.0A ↪ → -4.31e-04 ↪ 3.32e-06</td><td>5.626046 5.49e-07</td><td>45377.1 220.4 3.97e-03</td><td>3.14e-06 -5.06e-06 -2.61e-03</td><td>2.28e-05␣ ␣</td></tr><tr><td>→ 0-1.0A -&gt; 5-3.0A ↪ → 1.13e-04</td><td>5.626322 5.45e-04</td><td>45379.4 220.4 -4.10e-05</td><td>7.04e-08 -1.98e-04 -8.13e-05</td><td>5.11e-07␣ -</td></tr><tr><td>↪ → 3.92e-04 0-1.0A -&gt; 6-3.0A ↪ → -1.52e-05</td><td>5.626327 -1.15e-07</td><td>45379.4 220.4 1.31e-04</td><td>3.42e-09 9.97e-07 -8.58e-05</td><td>2.48e-08␣ -</td></tr><tr><td>↪ → 6.51e-07 0-1.0A -&gt; 7-1.0A ↪ → -1.41e-02</td><td>5.858722 -2.11e-05</td><td>47253.8 211.6 1.30e-01</td><td>3.49e-03 1.94e-04 -8.52e-02</td><td>2.43e-02␣ -</td></tr><tr><td>↪ → 1.28e-04 0-1.0A -&gt; 8-3.0A ↪ → -1.24e-04</td><td>6.537246 1.22e-04</td><td>52726.4 189.7 3.61e-05</td><td>6.35e-09 -3.56e-05</td><td>3.97e-08␣ 5.89e-05 -</td></tr><tr><td>↪ → 5.80e-05 0-1.0A -&gt; 9-3.0A ↪ → 1.10e-04</td><td>6.537246 1.07e-06</td><td>52726.5 189.7 -9.87e-04</td><td>2.25e-07 -9.61e-06</td><td>1.40e-06␣ 6.46e-04 ␣</td></tr><tr><td>↪ → 6.29e-06 0-1.0A -&gt; 10-3.0A ↪ → -4.25e-05 ↪ 3.13e-07</td><td>6.537257 -5.39e-08</td><td>52726.5 189.7 3.73e-04</td><td>3.24e-08 4.74e-07 -2.47e-04</td><td>2.02e-07␣ -</td></tr><tr><td>→ 0-1.0A -&gt; 11-1.0A ↪ → 4.49e-02 ↪ 8.35e-03</td><td>6.859693 1.21e-01</td><td>55327.2 180.7 7.39e-03</td><td>2.90e-03 2.00e-02</td><td>1.73e-02␣ 3.09e-03 ␣</td></tr><tr><td>→ 0-1.0A -&gt; 12-1.0A ↪ → -2.18e-01 ↪</td><td>7.025210 8.17e-02</td><td>56662.1 176.5 -8.04e-02</td><td>1.20e-02 3.02e-02 -8.49e-02</td><td>6.96e-02␣ ␣</td></tr><tr><td>→ 3.19e-02 0-1.0A -&gt; 13-3.0A ↪ → 6.65e-05 ↪ → 3.42e-04</td><td>7.448215 -1.67e-04</td><td>60073.9 166.5 -8.19e-05</td><td>3.95e-08 2.05e-04 -1.37e-04</td><td>2.17e-07␣ ␣</td></tr><tr><td>0-1.0A -&gt; 14-3.0A ↪ → -2.09e-05 ↪ → 1.83e-06</td><td>7.448216 6.86e-07</td><td>60073.9 166.5 1.12e-04</td><td>2.93e-09 -3.68e-06 -5.57e-05</td><td>1.61e-08␣ ␣</td></tr><tr><td>0-1.0A -&gt; 15-3.0A ↪ → -6.54e-04 ↪ → 8.07e-04</td><td>7.448231 -9.63e-04</td><td>60074.0 166.5 -4.40e-04</td><td>5.33e-07 -6.48e-04 -5.48e-04</td><td>2.92e-06␣ -</td></tr><tr><td>0-1.0A -&gt; 16-1.0A ↪ → -2.40e-02</td><td>7.837071 3.67e-03</td><td>63210.2 158.2 2.09e-01</td><td>1.24e-02 -3.20e-02 -1.37e-01</td><td>6.45e-02␣ ␣</td></tr></tbody></table>
+<pre><code>↪ → 2.10e-02</code></pre>
+<h2>5.14.5 OPS Full list of keywords</h2>
+<p>The folowing list of keywords may be included directly in the correcponding module block to trigger OPS compute the corresponding intensities.</p>
+<pre><code>DoCD (to request circular dichroism calculation) DoDipoleLength (to request the use of electric moments in a length␣ ↪ → formulation) DoDipoleVelocity (to request the use of electric moments in a velocity␣ ↪ → formulation) DoFullSemiclassical (to request the calculation of complete semiclassical␣ ↪ → multipolar moments) DecomposeFosc (to request the decomposition of the oscillator strengths in ␣ ↪ → a multipolar expansion)</code></pre>
+<h2>5.14.6 Notes</h2>
+<ol>
+<li style="list-style-type: '1. ';">All values in the OPS tables are expressed in atomic units (au) unless otherwise specified.</li>
+<li style="list-style-type: '2. ';">Keyword corrections are done internally when necessary.</li>
+<li style="list-style-type: '3. ';">IMPORTANT : Input keywords have been standardized across all OPS-utilizing modules; Orca 5.x are no longer valid.</li>
+<li style="list-style-type: '4. ';">IMPORTANT : In CASSCF and MRCI, keywords controlling the absorption and ECD spectrum no longer belong in the %rel block.</li>
+<li style="list-style-type: '5. ';">Origin-adjusted formulation is approximated in SOC/SSC formulations.</li>
+<li style="list-style-type: '6. ';">OPS is not available for sTDDFT and sTDADFT.</li>
+<li style="list-style-type: '7. ';">The MDCI module reports spectra using left, right, and both solutions.</li>
+<li style="list-style-type: '8. ';">ADC2 and EOM-CCSD methods exclusively utilize ED length tables.</li>
+<li style="list-style-type: '9. ';">Starting in ORCA 6.1, the keywords DoHigherMoments , DecomposeFoscLength and DecomposeFoscVelocity have been consolidated into a single, simplified keyword: DecomposeFosc .</li>
+</ol>
+<h2>5.15 Core-Level Spectroscopy with Coupled Cluster Methods</h2>
+<p>The equation of motion coupled cluster method and its similarity transformed version provides an easy way to directly calculate core-ionization and core-excitation energies. The core-level spectroscopy with EOM-CCSD is only available for closed shell systems.</p>
+<p>(continued from previous page)</p>
+<h2>5.15.1 Core-Ionization</h2>
+<p>One can obtain core-ionized states if one calculates a large no of roots. The ORCA implementation of IP-EOMCCSD, however, allows one to directly target the ionization from the core-orbitals. A typical IP-EOM-CCSD input file for the acetic acid will look like</p>
+<pre><code>!IP-EOM-CCSD ExtremeSCF cc-pvdz !NoFrozencore %maxcore 5000 %mdci nroots 4 # no of roots FollowCIS true # Follow the initial guess orbital DoCVS true # Core valence separation (currently both the option needs to be␣ ↪ → true) DoCore true # Directly target the core CoreOrb[0]=0 # The MO from which it will start counting maxiter 500 # no of iteration, generally requires larger no of roots end *xyz 0 1 C -6.7624010562 0.1328615492 0.0389382700 C -5.3564667033 0.2819965475 -0.5188248498 H -6.9983743824 1.0019615710 0.6510029634 H -7.4924880320 0.0542210905 -0.7741766747 H -6.8380664832 -0.7720291637 0.6519904379 O -4.9303467983 -0.7518088469 -1.3223158759 H -5.6257914271 -1.4265892921 -1.4015111180 O -4.6208051175 1.2132365445 -0.3081931529 *</code></pre>
+<h2>The output of it will be</h2>
+<pre><code>----------------------EOM-CCSD RESULTS (RHS) ----------------------IROOT= 1: 19.999934 au 544.226 eV 4389478.1 cm**-1 Amplitude Excitation 0.672786 0 -> x Percentage singles character= 82.70 IROOT= 2: 19.944006 au 542.704 eV 4377203.3 cm**-1 Amplitude Excitation 0.672143 1 -> x Percentage singles character= 82.41 IROOT= 3: 10.962172 au 298.296 eV 2405918.7 cm**-1 Amplitude Excitation 0.669804 2 -> x Percentage singles character= 81.37 IROOT= 4: 10.826519 au 294.605 eV 2376146.3 cm**-1 Amplitude Excitation 0.670634 3 -> x Percentage singles character= 81.74</code></pre>
+<p>The option 'DoCore true' together with 'DoCVS true' and 'CoreOrb[0]=0' is enough to enable the calculation for core ionizations in IP-EOM-CCSD. The option 'CoreOrb[0]=0' indicates that we will look for core excitations arising from the orbital 0 up to the HOMO, which correspond to the oxygen K-shell. We can also directly access the carbon K-edge by starting from the orbital 2 instead. For this, we use 'CoreOrb[0]=2'</p>
+<pre><code>!IP-EOM-CCSD ExtremeSCF cc-pvdz !NoFrozencore %maxcore 5000 %mdci nroots 2 # no of roots FollowCIS true # Follow the initial guess orbital DoCVS true # Core valence separation (currently both the option needs to be␣ ↪ → true) DoCore true # Directly target the core CoreOrb[0]=2 # The MO from which it will start counting maxiter 500 # no of iteration, generally requires larger no of roots end *xyz 0 1 C -6.7624010562 0.1328615492 0.0389382700 C -5.3564667033 0.2819965475 -0.5188248498 H -6.9983743824 1.0019615710 0.6510029634 H -7.4924880320 0.0542210905 -0.7741766747 H -6.8380664832 -0.7720291637 0.6519904379 O -4.9303467983 -0.7518088469 -1.3223158759 H -5.6257914271 -1.4265892921 -1.4015111180 O -4.6208051175 1.2132365445 -0.3081931529 *</code></pre>
+<h2>The output of it will be</h2>
+<pre><code>----------------------EOM-CCSD RESULTS (RHS) ----------------------IROOT= 1: 10.962172 au 298.296 eV 2405918.7 cm**-1 Amplitude Excitation 0.669804 2 -> x Percentage singles character= 81.37 IROOT= 2: 10.826519 au 294.605 eV 2376146.3 cm**-1 Amplitude Excitation 0.670634 3 -> x Percentage singles character= 81.74</code></pre>
+<p>Now, the core-ionized states remains embedded in the high density of doubly ionized valence states that form the continuum. This leads to severe convergence problems. One easy way to overcome this is to use the core-valence separation approximation which is turned on by setting an upper limit to the possible core excitations. The orbitals from which the contributions are not neglected for the core-valence separation are set by 'CoreOrb[0]= initial,final'. It is generally a good idea to include all the core orbitals corresponding to a particular element if one is interested in the ionization from any of the core orbitals for the particular element. In the second example both the carbon core-orbitals are also included, which is equivalent to set 'CoreOrb[0] = 0,3'. A 'bt-PNO-IP-EOM-CCSD' input file for the same example will look like</p>
+<pre><code>!bt-PNO-IP-EOM-CCSD ExtremeSCF cc-pvdz cc-pvdz/c !NoFrozencore %maxcore 5000 %mdci nroots 4 # no of roots FollowCIS true # Follow the initial guess orbital DoCVS true # Core valence separation (currently both the option needs to be␣ ↪ → true) DoCore true # Directly target the core</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>CoreOrb[0]=0,3 # The MO from which it will start counting maxiter 500 # no of iteration, generally requires larger no of roots end *xyz 0 1 C -6.7624010562 0.1328615492 0.0389382700 C -5.3564667033 0.2819965475 -0.5188248498 H -6.9983743824 1.0019615710 0.6510029634 H -7.4924880320 0.0542210905 -0.7741766747 H -6.8380664832 -0.7720291637 0.6519904379 O -4.9303467983 -0.7518088469 -1.3223158759 H -5.6257914271 -1.4265892921 -1.4015111180 O -4.6208051175 1.2132365445 -0.3081931529 *</code></pre>
+<h2>The output of it will be</h2>
+<pre><code>----------------------EOM-CCSD RESULTS (RHS) ----------------------IROOT= 1: 19.999730 au 544.220 eV 4389433.3 cm**-1 Amplitude Excitation 0.672774 0 -> x Percentage singles character= 82.69 IROOT= 2: 19.943800 au 542.698 eV 4377158.2 cm**-1 Amplitude Excitation 0.672139 1 -> x Percentage singles character= 82.41 IROOT= 3: 10.962316 au 298.300 eV 2405950.3 cm**-1 Amplitude Excitation 0.669787 2 -> x Percentage singles character= 81.36 IROOT= 4: 10.826562 au 294.606 eV 2376155.7 cm**-1 Amplitude Excitation 0.670612 3 -> x Percentage singles character= 81.73</code></pre>
+<p>The results are in excellent agreement with the canonical one. A DLPNO variant for the same example will look like</p>
+<pre><code>!IP-EOM-DLPNO-CCSD ExtremeSCF cc-pvdz cc-pvdz/c !NoFrozencore %maxcore 5000 %mdci nroots 4 # no of roots FollowCIS true # Follow the initial guess orbital DoCVS true # Core valence separation (currently both the option needs to be␣ ↪ → true) DoCore true # Directly target the core CoreOrb[0]=0,3 # The MO from which it will start counting maxiter 500 # no of iteration, generally requires larger no of roots end *xyz 0 1 C -6.7624010562 0.1328615492 0.0389382700 C -5.3564667033 0.2819965475 -0.5188248498</code></pre>
+<p>(continues on next page)</p>
+<pre><code>H -6.9983743824 1.0019615710 0.6510029634 H -7.4924880320 0.0542210905 -0.7741766747 H -6.8380664832 -0.7720291637 0.6519904379 O -4.9303467983 -0.7518088469 -1.3223158759 H -5.6257914271 -1.4265892921 -1.4015111180 O -4.6208051175 1.2132365445 -0.3081931529 *</code></pre>
+<h2>The output of it will be</h2>
+<pre><code>----------------------EOM-CCSD RESULTS (RHS) ----------------------IROOT= 1: 20.051396 au 545.626 eV 4400772.7 cm**-1 Amplitude Excitation -0.678316 0 -> x Percentage singles character= 101.08 IROOT= 2: 19.986869 au 543.870 eV 4386610.6 cm**-1 Amplitude Excitation -0.677491 1 -> x Percentage singles character= 101.14 IROOT= 3: 11.034622 au 300.267 eV 2421819.6 cm**-1 Amplitude Excitation -0.674692 2 -> x -0.108213 1 -> x 13 -> 16 -0.108195 1 -> x 15 -> 16 Percentage singles character= 101.21 IROOT= 4: 10.890773 au 296.353 eV 2390248.3 cm**-1 Amplitude Excitation 0.679269 3 -> x Percentage singles character= 101.04</code></pre>
+<p>Although the error in the absolute IP values are as large as 1 eV, the so-called 'chemical shift' i.e. the difference between the IP value of two different atoms of the same elements are reasonably correct.</p>
+<h2>5.15.2 Core-Ionization (UHF)</h2>
+<p>Starting from ORCA 6.0.1 it is also possible to perform core-ionized states on open-shell systems.[671] This is a direct extension of the closed-shell implementation and the syntax is kept almost identical to that of closed-shell. Now, we need to define 'CoreOrb' for each one of the spin channels using 'CoreOrb[0]= min,max' for spin up and 'CoreOrb[1]=min,max' for spin down electrons.</p>
+<pre><code>CoreOrb[0]= min,max #The MO from which it will start counting (spin up) CoreOrb[1]= min,max #The MO from which it will start counting (spin down)</code></pre>
+<p>In the following example, we perform a core-ionization on the dyoxygen molecule on its triplet ground-state for 'DoAlpha' and 'DoBeta' using ORCA's compound.</p>
+<pre><code>%compound new_step !UHF IP-EOM-CCSD cc-pVDZ ExtremeSCF KDIIS nofrozencore %mdci</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

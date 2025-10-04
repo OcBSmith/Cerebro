@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part065</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<figure><figcaption><div class="caption">NOTE The files will contain XYZ geometries in BOHRS .</div></figcaption></figure>
+<h2>G.FollowNormalMode</h2>
+<p>FollowNormalMode command acts on a geometry object (see see Geometry ). It will displace the loaded geometry following a chosen normal mode of vibtation</p>
+<h2>Syntax:</h2>
+<p>myGeom.FollowNormalMode(vibrationSN=myVibration, [ScalingFactor=myScalingFactor]);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">myGeom is a geometry object that already contains a geometry</li>
+<li style="list-style-type: '· ';">vibrationSN is the serial number of the vibration. NOTE Please remember that counting starts with 1.</li>
+<li style="list-style-type: '· ';">scalingFactor is the scaling of the normal mode of vibration. This argument is optional.</li>
+</ul>
+<h2>Example:</h2>
+<p>(continues on next page)</p>
+<pre><code>H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable CC, normalModes; Variable res = -1; New_Step !BP86 Freq Step_End myGeom.Read(); myGeom.FollowNormalMode(vibrationSN=7, scalingFactor=0.8); CC = myGeom.GetCartesians(); CC.PrintMatrix(); End</code></pre>
+<h2>G.DisplaceAtom</h2>
+<p>Function DisplaceAtom acts on geometry objects and moves the cartesian coordintates of a given atom of the current geometry. The displacement is in Bohrs.</p>
+<h2>Syntax:</h2>
+<p>res = geom.DisplaceAtom(atomID, dx, dy, dz)</p>
+<h2>Where:</h2>
+<p>geom A geometry object previously loaded.</p>
+<p>atomID The index of the atom we want to move. Please note that counting starts with zero.</p>
+<ul>
+<li>dx The displacement in the x axis in Bohrs.</li>
+<li>dy The displacement in the y axis in Bohrs.</li>
+<li>dz The displacement in the z axis in Bohrs.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ------------------------------------# This is to test Geometry function # DisplaceAtom # ------------------------------------%Compound Variable dist=0.1; Geometry myGeom; NewStep !BP86 *xyz 0 1 O 0.000 0.000 0.394 H -0.755 0.000 -0.197 H 0.755 0.000 -0.197 * StepEnd myGeom.Read(); myGeom.DisplaceAtom(0, 0.0, 0.0, -dist); #Move the z coordinate of Oxygen myGeom.WriteXYZFile(filename="displaced.xyz"); End</code></pre>
+<p>(continued from previous page)</p>
+<h2>G.GetAngle</h2>
+<p>Function GetAngle acts on geometry objects and returns the angle between three atoms in Degrees .</p>
+<h2>Syntax:</h2>
+<p>res = geom.GetAngle(atomA, atomB, atomC)</p>
+<p>Where:</p>
+<p>res The angle between atoms atomA, atomB and atomC.</p>
+<p>geom A geometry object previously loaded.</p>
+<p>atomA The index of atomA in the geometry.</p>
+<p>atomB The index of atomB in the geometry.</p>
+<p>atomC The index of atomC in the geometry.</p>
+<p>NOTE Please not that the ordering of atoms is important</p>
+<h2>Example:</h2>
+<pre><code># ------------------------------------# This is to test Geometry function # GetAngle # ------------------------------------%Compound Variable dist; Geometry myGeom; New_Step !BP86 *xyz 0 1 O 0.00000000 0.00000000 0.39393904 H -0.75503878 0.00000000 -0.19696952 H 0.75503878 0.00000000 -0.19696952 * Step_End myGeom.Read(); #Reads teh geometry of the previous step print( " -------------------------------------------------------\n"); print( " Compound Geometry functions test (GetAngle) \n"); print( " It should print 103.9051 Degrees\n"); print( " -------------------------------------------------------\n"); print( " The angle between atom %d, atom %d and atom %d is: %.4lf Degreess\n", 1, 0, 2, myGeom.GetAngle(1,0,2)); End</code></pre>
+<h2>G.GetAtomicNumbers</h2>
+<p>Function GetAtomicNumbers acts on geometry objects and returns and array with the atomic numbers of the elements in the working geometry.</p>
+<p>Syntax: atomNumbers = geom.GetAtomicNumbers()</p>
+<p>atomNumbers A variable that will be filled with the values of the atomic numbers geom A geometry object that should already be loaded.</p>
+<h2>Example:</h2>
+<pre><code>*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302</code></pre>
+<p>(continues on next page)</p>
+<pre><code>* %Compound Geometry myGeom; Variable atomicNumbers; New_Step !BP86 Step_End myGeom.Read(); atomicNumbers = myGeom.GetAtomicNumbers(); print("\nCompound \n"); for i from 0 to atomicNumbers.GetSize()-1 Do print("Atom '%d': atomic number: %d\n", i, atomicNumbers[i]); EndFor End</code></pre>
+<h2>G.GetBondDistance</h2>
+<p>Function GetBondDistance acts on geometry objects and returns the distance between two atoms in Bohrs .</p>
+<h2>Syntax:</h2>
+<p>res = geom.GetBondDistance(atomA, atomB)</p>
+<h2>Where:</h2>
+<p>res The distance between atoms atomA and atomB.</p>
+<p>geom A geometry object previously loaded.</p>
+<p>atomA The index of atomA in the geometry.</p>
+<p>atomB The index of atomB in the geometry.</p>
+<p>NOTE indices start counting from 0</p>
+<h2>Example:</h2>
+<pre><code># ------------------------------------# This is to test Geometry function # GetBondDistance # ------------------------------------%Compound Variable dist; Geometry myGeom; New_Step !BP86 *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End myGeom.Read(); #Reads teh geometry of the previous step print( " -------------------------------------------------------\n"); print( " Compound Geometry functions test (GetBondDistance) \n"); print( " It should print 1.5118\n"); print( " -------------------------------------------------------\n"); print( " The distance between atom %d and atom %d is: %.4lf Bohr\n", 0, 1, myGeom.GetBondDistance(0,1)); End</code></pre>
+<p>(continued from previous page)</p>
+<h2>G.GetCartesians</h2>
+<p>Function GetCartesians acts on geometry objects (see Geometry ) and returns the distance xyz cartesian coordinates. Please remember that it alsways returns the cooridnates in BOHRS .</p>
+<h2>Syntax:</h2>
+<p>coords = geom.GetCartesians()</p>
+<h2>Where:</h2>
+<p>coords : A ( nAtoms ,3) array with the cartesian coordinates in BOHRS .</p>
+<p>geom : A geometry object previously loaded.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the GetCartesians function # NOTE: It always return it in Bohrs! # -----------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable CC; New_Step !BP86 Step_End myGeom.Read(); CC = myGeom.GetCartesians(); for i from 0 to CC.GetDim1()-1 Do print("%12.9lf %12.9lf %12.9lf\n", CC[i][0], CC[i][1], CC[i][2]); endFor End</code></pre>
+<h2>G.GetGhostAtoms</h2>
+<p>Function GetGhostAtoms acts on geometry objects (see Geometry ). It returns a vector of size nAtoms where for each atom the value will be -1 if it is a ghost atom, otherwise the atomic number of the element</p>
+<h2>Syntax:</h2>
+<p>ghostAtoms = geom.GetGhostAtoms()</p>
+<h2>Where:</h2>
+<p>ghostAtoms : A ( nAtoms ,1) integer vector with values -1 or the atomic number of the atom, in case it is not a ghost atom.</p>
+<p>geom : A geometry object previously loaded.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the getGhostAtoms function # -----------------------------------------------------*xyz 0 1 o: -1.69296787 -0.05579265 0.00556629 h: -2.01296504 0.84704339 -0.01586469</code></pre>
+<p>(continues on next page)</p>
+<pre><code>h: -0.73325076 0.04238910 0.00084302 o 1.23009925 0.02698440 -0.00375550 h 1.60672086 -0.41139567 0.76236888 h 1.60236356 -0.44922858 -0.74915800 * %Compound Geometry myGeom; Variable ghostAtoms; New_Step !BP86 Step_End myGeom.Read(); ghostAtoms = myGeom.GetGhostAtoms(); ghostAtoms.PrintMatrix(); End</code></pre>
+<h2>G.GetNumOfAtoms</h2>
+<p>GetNumOfAtoms returns an integer with the number of atoms of the working geometry.</p>
+<h2>Syntax:</h2>
+<p>res = geom.GetNumOfAtoms();</p>
+<h2>Where:</h2>
+<p>res is the resulting number of atoms geom is the name of a geometry variable (see Geometry ) we are using.</p>
+<h2>Example:</h2>
+<pre><code>*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable numOfAtoms = 0; New_Step !BP86 Step_End Alias currStep; myGeom.Read(currStep); numOfAtoms = myGeom.GetNumOfAtoms(); print("\nCompound \n"); print("Number of atoms: %d (it should print 3)\n", numOfAtoms); End</code></pre>
+<p>(continued from previous page)</p>
+<h2>G.MoveAtomToCenter</h2>
+<p>Function MoveAtomToCenter acts on geometry objects (see Geometry ). It will adjust the cartesian coordinates so that the chosen atom will rest at (0.0 0.0 0.0).</p>
+<h2>Syntax:</h2>
+<p>geom.MoveAtomToCenter(atom serial nubmer);</p>
+<h2>Where:</h2>
+<p>geom : A geometry object previously loaded.</p>
+<p>atom serial number : The serial number of the atom in the geometry.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the moveAtomToCenter function # -----------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable CC; New_Step !BP86 Step_End myGeom.Read(); myGeom.MoveAtomToCenter(0); myGeom.BohrToAngs(); CC = myGeom.GetCartesians(); CC.PrintMatrix(); End</code></pre>
+<h2>G.Read</h2>
+<p>Function Read acts on geometry objects (see Geometry ) and reads a geometry from a property file related to a previous step.</p>
+<h2>Syntax:</h2>
+<p>geom.Read([stepID=myStepID], propertySN=myPropertySN)</p>
+<h2>Where:</h2>
+<p>geom : A geometry object that will be updated.</p>
+<p>stepID : The step from which we are going to read the geometry. If not given the previous step will be used.</p>
+<p>propertySN : The serial number the geometry in the property file. If not given the last available geometry will be used.</p>
+<h2>Example:</h2>
+<p>(continues on next page)</p>
+<pre><code>H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable CC; New_Step !BP86 opt Step_End myGeom.Read(propertySN=2); End</code></pre>
+<h2>G.RemoveAtoms</h2>
+<p>Function RemoveAtoms acts on geometry objects (see Geometry ). It accepts a list of atoms and removes them from the loaded geometry. In the end the geometry object will be updated.</p>
+<h2>Syntax:</h2>
+<p>geom.RemoveAtoms(atom1, atom2, …);</p>
+<h2>Where:</h2>
+<p>geom : A geometry object previously loaded.</p>
+<p>atom1, atom2, … : The serial number of the atoms in the geometry.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the RemoveAtoms function # -----------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable numOfAtoms; New_Step !BP86 Step_End myGeom.Read(); numOfAtoms = myGeom.GetNumOfAtoms(); print("Number of atoms before: %d (It should print 3)\n", numOfAtoms); myGeom.RemoveAtoms(0); #Remove the first atom numOfAtoms = myGeom.GetNumOfAtoms(); print("Number of atoms after : %d (It should print 2)\n", numOfAtoms); End</code></pre>
+<p>(continued from previous page)</p>
+<h2>G.RemoveElements</h2>
+<p>Function RemoveElements acts on geometry objects (see Geometry ). It will remove from the loaded geometry all atoms with an atomic number given in the list.</p>
+<h2>Syntax:</h2>
+<p>geom.RemoveElements(atomNumber1, atomicNumber2, …);</p>
+<h2>Where:</h2>
+<p>geom : A geometry object previously loaded.</p>
+<p>atomicNumber1, atomicNumber2, … : The atomic number of elements to be removed from the current geometry.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the RemoveElements function # -----------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable numOfAtoms; Variable CC; New_Step !BP86 Step_End myGeom.Read(); numOfAtoms = myGeom.GetNumOfAtoms(); CC = myGeom.GetCartesians(); CC.PrintMatrix(); print("Number of atoms before: %d (It should print 3)\n", numOfAtoms); myGeom.RemoveElements(8); #Remove the oxygen numOfAtoms = myGeom.GetNumOfAtoms(); print("Number of atoms after : %d (It should print 2)\n", numOfAtoms); CC = myGeom.GetCartesians(); CC.PrintMatrix(); End</code></pre>
+<h2>G.WriteXYZFile</h2>
+<p>Function WriteXYZFile acts on geometry objects (see Geometry ) and writes on disc an xyz file with the coordinates of the current goemetry object. Please remember that by default it writes the coordinates in Angstroems .</p>
+<h2>Syntax:</h2>
+<p>res = geom.WriteXYZFile(filename=myFilename, [useBohr=True/False])</p>
+<h2>Where:</h2>
+<p>res : An integer that returns '0' if everything worked smoothly.</p>
+<p>myFilename The name of the file that will contain the coordinates.</p>
+<p>useBohr : A boolean that can take the value of 'True' or 'False'. This is an optional argument and the default value is 'False'.</p>
+<p>geom : A geometry object previously loaded.</p>
+<p>NOTE: Please note that we changed the default units. Now by default we write the xyz file in Angstroems. We added the parameter UseBohr that is set by default to 'False' but if it is used with the value 'True' then the geometry is saved in Bohrs.</p>
+<h2>Example:</h2>
+<pre><code># -------------------------------------------------------# This is a script to check the WriteXYZ function # NOTE: By default it write the coordinates in Angstroems! # -------------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable res=-1; New_Step !BP86 Step_End myGeom.Read(); res = myGeom.WriteXYZFile(filename="myGeom.xyz",useBohr=false); End</code></pre>
+<h2>GOAT</h2>
+<p>In Compound we have GOAT objects. These objects can be treated like normal variables of type ' compGOAT '. An important difference between normal variables and GOAT variables is the declaration. Instead of the normal:</p>
+<pre><code>Variable myGoat;</code></pre>
+<p>we excplicitly have to declare that this is a GOAT object. So the syntax for a goat declaration is:</p>
+<h2>Syntax:</h2>
+<pre><code>GOAT myGoat;</code></pre>
+<p>Below is a list of functions that work on Geometry objects.</p>
+<ul>
+<li style="list-style-type: '· ';">Get_Energy ( Goat.Get_Energy )</li>
+<li style="list-style-type: '· ';">Get_Num_Of_Geometries ( Goat.Get_Num_Of_Geometries )</li>
+<li style="list-style-type: '· ';">ParseEensembleFile ( Goat.ParseEnsembleFile )</li>
+<li style="list-style-type: '· ';">Set_Basename ( Goat.Set_Basename )</li>
+<li style="list-style-type: '· ';">Print ( Goat.Print )</li>
+<li style="list-style-type: '· ';">WriteXYZFile ( Goat.WriteXYZFile )</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># Example for the usage of GOAT objects in compound # # NOTE: The file 'test.finalensemble.xyz' # should be availablie in the directory %Compound goat myGoat; variable myFilename; myGoat.Set_Basename("test"); myGoat.ParseEnsemblefile();</code></pre>
+<p>(continues on next page)</p>
+<pre><code>for myGeomID from 1 to myGoat.Get_Num_of_Geometries() Do write2String(myFilename, "goatGeom_%d.xyz", myGeomID); myGoat.WriteXYZFile(geomID=myGeomID, filename=myFilename); print("geomID: %d Energy: %lf\n", myGeomID, myGoat.Get_ ↪ → Energy(geomID=myGeomID)); EndFor myGoat.Print(); EndRun</code></pre>
+<h2>Goat.Get_Energy</h2>
+<p>Function Get_Energy acts on goat objects (see GOAT ) and returns a double with the energy of the requested structure.</p>
+<h2>Syntax:</h2>
+<p>res = myGoat.Get_Energy(geomID=myGeomID)</p>
+<p>Where:</p>
+<p>res : A double with the energy of the requested structure.</p>
+<p>myGoat A GOAT object that is already loaded (meaning it has already parse an ensemble file, see (see Goat.ParseEnsembleFile ).</p>
+<p>myGeomID : The geometry ID of the requested structure. Counting starts from 1.</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<h2>Goat.Get_Num_Of_Geometries</h2>
+<p>Function Get_Num_Of_Geometries acts on goat objects (see GOAT ) and returns an integer with the number of structures available in the current GOAT object.</p>
+<h2>Syntax:</h2>
+<p>res = myGoat.Get_Num_Of_Geometries()</p>
+<h2>Where:</h2>
+<p>res : An integer with the number of geometries in the current GOAT object.</p>
+<p>myGoat A GOAT object that is already loaded (meaning it has already parse an ensemble file, see (see Goat.ParseEnsembleFile ).</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<h2>Goat.ParseEnsembleFile</h2>
+<p>Function ParseEnsembleFile acts on goat objects (see GOAT ). It will read an ensemble file created by a GOAT run and then update the object with the geometries and energies of each geometry available in the current GOAT object.</p>
+<h2>Syntax:</h2>
+<p>res = geom.ParseEnesembleFile(filename=myFilename)</p>
+<h2>Where:</h2>
+<p>res : An integer that returns '0' if everything worked smoothly.</p>
+<p>myFilename The name of the file that will contain the coordinates.</p>
+<p>(continued from previous page)</p>
+<p>myGoat : A GOAT object previously loaded.</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<p>NOTE: The old syntax (Parse_Ensemble_File) is still compatible but please do not use it because in the future it will be deprecated.</p>
+<h2>Goat.Set_Basename</h2>
+<p>Function Set_Basename acts on goat objects (see GOAT ). It set the basename of the ensemble file created by a GOAT run. It will automatically add the extension: '.finalensemble.xyz' in the end of the basename.</p>
+<h2>Syntax:</h2>
+<p>myGoat.Set_Basename(myFilename)</p>
+<p>Where:</p>
+<p>myFilename The basename of the GOAT ensemble file ( without the extension 'finalensemble.xyz' ).</p>
+<p>myGOAT : A GOAT object previously loaded.</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<h2>Goat.Print</h2>
+<p>Function Print acts on goat objects (see GOAT ). It will print in the output the geometries of current GOAT object.</p>
+<h2>Syntax:</h2>
+<p>myGoat.Print()</p>
+<p>Where:</p>
+<p>myGoat : A GOAT object previously loaded.</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<h2>Goat.WriteXYZFile</h2>
+<p>Function WriteXYZFile acts on goat objects (see GOAT ). It will write the requested geometry to an XYZ file on disk. It expects two arguments:</p>
+<ol>
+<li style="list-style-type: '1. ';">The geometry ID of the geometry and</li>
+<li style="list-style-type: '2. ';">The filename that it will use to store the geometry</li>
+</ol>
+<h2>Syntax:</h2>
+<p>myGoat.WriteXYZFile(geomID=myGeomID, filename=myFilename)</p>
+<p>Where:</p>
+<p>myFilename: The name that it will be used to store the geometry on the disk.</p>
+<p>myGeomID : The geometry ID of the requested structure. Counting starts from 1.</p>
+<h2>Example:</h2>
+<p>see example in GOAT</p>
+<h2>GetNumOfInstances</h2>
+<p>The GetNumOfInstances returns the number of instances of a specific object in a propertyfile.</p>
+<h2>Syntax:</h2>
+<p>[res=] GetNumOfInstances(propertyName=myName, [step=myStep], [filename=myFilename], [baseProperty=true/false])</p>
+<h2>Where:</h2>
+<p>res: An integer that returns the number of instances of the required property in the property file.</p>
+<p>propertyName: A string alias that defines the variable the user wants to read.</p>
+<p>step: The step from which we want to read the property. If not given the property file from the last step will be read.</p>
+<p>filename: Afilename of a property file. If a filename and at the same time a step are provided the program will ignore the step and try to read the property file with the given filename.</p>
+<p>NOTE please note that in the end of filename the extension .property.txt will be added.</p>
+<p>baseProperty: Atrue/false boolean. The default value is set to false. If the value is set to true then a generic property of the type asked will be read. This means if dipole moment is asked, it will return the last dipole moment, irrelevant if and MP2 or SCF one wad defined.</p>
+<h2>Example</h2>
+<pre><code># ----------------------------------------------------# This is an example script for readNumOfInstances # -----------------------------------------------------%Compound Variable res = 0; Variable myProperty="MP2_DIPOLE_TOTAL"; Variable myBaseProperty="DIPOLE_MOMENT_TOTAL"; New_Step !MP2 #%mp2 # density relaxed #end *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * Step_End # First read the MP2 dipole moment res = GetNumOfInstances(propertyName=myProperty); print("Num of MP2 dipole moments : %d\n", res); res = GetNumOfInstances(propertyName=myBaseProperty, Property_Base=true); print("Num of total dipole moments : %d\n", res); End</code></pre>
+<h2>GoTo</h2>
+<p>The GoTo command allows the 'jump' inside the normal flow of a compound script. The syntax of the command can be best presented through an example.</p>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for GoTo # (It should print only 0,1,2,3) # -----------------------------------------------------%Compound</code></pre>
+<p>(continues on next page)</p>
+<pre><code>Variable TCut=3; Variable Done; for i from 0 to 6 Do print("Index: %d\n", i); if (i >= TCut) then GoTo Done; EndIf EndFor Done: print("Done\n"); End</code></pre>
+<p>Please note that the variable we use as a label for the GoTo command should be previously defined like a normal variable.</p>
+<p>If</p>
+<p>The if block allows the user to make decisions. The syntax in Compound is the following: Syntax:</p>
+<p>If (expression) Then</p>
+<pre><code>actions Else if (expression) Then actions Else actions</code></pre>
+<h2>Endif</h2>
+<p>Below is an example of the usage of if block in compound .</p>
+<pre><code># -------------------------------------------------------------# This is to check all available ways of 'if blocks' # -------------------------------------------------------------Variable x1 = 10.0; Variable y1 = 20.0; Variable b1 = False; Variable b2 = True; Variable s1 = "alpha"; Variable s2 = "beta"; Variable s3 = "alpha"; print( " ---------------------------------------------------------\n"); print( " ----------SUMMARY OF IF CASES -------------- \n"); print( " ---------------------------------------------------------\n"); print(" x1: %.1lf\n", x1); print(" y1: %.1lf\n", y1); print(" b1: %s\n", b1.GetString()); print(" b2: %s\n", b2.GetString()); print(" s1: %s\n", s1); print(" s2: %s\n", s2); print(" s3: %s\n", s3); # **************************************************************** # DOUBLES # **************************************************************** print(" -------------------Doubles ----------------------\n"); print(" Variable/constant / One operator / if (x1>5) \n"); print(" No else if/No else \n");</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<pre><code>if (x1>5) then print(" %.2lf > 5 \n", x1); endif # ----------------------------------------------------------------print(" function / Variable / One operator / if (3*x1>y1) \n"); print(" no else if / else \n"); if (3*x1>y1) then print(" 3*%.1lf > %.1lf\n", x1, y1); else print(" 3*%.1lf < %.1lf\n", x1, y1); endif # ----------------------------------------------------------------print(" function / function / One operator / if (x1-y1>-10.0) \n"); print(" else if/else \n"); if (x1-y1>-10.0) then print(" %.2lf -%.2lf > -10.0\n", x1, y1); else if (x1-y1 < -10.0) then print(" %.2lf -%.2lf < -10.0\n", x1, y1); else print(" %.2lf -%.2lf = -10.0\n", x1, y1); endif # **************************************************************** # BOOLEANS # **************************************************************** print(" ---------------Booleans ---------------------------\n"); print(" Variable / No operator / if (b1) \n"); if (b1) then print("b1 is True\n"); else print("b1 is False\n"); endIf # --------------------------------------------------------------------# ---------------------------------------------------------------------print(" Constant / No operator / if (true) \n"); if (True) then print( "True\n"); else print( "False"); endIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" Variable/Variable / AND operator / if (b1 and b2) \n ↪ → "); if (b1 and b2) then print("(%s and %s) is true\n", b1.GetString(), b2.GetString()); else print("(%s and %s) is not true\n", b1.GetString(), b2.GetString()); endIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" Variable/Variable / OR operator / if (b1 or b2) \n"); if (b1 OR b2) then print("(%s or %s) is true\n", b1.GetString(), b2.GetString()); else print("(%s or %s) is not true\n", b1.GetString(), b2.GetString()); endIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" Bool /Doubles Function / AND operator / if (b1 and x1>y1 )\n"); if (b1 and y1>x1) then print("(%s and %.1lf>%.1lf) is True\n", b1.GetString(), x1, y1);</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>else print("(%s and %.1lf>%.1lf) is False\n", b1.GetString(), x1, y1); endIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" Nested if / if (b2) then if (y1>x1)\n"); if (b2) then if (y1 > x1) then print ( "(%s is True) and (%.1lf>%.1lf)\n", b2.GetString(), y1, x1); else print ( "(%s is True) and (%.1lf<%.1lf)\n", b2.GetString(), y1, x1); endIf else print ( "%s is False\n", b2.GetString()); endIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" ----------------Strings ---------------------------\n"); print(" -------------------------------------------------------------\n"); print(" -------------------------------------------------------------\n"); print(" Variable/Variable / if s1=s2\n"); if (s1=s2) then print("%s is same as %s \n", s1, s2); else print("%s is not same as %s \n", s1, s2); EndIf # ---------------------------------------------------------------------# ---------------------------------------------------------------------print(" ----------------Strings ---------------------------\n"); print(" -------------------------------------------------------------\n"); print(" -------------------------------------------------------------\n"); print(" Variable/constant / if s1=\"alpha\"\n"); if (s1="alpha") then print("%s is same as %s \n", s1, "alpha"); else print("%s is not same as %s \n", s1, "alpha"); EndIf End</code></pre>
+<p>Some comments about the syntax:</p>
+<p>The Else if or Else blocks are not obligatory.</p>
+<p>The numerical operators that can be used are: '&gt;', '&lt;', '&gt;=', '&lt;=', '=' .</p>
+<p>The available logical operators are: 'and' and 'or' .</p>
+<p>Unfortunately in the current version multi-parentheses are not allowed.</p>
+<p>There is now the possibility to compare strings.</p>
+<h2>InvertMatrix</h2>
+<p>Compound can peform matrix algebraic operations, one of the available algebraic operation is the inversion of a matrix. Be carefull that the matrix, whose the invert we are looking for, must be a real, square matrix.</p>
+<h2>Syntax:</h2>
+<p>AInvert = A.InvertMatrix();</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">A: The matrix to be inverted.</li>
+<li style="list-style-type: '· ';">AInvert: The invert of A. It can be A itself and then A will just be updated.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for matrix inversion # -----------------------------------------------------%Compound Variable Dim=3; Variable A[Dim][Dim]; Variable invertA, C; Variable res=-1; for i from 0 to Dim-1 Do for j from 0 to Dim-1 Do if (i=j) then A[i][j] = i+1; else A[i][j] = 0.0; EndIf EndFor EndFor invertA = A.invertMatrix(); A.PrintMatrix(); invertA.PrintMatrix(); C = Mat_x_Mat(A,invertA,false, false, 1.0, 1.0); C.PrintMatrix(); End</code></pre>
+<h2>Mat_p_Mat</h2>
+<p>Compound can peform matrix algebraic operations, one of the available algebraic operation is matrix addittion. In order to add two matrices they must have the same dimensions.</p>
+<h2>Syntax:</h2>
+<p>C=Mat_p_Mat(alpha, A, beta, B);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">C: The resulting matrix.</li>
+<li style="list-style-type: '· ';">alpha: The coefficient for matrix A.</li>
+<li style="list-style-type: '· ';">A: The left matrix of the addition.</li>
+<li style="list-style-type: '· ';">beta: The coefficient for matrix B.</li>
+<li style="list-style-type: '· ';">B: The right matrix of the addition.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for matrix addition # -----------------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%Compound Variable Dim=3; Variable A[Dim][Dim]; Variable B[Dim][Dim]; Variable C; Variable res=-1; for i from 0 to Dim-1 Do for j from 0 to Dim-1 Do A[i][j] = 1.0; B[i][j] = 2.0; EndFor EndFor A.PrintMatrix(); B.PrintMatrix(); C = Mat_p_Mat(2.0, A, 3.0, B); C.PrintMatrix(); End</code></pre>
+<h2>Mat_x_Mat</h2>
+<p>Compound can peform matrix algebraic operations, one of the available algebraic operation is matrix multiplication. In general we can multiply each matrix with constants alpha and beta so that the general multiplication is:</p>
+<p>C=(alpha A) (beta B)</p>
+<p>In addition each of matrices A and B are allowed to be transposed.</p>
+<h2>Syntax:</h2>
+<p>C=Mat_x_Mat(A, B, [transposeA], [transposeB], [alpha], [beta]);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">C: The resulting matrix.</li>
+<li style="list-style-type: '· ';">A: The left matrix of the multiplication.</li>
+<li style="list-style-type: '· ';">B: The right matrix of the multiplication.</li>
+<li style="list-style-type: '· ';">transposeA: A boolean to state if matrix A should be transposed before the mutliplication (default: False).</li>
+<li style="list-style-type: '· ';">transposeB: A boolean to state if matrix B should be transposed before the multiplication (default: False).</li>
+<li style="list-style-type: '· ';">alpha: A scalar to multiply matrix A before the mutliplication (default 1.0).</li>
+<li style="list-style-type: '· ';">beta: A scalar to mutliply matrix B before the multiplication (default 1.0).</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for matrix multiplication # -----------------------------------------------------%Compound Variable Dim=3; Variable A[Dim][Dim]; Variable invertA; Variable C; Variable D; Variable res=-1; for i from 0 to Dim-1 Do for j from 0 to Dim-1 Do if (i=j) then A[i][j] = i+1; else A[i][j] = 0.0;</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>EndIf EndFor EndFor A.invertMatrix(invertA); A.PrintMatrix(); invertA.PrintMatrix(); C = Mat_x_Mat(A,invertA,false, false, 1.0, 1.0); C.PrintMatrix(); C = Mat_x_Mat(A, invertA, true, true, 1.0, 1.0); C.PrintMatrix(); C = Mat_x_Mat(A, invertA, false, false, 2.0); C.PrintMatrix(); C = Mat_x_Mat(A, invertA, false, false, 2.0, 3.0); C.PrintMatrix(); End</code></pre>
+<h2>Mat_x_Scal</h2>
+<p>Compound can peform matrix algebraic operations, one of the available algebraic operation is multiplication of the elements of a matrix with a scalar. The function returns the multiplied matrix that can be the one that we use as an argument in the parenthesis, meaning it is updated, or a different one.</p>
+<h2>Syntax:</h2>
+<p>C=Mat_x_Scal(alpha, A);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">C: The resulting matrix.</li>
+<li style="list-style-type: '· ';">alpha: A scalar to multiply the elements of matrix A.</li>
+<li style="list-style-type: '· ';">A: The matrix to be mutliplied.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for matrix times scalar # -----------------------------------------------------%Compound Variable Dim=3; Variable A[Dim][Dim]; Variable alpha=2.0; Variable C; for i from 0 to Dim-1 Do for j from 0 to Dim-1 Do A[i][j] = i+j; EndFor EndFor A.PrintMatrix(); C = Mat_x_Scal(alpha,A); A = Mat_x_Scal(alpha,A); A.PrintMatrix(); C.PrintMatrix(); End</code></pre>
+<p>(continued from previous page)</p>
+<h2>NewGeom</h2>
+<p>NewGeom is a platform for geometry manipulation. The basic idea is to have functions that can read a geometry and then produce one or more new geometries with some characteristics that we need. For the moment under the umbrella of NewGeom fall 4 different functions, and these are: Displace, Remove_Atom, Remove_Element.</p>
+<p>NOTE: The old syntax (New_Geom) is still compatible but please do not use it because in the future it will be deprecated.</p>
+<h2>Displace</h2>
+<p>The idea behind ' Displace' ' is to have a structure, perform an analytical frequncy calculation on it (currently we do not store numerical frequencies in the property file) and then read the Hessian from this calculation to adjust the geometry based on a normal mode of vibration that we choose. The syntax of this command is:</p>
+<p>syntax: NewGeom = (Displace, step, hessian, frequency, scaling)</p>
+<p>where: step is the step from which we choose the original geometry hessian is the hessian read from a property file frequency defines which normal mode we will use and scaling is a factor of how severe we want the displacement to be.</p>
+<p>Weshould note that Displace is the only command of the new_geom family of commands that will not store a geometry on disk but only internally pass the new geometry to the next calculation. An example of the usage of this command can be found in the script 'iterativeOptimization' that is given with ORCA. The relevant part is as follows: example:</p>
+<pre><code># Define variables Variable MaxNTries = 25; Variable CutOff = -50; Variable displacement = 0.6; Variable NNegative = 0; Variable freqs[]; Variable modes[]; Variable NFreq; Variable limit; Variable done; Variable FinalEnergy; # =========================================================== # Start a for loop over number of tries # =========================================================== For itry From 1 To maxNTries Do # ----------------------------------# Run a geometry optimization # ----------------------------------New_Step ! tightopt freq verytightscf nopop def2-TZVP xyzfile Step_End Read freqs = THERMO_FREQS[itry]; Read modes = HESSIAN_MODES[itry]; Read NFreq = THERMO_NUM_OF_FREQS[itry]; limit = NFreq -1; # ----------------------------------# check for sufficeintly negative # frequencies # ----------------------------------NNegative = 0; For ifreq From 0 to limit Do if ( freqs[ifreq] < CutOff ) then New_Geom = (Displace, itry, modes, ifreq, displacement);</code></pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part028</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>which gives the reference value 108 cm -1 . We now compare that to several other methods which only have the two 'magnetic' orbitals (the 1s's on the hydrogens) in the active space:</p>
+<pre><code>... same as above %mrci EWin -10,1000 CIType MRDDCI3 ... same as previously NewBlock 1 * NRoots 1 refs CAS(2,2) end end NewBlock 3 * NRoots 1 refs CAS(2,2) end end end</code></pre>
+<h2>This gives the result:</h2>
+<pre><code>Method S-T gap MR-CI+Q : 98 cm-1 MR-CI : 93 cm-1 MR-ACPF : 98 cm-1 MR-ACPF2 : 98 cm-1 MR-ACPF2a: 97 cm-1 MR-AQCC : 95 cm-1 SORCI : 131 cm-1 MR-DDCI2 : 85 cm-1 MR-DDCI3 : 130 cm-1</code></pre>
+<p>All these methods give good results with SORCI leading to a somewhat larger error than the others. The (difference dedicated CI) DDCI2 method slightly underestimates the coupling which is characteristic of this method. It is nice in a way that DDCI3 gives the same result as SORCI since SORCI is supposed to approximate the DDCI3 (or better the IDDCI3) result which it obviously does.</p>
+<p>This splitting can also be studied using broken symmetry HF and DFT methods as explained elsewhere in this manual:</p>
+<pre><code>Method S-T gap UHF : 70 cm-1 B3LYP/G : 240 cm-1 BP86 : 354 cm-1 PW91 : 234 cm-1 PBE : 234 cm-1 PBE0 : 162 cm-1 RPBE : 242 cm-1</code></pre>
+<p>This confirms the usual notions; UHF underestimates the coupling and DFT overestimates it, less so for hybrid functionals than for GGAs. The BP86 is worse than PW91 or PBE. The PBE0 hybrid may be the best of the DFT methods. For some reason most of the DFT methods give the best results if the BS state is simply taken as an approximation for the true open-shell singlet. This is, in our opinion, not backed up by theory but has been observed by other authors too.</p>
+<p>Now let us study the dependence on Tsel as this is supposed to be critical (we use the DDCI3 method):</p>
+<pre><code>Tsel S-T gap 1e-04 121 1e-05 128 1e-06 132 1e-07 131 1e-08 131 1e-10 131 1e-12 131 0 131</code></pre>
+<p>The convergence is excellent once AllSingles are included.</p>
+<h2>3.19.10 Potential Energy Surfaces</h2>
+<p>Another situation where multireference approaches are necessary is when bond breaking is studied and one wants to calculate a full potential energy surface. Say we want to compute the potential energy surface of the CH molecule. First we have to figure out which states to include. Hence, let us first determine a significant number of roots for the full valence CASSCF reference state (we use a small basis set in order to make the job fast).</p>
+<pre><code>! ANO-pVDZ VeryTightSCF NoPop Conv %casscf nel 5 norb 5 nroots 2 mult 2 end %mrci CIType MRCI NewBlock 2 * excitations none NRoots 15 refs CAS(5,5) end end NewBlock 4 * excitations none NRoots 15 refs CAS(5,5) end end end * xyz 0 2 C 0 0 0 H 0 0 1.15 *</code></pre>
+<h2>This yields:</h2>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -38.308119994 Eh State Mult Irrep Root Block mEh eV 1/cm 0 2 -1 0 0 0.000 0.000 0.0 1 2 -1 1 0 0.000 0.000 0.0 2 4 -1 0 1 14.679 0.399 3221.6 3 2 -1 2 0 126.464 3.441 27755.7 4 2 -1 3 0 126.464 3.441 27755.7 5 2 -1 4 0 132.689 3.611 29121.8 6 2 -1 5 0 164.261 4.470 36051.2 7 2 -1 6 0 305.087 8.302 66958.9 8 2 -1 7 0 305.087 8.302 66958.9 9 4 -1 1 1 328.911 8.950 72187.7 10 4 -1 2 1 452.676 12.318 99350.8 11 4 -1 3 1 452.676 12.318 99350.8 12 2 -1 8 0 460.116 12.520 100983.9 13 2 -1 9 0 463.438 12.611 101712.9 14 2 -1 10 0 463.438 12.611 101712.9 ...</code></pre>
+<p>Thus, if we want to focus on the low-lying states we should include five doublet and one quartet root. Now we run a second job with these roots and scan the internuclear distance.</p>
+<pre><code>! ano-pVDZ VeryTightSCF NoPop Conv MRCI+Q %casscf nel 5 norb 5 nroots 5,1 mult 2,4 shiftup 2 end %paras R = 0.8,2.5,25 end * xyz 0 2 C 0 0 0 H 0 0 {R} *</code></pre>
+<p>The surfaces obtained in this run are shown in Fig. 3.43. You can nicely see the crossing of the 2 Σ and 2 ∆ states fairly close to the equilibrium distance and also the merging of the 4 Σ state with 2 Π and 2 Σ towards the asymptote that where C-H dissociates in a neutral C-atom in its 3 P ground state and a neutral hydrogen atom in its 2 S ground state. You can observe that once AllSingles is set to true (the default), the default settings of the MRCI module yield fairly smooth potential energy surfaces.</p>
+<figure><figcaption><div class="caption">Fig. 3.43: Potential energy surfaces for some low-lying states of CH using the MRCI+Q method</div></figcaption></figure>
+<p>In many cases one will focus on the region around the minimum where the surface is nearly quadratic. In this case one</p>
+<p>can still perform a few (2, 3, 5, ) point polynomial fitting from which the important parameters can be determined. The numerical accuracy and the behavior with respect to T sel has to be studied in these cases since the selection produces some noise in the procedure. We illustrate this with a calculation on the HF molecule:</p>
+<pre><code>! ano-pVDZ VeryTightSCF NoPop Conv MRCI+Q %paras R = 0.85,1.1,7 end %casscf nel 8 norb 5 nroots 1 mult 1 shiftup 2.5 shiftdn 2.5 switchstep nr gtol 1e-5 end %mrci tsel 1e-8 tpre 1e-5 end * xyz 0 1 F 0 0 0 H 0 0 {R} *</code></pre>
+<p>The output contains the result of a Morse fit:</p>
+<pre><code>Morse-Fit Results: Re = 0.93014 Angstroem we = 4111.2 cm**-1 wexe = 79.5 cm**-1</code></pre>
+<p>Which may be compared with the CCSD(T) values calculated with the same basis set:</p>
+<pre><code>Morse-Fit Results: Re = 0.92246 Angstroem we = 4209.8 cm**-1 wexe = 97.6 cm**-1</code></pre>
+<p>The agreement between MRCI+Q and CCSD(T) results is fairly good.</p>
+<h2>3.19.11 Multireference Systems - Ozone</h2>
+<p>The ozone molecule is a rather classical multireference system due to its diradical character. Let us look at the three highest occupied and lowest unoccupied MO (the next occupied MO is some 6 eV lower in energy and the next virtual MOsome 10 eV higher in energy):</p>
+<figure><figcaption><div class="caption">Fig. 3.44: Frontier MOs of the Ozone Molecule.</div></figcaption></figure>
+<p>These MOs are two σ lone pairs which are high in energy and then the symmetric and antisymmetric combinations of the oxygen π lone pairs. In particular, the LUMO is low lying and will lead to strong correlation effects since the (HOMO) 2 → (LUMO) 2 excitation will show up with a large coefficient. Physically speaking this is testimony of the large diradical character of this molecule which is roughly represented by the structure ↑ O-O-O ↓ . Thus, the minimal active space to treat this molecule correctly is a CAS(2,2) space which includes the HOMO and the LUMO. We illustrate the calculation by looking at the RHF, MP2 MRACPF calculations of the two-dimensional potential energy surface along the O-O bond distance and the O-O-O angle (experimental values are 1.2717 Å and 116.78 ◦ ).</p>
+<pre><code>! ano-pVDZ VeryTightSCF NoPop MRCI+Q Conv %paras R = 1.20,1.40,21 Theta = 100,150,21 end %casscf nel 2 norb 2 mult 1 nroots 1 end %mrci tsel 1e-8 tpre 1e-5 end * int 0 1 O 0 0 0 0 0 0 O 1 0 0 {R} 0 0 O 1 2 0 {R} {Theta} 0 *</code></pre>
+<p>This is a slightly lengthy calculation due to the 441 energy evaluations required. RHF does not find any meaningful minimum within the range of examined geometries. MP2 is much better and comes close to the desired minimum but underestimates the O-O distance by some 0.03 Å. CCSD(T) gives a very good angle but a O-O distance that is too long. In fact, the largest doubles amplitude is ≈ 0.2 in these calculations (the HOMO-LUMO double excitation) which indicates a near degeneracy calculation that even CCSD(T) has problems to deal with. Already the</p>
+<p>CAS(2,2) calculation is in qualitative agreement with experiment and the MRCI + Q calculation then gives almost perfect agreement.</p>
+<p>The difference between the CCSD(T) and MRCI + Q surfaces shows that the CCSD(T) is a bit lower than the MRCI + Q one suggesting that it treats more correlation. However, CCSD(T) does it in an unbalanced way. The MRCI calculation employs single and double excitations on top of the HOMO-LUMO double excitation, which results in triples and quadruples that apparently play an important role in balancing the MR calculation. These excitations are treated to all orders explicitly in the MRCI calculation but only approximately (quadruples as simultaneous pair excitations and triples perturbatively) in the coupled-cluster approach. Thus, despite the considerable robustness of CC theory in electronically difficult situations it is not applicable to genuine multireference problems.</p>
+<p>This is a nice result despite the too small basis set used and shows how important it can be to go to a multireference treatment with a physically reasonable active space (even if is only 2 × 2 ) in order to get qualitatively and quantitatively correct results.</p>
+<figure><figcaption><div class="caption">Fig. 3.45: 2D potential energy surface for the O 3 molecule calculated with different methods</div></figcaption></figure>
+<h2>3.19.12 Size Consistency</h2>
+<p>Finally, we want to study the size consistency errors of the methods. For this we study two non-interacting HF molecules at the single reference level and compare to the energy of a single HF molecule. This should give a reasonably fair idea of the typical performance of each method (energies in Eh) 5 :</p>
+<table><tbody><tr><th>E(HF)</th><th>E(HF+HF)</th><th>|Difference|</th></tr><tr><td>CISD+Q</td><td>-100.138 475</td><td>-200.273 599 0.00335</td></tr><tr><td>ACPF</td><td>-100.137 050</td><td>-200.274 010 0.00000</td></tr><tr><td>ACPF2</td><td>-100.136 913</td><td>-200.273 823 0.00000</td></tr><tr><td>AQCC</td><td>-100.135 059</td><td>-200.269 792 0.00032</td></tr></tbody></table>
+<p>The results are roughly as expected - CISD+Q has a relatively large error, ACPF and ACPF/2 are perfect for this type of example; AQCC is not expected to be size consistent and is (only) about a factor of 10 better than CISD+Q in this respect. CEPA-0 is also size consistent.</p>
+<p>5 Most of these numbers were obtained with a slightly older version but will not change too much in the present version.</p>
+<h2>3.19.13 Efficient MR-MP2 Calculations for Larger Molecules</h2>
+<p>Uncontracted MR-MP2 approaches are nowadays outdated. They are much more expensive than internally contracted e.g. the NEVPT2 method described in section N-Electron Valence State Perturbation Theory (NEVPT2) . Moreover, MR-MP2 is prone to intruder states, which is a major obstacle for practical applications. For historical reasons, this section is dedicated to the traditional MR-MP2 approach that is available since version 2.7.0 ORCA. The implementation avoids the full integral transformation for MR-MP2 which leads to significant savings in terms of time and memory. Thus, relatively large RI-MR-MP2 calculations can be done with fairly high efficiency. However, the program still uses an uncontracted first order wavefunction which means that for very large reference space, the calculations still become untractable.</p>
+<p>Consider for example the rotation of the stilbene molecule around the central double bond</p>
+<figure><figcaption><div class="caption">Fig. 3.46: Rotation of stilbene around the central double bond using a CASSCF(2,2) reference and correlating the reference with MR-MP2.</div></figcaption></figure>
+<p>The input for this calculation is shown below. The calculation has more than 500 basis functions and still runs through in less than one hour per step (CASSCF-MR-MP2). The program takes care of the reduced number of two-electron integrals relative to the parent MRCI method and hence can be applied to larger molecules as well. Note that we have taken a 'JK' fitting basis in order to fit the Coulomb and the dynamic correlation contributions both with sufficient accuracy. Thus, this example demonstrates that MR-MP2 calculations for not too large reference spaces can be done efficiently with ORCA (as a minor detail note that the calculations were started at a dihedral angle of 90 degrees in order to make sure that the correct two orbitals are in the active space, namely the central carbon p-orbitals that would make up the pi-bond in the coplanar structure).</p>
+<pre><code># # Stilbene rotation using MRMP2 # ! def2-TZVP def2/JK RIJCOSX RI-MRMP2 %casscf nel 2 norb 2 end %mrci maxmemint 2000 tsel 1e-8 end %paras DIHED = 90,270, 19 end * int 0 1</code></pre>
+<p>(continues on next page)</p>
+<pre><code>C 0 0 0 0.000000 0.000 0.000 C 1 0 0 1.343827 0.000 0.000 C 2 1 0 1.490606 125.126 0.000 C 1 2 3 1.489535 125.829 \{DIHED\} C 4 1 2 1.400473 118.696 180.000 C 4 1 2 1.400488 122.999 0.000 C 6 4 1 1.395945 120.752 180.000 C 5 4 1 1.394580 121.061 180.000 C 8 5 4 1.392286 120.004 0.000 C 3 2 1 1.400587 118.959 180.000 C 3 2 1 1.401106 122.779 0.000 C 11 3 2 1.395422 120.840 180.001 C 12 11 3 1.392546 120.181 0.000 C 13 12 11 1.392464 119.663 0.000 H 1 2 3 1.099419 118.266 0.000 H 2 1 3 1.100264 118.477 179.999 H 5 4 1 1.102119 119.965 0.000 H 6 4 1 1.100393 121.065 0.000 H 7 6 4 1.102835 119.956 180.000 H 8 5 4 1.102774 119.989 180.000 H 9 8 5 1.102847 120.145 180.000 H 10 3 2 1.102271 120.003 0.000 H 11 3 2 1.100185 121.130 0.000 H 12 11 3 1.103001 119.889 180.000 H 13 12 11 1.102704 120.113 180.000 H 14 13 12 1.102746 119.941 180.000 *</code></pre>
+<h2>3.19.14 Properties Calculation Using the SOC Submodule</h2>
+<h2>Zero-Field Splitting</h2>
+<p>The spin-orbit coupling (SOC) and spin-spin coupling (SSC) contributions to the zero-field splitting (ZFS) can be calculated very accurately using a wavefunction obtained from a multiconfigurational calculation of a multi-reference type such as CASSCF, MRCI, or MRPT as is described in QDPT Magnetic Properties Section Magnetic Properties</p>
+<p>Through Quasi Degenerate Perturbation Theory .</p>
+<pre><code># In case that you want to run QDPT-SOC calculation with manually adjusted ␣ ↪ → diagonal # energies you can copy the following part into the %mrci soc block and modify it ␣ ↪ → as needed # (energies are given in wavenumbers relative to the lowest state). ␣ ↪ → # ␣ ↪ → # NOTE: It is YOUR responsibility to make sure that the CAS-CI state that you may ␣ ↪ → want to dress # with these energies correlates properly with the energies printed here. ␣ ↪ → The order of states # or even the identity of states may change with and without inclusion of ␣ ↪ → dynamic correlation. # In the case that dynamic correlation strongly mixes, different CAS-CI ␣ ↪ → states there may not # even be a proper correlation! ␣ ↪ → # ␣ ↪ → EDiag[ 0] -149.526236244 # root 0 of block 0 EDiag[ 1] -149.359818263 # root 1 of block 0</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>EDiag[ 2] -149.359818263 # root 2 of block 0 EDiag[ 3] -149.496737695 # root 0 of block 1 EDiag[ 4] -149.496737695 # root 1 of block 1 EDiag[ 5] -149.474844108 # root 2 of block 1</code></pre>
+<p>Those transition energies can be substituted by a more accurate energies provided in the input file as follows:</p>
+<pre><code>%soc dosoc true dossc true EDiag[ 0] -149.526236244 # root 0 of block 0 EDiag[ 1] -149.359818263 # root 1 of block 0 EDiag[ 2] -149.359818263 # root 2 of block 0 EDiag[ 3] -149.496737695 # root 0 of block 1 EDiag[ 4] -149.496737695 # root 1 of block 1 EDiag[ 5] -149.474844108 # root 2 of block 1 end</code></pre>
+<p>Accurate diagonal energies generally improve the accuracy of the SOC and SSC splittings.</p>
+<h2>Local Zero-Field Splitting</h2>
+<p>The submodule can also be used to calculate the local ZFS splitting parameters of atomic centers. The method, referred to as local complete active space configuration interaction (L-CASCI), can be used to separate into atomic contributions the SOC part of the total ZFS tensor. The rational behind it and additional details are described in the original publication [509]; below are listed only the steps required to reproduce the calculation for the dimer complex presented there.</p>
+<ol>
+<li style="list-style-type: '1. ';">The first step consists in obtaining the molecular orbitals that are going to be used in the configuration interaction (CI) procedure. A good set of orbitals can be obtained from a restricted open-shell spin-averaged Hartree-Fock (SAHF) calculation. The relevant part of the input is listed below:</li>
+</ol>
+<pre><code>! def2-TZVP % scf hftyp rohf rohf_case sahf rohf_numop 2 rohf_nel[1] 9 rohf_norb[1] 10 end</code></pre>
+<p>For the present Mn(II)Mn(III) dimer there are a total of 9 electrons distributed into 10 d-orbitals.</p>
+<ol>
+<li style="list-style-type: '2. ';">Next, the molecular orbitals are localized using one of the implemented localization schemes. Below is the orca_loc input used in this case:</li>
+<li style="list-style-type: '3. ';">Following this, the localized orbitals are made locally canonical by block diagonalizing the Fock matrix using the orca_blockf utility.</li>
+</ol>
+<pre><code>sahf.gbw sahf.loc 0 200 # first of the 10 d-orbitals 209 # last of the 10 d-orbitals 128 0.000001 0.75 0.65 2</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>orca_blockf sahf.gbw sahf.loc 200 204 205 209</code></pre>
+<p>The first two numbers define the range of molecular orbitals localized on one center; the last two are for the second center.</p>
+<ol>
+<li style="list-style-type: '4. ';">The recanonicalized orbitals stored in the sahf.loc file can be then used to calculate the SOC contribution to the local ZFS of the Mn(III) center using the following MRCI input:</li>
+</ol>
+<pre><code>! ZORA-def2-TZVP def2-TZVP/C ZORA ! nomulliken noloewdin ! moread noiter allowrhf ! moread % mrci citype mrci tsel 0 tpre 0 intmode ritrafo solver diis soc intmode ritrafo dosoc true end newblock 10 * nroots 5 excitations none refs # Mn(II) Mn(III) {1 1 1 1 1 1 1 1 1 0} {1 1 1 1 1 1 1 1 0 1} {1 1 1 1 1 1 1 0 1 1} {1 1 1 1 1 1 0 1 1 1} {1 1 1 1 1 0 1 1 1 1} end end newblock 8 * nroots 45 excitations none refs # Mn(II) Mn(III) {1 1 1 1 1 2 1 1 0 0} {1 1 1 1 1 2 1 0 1 0} {1 1 1 1 1 2 1 0 0 1} {1 1 1 1 1 2 0 1 1 0} {1 1 1 1 1 2 0 1 0 1} {1 1 1 1 1 2 0 0 1 1} {1 1 1 1 1 1 2 1 0 0} {1 1 1 1 1 1 2 0 1 0} {1 1 1 1 1 1 2 0 0 1} {1 1 1 1 1 1 1 2 0 0} {1 1 1 1 1 1 1 1 1 0} {1 1 1 1 1 1 1 1 0 1} {1 1 1 1 1 1 1 0 2 0} {1 1 1 1 1 1 1 0 1 1} {1 1 1 1 1 1 1 0 0 2} {1 1 1 1 1 1 0 2 1 0} {1 1 1 1 1 1 0 2 0 1} {1 1 1 1 1 1 0 1 2 0} {1 1 1 1 1 1 0 1 1 1} {1 1 1 1 1 1 0 1 0 2} {1 1 1 1 1 1 0 0 2 1} {1 1 1 1 1 1 0 0 1 2}</code></pre>
+<p>(continues on next page)</p>
+<pre><code>{1 1 1 1 1 0 2 1 1 0} {1 1 1 1 1 0 2 1 0 1} {1 1 1 1 1 0 2 0 1 1} {1 1 1 1 1 0 1 2 1 0} {1 1 1 1 1 0 1 2 0 1} {1 1 1 1 1 0 1 1 2 0} {1 1 1 1 1 0 1 1 1 1} {1 1 1 1 1 0 1 1 0 2} {1 1 1 1 1 0 1 0 2 1} {1 1 1 1 1 0 1 0 1 2} {1 1 1 1 1 0 0 2 1 1} {1 1 1 1 1 0 0 1 2 1} {1 1 1 1 1 0 0 1 1 2} end end end</code></pre>
+<ol>
+<li style="list-style-type: '5. ';">The three second order ZFS components printed at the end of the calculation ( Second order D-tensor: component 0 , etc.) are scaled using the S value for the complex, which in this case is 4.5 (9 electrons × 0.5). In order to obtain the correct local value of the ZFS, the three matrices have to be rescaled using the S value for Mn(III), which is to 2. Note that the three matrices have different scaling prefactors, and the dependence on S is not the same:</li>
+<li>D SOC -(0) ∝ 1 S 2</li>
+<li>D SOC -( -1) ∝ 1 S (2 S -1)</li>
+<li>D SOC -(+1) ∝ 1 ( S +1)(2 S +1)</li>
+</ol>
+<p>These equations can be used to calculate the required prefactors. For example in the case of the SOC -(0) the prefactor is equal to:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The final step is to scale the two remaining matrices using the appropriate prefactors, sum all three of them up, diagonalize the resulting the matrix, and use its eigenvalues to calculate the D and E parameters. These represent the local ZFS parameters of the Mn(III) center.</p>
+<h2>Zero-Field Splitting from an excited Multiplet</h2>
+<p>For an excited state Multiplet the Calculationof ZFS can be requested by</p>
+<pre><code>Lowest eigenvalue of the SOC matrix: -149.86223277 Eh Energy stabilization: -2.54512 cm-1 Eigenvalues: cm-1 eV Boltzmann populations at T = 300.000 K 0: 0.00 0.0000 3.36e-01 1: 2.37 0.0003 3.32e-01 2: 2.37 0.0003 3.32e-01 3: 7757.65 0.9618 2.33e-17 4: 7757.66 0.9618 2.33e-17 5: 11913.81 1.4771 5.15e-26</code></pre>
+<pre><code>soc DTensor true IStates 3,4,5 end</code></pre>
+<pre><code>***************************************** EXCITED STATE ZERO-FIELD SPLITTING: *****************************************</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>--------------------------------------------Computing Excited State D Tensors of Excited State Multiplet Consisting of States : 3 4 5 --------------------------------------------0 4 1 5 2 0 3 1 4 0 5 2 --------------------------------------------ZERO-FIELD SPLITTING (2ND ORDER SPIN-ORBIT COUPLING CONTRIBUTION) --------------------------------------------D = -2.668445 cm-1 E/D = 0.000103 ... --------------------------------------------------------ZERO-FIELD SPLITTING EFFECTIVE HAMILTONIAN SOC CONTRIBUTION --------------------------------------------------------D = -2.674495 cm-1 E/D = 0.009610 ...</code></pre>
+<h2>g-Tensor</h2>
+<p>The orca_mrci program contains an option to calculate g-tensors using MRCI wavefunctions. For a system with an odd number of electrons, the doubly degenerate eigenvalues obtained from the QDPT procedure represent Kramers pairs, which are used to build the matrix elements of the total spin operator and the total angular momentum operator from the Zeeman Hamiltonian. Denoting Ψ as a solution and ¯ Ψ as its Kramers partner and using matrix element notations</p>
+<p>The elements of g-matrix are obtained as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>G is subjected further to diagonalization yielding positive eigenvalues, the square roots of which give the principal values of g-matrix.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Atypical mrci block of the input file for a g-tensor calculation should (e.g. for a S=3/2 problem) look as the following:</p>
+<p>Then, the true tensor G is built from g-matrices:</p>
+<p>(continued from previous page)</p>
+<pre><code>%mrci ewin -4,1000 citype mrci cimode direct2 intmode fulltrafo solver diis etol 1e-8 rtol 1e-8 tsel 1e-6 tpre 1e-5 soc PrintLevel 2 GTensor true # make g-tensor calculations NDoubGTensor 2 # number of Kramers doublets to account # for every pair a separate # calculation is performed end newblock 4 * excitations cisd nroots 10 refs cas(7,5) end end end</code></pre>
+<p>The result for the first Kramers pair is printed as follows:</p>
+<pre><code>--------------KRAMERS PAIR 1 --------------Matrix elements Re<1|S|1> -0.072128 0.024511 -2.998843 Matrix elements Re<1|S|2> -0.001088 0.000366 -0.002010 Matrix elements Im<1|S|2> -0.000354 -0.001037 -0.000173 Matrix elements Re<1|L|1> -0.027067 0.009209 -1.123531 Matrix elements Re<1|L|2> -0.000031 0.000010 -0.000763 Matrix elements Im<1|L|2> -0.000006 -0.000011 -0.000065 -------------------ELECTRONIC G-MATRIX -------------------g-matrix: -0.002240 0.000754 -0.005551 0.000720 0.002100 0.000477 -0.198556 0.067498 -8.251703 g-factors: 0.002220 0.002222 8.254370 iso = 2.752937 g-shifts: -2.000100 -2.000098 6.252051 iso = 0.750618 Eigenvectors: 0.057426 0.998060 0.024055 0.998327 -0.057244 -0.008177 0.006784 -0.024484 0.999677</code></pre>
+<p>Here for the L and S matrix elements indices 1 and 2 are assumed to denote Kramers partners, and three numbers in the first row stand for x, y, z contributions.</p>
+<p>In addition the g-tensor is calculated within the Effective Hamiltonian formalism.</p>
+<p>----------------------------------------------</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>ELECTRONIC ----------------------------------------------</td><td>G-MATRIX FROM</td><td>EFFECTIVE HAMILTONIAN</td></tr><tr><th>g-matrix:</th><td></td><td></td></tr><tr><td>1.978874</td><td>-0.000345</td><td>0.018908</td></tr><tr><td>-0.000345</td><td>1.977899</td><td>-0.006433</td></tr><tr><td>0.018879</td><td>-0.006418</td><td>2.763402</td></tr><tr><th>g-factors:</th><td></td><td></td></tr><tr><td>1.977789</td><td>1.978477</td><td>2.763909 iso = 2.240058</td></tr><tr><th>g-shifts:</th><td></td><td></td></tr><tr><td>-0.024530 0.237739</td><td>-0.023843</td><td>0.761590 iso =</td></tr><tr><th colspan="2">Eigenvectors:</th><td></td></tr><tr><td>0.288884</td><td>0.957062</td><td>0.024060</td></tr><tr><td>0.957364</td><td>-0.288770</td><td>-0.008181</td></tr><tr><td>0.000882</td><td>-0.025397</td><td>0.999677</td></tr><tr><td colspan="3"># The g-factors are square roots of the eigenvalues of gT*g # Orientations are the eigenvectors of gT*g</td></tr></tbody></table>
+<p>Finally and only within the MRCI module the g-tensor is evaluated by using the Sum Over States formalism[510]:</p>
+<pre><code>---------------------------------------------------------------------------SUM OVER STATES CALCULATION OF THE SPIN HAMILTONIAN (for g and HFC tensors) ---------------------------------------------------------------------------Ground state index = 0 Ground state multiplicity = 4 Ground state spin density = P[ 1] State = 1 <0|P|I>= 2 <0|Q|I>= 19 State = 2 <0|P|I>= 3 <0|Q|I>= 27 State = 3 <0|P|I>= 4 <0|Q|I>= 34 State = 4 <0|P|I>= 5 <0|Q|I>= 40 State = 5 <0|P|I>= 6 <0|Q|I>= 45 State = 6 <0|P|I>= 7 <0|Q|I>= 49 State = 7 <0|P|I>= 8 <0|Q|I>= 52 State = 8 <0|P|I>= 9 <0|Q|I>= 54 State = 9 <0|P|I>= 10 <0|Q|I>= 55 Origin for angular momentum ... ( -0.0006, -0.0010, 0.0021) Kinetic Energy ... done Relativistic mass correction ... done Gauge correction ... done Angular momentum integrals ... done Reading Spin-Orbit Integrals ... done -----------------------MATRIX ELEMENT PRINTING -----------------------Energy differences (DE=EI-E0) and spin-orbit matrix elements (SO=<I|HSO|0>) are printed in cm**-1. Orbital Zeeman matrix elements (L=<I|L|0>) are printed in au. State DE LX LY LZ SOX SOY SOZ 1 1349.3 0.0464 -0.0158 1.9264 -23.432 7.965 -974.312 2 13026.2 -0.6596 0.6888 0.0214 337.028 -351.116 -10.966 3 13615.1 -0.6961 -0.6514 0.0113 354.225 332.219 -5.736 4 56686.3 -0.0053 0.0077 0.0971 1.794 -1.696 -36.786</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>5</td><td>56954.2</td><td>-0.0516</td><td>-0.0048</td><td>-0.0042</td><td>28.211</td><td>5.821</td><td colspan="2">1.459</td></tr><tr><td>6</td><td>56994.0</td><td>-0.0418</td><td>0.0233</td><td>-0.0025</td><td>15.185</td><td>-2.144</td><td colspan="2">1.145</td></tr><tr><td>7</td><td>63371.5</td><td>-0.0211</td><td>0.0226</td><td>0.0078</td><td>3.833</td><td>-2.948</td><td colspan="2">-2.724</td></tr><tr><td>8</td><td>64176.0</td><td>-0.0652</td><td>0.0032</td><td>-0.0002</td><td>32.779</td><td>6.146</td><td colspan="2">0.063</td></tr><tr><td>9</td><td>74309.9</td><td>-0.0007</td><td>0.0032</td><td>0.0380</td><td>0.183</td><td>-1.058</td><td colspan="2">-13.517</td></tr><tr><td colspan="9">------------------- ELECTRONIC G-MATRIX</td></tr><tr><td colspan="9">raw-matrix :</td></tr><tr><td colspan="9">2.025533 -0.000738 0.021755 -0.000738 2.024537 -0.007389 0.021755 -0.007389 2.928943</td></tr><tr><td colspan="9">g-factors:</td></tr><tr><td colspan="9">2.024122 2.025363 2.929527 iso = 2.326338</td></tr><tr><td colspan="9">g-shifts:</td></tr><tr><td colspan="9">Eigenvectors: 0.533896 -0.845208 0.024064</td></tr><tr><td colspan="9">0.845530 0.533866 -0.008182 -0.005932 0.024715 0.999677</td></tr><tr><td colspan="9">Euler angles w.r.t. molecular frame (degrees): -76.5038 1.4564 -161.2223</td></tr><tr><td colspan="9">----------------------------- CONTRIBUTIONS TO THE G-MATRIX</td></tr><tr><td colspan="9">-----------------------------</td></tr><tr><td colspan="7">-------------------------------------------------------------------- Relativistic mass correction: -0.0008220 -0.0008220 -0.0008220 Gauge correction : 0.0000000 0.0000000 0.0000000 g(OZ/SOC) : 0.0226250 0.0238662 0.9280297</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><th colspan="2">0.0000000</th></tr><tr><td colspan="7">1 : -0.0000000 State 2 : 0.0013767 0.0223913 State 3 : 0.0212332 0.0014408 State</td><td></td><td></td></tr><tr><td>State</td><td colspan="8">0.9279829 0.0000000 0.0000000 4 : 0.0000000 0.0000004 0.0000418 5 : 0.0000074 0.0000099 0.0000001</td></tr><tr><td>State</td><td colspan="8">6 : 0.0000002 0.0000078 0.0000001</td></tr><tr><td></td><td colspan="8">7 : 0.0000000 0.0000015 0.0000002</td></tr><tr><td>State</td><td colspan="8">8 : 0.0000076 0.0000144 0.0000000</td></tr><tr><td>State</td><td colspan="8">9 : 0.0000000 0.0000000 0.0000046</td></tr><tr><td></td><td colspan="8">-----------------------------------------</td></tr><tr><td>State</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>State</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>0.0230442</td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td>:</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td>0.9272077</td><td></td><td></td></tr><tr><td>Total</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>g-shifts</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td>0.0218030</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td># The</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td colspan="2">of</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td>of the</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td colspan="2">gT*g</td></tr><tr><td></td><td></td><td>square</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>are</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>Orientations</td><td></td><td>roots</td><td></td><td>eigenvalues</td><td></td><td></td><td></td></tr><tr><td>#</td><td></td><td>are</td><td></td><td>of gT*g</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>g-factors</td><td>the eigenvectors</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>Note that within the SOS formalism in addition to the second order (SOC) contributions the bilinear to the field terms: Relativistic mass correction and diamagnetic spin-orbit term (Gauge) are evaluated. As can be seen these corrections are rather negligible in comparison to the second order SOC contributions and most of the time can be safely omitted. Moreover further insight is obtained by printing the individual contribution of each excited state to the g-tensor. In the example above the first excited state contributes to the g z component while the next two to both the g x and g y</p>
+<p>components, respectively.</p>
+<p>So to summarize the g-tensor calculations in the framework of wavefunction based methods like MRCI and/or CASSCF can be evaluated:</p>
+<ul>
+<li style="list-style-type: '· ';">via the QDPT approach within an individual Kramers doublet. This is valid analysis only for non-integer spin cases. In particular for systems with well isolated Kramers doublets where the EPR spectrum originates only from one Kramers doublet defined within the pseudo spin 1/2 formalism. This analysis has been proven useful in determining the sign of the ZFS and the electronic structure of the system under investigation.[511]</li>
+<li style="list-style-type: '· ';">within the effective Hamiltonian approach. This is a valid analysis for all spin cases as it provides the principal g-values of the system under investigation evaluated in the molecular axis frame. These g-values can be directly compared with the experimentally determined ones.[512]</li>
+<li style="list-style-type: '· ';">within the sum over states formalism (SOS). As above this analysis is valid for all spin cases and is only available via the MRCI module.</li>
+</ul>
+<h2>Magnetization and Magnetic Susceptibility</h2>
+<p>The MRCI and CASSCF modules of ORCA allow for the calculation of magnetization and magnetic susceptibility curves at different fields and temperatures by differentiation of the QDPT Hamiltonian with respect to the magnetic field. For magnetic susceptibility, calculations are performed in two ways when a static field different from zero is defined: (i) as the second derivative of energy with respect to the magnetic field and (ii) as the magnetization divided by the magnetic field. Although the first method corresponds to the definition of magnetic susceptibility, the second approach is widely used in the experimental determination of χ ∗ T curves. If the static field is low, both formulas tend to provide similar values.</p>
+<p>The full list of keywords is presented below.</p>
+<pre><code>%mrci citype mrci newblock 3 * excitations none refs cas(2,7) end end soc dosoc true domagnetization true # Calculate magnetization (def: false) dosusceptibility true # Calculate susceptiblity (def: false) LebedevPrec 5 # Precision of the grid for different field # directions (meaningful values range from 1 # (smallest) to 10 (largest)) nPointsFStep 5 # number of steps for numerical differentiation # (def: 5, meaningful values are 3, 5 7 and 9) MAGFieldStep 100.0 # Size of field step for numerical␣ ↪ → differentiation # (def: 100 Gauss) MAGTemperatureMIN 4.0 # minimum temperature (K) for magnetization MAGTemperatureMAX 4.0 # maximum temperature (K) for magnetization MAGTemperatureNPoints 1 # number of temperature points for magnetization MAGFieldMIN 0.0 # minimum field (Gauss) for magnetization MAGFieldMAX 70000.0 # maximum field (Gauss) for magnetization MAGNpoints 15 # number of field points for magnetization SUSTempMIN 1.0 # minimum temperature (K) for susceptibility SUSTempMAX 300.0 # maximum temperature (K) for susceptibility SUSNPoints 300 # number of temperature points for␣ ↪ → susceptibility SUSStatFieldMIN 0.0 # minimum static field (Gauss) for␣ ↪ → susceptibility SUSStatFieldMAX 0.0 # maximum static field (Gauss) for␣ ↪ → susceptibility SUSStatFieldNPoints 1 # number of static fields for susceptibility</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>end</td></tr><tr><td>end</td></tr></tbody></table>
+<p>The same keywords apply for CASSCF calculations in rel block (instead of soc in MRCI). Although different aspects of integration and grid precision can be modified through keywords, default values should provide an accurate description of both properties. Calculated magnetization and susceptibility are printed in .sus and .mag files, respectively and also in the output file.</p>
+<table><tbody><tr><td colspan="4">FIELD DEPENDENT MAGNETIZATION AND MEAN SUSCEPTIBILITY (chi=M/B) -------------------------------------------------------------------------------</td></tr><tr><th>TEMPERATURE</th><th>(K) M. FIELD</th><th>(Gauss)</th><th>MAGNETIZATION (B.M.) chi*T (cm3*K/mol) -------------------------------------------------------------------------------</th></tr><tr><td>4.00</td><td>0.00</td><td></td><td>0.000000 inf</td></tr><tr><td>4.00</td><td>5000.00</td><td></td><td>0.350759 1.567189</td></tr><tr><td>4.00</td><td>10000.00</td><td></td><td>0.688804 1.538788</td></tr><tr><td>4.00</td><td>15000.00</td><td></td><td>1.003466 1.494496</td></tr><tr><td>4.00</td><td>20000.00</td><td></td><td>1.287480 1.438115</td></tr><tr><td>4.00</td><td>25000.00</td><td></td><td>1.537346 1.373773</td></tr><tr><td>4.00</td><td>30000.00</td><td></td><td>1.752841 1.305282</td></tr><tr><td>4.00</td><td>35000.00</td><td></td><td>1.936067 1.235764</td></tr><tr><td>4.00</td><td>40000.00</td><td></td><td>2.090450 1.167516</td></tr><tr><td>4.00</td><td>45000.00</td><td></td><td>2.219920 1.102067</td></tr><tr><td>4.00</td><td>50000.00</td><td></td><td>2.328368 1.040315</td></tr><tr><td>4.00</td><td>55000.00</td><td></td><td>2.419335 0.982690</td></tr><tr><td>4.00</td><td>60000.00</td><td></td><td>2.495883 0.929301</td></tr><tr><td>4.00</td><td>65000.00</td><td></td><td>2.560582 0.880052</td></tr><tr><td>4.00</td><td>70000.00</td><td></td><td>2.615538 0.834730</td></tr></tbody></table>
+<table><tbody><tr><th colspan="4">----------------------------------------------------------- TEMPERATURE DEPENDENT MAGNETIC SUSCEPTIBILITY</th></tr><tr><th>STATIC (Gauss) -----------------------------------------------------------</th><th>FIELD</th><th>TEMPERATURE (K)</th><th>chi*T (cm3*K/mol) M/B d2E/dB2</th></tr><tr><td>0.00</td><td>1.00</td><td>----</td><td>1.576836</td></tr><tr><td>0.00</td><td>2.00</td><td>----</td><td>1.576910</td></tr><tr><td>0.00</td><td>3.00</td><td>----</td><td>1.576951</td></tr><tr><td>0.00</td><td>4.00</td><td>----</td><td>1.576988</td></tr><tr><td>0.00</td><td>5.00</td><td>----</td><td>1.577023</td></tr><tr><td>0.00</td><td>6.00</td><td>----</td><td>1.577057</td></tr><tr><td>0.00</td><td>7.00</td><td>----</td><td>1.577091</td></tr><tr><td>0.00</td><td>8.00</td><td>----</td><td>1.577125</td></tr><tr><td>0.00</td><td>9.00</td><td>----</td><td>1.577159</td></tr><tr><td>0.00</td><td>10.00</td><td>----</td><td>1.577193</td></tr><tr><td>0.00</td><td>11.00</td><td>----</td><td>1.577227</td></tr><tr><td>0.00</td><td>300.00</td><td>----</td><td>1.586942</td></tr><tr><td>1000.00</td><td>1.00</td><td>1.570517</td><td>1.558042</td></tr><tr><td>1000.00</td><td>2.00</td><td>1.575324</td><td>1.572178</td></tr><tr><td>1000.00</td><td>3.00</td><td>1.576246</td><td>1.574845</td></tr><tr><td>1000.00</td><td>4.00</td><td>1.576590</td><td>1.575802</td></tr><tr><td>1000.00</td><td>5.00</td><td>1.576768</td><td>1.576264</td></tr><tr><td>1000.00</td><td>6.00</td><td>1.576880</td><td>1.576530</td></tr><tr><td>1000.00</td><td>7.00</td><td>1.576961</td><td>1.576704</td></tr><tr><td>1000.00</td><td>8.00</td><td>1.577026</td><td>1.576829</td></tr></tbody></table>
+<p>Note that the CASSCF module also supports the calculation of susceptibility tensors at non-zero user-defined magnetic fields. This is not yet possible with the MRCI module.</p>
+<h2>MCD and Absorption Spectra</h2>
+<p>The MRCI module of the ORCA program allows calculating MCD spectra and the SOC effects on absorption spectra. The formalism is described in detail by Ganyushin and Neese[513]. The approach is based on the direct calculation of the transition energies and transition probabilities between the magnetic levels. Namely, the differential absorption of LCP- and RCP photons for transitions from a manifold of initial states A to a manifold of final states J . Using Fermi's golden rule, the Franck-Condon approximation, assuming a pure electronic dipole mechanism and accounting for the Boltzmann populations of the energy levels, the basic equation of MCD spectroscopy may be written as (atomic units are used throughout):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here a and j label members of the initial and state manifold probed in the experiments.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>denotes the Boltzmann population and if the a -th ground state sublevel at energy E a , f ( E ) stands for a line shape function, and γ denotes a collection of constants. The electric dipole operators are given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>They represent linear combinations of the dipole moment operator:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where N and i denotes summations of nuclei (at positions ⃗ R N with charges Z N ) and electrons (at positions ⃗ r i ) respectively. The calculated transition dipole moment are subjected to the space averaging over the Euler angles which is performed by a simple summation over three angular grids.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Finally, every transition is approximated by a Gaussian curve with a definite Gaussian shape width parameter. Hence, the final calculated MCD spectrum arises from the superposition of these curves.</p>
+<p>As an illustration, consider calculation of a classical example of MCD spectrum of [Fe(CN) 6 ] 3 -. The mrci block of the input file is presented below.</p>
+<pre><code>%mrci ewin -4,10000 citype mrddci2 intmode ritrafo Tsel 1e-6 Tpre 1e-5 etol 1e-8 rtol 1e-8 cimode direct2 maxmemint 300 solver diis davidsonopt 0 nguessmat 150 MaxIter 50</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>LevelShift 0.5 PrintLevel 3 soc printlevel 3 Domcd true # perform the MCD calculation NInitStates 24 # number of SOC and SSC state to account # Starts from the lowest state NPointsTheta 10 # number of integration point for NPointsPhi 10 # Euler angles NPointsPsi 10 # B 43500 # experimental magnetic field strength # in Gauss Temperature 299.0 # experimental temperature (in K) end newblock 2 * nroots 12 excitations cisd refs cas(23,12) end end end</code></pre>
+<p>The parameters B and Temperature can be assigned in pairs, i.e. B = 1000, 2000, 3000…, Temperature = 4, 10, 300…. The program calculates the MCD and absorption spectra for every pair. Now for every point of the integration grid the program prints out the Euler angles, the orientation of the magnetic field in the coordinate system of a molecule, and the energy levels.</p>
+<pre><code>Psi = 36.000 Phi = 72.000 Theta = 20.000 Bx = 8745.0 By = 12036.5 Bz = 40876.6 Energy levels (cm-1,eV):Boltzmann populations for T = 299.000 K 0 : 0.000 0.0000 4.53e-01 1 : 3.943 0.0005 4.45e-01 2 : 454.228 0.0563 5.09e-02 3 : 454.745 0.0564 5.08e-02 4 : 1592.142 0.1974 2.13e-04 5 : 1595.272 0.1978 2.10e-04 6 : 25956.363 3.2182 2.59e-55 7 : 25958.427 3.2184 2.56e-55 8 : 25985.656 3.2218 2.25e-55 9 : 25987.277 3.2220 2.23e-55 10 : 26070.268 3.2323 1.49e-55 11 : 26071.484 3.2325 1.49e-55 12 : 31976.645 3.9646 6.78e-68 13 : 31979.948 3.9650 6.67e-68 14 : 32018.008 3.9697 5.56e-68 15 : 32021.074 3.9701 5.48e-68 16 : 32153.427 3.9865 2.90e-68 17 : 32157.233 3.9870 2.84e-68 18 : 42299.325 5.2444 1.81e-89 19 : 42303.461 5.2450 1.78e-89 20 : 42346.521 5.2503 1.45e-89 21 : 42348.023 5.2505 1.44e-89 22 : 42456.119 5.2639 8.53e-90 23 : 42456.642 5.2640 8.51e-90</code></pre>
+<p>In the next lines, ORCA calculates the strength of LCP and RCP transitions and prints the transition energies, the difference between LCP and RCP transitions (denoted as C), and sum of LCP and RCP transitions (denoted as D), and C by D ratio.</p>
+<pre><code>dE Na C D C/D 0 -> 1 3.943 4.53e-01 1.14e-13 8.13e-13 0.00e+00 0 -> 2 454.228 4.53e-01 5.01e-09 9.90e-09 5.06e-01 0 -> 3 454.745 4.53e-01 -4.65e-09 7.00e-09 -6.65e-01 0 -> 4 1592.142 4.53e-01 -8.80e-08 1.02e-07 -8.67e-01 0 -> 5 1595.272 4.53e-01 -2.29e-08 2.97e-08 -7.71e-01 0 -> 6 25956.363 4.53e-01 1.22e+01 9.60e+01 1.27e-01 0 -> 7 25958.427 4.53e-01 3.44e+01 3.52e+01 9.77e-01 0 -> 8 25985.656 4.53e-01 3.83e+01 1.70e+02 2.25e-01 0 -> 9 25987.277 4.53e-01 -7.73e+00 6.03e+01 -1.28e-01 0 ->10 26070.268 4.53e-01 -6.11e+00 2.85e+01 -2.14e-01 0 ->11 26071.484 4.53e-01 6.17e+00 9.21e+00 6.70e-01 0 ->12 31976.645 4.53e-01 2.45e+01 6.21e+01 3.95e-01 0 ->13 31979.948 4.53e-01 -6.58e+01 6.93e+01 -9.50e-01 0 ->14 32018.008 4.53e-01 3.42e-01 1.07e+02 3.21e-03 0 ->15 32021.074 4.53e-01 -6.16e+00 3.24e+01 -1.90e-01 0 ->16 32153.427 4.53e-01 -4.73e+01 1.37e+02 -3.46e-01 0 ->17 32157.233 4.53e-01 -1.02e+00 5.97e+01 -1.71e-02 0 ->18 42299.325 4.53e-01 6.47e+00 2.11e+01 3.07e-01 0 ->19 42303.461 4.53e-01 -2.59e+00 7.61e+00 -3.40e-01 0 ->20 42346.521 4.53e-01 1.90e+01 8.99e+01 2.11e-01 0 ->21 42348.023 4.53e-01 3.36e+00 3.55e+00 9.48e-01 0 ->22 42456.119 4.53e-01 2.52e-01 4.86e-01 5.20e-01 0 ->23 42456.642 4.53e-01 -2.01e+00 2.91e+00 -6.91e-01 1 -> 2 450.285 4.45e-01 4.59e-09 6.87e-09 6.69e-01 1 -> 3 450.802 4.45e-01 -4.96e-09 9.73e-09 -5.09e-01</code></pre>
+<p>All C and D values are copied additionally into the text files input.1.mcd, input.2.mcd…, for every pair of Temperature and B parameters. These files contain the energies and C and D values for every calculated transition. These files are used by the program orca_mapspc to calculate the spectra lines. The orca_mapspc program generates from the raw transitions data into spectra lines. The main parameters of the orca_mapspc program are described in section 7.18.1. A typical usage of the orca_mapspc program for MCD spectra calculation for the current example may look as the following:</p>
+<pre><code>orca_mapspc input.1.mcd MCD -x020000 -x150000 -w2000</code></pre>
+<p>Here the interval for the spectra generation is set from 20000 cm -1 to 50000 cm -1 , and the line shape parameter is set to 2000 cm -1 .</p>
+<p>Very often, it is desirable to assign different line width parameters to different peaks of the spectra to obtain a better fitting to experiment. orca_mapspc can read the line shape parameters from a simple text file named as input.1.mcd.inp. This file should contain the energy intervals (in cm -1 ) and the line shape parameters for this energy interval in the form of:</p>
+<pre><code>20000 35000 1000 35000 40000 2000 40000 50000 1000</code></pre>
+<p>This file should not be specified in the executing command; orca_mapspc checks for its presence automatically:</p>
+<pre><code>orca_mapspc input.1.mcd MCD -x020000 -x150000 Mode is MCD Number of peaks ... 276001 Start wavenumber [cm-1] ... 20000.0 Stop wavenumber [cm-1] ... 50000.0 Line width parameters are taken from the file:input.1.mcd.inp Number of points ... 1024</code></pre>
+<p>Finally, the orca_mapspc program generates the output text file input.1.mcd.dat which contains seven columns of numbers: transition energies, intensities of MCD transitions (the MCD spectrum), intensities of absorption transitions</p>
+</div>
+</body>
+</html>

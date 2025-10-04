@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part049</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code># # input for simulation of absorption and resonance Raman spectra # using experimental values of transition energy and displacement # parameters corresponding to the strongly allowed 1-1Ag 1-1Bu transition # in trans-1,3,5-hexatriene # %sim Model IMDHO AbsRange 38000.0, 48000.0 NAbsPoints 2000 AbsScaleMode Rel # resonance Raman intensities will be calculated # for all vibrational states with excitation number # up to RamanOrder: RamanOrder 4 # excitation energies (cm**-1) for which rR spectra will be calculated: RRSE 39500, 39800, 41400 # full width half maximum of Raman bands in rR spectra (cm**-1): RRS_FWHM 10 RSRange 0, 5000 # spectral range for simulation of rR spectra (cm**-1) NRRSPoints 5000 # number of points to simulate rR spectra (cm**-1) end $el_states 1 1 39800.0 150.00 0.0 1.0 0.0 0.0 $vib_freq_gs 9 1 354.0 2 444.0 3 934.0 4 1192.0 5 1290.0 6 1305.0 7 1403.0 8 1581.0 9 1635.0 $sdnc 9 1 1 1 0.55 2 0.23 3 0.23 4 0.82 5 0.485 6 0.00 7 0.085 8 0.38 9 1.32</code></pre>
+<p>After the orca_asa run the following files will be created:</p>
+<ul>
+<li style="list-style-type: '· ';">example005abs.dat contains the simulated absorption spectrum. It is shown in Fig. 5.38.</li>
+<li style="list-style-type: '· ';">example005.o4.rrs.39500.dat , example005.o4.rrs.39800.dat and example005. o4.rrs.41400.dat contain the simulated rR spectra for excitation energies at 39500, 39800 and 41400 cm -1 , respectively. The suffix ' o4 ' stands for the order of Raman scattering specified in the input by keyword RamanOrder=4 . The rR specta are shown in Fig. 5.39.</li>
+<li style="list-style-type: '· ';">example005.o4.rrs.39500.stk , example005.o4.rrs.39800.stk and example005. o4.rrs.41400.stk provide Raman shifts and intensities for each vibrational transition. Corresponding vibrational states are specified by the quantum numbers of excited modes.</li>
+</ul>
+<figure><figcaption><div class="caption">Fig. 5.38: Absorption spectrum corresponding to 1 -1 A g → 1 -1 B u transition in trans -1,3,5-hexatriene generated after orca_asa run on the file example005.inp .</div></figcaption></figure>
+<p>Fig. 5.39: Resonance Raman spectra for 3 different excitation energies which fall in resonance with 1 -1 A g → 1 -1 B u transition in trans -1,3,5-hexatriene.</p>
+<p>single rR spectrum are of major concern in most practical cases. However, one can put rR spectra corresponding to different excitation energies on the same intensity scale by providing the keyword RSISM=ASR in %sim block (RSISM - Raman Spectra Intensity Scaling Mode; ASR - All Spectra Relative). By default RSISM=SSR (SSR - Single Spectrum Relative) for which each rR spectrum is normalized so that the most intense band in it has intensity 1.0. The relative intensities of bands in rR spectra measured for different excitation energies can be compared if they are appropriately normalized relative to the intensity of a reference signal (e.g. Raman band of the solvent). We also keep in mind the possibility to extend our methodology in order to provide the absolute measure of rR intensities in terms of the full or differential cross-sections.</p>
+<ul>
+<li style="list-style-type: '· ';">Within the harmonic model, for a single electronic state neither relative rR intensities nor absorption bandshapes in the case of AbsScaleMode=Rel do depend on the values of the electronic transition dipole moment (unless it is precisely zero).</li>
+</ul>
+<p>In the example above resonance Raman spectra have been generated for all vibrational transitions with total excitation number up to the value specified by the parameter RamanOrder . Its is also possible to make explicit specification of vibrational states corresponding to various fundamental, overtone and combination bands via the $rr_vib_states block. In such a case rR spectra involving only these vibrational transitions will be generated separately.</p>
+<pre><code>$rr_vib_states 5 # total number of vibrational transitions 1 modes 1 quanta 1; # final vibrational state for the fundamental band corresponding to␣ ↪ → mode 1 2 modes 9 quanta 1; # final vibrational state for the fundamental band corresponding to␣ ↪ → mode 9 3 modes 3, 4 quanta 1, 1; # final vibrational state for the combination band involving␣ ↪ → single # excitations in modes 3 and 4 4 modes 5 quanta 3; # final vibrational state for the second overtone band corresponding␣ ↪ → to # mode 5 5 modes 1, 5,9 quanta 1,2, 1; # final vibrational state for the combination band involving␣ ↪ → single # excitations in modes 1 and 2, and double excitation in mode 5</code></pre>
+<p>Each vibrational transition is specified via the subblock which has the following structure:</p>
+<pre><code>k modes m1,m2,...mn quanta q1,q2,...qn;</code></pre>
+<p>This means that the k -th transition is characteriezed by excitation numbers q i for modes m i so that corresponding Raman shift is equal to ν = ∑ q i ν i , where ν i is vibrational frequency of the mode m i . After the orca_asa run the following files will be created in addition:</p>
+<ul>
+<li style="list-style-type: '· ';">example005.us.rrs.39500.dat , example005.us.rrs.39800.dat and example005. us.rrs.41400.dat contain the simulated rR spectra involving only vibrational transitions specified in the $rr_vib_states block, for excitations energies at 39500, 39800 and 41400 cm -1 , respectively. The suffix 'us' stands for 'User specified vibrational States'.</li>
+<li style="list-style-type: '· ';">example005.us.rrs.39500.stk , example005.us.rrs.39800.stk and example005.</li>
+</ul>
+<p>us.rrs.41400.stk provide Raman shifts and intensities for each vibrational transition specified in the $rr_vib_states block.</p>
+<h2>Example: Modelling of Absorption Spectrum and Resonance Raman Profiles for the 11 A g → 11 B u Transition in trans -1,3,5-Hexatriene</h2>
+<p>The following example illustrates an input for simulation of absorption bandshape and resonance Raman profiles (RRP):</p>
+<pre><code># # example006.inp # # input for simulation of absorption and resonance Raman profiles # using experimental values of transition energy and displacement # parameters corresponding to the strongly allowed 1-1Ag 1-1Bu transition # in trans-1,3,5-hexatriene # %sim Model IMDHO AbsRange 38000.0, 48000.0 NAbsPoints 2000 AbsScaleMode Rel RRPRange 38000.0, 48000.0 # spectral range for simulation of # rR profiles (cm**-1) NRRPPoints 2000 # number of points for simulation of rR profiles CAR 0.8 RamanOrder 2 end $el_states 1 1 39800.0 150.00 0.0 1.0 0.0 0.0 $vib_freq_gs 9 1 354.000000 2 444.000000 3 934.000000 4 1192.000000 5 1290.000000 6 1305.000000 7 1403.000000 8 1581.000000 9 1635.000000 $sdnc 9 1 1 1 0.55 2 0.23 3 0.23 4 0.82 5 0.485 6 0.00 7 0.085 8 0.38</code></pre>
+<pre><code>9 1.32 $rr_vib_states 5 # total number of vibrational transitions 1 modes 1 quanta 1; 2 modes 9 quanta 1; 3 modes 3, 4 quanta 1, 1; 4 modes 5 quanta 3; 5 modes 1, 5,9 quanta 1,2, 1;</code></pre>
+<p>The keyword RamanOrder=2 will invoke generation of rR profiles for all vibrational transitions with total excitation number up to 2 in the range of excitation energies specified by the keywords RRPRange and NRRPPoints . Likewise, rR profiles for the vibrational states given in the $rr_vib_states block will be generated separately. Since in most cases only relative rR intensities are important, and one would be interested to compare absorption bandshape and shapes of individual rR profiles, the keyword CAR = 0.8 is used to scale rR profiles for all vibrational transitions by a common factor in such a way that the ratio of the maximum of all rR intensities and the maximum of absorption band is equal to 0.8.</p>
+<p>After the orca_asa run the following files will be created:</p>
+<ul>
+<li style="list-style-type: '· ';">example006.abs.dat contains the simulated absorption spectrum (Fig. 5.40).</li>
+<li style="list-style-type: '· ';">example006.o1.rrp.dat and example006.o2.rrp.dat contain rR profiles for vibrational transitions with total excitation numbers 1 and 2, respectively. RR profiles for all fundamental bands (from the file example006.o1.rrp.dat ) are shown in Fig. 5.40.</li>
+<li style="list-style-type: '· ';">example006.o1.info and example006.o1.info contain specification of vibrational transitions with total excitation numbers 1 and 2, respectively, as well as corresponding Raman shifts.</li>
+<li style="list-style-type: '· ';">example006.us.rrp.1.dat-example006.us.rrp.5.da t contain rR profiles for vibrational transitions 1-5 specified in the $rr_vib_states block.</li>
+</ul>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 5.40: Absorption spectrum and resonance Raman profiles of fundamental bands corresponding to 1 -1 A g → 1 -1 B u transition in trans -1,3,5-hexatriene.</div></figcaption></figure>
+<h2>5.16.3 Fitting of Experimental Spectra</h2>
+<h2>Example: Gauss-Fit of Absorption Spectrum</h2>
+<p>An absorption spectrum basically consists of a number of absorption bands. Each absorption band corresponds to a transition of the ground electronic state to an excited electronic state. In molecules such transitions are usually considerably broadened. In many cases there will be overlapping bands and one would need to deconvolute the broad absorption envelope into contributions from individual transitions. Within the 'Simple model' the orca_asa program enables fit of an absorption spectrum with a sum of standard lineshape functions (Gaussian, Lorentzian) or more general Voigt functions. In most cases, one simply performs a 'Gauss-Fit'. That is, it is assumed that the shape of each individual band is that of a Gaussian function. Then one applies as many (or as few) Gaussians as are necessary for an accurate representation of the absorption envelope. In order to explain the fitting procedures within the 'Simple model' let us consider an experimental absorption spectrum in Fig. 5.41:</p>
+<figure><figcaption><div class="caption">Fig. 5.41: Experimental absorption spectrum. Bars indicate transition energies which were used for the initial guess in the input for spectral fitting.</div></figcaption></figure>
+<p>As shown in Fig. 5.41 one can identify roughly 7 electronic bands. The initial estimates of transition energies corresponding to the maxima and shoulders in the absorption spectrum (indicated by bars in Fig. 5.41) and rather approximate values of inhomogeneous broadening and transition dipole moment components are specified in the $el_states block of the input file for the spectral fitting:</p>
+<pre><code># example007.inp # # Input file for fitting of experimental absorption spectrum # %sim model Simple end %fit Fit true # Global flag to turn on the fit AbsFit true # Flag to include absorption into the fit method Simplex WeightsAdjust true AbsRange 0.0, 100000.0 # absorption spectral range to be included in the␣ ↪ → fit; # in the present case all experimental points # will be included AbsName "absexp.dat" # name of the file containing experimental # absorption spectrum in a simple two-column # ASCII format</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>ExpAbsScaleMode Ext # This keyword indicates that the experimental # absorption intensity is given in terms of # the extinction coefficient. This is important # for the proper fitting of transition dipole # moments and oscillator strengths NMaxFunc 10000 # maximum number of function evaluations in simplex # algorithm MWADRelTol 1e-5 # Relative Tolerance of the Mean Weighted Absolute # Difference (MWAD) function which specifies the # convergence criterion E0Step 500.00 # initial step for the transition energies # in the simplex fitting TMStep 0.5 # initial step for the transition dipole moments # in the simplex fitting E0SDStep 500.0 # initial step for the inhomogeneous linewidth (Sigma) # in the simplex fitting end # ! Parameters specified in the $el_states block # are used as initial guess in the fit #---------------------------------------------------------------------------# Transition Gamma Sigma Transition Dipole Moment (atomic unit) # Energy (cm**-1) (cm**-1) (cm**-1) Mx My Mz #---------------------------------------------------------------------------$el_states 7 1 11270 0.0 1000.00 1.0000 0.0000 0.0000 2 15100 0.0 1000.00 1.0000 0.0000 0.0000 3 20230 0.0 1000.00 1.0000 0.0000 0.0000 4 27500 0.0 1000.00 1.0000 0.0000 0.0000 5 31550 0.0 1000.00 1.0000 0.0000 0.0000 6 37070 0.0 1000.00 1.0000 0.0000 0.0000 7 39800 0.0 1000.00 1.0000 0.0000 0.0000 # the integer values specified in $el_states_c block indicate parameters # in the $el_states block to be varied $el_states_c 7 1 1 0 1 1 0 0 2 2 0 2 2 0 0 3 3 0 3 3 0 0 4 4 0 4 4 0 0 5 5 0 5 5 0 0 6 6 0 6 6 0 0 7 7 0 7 7 0 0</code></pre>
+<p>The functionality of the constraint block $el_states_c should be understood as follows: 1) 0 flag indicates that the corresponding parameter in the $el_state block will not be varied in the fitting; 2) if the number corresponding to a certain parameter coincides with the number of the corresponding electronic state this parameter will be varied independently. Thus, the block $el_states_c in the input indicates that all transition energies, inhomo-</p>
+<p>geneous linewidths and x-components of the transition electric dipole moment will be varied independently, while homogeneous linewidths, y- and z-components of the transition dipole moment will be fixed to their initial values.</p>
+<p>The following considerations are important:</p>
+<ul>
+<li style="list-style-type: '· ';">Since in conventional absorption spectroscopy one deals with the orientationally averaged absorption crosssection, the signal intensity is proportional to the square of the transition electric dipole moment | M | 2 . Thus, the intensities do not depend on the values of the individual components of M as long as | M | 2 = const. Therefore, we have allowed to vary only M x components. Otherwise there can be problems in convergence of the fitting algorithm.</li>
+<li style="list-style-type: '· ';">The sum of the weights of experimental points which enter the mean absolute difference function employed in the minimization is always kept equal to the number of experimental points. In the case of equidistant experimental photon energies all weights are assumed to be equal. However, in experimental electronic spectra the density of spectral points can increase significantly upon going from high- to low-energy spectral regions, which is due to the fact that experimental absorption spectra are initially acquired on the wavelength scale. In such a case the quality of the fit can be noticeably biased towards low-energy spectral region. Therefore, it is advisable to adjust relative weights of experimental points according to the their density which is controlled by the keyword WeightsAdjust in the %fit block. Although this parameter is not crucial for the present example, in general, it will provide a more balanced fit.</li>
+<li style="list-style-type: '· ';">The parameters E0Step , TMStep , E0SDStep in the %fit block specify the initial dimension of the simplex in the space of E T , M , σ and should roughly correspond to the expected uncertainty of initial guess on these parameters in the $el_states block relative to their actual values. The quality of the fit can noticeably deteriorate if the parameters specifying initial steps are too low or too high.</li>
+</ul>
+<p>The fit run of orca_asa on file example007.inp will converge upon approximately 3600 function evaluations (for MWADRelTol=1e-5 ). The results of the fit will be stored in file example007.001.inp which has the same structure as the input file example007.inp . Thus, if the fit is not satisfactory and/or it is not fully converged it can be refined in a subsequent orca_asa run upon which file example007.002.inp will be created, and so on. Some model parameters in intermediate files can be be additionally modified and/or some constraints can be lifted or imposed if so desired. The output file example007.001.inp will contain fitted model parameters stored in the $el_states block:</p>
+<pre><code>$el_states 7 1 11368.24 0.00 732.50 1.6290 0.0000 0.0000 2 15262.33 0.00 495.17 -0.2815 0.0000 0.0000 3 19500.08 0.00 1023.39 0.2300 0.0000 0.0000 4 26969.01 0.00 1832.30 1.4089 0.0000 0.0000 5 31580.41 0.00 1440.87 1.8610 0.0000 0.0000 6 35769.07 0.00 1804.02 1.5525 0.0000 0.0000 7 39975.11 0.00 1909.38 2.4745 0.0000 0.0000</code></pre>
+<p>The overall quality of the fit is determined by the parameter MWAD which upon convergence reaches the value of ≈ 0.009 (MWAD stands for Mean Weighted Absolute Difference).</p>
+<p>After the orca_asa run files absexp.fit.dat and absexp.fit.as.dat will be created. Both files contain the experimental and fitted spectra which are shown in Fig. 5.42 . In addition, the file absexp.fit.as.dat will contain individual contributions to the absorption spectrum corresponding to different excited states.</p>
+<figure><figcaption><div class="caption">Fig. 5.42: Comparison of the experimental (black curve) and fitted (red) absorption spectra corresponding to the fit run of orca_asa on the file example007.inp . Blue curves represent individual contributions to the absorption spectrum from each state.</div></figcaption></figure>
+<p>Since there is a noticeable discrepancy between the fitted and experimental spectra around 13000 cm -1 (Fig. 5.42) it is worthwhile to refine the fit after adding parameters for a new state in the file example007.001.inp :</p>
+<table><caption><div class="caption">Actually, the character of the discrepancy in the present case is very similar to that in Fig. 5.39 (section Example: Modelling of Effective Broadening, Effective Stokes Shift and Temperature Effects in Absorption and Fluorescence Spectra within the IMDHO Model ) where a vibronically broadened absorption spectrum was fitted with a Gaussian lineshape. Thus, the poor fit in the region around 1300 cm -1 is most likely due to the essentially asymmetric character of the vibronic broadening rather than to the presence of another electronic band.</div></caption><tbody><tr><td>$el_states 8</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>1 11368.24</th><td>0.00</td><td>732.50</td><td>1.6290</td><td>0.0000</td><td>0.0000</td></tr><tr><th>... ... ... 8 13280.00</th><td>0.00</td><td>1000.00</td><td>1.000</td><td>0.0000</td><td>0.0000</td></tr><tr><th>$el_states_c 8</th><td></td><td></td><td></td><td></td><td></td></tr><tr><th>1 1</th><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><th>... ... ... 8 8</th><td>0</td><td>8</td><td>8</td><td>0</td><td>0</td></tr></tbody></table>
+<p>As shown in Fig. 5.43 the refined fit leads to much better agreement between the experimental and fitted absorption spectra (MWAD = 0.0045).</p>
+<figure><figcaption><div class="caption">Fig. 5.43: Comparison of the experimental (black) and fitted (red) absorption spectra corresponding to the fit run of orca_asa on the file example007.001.inp . Blue curves represent individual contributions to the absorption spectrum from each state.</div></figcaption></figure>
+<p>Due to some peculiarities of the simplex algorithm for function minimization, you can still refine the fit by rerunning orca_asa on the file example007.002.inp ! This leads to an even lower value of the parameter MWAD = 0.0038, and therefore to better agreement of experimental and fitted spectra (even though the previous run has been claimed to be converged).</p>
+<p>It is also possible to perform a fit using the same value of inhomogeneous linewidth for all electronic states. For this purpose one needs to choose as a guess the same linewidth parameters in the $el_states block:</p>
+<pre><code>$el_states 8 1 11118.58 0.00 1000.0 1.0687 0.0000 0.0000 2 13673.38 0.00 1000.0 -0.5530 0.0000 0.0000 3 21267.40 0.00 1000.0 0.3675 0.0000 0.0000 4 27024.71 0.00 1000.0 1.4041 0.0000 0.0000 5 31414.74 0.00 1000.0 1.7279 0.0000 0.0000 6 35180.77 0.00 1000.0 1.6246 0.0000 0.0000 7 39985.52 0.00 1000.0 2.5708 0.0000 0.0000 8 11665.01 0.00 1000.0 1.2332 0.0000 0.0000</code></pre>
+<p>In addition the constraint block should be modified as follows:</p>
+<table><tbody><tr><td colspan="7">$el_states_c 8</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>2</td><td>2</td><td>0</td><td>1</td><td>2</td><td>0</td><td>0</td></tr><tr><td>3</td><td>3</td><td>0</td><td>1</td><td>3</td><td>0</td><td>0</td></tr><tr><td>4</td><td>4</td><td>0</td><td>1</td><td>4</td><td>0</td><td>0</td></tr><tr><td>5</td><td>5</td><td>0</td><td>1</td><td>5</td><td>0</td><td>0</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>6</td><td>6</td><td>0</td><td>1</td><td>6</td><td>0</td><td>0</td></tr><tr><td>7</td><td>7</td><td>0</td><td>1</td><td>7</td><td>0</td><td>0</td></tr><tr><td>8</td><td>8</td><td>0</td><td>1</td><td>8</td><td>0</td><td>0</td></tr></tbody></table>
+<p>The constraint parameters for the inhomogeneous broadening were chosen to be 1, which means that formally σ 1 corresponding to the first state is varied independently while the linewidths { σ i } for other bands are varied in such a way that the ratios σ i / σ 1 are kept fixed to their initial values, whereby the same linewidth parameter will be used for all states.</p>
+<figure><figcaption><div class="caption">Fig. 5.44: Comparison of the experimental (black) and fitted (red) absorption spectra corresponding to the fit run of orca_asa on the file example007.002.inp in which equal broadening was assumed for all electronic bands. Blue curves represent individual contributions to the absorption spectrum from each state.</div></figcaption></figure>
+<p>One can see (Fig. 5.44) that the assumption of equal linewidths for all electronic bands leads to a rather pronounced deterioration of the quality of the fit in the low-energy spectral range (MWAD = 0.017). Apparently, this discrepancy can be fixed assuming more electronic states at higher energies.</p>
+<h2>NOTE</h2>
+<ul>
+<li style="list-style-type: '· ';">The homogeneous linewidth parameters can also be included in the fit in a similar way. However, one can see that in most cases they appear to be much smaller than corresponding Gaussian linewidth parameters.</li>
+<li style="list-style-type: '· ';">Gauss-fit of absorption spectra is coventionally performed assuming the same linewidth parameters for all bands. However, since a large portion of Gaussian broadening is mainly due to the unresolved vibronic structure in the spectra which can significantly vary depending on the nature of transition, the assumption of unequal Gaussian bandwidths seems to be a physical one.</li>
+</ul>
+<h2>Example: Fit of Absorption and Resonance Raman Spectra for 11 A g → 11 B u Transition in trans -1,3,5-Hexatriene</h2>
+<p>Below we provide an example of the fit of the lineshape parameters and { ∆ m } corresponding to the strongly dipoleallowed 11 A g → 11 B u transition in hexatriene. It is known that the most intense bands in rR spectra correspond to the most vibronically active in absorption spectrum. For the IMDHO model this correlation is determined by the values of { ∆ m } . Thus, the larger ∆ , the larger is the rR intensity of a given mode and the more pronounced is the progression in the absorption spectrum corresponding to this mode. In principle, if all vibrational transitions in absorption are well resolved it is possible to determine { ∆ m } by a fit of the absorption spectrum alone. In practice this task is ambiguous due to the limited resolution of the experimental absorption spectra. The observation of a rR spectrum enables the identification of the vibrational modes that are responsible for the progression in the absorption spectrum, as well as a quantitative analysis in terms of { ∆ m } . The file example006.inp provides a brute-force example on how to approach the fit employing the minimal possible experimental information: 1) An absorption spectrum; 2) relative rR intensities of fundamental bands for a given excitation energy. The rR spectrum upon the excitation in resonance with the 0-0 vibronic band at 39809 cm -1 is shown in Fig. 5.33.</p>
+<figure><figcaption><div class="caption">Fig. 5.45: Experimental Resonance Raman spectrum corresponding to 11 A g → 11 B u transition in trans -1,3,5hexatriene.</div></figcaption></figure>
+<p>The experimental rR spectrum has enabled the identification of seven vibrational modes that give rise to the most intense resonance Raman bands. Therefore, they are expected to have the largest excited-state displacements and the most pronounced effect on the vibrational structure of the absorption spectrum. Their vibrational frequencies have been entered as input for the fit as shown below:</p>
+<pre><code># # example008.inp # # Input for fit of absorption and resonance Raman spectra # corresponding to the strongly allowed 1-1Ag 1-1Bu transition # in 1,3,5 trans-hexatriene.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># # Parameters to be varied: # 1) adiabatic minima transiton energy # 2) homogeneous linewidth (Gamma) # 3) dimensionless normal coordinate displacements of the # excited-state origin # %sim Model IMDHO end %fit Fit true # boolean parameter to switch on the fit # boolean parameter to include experimental absorption # spectrum in the fit: AbsFit true # boolean parameter to include experimental rR spectra # specified in $rrs_exp block in the fit: RRSFit true AbsExpName "hex-abs.dat" # name of the file with experimental absorption # spectrum # the following value of keyword ExpAbsScaleMode # indicates that only the shape of absorption band # but not its total intensity will be accounted in the fit: ExpAbsScaleMode Rel # the weight of absorption relative to the total weight of # rR intensities in the difference function to be minimized: CWAR 5.0 NMaxFunc 1000 # maximum number of function evaluations in simplex # algorithm MWADRelTol 1e-4 # Relative Tolerance of the Mean Weighted Absolute # Difference (MWAD) function which specifies the # convergence criterion SDNCStep 1.0 end # The values specified in $el_states block serve as initial guess in the fit $el_states 1 1 40000.0 200.00 0.0 1.0 0.0 0.0 # the integer values specified in $el_states_c block indicate parameters # in $el_states block to be varied $el_states_c 1 1 1 1 0 0 0 0 # 7 totally symmetric vibrations which give rise to the most # intense bands in the rR spectra are included into analysis.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># Experimental values of vibration frequencies are given: $vib_freq_gs 7 1 354.0 2 444.0 3 934.0 4 1192.0 5 1290.0 6 1403.0 7 1635.0 # Initial guess for the values of dimensionless normal # coordinate displacements of the excited-state origin $sdnc 7 1 1 1 0.0 2 0.0 3 0.0 4 0.0 5 0.0 6 0.0 7 0.0 # the integer values specified in $sdnc_c block indicate parameters # in $sdnc block to be varied $sdnc_c 7 1 1 1 1 2 2 3 3 4 4 5 5 6 6 7 7 # specification of vibrational transitions and their intensities # in experimental rR spectra: $rrs_exp 1 # number of rR spectra 1 1 # start of the block specifying the 1st rR spectrum Ex 39809.0 # excitation energy for the first rR spectrum NTr 7 # number of vibrational transitions for which intensities are # provided 1 int 10.0 1.0 modes 1 quanta 1; 2 int 5.0 1.0 modes 2 quanta 1; 3 int 1.5 1.0 modes 3 quanta 1; 4 int 21.0 1.0 modes 4</code></pre>
+<p>(continues on next page)</p>
+<pre><code>quanta 1; 5 int 7.5 1.0 modes 5 quanta 1; 6 int 2.0 1.0 modes 6 quanta 1; 7 int 46.0 1.0 modes 7 quanta 1;</code></pre>
+<p>The input of rR intensities for an arbitrary number of excitation energies follows the keyword $rrs_exp block:</p>
+<pre><code>$rrs_exp 1 # number of rR spectra 1 1</code></pre>
+<p>The first '1' in the last line denotes the number of the rR spectrum for which specification starts below. If the second number is the same as the number of the spectrum, then it means that only relative intensities for the first rR spectrum are meaningful in the fit. If several spectra are given in the input then the second number may have a different value, e.g.:</p>
+<pre><code>$rrs_exp 3 # number of rR spectra 1 2 ...</code></pre>
+<p>This input is to be interpreted as indicating that 3 rR spectra are provided and the relative intensities for the first spectrum are given on the same scale as the second one that will be accounted for in the fit. The value of the excitation energies and the number of vibrational transitions specified are indispensable within the blocks specifying intensities for each rR spectrum.</p>
+<p>Following the number of vibrational transitions given by the keyword NTr one has to specify each vibrational transition and its intensity. Thus, in the present case there are seven subblocks with the following structure:</p>
+<pre><code>k int I W modes m1,m2,...mn quanta q1,q2,...qn;</code></pre>
+<p>This means that the k -th transition has intensity I and weight W in the mean absolute difference function that is used for the minimization ( W is an optional parameter). The following 2 lines specify the vibrational transitions by providing excitation numbers q i for modes m i so that the corresponding Raman shift is equal to ν = ∑ q i ν i , where ν i is vibrational frequency of the mode m i .</p>
+<p>The parameters that are to be varied are specified within the constraint blocks $el_states_c and $sdnc_c . Both blocks have the same structure and number of parameters as $el_states and $sdnc , respectively. A parameter from the $el_states block is supposed to be independently varied if its counterpart from the $el_states_c block is equal to the number of the electronic state. Likewise, a parameter from the $sdnc block is supposed to be independently varied if its counterpart from the $sdnc_c block is equal to the number of the normal mode. Model parameters that are set to 0 in the corresponding constraint blocks are not varied in the fit. The values of the following parameters may be important for the quality of the fit:</p>
+<ul>
+<li style="list-style-type: '· ';">CWAR in the %fit block specifies the weight of absorption relative to the weight of rR intensities in the difference function to be minimized. If this parameter was not specified the fit would be almost insensitive to the rR intensities in the input, since typically the number of experimental absorption points is much larger than the number of rR transitions in the input. In most cases the value of CWAR in the range 1.0-5.0 is a good choice since the error in the measured experimental intensity is expected to be much smaller for absorption</li>
+</ul>
+<p>(continued from previous page)</p>
+<p>than for resonance Raman.</p>
+<ul>
+<li style="list-style-type: '· ';">SDNCStep in the %fit block specifies the initial dimension of the simplex in the space of { ∆ m } and should roughly correspond to the expected uncertainty of initial guess on { ∆ m } in the $sdnc block compared to their actual values. You can notice in the present example that if this parameter is too large (&gt;2.0) or too small (&lt;0.4) the quality of the fit may significantly deteriorate</li>
+<li style="list-style-type: '· ';">Although the default initial dimensions of the simplex have reasonable values for different types of parameters it may turn out to be helpful in some cases to modify the default values:</li>
+</ul>
+<pre><code>FREQGStep 10.0 # ground-state vibrational frequencies FREQEStep 10.0 # excited-state vibrational frequencies E0Step 300.0 # transition energies SSStep 20.0 # Stokes shift TMStep 0.5 # electronic transition dipole moment GammaStep 50.0 # homogeneous linewidth E0SDStep 50.0 # inhomogeneous linewidth SDNCStep 1.0 # origin shift along dimensionless normal coordinate</code></pre>
+<p>The fit run of orca_asa on the file example008.inp will converge upon approximately 700 function evaluations (for MWADRelTol=1e-4 ). The results of the fit will be stored in file example008.001.inp which has the same structure as the input file example008.inp . Thus, if the fit is not satisfactory and/or it is not fully converged it can be refined in subsequent orca_asa run upon which file example008.002.inp will be created, and so on. Some model parameters in intermediate files can be be additionally modified and/or some constraints can be lifted if so desired. The output file example008.001.inp will contain fitted displacement parameters { ∆ m } stored in the $sdnc block:</p>
+<pre><code>$sdnc 7 1 1 1 0.675000 2 -0.194484 3 -0.217527 4 0.811573 5 0.529420 6 -0.149991 7 1.314915</code></pre>
+<p>In the present example, these parameters are actually in very close agreement with those published for the hexatriene molecule!</p>
+<p>The overall quality of the fit is determined by the parameter MWAD which upon convergence reaches the value of ≈ 0.027. The fitted rR intensities are presented in the commented lines next to the experimental rR intensities in file example008.001.inp :</p>
+<pre><code>$rrs_exp 1 1 1 3.495285e+001 Ex 39809.00 NT 7 1 Int 10.0 1.0 # simulated intensity: 1.000982e+001 modes 1 quanta 1; 2 Int 5.0 1.0 # simulated intensity: 8.976285e-001 modes 2 quanta 1; 3 Int 1.5 1.0 # simulated intensity: 1.255880e+000 modes 3 quanta 1;</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>The file hex-abs.fit.dat will contain the experimental and fitted absorption spectra in ASCII format which can be plotted in order to visualize the quality of absorption fit (Fig. 5.46).</p>
+<p>Fig. 5.46: Experimental (black) and fitted (red) absorption spectrum corresponding to 11 A g → 11 B u transition in 1,3,5 trans -hexatriene.</p>
+<ul>
+<li style="list-style-type: '· ';">The more experimental rR intensities are included in the analysis the more reliable is the fit. In principle it is possible to obtain fully consistent results even if only a limited number of vibrational transitions is provided. However, in such a case it is desirable to include into analysis at least a single Raman transition</li>
+</ul>
+<p>involving the mode for which ∆ is to be determined.</p>
+<ul>
+<li style="list-style-type: '· ';">The quality of the fit can be improved if the IMDHOFA model is invoked and excited-state vibrational frequencies are allowed to vary.</li>
+<li style="list-style-type: '· ';">Due to the initial guess and dimension of the simplex, as well as some peculiarities of the simplex algorithm for function minimization, you can still refine the fit by rerunning orca_asa on file example008. 001.inp that may lead to an even lower value of the parameter MWAD = 0.021 , and therefore to better agreement of experimental and fitted spectra (even though the previous run has been claimed to be converged).</li>
+<li style="list-style-type: '· ';">In this respect it appears to be wise to perform the fit in 3 steps:</li>
+<li style="list-style-type: '1. ';">Fit the preresonance region below the 0-0 vibronic band with a single Lorentzian band, from which the adiabatic transition energy E 0 , and homogeneous linewidth Γ are obtained. The range for fit of the absorption spectrum can be specified by the AbsRange keyword in the %fit block.</li>
+<li style="list-style-type: '2. ';">Fix E 0 and Γ , and optimize { ∆ m } fitting the entire spectral range and rR intensities.</li>
+<li style="list-style-type: '3. ';">Lift constraints on E 0 and Γ , and reoptimize simultaneously all parameters.</li>
+</ul>
+<h2>Example: Single-Mode Fit of Absorption and Fluorescence Spectra for 11 A g → 11 B 2 u Transition in Tetracene</h2>
+<p>In this section we provide an example and discuss the most important aspects of joint fit of fluorescence and absorption spectra. Fig. 5.47 displays the experimental emission and absorption spectra corresponding to 11 A g → 11 B 2 u transition in tetracene.</p>
+<figure><figcaption><div class="caption">Fig. 5.47: Deconvoluted absorption (red) and fluorescence (blue) spectra of tetracene in cyclohexane upon the assumption of a single vibronically active mode. The black solid lines represent experimental spectra.</div></figcaption></figure>
+<p>Both spectra show pronounced effective vibrational progressions that are dominated by 3 and 5 peaks, respectively.</p>
+</div>
+</body>
+</html>

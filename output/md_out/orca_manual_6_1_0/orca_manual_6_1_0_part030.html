@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part030</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td colspan="10">↪ → -------</td></tr><tr><th>0-1A</th><td>-&gt;</td><td>1-1A</td><td>3.932110</td><td>31714.6</td><td>315.3</td><td>-0.00000</td><td>0.00000</td><td>0.00000</td><td>0.</td></tr><tr><th>↪ → 56273 0-1A ↪ 00000</th><td>-&gt;</td><td>2-1A</td><td>9.070040</td><td>73154.8</td><td>136.7</td><td>-0.00000</td><td>0.00000</td><td>-0.74486</td><td>0.</td></tr><tr><th>→ 0-1A ↪ → 00000</th><td>-&gt;</td><td>3-1A</td><td>9.728237</td><td>78463.5</td><td>127.4</td><td>-0.00000</td><td>-0.00000</td><td>-0.00000</td><td>-0.</td></tr><tr><th>0-1A</th><td>-&gt;</td><td>4-1A</td><td>10.618534</td><td>85644.3</td><td>116.8</td><td>0.00000</td><td>0.35898</td><td>0.00000</td><td>-0.</td></tr><tr><th>↪ → 00000 0-1A ↪ → 00000</th><td>-&gt;</td><td>5-1A</td><td>10.675343</td><td>86102.5</td><td>116.1</td><td>0.00000</td><td>0.00000</td><td>-0.00000</td><td>-0.</td></tr></tbody></table>
+<h2>Á Warning</h2>
+<ul>
+<li style="list-style-type: '· ';">It is important to note that the transition moments and oscillator strengths (and state dipole moments) have been blindly computed by the MRCI module and currently, no effort has been made to include the effects of the various similarity transformations in the evaluation of these quantities. Hence these quantities are only approximate and should only be used as a qualitative aid to determine which states are dipole allowed or forbidden. Furthermore, since the calculated densities are approximate, so are the results of the population analysis that are printed before the absorption and CD spectra.</li>
+<li style="list-style-type: '· ';">While both the CASSCF and MRCI modules can make use of spatial point-group symmetry to some extent, the MR-EOM-CC implementation is currently limited to calculations in C 1 symmetry.</li>
+</ul>
+<h2>3.20.2 Capabilities</h2>
+<p>The MR-EOM-CC methodology can be used to calculate a desired number of states for both closed- and open-shell systems from a single state-averaged CASSCF solution. Currently, the approach is limited to serial calculations and to smaller systems in smaller active spaces. One should be aware that in the most cost-effective MR-EOM-T|T † |SXD|Uh-v approach (i.e. the smallest diagonalization manifold), an MRCI diagonalization is performed over all 1h and 1p excited configurations out of the CAS, which will inevitably limit the size of the initial CAS which can be used. We have also implemented an orbital selection scheme which can be used to reduce the size of the inactive core and virtual subspaces in the calculation of excitation energies, and this can be employed to extend the applicability of the approach to larger systems. The current implementation can also be used in conjunction with the spin-orbit coupling submodule ( Properties Calculation Using the SOC Submodule ) of the MRCI module to calculate spin-orbit coupling effects in MR-EOM-CC calculations to first order. These and other features of the current implementation will be discussed in Details on the Multireference Equation of Motion Coupled-Cluster (MR-EOM-CC ) Theory .</p>
+<h2>3.20.3 Perturbative MR-EOM-CCPT</h2>
+<p>The MR-EOM-CC family of methods now also features an almost fully perturbative approach called MR-EOMT [524]. This method shares the features of the MR-EOM-CC parent method while using non-iterative perturbative estimates for the ˆ T and ˆ S, ˆ X, ˆ D amplitudes. This slightly reduces the accuracy compared to iterative MR-EOM-CC while reducing runtime. Furthermore, convergence issues due to nearly singular ˆ T and ˆ S, ˆ X, ˆ D amplitudes cannot occur anymore.</p>
+<p>This method can be invoked by adding the keyword DoMREOM_MRPT True to the %mdci block.</p>
+<h2>3.20.4 Details on the Multireference Equation of Motion Coupled-Cluster (MREOM-CC ) Theory</h2>
+<p>In analogy with single reference EOM-CC and STEOM-CC (see sections Section 5.9 and Section 5.10), Multireference Equation of Motion Coupled-Cluster (MR-EOM-CC ) theory [516, 517, 518, 519, 520, 521] can be viewed a transform and diagonalize approach to molecular electronic structure theory. An MR-EOM-CC calculation involves a single state-averaged CASSCF calculation, incorporating a few low-lying states and the solution of a single set of cluster amplitudes, which define a sequence of similarity-transformed Hamiltonians. The ultimate goal of these many-body transformations is to effectively decouple the CAS configurations from important excited configurations (e.g., 2p2h, 2p1h, 1p1h, etc.) which comprise the first-order interacting space. Through the definition of suitable cluster operators, in each of the transformations, most of these excitations can be included in an internally contracted fashion. Hence, the resulting final transformed Hamiltonian can be diagonalized over a small subspace of the original first-order interacting space to gain access to many electronic states. As discussed in section Section 3.20, the MR-EOM-CC implementation in ORCA therefore makes use of the CASSCF module (to obtain the state-averaged CASSCF reference), the MDCI module for the solution of the amplitude equations and the calculation of the elements of the various similarity transformed Hamiltonians and the MRCI module for the diagonalization of the final transformed Hamiltonian. Some desirable features of this methodology are:</p>
+<ul>
+<li style="list-style-type: '· ';">Many states can be obtained through the diagonalization of a similarity transformed Hamiltonian over a compact diagonalization manifold (e.g. the final diagonalization space in MR-EOM-T|T † |SXD|U only includes the CAS configurations and 1h and 1p configurations).</li>
+<li style="list-style-type: '· ';">Only a single state-averaged CASSCF calculation and the solution of a single set of amplitudes is required to define the final similarity transformed Hamiltonian and the results are typically quite insensitive to the precise definition of the CAS (only a few low-lying multiplets need to be included in the state-averaging)</li>
+<li style="list-style-type: '· ';">The MR-EOM-CC approach is rigorously invariant to rotations of the orbitals in the inactive, active and virtual subspaces, and it preserves both spin and spatial symmetry.</li>
+</ul>
+<table><caption><div class="caption">Table 3.53: The details of the various MR-EOM-CC transformations that are considered in the ORCA implementation of MR-EOM-CC. The equations for the operator components and the residual equations which determine the corresponding amplitudes also appear in the Table. Note that we use the usual (Einstein) convention that repeated indices are summed over.</div></caption><tbody><tr><th>Name</th><th>Transformation</th><th>Operators</th><th>Operator nents</th><th>Compo-</th><th>Residual Equation</th></tr><tr><td>T</td><td>̂ H = e - ̂ T ̂ He ̂ T = h + h p E p + h pq E pq + . . .</td><td>̂ T = ̂ T 1 + ̂ T 2</td><td>̂ T 1 = t a i ̂ E a i 1 ab</td><td>ab</td><td>R a i = ∑ m w m ⟨ Φ m | ̂ E i a ̂ H | Φ m ⟩ R ab ij = h ab ij</td></tr><tr><td>T †</td><td>0 q { ̂ q } rs { ̂ rs } ̂ H 2 e - ̂ T † = ˜ h 0 + ˜ h p q { ̂ E p q } + ˜ h pq rs { ̂ E pq rs } + . . .</td><td>̂ T † = ̂ T † 1 + ̂ T † 2</td><td>̂ T 2 = 2 t ij ̂ E ij ̂ T † 1 = t i a ̂ E i a ̂ T † 2 = 1 2 t ij ab E</td><td>̂ ij ab</td><td>None ( i.e. set t i a ≈ t a i ) None ( i.e. set t ij ab ≈ t ab ij )</td></tr><tr><td>SXD</td><td>̂ F = { e ̂ S + ̂ X + ̂ D } - 1 ̂ H 2 { e ̂ S + ̂ X + ̂ D } = f 0 + f p q { ̂ E p q } + f pq rs { ̂ E pq rs } + . . .</td><td>̂ S = ̂ S 2 ̂ X = ̂ X 2</td><td>̂ S 2 = s aw i ′ j ′ ̂ E aw i ′ j ′ ̂ X 2 = x aw i ′ x E aw i ′ x</td><td>̂ E aw</td><td>R aw i ′ j ′ = f aw i ′ j ′ R aw i ′ x = f, aw i ′ x</td></tr><tr><td>U</td><td>̂ G = e - ̂ U ̂ F 2 e ̂ U = g 0 + g p q { E p q } + g pq rs { E pq rs } +</td><td>̂ D = ̂ D 2 ̂ U = ̂ U 2</td><td>̂ D 2 = d xi ′ ̂ xi ′ ̂ U 2 = u wx i ′ j ′ E wx i ′ j ′</td><td>̂</td><td>R xi ′ = f xi ′ R wx i ′ j ′ = g wx i ′ j ′</td></tr></tbody></table>
+<p>̂</p>
+<p>̂</p>
+<p>As the details concerning the MR-EOM-CC methodology are rather involved, we refer the interested reader to Refs. [516, 517, 518, 519, 520, 521] for a more detailed discussion. Note that the details concerning the implementation of MR-EOM-CC in ORCA can be found in Refs. [520] and [521]. In the following discussion, we note that general spatial orbitals p, q, r, s , which comprise the molecular orbital basis, are partitioned into (doubly occu-</p>
+<p>pied) inactive core orbitals i ′ , j ′ , k ′ , l ′ , occupied orbitals i, j, k, l (i.e. the union of the inactive core and active orbital subspaces), active orbitals w,x,y, z and virtual orbitals a, b, c, d . In general, the many-body similarity transformations assume the general form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>in which ̂ Y is a cluster operator and ̂ H 2 is the bare Hamiltonian or a similarity transformed Hamiltonian truncated up to two-body operators. The braces indicate Kutzelnigg-Mukherjee normal ordering [525, 526], which is used extensively in the definition of the MR-EOM-CC formalism. The various transformations which need to be considered in the ORCA implementation of MR-EOM-CC are summarized in Table 3.53. The table also includes the expressions for the operator components of the various internally contracted cluster operators and the residual equations that must be solved for the various amplitudes. Note that the residual equations are typically of the many-body type (i.e. obtained by setting the corresponding elements of the similarity transformed Hamiltonian to zero). The only exception is the residual equation which defines the t a i amplitudes, which is a projected equation of the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, | Φ m 〉 is the m th state included in the state averaged CAS, with weight w m . The reason the equation for the singles is of the projected form is that it satisfies the Brillouin theorem (i.e. the first order singles vanish for all i and a ), whereas the corresponding many-body equation ( ¯ h a i = 0) does not.</p>
+<table><caption><div class="caption">Table 3.54: Details of the three MR-EOM-CC approaches implemented in ORCA</div></caption><tbody><tr><th>Method</th><th>Input Keyword</th><th>Operators</th><th>Diagonalization Manifold</th></tr><tr><td>MR-EOM-T|T † -h-v</td><td>MR-EOM-T|Td</td><td>̂ T ; ̂ T †</td><td>CAS, 2h1p, 1h1p, 2h, 1h, 1p</td></tr><tr><td>MR-EOM-T|T † |SXD-h-v</td><td>MR-EOM-T|Td|SXD</td><td>T ; T † ; S + X + D</td><td>CAS, 2h, 1h, 1p</td></tr><tr><td>MR-EOM-T|T † |SXD|U-h-v</td><td>MR-EOM</td><td>T ; T † ; S + X + D ; U</td><td>CAS, 1h, 1p</td></tr></tbody></table>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>Note that there are three different MR-EOM-CC approaches which have been implemented in ORCA. Namely, the current implementation allows for MR-EOM-T|T † -h-v, MR-EOM-T|T † |SXD-h-v and MR-EOM-T|T † |SXD|U-h-v calculations. At this point it is useful to discuss the naming convention used for these approaches. We use a vertical line to separate each transformation involved in the sequence of transformations defining the given MR-EOM-CC approach. For example, T|T † |SXD indicates that a T transformation, is followed by a T † transformation, which is then followed by an SXD transformation. The h-v indicates that the elements of the transformed Hamiltonian have been hermitized (h) and vertex symmetrized (v) before entering the MRCI diagonalization (see Ref. [521] for more information). Essentially, this means that the full eightfold symmetry of the two-electron integrals (and hermiticity of the one-body elements) have been enforced upon the elements of the transformed Hamiltonian. The details of the three MR-EOM-CC approaches are summarized in Table Table 3.54. This table includes the keyword (in the first line of input) used to initiate the calculation in ORCA, the various operators involved, and the configurations included in the final diagonalization manifold. One can clearly see that the MR-EOM-T|T † |SXD|U-h-v approach is the most cost effective, as it only includes the 1h and 1p configurations, beyond the CAS, in the final diagonalization manifold.</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>̂</p>
+<p>Some %mdci keywords which are important for controlling MR-EOM-CC calculations are (i.e. default values are given here):</p>
+<table><tbody><tr><td colspan="3">%mdci</td></tr><tr><td>STol</td><td>1e-7</td><td>#Convergence Tolerance on Residual Equations</td></tr><tr><td>MaxIter</td><td>100</td><td>#Maximum Number of Iterations</td></tr><tr><td>DoSingularPT</td><td>false</td><td>#Activate the Singular PT/Projection Procedure</td></tr><tr><td>SingularPTThresh</td><td>0.01</td><td>#Threshold for the Singular PT/Projection #Procedure</td></tr><tr><td>PrintOrbSelect</td><td>false</td><td>#Print the Eigenvalues of the Orbital Selection #Densities (and R_core and R_virt values) #and Terminate the Calculation</td></tr><tr><td>CoreThresh</td><td>0.0</td><td>#Core Orbital Selection Threshold</td></tr><tr><td>VirtualThresh</td><td>1.0</td><td>#Virtual Orbital Selection Threshold</td></tr><tr><td colspan="3">end</td></tr></tbody></table>
+<p>As discussed below, the orbital selection scheme is activated by adding !OrbitalSelection to the simple input line. Keywords that are specific to the CASSCF and MRCI modules are discussed in sections Section 3.13 and Section 3.19, respectively. We note that in MR-EOM-T|T † -h-v and MR-EOM-T|T † |SXD-h-v calculations, it is possible to override the default excitation classes in the final MRCI diagonalization. This is done by specifying excitations none and then explicitly setting the excitation flags within a given multiplicity block. For example, if we wanted to have 1h, 1p, 1h1p, 2h and 2h1p excitations in the final diagonalization manifold, we would specify (i.e. here we have requested 6 singlets and have a CAS(6,4) reference):</p>
+<pre><code>%mrci newblock 1 * excitations none Flags[is] 1 Flags[sa] 1 Flags[ia] 1 Flags[ijss] 1 Flags[ijsa] 1 nroots 6 refs cas(6,4) end end end</code></pre>
+<h2>The Steps Required to Run an MR-EOM-CC Calculation</h2>
+<p>To illustrate the various steps required in a typical MR-EOM-CC calculation, we will consider the calculation of the excitation energies of the neutral Fe atom at the MR-EOM-T|T † |SXD|U-h-v level of theory.</p>
+<h2>State-Averaged CASSCF Calculation</h2>
+<p>Evidently, the first step is to determine a suitable state-averaged CASSCF reference for the subsequent MR-EOM-CC calculation. In choosing the state-averaged CAS for an MR-EOM-CC calculation, we typically include a few of the low-lying multiplets that have the same character as the (much larger number of) states that we wish to compute in the final MR-EOM calculation. For the neutral Fe atom, we typically have electronic states which have either 4s 2 3d 6 character or 4s 1 3d 7 character. From the NIST atomic spectra database [527, 528], we find that the lowest lying 5 D multiplet is of 4s 2 3d 6 character and the higher lying 5 F multiplet is of 4s 1 3d 7 character. Hence, we can set up a stateaveraged CASSCF(8,6) calculation (i.e. 8 electrons in 6 orbitals (4s and 3d)) which includes the 5 Dand 5 F states and choose the weights such that the average occupation of the 4s orbital is 1.5. As discussed in Ref. [522], this is done to avoid a preference toward either of the 4s configurations in the state-averaging. We will run the state-averaged CASSCF calculation, making use of the second order DKH (see The Douglas-Kroll-Hess Method ) method for the inclusion of relativistic effects in a Def2-TZVPP basis (i.e. the DKH-Def2-TZVPP relativistically recontracted basis, listed in section Section 2.7). The input file for the state-averaged CASSCF(8,6) calculation takes the form:</p>
+<pre><code>!CASSCF DKH-Def2-TZVPP VeryTightSCF DKH %casscf nel 8 norb 6 mult 5 nroots 12 weights[0] = 0.7, 0.7, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 end * xyz 0 5 Fe 0.000000 0.000000 0.000000 end</code></pre>
+<p>Here, we have requested 12 quintet states (the lowest lying 5 D and 5 F multiplets) and we have chosen the weights to be 0.7 for the five 5 D states and 0.5 for the seven 5 F states, such that the overall occupation of the 4s orbital will be</p>
+<ul>
+<li>1.5. Once the calculation has converged, it is important to inspect the results printed in the final macro-iteration of the CASSCF calculation (macro-iteration 8 in this case). In this case, we have:</li>
+</ul>
+<pre><code>MACRO-ITERATION 8: ---Inactive Energy E0 = -1249.82392764 Eh ---All densities will be recomputed CI-ITERATION 0: -1271.258899450 0.000000000001 ( 0.00) -1271.258899450 0.000000000001 -1271.258899450 0.000000000001 -1271.258899450 0.000000000001 -1271.258899450 0.000000000001 -1271.186288591 0.000000000001 -1271.186288591 0.000000000001 -1271.186288591 0.000000000002 -1271.186288591 0.000000000001 -1271.186288591 0.000000000001 -1271.186288591 0.000000000001 -1271.186288591 0.000000000001 CI-PROBLEM SOLVED DENSITIES MADE E(CAS)= -1271.222594021 Eh DE= -1.591616e-12 ---Energy gap subspaces: Ext-Act = 0.276 Act-Int = 2.469 N(occ)= 1.50000 1.30000 1.30000 1.30000 1.30000 1.30000 ||g|| = 4.669702e-05 Max(G)= 1.104493e-05 Rot=68,1</code></pre>
+<p>Directly below CI-ITERATION 0 , the final CAS-CI energies are printed, and one observes that they follow the correct degeneracy pattern (i.e. 5 states with energy -1271.258899450 and 7 states with energy -1271. 186288591 ). Furthermore, the final state-averaged CASSCF energy ( E(CAS)= -1271.222594021 ) and occupation numbers ( N(occ)= 1.50000 1.30000 1.30000 1.30000 1.30000 1.30000 ) are also printed. As expected, the occupation number of the 4s orbital is indeed 1.5, while the 3d orbitals each have an occupation of 1.3.</p>
+<h2>Selection of the States to Include in the MR-EOM-CC Calculation</h2>
+<p>Once a satisfactory CASSCF reference has been obtained, the next step is to determine the number of states to include in the MR-EOM-CC calculation. From the NIST atomic spectra database, one finds that the higher lying states of 4s 2 3d 6 and 4s 1 3d 7 character are either singlets, triplets, or quintets. To figure out how many states should be included in each multiplicity block, one can perform an inexpensive CAS-CI calculation. This is done by reading in the orbitals from the previous CASSCF calculation (here they are stored in the file CAS.gbw ) and requesting a single iteration (i.e. using the NoIter keyword) of a state-averaged CASSCF calculation:</p>
+<pre><code>!CASSCF DKH-Def2-TZVPP ExtremeSCF DKH NoIter !MOREAD %moinp "CAS.gbw" %casscf nel 8 norb 6 mult 5,3,1 nroots 15,90,55 end * xyz 0 5 Fe 0.000000 0.000000 0.000000 end</code></pre>
+<p>Here, after some experimentation, we have chosen 15 quintets, 90 triplets and 55 singlets. It is important that we calculate states up to sufficiently high energy (i.e. all the states that are of interest) and it is imperative that we have complete multiplets. Hence, several iterations of this procedure might be required to choose the proper number</p>
+<p>of states for each multiplet. The relevant section of the output file which should be analyzed is the SA-CASSCF TRANSITION ENERGIES . For the above calculation, we obtain (i.e. only the CAS-CI energies for the first 33 roots are shown here):</p>
+<table><tbody><tr><th colspan="6">-----------------------------</th></tr><tr><th>LOWEST</th><th>ROOT</th><th>(ROOT</th><th>0 ,MULT 5)</th><th>=</th><th>-1271.258899450 Eh</th></tr><tr><td>STATE</td><td>ROOT</td><td>MULT</td><td>DE/a.u.</td><td>DE/eV</td><td>DE/cm**-1</td></tr><tr><td>1:</td><td>1</td><td>5</td><td>0.000000</td><td>0.000</td><td>0.0</td></tr><tr><td>2:</td><td>2</td><td>5</td><td>0.000000</td><td>0.000</td><td>0.0</td></tr><tr><td>3:</td><td>3</td><td>5</td><td>0.000000</td><td>0.000</td><td>0.0</td></tr><tr><td>4:</td><td>4</td><td>5</td><td>0.000000</td><td>0.000</td><td>0.0</td></tr><tr><td>5:</td><td>5</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>6:</td><td>6</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>7:</td><td>7</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>8:</td><td>8</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>9:</td><td>9</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>10:</td><td>10</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>11:</td><td>11</td><td>5</td><td>0.072611</td><td>1.976</td><td>15936.2</td></tr><tr><td>12:</td><td>0</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>13:</td><td>1</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>14:</td><td>2</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>15:</td><td>3</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>16:</td><td>4</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>17:</td><td>5</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>18:</td><td>6</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>19:</td><td>7</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>20:</td><td>8</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>21:</td><td>9</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>22:</td><td>10</td><td>3</td><td>0.092859</td><td>2.527</td><td>20380.2</td></tr><tr><td>23:</td><td>11</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>24:</td><td>12</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>25:</td><td>13</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>26:</td><td>14</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>27:</td><td>15</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>28:</td><td>16</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>29:</td><td>17</td><td>3</td><td>0.101848</td><td>2.771</td><td>22353.1</td></tr><tr><td>30:</td><td>18</td><td>3</td><td>0.102559</td><td>2.791</td><td>22509.1</td></tr><tr><td>31:</td><td>19</td><td>3</td><td>0.102559</td><td>2.791</td><td>22509.1</td></tr></tbody></table>
+<h2>Running the MR-EOM-CC Calculation</h2>
+<p>Nowthat we have chosen a suitable CASSCF reference and the states that we wish to calculate, we can finally proceed with the MR-EOM calculation. The following input file runs an MR-EOM-T|T † |SXD|U-h-v calculation for 15 quintet, 90 triplet and 55 singlet states of the neutral Fe atom (i.e. the CASSCF orbitals are read from CAS.gbw ):</p>
+<pre><code>!MR-EOM DKH-Def2-TZVPP VeryTightSCF DKH !MOREAD %moinp "CAS.gbw" %method frozencore fc_ewin end %casscf nel 8 norb 6</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>mult 5 nroots 12 weights[0] = 0.7, 0.7, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 end %mdci ewin -6, 10000 STol 1e-7 end %mrci ewin -6, 10000 MaxIter 200 newblock 5 * nroots 15 refs cas(8,6) end end newblock 3 * nroots 90 refs cas(8,6) end end newblock 1 * nroots 55 refs cas(8,6) end end end * xyz 0 5 Fe 0.000000 0.000000 0.000000 end</code></pre>
+<p>Note that since the default frozen core settings exclude the 3p orbitals from the correlation treatment, we have used an energy window (i.e. the line ewin -6, 10000 in both the %mdci and %mrci blocks) such that they are included in the current calculation. We note that a detailed discussion of the input and output of an MR-EOM-CC calculation has already been given in section Section 3.20 and thus, we do not repeat it here. It is important to reiterate that one should always inspect the values of the largest (T, S and U) amplitudes. Ideally, the largest amplitudes should be smaller than 0.1 and should not exceed 0.15. If some amplitudes are larger than 0.15, it might be necessary to revisit the definition of the CAS and the weights used. For the T amplitudes, an alternative solution is to use the projection/singular PT scheme discussed in section Section 3.20.4 below.</p>
+<p>As discussed in section Section 3.20, the excitation energies are printed under the heading TRANSITION ENERGIES . For the current calculation, we obtain the following results (only the results for 33 states are shown here):</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -1271.833871822 Eh State Mult Irrep Root Block mEh eV 1/cm 0 5 -1 0 0 0.000 0.000 0.0 1 5 -1 1 0 0.000 0.000 0.0 2 5 -1 2 0 0.000 0.000 0.0 3 5 -1 3 0 0.000 0.000 0.0 4 5 -1 4 0 0.000 0.000 0.0 5 5 -1 5 0 33.901 0.922 7440.4 6 5 -1 6 0 33.901 0.922 7440.4 7 5 -1 7 0 33.901 0.922 7440.4 8 5 -1 8 0 33.901 0.922 7440.4 9 5 -1 9 0 33.901 0.922 7440.4</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>10</td><td>5</td><td>-1</td><td>10</td><td>0</td><td>33.901</td><td>0.922</td><td>7440.4</td></tr><tr><td>11</td><td>5</td><td>-1</td><td>11</td><td>0</td><td>33.901</td><td>0.922</td><td>7440.4</td></tr><tr><td>12</td><td>3</td><td>-1</td><td>0</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>13</td><td>3</td><td>-1</td><td>1</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>14</td><td>3</td><td>-1</td><td>2</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>15</td><td>3</td><td>-1</td><td>3</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>16</td><td>3</td><td>-1</td><td>4</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>17</td><td>3</td><td>-1</td><td>5</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>18</td><td>3</td><td>-1</td><td>6</td><td>1</td><td>54.743</td><td>1.490</td><td>12014.8</td></tr><tr><td>19</td><td>5</td><td>-1</td><td>12</td><td>0</td><td>78.790</td><td>2.144</td><td>17292.5</td></tr><tr><td>20</td><td>5</td><td>-1</td><td>13</td><td>0</td><td>78.790</td><td>2.144</td><td>17292.5</td></tr><tr><td>21</td><td>5</td><td>-1</td><td>14</td><td>0</td><td>78.790</td><td>2.144</td><td>17292.5</td></tr><tr><td>22</td><td>3</td><td>-1</td><td>7</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>23</td><td>3</td><td>-1</td><td>8</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>24</td><td>3</td><td>-1</td><td>9</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>25</td><td>3</td><td>-1</td><td>10</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>26</td><td>3</td><td>-1</td><td>11</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>27</td><td>3</td><td>-1</td><td>12</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>28</td><td>3</td><td>-1</td><td>13</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>29</td><td>3</td><td>-1</td><td>14</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>30</td><td>3</td><td>-1</td><td>15</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>31</td><td>3</td><td>-1</td><td>16</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr><tr><td>32</td><td>3</td><td>-1</td><td>17</td><td>1</td><td>95.413</td><td>2.596</td><td>20940.8</td></tr></tbody></table>
+<p>It is also important to recall that one should always inspect the reference weights for each state, as only states which are dominated by reference space configurations can be treated accurately at the MR-EOM level of theory. Generally, the reference weights should be larger than (or close to) 0.9. In each multiplicity block, the individual state energies and reference weights can be found following convergence of the MRCI procedure, under the heading CI-RESULTS (see section Section 3.20 for a more detailed discussion).</p>
+<h2>Approximate Inclusion of Spin-Orbit Coupling Effects in MR-EOM-CC Calculations</h2>
+<p>The effects of spin-orbit coupling can approximately be included in MR-EOM-CC calculations using the SOC submodule of the MRCI module. This can be viewed as a first order approximation to the inclusion of spin-orbit coupling effects in MR-EOM-CC. In a more rigorous formulation, one would have to consider the various similarity transformations of the spin-orbit coupling operator. The details of the SOC submodule of the MRCI module have already been discussed in detail in Sec. Section 3.19.14 and its usage within the MR-EOM formalism is identical to that discussed therein. Let us consider the calculation of spin-orbit coupling effects in the excitation spectrum of the neutral Fe atom considered in the previous section. The input file for this calculation is:</p>
+<pre><code>!MR-EOM DKH-Def2-TZVPP ExtremeSCF DKH %method frozencore fc_ewin end %casscf nel 8 norb 6 mult 5 nroots 12 weights[0] = 0.7, 0.7, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 etol 1e-12 gtol 1e-12 end %mdci ewin -6, 10000 MaxIter 300 STol 1e-12 end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%mrci ewin -6, 10000 MaxIter 200 newblock 5 * nroots 15 refs cas(8,6) end end newblock 3 * nroots 90 refs cas(8,6) end end newblock 1 * nroots 55 refs cas(8,6) end end soc dosoc true #include spin-orbit coupling effects end end * xyz 0 5 Fe 0.000000 0.000000 0.000000 end</code></pre>
+<p>In contrast with the calculation performed in section Section 3.20.1, the convergence thresholds have been tightened in all aspects of the calculation (i.e. the use of the ExtremeSCF keyword, etol and gtol (CASSCF energy and orbital gradient convergence tolerance) are set to 1 × 10 -12 and the convergence tolerance for the residuals in the MR-EOM-CC amplitude iterations have been set to 1 × 10 -12 ). We note that with the use of the ExtremeSCF keyword, the convergence tolerance on the energy ( Etol ) and residual ( Rtol ) in the MRCI portion of the calculation are also set to 1 × 10 -12 . Although it is not absolutely necessary, we have used very strict convergence thresholds to preserve the degeneracies of the various multiplets as much as possible. The output of spin-orbit corrected MR-EOMCC spectrum appears under the heading SOC CORRECTED ABSORPTION SPECTRUM VIA TRANSITION DIPOLE MOMENTS :</p>
+<pre><code>-----------------------------------------------------------------------------------↪ → ---------------------SOC CORRECTED ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → ---------------------Transition Energy Energy Wavelength fosc(D2) D2 |DX|␣ ↪ → |DY| |DZ| (eV) (cm-1) (nm) (*population) (au**2) (au)␣ ↪ → (au) (au) -----------------------------------------------------------------------------------↪ → ---------------------</code></pre>
+<p>It is possible to obtain more accurate results by performing an MR-EOM-T|T † |SXD-h-v calculation and including the 1h1p excitations. It is important to note that these calculations are significantly more expensive. As discussed above, to run an MR-EOM-T|T † |SXD-h-v calculation, the keyword MR-EOM-T|Td|SXD must appear in the first line of input and, in order to activate the 1h1p excitations in each multiplicity block of the MRCI calculation, the %mrci block takes the form:</p>
+<pre><code>%mrci ewin -6, 10000 MaxIter 200 newblock 5 * nroots 15 excitations none Flags[is] 1 (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>Flags[sa] 1 Flags[ia] 1 Flags[ijss] 1 refs cas(8,6) end end newblock 3 * nroots 90 excitations none Flags[is] 1 Flags[sa] 1 Flags[ia] 1 Flags[ijss] 1 refs cas(8,6) end end newblock 1 * nroots 55 excitations none Flags[is] 1 Flags[sa] 1 Flags[ia] 1 Flags[ijss] 1 refs cas(8,6) end end soc dosoc true end end</code></pre>
+<p>Weuse excitations none to set the default excitation flags to false and then manually set the 1h ( Flags[is] ), 1p ( Flags[sa] ), 1h1p ( Flags[ia] ) and 2h ( Flags[ijss] ) excitation flags to true.</p>
+<h2>Warning</h2>
+<ul>
+<li style="list-style-type: '· ';">Currently, MR-EOM-T|T † |SXD|U-h-v calculations can only be run with the default excitation classes in the final MRCI (i.e. 1h and 1p). Any other input options for the excitation flags will automatically be overwritten and set to the default values.</li>
+<li style="list-style-type: '· ';">Only the inclusion of spin-orbit coupling effects has been tested for MR-EOM-CC calculations. Other features that are available in the MRCI module (e.g. spin-spin coupling, magnetic property calculations, etc.) have not been tested for use within MR-EOM calculations.</li>
+</ul>
+<h2>A Projection/Singular PT Scheme to Overcome Convergence Issues in the T Amplitude Iterations</h2>
+<p>In certain cases, there may be nearly singular T 2 amplitudes (often, but not always large in magnitude), which can cause convergence issues in the solution of the T amplitude equations. Hence, it is sometimes necessary to discard some of the amplitudes to remedy these convergence problems. The nearly singular T 2 amplitudes are of the form t ab wx , where ( w,x ) is a pair of active orbitals which corresponds to a small eigenvalue (pair occupation number n wx ) of the two-body reduced density matrix (RDM). When nearly singular amplitudes are present, it is possible to employ a singular PT/projection scheme (i.e. Scheme I described in Ref. [516]), using the two-body RDM as the metric matrix, to discard these nearly singular amplitudes and replace them with suitable perturbative estimates. As a first example, let us consider the following calculation on the cyclopentadiene molecule:</p>
+<pre><code>!MR-EOM def2-SVP VeryTightSCF %casscf nel 4</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>norb 4 nroots 2 mult 3 end %mdci STol 1e-7 MaxIter 60 end %mrci newblock 1 * nroots 3 refs cas(4,4) end end newblock 3 * nroots 3 refs cas(4,4) end end end * xyz 0 3 H -0.879859 0.000000 1.874608 H 0.879859 0.000000 1.874608 H 0.000000 2.211693 0.612518 H 0.000000 -2.211693 0.612518 H 0.000000 1.349811 -1.886050 H 0.000000 -1.349811 -1.886050 C 0.000000 0.000000 1.215652 C 0.000000 -1.177731 0.285415 C 0.000000 1.177731 0.285415 C 0.000000 -0.732372 -0.993420 C 0.000000 0.732372 -0.993420 *</code></pre>
+<p>The T amplitude iterations do not converge after 60 iterations and show no signs of convergence (i.e. final largest residual of 0.000458135 and oscillatory behavior over a significant portion of the iterations). If we inspect the largest T amplitudes,</p>
+<pre><code>--------------------LARGEST T AMPLITUDES --------------------19-> 24 19-> 24 0.043103 19-> 23 19-> 23 0.031162 11-> 25 11-> 25 0.028458 19-> 41 19-> 41 0.027950 11-> 47 11-> 47 0.027026 19-> 22 19-> 22 0.025163 19-> 21 19-> 21 0.022167 15-> 26 15-> 26 0.022084 11-> 47 11-> 25 0.022033 11-> 25 11-> 47 0.022033 19-> 24 19-> 29 0.021769 19-> 29 19-> 24 0.021769 19-> 36 19-> 36 0.020986 17-> 38 17-> 38 0.019743 19-> 41 16-> 36 0.019107 18-> 40 18-> 40 0.017949</code></pre>
+<p>one can see that there are no unusually large amplitudes. If we turn on the singular PT/projection scheme by adding the line DoSingularPT true to the %mdci block:</p>
+<p>(continued from previous page)</p>
+<pre><code>%mdci STol 1e-7 MaxIter 60 DoSingularPT true end</code></pre>
+<p>and rerun the calculation, we find that the T amplitude iterations now successfully converge in 22 iterations. If we look at the largest T amplitudes:</p>
+<pre><code>--------------------LARGEST T AMPLITUDES --------------------11-> 25 11-> 25 0.028440 11-> 47 11-> 47 0.027027 15-> 26 15-> 26 0.022069 11-> 47 11-> 25 0.022031 11-> 25 11-> 47 0.022031 19-> 41 19-> 41 0.020463 17-> 38 17-> 38 0.018288 11-> 43 11-> 43 0.017250 11-> 39 11-> 39 0.016838 15-> 27 15-> 27 0.016001 13-> 26 13-> 26 0.015985 16-> 36 16-> 36 0.015759 19-> 41 16-> 36 0.015697 18-> 40 18-> 40 0.015376 17-> 31 17-> 31 0.015074 18-> 40 17-> 38 0.014470</code></pre>
+<p>most of the amplitudes corresponding to the active pair ( w,x ) = (19 , 19) no longer appear in the list (i.e. they are nearly singular amplitudes which have been projected out). The only one that does appear in the list, corresponds to a projected perturbative estimate (e.g. 19-&gt; 41 19-&gt; 41 0.020463 ).</p>
+<p>By default, when the singular PT/projection scheme is active, the amplitudes t ab wx for which the pair occupation numbers satisfy n wx &lt; 0 . 01 (i.e. SingularPTThresh = 0.01 ), are replaced by perturbative amplitudes in the procedure. However, in some cases, it might be necessary to increase the SingularPTThresh threshold beyond the default value to achieve convergence. One such example is the ferrocene molecule. Consider the following calculation:</p>
+<pre><code>!MR-EOM def2-SVP %casscf nel 6 norb 5 mult 1,3 nroots 5,6 end %mdci DoSingularPT true MaxIter 50 end %mrci newblock 1 * nroots 18 refs cas(6,5) end end newblock 3 * nroots 10 refs cas(6,5) end end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>end * xyz 0 1 Fe 0.000000 0.000000 0.000000 C 0.000000 1.220080 1.650626 C -1.160365 0.377025 1.650626 C -0.717145 -0.987065 1.650626 C 0.717145 -0.987065 1.650626 C 1.160365 0.377025 1.650626 C 0.000000 1.220080 -1.650626 C 1.160365 0.377025 -1.650626 C 0.717145 -0.987065 -1.650626 C -0.717145 -0.987065 -1.650626 C -1.160365 0.377025 -1.650626 H 0.000000 2.306051 1.635648 H -2.193184 0.712609 1.635648 H -1.355463 -1.865634 1.635648 H 1.355463 -1.865634 1.635648 H 2.193184 0.712609 1.635648 H 0.000000 2.306051 -1.635648 H 2.193184 0.712609 -1.635648 H 1.355463 -1.865634 -1.635648 H -1.355463 -1.865634 -1.635648 H -2.193184 0.712609 -1.635648 end</code></pre>
+<p>The T amplitude iterations do not converge after 50 iterations, even though the singular PT/projection scheme is activated. If we increase SingularPTThresh to 0.05 by adding SingularPTThresh 0.05 to the %mdci block:</p>
+<pre><code>%mdci DoSingularPT true SingularPTThresh 0.05 MaxIter 50 end</code></pre>
+<p>the T amplitude iterations successfully converge in 25 iterations.</p>
+<p>In conclusion, it occasionally happens that the T amplitude iterations do not converge. In these cases, the singular PT/projection scheme can be activated ( DoSingularPT true ) to overcome these convergence difficulties. Sometimes, like in the case of ferrocene, it is necessary to adjust the threshold for the singular PT/projection procedure ( SingularPTThresh ) to achieve convergence. If the procedure still fails with larger values of the threshold, then it might be necessary to revisit the definition of the state-averaged CAS.</p>
+<h2>3.20.5 An Orbital Selection Scheme for More Efficient Calculations of Excitation Spectra with MR-EOM</h2>
+<p>As described in Ref. [520], the MR-EOM implementation in ORCA can make use of a sophisticated scheme to discard inactive and virtual orbitals, which are not important for the description of the excited states of interest. The selection of inactive core orbitals is based on the eigenvalues of the core orbital selection density</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>(continued from previous page)</p>
+<p>in which</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>are respectively, the contributions from the first order t ab (1) i ′ w , s aw (1) i ′ k and u wx (1) i ′ k ′ amplitudes (i.e. note that all amplitudes have at least one active label). Similarly, the selection of virtual orbitals is based upon the eigenvalues of the virtual orbital selection density</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>in which, the contribution ρ t , from the first order T 2 amplitudes, is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and the contribution ρ s , from the first order S 2 amplitudes, is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Diagonalization of the core orbital selection density D i ′ j ′ and the virtual orbital selection density ρ ab then yields two respective sets of eigenvalues { λ i ′ } and { λ a } . We have found it useful to compute the ratios,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>of the sum of the excluded eigenvalues to the sum over all eigenvalues. The orbital selection in the core and virtual subspaces is then based upon the values of these ratios, as will be discussed below.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The orbital selection procedure is activated by adding the keyword OrbitalSelection to the first line of input, e.g.</p>
+<pre><code>! MR-EOM-CC def2-TZVPP VeryTightSCF OrbitalSelection</code></pre>
+<p>There are two threshold parameters CoreThresh and VirtualThresh , which are used to determine which inactive core and virtual orbitals are to be discarded in the orbital selection procedure, respectively. Namely, all inactive core orbitals for which R core &lt; CoreThresh (i.e. R core as defined in Eq. (3.147)) are discarded and all virtual orbitals satisfying the condition R virt &lt; VirtualThresh (i.e. R virt as defined in Eq. (3.148)) are discarded. The default values of these thresholds are CoreThresh = 0.0 (no core orbital selection) and VirtualThresh</p>
+<p>= 1.0 . However, the values of these parameters can easily be changed by redefining them in the %mdci block:</p>
+<pre><code>%mdci CoreThresh 1.0 VirtualThresh 1.0 end</code></pre>
+<p>Let us consider the calculation of the previous section ( A Projection/Singular PT Scheme to Overcome Convergence Issues in the T Amplitude Iterations ) on ferrocene, with the orbital selection procedure activated (using the default thresholds):</p>
+<pre><code>!MR-EOM def2-SVP OrbitalSelection %casscf nel 6 norb 5 mult 1,3 nroots 5,6 end %mdci DoSingularPT true SingularPTThresh 0.05 MaxIter 50 end %mrci newblock 1 * nroots 18 refs cas(6,5) end end newblock 3 * nroots 10 refs cas(6,5) end end end * xyz 0 1 Fe 0.000000 0.000000 0.000000 C 0.000000 1.220080 1.650626 C -1.160365 0.377025 1.650626 C -0.717145 -0.987065 1.650626 C 0.717145 -0.987065 1.650626 C 1.160365 0.377025 1.650626 C 0.000000 1.220080 -1.650626 C 1.160365 0.377025 -1.650626 C 0.717145 -0.987065 -1.650626 C -0.717145 -0.987065 -1.650626 C -1.160365 0.377025 -1.650626 H 0.000000 2.306051 1.635648 H -2.193184 0.712609 1.635648 H -1.355463 -1.865634 1.635648 H 1.355463 -1.865634 1.635648 H 2.193184 0.712609 1.635648 H 0.000000 2.306051 -1.635648 H 2.193184 0.712609 -1.635648 H 1.355463 -1.865634 -1.635648 H -1.355463 -1.865634 -1.635648 H -2.193184 0.712609 -1.635648 end</code></pre>
+<p>The details of the orbital selection procedure are printed under the heading ORBITAL SELECTION :</p>
+<pre><code>------------------------------------------------ORBITAL SELECTION ------------------------------------------------T1 is NOT used in the construction of the orbital selection densities Factor (in percent) for inactive (core) orbital selection ␣ ↪ → ... 0.000000000 Factor (in percent) for virtual orbital selection ␣ ↪ → ... 1.000000000 Inactive orbitals before selection: 15 ... 44 ( 30 MO's/ 60 electrons)</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Virtual orbitals before selection: 50 ... 220 (171 MO's ) Inactive orbitals after selection: 15 ... 44 ( 30 MO's/ 60 electrons) Virtual orbitals after selection: 50 ... 126 ( 77 MO's ) -------------------------------------------TIMINGS FOR THE ORBITAL SELECTION PROCEDURE -------------------------------------------Total Time for Orbital Selection ... 61.470 sec First Half Transformation ... 58.041 sec ( 94.4%) Second Half Transformation ... 1.789 sec ( 2.9%) Formation of Orbital Selection Densities ... 1.629 sec ( 2.7%) Core Orbital Selection ... 0.000 sec ( 0.0%) Virtual Orbital Selection ... 0.003 sec ( 0.0%) Finalization of Orbitals ... 0.006 sec ( 0.0%)</code></pre>
+<p>Comparing the number of virtual orbitals before the orbital selection procedure (171) with the number that are left after orbital selection (77), we see that more than half have been discarded (94). The canonical calculation (without orbital selection) takes 149373 seconds to run and yields the following excitation energies:</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -1648.190045042 Eh State Mult Irrep Root Block mEh eV 1/cm 0 1 -1 0 0 0.000 0.000 0.0 1 3 -1 0 1 65.110 1.772 14289.9 2 3 -1 1 1 65.110 1.772 14289.9 3 3 -1 2 1 70.413 1.916 15454.0 4 3 -1 3 1 70.413 1.916 15454.0 5 3 -1 4 1 95.979 2.612 21065.0 6 3 -1 5 1 95.979 2.612 21065.0 7 1 -1 1 0 105.302 2.865 23111.1 8 1 -1 2 0 105.302 2.865 23111.1 9 1 -1 3 0 107.034 2.913 23491.4 10 1 -1 4 0 107.034 2.913 23491.4 11 1 -1 5 0 160.595 4.370 35246.6 12 1 -1 6 0 160.596 4.370 35246.6 13 3 -1 6 1 164.694 4.482 36146.1 14 3 -1 7 1 165.379 4.500 36296.6 15 3 -1 8 1 165.379 4.500 36296.6 16 3 -1 9 1 171.464 4.666 37632.1 17 1 -1 7 0 208.587 5.676 45779.6 18 1 -1 8 0 208.587 5.676 45779.6 19 1 -1 9 0 213.093 5.799 46768.6 20 1 -1 10 0 213.093 5.799 46768.6 21 1 -1 11 0 216.225 5.884 47456.0 22 1 -1 12 0 220.230 5.993 48334.9 23 1 -1 13 0 220.230 5.993 48334.9 24 1 -1 14 0 224.583 6.111 49290.3 25 1 -1 15 0 224.583 6.111 49290.3 26 1 -1 16 0 237.914 6.474 52216.0 27 1 -1 17 0 237.914 6.474 52216.0</code></pre>
+<p>In contrast, the calculation with the orbital selection procedure activated runs in 28977 seconds (a factor of 5 speedup) and produces the following excitation energies:</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -1647.788478559 Eh State Mult Irrep Root Block mEh eV 1/cm 0 1 -1 0 0 0.000 0.000 0.0 1 3 -1 0 1 65.112 1.772 14290.4 2 3 -1 1 1 65.134 1.772 14295.3 3 3 -1 2 1 70.520 1.919 15477.3 4 3 -1 3 1 70.520 1.919 15477.3 5 3 -1 4 1 96.105 2.615 21092.7 6 3 -1 5 1 96.134 2.616 21099.0 7 1 -1 1 0 105.415 2.868 23136.0 8 1 -1 2 0 105.450 2.869 23143.5 9 1 -1 3 0 107.294 2.920 23548.3 10 1 -1 4 0 107.294 2.920 23548.3 11 1 -1 5 0 161.082 4.383 35353.4 12 1 -1 6 0 161.094 4.384 35356.0 13 3 -1 6 1 164.786 4.484 36166.4 14 3 -1 7 1 165.465 4.503 36315.4 15 3 -1 8 1 165.465 4.503 36315.5 16 3 -1 9 1 171.542 4.668 37649.1 17 1 -1 7 0 208.853 5.683 45838.0 18 1 -1 8 0 208.853 5.683 45838.0 19 1 -1 9 0 213.419 5.807 46840.1 20 1 -1 10 0 213.419 5.807 46840.1 21 1 -1 11 0 216.526 5.892 47521.9 22 1 -1 12 0 220.611 6.003 48418.4 23 1 -1 13 0 220.611 6.003 48418.5 24 1 -1 14 0 225.135 6.126 49411.5 25 1 -1 15 0 225.136 6.126 49411.5 26 1 -1 16 0 238.388 6.487 52320.1 27 1 -1 17 0 238.388 6.487 52320.1</code></pre>
+<p>We note that the excitation energies in the orbital selection procedure agree very nicely with those of the canonical calculation. However, the total energies are significantly different, as we currently have not implemented a procedure to correct them. Hence, the following warning is particularly important.</p>
+<h2>WARNING</h2>
+<ul>
+<li style="list-style-type: '· ';">The orbital selection procedure should only be used for the calculation of excitation energies. Total energies computed with the orbital selection procedure have not been corrected and can differ greatly from the canonical results.</li>
+</ul>
+<p>Before leaving the discussion of the orbital selection procedure, we note that there is also a keyword PrintOrbSelect , which can be added to the %mdci block to print the eigenvalues of the inactive core orbital selection and virtual orbital selection densities and the corresponding values of R core and R virt defined in Eqs. (3.147) and (3.148), respectively. This is useful if one wants to manually select the orbitals to discard in the orbital selection procedure by adjusting the values of CoreThresh and VirtualThresh . We note that the program terminates after printing. In the case of the calculation on ferrocene, if we modify the %mdci block to read</p>
+<pre><code>%mdci DoSingularPT true SingularPTThresh 0.05 MaxIter 50 PrintOrbSelect True end</code></pre>
+<p>we find the following information in the ORBITAL SELECTION section of the output (only the first 50 values for the virtual orbital selection density are shown here):</p>
+<p>Eigenvalues and corresponding R_core values for the core orbital selection density</p>
+<table><tbody><tr><td>Orbital</td><td>Eigenvalue</td><td>R_core</td></tr><tr><td>0</td><td>0.00026936</td><td>0.419318</td></tr><tr><td>1</td><td>0.00027080</td><td>0.840883</td></tr><tr><td>2</td><td>0.00038739</td><td>1.443947</td></tr><tr><td>3</td><td>0.00038739</td><td>2.047011</td></tr><tr><td>4</td><td>0.00040299</td><td>2.674355</td></tr><tr><td>5</td><td>0.00040299</td><td>3.301700</td></tr><tr><td>6</td><td>0.00077636</td><td>4.510285</td></tr><tr><td>7</td><td>0.00086085</td><td>5.850394</td></tr><tr><td>8</td><td>0.00086085</td><td>7.190503</td></tr><tr><td>9</td><td>0.00091850</td><td>8.620358</td></tr><tr><td>10</td><td>0.00091850</td><td>10.050213</td></tr><tr><td>11</td><td>0.00112826</td><td>11.806598</td></tr><tr><td>12</td><td>0.00115561</td><td>13.605563</td></tr><tr><td>13</td><td>0.00137961</td><td>15.753236</td></tr><tr><td>14</td><td>0.00137961</td><td>17.900908</td></tr><tr><td>15</td><td>0.00139093</td><td>20.066210</td></tr><tr><td>16</td><td>0.00139093</td><td>22.231512</td></tr><tr><td>17</td><td>0.00143349</td><td>24.463072</td></tr><tr><td>18</td><td>0.00143350</td><td>26.694633</td></tr><tr><td>19</td><td>0.00148539</td><td>29.006985</td></tr><tr><td>20</td><td>0.00148539</td><td>31.319338</td></tr><tr><td>21</td><td>0.00173415</td><td>34.018940</td></tr><tr><td>22</td><td>0.00224131</td><td>37.508054</td></tr><tr><td>23</td><td>0.00224132</td><td>40.997171</td></tr><tr><td>24</td><td>0.00533017</td><td>49.294785</td></tr><tr><td>25</td><td>0.00533019</td><td>57.592429</td></tr><tr><td>26</td><td>0.00658679</td><td>67.846267</td></tr><tr><td>27</td><td>0.00662033</td><td>78.152314</td></tr><tr><td>28</td><td>0.00701718</td><td>89.076149</td></tr><tr><td>29</td><td>0.00701719</td><td>100.000000</td></tr></tbody></table>
+<p>Eigenvalues and corresponding R_virt values for the virtual orbital selection␣ ↪ → density</p>
+<table><tbody><tr><td>Orbital</td><td>Eigenvalue</td><td>R_virt</td></tr><tr><td>0</td><td>0.00000119</td><td>0.000450</td></tr><tr><td>1</td><td>0.00000119</td><td>0.000899</td></tr><tr><td>2</td><td>0.00000134</td><td>0.001404</td></tr><tr><td>3</td><td>0.00000134</td><td>0.001909</td></tr><tr><td>4</td><td>0.00000136</td><td>0.002423</td></tr><tr><td>5</td><td>0.00000177</td><td>0.003091</td></tr><tr><td>6</td><td>0.00000178</td><td>0.003764</td></tr><tr><td>7</td><td>0.00000178</td><td>0.004437</td></tr><tr><td>8</td><td>0.00000215</td><td>0.005248</td></tr><tr><td>9</td><td>0.00000224</td><td>0.006096</td></tr><tr><td>10</td><td>0.00000224</td><td>0.006944</td></tr><tr><td>11</td><td>0.00000238</td><td>0.007844</td></tr><tr><td>12</td><td>0.00000347</td><td>0.009154</td></tr><tr><td>13</td><td>0.00000347</td><td>0.010465</td></tr><tr><td>14</td><td>0.00000364</td><td>0.011841</td></tr><tr><td>15</td><td>0.00000386</td><td>0.013299</td></tr><tr><td>16</td><td>0.00000396</td><td>0.014793</td></tr><tr><td>17</td><td>0.00000396</td><td>0.016287</td></tr><tr><td>18</td><td>0.00000437</td><td>0.017937</td></tr><tr><td>19</td><td>0.00000437</td><td>0.019587</td></tr><tr><td>20</td><td>0.00000499</td><td>0.021472</td></tr><tr><td>21</td><td>0.00000499</td><td>0.023357</td></tr><tr><td>22</td><td>0.00000794</td><td>0.026354</td></tr><tr><td>23</td><td>0.00000794</td><td>0.029352</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<pre><code>24 0.00000819 0.032447 25 0.00000819 0.035543 26 0.00000927 0.039044 27 0.00000927 0.042546 28 0.00001002 0.046332 29 0.00001002 0.050119 30 0.00001137 0.054415 31 0.00001137 0.058711 32 0.00001158 0.063086 33 0.00001158 0.067461 34 0.00001381 0.072678 35 0.00001381 0.077894 36 0.00001417 0.083249 37 0.00001417 0.088604 38 0.00001465 0.094137 39 0.00001495 0.099785 40 0.00001495 0.105432 41 0.00001554 0.111302 42 0.00001554 0.117172 43 0.00001623 0.123303 44 0.00001689 0.129685 45 0.00001754 0.136310 46 0.00001754 0.142934 47 0.00001805 0.149752 48 0.00001805 0.156570 49 0.00002111 0.164546 . . .</code></pre>
+<p>In conclusion, the orbital selection scheme provides a more efficient way to calculate accurate excitation spectra within the framework of MR-EOM-CC It can be used to extend the applicability of this approach to larger systems and we expect it to be much more effective in larger systems where the chromophore is localized to a small part of the molecule. We reiterate that it is currently limited to the calculation of excitation energies and should not be used if one is interested in total energies.</p>
+<h2>3.20.6 Nearly Size Consistent Results with MR-EOM-CC by Employing an MRCEPA(0) Shift in the Final Diagonalization Procedure</h2>
+<p>One drawback of the MR-EOM-CC methodology is that it is not size-extensive (or size-consistent). The sizeextensivity errors arise due to the final uncontracted MR-CI diagonalization step. Namely, they result from the components of the eigenvectors of the transformed Hamiltonian, which lie outside of the CASSCF reference space (e.g. 1h, 1p, etc. configurations). As more of the excitation classes are included through the successive similarity transformations of the Hamiltonian, the size of the final diagonalization manifold is greatly decreased resulting in much smaller size-extensivity errors upon going from MR-EOM-T|T † -h-v to MR-EOM-T|T † |SXD|U-h-v. To illustrate this, let us consider the O 2 -O 2 dimer where the O 2 molecules are separated by a large distance. For the O 2 monomer, we employ a minimal active space consisting of 2 electrons distributed amongst the two π ∗ orbitals and we only consider the ground 3 Σ -g state (no state-averaging). In the MR-EOM-CC calculations, we also calculate the higher lying 1 ∆ g and 1 Σ + g singlet states. For example, the input file for the MR-EOM-T|T † |SXD|U-h-v calculation is given by:</p>
+<pre><code>!MR-EOM AUG-CC-PVTZ EXTREMESCF %casscf nel 2 norb 2 nroots 1 (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>mult 3 end %mdci MaxIter 300 STol 1e-12 end %mrci newblock 1 * nroots 3 refs cas(2,2) end end newblock 3 * nroots 1 refs cas(2,2) end end end * xyz 0 3 O 0.00000000 -0.00000000 -0.60500000 O -0.00000000 0.00000000 0.60500000 *</code></pre>
+<p>In the case of the dimer, we take the reference state as the coupled quintet state which is formed as the product 3 Σ + g ⊗ 3 Σ + g of the monomer states. We note that at large separation, in the non-interacting limit, the dimer state energies can be decomposed as the sum of monomer state energies. There are various possibilities, taking into account the degeneracies of the various states:</p>
+<ol>
+<li style="list-style-type: '1. ';">a singlet, a triplet, and a quintet with energy E ( 3 Σ -g + 3 Σ -g ) ,</li>
+<li style="list-style-type: '2. ';">four triplets with energy E ( 3 Σ -g + 1 ∆ g ) ,</li>
+<li style="list-style-type: '3. ';">two triplets with energy E ( 3 Σ -g + 1 Σ + g ) ,</li>
+<li style="list-style-type: '4. ';">four singlets with energy E ( 1 ∆ g + 1 ∆ g ) ,</li>
+<li style="list-style-type: '5. ';">four singlets with energy E ( 1 ∆ g + 1 Σ + g ) ,</li>
+<li style="list-style-type: '6. ';">a singlet with energy E ( 1 Σ + g + 1 Σ + g ) .</li>
+</ol>
+<p>Hence, in the final diagonalization step of the MR-EOM-CC calculation, we must ask for 10 singlets, 7 triplets and 1 quintet. The input file for the MR-EOM-T|T † | SXD|U-h-v calculation on the dimer is given by:</p>
+<pre><code>!MR-EOM AUG-CC-PVTZ EXTREMESCF %casscf nel 4 norb 4 nroots 1 mult 5 etol 1e-13 gtol 1e-13 end %mdci MaxIter 300 STol 1e-12 end %mrci newblock 1 * nroots 10</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

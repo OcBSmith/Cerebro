@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part082</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<ol>
+<li style="list-style-type: '[444] ';">Chilkuri, Vijay Gopal; Neese, Frank. Comparison of Many-Particle Representations for Selected Configuration Interaction: II. Numerical Benchmark Calculations. J. Chem. Theory Comput. , 2021 , 17 (5), 2868-2885. DOI: 10.1021/acs.jctc.1c00081.</li>
+<li style="list-style-type: '[445] ';">Chan, G. K.-L.; Head-Gordon, M. Highly correlated calculations with a polynomial cost algorithm: A study of the density matrix renormalization group. J. Chem. Phys. , 2002 , 116, 4462-4476. DOI: 10.1063/1.1449459.</li>
+<li style="list-style-type: '[446] ';">Chan, G. K.-L. An algorithm for large scale density matrix renormalization group calculations. J. Chem. Phys. , 2004 , 120, 3172. DOI: 10.1063/1.1638734.</li>
+<li style="list-style-type: '[447] ';">Ghosh, D.; Hachmann, J.; Yanai, T.; Chan, G. K.-L. J. Chem. Phys. , 2008 , 128, 144117.</li>
+<li style="list-style-type: '[448] ';">Sharma, S.; Chan, G. K.-L. J. Chem. Phys. , 2012 , 136, 124121.</li>
+<li style="list-style-type: '[449] ';">Sayfutyarova, Elvira R.; Sun, Qiming; Chan, Garnet Kin-Lic; Knizia, Gerald. Automated Construction of Molecular Active Spaces from Atomic Valence Orbitals. J. Chem. Theory Comput. , 2017 , 13 (9), 4063-4078. DOI: 10.1021/acs.jctc.7b00128.</li>
+<li style="list-style-type: '[450] ';">Sayfutyarova, Elvira R.; Hammes-Schiffer, Sharon. Constructing Molecular π-Orbital Active Spaces for Multireference Calculations of Conjugated Systems. J. Chem. Theory Comput. , 2019 , 15 (3), 1679-1689. DOI: 10.1021/acs.jctc.8b01196.</li>
+<li style="list-style-type: '[451] ';">Robin, Melvin B. Higher Excited States of Polyatomic Molecules . Academic Press, 1974 . ISBN 978-0-12589901-7.</li>
+<li style="list-style-type: '[452] ';">Walzl, K. N.; Koerting, C. F.; Kuppermann, A. Electron-impact Spectroscopy of Acetaldehyde. J. Chem. Phys. , 1987 , 87, 3796-3803. DOI: 10.1063/1.452935.</li>
+<li style="list-style-type: '[453] ';">Müller, Thomas; Lischka, Hans. Simultaneous Calculation of Rydberg and Valence Excited States of Formaldehyde. Theor. Chem. Acc. , 2001 , 106, 369-378. DOI: 10.1007/s002140100264.</li>
+<li style="list-style-type: '[454] ';">Lewin, Mathieu. J. Math. Chem. , 2008 , 44, 967.</li>
+<li style="list-style-type: '[455] ';">Lang, Lucas. Development of New Multistate Multireference Perturbation Theory Methods and Their Application . PhD thesis, Rheinische Friedrich-Wilhelms-Universität Bonn, 2020 .</li>
+<li style="list-style-type: '[456] ';">Rao, Shashank V.; Maganas, Dimitrios; Sivalingam, Kantharuban; Atanasov, Mihail; Neese, Frank. Extended Active Space Ab Initio Ligand Field Theory: Applications to Transition-Metal Ions. Inorg. Chem. , 2024 , 63 (52), 24672-24684. Publisher: American Chemical Society. DOI: 10.1021/acs.inorgchem.4c03893.</li>
+<li style="list-style-type: '[457] ';">Chatzis, A.; Kowalska, J. K.; Maganas, D.; DeBeer, S.; Neese, F. Ab Initio Wave Function-Based Determination of Element Specific Shifts for the Efficient Calculation of X-Ray Absorption Spectra of Main Group Elements and First Row Transition Metals. J. Chem. Theory Comput. , 2018 , 14 (7), 3686-3702. DOI: https://dx.doi.org/10.1021/acs.jctc.8b00249.</li>
+<li style="list-style-type: '[458] ';">Mathe, Zachary; Maganas, Dimitrios; Neese, Frank; DeBeer, Serena. Coupling experiment and theory to push the state-of-the-art in x-ray spectroscopy. Nature Reviews Chemistry , 2025 , 2397-3358. DOI: 10.1038/s41570-025-00718-2.</li>
+<li style="list-style-type: '[459] ';">Guo, Yang; Sivalingam, Kantharuban; Chilkuri, Vijay Gopal; Neese, Frank. Approximations of density matrices in N-electron valence state second-order perturbation theory (NEVPT2). III. Large active space calculations with selected configuration interaction reference. J. Chem. Phys. , 2025 , 162 (14), 144110. DOI: 10.1063/5.0262473.</li>
+<li style="list-style-type: '[460] ';">Chan, G. K.-L.; Sharma, S. Ann. Rev. Phys. Chem. , 2011 , 62, 465.</li>
+<li style="list-style-type: '[461] ';">Chan, G. K.-L. DMRG Homepage. URL: https://www.chan-lab.caltech.edu/software.</li>
+<li style="list-style-type: '[462] ';">Fiedler, M. Czech. Math. J. , 1973 , 23, 298.</li>
+<li style="list-style-type: '[463] ';">Fiedler, M. Czech. Math. J. , 1975 , 25, 619.</li>
+<li style="list-style-type: '[464] ';">Atkins, J. E.; Boman, E. G.; Hendrickson, B. A Spectral Algorithm for Seriation and the Consecutive Ones Problem. SIAM J. Computing. , 1998 , 28 (1), 297-310. DOI: 10.1137/S0097539795285771.</li>
+<li style="list-style-type: '[465] ';">Barcza, G.; Legeza, Ö.; Marti, K. H.; Reiher, M. Quantum-information analysis of electronic states of different molecular structures. Phys. Rev. A , 2011 , 83, 012508. DOI: 10.1103/PhysRevA.83.012508.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[466] ';">Angeli, C.; Cimiraglia, R.; Evangelisti, S.; Leininger, T.; Malrieu, J.P. Introduction of n-electron valence states for multireference perturbation theory. J. Chem. Phys. , 2001 , 114, 10252-10264. DOI: 10.1063/1.1361246.</li>
+<li style="list-style-type: '[467] ';">Angeli, C.; Cimiraglia, R.; Malrieu, J.P. N-electron valence state perturbation theory: a fast implementation of the strongly contracted variant. Chem. Phys. Lett. , 2001 , 350, 297-305. DOI: 10.1016/S0009-2614(01)013033.</li>
+<li style="list-style-type: '[468] ';">Angeli, C.; Cimiraglia, R.; Malrieu, J.P. n-electron valence state perturbation theory: A spinless formulation and an efficient implementation of the strongly contracted and of the partially contracted variants. J. Chem. Phys. , 2002 , 117, 9138-9153. DOI: 10.1063/1.1515317.</li>
+<li style="list-style-type: '[469] ';">Dyall, K. G. J. Chem. Phys. , 1995 , 102, 4909-4918.</li>
+<li style="list-style-type: '[470] ';">Havenith, Remco W. A.; Taylor, Peter R.; Angeli, Celestino; Cimiraglia, Renzo; Ruud, Kenneth. Calibration of the N-Electron Valence State Perturbation Theory Approach. J. Chem. Phys. , 2004 , 120, 4619. DOI: 10.1063/1.1645243.</li>
+<li style="list-style-type: '[471] ';">Schapiro, Igor; Sivalingam, Kantharuban; Neese, Frank. Assessment of N-Electron Valence State Perturbation Theory for Vertical Excitation Energies. J. Chem. Theory Comput. , 2013 , 9 (8), 3567-3580. DOI: 10.1021/ct400136y.</li>
+<li style="list-style-type: '[472] ';">Angeli, Celestino; Borini, Stefano; Cestari, Mirko; Cimiraglia, Renzo. A Quasidegenerate Formulation of the Second Order N-Electron Valence State Perturbation Theory Approach. J. Chem. Phys. , 2004 , 121, 40434049. DOI: 10.1063/1.1778711.</li>
+<li style="list-style-type: '[473] ';">Lang, Lucas; Sivalingam, Kantharuban; Neese, Frank. The Combination of Multipartitioning of the Hamiltonian with Canonical Van Vleck Perturbation Theory Leads to a Hermitian Variant of Quasidegenerate NElectron Valence Perturbation Theory. J. Chem. Phys. , 2020 , 152 (1), 014109. DOI: 10.1063/1.5133746.</li>
+<li style="list-style-type: '[474] ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. SparseMaps-A Systematic Infrastructure for Reduced-Scaling Electronic Structure Methods. III. Linear-Scaling Multireference Domain-Based Pair Natural Orbital N-Electron Valence Perturbation Theory. J. Chem. Phys. , 2016 , 144 (9), 094111. DOI: 10.1063/1.4942769.</li>
+<li style="list-style-type: '[475] ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. Explicitly Correlated NElectron Valence State Perturbation Theory (NEVPT2-F12). J. Chem. Phys. , 2017 , 147 (6), 064110. DOI: 10.1063/1.4996560.</li>
+<li style="list-style-type: '[476] ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+<li style="list-style-type: '[477] ';">Kong, Liguo; Valeev, Edward F. Perturbative correction for the basis set incompleteness error of complete-active-space self-consistent field. The Journal of Chemical Physics , 2010 , 133 (17), 174126. DOI: 10.1063/1.3499600.</li>
+<li style="list-style-type: '[478] ';">Dyall, Kenneth G. The choice of a zeroth-order Hamiltonian for second-order perturbation theory with a complete active space self-consistent-field reference function. The Journal of Chemical Physics , 1995 , 102 (12), 4909-4918. DOI: 10.1063/1.469539.</li>
+<li style="list-style-type: '[479] ';">Kollmar, Christian; Sivalingam, Kantharuban; Guo, Yang; Neese, Frank. An efficient implementation of the NEVPT2 and CASPT2 methods avoiding higher-order density matrices. J. Chem. Phys. , 2021 , 155 (23), 234104. DOI: 10.1063/5.0072129.</li>
+<li style="list-style-type: '[480] ';">Chatterjee, Koushik; Sokolov, Alexander Yu. Extended Second-Order Multireference Algebraic Diagrammatic Construction Theory for Charged Excitations. J. Chem. Theory Comput. , 2020 , 16 (10), 6343-6357. DOI: 10.1021/acs.jctc.0c00778.</li>
+<li style="list-style-type: '[481] ';">Zgid, Dominika; Ghosh, Debashree; Neuscamman, Eric; Chan, Garnet Kin-Lic. A Study of Cumulant Approximations to N-Electron Valence Multireference Perturbation Theory. J. Chem. Phys. , 2009 , 130, 194107.</li>
+<li style="list-style-type: '[482] ';">Forsberg, Niclas; Malmqvist, Per-Åke. Multiconfiguration perturbation theory with imaginary level shift. Chem. Phys. Lett. , 1997 , 274 (1-3), 196-204. DOI: 10.1016/S0009-2614(97)00669-6.</li>
+<li style="list-style-type: '[483] ';">Guo, Sheng; Watson, Mark A.; Hu, Weifeng; Sun, Qiming; Chan, Garnet Kin-Lic. N-Electron Valence State Perturbation Theory Based on a Density Matrix Renormalization Group Reference Function, with Applications</li>
+</ol>
+<ul>
+<li>to the Chromium Dimer and a Trimer Model of Poly(p-Phenylenevinylene). J. Chem. Theory Comput. , 2016 , 12 (4), 1583-1591. DOI: 10.1021/acs.jctc.5b01225.</li>
+<li style="list-style-type: '[484] ';">Khedkar, Abhishek; Roemelt, Michael. Active Space Selection Based on Natural Orbital Occupation Numbers from N-Electron Valence Perturbation Theory. J. Chem. Theory Comput. , 2019 , 15, 3522-3536.</li>
+<li style="list-style-type: '[485] ';">Domingo, A.; Carvajal, M.-A.; de Graaf, C.; Sivalingam, K.; Neese, F.; Angeli, C. Theor. Chem. Acc. , 2012 , 131 (9), 1264.</li>
+<li style="list-style-type: '[486] ';">Angeli, C.; Borini, S.; Cestari, M.; Cimigraglia, R. A quasidegenerate formulation of the second order n-electron valence state perturbation theory approach. J. Chem. Phys. , 2004 , 121, 4043. DOI: 10.1063/1.1778711.</li>
+<li style="list-style-type: '[487] ';">Shavir, I.; Redmon, L. T. J. Chem. Phys. , 1980 , 73, 5711.</li>
+<li style="list-style-type: '[488] ';">Brandow, B.H.'. Effective Interactions and Operators in Nuclei . Volume 40. Springer, 1974 .</li>
+<li style="list-style-type: '[489] ';">Andersson, Kerstin.; Malmqvist, Per Aake.; Roos, Bjoern O.; Sadlej, Andrzej J.; Wolinski, Krzysztof. SecondOrder Perturbation Theory with a CASSCF Reference Function. J. Phys. Chem. , 1990 , 94, 5483-5488. DOI: 10.1021/j100377a012.</li>
+<li style="list-style-type: '[490] ';">Roos, Björn O.; Andersson, Kerstin. Multiconfigurational Perturbation Theory with Level Shift - the Cr2 Potential Revisited. Chem. Phys. Lett. , 1995 , 245, 215-223. DOI: 10.1016/0009-2614(95)01010-7.</li>
+<li style="list-style-type: '[491] ';">Forsberg, Niclas; Malmqvist, Per-Å ke. Multiconfiguration Perturbation Theory with Imaginary Level Shift. Chem. Phys. Lett. , 1997 , 274, 196-204. DOI: 10.1016/S0009-2614(97)00669-6.</li>
+<li style="list-style-type: '[492] ';">Fdez. Galván, Ignacio; Vacher, Morgane; Alavi, Ali; Angeli, Celestino; Aquilante, Francesco; Autschbach, Jochen; Bao, Jie J.; Bokarev, Sergey I.; Bogdanov, Nikolay A.; Carlson, Rebecca K.; Chibotaru, Liviu F.; Creutzberg, Joel; Dattani, Nike; Delcey, Mickaël G.; Dong, Sijia S.; Dreuw, Andreas; Freitag, Leon; Frutos, Luis Manuel; Gagliardi, Laura; Gendron, Frédéric; Giussani, Angelo; González, Leticia; Grell, Gilbert; Guo, Meiyuan; Hoyer, Chad E.; Johansson, Marcus; Keller, Sebastian; Knecht, Stefan; Kovačević, Goran; Källman, Erik; Manni, Giovanni Li; Lundberg, Marcus; Ma, Yingjin; Mai, Sebastian; Malhado, João Pedro; Malmqvist, Per Åke; Marquetand, Philipp; Mewes, Stefanie A.; Norell, Jesper; Olivucci, Massimo; Oppel, Markus; Phung, Quan Manh; Pierloot, Kristine; Plasser, Felix; Reiher, Markus; Sand, Andrew M.; Schapiro, Igor; Sharma, Prachi; Stein, Christopher J.; Sørensen, Lasse Kragh; Truhlar, Donald G.; Ugandi, Mihkel; Ungur, Liviu; Valentini, Alessio; Vancoillie, Steven; Veryazov, Valera; Weser, Oskar; Wesołowski, Tomasz A.; Widmark, Per-Olof; Wouters, Sebastian; Zech, Alexander; Zobel, J. Patrick; Lindh, Roland. OpenMolcas: From Source Code to Insight. J. Chem. Theory Comput. , 2019 , 15 (11), 5925-5964.</li>
+<li style="list-style-type: '[493] ';">Kepenekian, Mikaël; Robert, Vincent; Le Guennic, Boris. What Zeroth-Order Hamiltonian for CASPT2 Adiabatic Energetics of Fe(II)N6 Architectures? J. Chem. Phys. , 2009 , 131, 114702. DOI: 10.1063/1.3211020.</li>
+<li style="list-style-type: '[494] ';">Zobel, J. Patrick; Nogueira, Juan J.; González, Leticia. The IPEA Dilemma in CASPT2. Chem. Sci. , 2017 , 8 (2), 1482-1499. DOI: 10.1039/C6SC03759C.</li>
+<li style="list-style-type: '[495] ';">Kollmar, Christian; Sivalingam, Kantharuban; Neese, Frank. An Alternative Choice of the Zeroth-Order Hamiltonian in CASPT2 Theory. J. Chem. Phys. , 2020 , 152 (21), 214110. DOI: 10.1063/5.0010019.</li>
+<li style="list-style-type: '[496] ';">Shiozaki, Toru; Győrffy, Werner; Celani, Paolo; Werner, Hans-Joachim. Communication: Extended MultiState Complete Active Space Second-Order Perturbation Theory: Energy and Nuclear Gradients. J. Chem. Phys. , 2011 , 135, 081106-081106-4.</li>
+<li style="list-style-type: '[497] ';">Li Manni, Giovanni; Carlson, Rebecca K.; Luo, Sijie; Ma, Dongxia; Olsen, Jeppe; Truhlar, Donald G.; Gagliardi, Laura. Multiconfiguration Pair-Density Functional Theory. J. Chem. Theory Comput. , 2014 , 10 (9), 3669-3680. PMID: 26588512. DOI: 10.1021/ct500483t.</li>
+<li style="list-style-type: '[498] ';">Becke, A. D.; Savin, A.; Stoll, H. Extension of the local-spin-density exchange-correlation approximation to multiplet states. Theor. Chim. Acta , 1995 , 91 (3), 147-156. DOI: 10.1007/BF01114982.</li>
+<li style="list-style-type: '[499] ';">Rodrigues, Gabriel L. S.; Scott, Mikael; Delcey, Mickael G. Multiconfigurational Pair-Density Functional Theory Is More Complex than You May Think. J. Phys. Chem. A , 2023 , 127 (44), 9381-9388. DOI: 10.1021/acs.jpca.3c05663.</li>
+<li style="list-style-type: '[500] ';">Scott, Mikael; Rodrigues, Gabriel L. S.; Li, Xin; Delcey, Mickael G. Variational Pair-Density Functional Theory: Dealing with Strong Correlation at the Protein Scale. J. Chem. Theory Comput. , 2024 , 20 (6), 24232432. PMID: 38217859. DOI: 10.1021/acs.jctc.3c01240.</li>
+</ul>
+<ol>
+<li style="list-style-type: '[501] ';">Fromager, Emmanuel; Toulouse, Julien; Jensen, Hans Jørgen Aa. On the universality of the long-/short-range separation in multiconfigurational density-functional theory. J. Chem. Phys. , 2007 , 126 (7), 074111. DOI: 10.1063/1.2566459.</li>
+<li style="list-style-type: '[502] ';">Hedegård, Erik Donovan; Toulouse, Julien; Jensen, Hans Jørgen Aagaard. Multiconfigurational shortrange density-functional theory for open-shell systems. J. Chem. Phys. , 2018 , 148 (21), 214103. DOI: 10.1063/1.5013306.</li>
+<li style="list-style-type: '[503] ';">Paziani, Simone; Moroni, Saverio; Gori-Giorgi, Paola; Bachelet, Giovanni B. Local-spin-density functional for multideterminant density functional theory. Phys. Rev. B , 2006 , 73, 155111. DOI: 10.1103/PhysRevB.73.155111.</li>
+<li style="list-style-type: '[504] ';">Goll, Erich; Werner, Hans-Joachim; Stoll, Hermann. A short-range gradient-corrected density functional in long-range coupled-cluster calculations for rare gas dimers. Phys. Chem. Chem. Phys. , 2005 , 7, 3917-3923. DOI: 10.1039/B509242F.</li>
+<li style="list-style-type: '[505] ';">Goll, Erich; Werner, Hans-Joachim; Stoll, Hermann; Leininger, Thierry; Gori-Giorgi, Paola; Savin, Andreas. A short-range gradient-corrected spin density functional in combination with long-range coupledcluster methods: Application to alkali-metal rare-gas dimers. Chem. Phys. , 2006 , 329 (1), 276 - 282. DOI: https://doi.org/10.1016/j.chemphys.2006.05.020.</li>
+<li style="list-style-type: '[506] ';">Helmich-Paris, Benjamin; Kjellgren, Erik Rosendahl; Jensen, Hans Jørgen Aa. Excited-State Methods Based on State-Averaged Long-Range CASSCF Short-Range DFT. under review in Phys. Chem. Chem. Phys., 2025 .</li>
+<li style="list-style-type: '[507] ';">Pedersen, Jesper Kielberg. Description of correlation and relativistic effects in calculations of molecular properties . PhD thesis, University of Southern Denmark, 2004 .</li>
+<li style="list-style-type: '[508] ';">Neese, Frank; Petrenko, Taras; Ganyushin, Dmitry; Olbrich, Gottfried. Advanced Aspects of Ab Initio Theoretical Optical Spectroscopy of Transition Metal Complexes: Multiplets, Spin-Orbit Coupling and Resonance Raman Intensities. Coordin. Chem. Rev. , 2007 , 251 (3-4), 288-327. DOI: 10.1016/j.ccr.2006.05.019.</li>
+<li style="list-style-type: '[509] ';">Retegan, Marius; Cox, Nicholas; Pantazis, Dimitrios A.; Neese, Frank. A First-Principles Approach to the Calculation of the on-Site Zero-Field Splitting in Polynuclear Transition Metal Complexes. Inorg. Chem. , 2014 , 53 (21), 11785-11793. DOI: 10.1021/ic502081c.</li>
+<li style="list-style-type: '[510] ';">Neese, F. Chem. Phys. Lett. , 2003 , 380, 721-728.</li>
+<li style="list-style-type: '[511] ';">Maganas, Dimitrios; Sottini, Silvia; Kyritsis, Panayotis; Groenen, Edgar J. J.; Neese, Frank. Theoretical Analysis of the Spin Hamiltonian Parameters in Co(II)S₄ Complexes, Using Density Functional Theory and Correlated ab initio Methods. Inorg. Chem. , 2011 , 50 (18), 8741-8754. DOI: 10.1021/ic200299y.</li>
+<li style="list-style-type: '[512] ';">Jiang, Shang-Da; Maganas, Dimitrios; Levesanos, Nikolaos; Ferentinos, Eleftherios; Haas, Sabrina; Thirunavukkuarasu, Komalavalli; Krzystek, Jurek; Dressel, Martin; Bogani, Lapo; Neese, Frank; Kyritsis, Panayotis. Direct Observation of Very Large Zero-Field Splitting in a Tetrahedral Ni(II)Se₄ Coordination Complex. J. Am. Chem. Soc. , 2015 , 137 (40), 12923-12928. DOI: 10.1021/jacs.5b06716.</li>
+<li style="list-style-type: '[513] ';">Ganyushin, D.; Neese, F. J. Chem. Phys. , 2008 , 128, 114117.</li>
+<li style="list-style-type: '[514] ';">Maganas, Dimitrios; Kowalska, Joanna K.; Nooijen, Marcel; DeBeer, Serena; Neese, Frank. Comparison of Multireference Ab Initio Wavefunction Methodologies for X-Ray Absorption Edges: A Case Study on [Fe(II/III)Cl₄]²⁻/¹⁻ Molecules. J. Chem. Phys. , 2019 , 150 (10), 104106. DOI: 10.1063/1.5051613.</li>
+<li style="list-style-type: '[515] ';">Pollock, Christopher J.; Delgado-Jaime, Mario Ulises; Atanasov, Mihail; Neese, Frank; DeBeer, Serena. Kβ Mainline X-Ray Emission Spectroscopy as an Experimental Probe of Metal-Ligand Covalency. J. Am. Chem. Soc. , 2014 , 136 (26), 9453-9463. DOI: 10.1021/ja504182n.</li>
+<li style="list-style-type: '[516] ';">Datta, Dipayan; Kong, Liguo; Nooijen, Marcel. A State-Specific Partially Internally Contracted Multireference Coupled Cluster Approach. J. Chem. Phys. , 2011 , 134 (21), 214116. DOI: 10.1063/1.3592494.</li>
+<li style="list-style-type: '[517] ';">Datta, Dipayan; Nooijen, Marcel. Multireference Equation-of-Motion Coupled Cluster Theory. J. Chem. Phys. , 2012 , 137 (20), 204107. DOI: 10.1063/1.4766361.</li>
+<li style="list-style-type: '[518] ';">Demel, Ondrej; Datta, Dipayan; Nooijen, Marcel. Additional Global Internal Contraction in Variations of Multireference Equation of Motion Coupled Cluster Theory. J. Chem. Phys. , 2013 , 138 (13), 134108.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[519] ';">Nooijen, Marcel; Demel, Ondrej; Datta, Dipayan; Kong, Liguo; Shamasundar, K. R.; Lotrich, V.; Huntington, Lee M.; Neese, Frank. Communication: Multireference Equation of Motion Coupled Cluster: A Transform and Diagonalize Approach to Electronic Structure. J. Chem. Phys. , 2014 , 140 (8), 081102.</li>
+<li style="list-style-type: '[520] ';">Huntington, L. M. J.; Nooijen, M. J. Chem. Phys. , 2015 , 142, 194111.</li>
+<li style="list-style-type: '[521] ';">Huntington, L. M. J.; Nooijen, M. J. Chem. Theory Comput. , 2016 , 12, 114.</li>
+<li style="list-style-type: '[522] ';">Liu, Z.; Demel, O.; Nooijen, M. Multireference Equation of Motion Coupled Cluster Study of Atomic Excitation Spectra of First-Row Transition Metal Atoms Cr, Mn, Fe and Co. J. Mol. Spectrosc. , 2015 , 311, 54.</li>
+<li style="list-style-type: '[523] ';">Liu, Z.; Huntington, L. M. J.; Nooijen, M. Application of the multireference equation of motion coupled cluster method, including spin-orbit coupling, to the atomic spectra of Cr, Mn, Fe and Co. Mol. Phys. , 2015 , 113 (19-20), 2999-3013. DOI: 10.1080/00268976.2015.1063730.</li>
+<li style="list-style-type: '[524] ';">Lechner, Marvin H.; Izsák, Róbert; Nooijen, Marcel; Neese, Frank. A Perturbative Approach to Multireference Equation-of-Motion Coupled Cluster. Mol. Phys. , 2021 , 119 (17-18), e1939185. DOI: 10.1080/00268976.2021.1939185.</li>
+<li style="list-style-type: '[525] ';">Mukherjee, D. Normal Ordering and a Wick-like Reduction Theorem for Fermions with Respect to a Multi-Determinantal Reference State. Chem. Phys. Lett. , 1997 , 274, 561-568. DOI: 10.1016/S00092614(97)00714-8.</li>
+<li style="list-style-type: '[526] ';">Kutzelnigg, Werner; Mukherjee, Debashis. Normal order and extended Wick theorem for a multiconfiguration reference wave function. J. Chem. Phys. , 1997 , 107 (2), 432-449. DOI: 10.1063/1.474405.</li>
+<li style="list-style-type: '[527] ';">National Institute of Standards and Technology (NIST) Atomic Spectra Database.</li>
+<li style="list-style-type: '[528] ';">Nave, G.; Johansson, S.; Learner, R. C. M.; Thorne, A. P.; Brault, J. W. Astrophys. J., Suppl. Ser. , 1994 , 94, 221.</li>
+<li style="list-style-type: '[529] ';">Pathak, Shubhrodeep; Lang, Lucas; Neese, Frank. A Dynamic Correlation Dressed Complete Active Space Method: Theory, Implementation, and Preliminary Applications. J. Chem. Phys. , 2017 , 147, 234109.</li>
+<li style="list-style-type: '[530] ';">Maurice, Rémi; Bastardis, Roland; de Graaf, Coen; Suaud, Nicolas; Mallah, Talal; Guihéry, Nathalie. Universal Theoretical Approach to Extract Anisotropic Spin Hamiltonians. J. Chem. Theory Comput. , 2009 , 5 (11), 2977-2984. DOI: 10.1021/ct900365q.</li>
+<li style="list-style-type: '[531] ';">Li, H.; Jensen, J. H. Partial Hessian vibrational analysis: The localization of the molecular vibrational energy and entropy. Theor. Chem. Acc. , 2002 , 107 (4), 211-219. DOI: 10.1007/s00214-001-0317-7.</li>
+<li style="list-style-type: '[532] ';">Steinbach, Peter J.; Brooks, Bernard R. New Spherical-Cutoff Methods for Long-Range Forces in Macromolecular Simulation. J. Comput. Chem. , 1994 , 15 (7), 667-683. DOI: 10.1002/jcc.540150702.</li>
+<li style="list-style-type: '[533] ';">Schlegel, H. B. In Lawley, K. P., editor, Advances in Chemical Physics: Ab Initio Methods in Quantum Chemistry, Part I , volume 67, pages 249. John Wiley and Sons, 1987 .</li>
+<li style="list-style-type: '[534] ';">Schlegel, H. B. In Yarkony, D. R., editor, Modern Electronic Structure Theory , pages 459. World Scientific, 1995 .</li>
+<li style="list-style-type: '[535] ';">Schlegel, H. B. In Schleyer, P. v. R., editor, Encyclopedia of Computational Chemistry , pages 1136. John Wiley and Sons, 1998 .</li>
+<li style="list-style-type: '[536] ';">Eckert, F.; Pulay, P.; Werner, H. J. J. Comput. Chem. , 1997 , 12, 1473.</li>
+<li style="list-style-type: '[537] ';">Horn, H.; Wei, H.; Häser, M.; Ehrig, M.; Ahlrichs, R. J. Comput. Chem. , 1991 , 12, 1058.</li>
+<li style="list-style-type: '[538] ';">Baker, J. An algorithm for the location of transition states. J. Comput. Chem. , 1986 , 7, 385. DOI: 10.1002/jcc.540070402.</li>
+<li style="list-style-type: '[539] ';">Ribas-Arino, Jordi; Marx, Dominik. Covalent Mechanochemistry: Theoretical Concepts and Computational Tools with Applications to Molecular Nanomechanics. Chem. Rev. , 2012 , 112 (10), 5412-5487. DOI: 10.1021/cr200399q.</li>
+<li style="list-style-type: '[540] ';">Hess, B.; Kutzner, C.; van der Spoel, D.; Lindahl, E. J. Chem. Theory Comput. , 2008 , 4, 435.</li>
+<li style="list-style-type: '[541] ';">Harvey, J. N.; Aschi, M.; Schwarz, H.; Koch, W. Theor. Chem. Acc. , 1998 , 99, 95.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[542] ';">Ishida, Kazuhiro; Morokuma, Keiji; Komornicki, Andrew. The Intrinsic Reaction Coordinate. An Ab Initio Calculation for HNC\textrightarrow HCN and H-+CH4\textrightarrow CH4+H-. J. Chem. Phys. , 1977 , 66 (5), 2153-2156. DOI: 10.1063/1.434152.</li>
+<li style="list-style-type: '[543] ';">Ásgeirsson, V.; B.O., Birgirsson; Bjornsson, R.; Becker, U.; Riplinger, C.; Neese, F.; Jónssson, H. Nudged Elastic Band Method for Molecular Reactions Using Energy-Weighted Springs Combined with Eigenvector Following. J. Chem. Theory Comput. , 2021 , 17, 4929. DOI: 10.1021/acs.jctc.1c00462.</li>
+<li style="list-style-type: '[544] ';">Mills, G.; Jónsson, H.; Schenter, G. K. Reversible Work Transition State Theory: Application to Dissociative Adsorption of Hydrogen. Surf. Sci. , 1995 , 324 (2-3), 305-337. DOI: 10.1016/0039-6028(94)00731-4.</li>
+<li style="list-style-type: '[545] ';">Jónsson, H.; Mills, G.; Jacobsen, K.W. Classical and Quantum Dynamics in Condensed Phase Simulations . World Scientific Publishing Company, 1998 .</li>
+<li style="list-style-type: '[546] ';">Henkelman, G.; Jónsson, H. Improved Tangent Estimate in the Nudged Elastic Band Method for Finding Minimum Energy Paths and Saddle Points. J. Chem. Phys. , 2000 , 113 (22), 9978-9985.</li>
+<li style="list-style-type: '[547] ';">Zhu, Ting; Li, Ju; Samanta, Amit; Kim, Hyoung Gyu; Suresh, Subra. Interfacial Plasticity Governs Strain Rate Sensitivity and Ductility in Nanostructured Metals. Proc. Nat. Acad. Sci. , 2007 , 104 (9), 3031-3036. arXiv:https://www.pnas.org/content/104/9/3031.full.pdf, DOI: 10.1073/pnas.0611097104.</li>
+<li style="list-style-type: '[548] ';">Ásgeirsson, Vilhjálmur; Arnaldsson, Andri; Jónsson, Hannes. Efficient Evaluation of Atom Tunneling Combined with Electronic Structure Calculations. J. Chem. Phys. , 2018 , 148 (10), 102334. DOI: 10.1063/1.5007180.</li>
+<li style="list-style-type: '[549] ';">Henkelman, G.; Uberuaga, B.P.; Jónsson, H. A Climbing Image Nudged Elastic Band Method for Finding Saddle Points and Minimum Energy Paths. J. Chem. Phys. , 2000 , 113 (22), 9901-9904.</li>
+<li style="list-style-type: '[550] ';">Maras, Emile; Trushin, Oleg; Stukowski, Alexander; Ala-Nissila, Tapio; Jónsson, Hannes. Global Transition Path Search for Dislocation Formation in Ge on Si (001). Comput. Phys. Commun. , 2016 , 205, 13-21. DOI: 10.1016/j.cpc.2016.04.001.</li>
+<li style="list-style-type: '[551] ';">Sheppard, D.; Terrell, R.; Henkelman, G. Optimization Methods for Finding Minimum Energy Paths. J. Chem. Phys. , 2008 , 128 (13), 134106.</li>
+<li style="list-style-type: '[552] ';">Trygubenko, S.A.; Wales, D.J. A Doubly Nudged Elastic Band Method for Finding Transition States. J. Chem. Phys. , 2004 , 120 (5), 2082-2094.</li>
+<li style="list-style-type: '[553] ';">Ásgeirsson, V. Development and Evaluation of Computational Methods for Studies of Chemical Reactions . University of Iceland, 2021 .</li>
+<li style="list-style-type: '[554] ';">Bitzek, Erik; Koskinen, Pekka; Gähler, Franz; Moseler, Michael; Gumbsch, Peter. Structural Relaxation Made Simple. Phys. Rev. Lett. , 2006 , 97 (17), 170201. DOI: 10.1103/PhysRevLett.97.170201.</li>
+<li style="list-style-type: '[555] ';">Nocedal, J. Updating Quasi-Newton Matrices with Limited Storage. Math. Comput. , 1980 , 35 (151), 773-782. DOI: 10.1090/S0025-5718-1980-0572855-7.</li>
+<li style="list-style-type: '[556] ';">Müller, Klaus; Brown, Leo D. Location of Saddle Points and Minimum Energy Paths by a Constrained Simplex Optimization Procedure. Theor. Chem. Acc. , 1979 , 53 (1), 75-93. DOI: 10.1007/BF00547608.</li>
+<li style="list-style-type: '[557] ';">Smidstrup, Søren; Pedersen, Andreas; Stokbro, Kurt; Jónsson, Hannes. Improved Initial Guess for Minimum Energy Path Calculations. J. Chem. Phys. , 2014 , 140 (21), 214106. DOI: 10.1063/1.4878664.</li>
+<li style="list-style-type: '[558] ';">Schmerwitz, Yorick Leonard Adrian; Ásgeirsson, Vilhjálmur; Jónsson, Hannes. Improved Initialization of Optimal Path Calculations Using Sequential Traversal over the Image-Dependent Pair Potential Surface. J. Chem. Theory Comput. , 2024 , 20, 155-163. DOI: 10.1021/acs.jctc.3c01111.</li>
+<li style="list-style-type: '[559] ';">Melander, Marko; Laasonen, Kari; Jónsson, Hannes. Removing External Degrees of Freedom from Transition-State Search Methods Using Quaternions. J. Chem. Theory Comput. , 2015 , 11 (3), 1055-1062. DOI: 10.1021/ct501103z.</li>
+<li style="list-style-type: '[560] ';">Kairys, V.; Head, J.D. Geometry Optimization of Charged Molecules in an External Electric Field Applied to F⁻⋅ H₂O and I⁻⋅H₂O. J. Phys. Chem. A , 1998 , 102 (8), 1365-1370.</li>
+<li style="list-style-type: '[561] ';">E, Weinan; Ren, Weiqing; Vanden-Eijnden, Eric. String Method for the Study of Rare Events. Phys. Rev. B , 2002 , 66 (5), 052301. arXiv:0205527 [cond-mat], DOI: 10.1103/PhysRevB.66.052301.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[562] ';">Shang, Honghui; Yang, Jinlong. The Moving-Grid Effect in the Harmonic Vibrational Frequency Calculations with Numeric Atom-Centered Orbitals. J. Phys. Chem. A , 2020 , 124 (14), 2897-2906. Publisher: American Chemical Society. DOI: 10.1021/acs.jpca.0c01453.</li>
+<li style="list-style-type: '[563] ';">Herzberg, G. Infrared and Raman Spectra . Van Nostrand Reinhold, 1945 .</li>
+<li style="list-style-type: '[564] ';">Gilson, Michael K.; Irikura, Karl K. Symmetry Numbers for Rigid, Flexible, and Fluxional Molecules: Theory and Applications. J. Phys. Chem. B , 2010 , 114 (50), 16304-16317. DOI: 10.1021/jp110434s.</li>
+<li style="list-style-type: '[565] ';">Maeda, Satoshi; Ohno, Koichi; Morokuma, Keiji. Updated Branching Plane for Finding Conical Intersections without Coupling Derivative Vectors. J. Chem. Theory Comput. , 2010 , 6 (5), 1538-1545. DOI: 10.1021/ct1000268.</li>
+<li style="list-style-type: '[566] ';">de Souza, Bernardo. GOAT: A Global Optimization Algorithm for Molecules and Atomic Clusters. Angew. Chem. Int. Ed. , 2025 , 64 (18), e202500393. DOI: 10.1002/anie.202500393.</li>
+<li style="list-style-type: '[567] ';">Wales, David J.; Doye, Jonathan P. K. Global Optimization by Basin-Hopping and the Lowest Energy Structures of Lennard-Jones Clusters Containing up to 110 Atoms. J. Phys. Chem. A , 1997 , 101 (28), 5111-5116. Publisher: American Chemical Society. DOI: 10.1021/jp970984n.</li>
+<li style="list-style-type: '[568] ';">Goedecker, Stefan. Minima hopping: An efficient search method for the global minimum of the potential energy surface of complex molecular systems. J. Chem. Phys. , 2004 , 120 (21), 9911-9917. Publisher: American Institute of Physics. DOI: 10.1063/1.1724816.</li>
+<li style="list-style-type: '[569] ';">Pracht, Philipp; Bohle, Fabian; Grimme, Stefan. Automated exploration of the low-energy chemical space with fast quantum chemical methods. Phys. Chem. Chem. Phys. , 2020 , 22 (14), 7169-7192. Publisher: The Royal Society of Chemistry. DOI: 10.1039/C9CP06869D.</li>
+<li style="list-style-type: '[570] ';">Pracht, Philipp; Grimme, Stefan. Calculation of absolute molecular entropies and heat capacities made simple. Chem. Sci. , 2021 , 12 (19), 6551-6568. Publisher: The Royal Society of Chemistry. DOI: 10.1039/D1SC00621E.</li>
+<li style="list-style-type: '[571] ';">Assadollahzadeh, Behnam; Schwerdtfeger, Peter. A systematic search for minimum structures of small gold clusters Aun (n=2-20) and their electronic properties. J. Chem. Phys. , 2009 , 131 (6), 064306. Publisher: American Institute of Physics. DOI: 10.1063/1.3204488.</li>
+<li style="list-style-type: '[572] ';">Spicher, Sebastian; Plett, Christoph; Pracht, Philipp; Hansen, Andreas; Grimme, Stefan. Automated Molecular Cluster Growing for Explicit Solvation by Efficient Force Field and Tight Binding Methods. J. Chem. Theory Comput. , 2022 , 18 (5), 3174-3189. Publisher: American Chemical Society. DOI: 10.1021/acs.jctc.2c00239.</li>
+<li style="list-style-type: '[573] ';">Shami, Tareq M.; El-Saleh, Ayman A.; Alswaitti, Mohammed; Al-Tashi, Qasem; Summakieh, Mhd Amen; Mirjalili, Seyedali. Particle Swarm Optimization: A Comprehensive Survey. IEEE Access , 2022 , 10, 1003110061. DOI: 10.1109/ACCESS.2022.3142859.</li>
+<li style="list-style-type: '[574] ';">Mulliken, R. S. Electronic Population Analysis on LCAO-MO Molecular Wave Functions. I. J. Chem. Phys. , 1955 , 23 (10), 1833-1840. DOI: 10.1063/1.1740588.</li>
+<li style="list-style-type: '[575] ';">Wiberg, K. B. Tetrahedron , 1968 , 24, 1083. DOI: .</li>
+<li style="list-style-type: '[576] ';">Mayer, István. Charge, Bond Order and Valence in the Ab Initio SCF Theory. Chem. Phys. Lett. , 1983 , 97 (3), 270-274. DOI: 10.1016/0009-2614(83)80005-0.</li>
+<li style="list-style-type: '[577] ';">Mayer, I. Int. J. Quant. Chem. , 1984 , 26, 151.</li>
+<li style="list-style-type: '[578] ';">Mayer, I. Theor. Chim. Acta , 1985 , 67, 315.</li>
+<li style="list-style-type: '[579] ';">Mayer, I. In Maksić, Z. B., editor, Modelling of Structure and Properties of Molecules . John Wiley and Sons, 1987 .</li>
+<li style="list-style-type: '[580] ';">Hirshfeld, F. L. Bonded-Atom Fragments for Describing Molecular Charge Densities. Theor. Chim. Acta , 1977 , 44, 129-138.</li>
+<li style="list-style-type: '[581] ';">Verstraelen, Toon; Vandenbrande, Steven; Heidar-Zadeh, Farnaz; Vanduyfhuys, Louis; Van Speybroeck, Veronique; Waroquier, Michel; W. Ayers, Paul. Minimal Basis Iterative Stockholder: Atoms in Molecules for Force-Field Development. J. Chem. Theory Comput. , 2016 , 12, 3894-3912. DOI: 10.1021/acs.jctc.6b00456.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[582] ';">Breneman, C. M.; Wiberg, K. B. Determining atom-centered monopoles from molecular electrostatic potentials. The need for high sampling density in formamide conformational analysis. J. Comput. Chem. , 1990 , 11, 361-373. DOI: 10.1002/jcc.540110311.</li>
+<li style="list-style-type: '[583] ';">Bayly, Christopher I.; Cieplak, Piotr; Cornell, Wendy; Kollman, Peter A. A well-behaved electrostatic potential based method using charge restraints for deriving atomic charges: the RESP model. The Journal of Physical Chemistry , 1993 , 97 (40), 10269-10280. Publisher: American Chemical Society. DOI: 10.1021/j100142a004.</li>
+<li style="list-style-type: '[584] ';">Clark, Aurora E.; Davidson, Ernest R. Local Spin. J. Chem. Phys. , 2001 , 115 (16), 7382-7392. DOI: 10.1063/1.1407276.</li>
+<li style="list-style-type: '[585] ';">McWeeny, R.; Kutzelnigg, W. Comparison of different independent particle model approximations. Int. J. Quantum Chem. , 1968 , 2 (2), 187-203. DOI: 10.1002/qua.560020207.</li>
+<li style="list-style-type: '[586] ';">Herrmann, Carmen; Reiher, Markus; Hess, Bernd A. Comparative Analysis of Local Spin Definitions. J. Chem. Phys. , 2005 , 122 (3), 034102. DOI: 10.1063/1.1829050.</li>
+<li style="list-style-type: '[587] ';">Bohmann, Jonathan A.; Weinhold, Frank; Farrar, Thomas C. Natural Chemical Shielding Analysis of Nuclear Magnetic Resonance Shielding Tensors from Gauge-Including Atomic Orbital Calculations. J. Chem. Phys. , 1997 , 107 (4), 1173-1184. DOI: 10.1063/1.474464.</li>
+<li style="list-style-type: '[588] ';">Grimme, S.; Hansen, A. A Practicable Real-Space Measure and Visualization of Static Electron-Correlation Effects. Angew. Chem. Int. Ed. , 2015 , 54, 12308-12313.</li>
+<li style="list-style-type: '[589] ';">Roemelt, M.; Neese, F. Excited States of Large Open-Shell Molecules: An Efficient, General, and SpinAdapted Approach Based on a Restricted Open-Shell Ground State Wave function. J. Phys. Chem. A , 2013 , 117, 3069-3082. DOI: 10.1021/jp3126126.</li>
+<li style="list-style-type: '[590] ';">Roemelt, Michael; Maganas, Dimitrios; DeBeer, Serena; Neese, Frank. Excited States of Large Open-Shell Molecules: An Efficient, General, and Spin-Adapted Approach Based on a Restricted Open-Shell Ground State Wave function. The Journal of Chemical Physics , 2013 , 138, 204101. DOI: 10.1063/1.4804607.</li>
+<li style="list-style-type: '[591] ';">Leyser da Costa Gouveia, Tiago; Maganas, Dimitrios; Neese, Frank. General Spin-Restricted Open-Shell Configuration Interaction Approach: Application to Metal K-Edge X-ray Absorption Spectra of Ferro- and Antiferromagnetically Coupled Dimers. The Journal of Physical Chemistry A , 2025 , 129 (1), 330-345. PMID: 39680653. arXiv:https://doi.org/10.1021/acs.jpca.4c05228, DOI: 10.1021/acs.jpca.4c05228.</li>
+<li style="list-style-type: '[592] ';">Yeager, Danny L.; Jørgensen, Poul. A Multiconfigurational Time-Dependent Hartree-Fock Approach. Chem. Phys. Lett. , 1979 , 65, 77-80.</li>
+<li style="list-style-type: '[593] ';">Jørgensen, Poul; Jensen, Hans Jørgen Aagaard; Olsen, Jeppe. Linear Response Calculations for Large Scale Multiconfiguration Self-Consistent Field Wave Functions. J. Chem. Phys. , 1988 , 89 (6), 3654-3661.</li>
+<li style="list-style-type: '[594] ';">Helmich-Paris, Benjamin. CASSCF Linear Response Calculations for Large Open-Shell Molecules. J. Chem. Phys. , 2019 , 150 (17), 174121. DOI: 10.1063/1.5092613.</li>
+<li style="list-style-type: '[595] ';">Martin, Richard L. Natural Transition Orbitals. J. Chem. Phys. , 2003 , 118 (11), 4775-4777. DOI: 10.1063/1.1558471.</li>
+<li style="list-style-type: '[596] ';">Helmich-Paris, Benjamin. Benchmarks for Electronically Excited States with CASSCF Methods. J. Chem. Theory Comput. , 2019 , 15 (7), 4170-4179. DOI: 10.1021/acs.jctc.9b00325.</li>
+<li style="list-style-type: '[597] ';">Berraud-Pache, Romain; Neese, Frank; Bistoni, Giovanni; Izsák, Róbert. Unveiling the Photophysical Properties of Boron-Dipyrromethene Dyes Using a New Accurate Excited State Coupled Cluster Method. J. Chem. Theory Comput. , 2020 , 16 (1), 564-575. DOI: 10.1021/acs.jctc.9b00559.</li>
+<li style="list-style-type: '[598] ';">Sirohiwal, Abhishek; Berraud-Pache, Romain; Neese, Frank; Izsák, Róbert; Pantazis, Dimitrios A. Accurate Computation of the Absorption Spectrum of Chlorophyll a with Pair Natural Orbital Coupled Cluster Methods. J. Phys. Chem. B , 2020 , 124 (40), 8761-8771. DOI: 10.1021/acs.jpcb.0c05761.</li>
+<li style="list-style-type: '[599] ';">Dittmer, Anneke; Izsák, Róbert; Neese, Frank; Maganas, Dimitrios. Accurate Band Gap Predictions of Semiconductors in the Framework of the Similarity Transformed Equation of Motion Coupled Cluster Theory. Inorg. Chem. , 2019 , 58 (14), 9303-9315. DOI: 10.1021/acs.inorgchem.9b00994.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[600] ';">de Souza, Bernardo; Neese, Frank; Izsak, Robert. On the Theoretical Prediction of Fluorescence Rates from First Principles Using the Path Integral Approach. J. Chem. Phys. , 2018 , 148 (3), 034104. DOI: 10.1063/1.5010895.</li>
+<li style="list-style-type: '[601] ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Predicting Phosphorescence Rates of Light Organic Molecules Using Time-Dependent Density Functional Theory and the Path Integral Approach to Dynamics. J. Chem. Theory Comput. , 2019 , 15 (3), 1896-1904. DOI: 10.1021/acs.jctc.8b00841.</li>
+<li style="list-style-type: '[602] ';">Santoro, Fabrizio; Improta, Roberto; Lami, Alessandro; Bloino, Julien; Barone, Vincenzo. Effective method to compute Franck-Condon integrals for optical spectra of large molecules in solution. J. Chem. Phys. , 2007 , 126 (8), 084509. DOI: 10.1063/1.2437197.</li>
+<li style="list-style-type: '[603] ';">Duschisnky, F. Acta Physicochim. URSS , 1937 , 7, 551.</li>
+<li style="list-style-type: '[604] ';">Strickler, S. J.; Berg, Robert A. Relationship between Absorption Intensity and Fluorescence Lifetime of Molecules. J. Chem. Phys. , 1962 , 37 (4), 814-822. DOI: 10.1063/1.1733166.</li>
+<li style="list-style-type: '[605] ';">Serpa, Carlos; Arnaut, Luis G.; Formosinho, Sebastião J.; Naqvi, K. Razi. Calculation of TripletTriplet Energy Transfer Rates from Emission and Absorption Spectra. The Quenching of Hemicarcerated Triplet Biacetyl by Aromatic Hydrocarbons. Photochem. Photobiol. Sci. , 2003 , 2 (5), 616-623. DOI: 10.1039/B300049D.</li>
+<li style="list-style-type: '[606] ';">Mori, K.; Goumans, T. P. M.; van Lenthe, E.; Wang, F. Predicting Phosphorescent Lifetimes and Zero-Field Splitting of Organometallic Complexes with Time-Dependent Density Functional Theory Including SpinOrbit Coupling. Phys. Chem. Chem. Phys. , 2014 , 16 (28), 14523-14530. DOI: 10.1039/C3CP55438D.</li>
+<li style="list-style-type: '[607] ';">Montalti, Marco; Credi, Alberto; Prodi, Luca; Gandolfi, M. Teresa. Handbook of Photochemistry, Third Edition . CRC Press, 3 edition edition, 02 2006 . ISBN 978-0-8247-2377-4.</li>
+<li style="list-style-type: '[608] ';">Hunter, T. F.; Wyatt, R. F. Intersystem Crossing in Anthracene. Chem. Phys. Lett. , 1970 , 6 (3), 221-224. DOI: 10.1016/0009-2614(70)80224-X.</li>
+<li style="list-style-type: '[609] ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Efficient Simulation of Overtones and Combination Bands in Resonant Raman Spectra. J. Chem. Phys. , 2019 , 150 (21), 044105. DOI: 10.1063/1.5099247.</li>
+<li style="list-style-type: '[610] ';">Long, Derek A. The Raman Effect: A Unified Treatment of the Theory of Raman Scattering by Molecules . Wiley, 1 edition edition, 11 2001 . ISBN 978-0-471-49028-9.</li>
+<li style="list-style-type: '[611] ';">Tripathi, G. N. R.; Schuler, Robert H. The Resonance Raman Spectrum of Phenoxyl Radical. J. Chem. Phys. , 1984 , 81 (1), 113-121. DOI: 10.1063/1.447373.</li>
+<li style="list-style-type: '[612] ';">Shafei, Rami; Hamano, Ai; Gourlaouen, Christophe; Maganas, Dimitrios; Takano, Keiko; Daniel, Chantal; Neese, Frank. Theoretical spectroscopy for unraveling the intensity mechanism of the optical and photoluminescent spectra of chiral Re(I) transition metal complexes. J. Chem. Phys. , 2023 , 159 (8), 084102.</li>
+<li style="list-style-type: '[613] ';">Hodecker, Manuel; Biczysko, Malgorzata; Dreuw, Andreas; Barone, Vincenzo. Simulation of Vacuum UV Absorption and Electronic Circular Dichroism Spectra of Methyl Oxirane: The Role of Vibrational Effects. J. Chem. Theory Comput. , 2016 , 12 (6), 2820-2833. DOI: 10.1021/acs.jctc.6b00121.</li>
+<li style="list-style-type: '[614] ';">Crassous, Jeanne. Circularly Polarized Luminescence in Helicene and Helicenoid Derivatives , pages 53-97. Springer Singapore, Singapore, 2020 . DOI: 10.1007/978-981-15-2309-0_4.</li>
+<li style="list-style-type: '[615] ';">Nishimura, Hidetaka; Tanaka, Kazuo; Morisaki, Yasuhiro; Chujo, Yoshiki; Wakamiya, Atsushi; Murata, Yasujiro. Oxygen-Bridged Diphenylnaphthylamine as a Scaffold for Full-Color Circularly Polarized Luminescent Materials. J. Org. Chem. , 2017 , 82 (10), 5242-5249. DOI: 10.1021/acs.joc.7b00511.</li>
+<li style="list-style-type: '[616] ';">Foglia, Nicolás; De Souza, Bernardo; Maganas, Dimitrios; Neese, Frank. Including vibrational effects in magnetic circular dichroism spectrum calculations in the framework of excited state dynamics. J. Chem. Phys. , 2023 , 158 (15), 154108. DOI: 10.1063/5.0144845.</li>
+<li style="list-style-type: '[617] ';">Cerezo, Javier; Zuniga, José; Requena, Alberto; Avila Ferrer, Francisco J.; Santoro, Fabrizio. Harmonic Models in Cartesian and Internal Coordinates to Simulate the Absorption Spectra of Carotenoids at Finite Temperatures. J. Chem. Theory Comput. , 2013 , 9 (11), 4947-4958. DOI: 10.1021/ct4005849.</li>
+<li style="list-style-type: '[618] ';">Jr, E. Bright Wilson; Decius, J. C.; Cross, Paul C. Molecular Vibrations: The Theory of Infrared and Raman Vibrational Spectra . Dover Publications, revised ed. edition edition, 03 1980 . ISBN 978-0-486-63941-3.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[619] ';">Baker, Jon. Constrained Optimization in Delocalized Internal Coordinates. J. Comput. Chem. , 1997 , 18 (8), 1079-1095. DOI: 10.1002/(SICI)1096-987X(199706)18:8&lt;1079::AID-JCC12&gt;3.0.CO;2-8.</li>
+<li style="list-style-type: '[620] ';">Reimers, Jeffrey R. A Practical Method for the Use of Curvilinear Coordinates in Calculations of NormalMode-Projected Displacements and Duschinsky Rotation Matrices for Large Molecules. J. Chem. Phys. , 2001 , 115 (20), 9103-9109. DOI: 10.1063/1.1412875.</li>
+<li style="list-style-type: '[621] ';">Swart, Marcel; Matthias Bickelhaupt, F. Optimization of Strong and Weak Coordinates. Int. J. Quantum Chem. , 2006 , 106 (12), 2536-2544. DOI: 10.1002/qua.21049.</li>
+<li style="list-style-type: '[622] ';">Lindh, Roland; Bernhardsson, Anders; Schütz, Martin. Force-Constant Weighted Redundant Coordinates in Molecular Geometry Optimizations. Chem. Phys. Lett. , 1999 , 303 (5), 567-575. DOI: 10.1016/S00092614(99)00247-X.</li>
+<li style="list-style-type: '[623] ';">Sando, Gerald M.; Spears, Kenneth G. Ab Initio Computation of the Duschinsky Mixing of Vibrations and Nonlinear Effects. J. Phys. Chem. A , 2001 , 105 (22), 5326-5333. DOI: 10.1021/jp004230b.</li>
+<li style="list-style-type: '[624] ';">Dymarsky, Anatoly Y.; Kudin, Konstantin N. Computation of the Pseudorotation Matrix to Satisfy the Eckart Axis Conditions. J. Chem. Phys. , 2005 , 122 (12), 124103. DOI: 10.1063/1.1864872.</li>
+<li style="list-style-type: '[625] ';">Petrenko, Taras; Kossmann, Simone; Neese, Frank. Efficient Time-Dependent Density Functional Theory Approximations for Hybrid Density Functionals: Analytical Gradients and Parallelization. J. Chem. Phys. , 2011 , 134 (5), 054116. DOI: 10.1063/1.3533441.</li>
+<li style="list-style-type: '[626] ';">Neese, F. J. Biol. Inorg. Chem. , 2006 , 11, 702.</li>
+<li style="list-style-type: '[627] ';">Neese, F. Coord. Chem. Rev. , 2009 , 253, 526.</li>
+<li style="list-style-type: '[628] ';">Izsák, Róbert; Neese, Frank. An Overlap Fitted Chain of Spheres Exchange Method. J. Chem. Phys. , 2011 , 135, 144105. DOI: 10.1063/1.3644029.</li>
+<li style="list-style-type: '[629] ';">Petrenko, T.; Kossmann, S.; Neese, F. J. Chem. Phys. , 2011 , 134, 054116.</li>
+<li style="list-style-type: '[630] ';">Casanova, David; Krylov, Anna I. Spin-Flip Methods in Quantum Chemistry. Phys. Chem. Chem. Phys. , 2020 , 22 (8), 4326-4342. DOI: 10.1039/C9CP06507E.</li>
+<li style="list-style-type: '[631] ';">Clark, Aurora E.; Davidson, Ernest R. P-Benzyne Derivatives That Have Exceptionally Small Singlet-Triplet Gaps and Even a Triplet Ground State. J. Org. Chem. , 2003 , 68 (9), 3387-3396. DOI: 10.1021/jo026824b.</li>
+<li style="list-style-type: '[632] ';">Cammi, Roberto; Mennucci, Benedetta; Tomasi, Jacopo. Fast Evaluation of Geometries and Properties of Excited Molecules in Solution: A Tamm-Dancoff Model with Application to 4-Dimethylaminobenzonitrile. J. of Phys. Chem. A , 2000 , 104 (23), 5631-5637. DOI: 10.1021/jp000156l.</li>
+<li style="list-style-type: '[633] ';">Grimme, S. A simplified Tamm-Dancoff density functional approach for the electronic excitation spectra of very large molecules. J. Chem. Phys. , 2013 , 138, 244104. DOI: 10.1063/1.4811330.</li>
+<li style="list-style-type: '[634] ';">Bannwarth, C.; Grimme, S. A simplified time-dependent density functional theory approach for electronic ultraviolet and circular dichroism spectra of very large molecules. Comp. Theor. Chem. , 2014 , 1040 -1041, 45-53. DOI: 10.1016/j.comptc.2014.02.023.</li>
+<li style="list-style-type: '[635] ';">Risthaus, T.; Hansen, A.; Grimme, S. Phys. Chem. Chem. Phys. , 2014 , 16, 14408-14419.</li>
+<li style="list-style-type: '[636] ';">Head-Gordon, M.; Rico, R. A.; Oumi, M.; Lee, T. J. Chem. Phys. Lett. , 1994 , 219, 21-29.</li>
+<li style="list-style-type: '[637] ';">Rhee, Young Min; Head-Gordon, Martin. J. Phys. Chem. A , 2007 , 111, 5314-5326.</li>
+<li style="list-style-type: '[638] ';">Goerigk, Lars; Grimme, Stefan. J. Chem. Phys. , 2010 , 132, 184103.</li>
+<li style="list-style-type: '[639] ';">Casanova-Páez, M.; Goerigk, L. Assessing the Tamm-Dancoff approximation, singlet-singlet, and singlettriplet excitations with the latest long-range corrected double-hybrid density functionals. J. Chem. Phys. , 2020 , 153, 064106.</li>
+<li style="list-style-type: '[640] ';">Schwabe, T.; Goerigk, L. J. Chem. Theory Comput. , 2017 , 13, 4307.</li>
+<li style="list-style-type: '[641] ';">Grimme, S.; Neese, F. J. Phys. Chem. , 2007 , 127, 154116.</li>
+<li style="list-style-type: '[642] ';">Goerigk, L. Moellmann; Grimme, S. Phys. Chem. Chem. Phys. , 2009 , 11, 4611.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[643] ';">Di Meo, Florent; Trouillas, Pascal; Adamo, Carlo; Sancho-García, Juan C. Application of Recent DoubleHybrid Density Functionals to Low-Lying Singlet-Singlet Excitation Energies of Large Organic Compounds. J. Chem. Phys. , 2013 , 139, 164104. DOI: 10.1063/1.4825359.</li>
+<li style="list-style-type: '[644] ';">Hernández-Martínez, Laura; Brémond, Eric; Pérez-Jiménez, Angel J.; San-Fabián, Emilio; Adamo, Carlo; Sancho-García, Juan C. Nonempirical (double-hybrid) density functionals applied to atomic excitation energies: A systematic basis set investigation. Int. J. Quantum Chem. , 2020 , 120, e26193. DOI: 10.1002/qua.26193.</li>
+<li style="list-style-type: '[645] ';">DeBeer-George, S.; Petrenko, T.; Neese, F. J. Phys. Chem. A , 2008 , 112, 12936.</li>
+<li style="list-style-type: '[646] ';">Sørensen, Lasse Kragh; Guo, Meiyuan; Lindh, Roland; Lundberg, Marcus. Applications to metal K pre-edges of transition metal dimers illustrate the approximate origin independence for the intensities in the length representation. Mol. Phys. , 2017 , 115 (1-2), 174-189. DOI: 10.1080/00268976.2016.1225993.</li>
+<li style="list-style-type: '[647] ';">Bernadotte, Stephan; Atkins, Andrew J.; Jacob, Christoph R. Origin-Independent Calculation of Quadrupole Intensities in X-ray Spectroscopy. J. Chem. Phys. , 2012 , 137, 204106. DOI: 10.1063/1.4766359.</li>
+<li style="list-style-type: '[648] ';">Holmgaard List, N. Saue, T.; Norman, P. Rotationally averaged linear absorption spectra beyond the electricdipole approximation. Mol. Phys. , 2017 , 115 (1-2), 63-74. DOI: 10.1080/00268976.2016.1187773.</li>
+<li style="list-style-type: '[649] ';">List, N. H.; Melin, T. R. L.; van Horn, M.; Saue, T. Beyond the electric-dipole approximation in simulations of x-ray absorption spectroscopy: Lessons from relativistic theory. J. Chem. Phys. , 2020 , 152 (18), 184110. DOI: 10.1063/5.0003103.</li>
+<li style="list-style-type: '[650] ';">Ray, K.; DeBeer-George, S.; Solomon, E. I.; Wieghardt, K.; Neese, F. Chem. Eur. J. , 2007 , 13, 2783.</li>
+<li style="list-style-type: '[651] ';">Steinmetzer, Johannes; Kupfer, Stephan; Gräfe, Stefanie. pysisyphus: Exploring potential energy surfaces in ground and excited states. Int. J. Quantum Chem. , 2021 , 121 (3), e26390. DOI: 10.1002/qua.26390.</li>
+<li style="list-style-type: '[652] ';">Campetella, Marco; Sanz García, Juan. Following the evolution of excited states along photochemical reaction pathways. J. Comput. Chem. , 2020 , 41 (12), 1156-1164. DOI: 10.1002/jcc.26162.</li>
+<li style="list-style-type: '[653] ';">Send, Robert; Furche, Filipp. First-Order Nonadiabatic Couplings from Time-Dependent Hybrid Density Functional Response Theory: Consistent Formalism, Implementation, and Performance. J. Chem. Phys. , 2010 , 132 (4), 044107. DOI: 10.1063/1.3292571.</li>
+<li style="list-style-type: '[654] ';">Fatehi, Shervin; Alguire, Ethan; Shao, Yihan; Subotnik, Joseph E. Analytic Derivative Couplings between Configuration-Interaction-Singles States with Built-in Electron-Translation Factors for Translational Invariance. J. Chem. Phys. , 2011 , 135 (23), 234105. DOI: 10.1063/1.3665031.</li>
+<li style="list-style-type: '[655] ';">Li, Zhendong; Liu, Wenjian. First-Order Nonadiabatic Coupling Matrix Elements between Excited States: A Lagrangian Formulation at the CIS, RPA, TD-HF, and TD-DFT Levels. J. Chem. Phys. , 2014 , 141 (1), 014110. DOI: 10.1063/1.4885817.</li>
+<li style="list-style-type: '[656] ';">Neese, F.; Solomon, E. I. Inorg. Chem. , 1998 , 37, 6568-6582.</li>
+<li style="list-style-type: '[657] ';">Maganas, D.; DeBeer, S.; Neese, F. Pair Natural Orbital Restricted Open-Shell Configuration Interaction (PNO-ROCIS) Approach for Calculating x-Ray Absorption Spectra of Large Chemical Systems. J. Phys. Chem. A , 2018 , 122 (5), 1215-1227. DOI: 10.1021/acs.jpca.7b10880.</li>
+<li style="list-style-type: '[658] ';">Plasser, F.; Wormit, M.; Dreuw, A. J. Chem. Phys. , 2014 , 141, 024106.</li>
+<li style="list-style-type: '[659] ';">Helmich-Paris, Benjamin. Simulating X-ray absorption spectra with complete active space self-consistent field linear response methods. Int. J. Quantum Chem. , 2021 , 121 (3), e26559. DOI: 10.1002/qua.26559.</li>
+<li style="list-style-type: '[660] ';">Olsen, Jeppe; Jensen, Hans Jørgen Aa.; Jørgensen, Poul. Solution of the large matrix equations which occur in response theory. J. Comput. Phys. , 1988 , 74 (2), 265 - 282. DOI: 10.1016/0021-9991(88)90081-2.</li>
+<li style="list-style-type: '[661] ';">Chaban, G.; Schmidt, M. W.; Gordon, M. S. Approximate second order method for orbital optimization of SCF and MCSCF wavefunctions. Theor. Chem. Acc. , 1997 , 97, 88-95. DOI: 10.1007/s002140050241.</li>
+<li style="list-style-type: '[662] ';">Dutta, Achintya Kumar; Neese, Frank; Izsák, Róbert. Speeding up Equation of Motion Coupled Cluster Theory with the Chain of Spheres Approximation. J. Chem. Phys. , 2016 , 144 (3), 034102.</li>
+<li style="list-style-type: '[663] ';">Nooijen, Marcel; Bartlett, Rodney J. A new method for excited states: Similarity transformed equation-ofmotion coupled-cluster theory. J. Chem. Phys. , 1997 , 106 (15), 6441-6448. DOI: 10.1063/1.474000.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[664] ';">Huntington, L .M. J.; Krupička, M.; Neese, F.; Izsák, R. Similarity transformed equation of motion coupledcluster theory based on an unrestricted Hartree-Fock reference for applications to high-spin open-shell systems. J. Chem. Phys. , 2017 , 147, 174104.</li>
+<li style="list-style-type: '[665] ';">Casanova-Páez, M.; Neese, F. Assessment of the similarity-transformed equation of motion (STEOM) for open-shell organic and transition metal molecules. J. Chem. Phys. , 2024 , 161, 1444120-XXXX. DOI: 10.1063/5.0234225.</li>
+<li style="list-style-type: '[666] ';">Dutta, Achintya Kumar; Nooijen, Marcel; Neese, Frank; Izsák, Róbert. Towards a Pair Natural Orbital Coupled Cluster Method for Excited States. J. Chem. Phys. , 2017 , 146 (3), 034102. DOI: 10.1063/1.4974488.</li>
+<li style="list-style-type: '[667] ';">Ghosh, Soumen; Dutta, Achintya Kumar; de Souza, Bernardo; Berraud-Pache, Romain; Izsák, Róbert. A New Density for Transition Properties within the Similarity Transformed Equation of Motion Approach. Mol. Phys. , 2020 , 118 (19-20), e1818858. DOI: 10.1080/00268976.2020.1818858.</li>
+<li style="list-style-type: '[668] ';">Dutta, Achintya Kumar; Neese, Frank; Izsák, Róbert. Towards a Pair Natural Orbital Coupled Cluster Method for Excited States. J. Chem. Phys. , 2016 , 145 (3), 034102.</li>
+<li style="list-style-type: '[669] ';">Ghosh, Soumen; Dutta, Achintya Kumar; de Souza, Bernardo; Berraud-Pache, Romain; Róbert Izsák. A New Density for Transition Properties within the Similarity Transformed Equation of Motion Approach. Mol. Phys. , 2020 , 0 (0), e1818858. DOI: 10.1080/00268976.2020.1818858.</li>
+<li style="list-style-type: '[670] ';">DeBeer-George, S.; Petrenko, T.; Neese, F. Inorg. Chim. Acta , 2008 , 361, 965.</li>
+<li style="list-style-type: '[671] ';">Casanova-Páez, M.; Neese, F. Core-Excited States for Open-Shell Systems in SimilarityTransformed Equation-of-Motion Theory. J. Chem. Theory Comput. , 2025 , 21 (3), 1306-1321. DOI: 10.1021/acs.jctc.4c01181.</li>
+<li style="list-style-type: '[672] ';">Petrenko, Taras; Neese, Frank. Analysis and prediction of absorption band shapes, fluorescence band shapes, resonance Raman intensities, and excitation profiles using the time-dependent theory of electronic spectroscopy. J. Chem. Phys. , 2007 , 127 (16), 164319. DOI: 10.1063/1.2770706.</li>
+<li style="list-style-type: '[673] ';">Barone, Vincenzo; Biczysko, Malgorzata; Bloino, Julien. Fully Anharmonic IR and Raman Spectra of Medium-Size Molecular Systems: Accuracy and Interpretation. Phys. Chem. Chem. Phys. , 2014 , 16 (5), 17591787. DOI: 10.1039/C3CP53413H.</li>
+<li style="list-style-type: '[674] ';">Yagi, Kiyoshi; Hirao, Kimihiko; Taketsugu, Tetsuya; Schmidt, Michael W.; Gordon, Mark S. \emph Ab initio Vibrational State Calculations with a Quartic Force Field: Applications to H2CO, C2H4, CH3OH, CH3CCH, and C6H6. J. Chem. Phys. , 2004 , 121 (3), 1383-1389. DOI: 10.1063/1.1764501.</li>
+<li style="list-style-type: '[675] ';">Barnes, Loïc; Schindler, Baptiste; Compagnon, Isabelle; Allouche, Abdul-Rahman. Fast and Accurate Hybrid QM//MM Approach for Computing Anharmonic Corrections to Vibrational Frequencies. J. Mol. Model. , 2016 , 22 (11), 285. DOI: 10.1007/s00894-016-3135-5.</li>
+<li style="list-style-type: '[676] ';">Kesharwani, Manoj K.; Brauer, Brina; Martin, Jan M. L. Frequency and Zero-Point Vibrational Energy Scale Factors for Double-Hybrid Density Functionals (and Other Selected Methods): Can Anharmonic Force Fields Be Avoided? J. Phys. Chem. A , 2015 , 119 (9), 1701-1714. DOI: 10.1021/jp508422u.</li>
+<li style="list-style-type: '[677] ';">Bec, Krzysztof B.; Huck, Christian W. Breakthrough Potential in Near-Infrared Spectroscopy: Spectra Simulation. A Review of Recent Developments. Front. Chem. , 2019 , 7, 48. DOI: 10.3389/fchem.2019.00048.</li>
+<li style="list-style-type: '[678] ';">Reiter, Kevin; Kühn, Michael; Weigend, Florian. Vibrational circular dichroism spectra for large molecules and molecules with heavy elements. J. Chem. Phys. , 2017 , 146 (5), 054102. DOI: 10.1063/1.4974897.</li>
+<li style="list-style-type: '[679] ';">Neugebauer, J.; Reiher, M.; Kind, C.; Hess, B. A. J. Comput. Chem. , 2002 , 23, 895-910.</li>
+<li style="list-style-type: '[680] ';">Petrenko, Taras; Sturhahn, Wolfgang; Neese, Frank. Hyperfine Interact. , 2007 , 175, 165.</li>
+<li style="list-style-type: '[681] ';">Petrenko, Taras; DeBeer-George, Serena; Aliaga-Alcalde, Núria; Bill, Eckhard; Mienert, Bernd; Xiao, Yuming; Guo, YiSong; Sturhahn, Wolfgang; Cramer, Stephen P.; Wieghardt, Karl; Neese, Frank. Characterization of a Genuine Iron(V)-Nitrido Species by Nuclear Resonant Vibrational Spectroscopy Coupled to Density Functional Calculations. J. Am. Chem. Soc. , 2007 , 129, 11053-11060.</li>
+<li style="list-style-type: '[682] ';">McLean, A. D.; Yoshimine, M. Theory of Molecular Polarizabilities. J. Chem. Phys. , 1967 , 47 (6), 1927-1935. arXiv:https://pubs.aip.org/aip/jcp/article-pdf/47/6/1927/18852261/1927\_1\_online.pdf, DOI: 10.1063/1.1712220.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[683] ';">Elking, Dennis M.; Perera, Lalith; Duke, Robert; Darden, Thomas; Pedersen, Lee G. A finite field method for calculating molecular polarizability tensors for arbitrary multipole rank. J. Comput. Chem. , 2011 , 32 (15), 3283-3295. DOI: 10.1002/jcc.21914.</li>
+<li style="list-style-type: '[684] ';">Chen, Houxian; Liu, Menglin; Yan, Tianying. Molecular multipoles and (hyper)polarizabilities from the Buckingham expansion: revisited. Commun. Theor. Phys. , 2020 , 72 (7), 075503. DOI: 10.1088/1572-9494/ab8a0d.</li>
+<li style="list-style-type: '[685] ';">London, F. Théorie quantique des courants interatomiques dans les combinaisons aromatiques. Phys. Radium , 1937 , 8 (10), 397-409. DOI: 10.1051/jphysrad:01937008010039700.</li>
+<li style="list-style-type: '[686] ';">Ditchfield, R. J. Chem. Phys. , 1972 , 56, 5688.</li>
+<li style="list-style-type: '[687] ';">Helgaker, T.; Jaszuński, M.; Ruud, K. Chem. Rev. , 1999 , 99, 293.</li>
+<li style="list-style-type: '[688] ';">Gauss, J. Molecular Properties. In Grotendorst, J., editor, Modern Methods and Algorithms of Quantum Chemistry , volume 3, 541-592. John von Neumann Institute for Computing, NIC Series, 2000 .</li>
+<li style="list-style-type: '[689] ';">Mason, J. Convention for the Reporting of Nuclear Magnetic Shielding (or Shifts) Tensors Suggested by Participants in the NATO ARW on NMR Shielding Constants at the University of Maryland, College Park, July 1992. Solid State Nucl. Magn. Res. , 1993 , 2, 285-288. DOI: 10.1016/0926-2040(93)90046-3.</li>
+<li style="list-style-type: '[690] ';">Auer, A. A.; Gauss, J., Stanton J. F. Quantitative prediction of gas-phase ¹³C nuclear magnetic shielding constants. J. Chem. Phys. , 2003 , 118, 10407. DOI: 10.1063/1.1574314.</li>
+<li style="list-style-type: '[691] ';">Flaig, D.; Maurer, M.; Hanni, M.; Braunger, K.; Kick, L.; Thubauville, M.; Ochsenfeld, C. J. Chem. Theory Comput. , 2014 , 10, 572.</li>
+<li style="list-style-type: '[692] ';">Stoychev, Georgi L; Auer, Alexander A; Izsák, Róbert; Neese, Frank. Self-Consistent Field Calculation of Nuclear Magnetic Resonance Chemical Shielding Constants Using Gauge-Including Atomic Orbitals and Approximate Two-Electron Integrals. J. Chem. Theory Comput. , 2018 , 14 (2), 619-637. DOI: 10.1021/acs.jctc.7b01006.</li>
+<li style="list-style-type: '[693] ';">Maximoff, Sergey N.; Scuseria, Gustavo E. Nuclear Magnetic Resonance Shielding Tensors Calculated with Kinetic Energy Density-Dependent Exchange-Correlation Functionals. Chem. Phys. Lett. , 2004 , 390 (4-6), 408-412. DOI: 10.1016/j.cplett.2004.04.049.</li>
+<li style="list-style-type: '[694] ';">Schattenberg, Caspar Jonas; Kaupp, Martin. Effect of the Current Dependence of Tau-Dependent ExchangeCorrelation Functionals on Nuclear Shielding Calculations. J. Chem. Theory Comput. , 2021 , 17 (3), 14691479. DOI: 10.1021/acs.jctc.0c01223.</li>
+<li style="list-style-type: '[695] ';">Dobson, John F. Alternative Expressions for the Fermi Hole Curvature. J. Chem. Phys. , 1993 , 98 (11), 88708872. DOI: 10.1063/1.464444.</li>
+<li style="list-style-type: '[696] ';">Bates, Jefferson E.; Furche, Filipp. Harnessing the Meta-Generalized Gradient Approximation for TimeDependent Density Functional Theory. J. Chem. Phys. , 2012 , 137 (16), 164105. arXiv:23126693, DOI: 10.1063/1.4759080.</li>
+<li style="list-style-type: '[697] ';">Reimann, Sarah; Ekström, Ulf; Stopkowicz, Stella; Teale, Andrew M; Borgoo, Alex; Helgaker, Trygve. The Importance of Current Contributions to Shielding Constants in Density-Functional Theory. Phys. Chem. Chem. Phys. , 2015 , 17 (28), 18834-18842. arXiv:26123927, DOI: 10.1039/C5CP02682B.</li>
+<li style="list-style-type: '[698] ';">Van den Heuvel, Willem; Soncini, Alessandro. NMR Chemical Shift as Analytical Derivative of the Helmholtz Free Energy. J. Chem. Phys. , 2013 , 138, 054113. DOI: doi:10.1063/1.4789398.</li>
+<li style="list-style-type: '[699] ';">Soncini, Alessandro; Van den Heuvel, Willem. Communication: Paramagnetic NMR Chemical Shift in a Spin State Subject to Zero-Field Splitting. J. Chem. Phys. , 2013 , 138, 021103. DOI: doi:10.1063/1.4775809.</li>
+<li style="list-style-type: '[700] ';">Gauss, Jürgen; Ruud, Kenneth; Helgaker, Trygve. Perturbation-dependent atomic orbitals for the calculation of spin-rotation constants and rotational g tensors. J. Chem. Phys. , 1996 , 105 (7), 2804-2812. DOI: 10.1063/1.472143.</li>
+<li style="list-style-type: '[701] ';">Pell, Andrew J.; Pintacuda, Guido; Grey, Clare P. Paramagnetic NMR in Solution and the Solid State. Prog. Nucl. Magn. Reson. Spectrosc. , 2019 , 111, 1-271. DOI: 10.1016/j.pnmrs.2018.05.001.</li>
+<li style="list-style-type: '[702] ';">Lang, Lucas; Ravera, Enrico; Parigi, Giacomo; Luchinat, Claudio; Neese, Frank. Solution of a Puzzle: HighLevel Quantum-Chemical Treatment of Pseudocontact Chemical Shifts Confirms Classic Semiempirical Theory. J. Phys. Chem. Lett. , 2020 , 11 (20), 8735-8744.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[703] ';">Saitow, Masaaki; Neese, Frank. Accurate Spin-Densities Based on the Domain-Based Local Pair-Natural Orbital Coupled-Cluster Theory. J. Chem. Phys. , 2018 , 149, 034104. DOI: 10.1063/1.5027114.</li>
+<li style="list-style-type: '[704] ';">Pantazis, D. A.; Orio, M.; Petrenko, T.; Zein, S.; Bill, E.; Lubitz, W.; Messinger, J.; Neese, F. Chem. Eur. J. , 2009 , 15, 5108.</li>
+<li style="list-style-type: '[705] ';">Harriman, John E. Theoretical Foundations of Electron Spin Resonance: Physical Chemistry: A Series of Monographs . Academic Press, 1978 . ISBN 978-1483175855.</li>
+<li style="list-style-type: '[706] ';">Pederson, M. R.; Khanna, S. N. Phys. Rev. B , 1999 , 60, 9566.</li>
+<li style="list-style-type: '[707] ';">Neese, F. J. Chem. Phys. , 2007 , 127, 164112.</li>
+<li style="list-style-type: '[708] ';">Sinnecker, S.; Neese, F. Spin-Spin Contributions to the Zero-Field Splitting Tensor in Organic Triplets, Carbenes and Biradicals - A Density Functional and \it ab initio Study. J. Phys. Chem. A , 2006 , 110, 12267.</li>
+<li style="list-style-type: '[709] ';">Riplinger, Christoph; Kao, Joseph P. Y.; Rosen, Gerald M.; Kathirvelu, Velavan; Eaton, Gareth R.; Eaton, Sandra S.; Kutateladze, Andrei; Neese, Frank. J. Am. Chem. Soc. , 2009 , 131, 10092.</li>
+<li style="list-style-type: '[710] ';">Perdew, J. P.; Chevary, J. A.; Vosko, S. H.; Jackson, K. A.; Pederson, M. R.; Singh, D. J.; Fiolhais, C. Phys. Rev. A , 1992 , 46, 6671.</li>
+<li style="list-style-type: '[711] ';">Helgaker, Trygve U.; Almlöf, Jan; Jensen, Hans Jørgen Aa.; Jørgensen, Poul. Molecular Hessians for largescale MCSCF wave functions. J. Chem. Phys. , 1986 , 84 (11), 6266-6279. DOI: 10.1063/1.450771.</li>
+<li style="list-style-type: '[712] ';">Vahtras, O.; Minaev, B.; Ågren, H. Ab initio calculations of electronic g-factors by means of multiconfiguration response theory. Chem. Phys. Lett. , 1997 , 281 (1), 186-192. DOI: 10.1016/S0009-2614(97)01169-X.</li>
+<li style="list-style-type: '[713] ';">Neese, F. Inorg. Chim. Acta , 2002 , 337C, 181-192.</li>
+<li style="list-style-type: '[714] ';">Römelt, M.; Ye, S.; Neese, F. Inorg. Chem. , 2009 , 48, 784.</li>
+<li style="list-style-type: '[715] ';">Neese, F. Efficient and Accurate Approximations to the Molecular Spin-Orbit Coupling Operator and their use in Molecular g-Tensor Calculations. J. Chem. Phys. , 2005 , 122, 034107.</li>
+<li style="list-style-type: '[716] ';">Ganyushin, D.; Neese, F. J. Chem. Phys. , 2013 , 138, 104113.</li>
+<li style="list-style-type: '[717] ';">Hess, Bernd A.; Marian, Christel M.; Wahlgren, Ulf; Gropen, Odd. Chem. Phys. Lett. , 1996 , 251, 365-371.</li>
+<li style="list-style-type: '[718] ';">Schimmelpfennig, B. AMFI - an Atomic Mean-Field Spin-Orbit Integral Program. 1996 .</li>
+<li style="list-style-type: '[719] ';">Berning, A.; Schweizer, M.; Werner, H.J.; Knowles, P. J.; Palmieri, P. Spin-orbit matrix elements for internally contracted multireference configuration interaction wavefunctions. Mol. Phys. , 2000 , 98, 1823-1833. DOI: 10.1080/00268970009483386.</li>
+<li style="list-style-type: '[720] ';">Koseki, S.; Schmidt, M. W.; Gordon, M. S. J. Phys. Chem. , 1992 , 96, 10768-10772.</li>
+<li style="list-style-type: '[721] ';">Koseki, S.; Gordon, M. S.; Schmidt, M. W.; Matsunaga, N. Main-group effective nuclear charges for spin-orbit calculations. J. Phys. Chem. , 1995 , 99 (31), 12764-12772. DOI: 10.1021/j100034a013.</li>
+<li style="list-style-type: '[722] ';">Koseki, S.; Schmidt, M. W.; Gordon, M. S. Reappraisal of the spin-forbidden unimolecular decay of the methoxy radical. J. Phys. Chem. A , 1998 , 102 (50), 10430-10435. DOI: 10.1021/jp982609q.</li>
+<li style="list-style-type: '[723] ';">Suturina, E. A.; Maganas, D.; Bill, E.; Atanasov, M.; Neese, F. Inorg. Chem. , 2015 , 54, 9948-9961.</li>
+<li style="list-style-type: '[724] ';">Ginsberg, A. P. J. Am. Chem. Soc. , 1980 , 102, 111.</li>
+<li style="list-style-type: '[725] ';">Noodleman, L. J. Chem. Phys. , 1981 , 74, 5737.</li>
+<li style="list-style-type: '[726] ';">Noodleman, L.; Davidson, E. R. Chem. Phys. , 1986 , 109, 131.</li>
+<li style="list-style-type: '[727] ';">Bencini, A.; Gatteschi, D. X.alpha.-SW calculations of the electronic structure and magnetic properties of weakly coupled transition-metal clusters. The [Cu2Cl6]2- dimers. J. Am. Chem. Soc. , 1980 , 108, 5763. DOI: 10.1021/ja00279a017.</li>
+<li style="list-style-type: '[728] ';">Yamaguchi, K.; Takahara, Y.; Fueno, T. In Smith, V. H., editor, Applied Quantum Chemistry , pages 155. Wiley, 1986 .</li>
+<li style="list-style-type: '[729] ';">Soda, T.; Kitagawa, Y.; Onishi, T.; Takano, Y.; Shigeta, Y.; Nagao, H.; Yoshioka, Y.; Yamaguchi, K. Chem. Phys. Lett. , 2000 , 319, 223.</li>
+<li style="list-style-type: '[730] ';">Yamaguchi, K.; Jensen, F.; Dorigo, A.; Houk, K. N. Chem. Phys. Lett. , 1988 , 149, 537.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[731] ';">Saito, T.; Nishihara, S.; Kataoka, Y.; Nakanishi, Y.; Kitagawa, Y.; Kawakami, T.; Yamanaka, S.; Okumura, M.; Yamaguchi, K. J. Phys. Chem. A , 2010 , 114, 7967.</li>
+<li style="list-style-type: '[732] ';">Ruiz, E.; Cano, J.; Alvarez, S.; Alemany, P. J. Comput. Chem. , 1999 , 20, 1391.</li>
+<li style="list-style-type: '[733] ';">Saito, T.; Thiel, W. J. Phys. Chem. A , 2012 , 116, 10864.</li>
+<li style="list-style-type: '[734] ';">Coulaud, E.; Malrieu, J.-P.; Guihéry, N.; Ferré, N. Additive Decomposition of the Physical Components of the Magnetic Coupling from Broken Symmetry Density Functional Theory Calculations. J. Chem. Theory Comput. , 2013 , 9 (8), 3429-3436. DOI: 10.1021/ct400305h.</li>
+<li style="list-style-type: '[735] ';">Ferre, N.; Guihery, N.; Malrieu, J.-P. Spin Decontamination of Broken-Symmetry Density Functional Theory Calculations: Deeper Insight and New Formulations. Phys. Chem. Chem. Phys. , 2015 , 17 (22), 14375-14382. DOI: 10.1039/C4CP05531D.</li>
+<li style="list-style-type: '[736] ';">David, Grégoire; Trinquier, Georges; Malrieu, Jean-Paul. Consistent spin decontamination of brokensymmetry calculations of diradicals. J. Chem. Phys. , 2020 , 153 (19), 194107. DOI: 10.1063/5.0029201.</li>
+<li style="list-style-type: '[737] ';">Duplaix-Rata, Gwenhaël; Le Guennic, Boris; David, Grégoire. Revisiting magnetic exchange couplings in heterodinuclear complexes through the decomposition method in KS-DFT. Phys. Chem. Chem. Phys. , 2023 , 25 (20), 14170-14178. DOI: 10.1039/d3cp00697b.</li>
+<li style="list-style-type: '[738] ';">David, Grégoire; Ferré, Nicolas; Le Guennic, Boris. Consistent Evaluation of Magnetic Exchange Couplings in Multicenter Compounds in KS-DFT: The Recomposition Method. J. Chem. Theory Comput. , 2022 , 19 (1), 157-173. DOI: 10.1021/acs.jctc.2c01022.</li>
+<li style="list-style-type: '[739] ';">David, Grégoire; Duplaix-Rata, Gwenhaël; Le Guennic, Boris. What governs magnetic exchange couplings in radical-bridged dinuclear complexes? Phys. Chem. Chem. Phys. , 2024 , 26 (11), 8952-8964. DOI: 10.1039/d3cp06243k.</li>
+<li style="list-style-type: '[740] ';">Lunghi, Alessandro; Totti, Federico; Sanvito, Stefano; Sessoli, Roberta. Intra-molecular origin of the spinphonon coupling in slow-relaxing molecular magnets. Chem. Sci. , 2017 , 8 (9), 6051-6059.</li>
+<li style="list-style-type: '[741] ';">Atanasov, M.; Aravena, D.; Suturina, E.; Bill, E.; Maganas, D.; Neese, F. First principles approach to the electronic structure, magnetic anisotropy and spin relaxation in mononuclear 3d-transition metal single molecule magnets. Coord. Chem. Rev. , 2015 , 289, 177-214.</li>
+<li style="list-style-type: '[742] ';">Reta, Daniel; Kragskow, Jon GC; Chilton, Nicholas F. Ab initio prediction of high-temperature magnetic relaxation rates in single-molecule magnets. Journal of the American Chemical Society , 2021 , 143 (15), 59435950.</li>
+<li style="list-style-type: '[743] ';">Kragskow, Jon GC; Mattioni, Andrea; Staab, Jakob K; Reta, Daniel; Skelton, Jonathan M; Chilton, Nicholas F. Spin-phonon coupling and magnetic relaxation in single-molecule magnets. Chemical Society Reviews , 2023 , 52 (14), 4567-4585.</li>
+<li style="list-style-type: '[744] ';">Mariano, Lorenzo A; Nguyen, Vu Ha Anh; Petersen, Jonatan B; Björnsson, Magnus; Bendix, Jesper; Eaton, Gareth R; Eaton, Sandra S; Lunghi, Alessandro. The role of electronic excited states in the spin-lattice relaxation of spin-1/2 molecules. Science Advances , 2025 , 11 (7), eadr0168.</li>
+<li style="list-style-type: '[745] ';">Timm, Carsten. Time-convolutionless master equation for quantum dots: Perturbative expansion to arbitrary order. Physical Review B-Condensed Matter and Materials Physics , 2011 , 83 (11), 115416.</li>
+<li style="list-style-type: '[746] ';">Lunghi, Alessandro; Sanvito, Stefano. The limit of spin lifetime in solid-state electronic spins. The Journal of Physical Chemistry Letters , 2020 , 11 (15), 6273-6278.</li>
+<li style="list-style-type: '[747] ';">Lunghi, Alessandro; Sanvito, Stefano. How do phonons relax molecular spins? Science advances , 2019 , 5 (9), eaax7163.</li>
+<li style="list-style-type: '[748] ';">Lunghi, Alessandro. Toward exact predictions of spin-phonon relaxation times: An ab initio implementation of open quantum systems theory. Science Advances , 2022 , 8 (31), eabn7880.</li>
+<li style="list-style-type: '[749] ';">Foglia, Nicolás O.; Maganas, Dimitrios; Neese, Frank. Going beyond the electric-dipole approximation in the calculation of absorption and (magnetic) circular dichroism spectra including scalar relativistic and spin-orbit coupling effects. J. Chem. Phys. , 2022 , 157 (8), 084120. arXiv:10.1063/5.0094709, DOI: 10.1063/5.0094709.</li>
+<li style="list-style-type: '[750] ';">Chibotaru, L. F.; Ungur, L. Ab Initio Calculation of Anisotropic Magnetic Properties of Complexes. I. Unique Definition of Pseudospin Hamiltonians and Their Derivation. J. Chem. Phys. , 2012 , 137 (6), 064112. DOI: 10.1063/1.4739763.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[751] ';">Ungur, Liviu; Chibotaru, Liviu F. Ab Initio Crystal Field for Lanthanides. Chem. Eur. J. , 2017 , 23 (15), 3708-3718. DOI: 10.1002/chem.201605102.</li>
+<li style="list-style-type: '[752] ';">Iwahara, Naoya; Ungur, Liviu; Chibotaru, Liviu F. J-Pseudospin States and the Crystal Field of Cubic Systems. Phys. Rev. B , 2018 , 98 (5), 054436. DOI: 10.1103/PhysRevB.98.054436.</li>
+<li style="list-style-type: '[753] ';">Ungur, Liviu. Ab Initio Methodology for the Investigation of Magnetism in Strongly Anisotropic Complexes . PhD thesis, KU Leuven, 10 2010 .</li>
+<li style="list-style-type: '[754] ';">Ungur, Liviu. Introduction to the Electronic Structure, Luminescence, and Magnetism of Lanthanides. In Martín-Ramos, Pablo; Manuela Ramos Silva, editors, Lanthanide-Based Multifunctional Materials , Advanced Nanomaterials, pages 1-58. Elsevier, 2018 . DOI: 10.1016/B978-0-12-813840-3.00001-6.</li>
+<li style="list-style-type: '[755] ';">Vieru, Veacheslav; Iwahara, Naoya; Ungur, Liviu; Chibotaru, Liviu F. Giant exchange interaction in mixed lanthanides. Scientific reports , 2016 , 6, 24046.</li>
+<li style="list-style-type: '[756] ';">Iwahara, Naoya; Chibotaru, Liviu F. Exchange interaction between J multiplets. Physical Review B , 2015 , 91, 174438. DOI: 10.1103/PhysRevB.91.174438.</li>
+<li style="list-style-type: '[757] ';">Lines, M. E. Orbital Angular Momentum in the Theory of Paramagnetic Clusters. J. Chem. Phys. , 1971 , 55 (6), 2977-2984. DOI: 10.1063/1.1676524.</li>
+<li style="list-style-type: '[758] ';">Schmerwitz, Yorick Leonard Adrian; Ivanov, Aleksei V.; Jónsson, Elvar Ö.; Jónsson, Hannes; Levi, Gianluca. Variational Density Functional Calculations of Excited States: Conical Intersection and Avoided Crossing in Ethylene Bond Twisting. J. Phys. Chem. Lett. , 2022 , 13, 3990-3999. DOI: 10.1021/acs.jpclett.2c00741.</li>
+<li style="list-style-type: '[759] ';">Selenius, Elli; Sigurdarson, Alec Elías; Schmerwitz, Yorick Leonard Adrian; Levi, Gianluca. OrbitalOptimized Versus Time-Dependent Density Functional Calculations of Intramolecular Charge Transfer Excited States. J. Chem. Theory Comput. , 2024 , 20, 3809-3822. DOI: 10.1021/acs.jctc.3c01319.</li>
+<li style="list-style-type: '[760] ';">Gilbert, Andrew T. B.; Besley, Nicholas A.; Gill, Peter M. W. Self-Consistent Field Calculations of Excited States Using the Maximum Overlap Method (MOM). J. Phys. Chem. A , 2008 , 112 (50), 13164-13171. Publisher: American Chemical Society. DOI: 10.1021/jp801738f.</li>
+<li style="list-style-type: '[761] ';">Corzo, Hector H.; Abou Taka, Ali; Pribram-Jones, Aurora; Hratchian, Hrant P. Using projection operators with maximum overlap methods to simplify challenging self-consistent field optimization. J. Comput. Chem. , 2022 , 43 (6), 382-390. DOI: 10.1002/jcc.26797.</li>
+<li style="list-style-type: '[762] ';">Hait, Diptarka; Head-Gordon, Martin. Orbital Optimized Density Functional Theory for Electronic Excited States. J. Phys. Chem. Lett. , 2021 , 12, 4517-4529. DOI: 10.1021/acs.jpclett.1c00744.</li>
+<li style="list-style-type: '[763] ';">Hardikar, Tarini S.; Neuscamman, Eric. A self-consistent field formulation of excited state mean field theory. J. Chem. Phys. , 2020 , 153, 164108. DOI: 10.1063/5.0019557.</li>
+<li style="list-style-type: '[764] ';">Ziegler, Tom; Rank, Arvi; Baerends, Evert J. On the Calculation of Multiplet Energies by the Hartree-FockSlater Method. Theoret. Chim Acta (Berl.) , 1977 , 43, 261-271. DOI: 10.1007/BF00551551.</li>
+<li style="list-style-type: '[765] ';">Schmerwitz, Yorick Leonard Adrian; Levi, Gianluca; Jónsson, Hannes. Calculations of Excited Electronic States by Converging on Saddle Points Using Generalized Mode Following. J. Chem. Theory Comput. , 2023 , 19, 3634-3651. DOI: 10.1021/acs.jctc.3c00178.</li>
+<li style="list-style-type: '[766] ';">Schmerwitz, Yorick Leonard Adrian; Ollé, Núria Urgell; Levi, Gianluca; Jónsson, Hannes. Saddle Point Search Algorithms for Variational Density Functional Calculations of Excited Electronic States with Self-Interaction Correction. In Proceedings of the Platform for Advanced Scientific Computing Conference , 1-11. Association for Computing Machinery, 6 2024 . DOI: 10.1145/3659914.3659933.</li>
+<li style="list-style-type: '[767] ';">Schmerwitz, Yorick Leonard Adrian; Selenius, Elli; Levi, Gianluca. Freeze-and-release direct optimization method for variational calculations of excited electronic states. arXiv:2501.18568 , 2025 . DOI: 10.48550/arXiv.2501.18568.</li>
+<li style="list-style-type: '[768] ';">Levi, Gianluca; Ivanov, Aleksei V; Jónsson, Hannes. Variational density functional calculations of excited states via direct optimization. J. Chem. Theory Comput. , 2020 , 16 (11), 6968-6982. DOI: 10.1021/acs.jctc.0c00597.</li>
+<li style="list-style-type: '[769] ';">Barca, Giuseppe M. J.; Gilbert, Andrew T. B.; Gill, Peter M. W. Simple Models for Difficult Electronic Excitations. J. Chem. Theory Comput. , 2018 , 14 (3), 1501-1509. Publisher: American Chemical Society. DOI: 10.1021/acs.jctc.7b00994.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[770] ';">Carter-Fenk, Kevin; Herbert, John M. State-Targeted Energy Projection: A Simple and Robust Approach to Orbital Relaxation of Non-Aufbau Self-Consistent Field Solutions. J. Chem. Theory Comput. , 2020 , 16 (8), 5067-5082. Publisher: American Chemical Society. DOI: 10.1021/acs.jctc.0c00502.</li>
+<li style="list-style-type: '[771] ';">Kubas, Adam; Hoffmann, Felix; Heck, Alexander; Oberhofer, Harald; Elstner, Marcus; Blumberger, Jochen. Electronic couplings for molecular charge transfer: Benchmarking CDFT, FODFT, and FODFTB against high-level ab initio calculations. J. Chem. Phys. , 2014 , 140 (10), 104105. DOI: 10.1063/1.4867077.</li>
+<li style="list-style-type: '[772] ';">Mitoraj, Mariusz P.; Michalak, Artur; Ziegler, Tom. A Combined Charge and Energy Decomposition Scheme for Bond Analysis. J. Chem. Theory Comput. , 2009 , 5 (4), 962-975.</li>
+<li style="list-style-type: '[773] ';">Schneider, W.; Bistoni, G.; Sparta., M.; Riplinger, C.; Saitow, M.; Auer, A.; Neese, F. Decomposition of Intermolecular Interaction Energies within the Local Pair Natural Orbital Coupled Cluster Framework. J. Chem. Theory Comput. , 2016 , 12 (10), 4778-4792. DOI: 10.1021/acs.jctc.6b00523.</li>
+<li style="list-style-type: '[774] ';">Altun, Ahmet; Saitow, Masaaki; Neese, Frank; Bistoni, Giovanni. Local Energy Decomposition of Open-Shell Molecular Systems in the Domain-Based Local Pair Natural Orbital Coupled Cluster Framework. J. Chem. Theory Comput. , 2019 , 15 (3), 1616-1632. DOI: 10.1021/acs.jctc.8b01145.</li>
+<li style="list-style-type: '[775] ';">Bistoni, Giovanni. Finding Chemical Concepts in the Hilbert Space: Coupled Cluster Analyses of Noncovalent Interactions. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2020 , 10 (3), e1442. arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1002/wcms.1442, DOI: 10.1002/wcms.1442.</li>
+<li style="list-style-type: '[776] ';">Bistoni, Giovanni; Auer, Alexander A.; Neese, Frank. Understanding the Role of Dispersion in Frustrated Lewis Pairs and Classical Lewis Adducts: A Domain-Based Local Pair Natural Orbital Coupled Cluster Study. Chem. Eur. J. , 2017 , 23 (4), 865-873.</li>
+<li style="list-style-type: '[777] ';">Lu, Qing; Neese, Frank; Bistoni, Giovanni. Formation of Agostic Structures Driven by London Dispersion. Angew. Chem. Int. Ed. , 2018 , 57 (17), 4760-4764.</li>
+<li style="list-style-type: '[778] ';">Lu, Qing; Neese, Frank; Bistoni, Giovanni. London Dispersion Effects in the Coordination and Activation of Alkanes in σ-Complexes: A Local Energy Decomposition Study. Phys. Chem. Chem. Phys. , 2019 , 21 (22), 11569-11577. DOI: 10.1039/C9CP01309A.</li>
+<li style="list-style-type: '[779] ';">Ghafarian Shirazi, Reza; Neese, Frank; Pantazis, Dimitrios A; Bistoni, Giovanni. Physical Nature of Differential Spin-State Stabilization of Carbenes by Hydrogen and Halogen Bonding: A Domain-Based Pair Natural Orbital Coupled Cluster Study. J. Phys. Chem. A , 2019 , 123 (24), 5081-5090.</li>
+<li style="list-style-type: '[780] ';">Yepes, Diana; Neese, Frank; List, Benjamin; Bistoni, Giovanni. Unveiling the Delicate Balance of Steric and Dispersion Interactions in Organocatalysis Using High-Level Computational Methods. J. Am. Chem. Soc. , 2020 , 142 (7), 3613-3625. arXiv:10.1021/jacs.9b13725, DOI: 10.1021/jacs.9b13725.</li>
+<li style="list-style-type: '[781] ';">Beck, M. E.; Riplinger, C.; Neese, F.; Bistoni, G. Unraveling Individual Host-Guest Interactions in Molecular Recognition from First Principles Quantum Mechanics: Insights into the Nature of Nicotinic Acetylcholine Receptor Agonist Binding. J. Comput. Chem. , 2021 , 42 (5), 293-302. DOI: 10.1002/jcc.26454.</li>
+<li style="list-style-type: '[782] ';">Altun, Ahmet; Izsák, Róbert; Bistoni, Giovanni. Local Energy Decomposition of Coupled-Cluster Interaction Energies: Interpretation, Benchmarks, and Comparison with Symmetry-Adapted Perturbation Theory. Int. J. Quantum Chem. , 2021 , 121 (3), e26339. arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1002/qua.26339, DOI: 10.1002/qua.26339.</li>
+<li style="list-style-type: '[783] ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. Local Energy Decomposition Analysis of Hydrogen-Bonded Dimers within a Domain-Based Pair Natural Orbital Coupled Cluster Study. Beilstein J. Org. Chem. , 2018 , 14, 919. DOI: 10.1021/acs.jctc.8b01145.</li>
+<li style="list-style-type: '[784] ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. Effect of Electron Correlation on Intermolecular Interactions: APair Natural Orbitals Coupled Cluster Based Local Energy Decomposition Study. J. Chem. Theory Comput. , 2019 , 15 (1), 215-228. DOI: 10.1021/acs.jctc.8b00915.</li>
+<li style="list-style-type: '[785] ';">Wuttke, Axel; Mata, Ricardo A. Visualizing Dispersion Interactions through the Use of Local Orbital Spaces. J. Comput. Chem. , 2017 , 38 (1), 15-23.</li>
+<li style="list-style-type: '[786] ';">Regni, Gianluca; Baldinelli, Lorenzo; Bistoni, Giovanni. A Quantum Chemical Method for Dissecting London Dispersion Energy into Atomic Building Blocks (In press). 2025 . DOI: 10.1021/acscentsci.5c00356.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[787] ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. HFLD: A Nonempirical London Dispersion-Corrected Hartree-Fock Method for the Quantification and Analysis of Noncovalent Interaction Energies of Large Molecular Systems. J. Chem. Theory Comput. , 2019 , 15 (11), 5894-5907. DOI: 10.1021/acs.jctc.9b00425.</li>
+<li style="list-style-type: '[788] ';">Baldinelli, Lorenzo; De Angelis, Filippo; Bistoni, Giovanni. Unraveling Atomic Contributions to the London Dispersion Energy: Insights into Molecular Recognition and Reactivity. J. Chem. Theory Comput. , 2024 , 20 (5), 1923-1931. DOI: 10.1021/acs.jctc.3c00977.</li>
+<li style="list-style-type: '[789] ';">Ghosh, Soumen; Neese, Frank; Izsák, Róbert; Bistoni, Giovanni. Fragment-Based Local Coupled Cluster Embedding Approach for the Quantification and Analysis of Noncovalent Interactions: Exploring the ManyBody Expansion of the Local Coupled Cluster Energy. J. Chem. Theory Comput. , 2021 , 17 (6), 3348-3359. DOI: 10.1021/acs.jctc.1c00005.</li>
+<li style="list-style-type: '[790] ';">Altun, Ahmet; Garcia-Ratés, Miquel; Neese, Frank; Bistoni, Giovanni. Unveiling the complex pattern of intermolecular interactions responsible for the stability of the DNA duplex. Chem. Sci. , 2021 , 12 (38), 1278512793. DOI: 10.1039/D1SC03868K.</li>
+<li style="list-style-type: '[791] ';">Schümann, Jan M.; Ochmann, Lukas; Becker, Jonathan; Altun, Ahmet; Harden, Ingolf; Bistoni, Giovanni; Schreiner, Peter R. Exploring the Limits of Intramolecular London Dispersion Stabilization with Bulky Dispersion Energy Donors in Alkane Solution. J. Am. Chem. Soc. , 2023 , 145 (4), 2093-2097. DOI: 10.1021/jacs.2c13301.</li>
+<li style="list-style-type: '[792] ';">Altun, Ahmet; Schiavo, Eduardo; Mehring, Michael; Schulz, Stephan; Bistoni, Giovanni; Auer, Alexander A. Rationalizing polymorphism with local correlation-based methods: a case study of pnictogen molecular crystals. Phys. Chem. Chem. Phys. , 2024 , 26 (45), 28733-28745. DOI: 10.1039/D4CP03697B.</li>
+<li style="list-style-type: '[793] ';">Bistoni, Giovanni; Altun, Ahmet; Wang, Zikuan; Neese, Frank. Local Energy Decomposition Analysis of London Dispersion Effects: From Simple Model Dimers to Complex Biomolecular Assemblies. Accounts Chem. Res. , 2024 , 57 (9), 1411-1420. DOI: 10.1021/acs.accounts.4c00085.</li>
+<li style="list-style-type: '[794] ';">Altun, Ahmet; Leach, Isaac F.; Neese, Frank; Bistoni, Giovanni. A Generally Applicable Method for Disentangling the Effect of Individual Noncovalent Interactions on the Binding Energy. Angew. Chem. Int. Ed. , 2025 , 64 (12), e202421922. DOI: 10.1002/anie.202421922.</li>
+<li style="list-style-type: '[795] ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. HFLD: A Nonempirical London Dispersion-Corrected Hartree-Fock Method for the Quantification and Analysis of Noncovalent Interaction Energies of Large Molecular Systems. J. Chem. Theory Comput. , 2019 , 15 (11), 5894-5907. arXiv:10.1021/acs.jctc.9b00425, DOI: 10.1021/acs.jctc.9b00425.</li>
+<li style="list-style-type: '[796] ';">Altun, A.; Neese, F.; Bistoni, G. Open-Shell Variant of the London Dispersion-Corrected Hartree-Fock Method HFLD for the Quantification and Analysis of Noncovalent Interaction Energies. J. Chem. Theory Comput. , 2022 , 18 (4), 2292-2307. DOI: 10.1021/acs.jctc.1c01295.</li>
+<li style="list-style-type: '[797] ';">Greengard, L; Rokhlin, V. A fast algorithm for particle simulations. J. Comput. Phys. , 1987 , 73 (2), 325-348. DOI: 10.1016/0021-9991(87)90140-9.</li>
+<li style="list-style-type: '[798] ';">Mayhall, Nicholas J.; Raghavachari, Krishnan; Hratchian, Hrant P. ONIOM-Based QM:QM Electronic Embedding Method Using Löwdin Atomic Charges: Energies and Analytic Gradients. J. Chem. Phys. , 2010 , 132 (11), 114107. DOI: 10.1063/1.3315417.</li>
+<li style="list-style-type: '[799] ';">Vreven, T.; Mennucci, B.; da Silva, C. O.; Morokuma, K.; Tomasi, J. J. Chem. Phys. , 2001 , 115, 62.</li>
+<li style="list-style-type: '[800] ';">Bjornsson, Ragnar; Bühl, Michael. Modeling Molecular Crystals by QM/MM: Self-Consistent Electrostatic Embedding for Geometry Optimizations and Molecular Property Calculations in the Solid. J. Chem. Theory Comput. , 2012 , 8 (2), 498-508. DOI: 10.1021/ct200824r.</li>
+<li style="list-style-type: '[801] ';">Anisimov, Victor; Stewart, James JP. Introduction to the Fast Multipole Method: Topics in Computational Biophysics, Theory, and Implementation . CRC Press, 2019 .</li>
+<li style="list-style-type: '[802] ';">Helgaker, Trygve; Jørgensen, Poul; Olsen, Jeppe. Molecular electronic-structure theory , chapter 9. John Wiley &amp;Sons, 2013 .</li>
+<li style="list-style-type: '[803] ';">Pérez-Jordá, José M; Yang, Weitao. A concise redefinition of the solid spherical harmonics and its use in fast multipole methods. J. Chem. Phys. , 1996 , 104 (20), 8003-8006.</li>
+<li style="list-style-type: '[804] ';">Laio, Alessandro; Parrinello, Michele. Escaping Free-Energy Minima. Proc. Natl. Acad. Sci. U.S.A. , 2002 , 99 (20), 12562-12566. DOI: 10.1073/pnas.202427399.</li>
+</ol>
+<ol>
+<li style="list-style-type: '[805] ';">Iannuzzi, Marcella; Laio, Alessandro; Parrinello, Michele. Efficient Exploration of Reactive Potential Energy Surfaces Using Car-Parrinello Molecular Dynamics. Phys. Rev. Lett. , 2003 , 90 (23), 238302. DOI: 10.1103/PhysRevLett.90.238302.</li>
+<li style="list-style-type: '[806] ';">Tummanapelli, Anil Kumar; Vasudevan, Sukumaran. Dissociation Constants of Weak Acids from Ab Initio Molecular Dynamics Using Metadynamics: Influence of the Inductive Effect and Hydrogen Bonding on pKa Values. J. Phys. Chem. B , 2014 , 118 (47), 13651-13657. DOI: 10.1021/jp5088898.</li>
+<li style="list-style-type: '[807] ';">Tummanapelli, Anil Kumar; Vasudevan, Sukumaran. Estimating Successive pKa Values of Polyprotic Acids from Ab Initio Molecular Dynamics Using Metadynamics: The Dissociation of Phthalic Acid and Its Isomers. Phys. Chem. Chem. Phys. , 2015 , 17 (9), 6383-6388. DOI: 10.1039/C4CP06000H.</li>
+<li style="list-style-type: '[808] ';">Barducci, Alessandro; Bussi, Giovanni; Parrinello, Michele. Well-Tempered Metadynamics: A Smoothly Converging and Tunable Free-Energy Method. Phys. Rev. Lett. , 2008 , 100 (2), 020603. DOI: 10.1103/PhysRevLett.100.020603.</li>
+<li style="list-style-type: '[809] ';">Martyna, Glenn J.; Klein, Michael L.; Tuckerman, Mark. Nosé-Hoover Chains: The Canonical Ensemble via Continuous Dynamics. J. Chem. Phys. , 1992 , 97 (4), 2635-2643. DOI: 10.1063/1.463940.</li>
+<li style="list-style-type: '[810] ';">Martyna, Glenn J.; Tuckerman, Mark E.; Tobias, Douglas J.; Klein, Michael L. Explicit Reversible Integrators for Extended Systems Dynamics. Mol. Phys. , 1996 , 87 (5), 1117-1157. DOI: 10.1080/00268979600100761.</li>
+<li style="list-style-type: '[811] ';">Bussi, Giovanni; Donadio, Davide; Parrinello, Michele. Canonical Sampling through Velocity Rescaling. J. Chem. Phys. , 2007 , 126 (1), 014101. DOI: 10.1063/1.2408420.</li>
+<li style="list-style-type: '[812] ';">Kumar, Shankar; Rosenberg, John M.; Bouzida, Djamal; Swendsen, Robert H.; Kollman, Peter A. THE Weighted Histogram Analysis Method for Free-Energy Calculations on Biomolecules. I. The Method. J. Comput. Chem. , 1992 , 13 (8), 1011-1021. DOI: 10.1002/jcc.540130812.</li>
+<li style="list-style-type: '[813] ';">Kästner, Johannes; Senn, Hans Martin; Thiel, Stephan; Otte, Nikolaj; Thiel, Walter. QM/MM Free-Energy Perturbation Compared to Thermodynamic Integration and Umbrella Sampling: Application to an Enzymatic Reaction. J. Chem. Theory Comput. , 2006 , 2 (2), 452-461. DOI: 10.1021/ct050252w.</li>
+<li style="list-style-type: '[814] ';">Grimme, Stefan. Exploration of Chemical Compound, Conformer, and Reaction Space with Meta-Dynamics Simulations Based on Tight-Binding Quantum Chemical Calculations. J. Chem. Theory Comput. , 2019 , 15 (5), 2847-2862. DOI: 10.1021/acs.jctc.9b00143.</li>
+<li style="list-style-type: '[815] ';">Berendsen, H. J. C.; Postma, J. P. M.; van Gunsteren, W. F.; DiNola, A.; Haak, J. R. Molecular Dynamics with Coupling to an External Bath. J. Chem. Phys. , 1984 , 81 (8), 3684-3690. DOI: 10.1063/1.448118.</li>
+<li style="list-style-type: '[816] ';">Box, G. E. P.; Muller, Mervin E. A Note on the Generation of Random Normal Deviates. Ann. Math. Statist. , 1958 , 29 (2), 610-611. DOI: 10.1214/aoms/1177706645.</li>
+<li style="list-style-type: '[817] ';">Andersen, Hans C. Rattle: A 'Velocity' Version of the Shake Algorithm for Molecular Dynamics Calculations. J. Comput. Phys. , 1983 , 52 (1), 24-34. DOI: 10.1016/0021-9991(83)90014-1.</li>
+<li style="list-style-type: '[818] ';">Kutteh, Ramzi. RATTLE Recipe for General Holonomic Constraints: Angle and Torsion Constraints. CCP5 Newsletter , 1998 , 46, 8-15. URL: https://www.ccp5.ac.uk/wp-content/uploads/2023/03/CCP5_Newsletter_ 1998_10_46.pdf.</li>
+<li style="list-style-type: '[819] ';">Wilson, E. B.; Decius, J. C.; Cross, P. C. Molecular Vibrations - the Theory of Infrared and Raman Vibrational Spectra . Dover Publications, 1955 .</li>
+<li style="list-style-type: '[820] ';">Knizia, Gerald. Intrinsic Atomic Orbitals: An Unbiased Bridge between Quantum Theory and Chemical Concepts. J. Chem. Theory Comput. , 2013 , 9 (11), 4834-4843. DOI: 10.1021/ct400687b.</li>
+<li style="list-style-type: '[821] ';">Derricotte, Wallace D; Evangelista, Francesco A. Localized Intrinsic Valence Virtual Orbitals as a Tool for the Automatic Classification of Core Excited States. J. Chem. Theory Comput. , 2017 , 13 (12), 5984-5999. DOI: 10.1021/acs.jctc.7b00493.</li>
+<li style="list-style-type: '[822] ';">Kubas, A.; Berger, D.; Oberhofer, H.; Maganas, D.; Reuter, K.; Neese, F. Surface Adsorption Energetics Studied with 'Gold Standard' Wave Function-Based Ab Initio Methods: Small-Molecule Binding to TiO2(110). J. Phys. Chem. Lett. , 2016 , 7, 4207-4212.</li>
+</ol>
+</div>
+</body>
+</html>

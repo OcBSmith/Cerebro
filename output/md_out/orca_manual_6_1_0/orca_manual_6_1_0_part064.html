@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part064</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>WORKFLOWS AND AUTOMATIZATION</h2>
+<h2>8.1 ORCA Python Interface (OPI)</h2>
+<p>The ORCA Python interface (OPI) is a versatile tool that provides seamless access to ORCA calculations through Python. The OPI library offers many functions and classes to easily define calculation settings, perform different kinds of ORCA calculations, and process the resulting output data. It is open-source and freely available at GitHub. For detailed installation instructions and usage examples, please refer to the official OPI documentation.</p>
+<p>Added in version 6.1.0: The first version of OPI was released with ORCA 6.1. Please note that OPI's open-source development is managed independently of the ORCA software itself. For the latest updates and changes, consult the OPI GitHub repository and the OPI documentation.</p>
+<h2>8.1.1 Installation</h2>
+<p>OPI can either be installed directly from PyPI:</p>
+<pre><code>pip install orca-pi</code></pre>
+<h2>or from GitHub:</h2>
+<pre><code>git clone https://github.com/faccts/opi.git cd opi python3 -m venv .venv source .venv/bin/activate python3 -m pip install .</code></pre>
+<p>In order to use OPI properly we recommend to install it in a venv environment. For more instructions refer to the OPI documentation.</p>
+<h2>8.2 Compound</h2>
+<p>Compound is a form of sophisticated scripting language that can be used directly in the input of ORCA. Using ' Compound ' the user can combine various parts of a normal ORCA calculation to evaluate custom functions of his own. In order to explain its usage, we will use an example. For a more detailed description of this module the user is referred to section More Details on Compound .</p>
+<h2>8.2.1 example</h2>
+<p>As a typical example we will use the constrained optimization describing the 'umbrella effect' of NH 3 . The script will perform a series of calculations and in the end it will print the potential of the movement plus it will identify the minima and the maximum. The corresponding compound script is the one shown below.</p>
+<pre><code># ----------------------------------------------# Umbrella coordinate mapping for NH3 # Author: Frank Neese # ----------------------------------------------variable JobName = "NH3-umbrella"; variable amin = 50.0; variable amax = 130.0; variable nsteps = 21; Variable energies[21]; Variable angle; Variable JobStep; Variable JobStep_m; variable step; Variable method = "BP86"; Variable basis = "def2-SVP def2/J"; step = 1.0*(amax-amin)/(nsteps-1); # Loop over the number of steps # ----------------------------for iang from 0 to nsteps-1 do angle = amin + iang*step; JobStep = iang+1; JobStep_m= JobStep-1; if (iang>0) then Read_Geom(JobStep_m); New_step ! &{method} &{basis} TightSCF Opt %base "&{JobName}.step&{JobStep}" %geom constraints {A 1 0 2 &{angle} C} {A 1 0 3 &{angle} C} {A 1 0 4 &{angle} C} end end Step_End else New_step ! &{method} &{basis} TightSCF Opt %base "&{JobName}.step&{JobStep}" %geom constraints {A 1 0 2 &{angle} C} {A 1 0 3 &{angle} C} {A 1 0 4 &{angle} C} end end * int 0 1 N 0 0 0 0.0 0.0 0.0 DA 1 0 0 2.0 0.0 0.0 H 1 2 0 1.06 &{angle} 0.0 H 1 2 3 1.06 &{angle} 120.0 H 1 2 3 1.06 &{angle} 240.0</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>* Step_End endif Read energies[iang] = SCF_ENERGY[jobStep]; print(" index: %3d Angle %6.2lf Energy: %16.12lf Eh\n", iang, angle,␣ ↪ → energies[iang]); EndFor # Print a summary at the end of the calculation # ---------------------------------------------print("////////////////////////////////////////////////////////\n"); print("// POTENTIAL ENERGY RESULT\n"); print("////////////////////////////////////////////////////////\n"); variable minimum,maximum; variable Em,E0,Ep; variable i0,im,ip; for iang from 0 to nsteps-1 do angle = amin + 1.0*iang*step; JobStep = iang+1; minimum = 0; maximum = 0; i0 = iang; im = iang-1; ip = iang+1; E0 = energies[i0]; Em = E0; Ep = E0; if (iang>0 and iang<nsteps-1) then Em = energies[im]; Ep = energies[ip]; endif if (E0<Em and E0<Ep) then minimum=1; endif if (E0>Em and E0>Ep) then maximum=1; endif if (minimum = 1 ) then print(" %3d %6.2lf %16.12lf (-)\n",JobStep,angle, E0 ); endif if (maximum = 1 ) then print(" %3d %6.2lf %16.12lf (+)\n",JobStep,angle, E0 ); endif if (minimum=0 and maximum=0) then print(" %3d %6.2lf %16.12lf \n",JobStep,angle, E0 ); endif endfor print("////////////////////////////////////////////////////////\n"); End # end of compound block</code></pre>
+<p>Let's start with how somebody can execute this input. In order to run it, the easiest way is to save it in a normal text file, using the name 'umbrella.cmp' and then use the following ORCA input file:</p>
+<pre><code>%Compound "umbrella.cmp"</code></pre>
+<p>nothing more is needed. ORCA will read the compound file and act appropriately.</p>
+<p>A few notes about this ORCA input. First, there is no simple input line, (starting with '!' ). A simple input is not required when one uses the Compound feature, but In case the user adds a simple input, all the information from the simple input will be passed to the actual compound jobs.</p>
+<p>In addition, if one does not want to create a separate compound text file, it is perfecly possible in ORCA to use the compound feature as any other ORCA block. This means that after the %Compound directive, instead of giving the filename one can append the contents of the Compound file.</p>
+<p>As we will see, inside the compound script file each compound job can contain all information of a normal ORCA</p>
+<p>input file. There are two very important exceptions here: The number of processors and the MaxCore . These information should be set in the initial ORCA input file and not in the actual compound files.</p>
+<p>The Compound block has the same structure like all ORCA blocks. It starts with a '%' and ends with 'End' , if the input is not read from a file. In case the compound directives are in a file, as in the example above, then simply the filename inside brackets is needed and no final END .</p>
+<h2>8.2.2 Defining variables</h2>
+<p>As we pointed out already, it is possible to either give all the information for the calculations and the manipulation of the data inside the Compound block or create a normal text file with all the details and let ORCA read it. The latter option has the advantage that one can use the same file with more than one geometries. In the previous example we refer ORCA to an external file. The file 'umbrella.cmp' , that contains all necessary information.</p>
+<p>Let's try to analyse now the Compound 'umbrella.cmp' file.</p>
+<pre><code># ----------------------------------------------# Umbrella coordinate mapping for NH3 # Author: Frank Neese # ----------------------------------------------variable JobName = "NH3-umbrella"; variable amin = 50.0; variable amax = 130.0; variable nsteps = 21; Variable energies[21]; Variable angle; Variable JobStep; Variable JobStep_m; variable step; Variable method = "BP86"; Variable basis = "def2-SVP def2/J"; step = 1.0*(amax-amin)/(nsteps-1);</code></pre>
+<p>The first part contains some general comments and variable definitions. For the comments we use the same syntax as in the normal ORCA input, through the '#' symbol. Plase not that more than one '#' symbols in the same line cause an error.</p>
+<p>After the initial comments we see some declarations and definitions. There are many different ways to declare variables described in detail in section Variables - General .</p>
+<p>All variable declarations begin with the directive Variable which is a sign for the program to expect the declaration of one or more new variables. Then there are many options, including defining more than one variable, assigning also a value to the variable or using a list of values. Nevertheless all declarations MUST finish with the ; symbol. This symbol is a message to the program that this is the end of the current command. The need of the ; symbol in the end of each command is a general requirement in Compound and there are only very few exceptions to it.</p>
+<h2>8.2.3 Running calculations</h2>
+<pre><code># Loop over the number of steps # ----------------------------for iang from 0 to nsteps-1 do angle = amin + iang*step; JobStep = iang+1; JobStep_m= JobStep-1; if (iang>0) then Read_Geom(JobStep_m); New_step</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>! &{method} &{basis} TightSCF Opt %base "&{JobName}.step&{JobStep}" %geom constraints {A 1 0 2 &{angle} C} {A 1 0 3 &{angle} C} {A 1 0 4 &{angle} C} end end Step_End else New_step ! &{method} &{basis} TightSCF Opt %base "&{JobName}.step&{JobStep}" %geom constraints {A 1 0 2 &{angle} C} {A 1 0 3 &{angle} C} {A 1 0 4 &{angle} C} end end * int 0 1 N 0 0 0 0.0 0.0 0.0 DA 1 0 0 2.0 0.0 0.0 H 1 2 0 1.06 &{angle} 0.0 H 1 2 3 1.06 &{angle} 120.0 H 1 2 3 1.06 &{angle} 240.0 * Step_End endif Read energies[iang] = SCF_ENERGY[jobStep]; print(" index: %3d Angle %6.2lf Energy: %16.12lf Eh\textbackslash{}n", iang,␣ ↪ → angle, energies[iang]); EndFor</code></pre>
+<p>Then we have the most information dense part. We start with the definition of a for loop. The syntax in compound for for loops is:</p>
+<p>For variable From startValue To endValue Do directives</p>
+<h2>EndFor</h2>
+<p>As we can see in the example above, the startValue and endValue can be constant numbers or previously defined variables, or even functions of these variables. Keep in mind that they have to be integers. The signal that the loop has reached it's end is the EndFor directive. For more details with regard to the for loops please refer to section For .</p>
+<p>Then we proceed to assign some variables.</p>
+<pre><code>angle = amin + iang*step; JobStep = iang+1; JobStep_m = JobStep-1;</code></pre>
+<p>The syntax of the variable assignement is like in every programming language with a variable, followed with the = symbol and then the value or an equation. Please keep in mind, that the assignement must always finish with the ; symbol.</p>
+<p>The next step is another significant part of every programming language, namely the if block. The syntax of the if block is the following:</p>
+<pre><code>if ( expression to evaluate ) Then directives else if ( expression to evaluate ) Then directives</code></pre>
+<h2>else</h2>
+<p>directives</p>
+<h2>EndIf</h2>
+<p>The else if and else parts of the block are optional but the final EndIf must always signal the end of the if block. For more details concerning the usage of the if block please refer to section If of the manual.</p>
+<p>Next we have a command which is specific for compound and not a part of a normal programming language. This is the ReadGeom command. It's syntax is:</p>
+<h2>Read_Geom ( integer value );</h2>
+<p>Before explaining this command we will proceed with the next one in the compound script and return for this one.</p>
+<p>The next command is the basis of all compound scripts. This is the New_Step Command. This command signals compound that a normal ORCA calculation follows. It's syntax is:</p>
+<h2>New_Command Normal ORCA input Step_End</h2>
+<p>Some comments about the New_Step command. Firstly, inside the New_Step -Step_End commands one can add all possilbe commands that a normal ORCA input accepts. We should remember here that the commands that define the number of processors and the MaxCore command will be ignored.</p>
+<p>A second point to keep in mind is the idea of the step . Every New_Step - Step_End structure corresponds to a step, starting counting from 1 (The first ORCA calculation). This helps us define the property file that this calculation will create, so that we can use it to retrieve information from it.</p>
+<p>A singificant feature in the New_Step - Step_End block. is the usage of the structure &amp;{ variable } . This structure allows the user to use variables that are defined outside the New_Step - Step_End block inside it, making the ORCA input more generic. For example, in the script given above, we build the basename of the calculations</p>
+<pre><code>%base "&{JobName}.step&{JobStep}"</code></pre>
+<p>using the defined variables JobName and JobStep . For more details regarding the usage of the &amp;{} structure please refer to section &amp; while for the New_Step - Step_End structure please refer to the section NewStep .</p>
+<p>Finally, a few comments about the geometries of the calculation. There are 3 ways to provide a geometry to a New_Step - Step_End calculation. The first one is the traditional ORCA input way, where we can give the coordinates or the name of a file with coordinates, like we do in all ORCA inputs. In Compound though, if we do not pass any information concerning the geometry of the calculation, then Compound will automatically try to read the geometry of the previous calculation. This is the second (implicit) way to give a geometry to a compound Step. Then there is a third way and this is the one we used in the example above. This is the Read_Geom command. The syntat of this command is:</p>
+<h2>Read_Geom ( Step number );</h2>
+<p>We can use this command when we want to pass a specific geometry to a calculation that is not explicitly given inside the New_Step - Step_End structure and it is also not the one from the previous step. Then we just pass the number of the step of the calculation we are interesting in just before we run our new calculation. For more details regarding the Read_Geom command please refer to section Read_Geom .</p>
+<h2>8.2.4 Data manipulation</h2>
+<p>One of the most powerfull features of Compound is it's direct access to properties of the calculation. In order to use these properties we defined the Read command. In the previous example we use it to read the SCF energy of the calculation:</p>
+<pre><code>Read energies[iang] = SCF\_ENERGY[jobStep];</code></pre>
+<p>The syntax of the command is:</p>
+<h2>Read variable name = property</h2>
+<p>where variable name is the name of a variable that is already defined, property is the property from the known properties found in table List of known Properties and step is the step of the cal-</p>
+<p>culation we are interested in. For more details in the Read command please refer to section sec:workflowsautomatization.compound_detailed.commands.propertyFile.read.</p>
+<pre><code># Print a summary at the end of the calculation # ---------------------------------------------print("////////////////////////////////////////////////////////\\n"); print("// POTENTIAL ENERGY RESULT\\n"); print("////////////////////////////////////////////////////////\\n"); variable minimum,maximum; variable Em,E0,Ep; variable i0,im,ip; for iang from 0 to nsteps-1 do angle = amin + 1.0*iang*step; JobStep = iang+1; minimum = 0; maximum = 0; i0 = iang; im = iang-1; ip = iang+1; E0 = energies[i0]; Em = E0; Ep = E0; if (iang>0 and iang<nsteps-1) then Em = energies[im]; Ep = energies[ip]; endif if (E0<Em and E0<Ep) then minimum=1; endif if (E0>Em and E0>Ep) then maximum=1; endif if (minimum = 1 ) then print(" %3d %6.2lf %16.12lf (-)\textbackslash{}n",JobStep,angle, E0 ); endif if (maximum = 1 ) then print(" %3d %6.2lf %16.12lf (+)\textbackslash{}n",JobStep,angle, E0 ); endif if (minimum=0 and maximum=0) then print(" %3d %6.2lf %16.12lf \textbackslash{}n",JobStep,angle, E0 ); endif endfor print("////////////////////////////////////////////////////////\\n");</code></pre>
+<p>Once all data are available we can use them in equations like in any programming language.</p>
+<p>The syntax of the print statement is:</p>
+<p>print( format string, [variables] );</p>
+<p>For example in the previous script we use it like:</p>
+<pre><code>print(" %3d %6.2lf %16.12lf \n",JobStep,angle, E0 );</code></pre>
+<p>where %3d, %6.2lf and %16.2lf are format identifiers and JobStep, angle and E0 are previously defined variables. The syntax follows closely the widely accepted syntax of the printf command in the programming language C. For more details regarding the print statememnt please refer to section: Print .</p>
+<p>Similar to the print command are the write2file and write2string commands that are used to write instead of the output file, either to a file we choose or to produce a new string.</p>
+<p>Finally it is really importnat not to forget that every compound file should finish with a final End .</p>
+<p>Once we run the previous example we get the following output:</p>
+<pre><code>//////////////////////////////////////////////////////// // POTENTIAL ENERGY RESULT ////////////////////////////////////////////////////////</code></pre>
+<p>(continues on next page)</p>
+<pre><code>1 50.00 -56.486626696200 2 54.00 -56.498074637200 3 58.00 -56.505200120800 4 62.00 -56.508823168800 5 66.00 -56.509732863600 (-) 6 70.00 -56.508724734300 7 74.00 -56.506590613800 8 78.00 -56.504070086000 9 82.00 -56.501791816800 10 86.00 -56.500229017900 11 90.00 -56.499674856600 (+) 12 94.00 -56.500229018100 13 98.00 -56.501791817200 14 102.00 -56.504070082800 15 106.00 -56.506590613300 16 110.00 -56.508724733100 17 114.00 -56.509732863700 (-) 18 118.00 -56.508823172900 19 122.00 -56.505200132200 20 126.00 -56.498074642900 21 130.00 -56.486626729200 ////////////////////////////////////////////////////////</code></pre>
+<p>with the step, the angle for the corresponding step, the energy of the constrained optimized energy plus the symbols for the two minima and the maximum in the potential.</p>
+<h2>8.3 More Details on Compound</h2>
+<p>In this part we describe 'Compound' in more detail.</p>
+<h2>8.3.1 Commands</h2>
+<p>Below is a list of all available commands available in Compound</p>
+<p>-----------DatasetRelated -----------</p>
+<ul>
+<li style="list-style-type: '· ';">Dataset( Dataset )</li>
+<li style="list-style-type: '· ';">MakeReferenceFromDir( D.MakeReferenceFromDir )</li>
+<li style="list-style-type: '· ';">Print( D.Print )</li>
+</ul>
+<p>----------FileHandling Related ----------</p>
+<ul>
+<li style="list-style-type: '· ';">CloseFile ( CloseFile )</li>
+<li style="list-style-type: '· ';">OpenFile ( OpenFile )</li>
+</ul>
+<p>-----------</p>
+<ul>
+<li style="list-style-type: '· ';">Break ( Break )</li>
+<li style="list-style-type: '· ';">Continue ( Continue )</li>
+<li style="list-style-type: '· ';">EndFor ( EndFor )</li>
+<li style="list-style-type: '· ';">For ( For )</li>
+</ul>
+<p>-----------GeometryRelated -----------</p>
+<ul>
+<li style="list-style-type: '· ';">Geometry( Geometry )</li>
+<li style="list-style-type: '· ';">BohrToAngs( G.BohrToAngs )</li>
+</ul>
+<p>For</p>
+<p>Loop Related -----------</p>
+<p>(continued from previous page)</p>
+<ul>
+<li style="list-style-type: '· ';">CreateBSSE( G.CreateBSSE )</li>
+<li style="list-style-type: '· ';">CreateFragments( G.CreateFragments )</li>
+<li style="list-style-type: '· ';">DisplaceAtom( G.DisplaceAtom )</li>
+<li style="list-style-type: '· ';">FollowNormalMode( G.FollowNormalMode )</li>
+<li style="list-style-type: '· ';">GetAngle( G.GetAngle )</li>
+<li style="list-style-type: '· ';">GetAtomicNumbers( G.GetAtomicNumbers )</li>
+<li style="list-style-type: '· ';">GetBondDistance( G.GetBondDistance )</li>
+<li style="list-style-type: '· ';">GetCartesians( G.GetCartesians )</li>
+<li style="list-style-type: '· ';">GetGhostAtoms( G.GetGhostAtoms )</li>
+<li style="list-style-type: '· ';">GetNumOfAtoms( G.GetNumOfAtoms )</li>
+<li style="list-style-type: '· ';">MoveAtomToCenter( G.MoveAtomToCenter )</li>
+<li style="list-style-type: '· ';">Read( G.Read )</li>
+<li style="list-style-type: '· ';">RemoveAtoms( G.RemoveAtoms )</li>
+<li style="list-style-type: '· ';">RemoveElements( G.RemoveElements )</li>
+<li style="list-style-type: '· ';">WriteXYZFile( G.WriteXYZFile )</li>
+</ul>
+<p>-----------GΟΑΤRelated-----------</p>
+<ul>
+<li style="list-style-type: '· ';">GOAT( GOAT )</li>
+<li style="list-style-type: '· ';">Get_Energy ( Goat.Get_Energy )</li>
+<li style="list-style-type: '· ';">Get_Num_Of_Geometries ( Goat.Get_Num_Of_Geometries )</li>
+<li style="list-style-type: '· ';">ParseEensembleFfile ( Goat.ParseEnsembleFile )</li>
+<li style="list-style-type: '· ';">Set_Basename ( Goat.Set_Basename )</li>
+<li style="list-style-type: '· ';">Print ( Goat.Print )</li>
+<li style="list-style-type: '· ';">WriteXYZFile ( Goat.WriteXYZFile )</li>
+</ul>
+<p>----------</p>
+<p>If block Related ----------</p>
+<ul>
+<li style="list-style-type: '· ';">If ( If )</li>
+</ul>
+<p>----------LinearAlgebra Related ----------</p>
+<ul>
+<li style="list-style-type: '· ';">Diagonalize( Diagonalize )</li>
+<li style="list-style-type: '· ';">InvertMatrix( InvertMatrix )</li>
+<li style="list-style-type: '· ';">Mat_p_Mat( Mat_p_Mat )</li>
+<li style="list-style-type: '· ';">Mat_x_Mat( Mat_x_Mat )</li>
+<li style="list-style-type: '· ';">Mat_x_Scal( Mat_x_Scal )</li>
+</ul>
+<p>---------ORCAcalculation Related ---------</p>
+<ul>
+<li style="list-style-type: '· ';">Basenames( Basenames )</li>
+<li style="list-style-type: '· ';">ReadMOs( ReadMOs )</li>
+</ul>
+<p>----------Programflow Related ----------</p>
+<ul>
+<li style="list-style-type: '· ';">Abort ( Abort )</li>
+<li style="list-style-type: '· ';">End ( End )</li>
+<li style="list-style-type: '· ';">EndRun ( EndRun )</li>
+<li style="list-style-type: '· ';">GoTo ( GoTo )</li>
+</ul>
+<p>---------PropertyFile Related ----------</p>
+<ul>
+<li style="list-style-type: '· ';">GetNumOfInstances( GetNumOfInstances )</li>
+<li style="list-style-type: '· ';">ReadProperty( ReadProperty )</li>
+</ul>
+<p>---------StringHandling Related ---------</p>
+<ul>
+<li style="list-style-type: '· ';">GetBasename ( S.GetBasename )</li>
+<li style="list-style-type: '· ';">GetChar ( S.GetChar )</li>
+<li style="list-style-type: '· ';">GetSuffix ( S.GetSuffix )</li>
+<li style="list-style-type: '· ';">Print ( Print )</li>
+<li style="list-style-type: '· ';">Write2File ( Write2File )</li>
+<li style="list-style-type: '· ';">Write2String ( Write2String )</li>
+</ul>
+<p>-----------StepRelated-----------</p>
+<ul>
+<li style="list-style-type: '· ';">&amp;( &amp; )</li>
+<li style="list-style-type: '· ';">Alias ( Alias )</li>
+</ul>
+<p>----------TimerRelated ------------</p>
+<ul>
+<li style="list-style-type: '· ';">Timer ( Timer )</li>
+<li style="list-style-type: '· ';">Last ( T.Last )</li>
+<li style="list-style-type: '· ';">Reset ( T.Reset )</li>
+<li style="list-style-type: '· ';">Start ( T.Start )</li>
+<li style="list-style-type: '· ';">Stop ( T.Stop )</li>
+<li style="list-style-type: '· ';">Total ( T.Total )</li>
+</ul>
+<p>---------Variables Related ------------</p>
+<ul>
+<li style="list-style-type: '· ';">Variables ( Variables - General )</li>
+<li style="list-style-type: '· ';">Variables - Assignment ( Variables - Assignment )</li>
+<li style="list-style-type: '· ';">Variables - Declaration ( Variables - Declaration )</li>
+<li style="list-style-type: '· ';">Variables - Functions ( Variables - Functions )</li>
+<li style="list-style-type: '· ';">Variable - With ( With )</li>
+<li style="list-style-type: '· ';">GetBool() V.GetBool()</li>
+<li style="list-style-type: '· ';">GetDim1() V.GetDim1()</li>
+<li style="list-style-type: '· ';">GetDim2() V.GetDim2()</li>
+<li style="list-style-type: '· ';">GetDouble() V.GetDouble()</li>
+<li style="list-style-type: '· ';">GetInteger() V.GetInteger()</li>
+<li style="list-style-type: '· ';">GetSize() V.GetSize()</li>
+<li style="list-style-type: '· ';">GetString() V.GetString()</li>
+<li style="list-style-type: '· ';">PrintMatrix() V.PrintMatrix()</li>
+<li style="list-style-type: '· ';">Write2File ( Write2File )</li>
+<li style="list-style-type: '· ';">Write2String ( Write2String )</li>
+</ul>
+<h2>&amp;</h2>
+<p>The &amp; symbol has a special meaning in the compound block. Using this symbol inside the NewStep -StepEnd block the user can use variables that are defined outside the block. Both string and numerical variables are allowed.</p>
+<h2>Syntax:</h2>
+<p>&amp;{ variable }</p>
+<h2>Example</h2>
+<pre><code># --------------------------------------------# This script checks the options for the # '&' symbol # --------------------------------------------%Compound Variable method = "BP86"; #string variable' Variable basis = "def2-TZVP def2/J"; Variable name = "base"; Variable number = 0; #integer variable Variable distance = 0.8; #double variable New_step ! &{method} &{basis} TightSCF %base "&{name}_&{number}" #combination of variables *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 &{distance} * Step_End # ------------------------------------------# Add some printing # ------------------------------------------print("SUMMARY OF VARIABLES\n"); print("Method: %s\n", method); print("Basis: %s\n", basis); print("Name: %s\n", name); print("Number: %d\n", number); print("Distance: %.2lf\n", distance); End</code></pre>
+<h2>Abort</h2>
+<p>Abort is used when the user wants to exit the program instantly. Syntax:</p>
+<p>Abort;</p>
+<h2>or alternatively:</h2>
+<p>Abort</p>
+<h2>Example:</h2>
+<pre><code>%Compound for i from 0 to 4 do print("i: %d\n", i); if (i=2) then abort; endif endfor End</code></pre>
+<h2>Alias</h2>
+<p>Alias is used to replace an integer number with a more representative string. It is useful when one performs more than one calculations and the step numbers become too complicated to evaluate. In this case using Alias_Step after the Step_End command will connect the preceeding calculation step number with the provided name.</p>
+<h2>Syntax:</h2>
+<p>Alias name ;</p>
+<p>or alternatively:</p>
+<p>Alias name</p>
+<p>Example:</p>
+<pre><code># ----------------------------------# This script checks 'alias' keyword # ----------------------------------Variable numOfSteps = 20; Variable Range = 4.0; Variable distStart = 0.4; Variable Step = Range/numOfSteps; Variable distance; Variable Energies[numOfSteps]; Variable simpleInput = "BP86 def2-SVP def2/J"; For index from 0 to numOfSteps-1 Do Distance = distStart+ index*Step; New_Step !&{simpleInput} *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 &{Distance} * Step_End Alias currStep; print("Current step: %d\n", currStep); Read Energies[index] = JOB_INFO_TOTAL_EN[currStep]; EndFor print("--------------------------------------\n"); print(" Compound Printing \n"); print("%s %12s %16s \n","Step", "Distance", "Energy"); print("--------------------------------------\n"); For index from 0 to numOfSteps -1 Do Distance = distStart + index*Step; print("%4d %12.4lf %16.8lf \n", index, Distance, Energies[index]); EndFor End</code></pre>
+<h2>Note</h2>
+<p>For the Alias command the final ';' is optional.</p>
+<h2>Basenames</h2>
+<p>Basenames in a variable that is automatically created in Compound everytime a NewStep is used and it holds the name of this step. It can be used to recover this name during running of a calculation. It practically is a vector were value zero corresponds to the main calculation before any new_step command.</p>
+<h2>Example:</h2>
+<pre><code>*xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 * %Compound new_step !BP86 step_end alias lala; print("Basaenames[0]: %s\n", basenames[0]); print("Basaenames[1]: %s\n", basenames[lala]); End</code></pre>
+<h2>Break</h2>
+<p>Break can be used inside a For loop (see (see For )) when one needs to break the loop under certain conditions. The syntax is the following:</p>
+<h2>Syntax:</h2>
+<p>For variable From Start value To End value Do commands</p>
+<h2>break ;</h2>
+<p>commands</p>
+<p>EndFor;</p>
+<p>NOTE both versions break and break; are legal.</p>
+<p>What break actually does is to set the running index of the loop to the last allowed value and then jump to the EndFor (see EndFor )).</p>
+<h2>Example:</h2>
+<pre><code># # This a script to check Compound 'break' command # %Compound print(" Test for 'break'\n"); print(" It should print 0, 1 and 2\n"); for i from 0 to 6 Do if (2*i > 4) then break endIF print("index: %d\n", i); EndFor print("Continued outside the 'for' loop\n"); End</code></pre>
+<h2>CloseFile</h2>
+<p>When a file is opened in Compound using the openFile command (see OpenFile ), then it must be closed using the closeFile command.</p>
+<h2>Syntax:</h2>
+<p>closeFile (file);</p>
+<p>file is the file pointer created from the openFile command. For an example see paragraph OpenFile .</p>
+<h2>Continue</h2>
+<p>Continue can be used inside a For loop (see (see For )) when one needs to skip the current step of the loop and proceed to the next one. The syntax is the following:</p>
+<h2>Syntax:</h2>
+<pre><code>For variable From Start value To End value Do commands continue ; commands EndFor;</code></pre>
+<p>NOTE both versions continue and continue; are legal.</p>
+<p>What continue actually does is to jump to the EndFor (see EndFor )).</p>
+<h2>Example:</h2>
+<pre><code># -----------------------------------------------------# This is a script to check Compound 'continue' command # ----------------------------------------------------%Compound print(" Test for 'continue'\n"); print(" It should print 0, 1, 2 and 4\n"); for i from 0 to 4 Do if ( i=3) then continue; endIf print("index: %d\n", i); EndFor End</code></pre>
+<h2>Dataset</h2>
+<p>In Compound we have Dataset objects. These objects can be treated like normal variables of type ' compDataset '. An important difference between normal variables and Dataset variables is the declaration. Instead of the normal:</p>
+<pre><code>Variable x;</code></pre>
+<p>we excplicitly have to declare that this is a dataset. So the syntax for a dataset declaration is:</p>
+<h2>Syntax:</h2>
+<pre><code>Dataset mySet;</code></pre>
+<p>NOTE in the case of datasets we do not allow multiple dataset declarations per line.</p>
+<p>Below is a list of functions that work on Dataset .</p>
+<ul>
+<li style="list-style-type: '· ';">MakeReferenceFromDir( D.MakeReferenceFromDir )</li>
+<li style="list-style-type: '· ';">Print( D.Print )</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for dataset definition # -----------------------------------------------------%Compound dataset mySet; mySet.Print(); End</code></pre>
+<h2>D.MakeReferenceFromDir</h2>
+<p>MakeReferenceFromDir command acts on a dataset object (see Dataset ). It creates a json reference file based on the *xyz files of the current folder. NOTE By default all charges and multplicities will be set to 0 and 1 respectively.</p>
+<h2>Syntax:</h2>
+<p>mySet.MakeReferenceFromDir(dirName);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">mySet is a dataset object that is already declared</li>
+<li style="list-style-type: '· ';">dirName The name of a directory that should contain some xyz files.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code>%Compound # ------------------------------------# This is a compound script that will # check dataset.MakeReferenceFromDir # function # NOTE: The script assumes that some # xyz files rest in the current # directory # ------------------------------------# First some definitions Variable name = "mySet"; Variable numOfMolecules = 0; dataset mySet; Variable myDir="./"; mySet.MakeReferenceFromDir(myDir); mySet.ReadReferenceFile(); mySet.Print(); End</code></pre>
+<h2>D.Print</h2>
+<p>Print command acts on a dataset object (see Dataset ). It prints all details of the specific dataset object.</p>
+<h2>Syntax:</h2>
+<p>mySet.Print();</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">mySet is a dataset object that is already declared</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for dataset definition # -----------------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%Compound dataset mySet; mySet.Print(); End</code></pre>
+<h2>Diagonalize</h2>
+<p>Compound can peform matrix algebraic operations, one of the available algebraic operation is matrix diagonalization. Be carefull that the matrix, that is to be diagonalized, must be a square symmetric matrix. It is also important to remember that only the upper triangle part of the matrix will be used for the diagonalization. If everything proceeds smoothly then the function will return the eigenvectors and eigenvalues of the matrix.</p>
+<h2>Syntax:</h2>
+<p>A.Diagonalize(eigenValues, eigenVectors);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">A: The matrix to be diagonalized.</li>
+<li style="list-style-type: '· ';">eigenValues: The vector with the eigenvalues</li>
+<li style="list-style-type: '· ';">eigenVectors: The square matrix with the eigenvectros of the initial matrix.</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is an example script for diagonalization # -----------------------------------------------------%Compound Variable Dim=3; Variable A[Dim][Dim]; Variable eigenVal; Variable eigenVec; for i from 0 to Dim-1 Do for j from 0 to Dim-1 Do if (i<=j) then A[i][j] = i+j+1; else A[i][j] = A[j][i]; EndIf EndFor EndFor A.Diagonalize(eigenVal, eigenVec); A.PrintMatrix(); eigenVal.PrintMatrix(); eigenVec.PrintMatrix(); End</code></pre>
+<h2>End</h2>
+<p>End is the final command each compound script must have (unless there is an EndRun command (see EndRun )). After Compound executes what is written in the script then it passes control again to normal ORCA input reading. ORCA will continue analyze the input that rests after the Compound part but it will not run any calculation.</p>
+<p>(continued from previous page)</p>
+<h2>EndRun</h2>
+<p>#EndRun* is an alternative to the End command (see EndRun ) for ending the execution of a Compound script. The difference between end and EndRun is that EndRun ignores everything after the Compound block. This makes it even easier to use Compound as a full workflow run.</p>
+<h2>EndFor</h2>
+<p>All For loops (see For ) must finish with EndFor . The syntax and an example is shown in the For section (see For ).</p>
+<p>NOTE For EndFor both EndFor and EndFor; are possible.</p>
+<h2>For</h2>
+<p>For loops are used to perform repetitive tasks. The syntax is the following:</p>
+<h2>Syntax:</h2>
+<p>For variable From Start value To End value Do commands</p>
+<h2>EndFor or EndFor;</h2>
+<p>Variable should be a variable name not previously defined. Start value and End value should be integers defining the start and end value of the variable . Start value and End value can be numbers, predefined variables or functions of previously defined variables. The only requirement is that they should be integers . Keep in mind that the loop will be performed from the first value to the End value , including the End value .</p>
+<h2>Example:</h2>
+<pre><code># ---------------------------------------# This is a script to check 'for' loops # ---------------------------------------# ---------------------------------# Some necessary initial definitions # ----------------------------------Variable x = {0.0, 1.0, 2.0, 3.0, 4.0}; Variable f; Variable loopStart; Variable upLimit; # -----------------------------------# Case 1. # Constant Start / Constant End # -----------------------------------print(" --------------Case 1 --------------\n"); print(" Constant Start / Constant End \n"); print(" f = index*x[index] \n"); print( " for index from 0 to 4 Do \n"); print(" -------------------------------------\n"); for index from 0 to 4 Do f = index*x[index]; print("Index: %3d x[index]: %.2lf f: %.2lf\n", index, x[index], f); EndFor loopStart = 0; upLimit = 4; print(" --------------Case 2 --------------\n"); print(" Variable Start / Variable End \n"); print(" f = index*x[index] \n");</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>print( " for index from loopStart to upLimit Do\n"); print(" -------------------------------------\n"); for index from loopStart to upLimit Do f = index*x[index]; print("Index: %3d x[index]: %.2lf f: %.2lf\n", index, x[index], f); EndFor loopStart = 1; upLimit = 3; print(" --------------Case 3 --------------\n"); print(" function Start / function End \n"); print(" f = index*x[index] \n"); print( " for index from start-1 to upLimit+1 Do\n"); print(" -------------------------------------\n"); for index from loopStart-1 to upLimit+1 Do f = index*x[index]; print("Index: %3d x[index]: %.2lf f: %.2lf\n", index, x[index], f); EndFor End</code></pre>
+<h2>Geometry</h2>
+<p>In Compound we have Geometry objects. These objects can be treated like normal variables of type ' compGeometry '. An important difference between normal variables and Geometry variables is the declaration. Instead of the normal:</p>
+<pre><code>Variable myGeom;</code></pre>
+<p>we excplicitly have to declare that this is a geometry. So the syntax for a geometry declaration is:</p>
+<h2>Syntax:</h2>
+<pre><code>Geometry myGeom; Geometry myGeom1, myGeom2;</code></pre>
+<p>Using the second definition one can define two geometry objects in the same line.</p>
+<p>Below is a list of functions that work on Geometry objects.</p>
+<ul>
+<li style="list-style-type: '· ';">BohrToAngs( G.BohrToAngs )</li>
+<li style="list-style-type: '· ';">CreateBSSE ( G.CreateBSSE )</li>
+<li style="list-style-type: '· ';">CreateFragments( G.CreateFragments )</li>
+<li style="list-style-type: '· ';">DisplaceAtom( G.DisplaceAtom )</li>
+<li style="list-style-type: '· ';">FollowNormalMode ( G.FollowNormalMode )</li>
+<li style="list-style-type: '· ';">GetAngle( G.GetAngle )</li>
+<li style="list-style-type: '· ';">GetAtomicNumbers( G.GetAtomicNumbers )</li>
+<li style="list-style-type: '· ';">GetBondDistance( G.GetBondDistance )</li>
+<li style="list-style-type: '· ';">GetCartesians( G.GetCartesians )</li>
+<li style="list-style-type: '· ';">GetGhostAtoms( G.GetGhostAtoms )</li>
+<li style="list-style-type: '· ';">GetNumOfAtoms( G.GetNumOfAtoms )</li>
+<li style="list-style-type: '· ';">MoveAtomToCenter( G.MoveAtomToCenter )</li>
+<li style="list-style-type: '· ';">Read( G.Read )</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">RemoveAtoms( G.RemoveAtoms )</li>
+<li style="list-style-type: '· ';">RemoveElements( G.RemoveElements )</li>
+<li style="list-style-type: '· ';">WriteXYZFile( G.WriteXYZFile )</li>
+</ul>
+<h2>G.BohrToAngs</h2>
+<p>BohrToAngs command acts on a geometry object (see see Geometry ). It will transform the geometry of the loaded geometry object from Bohr to Angstroms. Practically it will just multiply the coordinates with the factor 0.529177249 .</p>
+<h2>Syntax:</h2>
+<p>myGeom.BohrToAngs();</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">myGeom is a geometry object that already contains a geometry</li>
+</ul>
+<h2>Example:</h2>
+<pre><code># ----------------------------------------------------# This is a script to check the BohrToAngs function # -----------------------------------------------------*xyz 0 1 O -1.69296787 -0.05579265 0.00556629 H -2.01296504 0.84704339 -0.01586469 H -0.73325076 0.04238910 0.00084302 * %Compound Geometry myGeom; Variable CC; New_Step !BP86 Step_End myGeom.Read(); myGeom.BohrToAngs(); CC = myGeom.GetCartesians(); CC.PrintMatrix(); End</code></pre>
+<h2>G.CreateBSSE</h2>
+<p>CreateBSSE command acts on a geometry object (see see Geometry ). In the case that the geometry object contains ghost atoms then CreateBSSE will create five new files:</p>
+<ul>
+<li style="list-style-type: '· ';">myFilename_FragmentA.xyz</li>
+<li style="list-style-type: '• ';">myFilename_MonomerA.xyz</li>
+<li style="list-style-type: '· ';">myFilename_FragmentB.xyz</li>
+<li style="list-style-type: '· ';">myFilename_MonomerB.xyz</li>
+<li style="list-style-type: '· ';">myFilename_Total.xyz</li>
+</ul>
+<h2>Syntax:</h2>
+<p>myGeom.CreateBSSE(filename=myFilename);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">myGeom is a geometry object that already contains a geometry</li>
+<li style="list-style-type: '· ';">filename is a base filename for the created files.</li>
+</ul>
+<h2>Example:</h2>
+<figure><figcaption><div class="caption">NOTE The files will contain XYZ geometries in BOHRS .</div></figcaption></figure>
+<h2>G.CreateFragments</h2>
+<p>CreateBSSE command acts on a geometry object (see see Geometry ). In the case that the geometry object contains ghost atoms then CreateBSSE will create five new files:</p>
+<ul>
+<li style="list-style-type: '· ';">myFilename_FragmentA.xyz</li>
+<li style="list-style-type: '• ';">myFilename_MonomerA.xyz</li>
+<li style="list-style-type: '· ';">myFilename_FragmentB.xyz</li>
+<li style="list-style-type: '· ';">myFilename_MonomerB.xyz</li>
+<li style="list-style-type: '· ';">myFilename_Total.xyz</li>
+</ul>
+<h2>Syntax:</h2>
+<p>myGeom.CreateBSSE(filename=myFilename);</p>
+<h2>Where:</h2>
+<ul>
+<li style="list-style-type: '· ';">myGeom is a geometry object that already contains a geometry</li>
+<li style="list-style-type: '· ';">filename is a base filename for the created files.</li>
+</ul>
+<h2>Example:</h2>
+</div>
+</body>
+</html>

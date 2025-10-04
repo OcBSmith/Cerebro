@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part046</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<figure><figcaption><div class="caption">Fig. 5.28: Lowest transitions in Ni(H2O)62+.</div></figcaption></figure>
+<h2>5.8.4 X-Ray Absorption Spectroscopy</h2>
+<p>It is also possible to compute X-ray absorption spectra (XAS) with the MCRPA module by making use of the core-valence separation (CVS) approximation.[659] For such calculations, the same active space as for ground state CASSCF or valence excitation energy MCRPA calculations should be chosen. To access MCRPA core excitations, two restrictions are introduced by the CVS approximation:</p>
+<ul>
+<li style="list-style-type: '· ';">The configuration part of the eigenvectors is omitted as it is responsible for valence excitations within the valence active orbitals.</li>
+<li style="list-style-type: '· ';">The orbital part of the eigenvectors is restricted to core-active and core-virtual pairs with a user given list of core orbitals</li>
+</ul>
+<p>For computing the lowest MCRPA oxygen K-edge transitions of ozone, one can employ the following input for an CVS-MCRPA calculation:</p>
+<pre><code>%casscf nel 12 # number of active electrons norb 9 # number of active orbitals nroots 1 # only the ground state mult 1 # singlet multiplicity end %mcrpa NRoots 15 # number of roots / excited states</code></pre>
+<p>(continues on next page)</p>
+<pre><code>DoCVS true # turn on core valence separation OrbWin 0, 2, -1, -1 # select on the lowest 3 core orbitals DoNTO true # generate NTOs for converged roots end</code></pre>
+<p>Here the first 3 inactive MOs are selected by OrbWin that are primarily expanded in the 3 1s atomic orbitals of the three O atoms. There is no restriction on the virtual orbitals ( -1 is chosen for first and last virtual MO index).</p>
+<p>Note that in constrast to other multi-reference protocols , the core orbitals must not get added to the active space for CVS-MCRPA calculations.</p>
+<p>The most dominant NTO pairs for the four lowest core excitations are given below:</p>
+<figure><figcaption><div class="caption">Fig. 5.29: Lowest CVS-MCRPA oxygen K-edge transitions in ozone.</div></figcaption></figure>
+<p>(continued from previous page)</p>
+<h2>5.8.5 Computational Aspects</h2>
+<h2>Large Molecules</h2>
+<p>The code is intended to be used for medium-sized and larger open-shell molecules. It has the same scaling as ORCA's first-order CASSCF energy implementation though a larger pre-factor as the computational cost grow 'in principle' linearly with the number of roots.</p>
+<p>The implementation is AO-driven meaning that the computational bottleneck is the Fock matrix construction for the several state-specific pseudo AO densities. Note that there are up to 6 pseudo AO densities for each state. The computational costs can be reduced significantly if the RIJCOSX approximation is employed, which is highly recommended.</p>
+<p>The second most expensive part of the MCRPA computation are the two-electron integrals with 3 active indices g ptuv . As we aim for running calculations on larger systems, there is only an implementation of the integral transformation that uses the resolution-of-the-identity (RI) approximation.</p>
+<p>The restrictions on the auxiliary basis sets are the same as for the CASSCF code (Sec. CASSCF Linear Response ). That is</p>
+<ul>
+<li style="list-style-type: '· ';">If the Fock matrices are constructed in Direct or Conventional mode, the /C bases are used for the RI approximation of the g ptuv integrals.</li>
+<li style="list-style-type: '· ';">If the RIJCOSX approximation for the Fock matrices is employed, the /JK bases are used for both the Fock matrices and the g ptuv integrals.</li>
+</ul>
+<p>Note that the RIJK approximation is not yet available.</p>
+<h2>Convergence</h2>
+<p>Before starting running MCRPA, it is recommended to converge the state-specific CASSCF energy calculation very tightly. The TRAH-CASSCF is ideally suited for that purpose. Note that property calculations in general assume vanishing electronic gradients otherwise numerical issues in the eigenvalue / response equations may occur.</p>
+<p>Eigenvalues and eigenvectors are determined by a dedicated variant of the Davidson algorithm for solving large-scale TDA or RPA eigenvalue equations.[594, 660] The accuracy of the eigenvalues and eigenvectors is solely determined by TolR (default 1.e-5) that is compared to the Frobenius of the residual vector for each root.</p>
+<p>Similar to converging CASSCF equations, the MCTDA and MCRPA convergence rates are also affected by the choice of molecules orbitals. This has to be setup in the %casscf input block. The MCRPA program will not change the converged orbitals and CI coefficients. For most calculations, the default settings are most appropriate which are canonical orbitals for inactive and virtual orbitals and natural orbitals for active orbitals. as explained in subsection Final Orbitals: Canonicalization Choices . For multi-center systems as bimetallic transition metal complexes, localized orbitals are a better choice. Purified d or f orbitals ( ActOrbs dorbs or ddorbs and forbs ) for single-metal complexes are often helpful for analyzing excitations, though, their choice usually result in slower convergence of the eigenvalue equations.</p>
+<p>To facilitate quick convergence of the eigenvalue equations, we start the iterations from eigenvectors that were obtained from direct diagonalization of full Hessian and metric matrices that were compute for a subset of elements. This is referred to as P-space or full method which is the default for obtaining initial eigenvectors but also the preconditioner of the TDA/RPA Davidson algorithm ( PreCond full ). The P-space method contains the orbitalorbital and configuration-configuration blocks that are diagonalized individually. Orbital-configuration coupling is omitted here. The size of the P space is controlled by the keyword PreConMaxRed which is set to 400 by default. Faster convergence can be expected with larger P-space dimensions, though the cost of the full diagonalization increase cubically. Alternatively, the approximate diagonal Hessian[661] and metric can be used for preconditioning ( PreCond diag ), but not for the initial eigenvectors. It is recommended to employ Precond full .</p>
+<h2>5.8.6 Keyword List</h2>
+<table><tbody><tr><td colspan="3">%mcrpa</td></tr><tr><td>NRoots</td><td>0</td><td># The number of desired roots</td></tr><tr><td>TolR</td><td>1e-5</td><td># Convergence threshold for residual norm</td></tr><tr><td>PrintWF</td><td>CFG</td><td># print CI part in (CFG (default), CSF, or DET basis)</td></tr><tr><td>TolPrint</td><td>1e-2</td><td># Threshold for printing elements of excitation vector</td></tr><tr><td>MaxRed</td><td>200</td><td># maximum size of reduces space for ALL VECTORS IN TOTAL</td></tr><tr><td>MaxIter</td><td>100</td><td># maximum number of (Davidson) iterations</td></tr><tr><td>TDA</td><td>false</td><td># Switch off full TD-CASSCF (Tamm-Dancoff approximation)</td></tr><tr><td>DoNTO</td><td>false</td><td># Generate Natural Transition Orbitals</td></tr><tr><td>NTOThresh</td><td>1e-3</td><td># Threshold for printing occupation numbers</td></tr><tr><td>DoCVS</td><td>false</td><td># toggle core valence separation (CVS) for XAS</td></tr><tr><td>OrbWin</td><td>i0, i1,</td><td>a0, a1 # first and last inactive and virtual MO,␣</td></tr><tr><td>PreCond</td><td>full</td><td># (default) P-space preconditioner uses parts of exact␣</td></tr><tr><td colspan="2">→ diag Hessian elements</td><td># diagonal preconditioner approximate diagonal␣</td></tr><tr><td>PreConMaxRed</td><td>400</td><td># dimension of exact Hessian for preconditioning</td></tr><tr><td colspan="2">DoOrbResp true</td><td># turn orbital response off -&gt; CAS-CI method</td></tr><tr><td colspan="2">DoCD</td><td>true # circular dichroism calculation</td></tr><tr><td></td><td></td><td># electric moments in a length formulation</td></tr><tr><td colspan="2">DoDipoleLength</td><td>true</td></tr><tr><td colspan="2">DoDipoleVelocity DoFullSemiclassical</td><td>true # electric moments in a velocity formulation false # request the calculation of complete semiclassical␣</td></tr><tr><td colspan="2">↪ → multipolar moments</td><td></td></tr><tr><td colspan="2">DecomposeFosc</td><td>false # request the decomposition of the oscillator␣</td></tr></tbody></table>
+<h2>5.9 Excited States via EOM-CCSD</h2>
+<p>Many of the previously described methods are based on the single excitation framework. For a more accurate treatment, double excitations should also be considered. The equation of motion (EOM) CCSD method (and the closely related family of linear response CC methods) provides an accurate way of describing excited, ionized, and electronattached states based on singles and doubles excitations within the coupled-cluster framework.</p>
+<h2>5.9.1 Theory</h2>
+<p>The EOM wave function is parametrized in the following manner</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>i.e. via the action of a linear excitation operator R on the coupled-cluster ground state wave function Ψ CC . Here, R is a particle conserving operator, in the case of the excitation energy problem. However, this is not true for the ionization or electron attachment problems, where R is a net annihilation or net creation operator, respectively. The ground state coupled-cluster T-amplitudes are obtained from a CCSD calculation, and our task is to obtain R . Note that since the CC Hamiltonian is nonsymmetric, a left hand solution ( L ) would also be needed to evaluate properties. For the calculation of excitation, ionization or electron attachment energies, however, it is enough to obtain the right</p>
+<p>hand solutions ( R ). In principle, this is done by building the Hamiltonian and diagonalizing it in order to obtain energy expectation values.</p>
+<p>In practice, the size of the CCSD Hamiltonian matrix is prohibitively large and thus, various methods have been devised to obtain its lowest few eigenvalues and eigenstates. One of the most popular of these approaches is the Davidson method, which can be summarized as follows:</p>
+<ul>
+<li style="list-style-type: '· ';">Construct an initial guess of orthogonal trial vectors, C .</li>
+<li style="list-style-type: '· ';">Evaluate the sigma vectors σ = HC .</li>
+<li style="list-style-type: '· ';">Build model Hamiltonian H = C T σ .</li>
+<li style="list-style-type: '· ';">Diagonalize H : E = U T HU .</li>
+<li style="list-style-type: '· ';">Compute Ritz vectors X = C U .</li>
+<li style="list-style-type: '· ';">Compute residuals R = X E σ U , check convergence: if yes, pass X, E as solutions.</li>
+<li style="list-style-type: '· ';">Preconditioning: T = MR (many possible choices for the preconditioner M ).</li>
+<li style="list-style-type: '· ';">Check if adding new trial vectors would exceed the maximum number of trial vectors:</li>
+<li>-if no, add T to C , and orthonormalize the united set</li>
+<li>-if yes, then set X as C (orthonormalize if H is nonsymmetric); then add T and orthonormalize</li>
+</ul>
+<p>The advantage of the above method is that, instead of the full Hamiltonian, only the sigma vectors have to be explicitly evaluated and stored.</p>
+<p>It is also possible to use a lower scaling version of the EOM-CCSD methods, which relies on the perturbative truncation of the coupled-cluster similarity transformed Hamiltonian. Presently, only the second order truncated version (CCSD(2) approximation) is available for closed-shell molecules (RHF). However, it is better to use the PNO based implementation, as it has the cost of EOM-CCSD(2), but its accuracy is comparable to canonical EOM-CCSD.</p>
+<h2>Initial Guess</h2>
+<p>The present initial guess in the RHF EOM implementation consists of constructing a CIS Hamiltonian of a certain dimension, and diagonalizing it. The roots are preselected based on the energetic ordering of the diagonal elements of the Hamiltonian. In the UHF case, the guess is constructed from the solutions of a UHF CIS calculation. The number of roots in the initial guess is determined as 20 times the number of roots desired in EOM ( NRoots ) if NDav is 20 or smaller, otherwise it is set to NDav times the number of EOM roots. If the parameter NInits is larger than zero, then the number of initial guess roots will be set to this parameter times NRoots . The maximum possible number of roots is the full CIS dimension, ( N O N V (RHF) or N O α N V α + N O β N V β (UHF)) . One should keep in mind, while increasing the number of initial guess vectors, that this corresponds to diagonalizing a matrix of increasing dimension. If, for example NRoots is 10, then by default 200 roots are considered in the initial guess (unless it exceeds the size of the CIS space), or if NInits is set to 100, then there will be 1000 roots in the guess. In some cases, the roots calculated using EOM may not be the lowest ones, but a few of these may be replaced by some higher roots which are 'easier' to find. In such cases, it may help to increase NRoots or NInits to converge to the proper roots. The program can be made to follow the initial CIS guess by setting FollowCIS to true and is necessary if we wish to ionize or excite from inner-valence or core orbitals. In the RHF implementation, the core orbital, from which the ionization or excitation originates, can be specified using the keyword CoreHole , in addition to setting DoCore and FollowCIS to true. The CoreHole keyword is quite general and in principle, ionization or excitation processes from any occupied orbital can be specified using this keyword.</p>
+<h2>Hamiltonian Construction</h2>
+<p>The Hamiltonian construction begins by calling the sigma routines. In the case of the closed-shell code, the logical variables UseEOMOptS and UseEOMOptD choose the routines to be used in the evaluation of the singles and doubles sigma vectors, respectively. If true, the optimized sigma routine, using dressed integrals, will be used. This should not be changed, the option is there mainly for debugging purposes. If set to false, an automatically generated, and much slower serial code will be used instead. In the case of the open-shell UHF implementation, optimized sigma routines have been generated using the ORCA Automated Generator Environment (AGE) [361]. In each early iteration, N R sigma vectors will be determined, except in the case of a restart, where the number of sigma vectors is 2 N R . For further details on convergence, see Convergence, Restart, Preconditioning and Subspace Expansion below.</p>
+<p>The most time consuming part of the sigma vector construction is the formation of the external exchange contribution, which can be influenced via the CC keyword KCOpt . Currently, there are three options that are compatible with the RHF EOM implementation: KC_MO , KC_AOX and KC_AOBLAS and KC_AOX is the only option available in the UHF EOM code. The external exchange term can be treated most efficiently using COSX, which in the closed-shell case, leads to average speed ups of 10x for the external exchange term and an overall speedup of 3x for the EOM calculation. This is accompanied by a drastic reduction of the storage cost[662]. The error introduced is below 1 meV, which is 200-fold less than the error bar of the method[662] itself. It is the default for KCOpt KC_AOX and KC_AOBLAS and can be controlled by the keyword DOCOSXEOM . The default grid settings for EOM are GridX 1 and IntAccX 2.68 .</p>
+<p>Once the sigma vectors are available, they are multiplied with the trial vectors to yield the reduced space Hamiltonian. The Hamiltonian is built in a way that, in each iteration, only the new vector products are added to the 'edge' of the old Hamiltonian, so that a full build is avoided. It should be clear that the parameter NDav plays an important role here, since it determines the maximum size of the Hamiltonian ( N D N R ), and also controls how much memory is needed for the trial and sigma vectors, as seen above. Since the choice of this parameter influences convergence properties, it will be discussed further in Convergence, Restart, Preconditioning and Subspace Expansion .</p>
+<h2>Solution of the (Nonsymmetric) Eigenproblem</h2>
+<p>Following the construction of the Hamiltonian, a nonsymmetric eigensolver is called. In this case, it is possible to have complex eigenvalues. In practice, this is rarely the case, and indicates a problem of some kind. A warning will be given if this happens, however, one may get away with this if it only happens in an isolated iteration step.</p>
+<p>Once the eigenvectors are available, they are compared with those of the previous iteration, if root homing is turned on, i.e. if the RootHoming keyword is set to true. This means evaluating the overlap of the old and new eigenvectors, in order to keep track of the possible movement of the eigenvectors if root flipping occurs. If converged roots are removed from further iterations (see next section), it is important to keep track of changes in ordering, especially if a converged and a non-converged root is swapped. After diagonalization, the Ritz vectors and residuals can be evaluated.</p>
+<h2>Convergence, Restart, Preconditioning and Subspace Expansion</h2>
+<p>Convergence is signaled once a residual square norm based criteria is fulfilled. This criteria is determined by the CheckEachRoot keyword. If it is true (default), the convergence of the residual square norm of each root is checked separately. This is due to the fact that different roots converge at a different rate. Once a root is converged, no new trial vectors will be generated, belonging to that vector. This means that the EOM iterations will progressively become faster (until restart). Turning off the rootwise convergence check is possible, but not recommended. In this case, the maximum of all residual square norms is checked for convergence, and all iterations will take roughly the same amount of time since no vectors are removed in any iteration. However, this procedure can be numerically unstable, since the residuals of some roots might become very close to zero, and trying to generate new vectors, which are orthogonal to these, may lead to numerical disaster. In short, the recommended default is having both CheckEachRoot and RootHoming set to true. If CheckEachRoot is false, then RootHoming should also be set to false, as it may cause problems if NDav is too small. The convergence threshold of the residual in Davidson's method can be larger than that for the ground state CC residual threshold in order to obtain converged results. Namely, a value of DTol of 1e-5 is almost always enough to get well converged energies.</p>
+<p>At this point it is worth discussing the role of the keyword NDav . This keyword determines at what point the Davidson algorithm should be restarted. If it is chosen too small, it may cause slow convergence. If this value is too large, this</p>
+<p>may result in overwhelming demands on memory/disk space requirements. The default value (20) is chosen with the hope that no, or maybe one restart will be required. It should only be changed if computational resources demand it. However, the treatment of core ionization or core excitation processes often requires a large value of NDav . At restart, the Ritz vectors are copied as new trial vectors for all roots, which will then be orthonormalized, while new vectors will only be generated for the non-converged roots. This means that the step after the rebuilding of the expansion space will be 1-2 times as expensive as one of the initial steps.</p>
+<p>New directions (trial vectors) are generated from the preconditioned residual vectors. If no preconditioning is applied (the preconditioner is taken to be a unit matrix), one falls back to the Lanczos algorithm, which is inferior to the Davidson algorithm. This happens if the keyword DoLanczos is true. This is not recommended, as the Lanczos algorithm converges several times slower than Davidson's, and is there for debugging mainly. The original Davidson preconditioner is the inverse of a diagonal matrix which contains the difference of the diagonal elements of the Hamiltonian and the current approximation to the eigenvalue belonging to the given root. Let us consider the closedshell RHF implementation for simplicity. If R ia and R ijab are elements of the singles and doubles amplitudes, respectively, then the updated vectors ( T ia , T ijab ) have the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>for doubles. Here, D ia and D ijab are related to, and possibly approximations of, the respective diagonal Hamiltonian elements. The simplest approximation is just to construct these from diagonal Fock matrix elements (i.e. orbital energies) as D ia = ε a -ε i and D ijab = ε a + ε b -ε i -ε j . A slightly better preconditioning can be obtained as follows. For singles, take the exact CIS diagonal elements, D ia = ε a -ε i + g iiaa , where the last term is the respective antisymmetrized integral; and construct the doubles as D ijab = D ia + D jb . This is the default, and can be changed back to the simple Fock matrix guess by setting UseCISUpdate to false.</p>
+<p>Following the preconditioning step, the resulting vectors are orthogonalized to the previous set of trial vectors, and orthonormalized among themselves. Since, the trial vectors do not change once they are generated (unless a restart occurs), only the new elements of the overlap matrix need to be generated for the orthonormalization. The numerical threshold for the inversion (and other division steps) is controlled by the parameter OTol . Finally, the amount of printed information can be controlled via the PrintLevel keyword. If not given or equal to 2, only basic iteration information will be printed. If set to 3, detailed iteration information will be printed (recommended if timing results for individual steps are required), while 4 or higher triggers additional (and very verbose) information from other subroutines as well.</p>
+<p>The default solver is a multi-root Davidson procedure. The single-root solver can be initiated by setting DoRootwise and FollowCIS to true. The latter is more stable when a large number of roots are requested.</p>
+<h2>Properties in the RHF EOM implementation</h2>
+<p>The only property that can be calculated with the current RHF EOM implementation is the transition moment. It is calculated as a CI-like expectation value, as proposed by Stanton and Bartlett. The right and left transition density are defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In the above equation, Λ corresponds to the ground state left vector, which needs to be solved once and L is the left vector, which needs to be solved separately for each root. Once the right and left vectors have been obtained, the left and right transition densities are constructed and the oscillator strength is calculated using the following formula</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The oscillator strength, calculated by default, employs a linear approximation for Λ . The L vectors are, on the other hand, calculated as a general inverse of the corresponding R vectors. This approximation requires no additional effort for singles, and</p>
+<p>over the energy calculation and gives similar accuracy as that of the exact oscillator strength calculation, which is at least twice the cost of the energy calculation. Exact EOM-CC transition moments can, however, be calculated by setting DoLeft and DoTDM to true. Please note that transition moments have not yet been implemented for the UHF EOM-CCSD approach.</p>
+<h2>5.9.2 General Use</h2>
+<p>The EOM-CCSD routine is part of the orca_mdci module of the ORCA program package. It is called after a successful coupled-cluster calculation, if the appropriate flags and the number of roots have been set. In the following chapter, the general program flow and the input parameters of the EOM routine will be described. For an RHF or UHF reference, the EE-, IP- and EA-EOM-CCSD approaches are available for the computation of excitation energies, ionization potentials and electron affinities, respectively. Currently, the following simple input keywords are available:</p>
+<pre><code>!EOM-CCSD # same as !EE-EOM-CCSD !EE-EOM-CCSD # EOM for electronically excited states !IP-EOM-CCSD # IP version !EA-EOM-CCSD # EA version</code></pre>
+<p>The simplest way to perform an EOM calculation is via the usage of the EOM-CCSD keyword, together with the specification of the desired number of roots:</p>
+<pre><code>! RHF EOM-CCSD cc-pVDZ TightSCF %mdci nroots 9 end *xyz 0 1 C 0.016227 -0.000000 0.000000 O 1.236847 0.000000 -0.000000 H -0.576537 0.951580 -0.000000 H -0.576537 -0.951580 -0.000000 *</code></pre>
+<p>The above input will call the EOM routine with default settings. The main output is a list of excitation energies, augmented with some further state-specific data. For the above input, the following output is obtained:</p>
+<pre><code>----------------------EOM-CCSD RESULTS (RHS) ----------------------IROOT= 1: 0.147823 au 4.022 eV 32443.5 cm**-1 Amplitude Excitation 0.107945 4 -> 8 0.665496 7 -> 8 0.104633 7 -> 8 6 -> 8 Ground state amplitude: 0.000000 Percentage singles character= 92.32 IROOT= 2: 0.314133 au 8.548 eV 68944.3 cm**-1 Amplitude Excitation 0.671246 7 -> 9 Ground state amplitude: -0.000000 Percentage singles character= 90.42 IROOT= 3: 0.343833 au 9.356 eV 75462.6 cm**-1 Amplitude Excitation -0.670633 5 -> 8 -0.112538 6 -> 8 5 -> 8</code></pre>
+<p>(continues on next page)</p>
+<pre><code>Ground state amplitude: 0.000000 Percentage singles character= 92.00 IROOT= 4: 0.364199 au 9.910 eV 79932.5 cm**-1 Amplitude Excitation 0.102777 4 -> 10 -0.484661 6 -> 8 0.438311 7 -> 10 -0.167512 6 -> 8 6 -> 8 Ground state amplitude: -0.021060 Percentage singles character= 87.22 IROOT= 5: 0.389398 au 10.596 eV 85463.0 cm**-1 Amplitude Excitation 0.646812 4 -> 8 -0.122387 7 -> 8 0.171366 7 -> 8 6 -> 8 Ground state amplitude: 0.000000 Percentage singles character= 87.47 IROOT= 6: 0.414587 au 11.281 eV 90991.4 cm**-1 Amplitude Excitation -0.378418 6 -> 8 -0.537292 7 -> 10 -0.124246 6 -> 8 6 -> 8 Ground state amplitude: -0.061047 Percentage singles character= 89.13 IROOT= 7: 0.423861 au 11.534 eV 93026.7 cm**-1 Amplitude Excitation 0.673806 7 -> 11 Ground state amplitude: 0.000000 Percentage singles character= 93.14 IROOT= 8: 0.444201 au 12.087 eV 97490.8 cm**-1 Amplitude Excitation 0.664877 6 -> 9 0.130475 6 -> 9 6 -> 8 Ground state amplitude: -0.000000 Percentage singles character= 87.17 IROOT= 9: 0.510514 au 13.892 eV 112044.8 cm**-1 Amplitude Excitation -0.665791 6 -> 10 0.114259 6 -> 15 -0.124374 6 -> 10 6 -> 8 Ground state amplitude: -0.000000</code></pre>
+<p>The IP and EA versions can be called using the keywords IP-EOM-CCSD and EA-EOM-CCSD , respectively. For open-shell systems (UHF reference wavefunction), IP/EA-EOM-CCSD calculations require an additional keyword. Namely, an IP/EA calculation involving the removal/attachment of an α electron is requested by setting the DoAlpha keyword to true in the %mdci block, while setting the DoBeta keyword to true selects an IP/EA calculation for the removal/attachment of a β electron. Note that DoAlpha and DoBeta cannot simultaneously be true and that the calculation defaults to one in which DoAlpha is true if no keyword is specified on input. A simple example of the input for a UHF IP-EOM-CCSD calculation for the removal of an α electron is given below.</p>
+<pre><code>! IP-EOM-CCSD cc-pVDZ %mdci DoAlpha true NRoots 7 end</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>*xyz 0 3 O 0.0 0.0 0.0 O 0.0 0.0 1.207 *</code></pre>
+<h2>Capabilities</h2>
+<p>At present, the EOM routine is able to perform excited, ionized and electron attached state calculations, for both closed- or open-shell systems, using RHF or UHF reference wave functions, respectively. It can be used for serial and parallel calculations. The method is available in the back-transformed PNO and DLPNO framework enabling the calculation of large molecules - see Section Excited States via PNO-based coupled cluster and Section Excited States with DLPNO based coupled cluster methods . In the closed-shell case (RHF), a lower-scaling version can be invoked by setting the CCSD2 keyword to true in the %mdci section. The latter is a second-order approximation to the conventional EOM-CCSD. For the time being, the most useful information provided is the list of the excitation energies, the ionization potentials or the electron affinities. The ground to excited state transition moments are also available for the closed-shell implementation of EE-EOM-CCSD.</p>
+<h2>5.9.3 Memory Management</h2>
+<p>The most important data coming from the coupled-cluster routine are the ground state energy and wave function, and the molecular integrals. The integrals are then used to create 'dressed' integral containers, which allows for an efficient factorization of the EOM equations, since these dressed quantities do not change during the calculation. Most of these are written on disk, with the possible exception of the integral container which has three external labels. This, and the solver files may remain in core if enough memory is available. The program sequentially tries to allocate memory for the files in the order of their importance, and what cannot be kept in core, goes on disk. The order of allocation is as follows: 1. residual vectors, 2. Ritz vectors, 3. three external integrals, 4. sigma vectors and 5. state (trial) vectors, as seen in the example below:</p>
+<pre><code>--------------------------------AUTOMATIC CHOICE OF INCORE LEVEL --------------------------------Memory available ... 6512.00 MB Memory needed for Residual-vectors ... 71.27 MB Memory needed for Ritz-vectors ... 71.27 MB Memory needed for 3-ext integrals ... 92.05 MB Memory needed for Sigma-vectors ... 1425.31 MB Memory needed for State-vectors ... 1425.31 MB -> Final InCoreLevel ... 5</code></pre>
+<p>Half of the memory specified with the keyword MaxCore is distributed among the five candidates. In the above case, everything fits in memory. Note that these are only the largest contributors to memory consumption, and there should ideally be a safety margin when allocating memory.</p>
+<p>In order to estimate the amount of necessary memory, it should be kept in mind that, in the closed shell case, the memory requirements of the residual and Ritz vectors are proportional to N R N P N 2 V , the three external integrals to N R N O N 3 V and the sigma and trial vectors to N D N R N P N 2 V , where N O and N V are the number of occupied and virtual orbitals, N P = N O ( N O +1) 2 is the number of occupied pairs, N R is the number of roots, and N D is the maximum size of the reduced space. The keyword NRoots sets N R , while NDav determines N D . Luckily, the contributions that, in our experience, are the most important to keep in memory, are also the ones that require the smallest amount of it. It is advisable to use KCOpt AOBLAS , as it has the lowest memory requirements.</p>
+<p>Note that in the UHF EE-EOM-CCSD implementation, the memory requirements of the residual and Ritz vectors are proportional to N R ( N P α N 2 V α + N P β N 2 V β + N O α N O β N V α N V β ) , the three external integrals to N R ( N O α N 2 V α + N O β N 2 V β + N O α N V α N 2 V β + N O β N V β N 2 V α ) and the sigma and trial vectors memory requirements are proportional to N D N R ( N P α N 2 V α + N P β N 2 V β + N O α N O β N V α N V β ) , where N O α , N O β , N V α and N V β are respectively, the</p>
+<p>(continued from previous page)</p>
+<p>number of occupied alpha, occupied beta, virtual alpha and virtual beta orbitals and N P α = N Oα ( N Oα -1) 2 and N P β = N O β ( N O β -1) 2 are the number of alpha and beta occupied pairs, respectively.</p>
+<h2>5.9.4 Some tips and tricks for EOM-CC calculation</h2>
+<ul>
+<li style="list-style-type: '· ';">The COSX approximation gives significant savings in terms of memory use, disk space use and computational timings with almost no loss of accuracy[662]. Therefore, the preferred setting for large-scale calculations should include DoCOSXEOM true , DoAOX3e true and KCOpt KC_AOBLAS (Note that KC_AOX is the only option available for KCOpt in the UHF implementation).</li>
+<li style="list-style-type: '· ';">The EOM-CC code in ORCA has three versions of the Davidson solver. The default one is the multi-root solver which does optimization of all the roots together. It gives the fastest convergence and is more suitable when one is interested only in a few roots of a big molecule. However, the multi-root solver can run into numerical issues, if more than 10 roots are desired. In that case, one can invoke the root-wise solver by setting DoRootwise true . The single root solver is very stable and should be used when a large number of roots are desired. However, the convergence of the single root solver is slower than the multi-root one. In the RHF implementation, there is also a batchwise solver, where a subset of the total number of roots is optimized together. This can be invoked by setting NRootsPerBatch true and is intermediate between the multiroot and single-root solvers in terms of stability and convergence.</li>
+<li style="list-style-type: '· ';">If the EOM iterations do not converge within 50 cycles, one can try to increase the number of iterations by setting MaxIter in the %mdci block to a larger value. One can also try to increase the dimension of the Krylov space in the Davidson solver by increasing the NDav value and this generally helps to accelerate convergence. However, setting NDav to a value larger than 200 can make the calculation prohibitively costly especially in terms of memory.</li>
+<li style="list-style-type: '· ';">Convergence thresholds of DTol 1e-5 (Davidson convergence) and STol 1e-7 (ground state CCSD convergence) generally yield sufficiently converged energies, and are suitable for most purposes.</li>
+<li style="list-style-type: '· ';">The normal Davidson solver generally leads to the lowest-energy solutions. This procedure can also yield roots dominated by double excitations (the so-called satellite states) for the IP and EA variants of EOM-CC, when one asks for a large number of roots. If one is interested in the low-lying Koopman's type of IP and EA states, they can be obtained by setting FollowCIS to true. This will follow the initial guess provided by the Fock operators.</li>
+</ul>
+<h2>5.9.5 Full keyword list</h2>
+<p>The simple input keywords related to EOM-CC are collected in Table 5.10. The input keywords of the %mdci block related to UHF EOM-CC are collected in Table 5.12. The input keywords of the %mdci block related to RHF EOM-CC are collected in Table 5.11.</p>
+<table><caption><div class="caption">Table 5.10: Simple input keywords for EOM-CC.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>EOM-CCSD</td><td>Same as EE-EOM-CCSD</td></tr><tr><td>EE-EOM-CCSD</td><td>EOM-CC for electronically excited states</td></tr><tr><td>IP-EOM-CCSD</td><td>IP version</td></tr><tr><td>EA-EOM-CCSD</td><td>EA version</td></tr></tbody></table>
+<table><caption><div class="caption">Table 5.11: %mdci block input keywords for RHF EOM-CC with defaults in parentheses.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>DoEOM (false)</td><td>true/false</td><td>Perform EOM?</td></tr><tr><td>UseEOMOptS (true)</td><td>true/false</td><td>Use optimized sigma routines for singles?</td></tr><tr><td>UseEOMOptD (true)</td><td>true/false</td><td>Use optimized sigma routines for doubles?</td></tr><tr><td>NDav (20)</td><td>&lt;int&gt;</td><td>Max. size of reduced space (i.e. 20*NRoots)</td></tr></tbody></table>
+<p>continues on next pa</p>
+<table><caption><div class="caption">Table 5.11 - continued from previous page</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>CCSD2 (false)</td><td>true/false</td><td>Use the lower scaling CCSD(2) approximation?</td></tr><tr><td>CheckEachRoot (true)</td><td>true/false</td><td>Check convergence for each root separately?</td></tr><tr><td>RootHoming (true)</td><td>true/false</td><td>Apply root homing?</td></tr><tr><td>DoLanczos (false)</td><td>true/false</td><td>Use the Lanczos procedure rather than Davidson?</td></tr><tr><td>UseCISUpdate (true)</td><td>true/false</td><td>Use diagonal CIS for updating?</td></tr><tr><td>NInits (0)</td><td>&lt;int&gt;</td><td>Number of roots in the initial guess, if 0, use preset value</td></tr><tr><td>DRESS3ES (true)</td><td>true/false</td><td>Construct the external dressing to singles or calculate on the fly?</td></tr><tr><td>DRESS3ED (false)</td><td>true/false</td><td>Construct the external dressing to doubles or calculate on the fly?</td></tr><tr><td>DOCOSXEOM (false)</td><td>true/false</td><td>Use COSX approximation for external exchange term in EOM?</td></tr><tr><td>DOAOX3E (false)</td><td>true/false</td><td>Use COSX approximation for 4 external terms contribution to 3 external intermediat</td></tr><tr><td>DoRootwise (false)</td><td>true/false</td><td>Solve for each root separately? More stable for large number of roots</td></tr><tr><td>DoTDM (false)</td><td>true/false</td><td>Option for calculation of default transition moment?</td></tr><tr><td>Doleft (false)</td><td>true/false</td><td>Calculation of exact left vector?</td></tr><tr><td>NRootsPerBatch (1)</td><td>&lt;int&gt;</td><td>Number of roots calculated together</td></tr><tr><td>FOLLOWCIS (false)</td><td>true/false</td><td>Follows the initial singles guess?</td></tr><tr><td>DoCore (true)</td><td>true/false</td><td>Initiates ionization or excitation from core orbital?</td></tr><tr><td>CoreHole (0)</td><td>&lt;int&gt;</td><td>Core orbital from which ionization or excitation is needed</td></tr><tr><td>CVSEP (false)</td><td>true/false</td><td>Separate core orbitals from valence?</td></tr><tr><td>DTol (1e-5)</td><td>&lt;real&gt;</td><td>Default for EOM residual threshold</td></tr><tr><td>NRoots (9)</td><td>&lt;int&gt;</td><td>Number of roots</td></tr><tr><td>OTol (1e-14)</td><td>&lt;real&gt;</td><td>Orthogonalization threshold</td></tr><tr><td>KCOpt</td><td></td><td>Method for external exchange formation</td></tr><tr><td></td><td>KC_MO</td><td></td></tr><tr><td></td><td>KC_AOX</td><td>When asked for exact TDM calculation</td></tr><tr><td></td><td>KC_AOBLAS</td><td>Most efficient</td></tr><tr><td>PrintLevel (3)</td><td>&lt;int&gt;</td><td>The amount of information to be printed</td></tr><tr><td>MaxCore (500)</td><td>&lt;int&gt;</td><td>Total amount of memory</td></tr></tbody></table>
+<p>Table 5.12: %mdci block input keywords for UHF EOM-CC with defaults in parentheses.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>DoEOM (false)</td><td>true/ false</td><td>Perform EOM?</td></tr><tr><td>DoAlpha (false)</td><td>true/ false</td><td>Removal/attachment of an alpha electron (IP/EA calculations)?</td></tr><tr><td>DoBeta (false)</td><td>true/ false</td><td>Removal/attachment of a beta electron (IP/EA calculations)?</td></tr><tr><td>NDav (20) UseQROs (false)</td><td>&lt;int&gt; true/ false</td><td>Max. size of reduced space (i.e. 20*NRoots) Use QROs?</td></tr><tr><td>CheckEachRoot (true)</td><td>true/ false</td><td>Check convergence for each root separately?</td></tr><tr><td>RootHoming (true)</td><td>true/ false</td><td>Apply root homing?</td></tr><tr><td>DoLanczos (false)</td><td>true/ false</td><td>Use the Lanczos procedure rather than Davidson?</td></tr><tr><td>DoOlsen (false)</td><td>true/ false</td><td>Use the Olsen procedure rather than Davidson?</td></tr><tr><td>UseCISUpdate (true)</td><td>true/ false</td><td>Use diagonal CIS for updating?</td></tr><tr><td>NInits (0) DOCOSXEOM (false)</td><td>&lt;int&gt; true/ false</td><td>Number of roots in the initial guess, if 0, use preset value Use COSX approximation for external exchange term in EOM?</td></tr><tr><td>DOAOX3E (false)</td><td>true/ false</td><td>Use COSX approximation for 4 external terms contribution to 3 external intermediate?</td></tr><tr><td>DoRootwise (false)</td><td>true/ false</td><td>Solve for each root separately? More stable for large number of roots</td></tr><tr><td>NRootsPerBatch (1)</td><td>&lt;int&gt;</td><td>Number of roots calculated together</td></tr><tr><td>FOLLOWCIS (true)</td><td>true/ false</td><td>Follow the initial singles guess?</td></tr><tr><td>DTol (1e-5)</td><td>&lt;real&gt;</td><td>Default for EOM residual threshold</td></tr><tr><td>NRoots (9)</td><td>&lt;int&gt;</td><td>Number of roots</td></tr><tr><td>OTol (1e-14)</td><td>&lt;real&gt;</td><td>Orthogonalization threshold</td></tr><tr><td>KCOpt</td><td>KC_AOX</td><td>AO exchange for the four external contributions</td></tr><tr><td>PrintLevel (3)</td><td>&lt;int&gt;</td><td>The amount of information to be printed</td></tr><tr><td>MaxCore (500)</td><td>&lt;int&gt;</td><td>Total amount of memory</td></tr></tbody></table>
+<h2>5.10 Excited States via STEOM-CCSD</h2>
+<p>The EOM-CCSDapproachfor excitation energies becomes prohibitively costly for large systems because of its O( N 6 ) scaling. Therefore, one needs a more compact form of the wave-function ansatz. A second similarity transformation can compress the final matrix diagonalization step to the CIS space only. The resulting STEOM-CCSD method of Marcel Nooijen and co-workers [663] is an efficient way for accurate calculations of excitation energies.</p>
+<h2>5.10.1 General Description</h2>
+<p>In the standard EOM-CC method, the transformed Hamiltonian is diagonalized over a singles and doubles space to obtain ionized, attached, or excited states of the reference state. In STEOM-CC, one performs a second similarity transformation</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The transformation operator ˆ S , including singles and doubles, is defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In the above equations, m and e denote active indices of the hole and particle type respectively, while a prime denotes a restriction to orbitals that are not active. The amplitudes of the operator ˆ S are defined in such a way that matrix elements of the transformed Hamiltonian, in second quantized notation, become equal to zero.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In addition, the zeros which pre-existed in ¯ H , after solving the CCSD equations, remain preserved. The above equations are linear in ˆ S and are equivalent to the Fock space multireference coupled cluster equations for the one valence problem. However, to ensure numerical stability, the equations are re-casted as matrix diagonalization problem and solved as IP-EOM-CCSD and EA-EOM-CCSD problems. The ˆ S IP and ˆ S EA are then extracted from the converged previous calculations, respectively, by invoking intermediate normalization on the suitably chosen eigenvectors corresponding to active holes and active particles. The total process can be described as following</p>
+<ul>
+<li style="list-style-type: '· ';">Solution of the ground state coupled cluster equations</li>
+<li style="list-style-type: '· ';">Construct the first similarity transformed Hamiltonian as ˆ ¯ H = e -ˆ T ˆ He ˆ T</li>
+<li style="list-style-type: '· ';">Solution of the IP-EOM and EA-EOM equations</li>
+<li style="list-style-type: '· ';">Extraction of the ˆ S amplitudes</li>
+<li style="list-style-type: '· ';">Construct the second similarity transformed Hamiltonian as ˆ ¯ G = e -ˆ S ˆ ¯ He ˆ S</li>
+<li style="list-style-type: '· ';">Diagonalization of ˆ ¯ G in CIS space</li>
+</ul>
+<p>The advantage of the above method is that, instead of one iterative O( N 6 ) scaling diagonalization step, it requires two iterative O( N 5 ) scaling steps, one non-iterative O( N 5 ) scaling step and one iterative O( N 4 ) scaling matrix diagonalization step. The presence of so-called 'implicit triples excitation' term ensures the charge transfer separability of the excited states, which is absent in EOM-CCSD. In addition, since the final diagonalization step is performed in a CIS space, the spin adaption is trivial and excited states of triplet multiplicity can be obtained without going through the complications of a spin orbital based implementation.</p>
+<p>The STEOMCC approach has also recently been extended for applications to open-shell systems within the UHF formalism [664] [665]. In this case, the expressions for the operators ˆ S IP and ˆ S EA take the form,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where we use overbars to distinguish the β orbitals from the α orbitals. The amplitudes { s ab ie , s ¯ ab ¯ ie } are determined by solving the UHF EA-EOM-CCSD equations for the attachment of an α electron, while the { s ¯ a ¯ b ¯ i ¯ e , s a ¯ b i ¯ e } amplitudes are extracted from a UHF EA-EOM-CCSD calculation for the attachment of a β electron. Similarly, the sets of amplitudes { s am ij , s ¯ am ¯ ij } and { s ¯ a ¯ b ¯ i ¯ j , s a ¯ m i ¯ j } are determined by solving the decoupled UHF IP-EOM-CCSD problems for the ionization of an α electron and the ionization of a β electron, respectively. Hence, an UHF STEOMCC calculation involves two separate IP calculations (O( N 5 ) scaling) and two separate EA calculations (O( N 5 ) scaling steps).</p>
+<p>All the speed up options, including CCSD(2) (only available in RHF implementation) and COSX, which are available for EOM-CCSD are also available for STEOMCC. The most important steps in a STEOMCC calculation are the IP-EOM and EA-EOM calculations. These steps are performed using the EOM-CCSD module and the relevant keywords are the same as that described in Excited States via EOM-CCSD . The keywords which are exclusive to the RHF STEOM module are:</p>
+<pre><code>%mdci #RHF STEOM parameters - defaults displayed DoCISNat true # automatic selection of active space NActIP 3 # number of states defined as active in the IP calculation NActEA 2 # number of states defined as active in the EA calculation DoTriplet false # target state of triplet multiplicity DoDbFilter true # filters out states with doubles excitation character DoNewActSch true # new active space selection scheme for STEOM-CCSD DoSOLV # perturbative correction for solvation effects (experimental) #Default values for automatic active space selection scheme OThresh 0.001 # Cut off occupation of CIS natural orbitals in IP calculation VThresh 0.001 # Cut off occupation of CIS natural orbitals in EA calculation IPSThrs 80 # The percentage singles threshold for the IP calculation EASThrs 80 # The percentage singles threshold for the EA calculation end</code></pre>
+<h2>The keywords pertaining to the UHF STEOM module are:</h2>
+<pre><code>%mdci #UHF STEOM parameters - defaults displayed DoCISNat true # automatic selection of active space NActIP_a 3 # number of states defined as active in the IP calculation # for the removal of an α electron NActIP_b 3 # number of states defined as active in the IP calculation # for the removal of a β electron NActEA_a 2 # number of states defined as active in the EA calculation # for the attachment of an α electron NActEA_b 2 # number of states defined as active in the EA calculation # for the attachment of a β electron DoDbFilter true # filters out states with doubles excitation character UseQROs false # use QROs or not DoNewActSch true # new active space selection scheme for STEOM-CCSD #Default values for automatic active space selection scheme OThresh 0.001 # Cut off occupation of CIS natural orbitals in tIP␣ ↪ → calculations VThresh 0.001 # Cut off occupation of CIS natural orbitals in EA␣ ↪ → calculations IPSThrs 80 # The percentage singles threshold for the IP calculations EASThrs 80 # The percentage singles threshold for the EA calculations end</code></pre>
+<h2>5.10.2 Selection of Active space</h2>
+<p>The results of a STEOM-CC calculation depend upon the number of roots selected as active in the EOMIP and EOMEAcalculations. In ORCA, they are chosen automatically, by using state-averaged CIS natural transition orbitals (NTO). By default, the number of roots included in this initial CIS computation is equal to the number of roots requested in STEOM ( NRoots ). However, this can be modified setting NRootsCISNAT to higher values. The orbitals up to a predefined occupation are then chosen to be active in the EOMIP and EOMEA calculations, and this is controlled by the keywords OThresh and VThresh respectively. Now, there are two possible ways to chose active space. One is to use the criteria of percentage occupation of NTO's as described in ref [666]. However, a newer and more robust approach is to use the criteria of absolute occupation, which is default in the current implementation. One can switch on the old percentage occupation based active space selection by setting DoNewActSch to false (not recommended).</p>
+<p>One can also select the active spaces manually by turning the DoCISNat to false and setting the NActIP and NActEA (RHF STEOM calculation) or the NActIP_a , NActIP_b , NActEA_a and NActEA_b (UHF STEOM calculation) to desired values. However, this is not recommended for general uses. The following snippet shows the output of the active orbital selection procedure on a closed-shell molecule:</p>
+<table><tbody><tr><td colspan="2">------------------------------------------</td></tr><tr><td>STATE AVERAGED NATURAL ORBITALS ------------------------------------------</td><td>FOR ACTIVE SPACE SELECTION</td></tr><tr><td>0</td><td>0.000478</td></tr><tr><td></td><td>0.002266</td></tr><tr><td>1 2</td><td>0.169928</td></tr><tr><td>3</td><td>0.171663</td></tr><tr><td>4</td><td>0.310125</td></tr><tr><td>5</td><td>0.345541</td></tr><tr><td>Orbital taken as active for IP</td><td>roots:</td></tr><tr><td>0 0.345541</td><td>0.310125</td></tr><tr><td>1</td><td></td></tr><tr><td>2</td><td>0.171663</td></tr><tr><td>3</td><td></td></tr><tr><td>Solving</td><td>0.169928</td></tr><tr><td>done 6 7</td><td>eigenvalue problem for the virtual space ... Virtual block occupation : 0.640886 0.332262</td></tr><tr><td>8</td><td>0.017272</td></tr><tr><td>9</td><td>0.005326</td></tr><tr><td>10</td><td>0.001752</td></tr><tr><td>11</td><td>0.000667</td></tr><tr><td>12</td><td>0.000574</td></tr><tr><td></td><td>0.000540</td></tr><tr><td>13 14</td><td>0.000160</td></tr><tr><td>15</td><td>0.000150</td></tr><tr><td>16</td><td>0.000139</td></tr><tr><td>17</td><td>0.000086</td></tr><tr><td>18</td><td>0.000082</td></tr><tr><td>19</td><td>0.000037</td></tr><tr><td>20</td><td>0.000023</td></tr><tr><td>21</td><td>0.000016</td></tr><tr><td>22</td><td>0.000013</td></tr><tr><td>23</td><td>0.000008</td></tr><tr><td>24</td><td>0.000003</td></tr><tr><td>25</td><td>0.000002</td></tr><tr><td>26</td><td>0.000001</td></tr><tr><td>27</td><td>0.000000</td></tr><tr><td>28</td><td>0.000000</td></tr><tr><td>29</td><td>0.000000</td></tr><tr><td>30</td><td>0.000000</td></tr><tr><td>31</td><td>0.000000</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<pre><code>32 0.000000 33 0.000000 34 0.000000 35 -0.000000 Orbital taken as active for EA roots : 0 0.640886 1 0.332262 2 0.017272 done No of roots active in IP calculation: 4 No of roots active in EA calculation: 3</code></pre>
+<h2>5.10.3 Active space selection using TD-DFT densities</h2>
+<p>Instead of using a CIS calculation for selected the Active Space roots, a TD-DFT based one can also be considered. Be aware that using DFT Kohn-Sham orbitals for computing the CCSD GS energy can lead to some instabilities and give incorrect results.</p>
+<p>The main interest of this approach is to start the STEOM-CCSD calculation with TD-DFT electronic densities which are in general better than the CIS one, especially for some specific compounds (metallic complexes for example). The computed TD-DFT densities are also often more stable than the CIS one. It will however slow down the calculation.</p>
+<p>The input has to be written like this:</p>
+<pre><code>!RHF/UHF BHANDHLYP STEOM-CCSD TZVP %mdci nroots 10 tddftguess true end %tddft nroots 10 end *xyz 0 1</code></pre>
+<p>Any DFT functional can be used but we recommend one with a decent amount of HF exchange. On top of this, the keyword TDDFTGuess has to be set to true in mdci block and the tddft has to be added together with the NRoots keyword. In both input blocks ( %mdci and %tddft ) the same number of roots has to be given. Starting from ORCA 6, using TD-DFT guess with an UHF reference is also possible.</p>
+<h2>5.10.4 The reliability of the calculated excitation energy</h2>
+<p>The excitation energy for any states calculated in STEOM-CC are only reliable when the dominant excitation for that states are confined within the active space. This can be verified from the percentage active character of the calculated states, an a posteriori diagnostic which is defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>for closed-shell systems and takes the form,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>(continued from previous page)</p>
+<p>within the UHF formalism. The roots which have % activecharacter higher than 98.0 are considered to be converged with respect to the active space.</p>
+<pre><code>------------------STEOM-CCSD RESULTS ------------------IROOT= 1: 0.145412 au 3.957 eV 31914.3 cm**-1 Amplitude Excitation -0.169361 4 -> 8 -0.984822 7 -> 8 Percentage Active Character 99.86 Amplitude Excitation in Canonical Basis -0.166580 4 -> 8 -0.975432 7 -> 8 -0.124356 7 -> 13 IROOT= 2: 0.309409 au 8.419 eV 67907.5 cm**-1 Amplitude Excitation 0.994141 7 -> 9 Percentage Active Character 99.78 Amplitude Excitation in Canonical Basis -0.990029 7 -> 9 IROOT= 3: 0.336993 au 9.170 eV 73961.4 cm**-1 Amplitude Excitation -0.994078 5 -> 8 Percentage Active Character 99.10 Amplitude Excitation in Canonical Basis -0.984116 5 -> 8 -0.136769 5 -> 13 IROOT= 4: 0.357473 au 9.727 eV 78456.2 cm**-1 Amplitude Excitation 0.181761 4 -> 10 0.728209 6 -> 8 0.611668 7 -> 10 -0.191540 7 -> 12 Percentage Active Character 94.10 Warning:: the state may have not converged with respect to active space --------------------Handle with Care --------------------Amplitude Excitation in Canonical Basis -0.184144 4 -> 10 -0.725183 6 -> 8 -0.633718 7 -> 10 IROOT= 5: 0.386654 au 10.521 eV 84860.8 cm**-1 Amplitude Excitation 0.980406 4 -> 8 -0.178551 7 -> 8 Percentage Active Character 99.79</code></pre>
+<p>(continues on next page)</p>
+<pre><code>Amplitude Excitation in Canonical Basis 0.971678 4 -> 8 0.122877 4 -> 13 -0.179242 7 -> 8 IROOT= 6: 0.444881 au 12.106 eV 97640.1 cm**-1 Amplitude Excitation -0.995150 6 -> 9 Percentage Active Character 99.69 Amplitude Excitation in Canonical Basis -0.989966 6 -> 9</code></pre>
+<p>If the % activecharacter for any calculated state is less than 98, that state may have not converged with respect to active space and the excitation energy for that particular state is less reliable. The user should request a larger number of roots under those conditions.</p>
+<h2>5.10.5 Removal of IP and EA states with double excitation character</h2>
+<p>To obtain accurate results with STEOM-CCSD, only the ˆ S amplitudes corresponding to the states dominated by single excitations should be included in the second similarity transformation. This is ensured in ORCA in two ways. First, the root following ( FollowCIS ) is activated by default so that it converges to the states dominated by singly excited guess vectors. This avoids the calculation of so called 'satellite states', which are of double excitation character with respect to the ground state. Secondly, among the converged IP and EA roots, the states which have %singles character below a certain predefined threshold (i.e. controlled by the keywords IPThresh and EAThresh ) are automatically excluded from the second similarity transformation.</p>
+<pre><code>EOM-CCSD RESULTS ----------------IROOT= 1: 0.105316 au 2.866 eV 23114.2 cm**-1 Amplitude Excitation 0.697547 x -> 8 IROOT= 2: 0.217925 au 5.930 eV 47829.1 cm**-1 Amplitude Excitation -0.701454 x -> 9 IROOT= 3: 0.304098 au 8.275 eV 66741.8 cm**-1 Amplitude Excitation -0.700458 x -> 10 IROOT= 4: 0.350387 au 9.535 eV 76901.1 cm**-1 Amplitude Excitation 0.702705 x -> 11 IROOT= 5: 0.651462 au 17.727 eV 142979.4 cm**-1 Amplitude Excitation 0.637352 x -> 12 0.121747 x -> 8 4 -> 10 0.177039 x -> 8 5 -> 9 0.109987 x -> 9 5 -> 8 -0.206789 x -> 8 7 -> 10 -0.109870 x -> 10 7 -> 8 EA STATE= 0: percentage singles 95.282 EA STATE= 1: percentage singles 96.981 EA STATE= 2: percentage singles 96.540 EA STATE= 3: percentage singles 97.844 EA STATE= 4: percentage singles 68.884</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Warning: high double excitation character, excluding from the STEOM transformation Final no active EA roots: 4</code></pre>
+<p>Note that the use of CIS natural transition orbitals can lead to convergence issues for the IP and EA states which are dominated by double excitation character. This can be remedied by setting DoDbFilter to true.</p>
+<h2>5.10.6 Transition and difference densities</h2>
+<p>At the end of a STEOM computation, it is possible to store the final eigenvectors in a file ' job.cis ', in analogy with what is done for CIS and TD-DFT computations. This file can be obtained by setting DoStoreSTEOM true in the input. This file can then be processed by orca_plot to obtain the difference and / or the transition densities.</p>
+<p>An Natural Transition Orbitals analysis can also be performed within the STEOM-CCSD scheme, as described in Natural Transition Orbitals . It can be performed by setting the keyword DoSTEOMNatTransOrb to true.</p>
+<h2>5.10.7 Properties</h2>
+<p>The dipolar and transition moments (as well as the oscillator strength) can be computed within the STEOM module using different kinds of approximations. Please cite our paper on these corrected STEOM transition densities [667]! Starting from ORCA 5, new defaults ( DoSimpleDens false ) are used that are much better than the previous CIS-like approximation, and the full option is of CC3-like quality.</p>
+<pre><code>%mdci DosimpleDens false # Default, using the STEOM-CCSD density + some doubles␣ ↪ → effect. AddL2term true DosimpleDens false # using the STEOM-CCSD density + some doubles effect. AddL2term true # + neglected GS double UpdateL1 true DosimpleDens false # using the STEOM-CCSD density + some doubles effect. AddL2term true # + neglected GS double + doubles from EOM-CCSD UpdateL1 true # (expensive, but of CC3 quality -see reference) AddDDTerm true end</code></pre>
+<p>By default, the STEOM-CCSD densities with AddL2term true should be used for all calculation as discussed in ref. [667].</p>
+<h2>5.10.8 Solvation (Experimental)</h2>
+<p>In STEOM-CCSD,theexcitation energies and densities can be corrected using the CPCM solvation scheme in ORCA.</p>
+<p>To use it, the keyword DoSolv has to be set to true in the %mdci block and the simple keyword CPCM (or SMD ) + name of the solvent has to be given.</p>
+<pre><code>!CPCM(ethanol) STEOM-CCSD TightSCF def2-TZVP def2-TZVP/C def2/J %mdci Nroots 5 DoSolv true end</code></pre>
+</div>
+</body>
+</html>

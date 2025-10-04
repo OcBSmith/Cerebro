@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part016</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>end %eprnmr GIAO_2el GIAO_2el_RIJCOSX # Also use RIJCOSX for GIAO integrals end # (This is the default for !RIJCOSX) *xyzfile 0 1 geometry.xyz</code></pre>
+<h2>Numerical DLPNO-MP2 derivatives</h2>
+<p>The various truncations in local correlation methods introduce small discontinuities in the potential energy surface. For example, a small displacement may change the sizes of correlation domains, leading to a slightly larger or smaller error from the domain approximation. The default DLPNO-MP2 truncation thresholds are conservative enough, so that these discontinuities should not cause problems in geometry optimizations using analytic gradients.[352] However, if one wishes to calculate (semi-)numerical derivatives of the DLPNO-MP2 energy, gradient, or properties using finite differences, large errors can occur. Therefore, in these cases it is advisable to keep the pair lists and correlation domains fixed upon displacement. Currently, this can be achieved using the following procedure: first, the calculation at the reference geometry is carried out with the additional setting StoreDLPNOData=true :</p>
+<pre><code>! DLPNO-MP2 def2-SVP def2-SVP/C VeryTightSCF %base "calc0" %mp2 StoreDLPNOData true end *xyzfile 0 1 geom0.xyz</code></pre>
+<p>This will produce the additional files calc0.MapDLPNO00.tmp , calc0.MapDLPNOPre0.tmp , calc0.IJLIST.0.tmp , calc0.IJLISTSCR.0.tmp , and calc0.IJNPNO.0.tmp , which are needed in the working directory for the next step together with the localized orbitals in calc0.loc . The calculation at the displaced geometry is then requested as:</p>
+<pre><code>! DLPNO-MP2 def2-SVP def2-SVP/C VeryTightSCF %mp2 RefBaseName "calc0" end *xyzfile 0 1 geom1.xyz</code></pre>
+<p>The program will use the orbitals from calc0.loc as a starting guess for the localization and map the reference orbitals to the new ones based on maximal overlap. The lists of correlated and screened out pairs are read from the files calc0.IJLIST.0.tmp and calc0.IJLISTSCR.0.tmp , while the domain information (MO-PAO, MO-Aux, etc.) is read from calc0.MapDLPNO00.tmp and calc0.MapDLPNOPre0.tmp . The number of PNOs for a each pair (stored in calc0.IJNPNO.0.tmp ) is also kept consistent with the reference calculation: the ones with the higest occupation numbers are kept, disregarding T CutPNO.</p>
+<p>This procedure should improve the accuracy and numerical stability for manually calculated geometric derivatives of various DLPNO-MP2 properties (including those that require analytic first or second derivatives at the displaced geometries). For semi-numerical Hessian calculations ( NumFreq ), it is sufficient to add StoreDLPNOData=true as shown below and ORCA will handle the rest. For the sake of numerical stability, it is also recommended to increase PAOOverlapThresh and add a PNO level shift for the reasons described in section Local MP2 Second Derivatives and Response Properties .</p>
+<pre><code>! DLPNO-MP2 def2-SVP def2-SVP/C VeryTightSCF NumFreq %mp2 StoreDLPNOData true PAOOverlapThresh 1e-5 TScalePNO_LShift 0.1 end # geometry definition</code></pre>
+<p>Note that in case the orbital localization Hessian is (near-)singular, the mapping of orbitals from reference to displaced geometries will likely fail. No solution is presently implemented for this problem.</p>
+<h2>Multi-Level DLPNO-MP2 calculations</h2>
+<p>With the DLPNO-MP2 method it is possible to treat the interactions among different fragments of a system with varying accuracy, or exclude some interactions from the electron correlation treatment entirely. A more detailed discussion in the DLPNO-CCSD(T) context is given in section Multi-Level Calculations and in ref. [355]. Here we just present the technical capabilities of the MP2 module and the required input. Currently, multilayer calculations are only available for closed-shell DLPNO-MP2. Multilayer gradients and response properties are also possible. Fragments must be defined - see Fragment Specification .</p>
+<pre><code>! DLPNO-MP2 NoFrozenCore TightPNO %mp2 LoosePNOFragInter {1 *} # * can be used as a wildcard for either or both indices NormalPNOFragInter {1 1} {1 2} # multiple fragment pairs can be listed like this TightPNOFragInter {2 3} HFFragInter {3 1} {4 2} CustomFragInter FragPairs {4 4} {3 4} # pair definition is required HFOnly false # flag to skip MP2 for these pairs -same as HFFragInter FrozenCore false # flag to skip core correlation -requires !NoFrozenCore TCutPNO 1e-8 # custom value for these pairs TCutDO 1e-2 # custom value for these pairs TCutDOij 1e-5 # custom value for these pairs TCutPre 1e-6 # custom value for these pairs end end # geometry and fragment definition</code></pre>
+<p>Note that a given pair or fragments can only belong to a single layer and definitions later in the input overwrite previous ones. This means that if the above input is used in a 4-fragment calculation, the 1-4 interfragment interactions will be treated with LoosePNO thresholds, the interactions within fragment 1 and with fragment 2 - with NormalPNO thresholds, 2-3 pairs - with TightPNO , 1-3 and 2-4 pairs will be left at the HF level, 3-4 and 4-4 pairs will be treated with T CutPNO = 10 -8 and T CutDO = 10 -2 (i.e. the NormalPNO defaults), and 2-2 and 3-3 pairs will be left at the global ( TightPNO ) settings.</p>
+<h2>3.9.12 Explicitly correlated MP2 calculations</h2>
+<p>ORCA features an efficient explicit correlation module that is available for MP2 and coupled-cluster calculations (section Explicitly Correlated Methods: F12-MP2 and F12-CCSD(T) ). It is described below in the context of coupledcluster calculations.</p>
+<h2>3.9.13 MP2 in 'Double-Hybrid' Density Functional Theory</h2>
+<p>A slightly more general form is met in the double-hybrid DFT gradient. The theory is briefly described below.</p>
+<p>The energy expression for perturbatively and gradient corrected hybrid functionals as proposed by Grimme is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here V NN is the nuclear repulsion energy and h µν is a matrix element of the usual one-electron operator which contains the kinetic energy and electron-nuclear attraction terms ( ⟨ ab ⟩ denotes the trace of the matrix product ab ) . As usual, the molecular spin-orbitals are expanded in atom centered basis functions ( σ = α, β ) :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with MO coefficients c σ µp . The total density is given by (real orbitals are assumed throughout):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The second term of (3.31) represents the Coulombic self-repulsion. The third term represents the contribution of the Hartree-Fock exchange with the two-electron integrals being defined as:</p>
+<p>Where P = P α + P β and P σ µν = ∑ i σ c σ µi c σ νi .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The mixing parameter a x controls the fraction of Hartree-Fock exchange and is of a semi-empirical nature. The exchange correlation contribution may be written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, E GGA X [ ρ α , ρ β ] is the exchange part of the XC- functional in question and E GGA C [ ρ α , ρ β ] is the correlation part. The parameter b controls the mixing of DFT correlation into the total energy and the parameter c DF is a global scaling factor that allows one to proceed from Hartree-Fock theory ( a X = 1 , c DF = 0 , c PT = 0) to MP2 theory ( a X = 1 , c DF = 0 , c PT = 1 ) to pure DFT ( a X = 1 , c DF = 0 , c PT = 1 ) to hybrid DFT ( 0 &lt; a X &lt; 1 , c DF = 1 , c PT = 0) and finally to the general perturbatively corrected methods discussed in this work ( 0 &lt; a X &lt; 1 , c DF = 1 , 0 &lt; c PT &lt; 1 ). As discussed in detail by Grimme, the B2- PLYP functional uses the Lee-Yang-Parr (LYP) functional as correlation part, the Becke 1988 (B88) functional as GGA exchange part and the optimum choice of the semiempirical parameters was determined to be a X = 0 . 53 , c PT = 0 . 27 , c DF = 1 , b = 1 -c PT. For convenience, we will suppress the explicit reference to the parameters a X and b in the XC part and rewrite the gradient corrected XC energy as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with the gradient invariants γ σσ ′ = ⃗ ∇ ρ σ ⃗ ∇ ρ σ ′ . The final term in eq (48) represents the scaled second order perturbation energy:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The PT2 amplitudes have been collected in matrices t i σ j σ ′ with elements:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where the orbitals were assumed to be canonical with orbital energies ε σ p . The exchange operator matrices are K i σ j σ ′ a σ b σ ′ = ( i σ a σ | j σ ′ b σ ′ ) and the anti-symmetrized exchange integrals are defined as ¯ K i σ j σ ′ a σ b σ ′ = ( i σ a σ | j σ ′ b σ ′ ) -δ σσ ′ ( i σ b σ | σ a σ ) .</p>
+<p>The orbitals satisfy the SCF equations with the matrix element of the SCF operator given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The matrix elements of the XC-potential for a gradient corrected functional are: [180]</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The energy in equation (3.31) depends on the MO-coefficients, the PT2-amplitudes and through V NN , V eN (in h ) and the basis functions also explicitly on the molecular geometry. Unfortunately, the energy is only stationary with respect to the PT2 amplitudes since they can be considered as having been optimized through the minimization of the Hylleraas functional:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The unrelaxed PT2 difference density is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>With analogous expressions for the spin-down unrelaxed difference densities. Minimization of this functional with respect to the amplitudes yields the second order perturbation energy. The derivative of the SCF part of equation (3.31) with respect to a parameter ' x ' is straightforward and well known. It yields:</p>
+<p≯</p>
+<p>Superscript ' x ' refers to the derivative with respect to some perturbation ' x ' while a superscript in parentheses indicates that only the derivative of the basis functions with respect to ' x ' is to be taken. For example:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In equation (3.44), S is the overlap matrix and W SCF the energy weighted density:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>At this point, the effective two-particle density matrix is fully separable and reads:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The derivative of the PT2 part is considerably more complex, since E PT2 is not stationary with respect to changes in the molecular orbitals. This necessitates the solution of the coupled-perturbed SCF (CP-SCF) equations. We follow the standard practice and expand the perturbed orbitals in terms of the unperturbed ones as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The occupied-occupied and virtual-virtual blocks of U are fixed, as usual, through the derivative of the orthonormality constraints:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where S σ ( x ) pq = ∑ µν c σ µp c σ νq S ( x ) µν . The remaining virtual-occupied block of U x must be determined through the solution of the CP-SCF equations. However, as shown by Handy and Schaefer, this step is unnecessary and only a single set of CP-SCF equations (Z-vector equations) needs to be solved. To this end, one defines the Lagrangian:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>An analogous equation holds for L β ai . The matrix elements of the response operator R α ( D ′ ) are best evaluated in the AO basis and then transformed into the MO basis. The AO basis matrix elements are given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where</p>
+<p>With</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The ζ -gradient-parameters are evaluated as a mixture of PT2 difference densities and SCF densities. For example:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Having defined the Lagrangian, the following CP-SCF equations need to be solved for the elements of the 'Z- vector':</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The solution defines the occupied-virtual block of the relaxed difference density, which is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For convenience, D σ is symmetrized since it will only be contracted with symmetric matrices afterwards. After having solved the Z-vector equations, all parts of the energy weighted difference density matrix can be readily calculated:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Once more, analogous equations hold for the spin-down case. With the relaxed difference density and energy weighted density matrices in hand, one can finally proceed to evaluate the gradient of the PT2 part as ( W PT2 = W α ; PT2 + W β ; PT2 ) :</p>
+<p≯</p>
+<p>The final derivative of eq. (3.31) is of course the sum E x SCF + c PT E x PT2 . Both derivatives should be evaluated simultaneously in the interest of computational efficiency.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Note that the exchange-correlation contributions to the gradient take a somewhat more involved form than might have been anticipated. In fact, from looking at the SCF XC-gradient (eq. (3.44)) it could have been speculated that the PT2 part of the gradient is of the same form but with ρ σ ( x ) P being replaced by ˆ H , the relaxed PT2 difference density. This is, however, not the case. The underlying reason for the added complexity apparent in equation (3.64) is that the XC contributions to the PT2 gradient arise from the contraction of the relaxed PT2 difference density with the derivative of the SCF operator. Since the SCF operator already contains the first derivative of the XC potential and the PT2 energy is not stationary with respect to changes in the SCF density, a response type term arises which requires the evaluation of the second functional derivative of the XC-functional. Finally, as is well known from MP2 gradient theory, the effective two- particle density matrix contains a separable and a non-separable part:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Thus, the non-separable part is merely the back-transformation of the amplitudes from the MO to the AO basis. It is, however, important to symmetrize the two-particle density matrix in order to be able to exploit the full permutational symmetry of the AO derivative integrals.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>3.9.14 Orbital Optimized MP2 Methods</h2>
+<h2>OO-MP2 Theory</h2>
+<p>The MP2 energy can be regarded as being stationary with respect to the MP2 amplitudes, since they can be considered as having been optimized through the minimization of the Hylleraas functional:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>ˆ H is the 0 th order Hamiltonian as proposed by Møller and Plesset, Ψ 0 is the reference determinant, Ψ 1 is the firstorder wave function and E 0 = E HF = ⟨ Ψ HF | ˆ H | Ψ HF ⟩ is the reference energy. The quantities t collectively denote the MP2 amplitudes.</p>
+<p>The fundamental idea of the OO-MP2 method is to not only minimize the MP2 energy with respect to the MP2 amplitudes, but to minimize the total energy additionally with respect to changes in the orbitals. Since the MP2 energy is not variational with respect to the MO coefficients, no orbital relaxation due to the correlation field is taken into account. If the reference determinant is poor, the low-order perturbative correction then becomes unreliable. This may be alleviated to a large extent by choosing better orbitals in the reference determinant. Numerical evidence for the correctness of this assumption will be presented below.</p>
+<p>In order to allow for orbital relaxation, the Hylleraas functional can be regarded as a functional of the wavefunction amplitudes t and the orbital rotation parameters R that will be defined below. Through a suitable parameterization it becomes unnecessary to ensure orbital orthonormality through Lagrange multipliers. The functional that we minimize reads:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Ψ 0 is the reference determinant. However, it does no longer correspond to the Hartree-Fock (HF) determinant. Hence, the reference energy E 0 [ R ] = ⟨ Ψ 0 [ R ] | ˆ H | Ψ 0 [ R ] ⟩ also changes during the variational process and is no longer stationary with respect to the HF MO coefficients. Obviously, E 0 [ R ] ⩾ E HF since the HF determinant is, by construction, the single determinant with the lowest expectation value of the full Hamiltonian.</p>
+<p>The reference energy is given as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The first-order wave function excluding single excitations is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>A conceptually important point is that Brillouin's theorem [356] is no longer obeyed since the Fock matrix will contain off-diagonal blocks. Under these circumstances the first-order wavefunction would contain contributions from single excitations. Since the orbital optimization brings in all important effects of the singles we prefer to leave them out of the treatment. Any attempt to the contrary will destroy the convergence properties. We have nevertheless contemplated to include the single excitations perturbatively:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The perturbative nature of this correction would destroy the stationary nature of the total energy and is hence not desirable. Furthermore, results with inclusion of single excitation contributions represent no improvement to the results reported below. They will therefore not be documented below and henceforth be omitted from the OO-MP2 method by default.</p>
+<p>The explicit form of the orbital-optimized MP2 Hylleraas functional employing the RI approximation (OO-RI-MP2) becomes:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, { ψ } is the set of orthonormal molecular orbitals and { η } denotes the auxiliary basis set. F pq denotes a Fock matrix element:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and it is insisted that the orbitals diagonalize the occupied and virtual subspaces, respectively:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The MP2 like density blocks are, where the MP2 amplitudes in the case of a block diagonal Fock matrix are obtained through the condition ∂L ∞ ∂t ij ab = 0 :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The orbital changes are parameterized by an anti-Hermitian matrix R and an exponential Ansatz,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The orbitals changes to second order are,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Through this Ansatz it is ensured that the orbitals remain orthonormal and no Lagrangian multipliers need to be introduced. The first-order expansion of the Fock operator due to the orbital rotations are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The first-order energy change becomes ( h pq ≡ ⟨ p | ˆ h | q ⟩ , g pqrs ≡ ⟨ pq || rs ⟩ ) :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The condition for the energy functional to be stationary with respect to the orbital rotations ( ∂L ∞ [ t , R ] ∂R ai = 0 ) , yields the expression for the orbital gradient and hence the expression for the OO-RI-MP2 Lagrangian.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The goal of the orbital optimization process is to bring this gradient to zero. There are obviously many ways to achieve this. In our experience, the following simple procedure is essentially satisfactory. We first build a matrix B in the current MO basis with the following structure:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ∆ is a level shift parameter. The occupied/occupied and virtual/virtual blocks of this matrix are arbitrary but their definition has a bearing on the convergence properties of the method. The orbital energies of the block diagonalized Fock matrix appear to be a logical choice. If the gradient is zero, the B -matrix is diagonal. Hence one obtains an improved set of orbitals by diagonalizing B .</p>
+<p>In order to accelerate convergence a standard DIIS scheme is used. [333, 357] However, in order to carry out the DIIS extrapolation of the B -matrix it is essential that a common basis is used that does not change from iteration to iteration. Since the B -matrix itself is defined in the molecular orbitals of the current iteration we choose as a common set of orthonormal orbitals the MOs of the HF calculation. The extrapolation is carried out in this basis and the extrapolated B -matrix is transformed back to the current set of MOs prior to diagonalization. Obviously, the same strategy can be used for orbital optimization in any method for which an orbital gradient is available.</p>
+<p>For well behaved cases this simple scheme converges in 5-10 iterations. Transition metals and more complicated molecules may require up to 20 iterations and level shifting in order to achieve convergence.</p>
+<p>Upon convergence the sum of the matrix D and the density of the reference determinant P µν = ∑ i c µi c νi form the true one-particle density matrix of the OO-MP2 approach that can be used for property or gradient calculations.</p>
+<h2>OO-MP2 - Tips, Usage and Examples</h2>
+<p>By making the Hylleraas functional stationary with respect to the orbital rotations one obtains the orbital-optimized MP2 method that is implemented in ORCA in combination with the RI approximation (OO-RI-MP2). One obtains from these calculations orbitals that are adjusted to the dynamic correlation field at the level of second order manybody perturbation theory. Also, the total energy of the OO-RI-MP2 method is lower than that of the RI-MP2 method itself. One might think of this method as a special form of multiconfigurational SCF theory except for the fact that the Hamiltonian is divided into a 0 th order term and a perturbation.</p>
+<p>The main benefit of the OO-RI-MP2 method is that it 'repairs' the poor Hartree-Fock orbitals to some extent which should be particularly beneficial for systems which suffer from the imbalance in the Hartree-Fock treatment of the Coulomb and the Exchange hole. Based on the experience gained so far, the OO-RI-MP2 method is no better than RI-MP2 itself for the thermochemistry of organic molecules. However, for reactions barriers and radicals the benefits of OO-MP2 over MP2 are substantial. This is particularly true with respect to the spin-component scaled variant of OO-RI-MP2 that is OO-RI-SCS-MP2. Furthermore, the OO-RI-MP2 method substantially reduces the spin contamination in UHF calculations on radicals.</p>
+<p>Since every iteration of the OO-MP2 method is as expensive as a RI-MP2 relaxed density calculation, the computational cost is much higher than for RI-MP2 itself. One should estimate about a factor of 10 increase in computational time with respect to the RI-MP2 time of a normal calculation. This may still be feasible for calculations in the range of 1000-2000 basis functions (the upper limit, however, implies very significant computational costs). A full assessment of the orbital optimized MP2 method has been published.[358]</p>
+<p>OO-RI-MP2 is triggered either with ! OO-RI-MP2 or ! OO-RI-SCS-MP2 (with spin component scaling) in the simple input line or by OrbOpt true in the %mp2 block. The method comes with the following new variables:</p>
+<pre><code>%mp2 OrbOpt true # turns on the orbital optimization CalcS2 false # calculate the S**2 expectation value # in spin-unrestricted calculations MaxOrbIter 64 # Max. number of iterations MP2Shift 0.1 # Level shift for the procedure end</code></pre>
+<p>The solver is a simple DIIS type scheme with additional level shifting. We have found that it is not really beneficial to first converge the Hartree-Fock equations. Thus it is sensible to additionally use the keyword ! noiter in order to turn off the standard Hartree-Fock SCF process before entering the orbital optimizations.</p>
+<p>The OO-RI-MP2 method is implemented for RHF and UHF reference wavefunctions. Analytic gradients are available.</p>
+<p>The density does not need to be requested separately in OO-RI-MP2 calculations because it is automatically calculated. Also, there is no distinction between relaxed and unrelaxed densities because the OO-RI-MP2 energy is fully stationary with respect to all wavefunction parameters and hence the unrelaxed and relaxed densities coincide.</p>
+<h2>3.9.15 Regularized MP2 and RI-MP2</h2>
+<p>Regularized MP2 is a variant of second-order Moller-Plesset theory (MP2) introduced by J. Shee, M. Loipersberger, A. Rettig, J. Lee, and M. Head-Gordon [359] that aims to improve its accuracy for systems with π -driven dispersion interactions and dative bonds in transition metal complexes. The approach achieves this by introducing a singleparameter, energy-gap dependent regularization that dampens overestimated pairwise additive contributions, thus renormalizing first-order amplitudes to empirically mimic higher-order correlations.</p>
+<p>For this, the standard MP2 energy and thus the standard algorithms are modified. For the σ ( p = 1 ) and σ 2 ( p = 2 ) regularization, the energy is modified according to</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which corresponds to regularizing the first-order amplitudes. For the κ regularization, the MP2 energy is modified according to</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which corresponds to regularizing the first-order amplitudes and the exchange integrals.</p>
+<p>Regularized MP2 is available for standard MP2 in 'memory mode' (Q1Opt &gt; 0) and RI-MP2 (RIJDX, RIJCOSX, RIJK).</p>
+<p>The usage of regularized MP2 is controlled by the DoRegMP2 keyword, the type of regularization can be specified by setting the RegMP2Type parameter to 0 for κ , 1 for σ , or 2 for σ 2 . The value of the regularizers can be specified by RegMP2Kappa and RegMP2Sigma respectively.</p>
+<pre><code>%mp2 DoRegMP2 true # required RegMP2Type 0 # kappa regularizer 1 # sigma regularizer 2 # sigma-squared regularizer RegMP2Kappa 1.1 # kappa value RegMP2Sigma 0.5 # sigma value end</code></pre>
+<p>It is important to note that only single point energies are available and tested for regularized MP2. Density, Gradient, and Hessian calculations are not yet supported.</p>
+<h2>3.9.16 Keywords</h2>
+<table><caption><div class="caption">Table 3.34: Simple input keywords selecting MP2 variants.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>MP2</td><td>Canonical MP2</td></tr><tr><td>RI-MP2</td><td>RI-MP2 (Aliases: RIMP2 , MP2RI )</td></tr><tr><td>DLPNO-MP2</td><td>DLPNO-MP2</td></tr><tr><td>SCS-MP2</td><td>Spin-component-scaled canonical MP2</td></tr><tr><td>SCS-MP2</td><td>Spin-opposite-scaled canonical MP2</td></tr><tr><td>RI-SCS-MP2</td><td>Spin-component-scaled RI-MP2 (Aliases: SCS-RI-MP2 , SCS-RIMP2 )</td></tr><tr><td>RI-SOS-MP2</td><td>Spin-opposite-scaled RI-MP2 (Aliases: SOS-RI-MP2 , SOS-RIMP2 )</td></tr><tr><td>DLPNO-SCS-MP2</td><td>Spin-component-scaled DLPNO-MP2 (Alias: SCS-DLPNO-MP2 )</td></tr><tr><td>DLPNO-SOS-MP2</td><td>Spin-opposite-scaled DLPNO-MP2 (Alias: SOS-DLPNO-MP2 )</td></tr><tr><td>RI-SCS-MP2</td><td>Spin-opposite-scaled RI-MP2 (Aliases: SOS-RI-MP2 , SOS-RIMP2 )</td></tr><tr><td>OO-RI-MP2</td><td>Orbital-optimized RI-MP2 (Aliases: OO-RIMP2 , OO-MP2RI )</td></tr><tr><td>OO-RI-SCS-MP2</td><td>Orbital-optimized spin-component-scaled RI-MP2 (Aliases: OO-SCS-RI-MP2 , OO-SCS-RIMP2 )</td></tr><tr><td>OO-RI-SOS-MP2</td><td>Orbital-optimized spin-opposite-scaled RI-MP2 (Aliases: OO-SOS-RI-MP2 , OO-SOS-RIMP2 )</td></tr><tr><td>F12-MP2</td><td>MP2 with F12 correction (Alias: MP2-F12 )</td></tr><tr><td>F12-RI-MP2</td><td>RI-MP2 with F12 correction (Aliases: MP2-F12-RI , RI-MP2-F12 )</td></tr><tr><td>F12/</td><td>RI-MP2 with F12 correction employing the lower-cost D approximation (Aliases: MP2-F12/D-RI , RI-MP2-F12/D ,</td></tr><tr><td>D-RI-MP2</td><td>F12D-RI-MP2 , MP2-F12D-RI , RI-MP2-F12D )</td></tr><tr><td>F12-DLPNO-MP2</td><td>DLPNO-MP2 with F12 correction (Alias: DLPNO-MP2-F12 )</td></tr><tr><td>F12/</td><td>DLPNO-MP2 with F12 correction employing the lower-cost D approximation (Aliases: DLPNO-MP2-F12/D ,</td></tr><tr><td>D-DLPNO-MP2</td><td>F12D-DLPNO-MP2 , DLPNO-MP2-F12D )</td></tr><tr><td>LoosePNO</td><td>Selects loose thresholds for DLPNO-MP2</td></tr><tr><td>NormalPNO</td><td>(Default) Selects default thresholds for DLPNO-MP2</td></tr><tr><td>TightPNO</td><td>Selects tight thresholds for DLPNO-MP2</td></tr></tbody></table>
+<h2>3.10 Coupled Cluster and CI Theories (MDCI)</h2>
+<p>Aside from the second-order Møller-Plesset theory (MP2) , ORCA features a variety of single-reference correlation methods for single point energies (restricted to a RHF or RKS determinant in the closed-shell case and a UHF or UKS determinant in the open-shell case; quasi-restricted orbitals (QROs)[360] are also supported in the open-shell case). These methods are all fairly expensive but maybe be used in order to obtain accurate results in the case that the reference determinant is a good starting point for the expansion of the many-body wavefunction. The methods are implemented in the orca_mdci module, which is the main subject of this section. 'MDCI' is an abbreviations for 'matrix driven configuration interaction'. The term is rather technical to emphasize that if one wants to implement these methods (CCSD, QCISD etc.) efficiently, one needs to write them in terms of matrix operations, which pretty much every computer can drive at peak performance.</p>
+<p>It should be noted that in recent years, a number of highly correlated single reference methods and their properties were added to ORCA using automatic code generation and reside in the orca_autoci module , which follows similar design principles.[361, 362] Let us first briefly describe the theoretical background of the methods, that we have implemented in ORCA.</p>
+<h2>3.10.1 Theory</h2>
+<p>We start from the full CI hierarchy in which the wavefunction is expanded as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where | 0 ⟩ is a single-determinant reference and S, D, T, Q, …denote the single, double, triple quadruple and higher excitations relative to this determinant at the spin-orbital level. As usual, labels i, j, k, l refer to occupied orbitals in | 0 ⟩ , a, b, c, d to unoccupied MOs and p, q, r, s to general MOs. The action of the second quantized excitation operators a a i = a † a a i on | 0 ⟩ lead to excited determinants | Φ a i ⟩ that enter | Ψ ⟩ with coefficients C i a . The variational equations are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Further equations coupling triples with singles through pentuples etc.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The total energy is the sum of the reference energy E 0 = ⟨ 0 | H | 0 ⟩ and the correlation energy</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which requires the exact singles- and doubles amplitudes to be known. In order to truncate the series to singles- and doubles one may either neglect the terms containing the higher excitations on the right hand side (leading to CISD) or approximate their effect thereby losing the variational character of the CI method (CCSD, QCISD and CEPA methods). Defining the one- and two-body excitation operators as ˆ C 1 = ∑ ia C i a a a i , ˆ C 2 = 1 4 ∑ ijab C ij ab a ab ij one can proceed to approximate the triples and quadruples by the disconnected terms:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>As is well known, the CCSD equations contain many more disconnected contributions arising from the various powers of the ˆ C 1 operator (if one would stick to CC logics one would usually label the cluster amplitudes with t i a , t ij ab ,…and the n -body cluster operators with ˆ T n ; we take a CI point of view here). In order to obtain the CEPA type equations from ((3.88)-(3.92)), it is most transparent to relabel the singles and doubles excitations with a compound label P for the internal indices ( i ) or ( ij ) and x for ( a ) or ( ab ). Then, the approximations are as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The resulting equations thus have the appearance of a diagonally shifted ('dressed') CISD equation ⟨ Φ x P | H -E 0 +∆ | 0 + S + D ⟩ = 0 . If the second approximation mentioned above is avoided Malrieu's (SC) 2 -CISD arises. [307, 308, 309, 310, 363] Otherwise, one obtains CEPA/3 with the shift:</p>
+<p>Here the second line contains the approximation that only the terms in which either Qy or Rz are equal to Px are kept (this destroys the unitary invariance) and the fourth line contains the approximation that only 'exclusion principle violating' (EPV) terms of internal labels are considered. The notation Qy ∪ Px means ' Qy joint with Px ' (containing commonorbital indices) and ε Q is the pair correlation energy. The EPV terms must be subtracted from the correlation energy since they arise from double excitations that are impossible due to the fact that an excitation out of an occupied or into an empty orbital of the reference determinant has already been performed. Inserting eq. (3.96) into eq. (3.89) C P x E C cancels and effectively is replaced by the 'partial correlation energy' ∑ Q ∪ P ε Q .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>CEPA/2 is obtained by -∆ ij ab = ε ij and CEPA/1 is the average of the CEPA/2 and CEPA/3. As mentioned by Ahlrichs, [364] no consensus appears to exist in the literature for the appropriate shift on the single excitations. If one proceeds straightforwardly in the same way as above, one obtains:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>as the appropriate effect of the disconnected triples on the singles. It has been assumed here that only the singles | Φ a i ⟩ in ˆ C 1 contribute to the shift. If | 0 ⟩ is a HF determinant, the effect of the disconnected triples in the doubles projection vanishes under the same CEPA approximations owing to Brillouin's theorem. Averaged CEPA models are</p>
+<p>derived by assuming that all pair correlation energies are equal (except ε ii = 0) . As previously discussed by Gdanitz [365], the averaging of CEPA/1 yields 2 n E C and CEPA/3 E C 4 n -6 n ( n -1) where n is the number of correlated electrons. These happen to be the shifts used for the averaged coupled-pair functional (ACPF [366]) and averaged quadratic coupled-cluster (AQCC [367]) methods respectively. However, averaging the singles shift of eq. (3.98) gives 4 n E C. The latter is also the leading term in the expansion of the AQCC shift for large n . In view of the instability of ACPF in certain situations, Gdanitz has proposed to use the AQCC shift for the singles and the original ACPF shift for the doubles and called his new method ACPF/2 [366]. Based on what has been argued above, we feel that it would be most consistent with the ACPF approach to simply use 4 n E C as the appropriate singles shift. We refer to this as NACPF.</p>
+<p>It is readily demonstrated that the averaged models may be obtained by a variation of the modified correlation energy functional:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with g S and g D being the statistical factors 4 n , 2 n , 4 n -6 n ( n -1) , as appropriate for the given method. Thus, unlike the CEPA models, the averaged models fulfill a stationarity principle and are unitarily invariant. However, if one thinks about localized internal MOs, it appears evident that the approximation of equal pair energies must be one of rather limited validity and that a more detailed treatment of the electron pairs is warranted. Maintaining a stationarity principle while providing a treatment of the pairs that closely resembles that of the CEPA methods was achieved by Ahlrichs and co-workers in an ingenious way with the development of the CPF method [368]. In this method, the correlation energy functional is written as:</p>
+<p>with</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The topological matrix for pairs P = ( ij ) and Q = ( kl ) is chosen as: [115]</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with n i being the number of electrons in orbital i in the reference determinant. The singles out of orbital i are formally equated with P = ( ii ) . At the spin-orbital level, n i = 1 , for closed shells n i = 2 . Using the same topological matrix in ∆ P = ∑ Q T PQ ε Q one recovers the CEPA/1 shifts for the doubles in eq. (3.98). It is straightforward to obtain the CPF equivalents of the other CEPA models by adjusting the T PQ matrix appropriately. In our program, we have done so and we refer below to these methods as CPF/1, CPF/2 and CPF/3 in analogy to the CEPA models (CPF/1 ≡ CPF). In fact, as discussed by Ahlrichs and co-workers, variation of the CPF-functional leads to equations that very closely resemble the CEPA equation and can be readily implemented along the same lines as a simple modification of a CISD program. Ahlrichs et al. argued that the energies of CEPA/1 and CPF/1 should be very close. We have independently confirmed that in the majority of cases, the total energies predicted by the two methods differ by less than 0.1 mEh.</p>
+<p>An alternative to the CPF approach which is also based on variational optimization of an energy functional is the VCEPAmethod [369]. The equations resulting from application of the variational principle to the VCEPA functional are even closer to the CEPA equations than for CPF so that the resulting energies are practically indistinguishable from the corresponding CEPA values. The VCEPA variants are referred to as VCEPA/1, VCEPA/2, and VCEPA/3 in analogy to CEPA and CPF. A strictly size extensive energy functional (SEOI) which is invariant with respect to unitary transformations within the occupied and virtual orbital subspaces is also available [370] (an open-shell version is not implemented yet).</p>
+<p>Again, a somewhat critical point concerns the single excitations. They do not account for a large fraction of the correlation energy. However, large coefficients of the single excitations lead to instability and deterioration of the results. Secondly, linear response properties are highly dependent on the effective energies of the singles and their balanced treatment is therefore important. Since the CEPA and CPF methods amount to shifting down the diagonal energies of the singles and doubles, instabilities are expected if the effective energy of an excitation approaches the</p>
+<p>reference energy of even falls below it. In the CPF method this would show up as denominators N P that are too small. The argument that the CPF denominators are too small has led Chong and Langhoff to the proposal of the MCPFmethod which uses a slightly more elaborate averaging than ( N P N Q ) 1/2 [371]. 1 However, their modification was solely based on numerical arguments rather than physical or mathematical reasoning. In the light of Eq. (3.98) and the performance of the NACPF, it appears to us that for the singles one should use twice the T PQ proposed by Ahlrichs and co-workers. The topological matrix T PQ is modified in the following way for the (very slightly) modified method to which we refer to as NCPF/1:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>(note that T PQ = T QP for this choice). Thus, the effect of the singles on the doubles is set to zero based on the analysis of the CEPA approximations and the effect of the singles on the singles is also set to zero. This is a sensible choice since the product of two single excitations is a double excitation which is already included in the SD space and thus none of them can belong to the outer space. It is straightforward to adapt this reasoning about the single excitations to the CEPA versions as well as to NCPF/2 and NCPF/3.</p>
+<p≯</p>
+<p>The aforementioned ambiguities arising from the use of single excitations in coupled-pair methods can be avoided by using correlation-adapted orbitals instead of Hartree-Fock orbitals thus eliminating the single excitations. There are two alternatives: (a) Brueckner orbitals and (b) optimized orbitals obtained from the variational optimization of the electronic energy with respect to the orbitals. Both approaches have already been used for the coupled-cluster doubles (CCD) method [372, 373] and later been extended to coupled-pair methods [374]. In the case of CCD, orbital optimization requires the solution of so-called Λ (or Z vector) equations [375]. There is, however, a cheaper alternative approximating the Z vector by a simple analytical formula [376].</p>
+<p>Furthermore, the parametrized coupled-cluster (pCCSD) method of Huntington and Nooijen [377], which combines the accuracy of coupled-pair type methods for (usually superior to CCSD, at least for energies and energy differences) with the higher stability of the coupled-cluster methods, is an attractive alternative. Comprehensive numerical tests [378] indicate that particularly pCCSD(-1,1,1) (or pCCSD/1a) and pCCSD (-1.5,1,1) (or pCCSD/2a) have great potential for accurate computational thermochemistry. These methods can be employed by adding the 'simple' keywords pCCSD/1a or pCCSD/2a to the first line of input. As mentioned in section Local correlation (DLPNO) , the DLPNO variants of the pCCSD/1a method is also available for RHF and UHF references via the simple keyword DLPNO-pCCSD/1a .</p>
+<h2>Closed-Shell Equations</h2>
+<p>Proceeding from spin-orbitals to the spatial orbitals of a closed-shell determinant leads to the actual working equations of this work. Saebo, Meyer and Pulay have exploited the generator state formalism to arrive at a set of highly efficient equations for the CISD problem [379]. A similar set of matrix formulated equations for the CCSD and QCISD cases has been discussed by Werner and co-workers [380] and the MOLPRO implementation is widely recognized to be particularly efficient. Equivalent explicit equations for the CISD and CCSD methods were published by Scuseria et al . [381] 2 The doubles equations for the residual 'vector' σ are ( i ⩽ j , all a, b ):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>1 This method - although it has been rather extensively used in the past - is not implemented in ORCA. We recommend to use our NCPF/1 instead.</p>
+<p>2 Our coupled-cluster implementation is largely based on this nice paper. The equations there have been extensively verified to be correct.</p>
+<p>The singles equations are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The following definitions apply:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The two-electron integrals are written in (11|12) notation and F is the closed-shell Fock operator with F V being its virtual sub-block. We do not assume the validity of Brillouin's theorem. The amplitudes C i a , C ij ab have been collected in vectors C i and matrices C ij wherever appropriate. The shifts ∆ i and ∆ ij are dependent on the method used and are defined in Table Table 3.35 for each method implemented in ORCA.</p>
+<table><caption><div class="caption">Table 3.35: Summary of the diagonal shifts used in various singles- and doubles methods discussed in this chapter. The quantities ε i and ε ij are the correlation energy increments brought about by the single- and the double excitations respectively. The partial denominators for the CPF type methods N i and N ij are specified in eq. (3.101).</div></caption><tbody><tr><th>Method</th><th>Doubles Shift</th><th>Singles Shift</th></tr><tr><td>CISD</td><td>E C</td><td>E C</td></tr><tr><td>CEPA/0</td><td>0</td><td>0</td></tr><tr><td>CEPA/1</td><td>1 2 ( ε i + ε j )+ 1 4 ∑ k ( ε ik + ε jk )</td><td>1 2 ε ii + 1 2 ∑ k ε ik</td></tr><tr><td>CEPA/2</td><td>δ ij ε i + ε ij</td><td>ε i + ε ii</td></tr><tr><td>CEPA/3</td><td>( ε i + ε j ) - δ ij ε i - ε ij + 1 2 ∑ k ( ε ik + ε jk )</td><td>ε i + ∑ k ε ik</td></tr><tr><td>NCEPA/1</td><td>1 4 ∑ k ( ε ik + ε jk )</td><td>ε ii + ∑ k ε ik</td></tr><tr><td>NCEPA/2</td><td>ε ij</td><td>2 ε ii</td></tr><tr><td>NCEPA/3</td><td>- ε ij + 1 2 ∑ k ( ε ik + ε jk )</td><td>2 ∑ k ε ik</td></tr><tr><td>CPF/1</td><td>N ij { 1 2 ( ε i N i + ε j N j )+ 1 4 ∑ k ( ε ik N ik + ε jk N jk ) }</td><td>N i { 1 2 ε ii N ii + 1 2 ∑ k ε ik N ik }</td></tr><tr><td>CPF/2</td><td>N ij { δ ij ε i N i + ε ij N ij</td><td>N i { ε i N i + ε ii N ii }</td></tr><tr><td>CPF/3</td><td>} N ij { ε i N i (1 - δ ij )+ ε j N j - ε ij N ij + 1 2 ∑ k ( ε ik N ik + ε jk N jk ) }</td><td>N i { ε i N i + ∑ k ε ik N ik }</td></tr><tr><td>NCPF/1</td><td>1 4 N ij ∑ k ( ε ik N ik + ε jk N jk )</td><td>N i { ε ii N ii + ∑ k ε ik N ik }</td></tr><tr><td>NCPF/2</td><td>N ij ε ij N ij</td><td>2 N i ε ii N ii</td></tr><tr><td>NCPF/3</td><td>N ij { - ε ij N ij + 1 2 ∑ k ( ε ik N ik + ε jk N jk ) }</td><td>2 N i ∑ k ε ik N ik</td></tr><tr><td>ACPF</td><td>2 n E C</td><td>2 n E C</td></tr><tr><td>ACPF/2</td><td>2 n E C</td><td>1 - ( n - 3)( n - 2) n ( n - 1) ] E C</td></tr><tr><td>NACPF</td><td>2 n E C</td><td>[ 4 n E C</td></tr><tr><td>AQCC</td><td>1 - ( n - 3)( n - 2) n ( n - 1) E C</td><td>1 - ( n - 3)( n - 2) n ( n - 1) E C</td></tr></tbody></table>
+<p>[</p>
+<p>]</p>
+<p>[</p>
+<p>]</p>
+<p>The QCISD method requires some slight modifications. We found it most convenient to think about the effect of the nonlinear terms as a 'dressing' of the integrals occurring in equations (3.107) and (3.108). This attitude is close</p>
+<p>to the recent arguments of Heully and Malrieu and may even open interesting new routes towards the calculation of excited states and the incorporation of connected triple excitations.[382] The dressed integrals are given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The CCSD method can be written in a similar way but requires 15 additional terms that we do not document here. They may be taken conveniently from our paper about the LPNO-CCSD method [383].</p>
+<p>A somewhat subtle point concerns the definition of the shifts in making the transition from spin-orbitals to spatial orbitals. For example, the CEPA/2 shift becomes in the generator state formalism:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>( ˜ Φ ab ij is a contravariant configuration state function, see Pulay et al . [375]. The parallel and antiparallel spin pair energies are given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This formulation would maintain the exact equivalence of an orbital and a spin-orbital based code. Only in the (unrealistic) case that the parallel and antiparallel pair correlation energies are equal the CEPA/2 shift of Table 3.35 arise. However, we have not found it possible to maintain the same equivalence for the CPF method since the electron pairs defined by the generator state formalism are a combination of parallel and antiparallel spin pairs. In order to maintain the maximum degree of internal consistency we have therefore decided to follow the proposal of Ahlrichs and co-workers and use the topological matrix T PQ in equation (3.102) and the equivalents thereof in the CEPA and CPF methods that we have programmed.</p>
+<h2>Open-Shell Equations</h2>
+<p>We have used a non-redundant set of three spin cases ( αα , ββ , αβ ) for which the doubles amplitudes are optimized separately. The equations in the spin-unrestricted formalism are straightforwardly obtained from the corresponding spin orbital equations by integrating out the spin. For implementing the unrestricted QCISD and CCSD method, we applied the same strategy (dressed integrals) as in the spin-restricted case. The resulting equations are quite cumbersome and will not be shown here explicitly [384].</p>
+<p>Note that the definitions of the spin-unrestricted CEPA shifts differ from those of the spin-restricted formalism described above (see Kollmar et al. [384]). Therefore, except for CEPA/1 and VCEPA/1 (and of course CEPA/0), for which the spin-adaptation of the shift can be done in a consistent way, CEPA calculations of closed-shell molecules yield slightly different energies for the spin-restricted and spin-unrestricted versions. Since variant 1 is also the most accurate among the various CEPA variants [385], we recommend to use variant 1 for coupled-pair type calculations. For the variants 2 and 3, reaction energies of reactions involving closed-shell and open-shell molecules simultaneously should be calculated using the spin-unrestricted versions only.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>A subtle point for open-shell correlation methods is the choice of the reference determinant [386]. Single reference correlation methods only yield reliable results if the reference determinant already provides a good description of the systems electronic structure. However, an UHF reference wavefunction suffers from spin-contamination which can spoil the results and lead to convergence problems. This can be avoided if quasi-restricted orbitals (QROs) are used [360, 382] since the corresponding zeroth-order wavefunction is an eigenfunction of the ˆ S 2 operator and thus, no severe spin-contamination will appear. The coupled-pair and coupled-cluster equations will be still solved in a spinunrestricted formalism but the energy will be slightly higher compared to the results obtained with a spin-polarized UHF reference determinant. Furthermore, especially for more difficult systems like e.g. transition metal complexes, it is often advantageous to use Kohn-Sham (KS) orbitals instead of HF orbitals.</p>
+<h2>3.10.2 Basic Usage</h2>
+<p>The coupled-cluster and CI methods in orca_mdci are available for RHF and UHF references. The implementation is fairly efficient and suitable for large-scale calculations. The most elementary use of this module is fairly simple.</p>
+<pre><code>! METHOD # where METHOD is: # CCSD CCSD(T) QCISD QCISD(T) CPF/n NCPF/n CEPA/n NCEPA/n # (n=1,2,3 for all variants) ACPF NACPF AQCC CISD ! AOX-METHOD # computes contributions from integrals with 3and 4-external # labels directly from AO integrals that are pre-stored in a # packed format suitable for efficient processing ! AO-METHOD # computes contributions from integrals with 3and 4-external # labels directly from AO integrals. Can be done for integral # direct and conventional runs. In particular, the conventional # calculations can be very efficient ! MO-METHOD (this is the default) # performs a full four index integral transformation. This is # also often a good choice ! RI-METHOD # selects the RI approximation for all integrals. Rarely advisable ! RI34-METHOD # selects the RI approximation for the integrals with 3and 4# external labels # # The module has many additional options that are documented # later in the manual. ! RCSinglesFock ! RIJKSinglesFock ! NoRCSinglesFock ! NoRIJKSinglesFock # Keywords to select the way the so-called singles Fock calculation # is evaluated. The first two keywords turn on, the second two turn off # RIJCOSX or RIJK, respectively.</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The same FrozenCore options as for MP2 are applied in the MDCI module.</li>
+<li style="list-style-type: '· ';">Since ORCA 4.2, an additional term, called '4th-order doubles-triples correction' is considered in openshell CCSD(T). To reproduce previous results, one should use a keyword,</li>
+</ul>
+<pre><code>%mdci false</code></pre>
+<pre><code>Include_4thOrder_DT_in_Triples end</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The MDCI module cannot deal with systems without alpha virtual orbitals, even if there are beta virtual orbitals. Normally this only happens when the user uses minimal basis sets.</li>
+</ul>
+<p>The computational effort for these methods is high - O(N 6 ) for all methods and O(N 7 ) if the triples correction is to be computed (calculations based on an unrestricted determinant are roughly 3 times more expensive than closed-shell calculations and approximately six times more expensive if triple excitations are to be calculated). This restricts the calculations somewhat: on presently available PCs 300-400 basis functions are feasible and if you are patient and stretch it to the limit it may be possible to go up to 500-600; if not too many electrons are correlated maybe even up to 800-900 basis functions (when using AO-direct methods).</p>
+<h2>b Tip</h2>
+<ul>
+<li style="list-style-type: '· ';">For calculations on small molecules and large basis sets the MO-METHOD option is usually the most efficient; say perhaps up to about 300 basis functions. For integral conventional runs, the AO-METHOD may even more efficient.</li>
+<li style="list-style-type: '· ';">For large calculations (&gt;300 basis functions) the AO-METHOD option is a good choice. If, however, you use very deeply contracted basis sets such as ANOs these calculations should be run in the integral conventional mode.</li>
+<li style="list-style-type: '· ';">AOX-METHOD is usually slightly less efficient than MO-METHOD or AO-METHOD.</li>
+<li style="list-style-type: '· ';">RI-METHOD is seldom the most efficient choice. If the integral transformation time is an issue than you can select %mdci trafotype trafo_ri or choose RI-METHOD and then %mdci kcopt kc_ao .</li>
+<li style="list-style-type: '· ';">Regarding the singles Fock keywords (RCSinglesFock, etc.), the program usually decides which method to use to evaluate the singles Fock term. For more details on the nature of this term, and options related to its evaluation, see The singles Fock term .</li>
+</ul>
+<p>To put this into perspective, consider a calculation on serine with the cc-pVDZ basis set - a basis on the lower end of what is suitable for a highly correlated calculation. The time required to solve the equations is listed in Table 3.36. We can draw the following conclusions:</p>
+<ul>
+<li style="list-style-type: '· ';">As long as one can store the integrals and the I/O system of the computer is not the bottleneck, the most efficient way to do coupled-cluster type calculations is usually to go via the full transformation (it scales as O(N 5 ) whereas the later steps scale as O(N 6 ) and O(N 7 ) respectively).</li>
+<li style="list-style-type: '· ';">AO-based coupled-cluster calculations are not much inferior. For larger basis sets (i.e. when the ratio of virtual to occupied orbitals is larger), the computation times will be even more favorable for the AO based implementation. The AO direct method uses much less disk space. However, when you use a very expensive basis set the overhead will be larger than what is observed in this example. Hence, conventionally stored integrals - if affordable - are a good choice.</li>
+<li style="list-style-type: '· ';">AOX-based calculations run at essentially the same speed as AO-based calculations. Since AOX-based calculations take four times as much disk space, they are pretty much outdated and the AOX implementation is only kept for historical reasons.</li>
+<li style="list-style-type: '· ';">RI-based coupled-cluster methods are significantly slower. There are some disk space savings, but the computationally dominant steps are executed less efficiently.</li>
+<li style="list-style-type: '· ';">CCSD is at most 10% more expensive than QCISD. With the latest AO implementation the awkward coupledcluster terms are handled efficiently.</li>
+<li style="list-style-type: '· ';">CEPA is not much more than 20% faster than CCSD. In many cases CEPA results will be better than CCSD and then it is a real saving compared to CCSD(T), which is the most rigorous.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">If triples are included practically the same comments apply for MO versus AO based implementations as in the case of CCSD.</li>
+</ul>
+<p>ORCA is quite efficient in this type of calculation, but it is also clear that the range of application of these rigorous methods is limited as long as one uses canonical MOs. ORCA implements novel variants of the so-called local coupled-cluster method which can calculate large, real-life molecules in a linear scaling time. This will be addressed in Sec. Local correlation (DLPNO) .</p>
+<table><caption><div class="caption">Table 3.36: Computer times (minutes) for solving the coupled-cluster/coupled-pair equations for Serine (cc-pVDZ basis set)</div></caption><tbody><tr><th>Method</th><th>SCFMode</th><th>Time (min)</th></tr><tr><td>MO-CCSD</td><td>Conv</td><td>38.2</td></tr><tr><td>AO-CCSD</td><td>Conv</td><td>47.5</td></tr><tr><td>AO-CCSD</td><td>Direct</td><td>50.8</td></tr><tr><td>AOX-CCSD</td><td>Conv</td><td>48.7</td></tr><tr><td>RI-CCSD</td><td>Conv</td><td>64.3</td></tr><tr><td>AO-QCISD</td><td>Conv</td><td>44.8</td></tr><tr><td>AO-CEPA/1</td><td>Conv</td><td>40.5</td></tr><tr><td>MO-CCSD(T)</td><td>Conv</td><td>147.0</td></tr><tr><td>AO-CCSD(T)</td><td>Conv</td><td>156.7</td></tr></tbody></table>
+<p>All of these methods are designed to cover dynamic correlation in systems where the Hartree-Fock determinant dominates the wavefunctions. The least attractive of these methods is CISD which is not size-consistent and therefore practically useless. The most rigorous are CCSD(T) and QCISD(T). The former is perhaps to be preferred, since it is more stable in difficult situations. 3 One can get highly accurate results from such calculations. However, one only gets this accuracy in conjunction with large basis sets. It is perhaps not very meaningful to perform a CCSD(T) calculation with a double-zeta basis set (see Table 3.37). The very least basis set quality required for meaningful results would perhaps be something like def2-TZVP(-f) or preferably def2-TZVPP (cc-pVTZ, ano-pVTZ). For accurate results quadruple-zeta and even larger basis sets are required and at this stage the method is restricted to rather small systems.</p>
+<p>Let us look at the case of the potential energy surface of the N 2 molecule. We study it with three different basis sets: TZVP, TZVPP and QZVP. The input is the following:</p>
+<pre><code>! TZVPP CCSD(T) %paras R= 1.05,1.13,8 end * xyz 0 1 N 0 0 0 N 0 0 {R} *</code></pre>
+<p>For even higher accuracy we would need to introduce relativistic effects and - in particular - turn the core correlation on. 4</p>
+<p>Table 3.37: Computed spectroscopic constants of N2 with coupled-cluster methods.</p>
+<p>3 The exponential of the T1 operator serves to essentially fully relax the orbitals of the reference wavefunction. This is not included in the QCISD model that only features at most a linear T1T2 term in the singles residuum. Hence, if the Hartree-Fock wavefunction is a poor starting point but static correlation is not the main problem, CCSD is much preferred over QCISD. This is not uncommon in transition metal complexes.</p>
+<p>4 Note that core correlation is not simply introduced by including the core orbitals in the correlation problem. In addition, special correlation core-polarization functions are needed. They have been standardized for a few elements in the cc-pCVxZ (X=D,T,Q,5,6) basis sets.</p>
+<table><tbody><tr><th>Method</th><th>Basis set</th><th>R e (pm)</th><th>ω e (cm - 1 )</th><th>ω e x e (cm - 1 )</th></tr><tr><td>CCSD(T)</td><td>SVP</td><td>111.2</td><td>2397</td><td>14.4</td></tr><tr><td></td><td>TZVP</td><td>110.5</td><td>2354</td><td>14.9</td></tr><tr><td></td><td>TZVPP</td><td>110.2</td><td>2349</td><td>14.1</td></tr><tr><td></td><td>QZVP</td><td>110.0</td><td>2357</td><td>14.3</td></tr><tr><td></td><td>ano-pVDZ</td><td>111.3</td><td>2320</td><td>14.9</td></tr><tr><td></td><td>ano-pVTZ</td><td>110.5</td><td>2337</td><td>14.4</td></tr><tr><td></td><td>ano-pVQZ</td><td>110.1</td><td>2351</td><td>14.5</td></tr><tr><td>CCSD</td><td>QZVP</td><td>109.3</td><td>2437</td><td>13.5</td></tr><tr><td>Exp</td><td></td><td>109.7</td><td>2358.57</td><td>14.32</td></tr></tbody></table>
+<p>One can see from Table 3.37 that for high accuracy - in particular for the vibrational frequency - one needs both the connected triple-excitations and large basis sets (the TZVP result is fortuitously good). While this is an isolated example, the conclusion holds more generally. If one pushes it, CCSD(T) has an accuracy (for reasonably wellbehaved systems) of approximately 0.2 pm in distances, &lt;10 cm -1 for harmonic frequencies and a few kcal/mol for atomization energies. 5 It is also astonishing how well the Ahlrichs basis sets do in these calculations - even slightly better than the much more elaborate ANO bases.</p>
+<h2>® Note</h2>
+<p>The quality of a given calculation is not always high because it carries the label 'coupled-cluster'. Accurate results are only obtained in conjunction with large basis sets and for systems where the HF approximation is a good 0 th order starting point.</p>
+<h2>Frozen Core Options</h2>
+<p>In coupled-cluster calculations the Frozen Core (FC) approximation is applied by default. This implies that the core electrons are not included in the correlation treatment, since the inclusion of dynamic correlation in the core electrons usually affects relative energies insignificantly.</p>
+<p>The frozen core option can be switched on or off with ! FrozenCore or ! NoFrozenCore in the simple input. More information and further options are given in section Frozen Core Options and in section Including (semi)core orbitals in the correlation treatment .</p>
+<h2>The singles Fock term</h2>
+<p>In most MDCI calculations, there is an intermediate, which resembles closely to the SCF Fock matrix, and similar methods are available to efficiently calculate it. In the followings, a short discussion will be given of the so-called singles Fock term, which in the closed shell case has the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The singles Fock matrix can be obtained via transformation from its counterpart ( G ( t 1 ) µν ) in the atomic orbital (AO) basis where</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>5 However, in recent years it became more evident that even CCSD(T) achieves its high apparent accuracy through error cancellations. The full CCSDT method (triples fully included) usually performs worse than CCSD(T). The reason is that the (T) correction undershoots the effects of the triples to some extent and thereby compensates for the neglect of connected quadruple excitations. For very high accuracy quantum chemistry, even these must be considered. The prospects for treating chemically more relevant molecules with such methods is not particularly bright for the foreseeable future…</p>
+<p>is the analogue of the SCF density matrix for the singles Fock case. For the singles Coulomb ( J ( t 1 ) µν ) case, the density may be symmetrized ( ˜ P ( t 1 ) κτ = P ( t 1 ) κτ + P ( t 1 ) τκ ), and one may use the resolution of identity approximation</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where A,B are elements of the RI/DF auxiliary fitting basis. Note that the factor of 2 in ((3.122)) is taken care of by symmetrization. Since we are using a symmetric density, we may use the same efficient routine to evaluate the singles Coulomb term as in the SCF case, see RI-J and Split-RI-J .</p>
+<p>For the exchange case ( K ( t 1 ) µν ), one possibility is to use the COSX approximation (see RIJCOSX )</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The COSX routine is able to deal with asymmetric densities as well, and thus, it can be used here similar to the SCF case.</p>
+<p>The other possibility is to use RI for exchange (RIK), where</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and the ˜ j is an 'orbital' transformed using C ( t 1 ) .</p>
+<p>Using these approximations, there are two approximations for the total singles Fock term, RIJCOSX called by the simple keyword RCSinglesFock and RIJK called by RIJKSinglesFock, see Basic Usage . For canonical and LPNO methods, by default the program chooses the same approximation used in the SCF calculation. DLPNO2013 uses RIJCOSXbydefault, while in DLPNO, the singles Fock term is also evaluated using PNOs via SinglesFockUsePNOs, see Local correlation (DLPNO) . This behavior can also be changed by keywords in the method block.</p>
+<pre><code>%method RIJKSinglesFock 1 # 0 false, 1 true RCSinglesFock 0 # 0 false, 1 true</code></pre>
+<p>end</p>
+<h2>3.10.3 Coupled-Cluster Densities</h2>
+<p>If one is mainly accustomed to Hartree-Fock or DFT calculations, the calculation of the density matrix is more or less a triviality and is automatically done together with the solution of the self-consistent field equations. Unfortunately, this is not the case in coupled-cluster theory (and also not in MP2 theory). The underlying reason is that in coupledcluster theory, the expansion of the exponential e ˆ T in the expectation value</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>only terminates if all possible excitation levels are exhausted, i.e., if all electrons in the reference determinant Ψ 0 (typically the HF determinant) are excited from the space of occupied to the space of virtual orbitals (here D pq denotes the first order density matrix, E q p are the spin traced second quantized orbital replacement operators, and ˆ T is the cluster operator). Hence, the straightforward application of these equations is far too expensive. It is, however, possible to expand the exponentials and only keep the linear term. This then defines a linearized density which coincides with the density that one would calculate from linearized coupled-cluster theory (CEPA/0). The difference to the CEPA/0 density is that converged coupled-cluster amplitudes are used for its evaluation. This density is straightforward to compute and the computational effort for the evaluation is very low. Hence, this is a density that can be easily produced in a coupled-cluster run. It is not, however, what coupled-cluster aficionados would accept as a density.</p>
+</div>
+</body>
+</html>

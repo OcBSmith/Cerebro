@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part042</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>Derivatives of the transition dipole</h2>
+<p>The derivatives of the transition dipoles with respect to the normal coordinates of the final state can be obtained directly from the derivatives with respect to the Cartesian coordinates as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>U being the matrix of the x,y and z components of the derivative, M a 3 N × 3 N matrix with the atomic masses along the diagonal. Also, in case one already has the derivatives with respect to the initial state , those can be transformed into the derivatives with respect to the final state by using the Duschinsky relation, assuming that ⃗ µ e 0 ( 2/7 Q ) + ∑ i ∂⃗ µ e ∂ ¯ Q i ¯ Q i = ⃗ µ e 0 ( Q ) + ∑ i ∂⃗ µ e ∂Q i Q i , so that</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>By default, this transformation is NOT done, since Eq. (5.59) is an approximation. If you want to turn it on, set CONVDER TRUE under %ESD.</p>
+<p>OBS: Remember that, if you already have the Cartesian derivatives over the final state, like if you use AHAS for an absorption spectrum, the conversion should be exact (although there might be numerical issues, always use a larger GRAD for frequencies!).</p>
+<p>Alternatively, these can be calculated numerically from displacements over each normal mode. In this case, it is convenient to use the dimensionless normal coordinates q i = ω 1/2 i Q i which represent proportional displacements on the PES [625]. We use ∆ q = 0 . 01 by default, but this can be changed setting the DER_DELQ flag.</p>
+<ul>
+<li style="list-style-type: '· ';">Again, DO NOT MIX different coordinates systems. If the derivatives were calculated over one coordinate set and you decide to change it, it has to be recalculated. You can manually delete them from the BASENAME.ES.hess file.</li>
+<li style="list-style-type: '· ';">For hybrid functionals, you can choose to use DFT for the gradient, energy and transition dipole, and the fast simplified TDA (Sec. Simplified TDA and TD-DFT ) only for the derivatives by seting STDA TRUE under %ESD.</li>
+<li style="list-style-type: '· ';">A simple trick can be used to accelerate the computation of derivatives. If the first displacement gives a transition dipole that is too close to the reference, then the derivative can be assumed to be small and just the plus displacement may be taken to compute the derivative (with an usually small error). If it is large enough, then the minus displacement is also done and central differences is used. This is the default method and can be turned off by setting FASTDER to FALSE.</li>
+<li style="list-style-type: '· ';">The central differences option can be altogether turned off by setting CENTRALDIFF FALSE under %ESD.</li>
+<li style="list-style-type: '· ';">If you are having problems, set a larger PRINTLEVEL to check the individual calculation of the derivatives, you might be having some kind of root flipping during the displacement, or some other issue.</li>
+</ul>
+<h2>The Fourier Transform step</h2>
+<p>After the calculation of the correlation function, it is necessary to do a Fourier Transform (FT) step. To do that numerically, it is needed to correctly choose the grid in wich the time points will be computed, for that affects how the results will be obtained in the frequency domain. We have developed a method to generate an optimal set of parameters, depending on the final spectral resolution desired [600] and it will be used by default. Even so, you can choose your own grid by setting the NPOINTS and MAXTIME (in atomic units!) flags under %ESD. There are a few comments related to that:</p>
+<ul>
+<li style="list-style-type: '· ';">Because we solve the FT using a very efficient Cooley-Tukey algorithm, the NPOINTS should be always multiple of two. You can put any number on the input, but the next larger multiple of two will be calculated and set.</li>
+<li style="list-style-type: '· ';">The MAXTIME should be enough so that the correlation function goes to zero. If anything goes wrong, please check the BASENAME.corrfunc file for that.</li>
+<li style="list-style-type: '· ';">The finer the spectral resolution chosen with SPECRES, the largest MAXTIME must be.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">If you have a larger MAXTIME, you also must increase NPOINTS, otherwise the grid will be too sparse and many oscillations will be skipped.</li>
+</ul>
+<h2>Spectrum options</h2>
+<p>The final spectrum is saved in a BASENAME.spectrum file, with the total spectrum, the FC and HT parts discriminated, as explained in Sec. Excited State Dynamics . He are some detailed about it:</p>
+<ul>
+<li style="list-style-type: '· ';">The range for which the spectrum is saved is given by default, but it can be set using SPECRANGE flag under %ESD, as SPECRANGE 10000,70000.</li>
+<li style="list-style-type: '· ';">All of the INPUT units should always be in CM-1, but you can choose the OUTPUT units by setting the UNIT flag to CM-1, NM or EV.</li>
+<li style="list-style-type: '· ';">In order to better converge the correlation function and approximate experimental spectra, a lineshape function can be used instead of the delta. The default is to use a LOREZENTIAN lineshape, but LINES can be set to DELTA, LORENTZ, GAUSS or VOIGT.</li>
+<li style="list-style-type: '· ';">The DELTA lineshape might lead to a correlation function that oscillates forever, so please take care with that option.</li>
+<li style="list-style-type: '· ';">The default line widths are LINEW 50 and INLINEW 250.</li>
+<li style="list-style-type: '· ';">If you use a VOIGT lineshape, the Gaussian width can be controlled separately using the INLINEW flag. By default, it will be proportial to the Lorezntian to reach the same FWHM.</li>
+<li style="list-style-type: '· ';">The LINEW and INLINEW are NOT the full width half maximum ( FWHM ) of these curves. However they are related to them by: FWHM lorentz = 2 × LINEW and FWHM gauss = 2 . 355 × INLINEW . For the VOIGT curve, it is a little more complicated but in terms of the other FWHMs, it can be aproximated as FWHM voigt = 0 . 5346 × FHWM lorentz + √ (0 . 2166 × FWHM 2 lorentz + FWHM 2 gauss ) .</li>
+<li style="list-style-type: '· ';">The resolution of the spectrum can be modified with the SPECRES flag. By default it is a fraction of the LINEW. Please be aware that higher resolution (smaller SPECRES), mean a larger grid for the correlation function and more time points to calculate on.</li>
+</ul>
+<h2>General</h2>
+<ul>
+<li style="list-style-type: '· ';">The temperature is accounted for exactly on Absorption and Emission [600] and can be set using the TEMP flag.</li>
+<li style="list-style-type: '· ';">PRINTLEVEL can be set to HIGH in order to print more details, including Huang-Rhys factors which are useful for rationalizing the contribution of different vibrational modes to the rate/spectrum.</li>
+<li style="list-style-type: '· ';">The frequencies read from the Hessian files can be scaled by any number by setting the SCALING flag under %ESD. The default is 1.0.</li>
+<li style="list-style-type: '· ';">If necessary, the transition dipole can also be scaled by setting the TDIPSCALING flag.</li>
+<li style="list-style-type: '· ';">If you just want to compute an ES PES and stop, set WRITEHESS to TRUE and the correlation function will be skipped.</li>
+<li style="list-style-type: '· ';">In order to make use of the fastest algorithm, set SAMEFREQ to TRUE and the DO method will be used, assuming equal Hessians between initial and final states and maximizing the efficiency when calculating the correlation function.</li>
+<li style="list-style-type: '· ';">If you want to calculate phosphorescence rates, you MUST input the adiabatic energy difference DELE manually (the energy difference between each state at its own geometry). And, of course, don't forget to set the SOC module to true.</li>
+</ul>
+<h2>Intersystem crossing rates</h2>
+<h2>General Aspects of the Theory</h2>
+<p>Intersystem crossing (ISC) rates between a given initial state i and a final state f can be calculated from Fermi's Golden rule:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which is quite similar to the Eq. (5.50) for Fluorescence, except for the frequency term. The same trick used there can be applied here to swtich to the time domain. Then, we are left with a simple time integration, which is not anymore difficult to solve than the equations above.</p>
+<p>One can use all of the infrastructure already presented to compute these ISC rates, including Duschisnky rotation, vibronic coupling effects, use of different coordinate systems and so on. Right now, its use is optimized for CIS/TDDFT, as explained in Section Intersystem Crossing Rates (unpublished) , but it can be applied in general by combining simpler methods to obtain the geometries and Hessians with more advanced methods to compute the SOC matrix elements, when needed.</p>
+<h2>Tips and Tricks</h2>
+<ul>
+<li style="list-style-type: '· ';">The DELE must be given when using ESD(ISC), it is not automatically computed.That is the energy of the initial state minus the energy of the final state, each at its own geometry.</li>
+<li style="list-style-type: '· ';">A SOC matrix element calculated from any method can be given on the input using the SOCME Re, Im flag, where these are the real and imaginary parts of that number.</li>
+<li style="list-style-type: '· ';">The SOCMEs from TD-DFT are not bad, maybe except for those between the ground singlet and the triplets. In that case, a multireference calculation might be the preferred option.</li>
+<li style="list-style-type: '· ';">If the final state is higher in energy than then initial state, the DELE is a negative number. In that case, there is barrier to go up when doing the ISC and the rates becomes more sensitive to the temperature.</li>
+<li style="list-style-type: '· ';">In contrast to Fluorescence, the ISC rates depend strongly on the inclusion of Duschisnky rotations, please take care when using USEJ FALSE.</li>
+<li style="list-style-type: '· ';">The default LINES is GAUSS, and the default INLINEW of 250 cm -1 might be too large. One should always investigate it by varying the width a bit. Other LINES can increase the error, please take care when changing it.</li>
+</ul>
+<h2>Resonant Raman Spectrum</h2>
+<h2>General Aspects of the Theory</h2>
+<p>Raman intensities can be obtained in many different ways, depending on the experimental set up. As discussed extensively by D. A. Long [609, 610], the part of it that is 'set up independent' is the Scattering Factor (or Raman activity), given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the a is related to the isotropic part of the 'transition polarizability' between an initial state and a final state with a different vibrational quantum number ⟨ Ψ f | ˆ α | Ψ i ⟩ = α if :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and γ is also related to its off-diagonal elements:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This transition polarizability itself can be computed using Kramers, Heisenberg and Dirac (KHD) formalism and it can be shown that each of its Cartesian components can be calculated as a sum-over-states:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In (5.62), the sum is over any number of electronic excited states n , ∆ E in is the energy difference between the initial state and the excited, ω laser is the laser energy and γ lt is the lifetime broadening to avoid a zero on the denominator. If we work with a laser for which the frequency is close to the excited state energy difference, the first term is much larger than the second and can approximate alpha by</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This equation can be solved using a path integral approach by switching to the integral form of 1/ x :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>So that the components of α if can be given by:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>From here on, it is possible to show that the α if ρσ can be calculated as an integral of a correlation function [609], which is similar to the one previously discussed. In order to calculate that, a path integral scheme is also used and a geometry and Hessian for the ES are needed. The ORCA_ESD module predicts the ES PES (if not inputed), computes the α if and then prints the Scattering factor on a spectrum named BASENAME.spectrum.LASERE.</p>
+<p>OBS.: The actual Raman Intensity collected with any polarization at 90 degrees, the I( π /2; ∥ s + ⊥ s , ⊥ i [610]), can be obtained by setting RRINTENS to TRUE under %ESD.</p>
+<p>OBS2.: In the current implementation, if a multistate calculation is requested, Eq. (5.63) is solved for each state and all spectra are summed up afterwards.</p>
+<h2>Specific Keywords and Details</h2>
+<p>In order to solve Eq. (5.65), the same information as for Absorption/Emission is needed and to compute the ES PES all of the above approximations are also valid. The main difference here is that a laser energy, given by the LASERE flag, should be given. If it is not given, the default is to set it to the 0-0 energy difference between the ground and the excited state. As mentioned before, more information can be found on Sec. Resonant Raman Spectrum .</p>
+<ul>
+<li style="list-style-type: '· ';">You can choose more than one laser energy by setting LASERE 1,2,3,4 and etc. If so, each spectrum will be saved on a different BASENAME.spectrum.LASERE file.</li>
+<li style="list-style-type: '· ';">You can also choose more than one excited state to be accounted for with the flag STATES 1,2,3, etc. and the final spectrum will be the sum of all of Scattering Factors given by the α if s. You can NOT choose several states and laser energies currently.</li>
+<li style="list-style-type: '· ';">The automatic selection for the integral grid is also done based on the same ideas as mentioned before.</li>
+<li style="list-style-type: '· ';">The default lineshape for resonant Raman is VOIGT.</li>
+<li style="list-style-type: '· ';">The lineshape of the RR spectra will be taken from the RRSLINEW flag. In this case, LINEW and INLINEW are used only in the calculation of the correlation function.</li>
+<li style="list-style-type: '· ';">Currently the only temperature for which this model works is at 0K.</li>
+<li style="list-style-type: '· ';">In terms of which vibrationally excited states to be considered, currently it goes up to Raman Order 2, which means fundamentals, first overtones and combination bands (up to a total quantum number of 2). You can reduced that using RORDER flag.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">It is also possible to include HT effect here for weak transitions, but be aware the calculation is much more costly. Due to technical reasons, the data is saved only on memory so, if you plan to go being 300 modes and do HT, there should be A LOT of memory available, about 8 × NMODES 4 . Also, you should expect a VERY long time for the computation of the correlation function. We are currently working on ways to accelerate this particular case.</li>
+<li style="list-style-type: '· ';">As it is explained on the reference paper [609], the calculations using both Duschinsky rotation and HT effect can be greatly accelerated setting cutoffs for the derivatives and J matrix elements. The RRTCUTDER is a ratio with respect to the transition dipole moment below which the derivatives will be ignored and RRTCUTJ is a cutoff for J matrix elements. As the paper suggests, RRTCUTDER = 0.001 and RRTCUTJ = 0.01 are in general good numbers. We do recommend using these, but please be aware of the specific needs of your system.</li>
+</ul>
+<h2>5.5.12 Complete Keyword List for the ESD Module</h2>
+<table><tbody><tr><td>%ESD ESDFLAG</td><td>ABS (default) ECD FLUOR (default) CPF/CPFLUOR PHOSP CPP/CPPHOSP MCD RR ISC</td><td>#The booleans are the defaults #Which calculation to make? #Only available with TDDFT</td></tr><tr><td>GSHESSIAN ESHESSIAN TSHESSIAN</td><td>&quot;BASENAME.hess&quot; &quot;BASENAME_S1.hess&quot; &quot;BASENAME_T.hess&quot;</td><td>#The ground state Hessian #The excited state Hessian #The triplet state Hessian</td></tr><tr><td>HESSFLAG</td><td>AHAS VH VG (default) VGFC HHBS HHAS UFBS</td><td>#How to obtained the ES PES? # VG + APPROXADEN TRUE</td></tr><tr><td>STATES</td><td>1,2,3,4</td><td>#IROOTS to compute</td></tr><tr><td>MODELIST ↪ → modes</td><td>4,5,6</td><td># only include the 4th, 5th and 6th vibrational␣ # in the ESD calculation</td></tr><tr><td>→ DOHT FASTDER DELQ</td><td></td><td># one of the 1st, 5th and 10th vibrational modes #Do HT effect? #Use the fast derivatives algorithm?</td></tr><tr><td>STDA APPROXADEN</td><td>FALSE TRUE 0.01 (default) FALSE</td><td>#Dimensionless displacemente for derivatives #Use sTDA during derivatives? #Compute the DELE by extrapolating info from #the Hessians, avoiding second single-point</td></tr><tr><td></td><td>FALSE</td><td>#at the ES geometry</td></tr><tr><td>USEJ USEB</td><td>FALSE TRUE</td><td>#Consider Duschinsky rotations? #Rotate the initial state?</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th>SAMEFREQ</th><th>TRUE</th><th>#Use DO method and J=1.</th></tr><tr><td>DELE TDIP</td><td>12000 x,y,z</td><td>#Custom energy difference #Custom transition electric dipole x.re,x.im,y.re,y.im,z.re,z.im</td></tr><tr><td>TMDIP</td><td>x,y,z x.re,x.im,y.re,y.im,z.re,z.im</td><td>#Custom transition magnetic dipole</td></tr><tr><td>SOCME ↪ → u. LASERE</td><td>x.re,x.im 34000</td><td>#Custom spin-orbit coupling matrix elements, in a. #The laser energy for RR</td></tr><tr><td>B</td><td>3000.0 LEBEDEVINTEGRATIONPOINTS 14</td><td>#Magnetic field in Gauss for MCD #Lebedev Grid for MCD molecular #orientational average</td></tr><tr><td>GEOMSTEP</td><td>AUGHESS (default) QN</td><td>#Geometry step?</td></tr><tr><td>STEPSCALING STEPCONSTR COORDSYS</td><td>1.0 0,2,5 CART INT (default) WINT FCWL</td><td>#A number for scaling the steps #A list of atoms that will not be moved #Coordinate system for the normal modes?</td></tr><tr><td>TCUTFREQ IFREQFLAG</td><td>100 POSITIVE (default) LEAVE REMOVE</td><td>#Cutoff for frequencies #What to do with negative frequencies?</td></tr><tr><td>UF_DELE UFFREQERR</td><td>1E-4</td><td>#Energy difference for updated freq. #Tolerated percentual error</td></tr><tr><td>TEMP UNIT</td><td>0.2 298.15 (default)</td><td>#Temperature to consider</td></tr><tr><td>↪ → )</td><td>WN NM EV</td><td>#wavenumbers (Output units - input still in cm-1! #nanometers #electron volts</td></tr><tr><td>SCALING LINES</td><td>1.0 (default) TDIPSCALING 1.0 (default) DELTA</td><td>#Scaling for frequencies #Scaling for the transition dipole lineshape function</td></tr><tr><td>LINEW INLINEW RRSLINEW</td><td>LORENTZ (default) GAUSS VOIGT (default for RR) 50 (default)</td><td>#The</td></tr><tr><td>RORDER RRINTENS</td><td>250 (default) 10 (default) 2 (default)</td><td>#The Raman Order for RR #Calculate the intensities instead #A cutoff for derivatives #A cutoff for J matrix elements</td></tr><tr><td>RRTCUTDER RRTCUTJ</td><td>false 0 (default) 0 (default)</td><td></td></tr><tr><td>WRITEHESS</td><td>FALSE</td><td>#Make ES PES and leave</td></tr><tr><td>MAXTIME</td><td>12000</td><td>#Max time (atomic units!) for the FT</td></tr><tr><td>NPOINTS</td><td>131072</td><td>#Total number of points</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>SPECRANGE 10000,50000 #Spectral range SPECRES 1.0 #Spectral resolution PRINTVIB FALSE #Save a .xyz file per each vibational mode. #(Requires DOHT true) PRINTLEVEL 0 #If set to 1 (or 2, 3, ...), prints additional #details of the calculation END</code></pre>
+<h2>5.6 Excited States via RPA, CIS, TD-DFT and SF-TDA</h2>
+<p>ORCA features a relatively efficient single-excitation CI (CIS), 'random-phase approximation' (RPA) and timedependent DFT module that can be used to calculate excitation energies, absorption intensities and CD intensities. Especially TD-DFT became very popular for excited state calculations as it offers significantly better results than HF-CIS at about the same cost. However, there are also many pitfalls of TD-DFT, some of which are discussed in reviews[626][627]. TD-DFT methods are available for closed-shell and spin-unrestricted reference states, together with its collinear spin-flip variant. Analytic gradients are available for all these cases. There also is a doubles correction implemented that improves the results (but also the computational cost). It is often used together with double-hybrid functionals as explained below. The TD-DFT module of ORCA is also extensively used for the calculation of X-ray absorption spectra at the K-edge of a given element.</p>
+<p>Starting from version 6.0.0, the output format of the absorption wavelength, oscillator strength etc. has changed compared to the 5.0.x version. For more details on the interpretation of the output, please refer to One Photon Spectroscopy .</p>
+<h2>5.6.1 General Features</h2>
+<p>The module is invoked with the block:</p>
+<pre><code>%cis end # or equivalently %tddft end</code></pre>
+<p>There are a variety of options. The most important one is the number of excited states that you want to have calculated:</p>
+<pre><code>%cis NRoots 10 end</code></pre>
+<p>The convergence tolerances are given by:</p>
+<pre><code>%cis ... ETol 1e-6 RTol 1e-6 end</code></pre>
+<p>The variable ETol gives the required convergence of the energies of the excited states (in Eh) and RTol is the required convergence on the norm of the residual vectors. Under normal ciorcumstances the calculations need about 5-10 iterations to converge to the default convergence tolerances.</p>
+<p>Once converged, the program prints the wave function composition. To keep the printing concise, coefficients smaller than 0.01 are omitted. The threshold can be adjusted with the keyword TPrint .</p>
+<pre><code>%cis ...</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>TPrint 0.0001 # cut-off for the wave function printing, default= 0.01 end</code></pre>
+<p>If closed-shell references are used the program can calculate the singlet and spin-adapted triplet excited states at the same time by using:</p>
+<pre><code>%cis ... triplets true end</code></pre>
+<p>This is available for all combinations of methods, including analytic gradients, and for double-hybrids.</p>
+<p>In order to control the orbitals that should be taken into account in the calculation two mechanisms are available. The first mechanism is the default mechanism and consists of specifying and orbital energy window within which all single excitations will be considered:</p>
+<pre><code>%cis ... EWin -3,3 # (orbital energy window in Eh) end</code></pre>
+<p>Thus, the default is to keep core orbitals frozen and to neglect very high lying virtual orbitals which is a sensible approximation. However, you may want to consider to include all virtual orbitals by choosing for example EWin -3,10000 . The second mechanism is to explicitly give an orbital energy window for each operator, i.e.</p>
+<pre><code>%cis ... OrbWin[0] = 2,-1,-1,14 # orbital window for spin-up MOs OrbWin[1] = 2,-1,-1,16 # orbital window for spin-down MOs end</code></pre>
+<p>The '-1''s in the above example mean that the HOMO and LUMO for the spin-.up and spin-down orbitals will be automatically determined by the program. In other words, in the above example, only the following excitations are included in the TDDFT calculation:</p>
+<ul>
+<li style="list-style-type: '· ';">Excitations from any occupied alpha orbital whose index is between 2 (inclusive) and that of the alpha HOMO (inclusive), to any virtual alpha orbital whose index is between that of alpha LUMO (inclusive) and 14 (inclusive)</li>
+<li style="list-style-type: '· ';">Excitations from any occupied beta orbital whose index is between 2 (inclusive) and that of the beta HOMO (inclusive), to any virtual beta orbital whose index is between that of beta LUMO (inclusive) and 16 (inclusive)</li>
+</ul>
+<p>For calculations based on a restricted reference, OrbWin[1] will be ignored.</p>
+<p>In using the CIS/TD-DFT module five different types of calculations should be distinguished:</p>
+<ul>
+<li style="list-style-type: '· ';">Semiempirical methods</li>
+<li style="list-style-type: '· ';">Hartree-Fock calculations</li>
+<li style="list-style-type: '· ';">DFT calculations without HF exchange (non-hybrid functionals)</li>
+<li style="list-style-type: '· ';">DFT calculations with HF exchange (hybrid functionals)</li>
+<li style="list-style-type: '· ';">DFT calculations with HF exchange and MP2 correlation (double-hybrid functionals)</li>
+</ul>
+<h2>5.6.2 Semiempirical Methods</h2>
+<p>The semiempirical INDO/S method is very suitable to calculate absorption spectra of medium sized to large organic and inorganic molecules. It has been parameterized by the late M. C. Zerner for optical spectroscopy and in my experience at least, it tends to work nicely for many systems. With the semiempirical approach it is easy to calculate many states of large molecules. For example, consider the following calculation on a bis-histidine ligated iron-porphyrin model (in the Fe(II) state) that includes 92 atoms and ≈ 16,500 CSFs in the single excitation space. Yet the calculation requires only a few minutes on an ordinary computer for the prediction of the first 40 excited states.</p>
+<p>The calculated spectrum is in essentially reasonable agreement with experiment in showing a huge band around 400 nm (the famous Soret band) and a smaller but still intense band between 500 and 550 nm (the Q-band). There are no predicted absorptions below ≈ 10,000 cm -1 .</p>
+<p>The input for the job is shown below:</p>
+<pre><code># Test CIS in conjunction with INDO/S ! ZINDO/S TightSCF DIIS NoMOPrint %cis NRoots 40 end * xyz 0 1 Fe -0.01736 0.71832 -0.30714 C 2.65779 4.03195 -0.13175 C 3.51572 3.02488 -0.24101 C 2.66971 1.82027 -0.30891 C 3.30062 0.51609 -0.42755 C 2.61022 -0.60434 -0.47131 C 3.32146 -1.89491 -0.57434 C 2.35504 -2.79836 -0.57179 C 1.11740 -1.99868 -0.46878 C -0.04908 -2.61205 -0.44672 C -1.30967 -1.89127 -0.38984 C -2.58423 -2.63345 -0.40868 C -3.50492 -1.68283 -0.37930 C -2.72946 -0.42418 -0.33711 C -3.35747 0.73319 -0.28970 C -2.66935 2.01561 -0.22869 C -3.31167 3.19745 -0.16277 C -4.72835 3.62642 -0.14517 C -5.84825 2.89828 -0.20597 C -2.21443 4.15731 -0.09763 C -1.11572 3.39398 -0.14235 C 0.19578 4.02696 -0.10122 C 1.33370 3.36290 -0.15370 C 3.09165 5.44413 -0.02579 C 2.35656 6.55323 0.10940 N 1.43216 2.09428 -0.24815 N 1.34670 -0.74673 -0.42368 N -1.39885 2.15649 -0.21891 N -1.47620 -0.63353 -0.34705 C 5.03025 3.02708 -0.28544 C 4.81527 -2.12157 -0.66646 C -5.01065 -1.83771 -0.38886 C -2.28137 5.66820 -0.00321 C -2.73691 -4.14249 -0.43699 C -2.42579 -4.72805 -1.83259 C 2.45978 -4.31073 -0.64869 C 2.19678 -4.82182 -2.08201 C 1.60835 -6.22722 -2.10748 C -1.90102 -6.15737 -1.82447 O -1.96736 -6.92519 -2.75599 O 1.60982 -7.01844 -1.19330</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th>O</th><th>-1.15355</th><th>-6.41323</th><th>-0.74427</th><td></td></tr><tr><td>O</td><td>0.89871</td><td>-6.41433</td><td>-3.22828</td><td></td></tr><tr><td>H</td><td>4.17823</td><td>5.62170</td><td>-0.05623</td><td></td></tr><tr><td>H</td><td>2.86221</td><td>7.53117</td><td>0.17503</td><td></td></tr><tr><td>H</td><td>1.26303</td><td>6.57673</td><td>0.17212</td><td></td></tr><tr><td>H</td><td>0.21799</td><td>5.11603</td><td>-0.03468</td><td></td></tr><tr><td>H</td><td>-1.78003</td><td>6.14426</td><td>-0.87498</td><td></td></tr><tr><td>H</td><td>-3.32281</td><td>6.05139</td><td>0.01906</td><td></td></tr><tr><td>H</td><td>-1.78374</td><td>6.03115</td><td>0.92347</td><td></td></tr><tr><td>H</td><td>-4.89690</td><td>4.71221</td><td>-0.07358</td><td></td></tr><tr><td>H</td><td>-6.82566</td><td>3.40843</td><td>-0.18007</td><td></td></tr><tr><td>H</td><td>-5.88239</td><td>1.80643</td><td>-0.28628</td><td></td></tr><tr><td>H</td><td>-4.44893</td><td>0.70720</td><td>-0.28575</td><td></td></tr><tr><td>H</td><td>-5.32107</td><td>-2.89387</td><td>-0.54251</td><td></td></tr><tr><td>H</td><td>-5.45075</td><td>-1.49552</td><td>0.57400</td><td></td></tr><tr><td>H</td><td>-5.46788</td><td>-1.24144</td><td>-1.20929</td><td></td></tr><tr><td>H</td><td>-2.05997</td><td>-4.55939</td><td>0.34045</td><td></td></tr><tr><td>H</td><td>-3.76430</td><td>-4.43895</td><td>-0.12880</td><td></td></tr><tr><td>H</td><td>-3.33638</td><td>-4.66246</td><td>-2.47119</td><td></td></tr><tr><td>H</td><td>-1.65517</td><td>-4.10119</td><td>-2.33605</td><td></td></tr><tr><td>H</td><td>-0.56422</td><td>-7.14866</td><td>-1.00437</td><td></td></tr><tr><td>H</td><td>0.26056</td><td>-7.12181</td><td>-3.00953</td><td></td></tr><tr><td>H</td><td>1.48118</td><td>-4.13253</td><td>-2.58671</td><td></td></tr><tr><td>H</td><td>3.13949</td><td>-4.79028</td><td>-2.67491</td><td></td></tr><tr><td>H</td><td>3.46153</td><td>-4.65168</td><td>-0.30336</td><td></td></tr><tr><td></td><td>1.73023</td><td>-4.75206</td><td>0.06633</td><td>H</td></tr><tr><td>H</td><td>5.26172</td><td>-1.51540</td><td>-1.48550</td><td></td></tr><tr><td></td><td>5.31767</td><td>-1.84036</td><td>0.28550</td><td>H</td></tr><tr><td>H</td><td>5.06416</td><td>-3.18438</td><td>-0.87628</td><td></td></tr><tr><td>H</td><td>-0.07991</td><td>-3.70928</td><td>-0.48866</td><td></td></tr><tr><td>H</td><td>4.39835</td><td>0.46775</td><td>-0.47078</td><td></td></tr><tr><td>H</td><td>5.39550</td><td>2.59422</td><td>-1.24309</td><td></td></tr><tr><td>H</td><td>5.47197</td><td>4.04179</td><td>-0.19892</td><td></td></tr><tr><td>H</td><td>5.44914</td><td>2.41988</td><td>0.54738</td><td></td></tr><tr><td>N</td><td>0.01831</td><td>0.60829</td><td>1.68951</td><td></td></tr><tr><td>C</td><td>0.02054</td><td>1.64472</td><td>2.54371</td><td></td></tr><tr><td></td><td>0.04593</td><td>-0.50152</td><td>2.45186</td><td>C</td></tr><tr><td>N</td><td>0.04934</td><td>1.20474</td><td>3.84418</td><td></td></tr><tr><td>C</td><td>0.06582</td><td>-0.16578</td><td>3.80848</td><td></td></tr><tr><td>H</td><td>0.00322</td><td>2.72212</td><td>2.31829</td><td></td></tr><tr><td>N</td><td>-0.05051</td><td>0.81937</td><td>-2.30431</td><td></td></tr><tr><td>H</td><td>0.05251</td><td>-1.53704</td><td>2.08183</td><td></td></tr><tr><td>C</td><td>0.11803</td><td>1.92670</td><td>-3.04495</td><td></td></tr><tr><td>H</td><td>0.05712</td><td>1.81091</td><td>4.70485</td><td></td></tr><tr><td>H</td><td>0.08982</td><td>-0.83278</td><td>4.68627</td><td></td></tr><tr><td>C</td><td>-0.24302</td><td>-0.18840</td><td>-3.17641</td><td></td></tr><tr><td>C</td><td>-0.19749</td><td>0.28568</td><td>-4.49059</td><td></td></tr><tr><td></td><td>0.03407</td><td>1.63309</td><td>-4.38373</td><td>N</td></tr><tr><td>H</td><td>0.30109</td><td>2.95786</td><td>-2.70479</td><td></td></tr><tr><td>H</td><td>-0.41432</td><td>-1.24242</td><td>-2.91290</td><td>H -0.31761</td></tr><tr><td>H</td><td>0.12975</td><td>-0.27403</td><td>-5.43315</td><td></td></tr><tr><td></td><td></td><td>2.31943</td><td>-5.17616</td><td></td></tr><tr><td>*</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<figure><figcaption><div class="caption">Fig. 5.18: Structure of the iron-porphyrin used for the prediction of its absorption spectrum (the structure was obtained from a molecular mechanics calculation and the iron-imidazole bondlength was set to 2.0 Å).</div></figcaption></figure>
+<p>Fig. 5.19: The ZINDO/S predicted absorption spectrum of the model iron porphyrin shown above. The spectrum has been plotted using the orca_mapspc tool.</p>
+<h2>Note</h2>
+<p>ORCAslightly departs from standard ZINDO/S in using dipole integrals in the intensity calculations that include all one- and two-center terms which are calculated via a STO-3G expansion of the Slater basis orbitals. The calculated intensities are not highly accurate anyways. In the present case they are overestimated by a factor of ≈ 2.</p>
+<h2>5.6.3 Hartree-Fock Wavefunctions</h2>
+<p>When applying the procedures outlined above to pure Hartree-Fock, one obtains the 'random-phase approximation' (RPA) or the CI singles (CIS) model (when effectively using the Tamm-Dancoff Approximation, TDA). In general, RPA and CIS calculations do not lead to good agreement with experimental excitation energies and errors of 1-5 eV are common. Therefore HF/CIS is mostly a qualitative tool or can be used with caution for larger molecules if more extensive and more well balanced CI calculations are not computationally tractable.</p>
+<h2>5.6.4 Non-Hybrid and Hybrid DFT</h2>
+<p>For DFT functionals there is the choice between the full TD-DFT (eq. (5.66)) treatment and the so-called TammDancoff approximation (TDA).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The TDA is the same approximation that leads from RPA to CIS (i.e. neglect of the so-called 'B' matrix, see eq. (5.67)). The results for vertical excitation energies are usually very similar between the two approaches.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In general, the elements of matrix 'A' and 'B' for singlet-singlet excitations in the spin-restricted case are given by eqs. (5.68) and (5.69).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, i, j denote occupied and a, b virtual orbitals. a X is the amount of non-local Fock exchange in the density functional. If a X is equal to one, eqs. (5.66) and (5.67) correspond to the RPA and CIS case, based on a HartreeFock ground state determinant.</p>
+<p>The TDA is actually the default method for TD-DFT, and can be turned off by:</p>
+<pre><code>%tddft TDA false end</code></pre>
+<p>There are situations where hybrid functionals give significantly better results than pure functionals since they suffer less from the self-interaction error. In those cases, the RIJCOSX procedure[119] [628][120] leads to very large speedups in such calculations at virtually no loss in accuracy[629], and is turned on by default whenever the SCF uses that too.</p>
+<h2>5.6.5 Collinear Spin-Flip TDA (SF-TD-DFT)</h2>
+<p>Another approach to obtain excited states via CIS/TD-DFT are the so called spin-flip methods (for a good review, please check ref [630]). The idea is to start from an UHF state, and then 'flip' one of the alpha electrons to generate states with MS SF = MS UHF -1 . In order to do that, we look for excitations from alpha-to-beta orbitals only, and that makes the A matrix from TDA even simpler:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the overbar represent beta orbitals, and no-overbars alpha orbitals.</p>
+<p>Please note that for pure DFT (with a X = 0 , and no HF contribution), the A matrix is based simply in the orbital energies, and thus it is always good to have a good amount of HF on the functional!</p>
+<p>In order to facilitate the discussion on the results one gets from the SF-TDA, let's take a closer look at the picture representing some possible excitations:</p>
+<p>and</p>
+<figure><figcaption><div class="caption">Fig. 5.20: Effect of the spin-flip operator on a UHF ( MS = 3 ) wavefunction. The &#x27;spin-complete&#x27; states are eigenvectors of the S 2 operator, while the &#x27;spin-incomplete&#x27; are not. Alpha and beta orbitals here are represented with the same energy, just to simplify the image. Adapted from the previously mentioned review.</div></figcaption></figure>
+<p>It is important to note that no all SF-excitations lead to determinants that are eigenvalues of the S 2 operator. That means, depending on how much of these 'spin incomplete' excitations are present in the final SF-state, the spincontamination could be high, and in this case, states with ⟨ S 2 ⟩ ≃ 1 would be predicted. These are undefined states within the SF theory and should be treated carefully.</p>
+<h2>ǩ Important</h2>
+<ul>
+<li style="list-style-type: '· ';">Any SF method can only be used starting from a UHF wavefunction, with a multiplicity of at least 3!</li>
+</ul>
+<h2>First example: methylene and SF-CIS</h2>
+<p>One simple example is the calculation of the vertical singlet-triplet splitting of the methylene radical within CIS, using the following input with symmetry included:</p>
+<pre><code>!def2-SVP USESYM %TDDFT SF TRUE END * xyz 0 3 C 0 0 0.1058 H 0 0.9910 -0.3174 H 0 -0.9910 -0.3174 *</code></pre>
+<p>The geometry was taken from a high-level CCSD(T)/cc-pVQZ ( X 3 B 1 ) optimized geometry, and after the regular UHF SCF, the SF-CIS result is:</p>
+<pre><code>---------------------SF-CIS EXCITED STATES ---------------------the weight of the individual excitations are printed if larger than 1.0e-02 UHF/UKS reference: multiplicity estimated based on rounded <S**2> value, RELEVANCE␣ ↪ → IS LIMITED!</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>(SPIN-FLIP GROUND STATE) STATE 1: E= 0.005456 au 0.148 eV 1197.5 cm**-1 <S**2> = 2.041850␣ ↪ → Sym: B1 Mult 3 1a -> 3b : 0.017437 (c= -0.13204740) 3a -> 3b : 0.465217 (c= 0.68206845) 3a -> 9b : 0.026214 (c= 0.16190881) 4a -> 4b : 0.443967 (c= -0.66630872) 4a -> 10b : 0.028255 (c= -0.16809333) STATE 2: E= 0.058434 au 1.590 eV 12824.9 cm**-1 <S**2> = 0.022791␣ ↪ → Sym: A1 Mult 1 3a -> 4b : 0.128149 (c= -0.35797971) 4a -> 3b : 0.810350 (c= 0.90019420) 4a -> 9b : 0.032289 (c= 0.17969015) STATE 3: E= 0.079264 au 2.157 eV 17396.4 cm**-1 <S**2> = 0.032278␣ ↪ → Sym: B1 Mult 1 3a -> 3b : 0.446020 (c= -0.66784709) 3a -> 9b : 0.018620 (c= -0.13645512) 4a -> 4b : 0.494589 (c= -0.70327031) 4a -> 10b : 0.023225 (c= -0.15239893)</code></pre>
+<p>Now, it is very important to consider that the SF ground state is not the UHF ground state anymore , the 'new' ground state within the SF scheme is actually STATE 1. You can think of the UHF as being only an initial model, on the basis of which the SF states are built. The final energy of the new ground state is actually the SCF energy + energy of the STATE 1 (which is the one given as the FINAL SINGLE POINT ENERGY is no IROOT is given). This last contribution can be either positive or negative, depending on the case.</p>
+<p>Anyway, the ground state is predicted to be a triplet state (here with M S = 0 ), as expected for this carbene, and the S-T spiting energy is 1.590 - 0.148 eV = 1.442 eV. The full CI results for that is 1.50 eV, so it is already almost there! Of course, in this case computing the RHF singlet - UHF triplet makes no sense, since the RHF singlet would not have the necessary open-shell singlet character.</p>
+<h2>Benzyne and SF-TDA</h2>
+<p>Benzyne is a classic diradical that can be generated from benzene by hydrogen abstraction (Fig. 5.21). It is known to have an open-shell singlet ground state, and has its adiabatic sinlget-triplet splitting measured experimentally. Let's try to compute this value using SF-TDA with ORCA.</p>
+<figure><figcaption><div class="caption">Fig. 5.21: Lewis representation of the benzene and benzyne molecules, indicating the diradical character of the later.</div></figcaption></figure>
+<p>First, we optimize the open-shell singlet by using SF, and the input that follows. Here we use now DFT, in particular the BHANDHLYP functional, which uses 50% of HF correlation, and is recommended for this kind of application. By default, the IROOT to be optimized is 1, which in this case corresponds to the SF ground state.</p>
+<pre><code>!DEF2-TZVPD OPT %method Method DFT Functional hyb_gga_xc_bhandhlyp end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%tddft SF true NRoots 3 end * xyz 0 3 C -1.39113 0.00000 0.00000 C 0.69557 1.20476 0.00000 C -0.69557 1.20476 0.00000 C -0.69557 -1.20476 0.00000 C 0.69557 -1.20476 0.00000 C 1.39113 0.00000 0.00000 H -1.24291 2.15278 0.00000 H -1.24291 -2.15278 0.00000 H 1.24291 -2.15278 0.00000 H 1.24291 2.15278 0.00000 *</code></pre>
+<h2>And after the optimization of IROOT 1, the final SF-TDA result is:</h2>
+<pre><code>---------------------SF-TDA EXCITED STATES ---------------------the weight of the individual excitations are printed if larger than 1.0e-02 UHF/UKS reference: multiplicity estimated based on rounded <S**2> value, RELEVANCE␣ ↪ → IS LIMITED! (SPIN-FLIP GROUND STATE) STATE 1: E= 0.024173 au 0.658 eV 5305.3 cm**-1 <S**2> = 0.023478␣ ↪ → Mult 1 11a -> 19b : 0.018563 (c= -0.13624537) 17a -> 20b : 0.245232 (c= 0.49520915) 17a -> 27b : 0.016815 (c= -0.12967111) 20a -> 19b : 0.667236 (c= 0.81684517) 20a -> 25b : 0.019935 (c= -0.14119296) STATE 2: E= 0.032615 au 0.887 eV 7158.1 cm**-1 <S**2> = 2.018056␣ ↪ → Mult 3 11a -> 20b : 0.015462 (c= -0.12434444) 17a -> 19b : 0.448809 (c= 0.66993209) 17a -> 25b : 0.017854 (c= -0.13361796) 20a -> 20b : 0.460923 (c= 0.67891314) 20a -> 27b : 0.024031 (c= -0.15501804) STATE 3: E= 0.106201 au 2.890 eV 23308.4 cm**-1 <S**2> = 1.029543␣ ↪ → Mult 3 15a -> 20b : 0.051523 (c= -0.22698783) 18a -> 19b : 0.910633 (c= -0.95427103) 18a -> 25b : 0.017352 (c= 0.13172868)</code></pre>
+<p>confirming the singlet ground state, with an upper triplet excited state.</p>
+<p>Now to optimize the triplet state using SF-TDA, one has to use a similar input, except that now IROOT 2 has to be chosen as the one to be optimized:</p>
+<pre><code>!DEF2-TZVPD OPT %method Method DFT</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>Functional hyb_gga_xc_bhandhlyp end %tddft SF true NRoots 3 IRoot 2 end * xyz 0 3 C -1.39113 0.00000 0.00000 C 0.69557 1.20476 0.00000 C -0.69557 1.20476 0.00000 C -0.69557 -1.20476 0.00000 C 0.69557 -1.20476 0.00000 C 1.39113 0.00000 0.00000 H -1.24291 2.15278 0.00000 H -1.24291 -2.15278 0.00000 H 1.24291 -2.15278 0.00000 H 1.24291 2.15278 0.00000 *</code></pre>
+<h2>Giving the following results:</h2>
+<pre><code>---------------------SF-TDA EXCITED STATES ---------------------the weight of the individual excitations are printed if larger than 1.0e-02 UHF/UKS reference: multiplicity estimated based on rounded <S**2> value, RELEVANCE␣ ↪ → IS LIMITED! (SPIN-FLIP GROUND STATE) STATE 1: E= 0.028669 au 0.780 eV 6292.1 cm**-1 <S**2> = 0.022484␣ ↪ → Mult 1 11a -> 19b : 0.018011 (c= -0.13420632) 17a -> 20b : 0.293971 (c= 0.54219090) 17a -> 27b : 0.017459 (c= -0.13213220) 20a -> 19b : 0.611212 (c= 0.78180024) 20a -> 25b : 0.023243 (c= 0.15245717) STATE 2: E= 0.032738 au 0.891 eV 7185.1 cm**-1 <S**2> = 2.018181␣ ↪ → Mult 3 11a -> 20b : 0.014963 (c= -0.12232498) 17a -> 19b : 0.444520 (c= 0.66672364) 17a -> 25b : 0.021443 (c= 0.14643407) 20a -> 20b : 0.462361 (c= 0.67997124) 20a -> 27b : 0.022005 (c= -0.14834057) STATE 3: E= 0.108154 au 2.943 eV 23737.1 cm**-1 <S**2> = 1.030736␣ ↪ → Mult 3 15a -> 20b : 0.052291 (c= -0.22867148) 18a -> 19b : 0.904505 (c= -0.95105480) 18a -> 25b : 0.021057 (c= -0.14511042)</code></pre>
+<p>After the optimization, the final predicted adiabatic singlet-triplet gap is 0.233 eV, compared to the experimental value of 0.165 eV [631].</p>
+<p>(continued from previous page)</p>
+<h2>5.6.6 Including solvation effects via LR-CPCM theory</h2>
+<p>The LR-CPCM theory, as developed by Cammi and Tomasi [632], is implemented for both energies and gradients of excited states. It is turned on by default, whenever CPCM is also requested for the ground state.</p>
+<p>The major change is that now there is a G ia,jb term in the A part of Eq. (5.66), related to solvation effects.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Equilibrium and non-equilibrium conditions</h2>
+<p>These charges q jb are calculated in the same way as described in The Conductor-like Polarizable Continuum Model (C-PCM) , but for excited states, two different values of ε can be used, depending on the dynamics of the system:</p>
+<ul>
+<li style="list-style-type: '· ';">Non-equilibrium : If the calculation assumes that the electronic excitation is so fast, that there is no time for the solvent to reorganize around the solute, then the ε inf of the solvent is used, which is equivalent to the square of the refractive index. That is the case if one wants to compute the vertical excitation energy, and it is the default in that case.</li>
+<li style="list-style-type: '· ';">Equilibrium : If the excited state is assumed to be completely solvated, then the true dielectric constant ε of the solvent should be used. That is the case for geometry optimizations, frequencies or inside ORCA_ESD. This is turned on by default whenever analytic gradients are requested.</li>
+</ul>
+<p>In any case, these conditions can be controlled by the flag CPCMEQ, that can be set to TRUE or FALSE by the user, and will then override the defaults.</p>
+<p>These are available to all CIS/TD-DFT options: singlets, spin-adapted triplets, UHF and spin-flip variants. It works inclusive for double-hybrids and whenever SOC is requested.</p>
+<h2>5.6.7 Population Analysis of Excited States</h2>
+<p>If you want to print a population analysis for the excited state using CIS/TD-DFT, there are two options available: using unrelaxed or relaxed densities. For the unrelaxed densities, simply use UPOP TRUE:</p>
+<pre><code>!PBE def2-SVP %tddft NROOTS 5 UPOP TRUE end * xyz 0 1 O -1.88199 1.42016 -0.00000 C -1.80947 0.20286 0.00000 H -2.50488 -0.38174 -0.59212 H -1.04956 -0.29504 0.59212 *</code></pre>
+<p>and the atomic changes and bond orders will be printed for the chosen IROOT (default 1):</p>
+<pre><code>------------------------------------------------------------------------------UNRELAXED CIS/TDA DENSITY POPULATION ANALYSIS IROOT 1 ------------------------------------------------------------------------------------------------------------------------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>where G ia,bj is defined as:</p>
+<p>(continued from previous page)</p>
+<pre><code>ORCA POPULATION ANALYSIS ------------------------------------------------------------------------------Input electron density ... example5.cispur.singlet.iroot0 BaseName (.gbw .S,...) ... example5 ******************************** * MULLIKEN POPULATION ANALYSIS * ******************************** -----------------------MULLIKEN ATOMIC CHARGES -----------------------0 O : 0.177629 1 C : -0.438661 2 H : 0.130515 3 H : 0.130518 Sum of atomic charges: -0.0000000 (...) ***************************** * MAYER POPULATION ANALYSIS * ***************************** NA -Mulliken gross atomic population ZA -Total nuclear charge QA -Mulliken gross atomic charge VA -Mayer's total valence BVA -Mayer's bonded valence FA -Mayer's free valence ATOM NA ZA QA VA BVA FA 0 O 7.8224 8.0000 0.1776 2.5554 1.4462 1.1092 1 C 6.4387 6.0000 -0.4387 3.8364 3.1848 0.6516 2 H 0.8695 1.0000 0.1305 0.9720 0.8521 0.1199 3 H 0.8695 1.0000 0.1305 0.9720 0.8521 0.1199 Mayer bond orders larger than 0.100000 B( 0-O , 1-C ) : 1.4477 B( 1-C , 2-H ) : 0.8685 B( 1-C , 3-H ) : 0.8685</code></pre>
+<p>To get the analysis from the relaxed density, simply use !ENGRAD to a run a gradient calculation:</p>
+<pre><code>!PBE def2-SVP ENGRAD %tddft NROOTS 5 UPOP TRUE end * xyz 0 1 O -1.88199 1.42016 -0.00000 C -1.80947 0.20286 0.00000 H -2.50488 -0.38174 -0.59212 H -1.04956 -0.29504 0.59212 *</code></pre>
+<p>and the printout is:</p>
+<pre><code>------------------------------------------------------------------------------RELAXED CIS/TDA DENSITY POPULATION ANALYSIS IROOT 1</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>------------------------------------------------------------------------------------------------------------------------------------------------------------ORCA POPULATION ANALYSIS ------------------------------------------------------------------------------Input electron density ... example6.cispre.singlet.iroot1 BaseName (.gbw .S,...) ... example6 ******************************** * MULLIKEN POPULATION ANALYSIS * ******************************** -----------------------MULLIKEN ATOMIC CHARGES -----------------------0 O : -0.092919 1 C : -0.088136 2 H : 0.090533 3 H : 0.090522 Sum of atomic charges: -0.0000000 (...) ***************************** * MAYER POPULATION ANALYSIS * ***************************** NA -Mulliken gross atomic population ZA -Total nuclear charge QA -Mulliken gross atomic charge VA -Mayer's total valence BVA -Mayer's bonded valence FA -Mayer's free valence ATOM NA ZA QA VA BVA FA 0 O 8.0929 8.0000 -0.0929 2.2728 1.3646 0.9082 1 C 6.0881 6.0000 -0.0881 3.9322 3.1290 0.8031 2 H 0.9095 1.0000 0.0905 0.9876 0.8843 0.1034 3 H 0.9095 1.0000 0.0905 0.9876 0.8843 0.1034 Mayer bond orders larger than 0.100000 B( 0-O , 1-C ) : 1.3485 B( 1-C , 2-H ) : 0.8902 B( 1-C , 3-H ) : 0.8902</code></pre>
+<p>In order to print the analysis for multiple states, simply use IROOTLIST and TROOTLIST :</p>
+<pre><code>!PBE def2-SVP %tddft NROOTS 5 IROOTLIST 1,2,3 TROOTLIST 1,2,3 UPOP TRUE end * xyz 0 1 O -1.88199 1.42016 -0.00000 C -1.80947 0.20286 0.00000 H -2.50488 -0.38174 -0.59212 H -1.04956 -0.29504 0.59212 *</code></pre>
+</div>
+</body>
+</html>

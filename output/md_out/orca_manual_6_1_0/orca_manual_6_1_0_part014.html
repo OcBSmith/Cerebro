@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part014</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<table><caption><div class="caption">Table 3.17: DFT-D3(0) ( !D3ZERO ) parameters used for various functionals.</div></caption><tbody><tr><th>Functional</th><th>s 6</th><th>rs 6</th><th>s 8</th><th>α 6</th></tr><tr><th>HF</th><td>1.0000</td><td>1.1580</td><td>1.7460</td><td>14</td></tr><tr><th>BLYP</th><td>1.0000</td><td>1.0940</td><td>1.6820</td><td>14</td></tr><tr><th>BP86</th><td>1.0000</td><td>1.1390</td><td>1.6830</td><td>14</td></tr><tr><th>B97-D</th><td>1.0000</td><td>0.8920</td><td>0.9090</td><td>14</td></tr><tr><th>REVPBE</th><td>1.0000</td><td>0.9230</td><td>1.0100</td><td>14</td></tr><tr><th>PBE</th><td>1.0000</td><td>1.2170</td><td>0.7220</td><td>14</td></tr><tr><th>RPBE</th><td>1.0000</td><td>0.8720</td><td>0.5140</td><td>14</td></tr><tr><th>TPSS</th><td>1.0000</td><td>1.1660</td><td>1.1050</td><td>14</td></tr><tr><th>B3LYP</th><td>1.0000</td><td>1.2610</td><td>1.7030</td><td>14</td></tr><tr><th>PBE0</th><td>1.0000</td><td>1.2870</td><td>0.9280</td><td>14</td></tr><tr><th>PW6B95</th><td>1.0000</td><td>1.5230</td><td>0.8620</td><td>14</td></tr><tr><th>TPSS0</th><td>1.0000</td><td>1.2520</td><td>1.2420</td><td>14</td></tr><tr><th>B2PLYP</th><td>0.6400</td><td>1.4270</td><td>1.0220</td><td>14</td></tr><tr><th>B2GP-PLYP</th><td>0.5600</td><td>1.5860</td><td>0.7600</td><td>14</td></tr><tr><th>PWPB95</th><td>0.8200</td><td>1.5570</td><td>0.7050</td><td>14</td></tr><tr><th>mPWLYP</th><td>1.0000</td><td>1.2390</td><td>1.0980</td><td>14</td></tr><tr><th>BPBE</th><td>1.0000</td><td>1.0870</td><td>2.0330</td><td>14</td></tr><tr><th>BHANDHLYP</th><td>1.0000</td><td>1.3700</td><td>1.4420</td><td>14</td></tr><tr><th>TPSSh</th><td>1.0000</td><td>1.2230</td><td>1.2190</td><td>14</td></tr><tr><th>REVPBE0</th><td>1.0000</td><td>0.9490</td><td>0.7920</td><td>14</td></tr><tr><th>REVPBE38</th><td>1.0000</td><td>1.0210</td><td>0.8620</td><td>14</td></tr><tr><th>RPW86PBE</th><td>1.0000</td><td>1.2240</td><td>0.9010</td><td>14</td></tr><tr><th>B3PW91</th><td>1.0000</td><td>1.1760</td><td>1.7750</td><td>14</td></tr><tr><th>M06L</th><td>1.0000</td><td>1.5810</td><td>0.0000</td><td>14</td></tr><tr><th>M06</th><td>1.0000</td><td>1.3250</td><td>0.0000</td><td>14</td></tr><tr><th>M062X</th><td>1.0000</td><td>1.6190</td><td>0.0000</td><td>14</td></tr><tr><th>wB97X-D3</th><td>1.0000</td><td>1.2810</td><td>1.0000</td><td>14</td></tr><tr><th>CAM-B3LYP</th><td>1.0000</td><td>1.3780</td><td>1.2170</td><td>14</td></tr><tr><th>SCAN</th><td>1.0000</td><td>1.3240</td><td>0.0000</td><td>14</td></tr><tr><th>wB97X-2</th><td>0.5470</td><td>4.7330</td><td>-0.1090</td><td>14</td></tr><tr><th>PBE0DH</th><td>0.8800</td><td>1.1280</td><td>0.0000</td><td>14</td></tr><tr><th>PBE02</th><td>0.5400</td><td>1.2430</td><td>-0.2280</td><td>14</td></tr><tr><th>PBE-QIDH</th><td>0.4000</td><td>1.1140</td><td>0.0540</td><td>14</td></tr></tbody></table>
+<h2>3.4.2 Non-Local Dispersion Correction (VV10): DFT-NL</h2>
+<p>A different route to correct for London dispersion is followed by the van der Waals Density Functional (vdW-DF) as pioneered by Langreth and Lundquist [282]. These methods use only the electron density to include such dispersion/correlation effects and can be used in a self-consistent way also correction the molecular orbitals and not only energies. The vdW correlation functional VV10 of Vydrov and Van Voorhis [275] currently seems to be the most promising candidate for a general and accurate electronic structure method.</p>
+<p>We use the term DFT-NL for any density functional in combination with the non-local part of the VV10 functional with an optimized parameter b , which will be defined below. The performance of these methods has been evaluated in Ref. [276] using the GMTKN30 [250, 283, 284] database and the S66 set [285]. The performance of weak hydrogen bonds were evaluated in Ref. [286].</p>
+<p>DFT-NL and DFT-D3/D4 perform very similarly, but NL is to be preferred for metallic systems or when the basic electronic structure changes significantly (e.g. oxidations or ionizations). As a recent example, Janes and Iron showed that for functionals such as wB97X-V, including VV10 correlation results in very high quality reaction barriers when metals are involved [287].</p>
+<p>The total exchange-correlation (XC) energy of VV10-type functionals is defined in eq. (3.18). It is composed of standard exchange (X) and correlation (C) parts and the non-local (NL) term, which covers (mainly) long-range</p>
+<p>dispersive energy:</p>
+<p>with</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The NL term is given by the following double integral:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ρ is the total electron density, and the definitions of the kernel φ ( r, r ′ ) and β are as follows (in a.u.):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In the original definition, the short-range attenuation parameter b appearing in κ and β was fitted to the S22 set [288] of non-covalent interactions ( b = 5 . 9 for the rPW86PBE GGA). The other parameter C = 0 . 0093 , appearing in ω 0 , determines the long-range behavior, and was set to its original value. Other DFT-NL functionals are constructed analogously. For a detailed discussion of the derivation of the formulas and their physical meaning and basis, see the references given above.</p>
+<p>The defined energy of the non-local DFT-NL exchange-correlation functional can be computed in two ways: as a post-SCF addition based on a converged SCF density or in a self-consistent treatment. In our implementation of the non-self-consistent DFT-NL functional, a self-consistent DFT computation is performed as the first step. In the second step, the optimized electron density from the DFT computation is taken as input for the energy calculation of the non-local part. In the self-consistent treatment, the orbitals and density are optimized in the presence of the full DFT + VV10 exchange-correlation potential. According to many test calculations, an self-consistent treatment is rarely necessary for normal energy evaluations. The computation of the double integral given in eq. (3.19) requires using an integration grid, just like for normal exchange-correlation functionals. This grid is built similarly to the regular grids available in the ORCA, see Sec. Numerical Integration .</p>
+<h2>Basic usage</h2>
+<p>The non-self-consistent variant of NL can be invoked by the !NL keyword.</p>
+<p>!B3LYP NL</p>
+<p>The self-consistent variant by !SCNL .</p>
+<p>!B3LYP SCNL</p>
+<p>In the current version of ORCA, NL parameters are implemented for various functionals and HF:</p>
+<table><caption><div class="caption">Table 3.18: Methods with available NL parameters. If no values are given, the default parameters are used.</div></caption><tbody><tr><td>Method</td><th>b</th><th>C</th><th>NLScal</th></tr><tr><th>Hartree-Fock</th><td></td><td></td><td></td></tr><tr><th>HF</th><td>3.9</td><td></td><td></td></tr><tr><th>(meta-)GGA</th><td></td><td></td><td></td></tr><tr><th>BLYP</th><td>4.0</td><td></td><td></td></tr><tr><th>BP86</th><td>4.4</td><td></td><td></td></tr><tr><th>PBE</th><td>6.4</td><td></td><td></td></tr><tr><th>REVPBE</th><td>3.7</td><td></td><td></td></tr><tr><th>RPBE</th><td>4.0</td><td></td><td></td></tr><tr><th>RPW86PBE</th><td>5.9</td><td></td><td></td></tr><tr><th>SCANfunc</th><td>6.4</td><td></td><td></td></tr><tr><th>RSCAN</th><td>10.8</td><td></td><td></td></tr><tr><th>R2SCAN</th><td>12.3</td><td></td><td></td></tr><tr><th>TPSS</th><td>5.0</td><td></td><td></td></tr><tr><th>B97M-V</th><td>6.0</td><td>0.01</td><td></td></tr><tr><th>Hybrid</th><td></td><td></td><td></td></tr><tr><th>B3LYP</th><td>4.8</td><td></td><td></td></tr><tr><th>B3LYP/G</th><td>4.8</td><td></td><td></td></tr><tr><th>B3P86</th><td>5.3</td><td></td><td></td></tr><tr><th>B3PW91</th><td>4.5</td><td></td><td></td></tr><tr><th>mPW1PW</th><td>5.3</td><td></td><td></td></tr><tr><th>PBE0</th><td>6.9</td><td></td><td></td></tr><tr><th>PW1PW</th><td>7.7</td><td></td><td></td></tr><tr><th>PW6B95</th><td>9.0</td><td></td><td></td></tr><tr><th>REVPBE0</th><td>4.3</td><td></td><td></td></tr><tr><th>REVPBE38</th><td>4.7</td><td></td><td></td></tr><tr><th>TPSSh</th><td>5.2</td><td></td><td></td></tr><tr><th>TPSS0</th><td>5.5</td><td></td><td></td></tr><tr><th>R2SCANh (see [238])</th><td>11.9</td><td></td><td></td></tr><tr><th>R2SCAN0 (see [238])</th><td>11.4</td><td></td><td></td></tr><tr><th>R2SCAN50 (see [238])</th><td>10.8</td><td></td><td></td></tr><tr><th>Range-separated hybrid</th><td></td><td></td><td></td></tr><tr><th>LRC-PBE</th><td>6.4</td><td></td><td></td></tr><tr><th>WR2SCAN (see [248])</th><td>9.2612</td><td></td><td></td></tr><tr><th>WB97X-V</th><td>6.0</td><td>0.01</td><td></td></tr><tr><th>WB97M-V</th><td>6.0</td><td>0.01</td><td></td></tr><tr><th>Double-hybrid</th><td></td><td></td><td></td></tr><tr><th>B2PLYP (see [289])</th><td>7.8</td><td></td><td></td></tr><tr><th>DSD-BLYP (see [290])</th><td>12.0</td><td></td><td></td></tr><tr><th>DSD-PBEP86 (see [290])</th><td>14.2</td><td></td><td></td></tr><tr><th>DSD-BLYP/2013</th><td>12.0</td><td></td><td></td></tr><tr><th>DSD-PBEP86/2013</th><td>14.2</td><td></td><td></td></tr><tr><th>PWPB95 (see [290])</th><td>11.1</td><td></td><td></td></tr><tr><th>PR2SCAN50 (see [248])</th><td>10.9207</td><td></td><td>0.75</td></tr><tr><th>KPR2SCAN50 (see [248])</th><td>10.6723</td><td></td><td>0.70</td></tr><tr><th>PR2SCAN69 (see [248])</th><td>9.0691</td><td></td><td>0.5556</td></tr><tr><th>Range-separated double-hybrid</th><td></td><td></td><td></td></tr><tr><th>WPR2SCAN50 (see [248])</th><td>9.4149</td><td></td><td>0.65</td></tr><tr><th>WB97M(2)</th><td>10.0</td><td>0.01</td><td>0.65904</td></tr></tbody></table>
+<h2>ǩ Important</h2>
+<p>Head-Gordon's ω B97X-V[244], B97M-V [211], and ω B97M-V[247] functionals are specially fitted variants that use the non-local VV10 kernel to capture London-dispersion effects. They employ the non-self-consistent NL</p>
+<p>correction by default and no additional NL keywords have to be used! A self-consistent treatment can be invoked by the !SCNL keyword.</p>
+<h2>Some notes on the NL corrections in ORCA</h2>
+<ul>
+<li style="list-style-type: '· ';">Self-consistent calculations are not possible with the Hartree-Fock method.</li>
+<li style="list-style-type: '· ';">Analytic gradients are available, thus geometry optimizations with numerical frequencies can be computed.</li>
+<li style="list-style-type: '· ';">TD-DFT calculations are not yet available.</li>
+<li style="list-style-type: '· ';">Any calculations that require second derivatives of the NL functional are not yet possible. These are needed for real type perturbations in the CP-SCF solutions, e.g. for analytic Hessians, dipole polarizabilities, and double-hybrid gradients.</li>
+<li style="list-style-type: '· ';">Strictly imaginary perturbations such as NMR shielding and EPR g-tensors (both also with GIAOs), and hyperfine couplings are available.</li>
+</ul>
+<h2>Custom parameters</h2>
+<p>For NL, the parameters b , C , and a global scaling parameter of the NL correlation energy term can be adjusted via the %method block. The global scaling parameter NLScal should be used to scale the NL correction for methods that already partly cover long-range correlatione like double-hybrids.</p>
+<pre><code>!B3LYP NL %method NLb 5.0 NLC 0.0083 NLScal 1.0 end</code></pre>
+<p>In order to improve the scaling for larger systems, a distance cutoff was also introduced, controlled by the vdWdistTCUT flag in the %method block. The default value is 10 Å, so two grid points more than 10 Å away from each other do not correlate via the VV10 potential. This is already very conservative and has practically zero effect on the final energy, but can be altered if needed.</p>
+<h2>Example</h2>
+<p>In the following, we compute the energy of the argon dimer at a distance of 3.76 Å with the def2-TZVP basis set and using the B3LYP hybrid functional as an example. Here, we choose the non-self-consistent variant of the DFT-NL dispersion correction.</p>
+<pre><code>!B3LYP NL def2-TZVP *xyz 0 1 Ar 0.0 0.0 0.0 Ar 0.0 0.0 3.76 *</code></pre>
+<p>The DFT-NL output for this example is shown below:</p>
+<pre><code>-------------------------------------------------------------------------------post-SCF DFT-NL dispersion correction -------------------------------------------------------------------------------SCF Energy: -1054.960511496 NL Energy: 0.209449910 SC+NL Energy: -1054.751061586 NL done in : 0.7 sec -------------------------------------------------------------------------------[...] ----------------TOTAL SCF ENERGY ----------------[...] DFT components: N(Alpha) : 17.999996328440 electrons N(Beta) : 17.999996328440 electrons N(Total) : 35.999992656880 electrons E(X) : -47.880920358714 Eh E(C) : -1.761923687962 Eh NL Energy, E(C,NL) : 0.209449910227 Eh E(XC) : -49.433394136450 Eh</code></pre>
+<p>Here, we find the B3LYP total energy ( SCF Energy ), the non-local contribution ( NL Energy ), and their sum ( SC+NL Energy ), which is the final total energy. In the DFT components section, the non-local contribution is listed separately ( NL Energy, E(C,NL) ) in order to be consistent with the !SCNL output.</p>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 3.19: Simple input keywords for the NL correction.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>NL</td><td>Activates non-self-consistent NL correction</td></tr><tr><td>SCNL</td><td>Activates self-consistent NL correction</td></tr></tbody></table>
+<table><caption><div class="caption">Table 3.20: %method block input keywords for the NL correction.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>NLb</td><td>&lt;real&gt;</td><td>Controls b parameter for NL</td></tr><tr><td>NLC</td><td>&lt;real&gt;</td><td>Controls C parameter for NL</td></tr><tr><td>NLScal</td><td>&lt;real&gt;</td><td>Controls the global scaling parameter for NL</td></tr><tr><td>vdWdistTCUT</td><td>&lt;real&gt;</td><td>Controls the correlation distance cutoff for NL</td></tr></tbody></table>
+<h2>3.5 Semiempirical Methods</h2>
+<p>Semi-empirical quantum mechanical methods (SQM) are very useful to deal with many of very large systems. They use tailored approximations to reduce the computational cost drastically while keeping a reasonable level of accuracy for large parts of the chemical space. They are specifically useful to simulate raction paths with NEB-TS or to define a SQM region in multi-scale approaches like ONIOM.</p>
+<h2>3.5.1 Neglect of Differential Overlap: CNDO, INDO, NDDO</h2>
+<p>Anumber of methods based on the 'neglect of differential overlap' [291, 292] are currently implemented for energies and analytic gradients inluding AM1[293], PM3[294], MNDO[295, 296, 297] and other variants of CNDO, INDO, and NDDO.The methods MNDO , AM1, and PM3 are available for main group elements only and arise from the work of the Dewar group. They have been optimized to reproduce molecular structure and energetics. The older CNDO/1,2 and INDO/1,2 were developed by the Pople group [298, 299, 300, 301, 302, 303, 304, 305, 306] and were designed to roughly mimic minimal basis ab initio calculations. The methods of the Zerner group (ZINDO/1,2 and ZINDO/S) are closely related to the older methods but have been well parameterized for transition metals too [307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317]. ZINDO/1 (and less so ZINDO/2) are suitable for geometry optimization. ZINDO/S gives good results for electronically excited states at moderate configuration interaction levels and is also successful for the calculation of electron and spin distributions in large transition metal complexes [312, 313, 314, 315, 316, 317]. The ZNDDO/1,2 methods have been implemented into ORCA as straightforward extensions of the corresponding INDO methods without changing any parameter. However, the methods benefit from the somewhat more accurate representation of the Coulomb interaction within the NDDO approximation [318, 319]. The preliminary experience with these methods is that they are better than the corresponding INDO methods for calculation of transition metal complex structures but on the whole have also similar deficiencies. The analytic gradients are available for all of these methods and can be used to produce reasonable molecular structures at low computational cost or to get preliminary insight in the behavior of the system under investigation. However, do not try to use ZINDO/S (or CNDO/S) for structure optimizations - it does not make sense and will lead to disastrous results because there is no accurate representation of nuclear repulsion in these methods.</p>
+<h2>b Tip</h2>
+<p>Even though ORCA has no implementation of newer MNDO methods like PM6 or RM1, they can be used via ORCA's External Optimizer feature and MOPAC. This way, MOPAC can be interfaced to provide ORCA with energies and gradients via the respective wrapper script that can be downloaded from the ORCA external tools GitHub repository.</p>
+<h2>Basic Usage</h2>
+<p>The NDDO-based MNDO, AM1, and PM3 methods can be invoked via the simple input keywords !MNDO , !AM1 and !PM3 .</p>
+<table><tbody><tr><td>!MNDO</td></tr><tr><td>!AM1</td></tr><tr><td>!PM3</td></tr></tbody></table>
+<p>These and other methods can be further defined via the %method block, e.g. INDO with the INDO/1 parameter set as:</p>
+<pre><code>%method METHOD INDO VERSION INDO_1 end</code></pre>
+<p>Or by directly invoking the respective parameterization as METHOD</p>
+<pre><code>%method METHOD INDO_1 end</code></pre>
+<p>If you want you can also combine semiempirical methods with MP2 (energies only). For example use Method AM1 and DoMP2 true . It is questionable if this makes the results of semiempirical calculations any better but at least it is possible in ORCA.</p>
+<h2>Custom Parameters</h2>
+<p>You can change the built-in semiempirical parameters in a straightforward fashion via the %ndoparas block. To do so, any element sepcific parameters can be defined via an array 'P':</p>
+<pre><code>%ndoparas P[<atomic number>,<parameter number>] <real> end</code></pre>
+<p>For example, we can set the resonance integral parameter BS (s shell beta) with the number 25 for Carbon (Z = 6) to 20 eV:</p>
+<pre><code>%ndoparas P[6,25] 20 end</code></pre>
+<p>A full list of parameters that can be modified can be found below. Most of them will only be interesting for expert users. The most commonly modified parameters are the Beta's (number 25 through 28). Note that most programs require a negative number here. In ORCA the resonance integrals are defined in a way that makes the Beta's positive.</p>
+<table><caption><div class="caption">Table 3.21: List of parameters that can be set in the %ndoparas block.</div></caption><tbody><tr><th>Parameter</th><th>Number</th><th>Description</th></tr><tr><th>Core Integrals (in eV):</th><td></td><td></td></tr><tr><td>US</td><td>0</td><td></td></tr><tr><td>UP</td><td>1</td><td></td></tr><tr><td>UD</td><td>2</td><td></td></tr><tr><td>UF</td><td>3</td><td></td></tr><tr><th>Basis Set Parameters (double-zeta):</th><td></td><td></td></tr><tr><td>NSH</td><td>4</td><td>Number of shells for the element</td></tr><tr><td>NZS</td><td>5</td><td>Number of Slater type orbitals for the s shell</td></tr><tr><td>ZS1</td><td>6</td><td>First exponent</td></tr><tr><td>ZS2</td><td>7</td><td>Second exponent</td></tr><tr><td>CS1</td><td>8</td><td>First contraction coefficient</td></tr><tr><td>CS2</td><td>9</td><td>Second contraction coefficient</td></tr><tr><td>NZP</td><td>10</td><td>Number of Slater type orbitals for the p shell</td></tr><tr><td>ZP1</td><td>11</td><td></td></tr><tr><td>ZP2</td><td>12</td><td></td></tr><tr><td>CP1</td><td>13</td><td></td></tr><tr><td>CP2</td><td>14</td><td></td></tr><tr><td>NZD</td><td>15</td><td>Number of Slater type orbitals for the d shell</td></tr><tr><td>ZD1</td><td>16</td><td></td></tr><tr><td>ZD2</td><td>17</td><td></td></tr><tr><td>CD1</td><td>18</td><td></td></tr><tr><td>CD2</td><td>19</td><td></td></tr><tr><td>NZF</td><td>20</td><td>Number of Slater type orbitals for the f shell</td></tr><tr><td>ZF1</td><td>21</td><td></td></tr><tr><td>ZF2</td><td>22</td><td></td></tr><tr><td>CF1</td><td>23</td><td></td></tr><tr><td>CF2</td><td>24</td><td></td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 3.21 - continued from previous page</div></caption><tbody><tr><th>Parameter</th><th>Number</th><th>Description</th></tr><tr><th colspan="3">Resonance integral parameters (in eV):</th></tr><tr><td>BS</td><td>25</td><td>s shell beta</td></tr><tr><td>BP</td><td>26</td><td>p shell beta</td></tr><tr><td>BD</td><td>27</td><td>d shell beta</td></tr><tr><td>BF</td><td>28</td><td>f shell beta</td></tr><tr><th colspan="3">Number of electrons in the ground state:</th></tr><tr><td>NEL</td><td>29</td><td>Total number of electrons (integer)</td></tr><tr><td>NS</td><td>30</td><td>Fractional occupation number of the s shell</td></tr><tr><td>NP</td><td>31</td><td>Fractional occupation number of the p shell</td></tr><tr><td>ND</td><td>32</td><td>Fractional occupation number of the d shell</td></tr><tr><td>NF</td><td>33</td><td>Fractional occupation number of the f shell</td></tr><tr><th colspan="3">One center repulsion (gamma) integrals (in eV):</th></tr><tr><td>GSS</td><td>34</td><td></td></tr><tr><td>GSP</td><td>35</td><td></td></tr><tr><td>GSD</td><td>36</td><td></td></tr><tr><td>GSF</td><td>37</td><td></td></tr><tr><td>GPP</td><td>38</td><td></td></tr><tr><td>GPD</td><td>39</td><td></td></tr><tr><td>GPF</td><td>40</td><td></td></tr><tr><td>GDD</td><td>41</td><td></td></tr><tr><td>GDF</td><td>42</td><td></td></tr><tr><td>GFF</td><td>43</td><td></td></tr><tr><th colspan="3">Slater Condon parameters (in eV):</th></tr><tr><td>F2PP</td><td>44</td><td></td></tr><tr><td>F2PD</td><td>45</td><td></td></tr><tr><td>F2DD</td><td>46</td><td></td></tr><tr><td>F4DD</td><td>47</td><td></td></tr><tr><td>G1SP</td><td>48</td><td></td></tr><tr><td>G1PD</td><td>49</td><td></td></tr><tr><td>G2SD</td><td>50</td><td></td></tr><tr><td>G3PD</td><td>51</td><td></td></tr><tr><td>R1SPPD</td><td>52</td><td></td></tr><tr><td>R2SDPP</td><td>53</td><td></td></tr><tr><td>R2SDDD</td><td>54</td><td></td></tr><tr><th colspan="3">The nuclear repulsion parameters for Dewar type models:</th></tr><tr><td>NR1</td><td>55</td><td></td></tr><tr><td>NR2</td><td>56</td><td></td></tr><tr><td>NR3</td><td>57</td><td></td></tr><tr><td>NR4</td><td>58</td><td></td></tr><tr><td>NR5</td><td>59</td><td></td></tr><tr><td>NR6</td><td>60</td><td></td></tr><tr><td>NR7</td><td>61</td><td></td></tr><tr><td>NR8</td><td>62</td><td></td></tr><tr><td>NR9</td><td>63</td><td></td></tr><tr><td>NR10</td><td>64</td><td></td></tr><tr><td>NR11</td><td>65</td><td></td></tr><tr><td>NR12</td><td>66</td><td></td></tr><tr><td>NR13</td><td>67</td><td></td></tr><tr><th colspan="3">Nuclear attraction/repulsion parameter for MNDO/d:</th></tr><tr><td>RHO</td><td>68</td><td></td></tr><tr><th colspan="3">Spin orbit coupling parameters:</th></tr><tr><td>SOCP</td><td>69</td><td>SOC for the p shell</td></tr><tr><td>SOCD</td><td>70</td><td>SOC for the d shell</td></tr><tr><td>SOCF</td><td>71</td><td>SOC for the f shell</td></tr></tbody></table>
+<p>The 'molecular' parameters are also set in the %ndoparas block using ' INTFA ' ('interaction factors');</p>
+<pre><code>%ndoparas INTFA[PP_PI] 0.585 # The interaction factors exist for # ss_sigma # sp_sigma # sd_sigma # pp_sigma # pd_sigma # dd_sigma # pp_pi</code></pre>
+<p>(continues on next page)</p>
+<pre><code># pd_pi # dd_pi # dd_delta # the parameter entering the Coulomb integrals # in INDO/S FGAMMA 1.2 end</code></pre>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 3.22: Simple input keywords for the NDO-based methods.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>AM1</td><td>Activates AM1</td></tr><tr><td>PM3</td><td>Activates PM3</td></tr><tr><td>MNDO</td><td>ActivatesMNDO</td></tr><tr><td>ZINDO/1</td><td>Activates ZINDO/1</td></tr><tr><td>ZINDO/2</td><td>Activates ZINDO/2</td></tr><tr><td>ZINDO/S</td><td>Activates ZINDO/S</td></tr><tr><td>ZNDDO/1</td><td>Activates ZNDDO/1</td></tr><tr><td>ZNDDO/2</td><td>Activates ZNDDO/2</td></tr></tbody></table>
+<table><caption><div class="caption">Table 3.23: %method block input keywords for the NDO-based methods.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>METHOD</td><td>AM1</td><td>Activates AM1</td></tr><tr><td></td><td>PM3</td><td>Activates PM3</td></tr><tr><td></td><td>MNDO</td><td>ActivatesMNDO</td></tr><tr><td></td><td>CNDO_1</td><td>Activates CNDO/1</td></tr><tr><td></td><td>CNDO_2</td><td>Activates CNDO/2</td></tr><tr><td></td><td>CNDO_S</td><td>Activates CNDO/S</td></tr><tr><td></td><td>INDO_1</td><td>Activates INDO/1</td></tr><tr><td></td><td>INDO_2</td><td>Activates INDO/2</td></tr><tr><td></td><td>INDO_S</td><td>Activates INDO/S</td></tr><tr><td></td><td>ZINDO_1</td><td>Activates ZINDO/1</td></tr><tr><td></td><td>ZINDO_2</td><td>Activates ZINDO/2</td></tr><tr><td></td><td>ZINDO_S</td><td>Activates ZINDO/S</td></tr><tr><td></td><td>ZNDDO_1</td><td>Activates ZNDDO/1</td></tr><tr><td></td><td>ZNDDO_2</td><td>Activates ZNDDO/2</td></tr><tr><td></td><td>CNDO</td><td>Activates CNDO, requires a VERSION to be set</td></tr><tr><td></td><td>INDO</td><td>Activates INDO, requires a VERSION to be set</td></tr><tr><td></td><td>NDDO</td><td>Activates NDDO, requires a VERSION to be set</td></tr><tr><td>VERSION</td><td>CNDO_1</td><td>Sets the parameter set for CNDO to CNDO_1</td></tr><tr><td></td><td>CNDO_2</td><td>Sets the parameter set for CNDO to CNDO_2</td></tr><tr><td></td><td>CNDO_S</td><td>Sets the parameter set for CNDO to CNDO_S</td></tr><tr><td></td><td>INDO_1</td><td>Sets the parameter set for INDO to INDO_1</td></tr><tr><td></td><td>INDO_2</td><td>Sets the parameter set for INDO to INDO_2</td></tr><tr><td></td><td>INDO_S</td><td>Sets the parameter set for INDO to INDO_S</td></tr><tr><td></td><td>ZINDO_1</td><td>Sets the parameter set for INDO to ZINDO_1</td></tr><tr><td></td><td>ZINDO_2</td><td>Sets the parameter set for INDO to ZINDO_2</td></tr><tr><td></td><td>ZINDO_S</td><td>Sets the parameter set for INDO to ZINDO_S</td></tr><tr><td></td><td>ZNDDO_1</td><td>Sets the parameter set for NDDO to ZNDDO_1</td></tr><tr><td></td><td>ZNDDO_2</td><td>Sets the parameter set for NDDO to ZNDDO_2</td></tr><tr><td></td><td>MNDO</td><td>Sets the parameter set for NDDO to MNDO</td></tr><tr><td></td><td>AM1</td><td>Sets the parameter set for NDDO to AM1</td></tr><tr><td></td><td>PM3</td><td>Sets the parameter set for NDDO to PM3</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<h2>3.5.2 Extended Tight-Binding: GFN0-xTB, GFN-xTB, GFN2-xTB</h2>
+<p>ORCAisinterfaced to the xtb program by Grimme and coworkers, allowing the user to request all kinds of calculations using the popular GFN0-xTB, GFN-xTB and GFN2-xTB Hamiltonians.[161, 320, 321] From the technical side, the user has to provide the executable provided by the Grimme group. The xtb program package can be obtained free of charge from https://github.com/grimme-lab/xtb/releases and detailed information on the usage of the xtb standalone program and its utilities can be found at https://xtb-docs.readthedocs.io/en/latest/contents.html. Only the file bin/ xtb is used by ORCA . The user should copy this file into the directory where the other ORCA executables are located, and rename it as otool_xtb .</p>
+<h2>Á Warning</h2>
+<p>Please use the 6.7.1 version (or any later version) of xtb; older versions are not fully compatible with ORCA anymore or are missing features, for example it may not be possible to invoke the solvation model! Additionally, Windows users should copy libiomp5md.dll from the XTB directory to the ORCA directory.</p>
+<p>The xTB method can be invoked via the GFN0-xTB , GFN-xTB , and GFN2-xTB keywords. The GFN-FF generic force-field can be invoked via GFN-FF :</p>
+<table><tbody><tr><td>! GFN0-xTB</td><td># Synonym: XTB0</td></tr><tr><td>! GFN-xTB</td><td># Synonym: XTB1</td></tr><tr><td>! GFN2-xTB</td><td># Synonym: XTB2</td></tr><tr><td>! GFN-FF</td><td># Synonym: XTBFF</td></tr></tbody></table>
+<p>The following methods can be used in conjunction with XTB:</p>
+<ul>
+<li style="list-style-type: '· ';">Single Point Energy</li>
+<li style="list-style-type: '· ';">Energy and Gradient</li>
+<li style="list-style-type: '· ';">Optimization, using all kinds of constraints, relaxed surface scans, etc.</li>
+<li style="list-style-type: '· ';">Nudged-Elastic Band calculations</li>
+<li style="list-style-type: '· ';">Numerical Frequency Calculations</li>
+<li style="list-style-type: '· ';">Intrinsic Reaction Coordinate</li>
+<li style="list-style-type: '· ';">Molecular Dynamics Calculations</li>
+<li style="list-style-type: '· ';">QM/MM calculations</li>
+</ul>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">XTB0 is a non-self-consistent tight-binding method, and as such, its accuracy is generally inferior to XTB1 and XTB2 (and sometimes even XTBFF), despite that it is a few times faster than XTB1 and XTB2. From our experience, we only recommend XTB0 when both XTB1 and XTB2 exhibit qualitative failures for the system of interest.</li>
+<li style="list-style-type: '· ';">Please note that XTB0, XTB1 and XTB2 can also be used for the initial path generation or for the calculation of an initial TS structure on XTB level, both as input for the subsequent NEB calculation on a higher level of theory. For more details, please consult section Nudged Elastic Band Method .</li>
+</ul>
+<h2>Solvation in xTB</h2>
+<p>Three implicit solvation models can be requested in xTB calculations:</p>
+<ol>
+<li style="list-style-type: '1. ';">the analytical linearized Poisson-Boltzmann (ALPB)[322] solvation model</li>
+<li style="list-style-type: '2. ';">the domain decomposition COSMO (ddCOSMO)[323]</li>
+<li style="list-style-type: '3. ';">the extended conductor-like polarizable continuum model (CPCM-X).[149]</li>
+</ol>
+<p>These models can be requested via the simple keyword input:</p>
+<table><tbody><tr><td>! ALPB(solvent) # use ALPB</td></tr><tr><td>! DDCOSMO(solvent) # use ddCOSMO</td></tr><tr><td>! CPCMX(solvent) # use CPCMX</td></tr></tbody></table>
+<p>where solvent is any of the solvents in Table 3.24.</p>
+<p>They can further be envoked via the %xtb block, here exemplarily shown for ALPB:</p>
+<pre><code>%xtb DOALPB true ALPBSOLVENT "water" end</code></pre>
+<p>Table 3.24: List of available solvents for the different implicit solvation methods that can be used with xtb .</p>
+<table><tbody><tr><th>Solvent</th><th>ALPB</th><th>ddCOSMO</th><th>CPCM-X</th></tr><tr><th>1,2,4-trimethylbenzene</th><td></td><td></td><td>X</td></tr><tr><th>1,2-dichloroethane</th><td></td><td></td><td>X</td></tr><tr><th>1,4-dioxane / dioxane</th><td>X</td><td>X</td><td></td></tr><tr><th>1-butanol / butanol</th><td></td><td></td><td>X</td></tr><tr><th>1-chlorohexane / chlorohexane</th><td></td><td></td><td>X</td></tr><tr><th>1-decanol / decanol</th><td></td><td></td><td>X</td></tr><tr><th>1-fluorooctane</th><td></td><td></td><td>X</td></tr><tr><th>1-heptanol / heptanol</th><td></td><td></td><td>X</td></tr><tr><th>1-hexanol / hexanol</th><td></td><td></td><td>X</td></tr><tr><th>1-iodohexadecane / hexadecyliodide</th><td></td><td></td><td>X</td></tr><tr><th>1-nonanol / nonanol</th><td></td><td></td><td>X</td></tr><tr><th>1-octanol / octanol</th><td>X</td><td>X</td><td>X</td></tr><tr><th>1-pentanol / pentanol</th><td></td><td></td><td>X</td></tr><tr><th>1-propanol / propanol</th><td></td><td></td><td>X</td></tr><tr><th>2,2,4-trimethylpentane / isooctane</th><td></td><td></td><td>X</td></tr><tr><th>2,6-dimethylpyridine</th><td></td><td></td><td>X</td></tr><tr><th>2-butanol / secbutanol</th><td></td><td></td><td>X</td></tr><tr><th>2-methoxyethanol / methoxyethanol</th><td></td><td></td><td>X</td></tr><tr><th>2-methyl-1-propanol / isobutanol</th><td></td><td></td><td>X</td></tr><tr><th>2-methylpyridine / 2methylpyridine</th><td></td><td></td><td>X</td></tr><tr><th>2-propanol / isopropanol</th><td></td><td></td><td>X</td></tr><tr><th>4-methyl-2-pentanone / 4methyl2pentanone</th><td></td><td></td><td>X</td></tr><tr><th>acetic acid / aceticacid</th><td></td><td></td><td>X</td></tr><tr><th>acetone</th><td>X</td><td>X</td><td></td></tr><tr><th>acetonitrile / mecn / ch3cn</th><td>X</td><td>X</td><td>X</td></tr><tr><th>acetophenone</th><td></td><td></td><td>X</td></tr><tr><th>aniline</th><td>X</td><td>X</td><td>X</td></tr><tr><th>anisole</th><td></td><td></td><td>X</td></tr><tr><th>benzaldehyde</th><td>X</td><td>X</td><td></td></tr><tr><th>benzene</th><td>X</td><td>X</td><td>X</td></tr><tr><th>benzonitrile</th><td></td><td></td><td>X</td></tr><tr><th>benzyl alcohol / benzylalcohol</th><td></td><td></td><td>X</td></tr><tr><th>bromobenzene</th><td></td><td></td><td>X</td></tr><tr><th>bromoethane</th><td></td><td></td><td>X</td></tr><tr><th>bromoform</th><td></td><td></td><td>X</td></tr><tr><th>butanone</th><td></td><td></td><td>X</td></tr><tr><th>butyl ethanoate / butyl acetate / butylacetate</th><td></td><td></td><td>X</td></tr><tr><th>n-butylbenzene / butylbenzene</th><td></td><td></td><td>X</td></tr></tbody></table>
+<p>continues on next page</p>
+<h2>® Note</h2>
+<ul>
+<li style="list-style-type: '· ';">If jobs are run over several nodes, the number of cores used by the XTB tool might be lower than requested via the pal keyword.</li>
+</ul>
+<table><caption><div class="caption">Table 3.24 - continued from previous page</div></caption><tbody><tr><td>Solvent</td><th>ALPB</th><th>ddCOSMO</th><th>CPCM-X</th></tr><tr><th>sec-butylbenzene / secbutylbenzene</th><td></td><td></td><td>X</td></tr><tr><th>tert-butylbenzene / tbutylbenzene</th><td></td><td></td><td>X</td></tr><tr><th>carbon disulfide / carbondisulfide / cs2</th><td>X</td><td>X</td><td>X</td></tr><tr><th>carbon tetrachloride / ccl4</th><td></td><td></td><td>X</td></tr><tr><th>chlorobenzene</th><td></td><td></td><td>X</td></tr><tr><th>chloroform / chcl3</th><td>X</td><td>X</td><td>X</td></tr><tr><th>conductor</th><td></td><td>X</td><td></td></tr><tr><th>m-cresol / mcresol</th><td></td><td></td><td>X</td></tr><tr><th>cyclohexane</th><td></td><td></td><td>X</td></tr><tr><th>cyclohexanone</th><td></td><td></td><td>X</td></tr><tr><th>decalin</th><td></td><td></td><td>X</td></tr><tr><th>n-decane / decane</th><td></td><td></td><td>X</td></tr><tr><th>dibromomethane</th><td></td><td></td><td>X</td></tr><tr><td>dibutylether</td><td></td><td></td><td>X</td></tr><tr><th>o-dichlorobenzene / odichlorobenzene</th><td></td><td></td><td>X</td></tr><tr><th>dichloromethane / ch2cl2 / dcm</th><td>X</td><td>X</td><td>X</td></tr><tr><th>diethyl ether / diethylether</th><td>X</td><td>X</td><td>X</td></tr><tr><th>diisopropyl ether / diisopropylether</th><td></td><td></td><td>X</td></tr><tr><th>n,n-dimethylacetamide / dimethylacetamide</th><td></td><td></td><td>X</td></tr><tr><th>n,n-dimethylformamide / dimethylformamide / dmf</th><td>X</td><td>X</td><td>X</td></tr><tr><th>dimethylsulfoxide / dmso</th><td>X</td><td>X</td><td>X</td></tr><tr><th>diphenylether</th><td></td><td></td><td>X</td></tr><tr><th>n-dodecane / dodecane</th><td></td><td></td><td>X</td></tr><tr><th>ethanol</th><td>X</td><td>X</td><td>X</td></tr><tr><th>ethyl acetate / ethylacetate / ethanoate</th><td>X</td><td>X</td><td>X</td></tr><tr><th>ethyl phenyl ether / ethoxybenzene</th><td></td><td></td><td>X</td></tr><tr><th>ethylbenzene</th><td></td><td></td><td>X</td></tr><tr><th>fluorobenzene</th><td></td><td></td><td>X</td></tr><tr><th>furan / furane</th><td>X</td><td>X</td><td></td></tr><tr><th>n-heptane / heptane</th><td></td><td></td><td>X</td></tr><tr><th>n-hexadecane / hexadecane</th><td>X X</td><td>X X</td><td>X X</td></tr><tr><th>n-hexane / hexane iodobenzene</th><td></td><td></td><td>X</td></tr><tr><th>isopropylbenzene</th><td></td><td></td><td>X</td></tr><tr><th>p-isopropyltoluene / isopropyltoluene</th><td></td><td></td><td>X</td></tr><tr><th>mesitylene</th><td></td><td></td><td>X</td></tr><tr><th>methanol</th><td>X</td><td>X</td><td>X</td></tr><tr><th>n-methylformamide / methylformamide</th><td></td><td></td><td>X</td></tr><tr><th>nitrobenzene / phno2</th><td></td><td></td><td>X</td></tr><tr><th>nitroethane</th><td></td><td></td><td>X</td></tr><tr><th>nitromethane / meno2</th><td>X</td><td>X</td><td>X</td></tr><tr><th>o-nitrotoluene / onitrotoluene</th><td></td><td></td><td>X</td></tr><tr><th>n-nonane / nonane</th><td></td><td></td><td>X</td></tr><tr><th>n-octane / octane</th><td></td><td></td><td>X</td></tr><tr><th>n-pentadecane / pentadecane</th><td></td><td></td><td>X</td></tr><tr><th>octanol(wet) / wetoctanol / woctanol</th><td>X</td><td>X</td><td></td></tr><tr><th>n-pentane / pentane</th><td></td><td></td><td>X</td></tr><tr><th>perfluorobenzene / hexafluorobenzene</th><td>X</td><td>X</td><td>X</td></tr><tr><th>phenol</th><td></td><td></td><td>X</td></tr><tr><th>pyridine tetrachloroethene /</th><td></td><td></td><td>X</td></tr><tr><th>c2cl4 tetrahydrofuran / thf</th><td>X</td><td>X</td><td>X</td></tr><tr><th>tetrahydrothiophene-s,s-dioxide / tetrahydrothiophenedioxide / sulfolane</th><td></td><td></td><td>X</td></tr><tr><th>tetralin</th><td></td><td></td><td>X</td></tr><tr><th>toluene</th><td>X</td><td>X</td><td>X</td></tr><tr><th>tributylphosphate</th><td></td><td></td><td>X</td></tr><tr><th>triethylamine</th><td></td><td></td><td>X</td></tr><tr><th>n-undecane / undecane</th><td></td><td></td><td>X</td></tr><tr><th>water / h2o</th><td>X</td><td>X</td><td>X</td></tr><tr><th>xylene</th><td></td><td></td><td>X</td></tr></tbody></table>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 3.25: Simple input keywords for the extended tight-binding methods.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>XTB</td><td>Activates GFN2-xTB</td></tr><tr><td>XTB0</td><td>Activates GFN0-xTB</td></tr><tr><td>GFN0-XTB</td><td>Activates GFN0-xTB</td></tr><tr><td>XTB1</td><td>Activates GFN1-xTB</td></tr><tr><td>GFN1-XTB</td><td>Activates GFN1-xTB</td></tr><tr><td>XTB2</td><td>Activates GFN2-xTB</td></tr><tr><td>GFN2-XTB</td><td>Activates GFN2-xTB</td></tr><tr><td>XTBFF</td><td>Activates GFN-FF</td></tr><tr><td>GFN-FF</td><td>Activates GFN-FF</td></tr><tr><td>ALPB(&lt;solvent&gt;)</td><td>Activates ALPB solvation for a &lt;solvent&gt; , e.g. ALPB(Water)</td></tr><tr><td>DDCOSMO(&lt;solvent&gt;)</td><td>Activates DDCOSMO solvation for a &lt;solvent&gt; , e.g. DDCOSMO(Water)</td></tr><tr><td>CPCMX(&lt;solvent&gt;)</td><td>Activates CPCMX solvation for a &lt;solvent&gt; , e.g. CPCMX(Water)</td></tr></tbody></table>
+<table><caption><div class="caption">Table 3.26: %xtb block input keywords for the extended tight-binding methods.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>XTBINPUTSTRING NPROCS MAXCORE ACCURACY DOALPB ALPBSOLVENT DODDCOSMO DDCOSMOSOLVENT EPSILON DOCPCMX CPCMXSOLVENT ETEMP</td><td>&quot;&lt;string&gt;&quot; &quot;&lt;string&gt;&quot; &lt;integer&gt; &lt;integer&gt; &lt;real&gt; true / false true / false &lt;real&gt; true / false &quot;&lt;solvent&gt;&quot; &lt;real&gt;</td><td>Parses string to the otool_xtb call Parses string to the otool_xtb call Controls number of processors for the otool_xtb run, setting Memory inMB reserved for the xtb run, default is Accuracy setting for --acc in otool_xtb , default is Activates ALPB solvation in xtb run Controls the &lt;solvent&gt; used for ALPB Activates DDCOSMO solvation in xtb run Controls the &lt;solvent&gt; used for DDCOSMO Controls the dielectric constant, only for ddCOSMO Activates CPCMX solvation in xtb run Controls the &lt;solvent&gt; used in CPCMX</td></tr><tr><td>XTBINPUTSTRING2</td><td></td><td></td></tr><tr><td></td><td></td><td>default is ORCA&#x27;s PAL</td></tr><tr><td></td><td></td><td>ORCA&#x27;s maxcore setting</td></tr><tr><td></td><td></td><td>ORCA&#x27;s accuracy x 1.e6</td></tr><tr><td></td><td>&quot;&lt;solvent&gt;&quot;</td><td></td></tr><tr><td></td><td>&quot;&lt;solvent&gt;&quot;</td><td></td></tr><tr><td></td><td></td><td>Controls electronic temperature --etemp in otool_xtb</td></tr></tbody></table>
+<h2>3.5.3 Native GFN-xTB and GFN2-xTB</h2>
+<p>Added in version 6.1.0: Native implementation of GFN1-xTB and GFN2-xTB</p>
+<p>ORCA features its own native implementation of GFN-xTB and GFN2-xTB. Unlike the interface to the xtb program, the native xTB implementation can use the SCF and plotting infrastructure.</p>
+<p>The native xTB methods can be invoked via the !Native-GFN-xTB , !Native-GFN2-xTB simple keywords:</p>
+<p>! Native-GFN-xTB</p>
+<p>#</p>
+<p>Synonym:</p>
+<p>Native-GFN1-xTB,</p>
+<p>! Native-GFN2-xTB # Synonym: Native-XTB2</p>
+<h2>Warning</h2>
+<p>For a faster SCF restart based on atomic charges and multipole moments, the native xTB methods write a basename.xtbw file. If such an .xtbw file is present, it will be used for the restart instead of the .gbw file.</p>
+<p>Native-XTB1</p>
+<h2>Custom parameterization</h2>
+<p>The native implementations feature the use of custom semi-empirical parameters by reading a JSON parameter file with the name basename.xtb.json . This file has the same format as the JSON file in the dxtb program (dxtb documentation), and can be generated by writing the internal parameters. Reading and writing of semi-empirical parameters can be turned on and off via the %method block:</p>
+<pre><code>%method XTBParamFile "orca.xtb.json" # set parameter filename to orca.xtb.json WriteXTBParam true # if true: write parameters to orca.xtb.json file WriteXTBParamDry false # if true: write parameters to orca.xtb.json file and␣ ↪ → exit ReadXTBParam false # if true: read parameters from orca.xtb.json file end</code></pre>
+<p>By default the parameter file will be named according to the basename of your calculation ( basename.xtb. json ), but other names can be chosen ẁith the XTBParamFile option in the method block. For a dry run that just generates the parameter file from default parameters set WriteXTBParamDry true .</p>
+<pre><code>Á Warning Please note that the native xTB implementation does not allow changes in the basis.</code></pre>
+<h2>Spin-polarized native xTB</h2>
+<p>The energy expressions of the original GFNn-xTB methods are spin-independent. Therefore, calculations are typically performed using RHF/RKS-type wavefunctions, even for open-shell systems. Since spin does not enter the energy expression, electronic states with higher spin multiplicity will always be higher in energy compared to the respective low-spin states. This shortcoming is addressed by the spin-polarized xTB methods. The spin-polarized variants [324], termed spGFN1-xTB and spGFN2-xTB, employ a simple on-site spin-dependent term, which can stabilize high-spin states and allows for screening of potential high-spin configurations using xTB methods.</p>
+<p>The native spin-polarized xTB methods can be invoked via the !Native-spGFN1-xTB , ! Native-spGFN2-xTB simple keywords:</p>
+<pre><code>! Native-spGFN1-xTB # Synonym: Native-spGFN-xTB, Native-spXTB1</code></pre>
+<pre><code>! Native-spGFN2-xTB # Synonym: Native-spXTB2</code></pre>
+<p>Note that the spin-polarization term will only affect high-spin states. The computational cost increases compared to RHF/RKS-type calculations, as the underlying UHF/UKS-type wavefunctions require two Fock matrix diagonalizations instead of one-approximately doubling the cost.</p>
+<h2>SCF with native xTB</h2>
+<p>The native xTB methods, by default, employ special SCF settings that mimic the SCF procedure of the xtb program and override all other ORCA SCF settings. These special settings take advantage of xTB-specific features, most notably, that the Fock matrix can be constructed from atomic charges and multipole moments alone. Due to these shortcuts, the special SCF settings are typically faster for xTB methods than the default ORCA SCF. However, the default SCF is more robust and may succeed in converging problematic cases where the xtb SCF fails.</p>
+<p>To use the standard ORCA SCF infrastructure instead, set UseXTBMixer to false in the %scf block:</p>
+<pre><code>%scf UseXTBMixer false # if true (default): special xTB SCF is used end</code></pre>
+<p>With the ORCA default SCF infrastructure, challenging electronic structures can often be converged, but the results should be used with caution. In cases where SCF convergence has to be forced, the GFNn-xTB Hamiltonians are often not adequate to describe the system at hand. In such cases, Mulliken charges should be checked for sanity, and it might be helpful to slightly adjust the element-wise pair parameters via the parameter file described above.</p>
+<table><tbody><tr><td>Á Warning</td></tr><tr><td>Note that all SCF iterations are direct with xTB methods.</td></tr></tbody></table>
+<h2>FOD with native xTB</h2>
+<p>To better account for static correlation, the xTB methods use finite temperature SCF by default, with an electronic temperature of 300 K. The corresponding fractional occupation number weighted density (FOD) is not printed by default, since 300 K is a too low temperature to use it as a diagnostic tool. The FOD printout can be enabled by setting XTBFOD to true in the %scf input block. The electronic temperature can be controlled-just as for other methods-via the SmearTemp keyword:</p>
+<pre><code>%scf XTBFOD true # if true: Enable FOD printout and add FOD to density container SmearTemp 5000 # 5000 K is typically used for FOD plots with xTB methods end</code></pre>
+<h2>Solvation in native xTB</h2>
+<p>The native implementation of xTB includes the ALPB solvation model with the same solvents available as in the xtb program ( see above ). It is controlled with the same keywords as the external ALPB via the simple keyword input:</p>
+<pre><code>! ALPB(solvent) # use ALPB</code></pre>
+<p>In addition, the native implementations can be used with other solvation models available in ORCA, but one should consider that the CPCM and SMD models are quite expensive compared to an xTB calculation, and therefore the faster ALPB solvation model is recommended.</p>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 3.27: Simple input keywords for the native extended tight-binding methods.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>NATIVE-XTB</td><td>Activates native GFN2-xTB</td></tr><tr><td>NATIVE-spXTB</td><td>Activates native spGFN2-xTB</td></tr><tr><td>NATIVE-XTB1</td><td>Activates native GFN1-xTB</td></tr><tr><td>NATIVE-spXTB1</td><td>Activates native spGFN1-xTB</td></tr><tr><td>NATIVE-GFN-XTB</td><td>Activates native GFN1-xTB</td></tr><tr><td>NATIVE-spGFN-XTB</td><td>Activates native spGFN1-xTB</td></tr><tr><td>NATIVE-GFN1-XTB</td><td>Activates native GFN1-xTB</td></tr><tr><td>NATIVE-spGFN1-XTB</td><td>Activates native spGFN1-xTB</td></tr><tr><td>NATIVE-XTB2</td><td>Activates native GFN2-xTB</td></tr><tr><td>NATIVE-spXTB2</td><td>Activates native spGFN2-xTB</td></tr><tr><td>NATIVE-GFN2-XTB</td><td>Activates native GFN2-xTB</td></tr><tr><td>NATIVE-spGFN2-XTB</td><td>Activates native spGFN2-xTB</td></tr><tr><td>ALPB(&lt;solvent&gt;)</td><td>Activates ALPB solvation for a &lt;solvent&gt; , e.g. ALPB(Water)</td></tr></tbody></table>
+<p>Table 3.28: %method block input keywords for the native extended tight-binding methods.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>WRITEXTBPARAM WRITEXTBPARAMDRY READXTBPARAM XTBPARAMFILE</td><td>true/false true/false true/false &quot;filename.xtb.json&quot;</td><td>Write semi-empirical parameters to xtb.json file Write semi-empirical parameters to xtb.json file and abort Read semi-empirical parameters from xtb.json file Specifies xtb.json filename to &#x27;filename.xtb.json&#x27;</td></tr></tbody></table>
+<p>Table 3.29: %scf block input keywords for the native extended tight-binding methods.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>XTBFOD UseXTBMixer</td><td>true/false true/false</td><td>Enable FOD printout Use special SCF settings similar to the ones in xtb</td></tr></tbody></table>
+<h2>3.6 Composite Methods (3c methods)</h2>
+<p>Composite HF and DFT methods utilize relatively small tailored basis sets and special corrections to achieve high accuracies at a fraction of the computational cost of a calculation approaching the basis set limit. The most prominent composite methods are the so-called '3c' methods by Grimme and co-workers.</p>
+<h2>3.6.1 HF-3c</h2>
+<p>HF-3c is a fast Hartree-Fock based method developed for computation of structures, vibrational frequencies and non-covalent interaction energies in huge molecular systems [325]. The starting point for evaluating the electronic energy is a standard HF calculation with a small Gaussian AO basis set. The used so-called MINIX basis set consists of different sets of basis functions for different groups of atoms as shown in table Table 3.30. In ORCA, HF-3c is available for all elements up to Pu (Z = 94).</p>
+<table><caption><div class="caption">Table 3.30: Composition of the MINIX basis set.</div></caption><tbody><tr><th>element</th><th>basis</th></tr><tr><td>H-He, B-Ne</td><td>MINIS</td></tr><tr><td>Li-Be</td><td>MINIS+1(p)</td></tr><tr><td>Na-Mg</td><td>MINIS+1(p)</td></tr><tr><td>Al-Ar</td><td>MINIS+1(d)</td></tr><tr><td>K-Zn</td><td>SV</td></tr><tr><td>Ga-Kr</td><td>SVP</td></tr><tr><td>Rb-Rn</td><td>def2-SVP with def-ECPs</td></tr><tr><td>Fr-Lr</td><td>def-SVP with def-ECPs</td></tr></tbody></table>
+<p>Three terms are added to correct the HF energy E HF/MINIX tot in order to include London dispersion interactions, to account for the BSSE and to correct for basis set deficiencies, i.e. overestimated bond lengths. The corrected total energy is therefore calculated as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The first correction term E D3(BJ) disp is the atom-pair wise London dispersion energy from the D3 dispersion correction scheme[272] applying Becke-Johnson (BJ) damping [277, 278, 279] (see section Grimme's DFT-D3 and DFT-D4 ). The second term E gCP BSSE denotes the geometrical counterpoise (gCP) correction [124] to treat the BSSE (see section Geometrical Counterpoise Correction (gCP) ). For the HF-3c method, the three usual D3 parameters s 8 , a 1 and a 2 were re-fitted using reference interaction energies of the complexes of the S66 test set [285]. This results in s 8 = 0 . 8777 , a 1 = 0 . 4171 and a 2 = 2 . 9149 . The parameter s 6 was set to unity as usual to enforce the correct asymptotic limit and the gCP correction was already applied in this fitting step.</p>
+<p>The last term E SRB is a short-ranged correction to deal with basis set deficiencies which occur when using small or minimal basis sets. It corrects for systematically overestimated covalent bond lengths for electronegative elements</p>
+<p>and is calculated as a sum over all atom pairs:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<p>Here, R 0 , D3 AB are the default cut-off radii as determined ab initio for the D3 scheme [272] and Z A , Z B are the nuclear charges. This correction is applied for all elements up to argon. The empirical fitting parameters s = 0 . 03 and γ = 0 . 7 were determined to produce vanishing HF-3c total atomic forces for B3LYP-D3(BJ)/def2-TZVPP equilibrium structures of 107 small organic molecules. More details can be found in the original publication [325].</p>
+<p>The HF-3c method can only be invoked with a simple keyword:</p>
+<pre><code>! HF-3c</code></pre>
+<p>! HF-3c is a compound keyword and equals ! HF MINIX D3BJ GCP(HF/MINIX) PATOM , hence no basis set etc. has to be specified. The PATOM guess is selected since the grid construction for the default guess can take more time than an actual SCF step. The guess can only be overwritten manually in the %method section.</p>
+<p>The default mode for the integral handling is set to Conventional . The storing of the two-electron integrals on disk or in memory if possible leads to large computational savings. In case one want to use the Direct mode, this has to be specified in the %scf input section:</p>
+<pre><code>%scf SCFmode Direct end</code></pre>
+<p>The output gives the used parameters and the correction itself for D3 and gCP separately. As the SRB correction is also calculated with the otool_gcp, the results are given in the gCP output section. The Total correction to HF/MINIX is the sum of all three corrections (D3, gCP and SRB) and FINAL SINGLE POINT ENERGY is the total HF-3c energy as given in equation (3.23).</p>
+<pre><code>-------------------------------------------------------------------------------DFT DISPERSION CORRECTION DFTD3 V2.1 Rev 6 USING Becke-Johnson damping -------------------------------------------------------------------------------The default Hartree-Fock is recognized Active option DFTDOPT ... 4 molecular C6(AA) [au] = 1689.256597 DFT-D V3 parameters using HF/MINIX parameters s6 scaling factor : 1.0000 a1 scaling factor : 0.4171 s8 scaling factor : 0.8777 a2 scaling factor : 2.9149 ad hoc parameters k1-k3 : 16.0000 1.3333 -4.0000 Edisp/kcal,au: -32.163184627631 -0.051255291794 E6 /kcal : -18.007221978 E8 /kcal : -14.155962649 % E8 : 44.012938437 -----------------------------------------Dispersion correction -0.051255292 -----------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>------------------------------------------------------------------------------g C P -geometrical counterpoise correction ------------------------------------------------------------------------------Method: hf/minix Parameters: sigma eta alpha beta 0.1290 1.1526 1.1549 1.1763 Egcp: 0.0723150636 a.u. Ebas: -0.0636976872 a.u. -----------------------------------gCP+bas correction 0.008617376 -------------------------------------------------------------------------------Total correction to HF/MINIX -0.042637915 -----------------------------------------------------------------------------------------FINAL SINGLE POINT ENERGY -163.002895262171 ---------------------------------------------</code></pre>
+<p>For the elements up to Xe, the default initial guess is a Hückel guess. Beyond Xe, the guess mode is changed to HCORE since no Hückel parameters for the respective ECP bases are available and other models are not implemented at the moment. For calculations with only lighter elements and therefore no ECPs, the ECP printouts in the output file can be ignored.</p>
+<h2>3.6.2 B97-3c</h2>
+<p>B97-3c[326] is another composite DFT method designed for thermochemistry, structures, and noncovalent interactions specifically also for transition metal chemistry and other stronger correlated systems. It is based on the B97 GGA including the D3(BJ) dispersion correction with three-body contribution, a short range bond length correction, and a modified, stripped-down tripleζ basis termed def2-mTZVP, the computational cost of this method is between that of HF-3c and PBEh-3c (for large systems roughly two times more expensive than HF-3c ). In ORCA, B97-3c is available for all elements up to Pu (Z = 94).</p>
+<p>B97-3c can be invoked via simple input keyword:</p>
+<pre><code>! B97-3c</code></pre>
+<h2>3.6.3 r 2 SCAN-3c</h2>
+<p>The r 2 SCAN-3c composite method[221] is available as robust 'Swiss army knife' electronic structure method for thermochemistry, geometries and non-covalent interactions and has shown in preliminary tests consistent performance for both open and closed shell transition metal complexes. It is based on the r 2 SCAN[216] meta-GGA combined with the D4 dispersion correction [327] and the geometrical counter poise-correction [124]. The modified tripleζ basis set, def2-mTZVPP, is larger and more consistent for the light main-group elements and almost as computationally efficient as the def2-mTZVP basis set of B97-3c . The computational cost of r 2 SCAN-3c is slightly larger than B973c . In ORCA, r 2 SCAN-3c is available for all elements up to Lr (Z = 103). It is invoked with the simple keyword</p>
+<pre><code>! r2SCAN-3c</code></pre>
+<h2>3.6.4 PBEh-3c</h2>
+<p>PBEh-3c is a highly efficient electronic structure approach performing particularly well in the optimization of geometries and for interaction energies of non-covalent complexes.[239] Here, a global hybrid variant of the PerdewBurke-Ernzerhof (PBE) functional with a relatively large amount of non-local Fock-exchange (42%) is employed with a valence-double-zeta Gaussian AO basis set (def2-mSVP). Basis set superposition errors (BSSE) and London dispersion effects are accounted for by the gCP and D3 schemes, respectively (see above). The basis set is constructed such that:</p>
+<table><caption><div class="caption">Table 3.31: Composition of the def2-mSVP basis set.</div></caption><tbody><tr><th>element</th><th>basis</th></tr><tr><td>H</td><td>def2-SV(P) ( α scaled by 1.2)</td></tr><tr><td>He</td><td>def2-SVP(-p)</td></tr><tr><td>Li-Be,Na-Kr</td><td>def2-SV(P)</td></tr><tr><td>B,Ne</td><td>Ahlrichs&#x27; DZ + Polarization from def2-SVP</td></tr><tr><td>C-F</td><td>Ahlrichs&#x27; DZ + Polarization from 6-31G*</td></tr><tr><td>Rb-Rn</td><td>def2-SVP with def2 ECPs</td></tr><tr><td>Fr-Lr</td><td>def-SVP with def-ECPs</td></tr></tbody></table>
+<p>For inter- and intramolecular BSSE the gCP expression from Eq. (2.25) is used but with a damping function (similar to the zero-damping in Eq. (3.14)). This damping improves the thermochemistry of the method significantly compared with the non-damped version. London dispersion effects are accounted for by the DFT-D3 (BJ-damping) scheme including the three-body term. Compared to the related HF-3c approach, the PBEh-3c is somewhat more costly, however, it yields much better geometries. These are roughly of MP2-quality (or even better for non-covalent structures) but may be computed at much lower cost. Due to the moderate amount of non-local Fock exchange, the method is less prone to self-interaction errors (as in GGAs) but still applicable in cases when Hartree-Fock fails (strongly correlated systems). In ORCA, PBEh-3c is available for all elements up to Pu (Z = 94).</p>
+<p>The PBEh-3c method may be invoked with the simple keyword:</p>
+<pre><code>! PBEh-3c</code></pre>
+<p>Identical to HF-3c, the default initial guess for all elements up to Xe is a Hückel guess. Beyond Xe, the guess mode is changed to HCORE . For calculations with only lighter elements and therefore no ECPs, the ECP printouts in the output file can be ignored.</p>
+<h2>3.6.5 B3LYP-3c</h2>
+<p>B3LYP-3c is a method combination introduced by Grimme and co-workers to efficiently calculate gas-phase infrared spectra.[240] It combines the standard B3LYP functional with the D3(BJ)-ATM dispersion correction , a def2-mSVP basis set, and a geometrical counterpoise correction . In ORCA, B3LYP-3c is available for all elements up to Pu (Z = 94). B3LYP-3c can be invoked via simple input keyword:</p>
+<pre><code>! B3LYP-3c</code></pre>
+<p>or it can be constructed manually from its components via:</p>
+<pre><code>!B3LYP D3BJ GCP(DFT/SV(P)) def2-mSVP ABC</code></pre>
+<h2>3.6.6 ω B97X-3c</h2>
+<p>The ω B97X-3c composite method[49] is based on the ω B97X-V functional and combines a tailored and moleculeoptimized polarized valence doubleζ (vDZP) basis set and a specifically adapted D4 dispersion correction. The vDZP basis set employs large-core ECPs and shows only very small basis set superposition and incompleteness errors compared to conventional doubleζ basis sets. In thorough tests on standard benchmarks sets, the ω B97X-3c method was shown to be on par with well-performing hybrid DFT methods in a quadrupleζ basis set at a fraction of their computational cost. ω B97X-3c is consistently available for all elements up to Rn (Z = 1-86).</p>
+<p>It is invoked with the simple keyword:</p>
+<p>! wB97X-3c</p>
+<p>The vDZP basis set alone is utilized as follows (note that the corresponding large-core ECPs are called automatically):</p>
+<p>! vDZP</p>
+<h2>3.6.7 Keywords</h2>
+<table><caption><div class="caption">Table 3.32: Simple input keywords for the 3c composite methods.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>HF-3C</td><td>Invokes the HF-3c method</td></tr><tr><td>B97-3C</td><td>Invokes the B97-3c method</td></tr><tr><td>R2SCAN-3C</td><td>Invokes the r 2 SCAN-3c method</td></tr><tr><td>PBEH-3C</td><td>Invokes the PBEh-3c method</td></tr><tr><td>B3LYP-3C</td><td>Invokes the B3LYP-3c method</td></tr><tr><td>WB97X-3C</td><td>Invokes the ω B97X-3c method</td></tr></tbody></table>
+<h2>3.7 Analytic Density Functional Theory (ADFT)</h2>
+<p>The method that has come to be known as 'analytic density functional theory' (ADFT) is a variant of DFT that avoids the very common use of numerical integration. Early approaches to a grid DFT were relying on diagonalizing the density matrix and applying the DFT functional to the eigenvalues of the density followed by back transformation. These methods work but have been abandoned in favor of numerical integration.</p>
+<p>ORCAfeatures an alternative approach, that is, however, still limited to the most elementary of all density functionals, namely the Hartree-Fock Slater (HFS) or, in a slightly parameterized form, the X-Alpha method. The method is based on fitting the Coulomb and exchange potentials to separate auxiliary basis sets. In the case of the Coulomb interaction, this is very well known in form of the RI-J approximation. For the exchange, the ADFT construction is based on a related but more tricky development given the nonlinear dependency of the Slater-exchange on the density.</p>
+<p>The exchange energy is:</p>
+<p>Leading to the exchange potential:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+</div>
+</body>
+</html>

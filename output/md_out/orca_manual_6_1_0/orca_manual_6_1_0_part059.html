@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part059</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<table><tbody><tr><th>∆ E</th><th>∆ E geo - prep</th><th>∆ E ref. el - prep</th><th>E ref. elstat</th><th>E ref. exch</th><th>∆ E C - CCSD non - disp.</th><th>E C - CCSD disp.</th><th>∆ E C - ( T ) int</th></tr><tr><td>a.u.</td><td>0.000423716</td><td>0.060716530712-</td><td></td><td>-</td><td>0.001056616</td><td>-</td><td>-</td></tr><tr><td></td><td></td><td></td><td>0.056636132</td><td>0.010292635</td><td></td><td>0.001609975</td><td>0.000266331</td></tr><tr><td>kcal/mol</td><td>0.266</td><td>38.100</td><td>-35.540</td><td>-6.459</td><td>0.663</td><td>-1.010</td><td>-0.167</td></tr></tbody></table>
+<p>which sum to the total binding energies of -0.006608211 a.u. or -4.147 kcal/mol that we have evaluated at the beginning of this section. A detailed discussion of the underlying physics and chemistry can be found in Ref. [774].</p>
+<h2>5.38.3 Open shell LED</h2>
+<p>The decomposition of the DLPNO-CCSD(T) energy in the open shell case is carried out similarly to the closed shell case [774]. However, the open shell variant of the LED scheme relies on a different implementation than the closed shell one. A few important differences exist between the two implementations, which are listed below.</p>
+<ul>
+<li style="list-style-type: '· ';">In the closed shell LED the reference energy is typically the HF energy. Hence, the total energy equals the sum of HF and correlation energies. In the open shell variant, the reference energy is the energy of the QRO determinant. Hence, the total energy in this case equals the sum of the energy of the QRO determinant and the correlation energy.</li>
+<li style="list-style-type: '· ';">The singles contribution is typically negligible in the closed shell case due to the Brillouin's theorem. In the open shell variant, this is not necessarily the case. In both cases, the singles contribution is included in the 'Non dispersion' part of the strong pairs.</li>
+<li style="list-style-type: '· ';">In the UHF DLPNO-CCSD(T) framework we have αα , ββ and αβ pairs. Hence, in the open shell LED, all correlation terms (e.g. London dispersion) have αα , ββ and αβ contributions. By adding 'printlevel 3' in the %mdci block one can obtain information on the relative importance of the different spin terms.</li>
+<li style="list-style-type: '· ';">The open shell DLPNO-CCSD(T) algorithm can also be used for computing the energy of closed shell systems by adding the UHF keyword in the simple input line of a DLPNO-CCSD(T) calculation.</li>
+</ul>
+<h2>Basic Usage</h2>
+<p>Similarly to the closed shell case, define the fragments and include the !LED keyword in the simple input line.</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk LED</code></pre>
+<h2>Example</h2>
+<p>An example of input file is shown below.</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO LED *xyz 0 3 C(1) 0.32786304018834 0.25137292674595 0.32985672433579 H(1) 0.78308855251826 -0.37244139824620 -0.42204823336026 H(1) -0.19639272865450 1.19309490346756 0.33713773666060 O(2) -1.47005964014997 -1.60804001777555 1.84974416203666 H(2) -0.89305417808014 -1.00736849071095 1.35216686141176 H(2) -1.02515061661047 -1.73931270222718 2.69260529998224 *</code></pre>
+<p>The corresponding output is entirely equivalent to the one just discussed for the closed shell case.</p>
+<h2>5.38.4 COVALED</h2>
+<p>Local Energy Decomposition is conducted on interaction energies computed using local correlation methods, typically DLPNO-CCSD(T). When a covalent bond is present between two fragments, its inherently delocalized nature makes its assignment to the fragments challenging. To overcome this limitation, the COVALED method has been developed. It represents an extension of the standard LED approach within the DLPNO-CCSD(T) framework, enabling the decomposition of both covalent and non-covalent interaction energies.</p>
+<h2>Basic Usage</h2>
+<p>The local energy decomposition of covalent bonds is invoked using the keyword !LED in the simple input line, by specifying in the %mdci block of the input file the Covalent keyword, along with the atoms connected by the covalent bond.</p>
+<pre><code>! LED %mdci Covalent {0 4} end</code></pre>
+<h2>ǩ Important</h2>
+<p>If you are using the Automatic Fragmentation the Covalent bonds can be assigned automatically by setting %frag DoInterFragBonds true end .</p>
+<h2>Example</h2>
+<p>As an example, the DLPNO-CCSD(T)/COVALED input file for the ethane dimer is reported. Atoms can be assigned to fragments as explained in Fragment Specification section. In this case, four fragments are defined manually, by cutting the covalent bonds between the C atoms in each ethane molecule. Fig. 5.70 illustrates the fragmentation scheme used for this system.</p>
+<pre><code>! DLPNO-CCSD(T) def2-TZVP def2/J def2-TZVP/C def2/J LED %mdci Covalent {0 4} {8 12} end # C4H12 optimized at RI-MP2/aug-cc-pVTZ level of theory *xyz 0 1 C(1) -7.95601053588590 3.15195494946836 0.27839423386884 H(1) -8.05179200418556 2.32105035333223 0.97643318840757 H(1) -8.76671687926839 3.06907938063429 -0.44469508271450 H(1) -8.10439460873783 4.07476211185951 0.83796813304307 C(2) -6.59679579710356 3.13992001745864 -0.41129316526153 H(2) -6.44433232188420 2.21634557454439 -0.96856734466103 H(2) -5.78737090643299 3.22474156709677 0.31305681682191 H(2) -6.50317719735328 3.96948543870281 -1.11109265496380 C(3) -7.98491788051681 -0.47692316195123 -0.27920144845602 H(3) -8.79547255792874 -0.40025515615629 0.44475840345098 H(3) -8.14024532507479 -1.38893575993245 -0.85442072275227 H(3) -8.07387099754762 0.36622931992467 -0.96327738147245 C(4) -6.62637230870360 -0.48881716933962 0.41184856873533 H(4) -6.54173070676907 -1.33138502402438 1.09714355762301 H(4) -6.46548339397797 0.42323949114744 0.98551040416686 H(4) -5.81650657862927 -0.56907193276525 -0.31256550583595 *</code></pre>
+<p>In the output file, information about the population of shared orbitals are provided.</p>
+<pre><code>SUMMARY ORBITALS TREATED AS COVALENT: ORBITAL: 7; POP ATOM 4: 0.500; POP ATOM 0: 0.500 ORBITAL: 14; POP ATOM 12: 0.500; POP ATOM 8: 0.500</code></pre>
+<p>Afterward, the decomposition of the total energy into intra- and inter-fragment terms is printed. The output structure is the same as that of the standard LED approach (see Section Section 5.38.2), with the main difference lying in the values of the intra- and inter-fragment terms. Unlike the standard LED method, which assigns all the shared electron density to a single fragment, with the COVALED approach the electron density is assigned based on the population analysis of the shared orbitals, thus providing a chemically meaningful decomposition of the total energy.</p>
+<p>As the standard LED, the COVALED can be used to decompose intermolecular interaction energy in terms of fragments. As an example, we consider the interaction energy between two ethane molecules in the dimer reported in the example above. The interaction energy is computed as the energy difference between the dimer and the two ethane molecules, keeping their geometry fixed as in the dimer. Its decomposition is shown in the heat maps, where the diagonal elements represent the intra-fragment (electronic preparation) energy terms, while the off-diagonal elements represent the interaction energy between pairs of fragments. Shown below are the heat maps obtained with the standard LED and the COVALED approach.</p>
+<figure><figcaption><div class="caption">Fig. 5.70: Fragmentation scheme of the ethane dimer used in the DLPNO-CCSD(T)/COVALED calculation.</div></figcaption></figure>
+<figure><figcaption><div class="caption">Fig. 5.71: Heat maps showing the decomposition of the interaction energy between two ethane molecule using the standard LED (a) and COVALED (b) methods.</div></figcaption></figure>
+<p>Note that the total interaction energy remains unchanged, but the way it is distributed among the fragments differs between the standard LED and the COVALED approach.</p>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 5.30: Simple input keywords for the COVALED.</div></caption><tbody><tr><td>Keyword</td><td>Description</td></tr><tr><td>LED</td><td>Activates LED scheme</td></tr></tbody></table>
+<table><caption><div class="caption">Table 5.31: %mdci block input keywords for the COVALED.</div></caption><tbody><tr><th>Key- word</th><th>Options</th><th>Description</th></tr><tr><td>Covalent</td><td>{&lt;integer&gt; &lt;integer&gt;}</td><td>Defines the indexes of atoms connected through a covalent bond. Is defined automat- ically if %frag DoInterFragBonds true end when using Automatic Frag- mentation .</td></tr><tr><td>CovalPOL</td><td>true/false</td><td>If true, the shared electron density is equally partitioned between the two fragments (by default, it is set to true).</td></tr></tbody></table>
+<h2>5.38.5 Dispersion Interaction Density plot</h2>
+<p>The Dispersion Interaction Density (DID) plot provides a simple yet powerful tool for the spatial analysis of the London dispersion interaction between a pair of fragments extracted from the LED analysis in the DLPNO-CCSD(T) framework [784]. A similar scheme was developed for the closed shell local MP2 method [785]. The 'dispersion energy density', which is necessary for generating the DID plot, can be obtained from a simple LED calculation by adding DoDIDplot true in the %mdci block.</p>
+<pre><code>!DLPNO-CCSD(T) ... LED %mdci DoDIDplot true end</code></pre>
+<p>These can be converted to a format readable by standard visualization programs, e.g. a cube file, through orca_plot . To do that, call orca_plot with the command:</p>
+<pre><code>orca_plot gbwfilename -i</code></pre>
+<p>and follow the instructions that will appear on your screen, i.e.:</p>
+<pre><code>1 - Enter type of plot 2 - Enter no of orbital to plot 3 - Enter operator of orbital (0=alpha,1=beta) 4 - Enter number of grid intervals 5 - Select output file format 6 - Plot CIS/TD-DFT difference densities 7 - Plot CIS/TD-DFT transition densities 8 - Set AO(=1) vs MO(=0) to plot 9 - List all available densities 10 -Generate the plot 11 -exit this program</code></pre>
+<p>Type '1' for selecting the plot type. A few options are possible:</p>
+<pre><code>1 molecular orbitals 2 (scf) electron density ...... (scfp ) -available 3 (scf) spin density ...... (scfr ) -available 4 natural orbitals 5 corresponding orbitals 6 atomic orbitals 7 mdci electron density ...... (mdcip ) -NOT available 8 mdci spin density ...... (mdcir ) -NOT available 9 OO-RI-MP2 density ...... (pmp2re) -NOT available 10 -OO-RI-MP2 spin density ...... (pmp2ur) -NOT available 11 -MP2 relaxed density ...... (pmp2re) -NOT available 12 -MP2 unrelaxed density ...... (pmp2ur) -NOT available 13 -MP2 relaxed spin density ...... (rmp2re) -NOT available 14 -MP2 unrelaxed spin density ...... (rmp2ur) -NOT available 15 -LED dispersion interaction density (ded21 ) -available 16 -Atom pair density 17 -Shielding Tensors 18 -Polarisability Tensor</code></pre>
+<p>Select 'LED dispersion interaction density' from the list by typing '15'. Afterwards, choose your favorite format and generate the file.</p>
+<h2>5.38.6 Automatic Fragmentation</h2>
+<p>Orca can automatically define the fragments for the LED analysis. By default, the program will attempt to identify all monomers in the system that are not connected by covalent bonds and assign a fragment to each. However, users can define alternative fragmentation procedures, as explained in the Automatic Fragmentation section.</p>
+<p>The XYZ coordinates of the fragments are reported in the beginning of the output file. For instance, given the input:</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO LED *xyz 0 1 C 0.18726407287156 0.08210467619149 0.19811955853244 H 1.07120465088431 -0.00229078749404 -0.46002874025040 H -0.15524644515923 1.12171178448874 0.04316776563623 O -1.47509614629583 -1.29358571885374 2.29818864036820 H -0.87783948760158 -0.98540169212890 1.58987042714267 H -1.22399221548771 -2.20523304094991 2.47014489963764 *</code></pre>
+<p>The program will automatically identify the H 2 O and the CH 2 fragments.</p>
+<pre><code>----------------------------------------------OF FRAGMENTS (ANGSTROEM) ----------------------------------------------</code></pre>
+<pre><code>CARTESIAN COORDINATES FRAGMENT 1 C 0.187264 0.082105 0.198120 H 1.071205 -0.002291 -0.460029 H -0.155246 1.121712 0.043168 FRAGMENT 2 O -1.475096 -1.293586 2.298189 H -0.877839 -0.985402 1.589870 H -1.223992 -2.205233 2.470145</code></pre>
+<p>Note that this procedure works for an arbitrary number of interacting molecules. It is also possible to assign only certain atoms to a fragment and let the program define the other ones:</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO LED *xyz 0 1 C(1) 0.18726407287156 0.08210467619149 0.19811955853244 H(1) 1.07120465088431 -0.00229078749404 -0.46002874025040 H(1) -0.15524644515923 1.12171178448874 0.04316776563623 O -1.47509614629583 -1.29358571885374 2.29818864036820 H -0.87783948760158 -0.98540169212890 1.58987042714267 H -1.22399221548771 -2.20523304094991 2.47014489963764 *</code></pre>
+<h2>ǩ Important</h2>
+<p>If any atom is left unassigned (or explicitly assigned to fragment 0), it will be automatically assigned to a fragment using the Automatic Fragmentation . In such cases, the highest manually assigned fragment number must be less than the total number of fragments generated by the combination of manual and automatic procedures. If this condition is not met, ORCA will automatically reorder all fragment numbers in ascending order, starting from 1.</p>
+<h2>5.38.7 Additional Features, Defaults and List of Keywords</h2>
+<h2>Note</h2>
+<p>Starting from ORCA 4.2 the default localization scheme for the PNOs has changed from PM (Pipek Mezey) to FB (Foster Boys). This might cause slight numerical differences in the LED terms with respect to that obtained from previous ORCA versions. To obtain results that are fully consistent with previous ORCA versions, PM must be specified (see below).</p>
+<p>The following options can be used in accordance with LED.</p>
+<pre><code>! DLPNO-CCSD(T) cc-pVDZ cc-pVDZ/C cc-pVTZ/JK RIJK TightPNO LED TightSCF %mdci LED 1 # localization method for the PNOs. Choices: # 1 = PipekMezey # 2 = FosterBoys (default starting from ORCA 4.2) PrintLevel 3 # Selects large output for LED and prints the # detailed contribution # of each DLPNO-CCSD strong pair</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>LocMaxIterLed 600 # Maximum number of localization iterations for PNOs LocTolLed 1e-6 # Absolute threshold for the localization procedure for PNOs Maxiter 0 # Skips the CCSD iterations and # the decomposition of the correlation energy DoLEDHF true # Decomposes the reference energy in the LED part. # By default, it is set to true. end</code></pre>
+<p>Starting from ORCA 4.2 an RIJCOSX implementation of the LED scheme for the decomposition of the reference energy is also available. This is extremely efficient for large systems. For consistency, the RIJCOSX variant of the LED is used only if the underlying SCF treatment is performed using the RIJCOSX approximation, i.e., if RIJCOSX is specified in the simple input line. An example of input follows.</p>
+<pre><code>! dlpno-ccsd(t) def2-TZVP def2-TZVP/C def2/j rijcosx verytightscf TightPNO LED *xyz 0 1 C(1) 0.18726407287156 0.08210467619149 0.19811955853244 H(1) 1.07120465088431 -0.00229078749404 -0.46002874025040 H(1) -0.15524644515923 1.12171178448874 0.04316776563623 O(2) -1.47509614629583 -1.29358571885374 2.29818864036820 H(2) -0.87783948760158 -0.98540169212890 1.58987042714267 H(2) -1.22399221548771 -2.20523304094991 2.47014489963764 *</code></pre>
+<p>Finally, here are some tips for advanced users.</p>
+<ul>
+<li style="list-style-type: '· ';">The LED scheme can be used in conjunction with an arbitrary number of fragments.</li>
+<li style="list-style-type: '· ';">The LED scheme can be used to decompose DLPNO-CCSD and DLPNO-CCSD(T) energies. At the moment, it is not possible to use this scheme to decompose DLPNO-MP2 energies directly. However, for closed shell systems, one can obtain DLPNO-MP2 energies from a DLPNO-CCSD calculation by adding a series of keywords in the %mdci block: (i) TScalePairsMP2PreScr 0 ; (ii) UseFullLMP2Guess true ; (iii) TCutPairs 10 (or any large value). The LED can be used as usual to decompose the resulting energy.</li>
+<li style="list-style-type: '· ';">For a closed shell system of two fragments (say A and B), the LED scheme can be used to further decompose the LED components of the reference HF energy (intrafragment, electrostatics and exchange) into a sum of frozen state and orbital relaxation correction contributions. More information can be found in Ref. [784].</li>
+<li style="list-style-type: '· ';">To obtain the frozen state terms one has to: (i) generate a .gbw file containing the orbitals of both fragments (AB.gbw) using orca_mergefrag A.gbw B.gbw AB.gbw , where A.gbw and B.gbw are the orbital files of isolated fragments at the aduct geometry; (ii) run the LED as usual by using MORead to read the orbitals in the AB.gbw file in conjunction with Maxiter 0 in both the %scf block (to skip the SCF iterations) and the %mdci block (to skip the unnecessary CCSD iterations).</li>
+</ul>
+<table><caption><div class="caption">Table 5.32: Simple input keywords for the Local Energy Decomposition.</div></caption><tbody><tr><td>Keyword</td><td>Description</td></tr><tr><td>LED</td><td>Activates the Local Energy Decomposition</td></tr></tbody></table>
+<p>Table 5.33: %mdci block input keywords for the Local Energy Decomposition.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>LED</td><td>1</td><td>PipekMezey used as localization method for the PNOs</td></tr><tr><td></td><td>2</td><td>FosterBoys used as localization method for the PNOs (default starting from ORCA 4.2)</td></tr><tr><td>PrintLevel</td><td>3</td><td>Selects large output for LED and prints the detailed contribution of each DLPNO-CCSD strong pair</td></tr><tr><td>LocMaxIterLed</td><td>&lt;integer&gt;</td><td>Maximum number of localization iterations for PNOs (set to 600 by default)</td></tr><tr><td>LocTocLed</td><td>&lt;real&gt;</td><td>Absolute threshold for the localization procedure for PNOs (set to 1e-6 by de- fault)</td></tr><tr><td>MaxIter</td><td>0</td><td>Skips the CCSD iterations and the decomposition of the correlation energy</td></tr><tr><td>DoLEDHF</td><td>true/ false</td><td>Decomposes the reference energy in the LED part (set to true by default)</td></tr></tbody></table>
+<h2>5.38.8 Atomic Decomposition Methods</h2>
+<p>Starting from ORCA 6.1, within the LED framework, it is possible to quantify the interfragment atomic contributions to London dispersion [786]( ADLD . The decomposition of DFT-D London dispersion energies is described in Section 5.40) and exchange energies ( ADEX ):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These atomic decomposition methods are available for both closed- and open-shell DLPNO-based methods (e.g., HFLD, DLPNO-CCSD, DLPNO-CCSD(T)). Different charge partition schemes (Mulliken and Löwdin) are available for the decomposition analysis, with Löwdin set as the default. For each scheme, the analysis reports the corresponding energy for each atom and fragment in the system, with values expressed in atomic units.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Different charge-partitioning schemes can be enabled or disabled by setting the corresponding keyword to true / false in the %mdci block:</p>
+<ul>
+<li style="list-style-type: '· ';">AD_Mulliken for Mulliken-based decomposition</li>
+<li style="list-style-type: '· ';">AD_Loewdin for Löwdin-based decomposition</li>
+</ul>
+<h2>Note</h2>
+<p>The results are inherently dependent on the chosen molecular fragment definition.</p>
+<p>If the contributions from triple excitations are included in the calculation of the LED-based method, ADLD will print the integrated contributions accordingly.</p>
+<p>By enabling the AD_SpinResolved flag within the %mdci block, the calculation will include spin-resolved atomic contributions for open-shell systems. This means that the energy contributions will be explicitly computed for each spin-spin interaction separately: alpha-alpha (↑↑), beta-beta (↓↓), and alpha-beta (↑↓).</p>
+<h2>Note</h2>
+<p>Please note that contributions from triple excitations are not yet implemented in the spin-resolved decomposition.</p>
+<h2>Atomic Decomposition of London Dispersion Energy (ADLD(LED))</h2>
+<p>In systems held together by non-covalent interactions, the dominant correlation contribution to the interaction energy is LD [787]. Therefore, a first estimate of the atomic contribution to the interaction energy, computed using a post-HF scheme, can be obtained by decomposing the correlation contribution to the binding energy into atomic components [788]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Since ϵ A incorporates both the long-range and the short-range dynamic correlation energy, 'pure' dispersion energy at the atomic level can be isolated at the Local Energy Decomposition level:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Basic Usage</h2>
+<p>The atomic decomposition of dispersion energy is invoked using the !ADLD keyword.</p>
+<pre><code>! DLPNO-CCSD def2-TZVP def2-TZVP/C def2/JK LED ADLD</code></pre>
+<h2>ǩ Important</h2>
+<p>Make sure to also include the !LED keyword in the simple input line</p>
+<h2>Example</h2>
+<p>As an example, the input file to compute the dispersion interaction between two water molecule at the DLPNOCCSD(T)/LED level using def2-TZVP basis set along with matching /JK and /C auxiliary basis sets is reported below.</p>
+<pre><code>! DLPNO-CCSD(T) def2-TZVP def2-TZVP/C def2/JK LED ADLD %mdci AD_Mulliken true AD_Loewdin true end # H2O dimer geometry optimized at B3LYP-D4/def2-TZVP level. * xyz 0 1 O(1) 0.00736774224494 0.01160693915772 0.01654049355157 H(1) 0.96923953706804 0.01163512314627 -0.00786387302697 H(1) -0.23645852051665 0.94172445362186 -0.01797690491825 O(2) -0.98965374142797 -1.29474095640989 2.41552530001642 H(2) -0.69837507632022 -0.90508483715064 1.57804074703869 H(2) -1.52582551183659 -2.04783550111168 2.15519678840530 *</code></pre>
+<p>The corresponding output file is reported below.</p>
+<pre><code>-------------------------------------------------------------------------ADLD -Atomic Decomposition of London Dispersion -------------------------------------------------------------------------MULLIKEN-BASED</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th colspan="4">--------------------------------------- --------------------------- CCSD</th><th colspan="2">--------------------------- CCSD(T) ---------------------------</th></tr><tr><td></td><td></td><th>Correlation</th><th>Dispersion</th><th>Correlation</th><th>Dispersion</th></tr><tr><td>1</td><td>O</td><td>-0.2187971</td><td>-0.0006293</td><td>-0.2245728</td><td>-0.0006459</td></tr><tr><td>2</td><td>H</td><td>-0.0215016</td><td>-0.0000253</td><td>-0.0220589</td><td>-0.0000260</td></tr><tr><td>3</td><td>H</td><td>-0.0214954</td><td>-0.0000249</td><td>-0.0220526</td><td>-0.0000256</td></tr><tr><td>4</td><td>O</td><td>-0.2183144</td><td>-0.0005019</td><td>-0.2240292</td><td>-0.0005151</td></tr><tr><td>5</td><td>H</td><td>-0.0205997</td><td>-0.0001578</td><td>-0.0211439</td><td>-0.0001619</td></tr><tr><td>6</td><td>H</td><td>-0.0225718</td><td>-0.0000199</td><td>-0.0231578</td><td>-0.0000204</td></tr><tr><td>Sum</td><td>=</td><td>-0.5232800</td><td>-0.0013591</td><td>-0.5370151</td><td>-0.0013949</td></tr><tr><td>FRAG</td><td>1</td><td>-0.2617941</td><td>-0.0006796</td><td>-0.2686843</td><td>-0.0006975</td></tr><tr><td>FRAG</td><td>2</td><td>-0.2614859</td><td>-0.0006796</td><td>-0.2683308</td><td>-0.0006974</td></tr><tr><th colspan="4">LOEWDIN-BASED</th><td></td><td></td></tr><tr><td></td><td></td><th colspan="2">--------------------------- CCSD</th><th colspan="2">--------------------------- CCSD(T)</th></tr><tr><td></td><td></td><th>Correlation</th><th>Dispersion</th><th>Correlation</th><th>Dispersion</th></tr><tr><td>1</td><td>O</td><td>-0.2145399</td><td>-0.0006243</td><td>-0.2202052</td><td>-0.0006408</td></tr><tr><td>2</td><td>H</td><td>-0.0236273</td><td>-0.0000279</td><td>-0.0242397</td><td>-0.0000286</td></tr><tr><td>3</td><td>H</td><td>-0.0236269</td><td>-0.0000274</td><td>-0.0242394</td><td>-0.0000281</td></tr><tr><td>4</td><td>O</td><td>-0.2146356</td><td>-0.0004835</td><td>-0.2202539</td><td>-0.0004961</td></tr><tr><td>5</td><td>H</td><td>-0.0228437</td><td>-0.0001750</td><td>-0.0234472</td><td>-0.0001796</td></tr><tr><td>6</td><td>H</td><td>-0.0240065</td><td>-0.0000211</td><td>-0.0246297</td><td>-0.0000217</td></tr><tr><td>Sum</td><td>=</td><td>-0.5232800</td><td>-0.0013591</td><td>-0.5370151</td><td>-0.0013949</td></tr><tr><td>FRAG</td><td>1</td><td>-0.2617941</td><td>-0.0006796</td><td>-0.2686843</td><td>-0.0006975</td></tr><tr><td>FRAG</td><td>2</td><td>-0.2614859</td><td>-0.0006796</td><td>-0.2683308</td><td>-0.0006974</td></tr></tbody></table>
+<h2>Atomic Decomposition of Exchange (ADEX(LED))</h2>
+<p>The role of interatomic exchange contributions can be studied by the atomic decomposition of exchange (ADEX) within the LED framework.</p>
+<h2>Basic Usage</h2>
+<p>The atomic decomposition of exchange energy is invoked using the !ADEX keyword in the simple input line.</p>
+<p>! DLPNO-CCSD def2-TZVP def2-TZVP/C def2/JK LED ADEX</p>
+<p>ADEX is currently not available with the RIJCOSX approximation.</p>
+<pre><code>ǩ Important Make sure to also include the !LED keyword in the simple input line</code></pre>
+<h2>Example</h2>
+<p>As an example, the input file to compute the exchange energy between two water molecules at DLPNO-CCSD/LED level using def2-TZVP basis set along with matching /JK and /C auxiliary basis sets is reported below.</p>
+<pre><code>! DLPNO-CCSD def2-TZVP def2-TZVP/C def2/JK LED ADEX %mdci AD_Mulliken true AD_Loewdin true end # H2O dimer geometry optimized at B3LYP-D4/def2-TZVP level. * xyz 0 1 O(1) 0.00736774224494 0.01160693915772 0.01654049355157 H(1) 0.96923953706804 0.01163512314627 -0.00786387302697 H(1) -0.23645852051665 0.94172445362186 -0.01797690491825 O(2) -0.98965374142797 -1.29474095640989 2.41552530001642 H(2) -0.69837507632022 -0.90508483715064 1.57804074703869 H(2) -1.52582551183659 -2.04783550111168 2.15519678840530 *</code></pre>
+<p>The corresponding output file is reported below.</p>
+<pre><code>-------------------------------------------------------------------------ADEX - Atomic Decomposition of Exchange -------------------------------------------------------------------------MULLIKEN-BASED ---------------------------------------Exchange 1 O -0.0028909 2 H -0.0000526 3 H -0.0000536 4 O -0.0022290 5 H -0.0007038 6 H -0.0000643 Sum = -0.0059942 FRAG 1 -0.0029971 FRAG 2 -0.0029971 LOEWDIN-BASED ---------------------------------------Exchange 1 O -0.0028804 2 H -0.0000578 3 H -0.0000589 4 O -0.0021483</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>5</td><td>H</td><td>-0.0007804</td></tr><tr><td>6</td><td>H</td><td>-0.0000684</td></tr><tr><td>Sum</td><td>=</td><td>-0.0059942</td></tr><tr><td>FRAG</td><td>1</td><td>-0.0029971</td></tr><tr><td>FRAG</td><td>2</td><td>-0.0029971</td></tr></tbody></table>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 5.34: Simple input keywords for the atomic decomposition methods.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>ADEX</td><td>Activates atomic decomposition of exchange energy</td></tr><tr><td>ADLD</td><td>Activates atomic decomposition of dispersion energy</td></tr></tbody></table>
+<table><caption><div class="caption">Table 5.35: %mdci block input keywords for the atomic decomposition methods.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>AD_Mulliken</td><td>true/false</td><td>Activate Mulliken-based decomposition</td></tr><tr><td>AD_Loewdin</td><td>true/false</td><td>Activate Löwdin-based decomposition (default)</td></tr><tr><td>AD_SpinResolved</td><td>true/false</td><td>Activate spin-resolved decomposition (for open-shell)</td></tr></tbody></table>
+<h2>5.38.9 Fragment-Pairwise Local Energy Decomposition</h2>
+<p>Applications of the LED scheme to large multi-fragment systems, such as molecular clusters [789], biomolecular assemblies [790], protein-ligand complexes [781], and molecular crystals [791, 792], have demonstrated its versatility and broad applicability. These studies highlight LED's potential to advance many areas of chemical research, including materials science, catalysis, and drug discovery [793, 794].</p>
+<p>For simplicity, the previous sections focused on LED analysis of DLPNO-CCSD(T) interaction energies in twofragment systems. In practice, the ORCA input/output structure for multi-fragment systems is similar and applies to HFLDas well. However, multi-fragment LED analyses often involve a significantly greater number of intra-fragment and inter-fragment LED terms. Consequently, these analyses require additional tools and techniques to collect and process the extensive data from ORCA outputs.</p>
+<p>Among the most effective tools for this purpose is the external LED Analysis Wizard (LEDAW) program package, which automates the extraction and visualization of LED interaction energy matrices and heat maps from ORCA outputs. These matrices/maps tabulate and present all interaction terms, facilitating intuitive interpretation.</p>
+<p>As an example, let us consider the inter-strand (K-L) interaction of a DNA duplex composed of three nucleobases per strand, with the water environment treated implicitly. The DNA ladder of the molecular system and the LED interaction energy heat map, which includes the distrubuted CPCM dielectric term as described in Ref. [794], are shown in Fig. 5.72a.</p>
+<figure><figcaption><div class="caption">Fig. 5.72: (a) Standard LED and (b) fp-LED heat maps for the BSSE-corrected total inter-strand (K-L) interaction energy of a three-nucleobase-long DNA duplex (backbones omitted) computed at the DLPNOCCSD(T1)/NormalPNO*/def2-TZVP(-f) level, treating the water environment implicitly with the CPCM model. Each off-diagonal element includes electrostatic, exchange, dispersion, and nondispersive correlation, and CPCM dielectric terms, which are not provided here for simplicity. In the heat maps, red represents attractive interactions, whereas blue represents repulsive interactions. Figure taken from the LEDAW manual.</div></figcaption></figure>
+<p>In this figure, off-diagonal elements represent inter-fragment interactions, while diagonal elements reflect the change in fragment energies upon duplex formation (electronic preparation energies). The submatrix enclosed by a black box highlights genuine interactions between strands K and L. Green-boxed off-diagonal elements are inductive in nature, arising from the perturbation of fragment-pairwise interaction energies upon duplex formation for fragments located at the same strand.</p>
+<p>Each diagonal element reflects the cumulative perturbation of a fragment's energy by all other fragments. The fragment-pairwise LED (fp-LED) scheme, introduced in Ref. [794], decomposes this cumulative contribution into individual fragment-pairwise terms, thus eliminating diagonal terms. Each of the resulting pairwise electronic preparation terms represents the sum of mutual perturbations on each fragment's energy, specifically due to the presence of the other.</p>
+<p>As seen by comparing panels (a) and (b) of Fig. 5.72, the standard LED heat map contains very large positive and very large negative values. In contrast, when diagonal elements are redistributed into pairwise terms, the resulting fp-LED terms directly reflect the interaction strengths between fragment pairs. Nevertheless, both standard LED and fp-LED lead to consistent conclusions in trend analyses.</p>
+<p>The fp-LED terms are more intuitive and comparable to those of isolated dimers, yet they inherently include manybody effects, also known as cooperativity. To analyze such effects, LED can be performed on all isolated fragment pairs across different strands (two-body analysis). Since two-body terms exclude many-body effects, subtracting the two-body LED terms from those of the entire system (N-body analysis) reveals the cooperative contribution to each interaction term. In Fig. 5.72, the diagonal elements of the submatrix enclosed by the black box represent the strongest interactions in this DNA example, highlighting that base-pairing (hydrogen bonding between nucleobases) is the primary contributor to duplex formation. In particular, the G-C pair is stronger than the A-T pair. Although much smaller in magnitude, the stacking interactions (shown by the elements just above and below this diagonal) are also noticeable.</p>
+<p>The external LEDAW software supports both the automated preparation of ORCA input files for LED calculations and the post-processing of ORCA/LED output files. It automates all types of LED analyses, including N-body, twobody, and cooperativity analyses with or without CPS and CBS extrapolations, within the frameworks of standard LEDand fp-LED schemes. LEDAW calculates the interaction energy matrix for each LED component and generates the corresponding heat map, similar to those shown in Fig. 5.72. Additionally, LEDAW includes a distribution scheme for the CPCM dielectric contribution to pairwise terms and another scheme to estimate the dispersion component</p>
+<p>of triple excitations. Its user-friendly GUI, equipped with built-in info buttons and help messages, provides clear guidance at each step.</p>
+<p>Let us now demonstrate multi-fragment ORCA/LED input files for the DNA duplex formation example (see Fig. 5.72) at both the DLPNO-CCSD(T) and HFLD levels. Outputs for this example, along with additional multi-fragment interaction problems, are available in the LEDAW repository.</p>
+<h2>Multi-fragment DLPNO-CCSD(T)/LED Inputs</h2>
+<p>Below is a sample DLPNO-CCSD(T)/LED input for the full six-fragment DNA system (supersystem), using NormalPNO* settings, i.e., NormalPNO settings with the TCutPairs threshold adopted from the TightPNO settings:</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>N(3)</td><td>2.872666242150</td><td>19.837350187609</td><td>-13.703978842593</td></tr><tr><td>C(3)</td><td>4.173814909084</td><td>19.635730662889</td><td>-13.950649270381</td></tr><tr><td>H(4)</td><td>0.607492786974</td><td>13.693167256443</td><td>-12.498905296936</td></tr><tr><td>N(4)</td><td>1.156233913621</td><td>13.976335931793</td><td>-11.654346631242</td></tr><tr><td>C(4)</td><td>0.719515992071</td><td>14.493104455789</td><td>-10.463418891368</td></tr><tr><td>H(4)</td><td>-0.320190226981</td><td>14.652465882135</td><td>-10.253396768309</td></tr><tr><td>N(4)</td><td>1.675522233408</td><td>14.756439112108</td><td>-9.624659463980</td></tr><tr><td>C(4)</td><td>2.833919441760</td><td>14.430973751698</td><td>-10.293445908760</td></tr><tr><td>C(4)</td><td>4.205441626210</td><td>14.518429914241</td><td>-9.917743216750</td></tr><tr><td>O(4)</td><td>4.678969477231</td><td>14.902137378802</td><td>-8.847036060363</td></tr><tr><td>N(4)</td><td>5.046351902043</td><td>14.044212601799</td><td>-10.915024253057</td></tr><tr><td>H(4)</td><td>6.072714102757</td><td>14.111198911849</td><td>-10.723202969726</td></tr><tr><td>C(4)</td><td>4.637211663222</td><td>13.564345980913</td><td>-12.125004367406</td></tr><tr><td>N(4)</td><td>5.571436643365</td><td>13.009014240888</td><td>-12.919396141151</td></tr><tr><td>H(4)</td><td>6.536208806688</td><td>13.328415372914</td><td>-12.798515557053</td></tr><tr><td>H(4)</td><td>5.278456082314</td><td>12.891881947995</td><td>-13.876688905133</td></tr><tr><td>N(4)</td><td>3.372577813131</td><td>13.480706123713</td><td>-12.484778526663</td></tr><tr><td>C(4)</td><td>2.516506103177</td><td>13.957107881401</td><td>-11.567141462038</td></tr><tr><td>H(5)</td><td>-0.427318750124</td><td>17.859731737670</td><td>-10.029201555848</td></tr><tr><td>N(5)</td><td>0.505872319628</td><td>18.084321359603</td><td>-9.624732567559</td></tr><tr><td>C(5)</td><td>0.836583758659</td><td>18.604519628671</td><td>-8.407322768699</td></tr><tr><td>H(5)</td><td>0.092411961428</td><td>18.948262192878</td><td>-7.715100794658</td></tr><tr><td>N(5)</td><td>2.115426925402</td><td>18.643562050428</td><td>-8.177257646546</td></tr><tr><td>C(5)</td><td>2.692395320505</td><td>18.137378704062</td><td>-9.318466049416</td></tr><tr><td>C(5)</td><td>4.023866632235</td><td>17.839636438080</td><td>-9.678850958220</td></tr><tr><td>N(5)</td><td>5.069903086692</td><td>17.996703370707</td><td>-8.878260648241</td></tr><tr><td>H(5)</td><td>4.919055989330</td><td>18.448434690564</td><td>-7.993811348555</td></tr><tr><td>H(5)</td><td>6.012493323398</td><td>17.797866055580</td><td>-9.225623461520</td></tr><tr><td>N(5)</td><td>4.208096816167</td><td>17.308977601422</td><td>-10.903952927055</td></tr><tr><td>C(5)</td><td>3.171511385838</td><td>17.075799836042</td><td>-11.696070915968</td></tr><tr><td>H(5)</td><td>3.416948001374</td><td>16.659607513112</td><td>-12.669038097596</td></tr><tr><td>N(5)</td><td>1.893387444935</td><td>17.271543482840</td><td>-11.450623229708</td></tr><tr><td>C(5)</td><td>1.692338416848</td><td>17.804060912579</td><td>-10.238211580065</td></tr><tr><td>H(6)</td><td>0.347959720865</td><td>22.070953898527</td><td>-7.231147376111</td></tr><tr><td>N(6)</td><td>1.367130517057</td><td>22.050245111897</td><td>-7.460759445434</td></tr><tr><td>C(6)</td><td>2.293054934819</td><td>22.474694200979</td><td>-6.575605167157</td></tr><tr><td>H(6)</td><td>1.905330062598</td><td>22.892493241868</td><td>-5.657222755113</td></tr><tr><td>C(6)</td><td>3.613987194667</td><td>22.359676299416</td><td>-6.836971827951</td></tr><tr><td>H(6)</td><td>4.357477801351</td><td>22.686127035235</td><td>-6.131652395756</td></tr><tr><td>C(6)</td><td>3.986574767236</td><td>21.774827021668</td><td>-8.089632503708</td></tr><tr><td>N(6)</td><td>5.248199676647</td><td>21.489136249217</td><td>-8.363368075578</td></tr><tr><td>H(6)</td><td>5.974584821090</td><td>21.754378375091</td><td>-7.719014977155</td></tr><tr><td>H(6)</td><td>5.487376252505</td><td>21.069865859566</td><td>-9.271452130257</td></tr><tr><td>N(6)</td><td>3.057799105691</td><td>21.473978059250</td><td>-8.997786542956</td></tr><tr><td>C(6)</td><td>1.758387335929</td><td>21.635696482051</td><td>-8.749410306360</td></tr><tr><td>O(6)</td><td>0.886565761830</td><td>21.396547045533</td><td>-9.589416228698</td></tr></tbody></table>
+<p>Fragments 1-3 belong to strand K and form subsystem 1, while fragments 4-6 belong to strand L and form subsystem 2. If BSSE correction is requested, the subsystem inputs can be prepared by modifying the supersystem input as follows:</p>
+<ul>
+<li style="list-style-type: '· ';">Subsystem 1 input: Prefix fragment labels (4), (5), and (6) with a ':' sign to designate them as ghost atoms.</li>
+<li style="list-style-type: '· ';">Subsystem 2 input: Prefix fragment labels (1), (2), and (3) with a ':' sign to designate them as ghost atoms.</li>
+</ul>
+<p>If BSSE correction is not required, the ghost fragments must be removed from the respective subsystem input files. In this case, subsystem 1 input contains only the strand K fragments, while the subsystem 2 input contains only the strand L fragments. Fragment labels in subsystem 2 could also be renumbered as 1-3, rather than keeping the original 4-6 labels. This prevents ORCA from retaining placeholder entries for fragments 1-3, resulting in cleaner and more readable outputs.</p>
+<h2>Multi-fragment HFLD/LED Inputs</h2>
+<p>Below is a sample HFLD/LED input for the DNA supersystem (supersystem), using the default NormalPNO* settings. Coordinate and fragment label specifications are not provided anymore as they are the same as in the previous subsection.</p>
+<pre><code>! HFLD def2-TZVP(-f) RIJCOSX DefGrid3 def2/J def2-TZVP/C ! VeryTightSCF CPCM(water) %mdci DoLedHF True # HFLD default: False HFFragInter {1 2} {1 3} {2 3} {4 5} {4 6} {5 6} end</code></pre>
+<p>In the HFLD method, intra-subsystem correlation is neglected by design, meaning each subsystem is treated at the reference level. However, by default, the HFLD implementation in ORCA treats each fragment as a separate subsystem. To explicitly specify fragment pairs to be excluded from correlation, the HFFragInter directive must be used. In the above example, this directive sets the correlation energy among strand K fragments (1-3) and among strand L fragments (4-6) to zero. Note that intra-fragment correlations do not need to be specified explicitly, as they are automatically excluded when the HFLD keyword is used.</p>
+<p>If a subsystem consists of a single fragment, only a reference energy calculation (RHF or QRO) is required to compute the RHF/HFLD or QRO/HFLD interaction energy. For subsystems containing multiple fragment, an RHF/LED or QRO/LED calculation is needed to decompose the interaction energy into pairwise contributions. If both DLPNOCCSD(T) and HFLD calculations are to be performed, the LED data for the refence energy are already included in the DLPNO-CCSD(T) subsystem outputs. Otherwise, since LED analysis cannot be invoked at the reference level alone in the current ORCA version, a low-cost DLPNO-CCSD or HFLD correlation calculation can be used in the subsystem inputs to efficiently obtain the necessary LED data, as illustrated below:</p>
+<pre><code>! HFLD def2-TZVP(-f) RIJCOSX DefGrid3 def2/J def2-TZVP/C ! VeryTightSCF CPCM(water) LoosePNO %mdci DoLedHF True # HFLD default: False maxiter 0 end</code></pre>
+<p>In this example, the maxiter 0 directive in the %mdci block is used to bypass unnecessary coupled-cluster iterations. When configuring a low-cost correlation calculation to obtain reference LED data, do not truncate the correlation space too aggressively since at least one electron pair must remain for ORCA to perform LED analysis. Here, LoosePNO settings are employed. However, if this excludes all electron pairs, slightly tighter PNO settings may be required. For large systems, selectively excluding certain interfragment correlations via the HFFragInter directive can further reduce the computational cost. However, avoid specifying all interfragment pairs since this will exclude all electron pairs, which disables LED analysis entirely.</p>
+<h2>5.39 The Hartree-Fock plus London Dispersion (HFLD) Method</h2>
+<p>The efficient and accurate HFLD method[795] can be used for the quantification and analysis of noncovalent interactions between a pair of user-defined fragments. Starting from ORCA 5.0, an open shell variant of the HFLD method is also available.[796]</p>
+<p>The leading idea here is to solve the DLPNO coupled cluster equations while neglecting intramonomer correlation. The LED scheme is then used to extract the London dispersion (LD) energy from the intermolecular part of the correlation. Finally, the resulting LD energy is used to correct interaction energies computed at the HF level. Hence, HFLD can be considered as a dispersion-corrected HF approach in which the dispersion interaction between the fragments is added at the DLPNO-CC level. As such, it is particularly accurate for the quantification of noncovalent interactions such as those found in H-bonded systems, pre-reactive intermediates (e.g., Frustrated Lewis Pairs), dispersion and electrostatically bound systems. Larger errors are in principle expected for transition metal complexes, as it is the case for any dispersion corrected Hartree-Fock scheme.</p>
+<p>The efficiency of the approach allows the study of noncovalent interactions in systems with several hundreds of atoms.</p>
+<p>Some of the most important aspects of the method are summarized below:</p>
+<h2>· Accuracy and Recommended Settings</h2>
+<p>For noncovalent interactions, HFLD typically provides an accuracy comparable to that of the DLPNOCCSD(T) method if default PNO settings are used. For the HFLD scheme, these are defined as TCutPNO = 3.3e-7 and TCutPairs 1e-5. If used in conjuction with a def2-TZVP(-f) basis set, these settings are typically denoted as HFLD* and are recommended for standard applications on large systems [796]. For example, HFLD* settings were used in Ref. [790] to elucidate the complex pattern of interactions responsible for the stability of the DNA duplex. If great accuracy is required, it is recommended to use TightPNO settings in conjuction with TCutPNO 1e-8 and two-point basis set extrapolation (aug-cc-pVTZ/aug-cc-pVQZ) to approach the CBS limit. These settings are typically denoted as the gold HFLD settings [796].</p>
+<h2>· Reference determinant in the Open shell HFLD scheme</h2>
+<p>In the open shell case, HFLD relies on a restricted reference determinant for the calculation of the LD energy. If the QRO determinant is used as reference, the reference interaction energy can in principle be computed at the UHF or QRO levels. This leads to two different schemes, namely the QRO/HFLD and UHF/HFLD. Alternatively, the restricted open-shell HF (ROHF) determinant can be used as reference in HFLD calculations, which leads to the ROHF/HFLD approach. The energy value reported as FINAL SINGLE POINT ENERGY in the output corresponds to the UHF/HFLD scheme by default, which is typically slightly more accurate. See Ref. [796] for details.</p>
+<h2>· Efficency</h2>
+<p>The calculation of the dispersion correction typically requires the same time as an HF calculation. This is true for small as well as for large systems.</p>
+<h2>· Analysis of Intermolecular Interactions</h2>
+<p>The HFLD method can be combined with the Local Energy Decomposition (LED) to study intermolecular interactions in great detail. The LED dispersion energy obtained with HFLD is often very close to that obtained from a full DLPNO-CCSD(T) calculation. Hence, HFLD can be used as a cost-effective alternative to DLPNOCCSD(T) to study, among other things, the importance of London dispersion in molecular chemistry.</p>
+<h2>· Additional considerations</h2>
+<p>(i) One can specify NormalPNO or TightPNO settings in the simple input line. The corresponding DLPNO thresholds would be in this case fully consistent with those used in the DLPNO-CCSD(T) method. (ii) The dispersion energy in the HFLD approach slightly depends on the choice of the localization scheme used for occupied orbitals and PNOs. Default settings are recommended for all intents and purposes. However, it is important to note that the localization iterations for occupied and virtual orbitals must be fully converged in order to obtain consistent results. To achieve this goal, it might be necessary to increase LocMaxIter or LocMaxIterLed (see below). However, this is typically necessary only if very large basis sets (e.g. aug-ccpV5Z) are used. (iii) Importantly, the method benefits from the use of tightly converged SCF solutions. For closed-shell systems, a useful diagnostic in this context is the 'Singles energy' term that is printed in the LED part of the output. This term must be smaller than 1e-6 for closed shell species. If this is not the case, one should change the settings used for the SCF iterations. Note also that all the features of the LED scheme (e.g. automatic fragmentation) are also available for the HFLD method.</p>
+<p>Note that, as HFLD relies on both the DLPNO-CCSD(T) and LED methods, the options of both schemes can be used in principle in conjunction with HFLD. Some examples are shown below:</p>
+<pre><code>! HFLD aug-cc-pVDZ aug-cc-pVDZ/C aug-cc-pVTZ/JK RIJK TightSCF %mdci LED 1 # localization method for the PNOs. Choices: # 1 = PipekMezey # 2 = FosterBoys (default, recommeded for the HFLD method) PrintLevel 3 # Selects large output for LED and prints the # detailed contribution # of each DLPNO-CCSD strong pair LocMaxIterLed 600 # Maximum number of localization iterations for PNOs LocMaxIter 300 # Maximum number of localization iterations for # occupied orbitals LocTolLed 1e-6 # Absolute threshold for the localization procedure for PNOs DoLEDHF true # Decomposes the reference energy in the LED part.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># By default, it is set to false in HFLD for efficiency␣ ↪ → reasons. TCutPNO 3.33e-7 # cutoff for PNO occupation numbers. TCutPairs 1e-5 # cutoff for estimated pair correlation energies # to be included in the CC treatment end</code></pre>
+<h2>5.39.1 Basic Usage</h2>
+<p>The Hartree-Fock plus London Dispersion method is invoked using the !HFLD keyword in the simple input line.</p>
+<pre><code>! HFLD aug-cc-pvdz aug-cc-pvdz/C</code></pre>
+<h2>5.39.2 Example</h2>
+<p>An input example is reported below.</p>
+<pre><code>! HFLD aug-cc-pvdz aug-cc-pvdz/C verytightscf *xyz 0 1 C(1) 0.18726407287156 0.08210467619149 0.19811955853244 H(1) 1.07120465088431 -0.00229078749404 -0.46002874025040 H(1) -0.15524644515923 1.12171178448874 0.04316776563623 O(2) -1.47509614629583 -1.29358571885374 2.29818864036820 H(2) -0.87783948760158 -0.98540169212890 1.58987042714267 H(2) -1.22399221548771 -2.20523304094991 2.47014489963764 *</code></pre>
+<p>In the corresponding output, after the DLPNO-CC iterations and the LED output, the following information is printed:</p>
+<p>The total HFLD energy of the adduct is thus -114.932878050741 a.u.. To compute interaction energies, we have to subtract from this value the Hartree-Fock energies of the monomers in the geometry they have in the complex, i.e., -38.884413525377 and -76.040412827089 a.u. for CH 2 and H 2 O, respectively. The total interaction energy is thus -0.00805 a.u. or -5.1 kcal/mol (the corresponding DLPNO-CCSD(T)/TightPNO/CBS value is -5.3 kcal/mol [774]). Note that, to obtain binding energies, the geometric preparation should be added to this value. This can be computed using a standard computational method, e.g, DFT or DLPNO-CCSD(T).</p>
+<h2>5.39.3 Keywords</h2>
+<h2>Note</h2>
+<p>As HFLD relies on both the DLPNO-CCSD(T) and LED methods, the options of both schemes can be used in principle in conjunction with HFLD.</p>
+<table><caption><div class="caption">Table 5.36: Simple input keywords for the Hartree Fock plus London Dispersion.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>HFLD</td><td>Activates the Hartree Fock plus London Dispersion method</td></tr></tbody></table>
+<table><caption><div class="caption">Table 5.37: %mdci block input keywords for the Hartree Fock plus London Dispersion.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>LED</td><td>1</td><td>PipekMezey used as localization method for the PNOs</td></tr><tr><td></td><td>2</td><td>FosterBoys used as localization method for the PNOs (default starting from ORCA 4.2)</td></tr><tr><td>PrintLevel</td><td>3</td><td>Selects large output for LEDandprints the detailed contribution of eachDLPNO- CCSD strong pair</td></tr><tr><td>LocMaxIterLed</td><td>&lt;integer&gt;</td><td>Maximum number of localization iterations for PNOs (set to 600 by default)</td></tr><tr><td>LocMaxIter</td><td>&lt;integer&gt;</td><td>Maximum number of localization iterations for occupied orbitals (set to 128 by default)</td></tr><tr><td>LocTocLed</td><td>&lt;real&gt;</td><td>Absolute threshold for the localization procedure for PNOs(set to 1e-6 by default)</td></tr><tr><td>DoLEDHF</td><td>true/ false</td><td>Decomposes the reference energy in the LED part (by default, it is set to false in HFLD for efficency reasons).</td></tr><tr><td>TCutPNO</td><td>&lt;real&gt;</td><td>Cutoff for PNO occupation numbers (set to 3.33e-7 by default).</td></tr><tr><td>TCutPairs</td><td>&lt;real&gt;</td><td>Cutoff for estimated pair correlation energies to be included in the CC treatment (set to 1e-5 by default).</td></tr></tbody></table>
+<h2>5.40 ADLD(D): Atomic Decomposition of DFT-D London Dispersion Energy</h2>
+<p>Starting from version 6.1, ORCA offers a method to quantify the London dispersion energy (LD) with atomic resolution in conjunction with a wide range of electronic structure techniques, as described in [788] and [786]. A special case of this decomposition scheme is the atomic decomposition of the DFT-D London Dispersion energies (e.g. ADLD(D4) for DFT-D4). This scheme is available for D2, D3, and D4. The original scheme for DLPNO-based LED methods is documented in the ADLD(LED) section .</p>
+<h2>5.40.1 Theory</h2>
+<p>The atomic LD energy for DFT-D is assessed by assigning half of the pairwise contribution to each atom of the pair and iterating over all atoms:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>If three-body effects are included in the calculation, the decomposition includes them as well:</p>
+<p≯</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Basic Usage</h2>
+<p>The atomic decomposition of LD energy is invoked using the !ADLD keyword in the simple input line.</p>
+<pre><code>! PBE D3 def2-TZVP ADLD</code></pre>
+<h2>Example</h2>
+<p>As an example, the atomic dispersion energies at the B3LYP-D4/def2-TZVP level of a water dimer can be analyzed using the following input file:</p>
+<pre><code>! B3LYP D4 def2-TZVP ADLD # H2O dimer geometry optimized at the B3LYP-D4/def2-TZVP level. * xyz 0 1 O 0.00736774224494 0.01160693915772 0.01654049355157 H 0.96923953706804 0.01163512314627 -0.00786387302697 H -0.23645852051665 0.94172445362186 -0.01797690491825 O -0.98965374142797 -1.29474095640989 2.41552530001642 H -0.69837507632022 -0.90508483715064 1.57804074703869 H -1.52582551183659 -2.04783550111168 2.15519678840530 *</code></pre>
+<p>The corresponding output file is reported below. The LD energy in atomic units is printed for each atom, along with the total dispersion. The output format remains consistent for the other -D corrections.</p>
+<pre><code>------------------------------------------------------------ADLD - Atomic Decomposition of London Dispersion ------------------------------------------------------------Atom Type Dispersion (a.u.) ---------------------------------1 O -0.000523477 2 H -0.000128807 3 H -0.000128264 4 O -0.000477971 5 H -0.000163561 6 H -0.000120093 Total dispersion -0.001542174</code></pre>
+<h2>Keywords</h2>
+<p>Table 5.38: Simple input keywords for the atomic decomposition of London dispersion calculated with DFT-D correction.</p>
+<table><tbody><tr><td>Keyword</td><td>Description</td></tr><tr><td>ADLD</td><td>Activates atomic decomposition of LD</td></tr></tbody></table>
+</div>
+</body>
+</html>

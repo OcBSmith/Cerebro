@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part045</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<p>After all CI calculations are finished, the program gives a list of all calculated roots with their excitation energies and their multiplicities. It is this number that will be referred to as label I in the decomposition of spin-orbit coupled states in the basis ∣ ∣ Ψ SM I 〉 . It is very important to note, that when states with different multiplicities are calculated this number might deviate from the number that appears in the respective CI part of the output. If one gets confused about the numbering of the states, the state energies might act as a guideline through the output of the program.</p>
+<table><tbody><tr><td colspan="5">------------------- Excitation energies -------------------</td></tr><tr><th>ROOT</th><th>Mult</th><th>Excitation energy[Eh]</th><th>[cm-1]</th><th>[eV]</th></tr><tr><td>0</td><td>-------------------------------------------------------------------------------- 5</td><td>0.00000000</td><td>0.00</td><td>0.000</td></tr><tr><td>1</td><td>5</td><td>26.41778649</td><td>5798033.94</td><td>718.865</td></tr><tr><td>2</td><td>5</td><td>26.42452401</td><td>5799512.66</td><td>719.048</td></tr><tr><td>3</td><td>5</td><td>26.42621555</td><td>5799883.91</td><td>719.094</td></tr><tr><td>4</td><td>5</td><td>26.44615744</td><td>5804260.65</td><td>719.637</td></tr><tr><td>5</td><td>5</td><td>26.45323131</td><td>5805813.18</td><td>719.829</td></tr><tr><td>6</td><td>5</td><td>26.47192609</td><td>5809916.21</td><td>720.338</td></tr><tr><td>7</td><td>5</td><td>26.47357807</td><td>5810278.78</td><td>720.383</td></tr><tr><td>8</td><td>5</td><td>26.48177016</td><td>5812076.74</td><td>720.606</td></tr><tr><td>9</td><td>5</td><td>26.49063895</td><td>5814023.21</td><td>720.847</td></tr><tr><td>10</td><td>5</td><td>26.50722706</td><td>5817663.88</td><td>721.298</td></tr><tr><td>11</td><td>5</td><td>26.50759779</td><td>5817745.25</td><td>721.308</td></tr><tr><td>12</td><td>5</td><td>26.50982238</td><td>5818233.49</td><td>721.369</td></tr><tr><td>13</td><td>3</td><td>26.55037043</td><td>5827132.76</td><td>722.472</td></tr><tr><td>14</td><td>3</td><td>26.58407940</td><td>5834531.02</td><td>723.390</td></tr><tr><td>15</td><td>3</td><td>26.58587963</td><td>5834926.12</td><td>723.439</td></tr><tr><td>16</td><td>3</td><td>26.58857702</td><td>5835518.13</td><td>723.512</td></tr><tr><td>17</td><td>3</td><td>26.59674863</td><td>5837311.59</td><td>723.734</td></tr><tr><td>18</td><td>3</td><td>26.59825865</td><td>5837643.00</td><td>723.775</td></tr><tr><td>19</td><td>3</td><td>26.61152227</td><td>5840554.03</td><td>724.136</td></tr><tr><td>20</td><td>3</td><td>26.61806435</td><td>5841989.85</td><td>724.314</td></tr><tr><td>21</td><td>3</td><td>26.62812795</td><td>5844198.56</td><td>724.588</td></tr><tr><td>22</td><td>3</td><td>26.63079807</td><td>5844784.58</td><td>724.661</td></tr><tr><td>23</td><td>3</td><td>26.63345218</td><td>5845367.09</td><td>724.733</td></tr><tr><td>24</td><td>3</td><td>26.64337021</td><td>5847543.85</td><td>725.003</td></tr><tr><td>25</td><td>3</td><td>26.65680719</td><td>5850492.92</td><td>725.369</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>26</td><td>3</td><td>26.66486245</td><td>5852260.85</td><td>725.588</td></tr><tr><td>27</td><td>3</td><td>26.66512507</td><td>5852318.49</td><td>725.595</td></tr><tr><td>28</td><td>3</td><td>26.66741755</td><td>5852821.63</td><td>725.657</td></tr><tr><td>29</td><td>3</td><td>26.68096811</td><td>5855795.63</td><td>726.026</td></tr><tr><td>30</td><td>3</td><td>26.68291870</td><td>5856223.74</td><td>726.079</td></tr><tr><td>31</td><td>3</td><td>26.68410859</td><td>5856484.89</td><td>726.112</td></tr><tr><td>32</td><td>3</td><td>26.68502036</td><td>5856685.00</td><td>726.136</td></tr><tr><td>33</td><td>3</td><td>26.68625712</td><td>5856956.44</td><td>726.170</td></tr><tr><td>34</td><td>3</td><td>26.68835097</td><td>5857415.98</td><td>726.227</td></tr><tr><td>35</td><td>3</td><td>26.69951161</td><td>5859865.46</td><td>726.531</td></tr><tr><td>36</td><td>3</td><td>26.70277202</td><td>5860581.04</td><td>726.619</td></tr><tr><td>37</td><td>3</td><td>26.71055426</td><td>5862289.04</td><td>726.831</td></tr><tr><td>38</td><td>3</td><td>26.71604333</td><td>5863493.75</td><td>726.980</td></tr><tr><td>39</td><td>3</td><td>26.71631714</td><td>5863553.85</td><td>726.988</td></tr><tr><td>40</td><td>3</td><td>26.71801283</td><td>5863926.01</td><td>727.034</td></tr><tr><td>41</td><td>3</td><td>26.71869535</td><td>5864075.80</td><td>727.053</td></tr><tr><td>42</td><td>3</td><td>26.71953590</td><td>5864260.28</td><td>727.076</td></tr><tr><td>43</td><td>3</td><td>26.72200411</td><td>5864801.99</td><td>727.143</td></tr><tr><td>44</td><td>3</td><td>26.72811146</td><td>5866142.40</td><td>727.309</td></tr><tr><td>45</td><td>3</td><td>26.73591005</td><td>5867853.99</td><td>727.521</td></tr><tr><td>46</td><td>3</td><td>26.73675062</td><td>5868038.48</td><td>727.544</td></tr><tr><td>47</td><td>3</td><td>26.75216877</td><td>5871422.37</td><td>727.964</td></tr><tr><td>48</td><td>3</td><td>26.78204828</td><td>5877980.17</td><td>728.777</td></tr><tr><td>49</td><td>7</td><td>27.21891306</td><td>5973860.90</td><td>740.664</td></tr><tr><td>50</td><td>7</td><td>27.21926225</td><td>5973937.54</td><td>740.674</td></tr><tr><td>51</td><td>7</td><td>27.21931555</td><td>5973949.24</td><td>740.675</td></tr><tr><td>52</td><td>5</td><td>27.26974929</td><td>5985018.16</td><td>742.048</td></tr><tr><td>53</td><td>5</td><td>27.26978849</td><td>5985026.77</td><td>742.049</td></tr><tr><td>54</td><td>5</td><td>27.27023065</td><td>5985123.81</td><td>742.061</td></tr><tr><td>55</td><td>5</td><td>27.29466376</td><td>5990486.26</td><td>742.726</td></tr><tr><td>56</td><td>5</td><td>27.29677691</td><td>5990950.04</td><td>742.783</td></tr><tr><td>57</td><td>5</td><td>27.31333680</td><td>5994584.52</td><td>743.234</td></tr><tr><td>58</td><td>7</td><td>27.31641173</td><td>5995259.39</td><td>743.317</td></tr><tr><td>59</td><td>5</td><td>27.31967798</td><td>5995976.24</td><td>743.406</td></tr><tr><td>60</td><td>7</td><td>27.32002169</td><td>5996051.68</td><td>743.416</td></tr></tbody></table>
+<p>Without SOC the spin exclusion rule applies which means that only excited states with a total spin equal to the ground state spin ( S ′ = S ) give rise to non-vanishing intensities. Hence, only these transitions are listed in the spectra before SOC.</p>
+<pre><code>------------------------ROCIS-EXCITATION SPECTRA ------------------------Center of mass = ( -0.0160, 0.0000, 0.0229) Reading integrals ... Reading the Dipole integrals ... done Reading the Linear Momentum integrals ... done Reading the Angular momentum integrals ... done Reading the Quadrupole integrals ... done Reading the Higher Moment integrals ... done --------------------------------------------------------------------Using One-Photon Spectroscopy Tool -------------------------------------------------------------------------------------------------------------------------------------------------------↪ → -----------------ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → -----------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td></td><th colspan="2">Transition</th><th>Energy Energy</th><th>Wavelength</th><th>fosc(D2)</th><th>D2</th><th>DX</th><th>␣</th></tr><tr><th>↪ →</th><th>DY</th><th>DZ (eV)</th><th>(cm-1)</th><th>(nm)</th><td></td><th>(au**2)</th><th>(au)</th><th>␣</th></tr><tr><td>↪ →</td><td>(au)</td><td>(au)</td><td></td><td></td><td>-----------------------------------------------------------------------------------</td><td></td><td></td><td></td></tr><tr><td>↪ → 0-5A ↪</td><td>-&gt; -0.02035</td><td>----------------- 1-5A 0.00619</td><td>718.864517 5798034.0</td><td>1.7</td><td>0.007967331</td><td>0.00045</td><td>0.00001</td><td>␣</td></tr><tr><td>→ 0-5A</td><td>-&gt; 2-5A -0.00019</td><td>719.047854 -0.00052</td><td>5799512.7</td><td>1.7</td><td>0.000032204</td><td>0.00000</td><td>0.00123</td><td>␣</td></tr><tr><td>↪ → 0-5A</td><td>-&gt;</td><td>3-5A 719.093883</td><td>5799883.9</td><td>1.7</td><td>0.000038607</td><td>0.00000</td><td>-0.00060</td><td>␣</td></tr><tr><td>↪ → -0.00039 0-5A</td><td>-&gt;</td><td>-0.00130 4-5A 719.636530 -0.00005</td><td>5804260.7</td><td>1.7</td><td>0.000000074</td><td>0.00000</td><td>-0.00004</td><td>␣</td></tr><tr><td>↪ → -0.00001 0-5A ↪ -0.00364</td><td>-&gt;</td><td>5-5A 719.829019 0.00116</td><td>5805813.2</td><td>1.7</td><td>0.000257559</td><td>0.00001</td><td>-0.00007</td><td>␣</td></tr><tr><td>→ 0-5A</td><td>-&gt; 0.00619</td><td>6-5A 720.337730 0.01987</td><td>5809916.2</td><td>1.7</td><td>0.045609938</td><td>0.00258</td><td>-0.04638</td><td>␣</td></tr><tr><td>↪ → 0-5A</td><td>-&gt; 0.01315</td><td>7-5A 720.382683 0.04327</td><td>5810278.8</td><td>1.7</td><td>0.043374431</td><td>0.00246</td><td>0.02031</td><td>␣</td></tr><tr><td>↪ → 0-5A</td><td>-&gt; 0.00005</td><td>8-5A 720.605601 0.00016</td><td>5812076.7</td><td>1.7</td><td>0.000000543</td><td>0.00000</td><td>0.00005</td><td>␣</td></tr><tr><td>↪ → 0-5A</td><td>-&gt; 0.09663</td><td>9-5A 720.846933 -0.02948</td><td>5814023.2</td><td>1.7</td><td>0.180244898</td><td>0.01021</td><td>0.00031</td><td>␣</td></tr><tr><td>↪ → 0-5A ↪ -0.01833</td><td>-&gt;</td><td>10-5A 721.298318 -0.06040</td><td>5817663.9</td><td>1.7</td><td>0.084488140</td><td>0.00478</td><td>-0.02823</td><td>␣</td></tr><tr><td>→ 0-5A</td><td>-&gt;</td><td>11-5A 721.308407 -0.02719</td><td>5817745.3</td><td>1.7</td><td>0.085964316</td><td>0.00486</td><td>0.06366</td><td>␣</td></tr><tr><td>↪ → -0.00850 0-5A</td><td>-&gt; 0.00002</td><td>12-5A 721.368941 0.00001</td><td>5818233.5</td><td>1.7</td><td>0.000000007</td><td>0.00000</td><td>-0.00000</td><td>␣</td></tr><tr><td>↪ → 0-5A</td><td>-&gt;</td><td>13-5A 742.047603</td><td>5985018.2</td><td>1.7</td><td>0.002287503</td><td>0.00013</td><td>0.00507</td><td>␣</td></tr><tr><td>↪ → 0.00276 0-5A</td><td>-&gt; -0.00164</td><td>0.00962 14-5A 742.048670 -0.00477</td><td>5985026.8</td><td>1.7</td><td>0.002278095</td><td>0.00013</td><td>0.00999</td><td>␣</td></tr><tr><td>↪ → 0-5A -&gt;</td><td>15-5A</td><td>742.060702</td><td>5985123.8</td><td>1.7</td><td>0.001342355</td><td>0.00007</td><td>0.00019</td><td>␣</td></tr><tr><td>↪ → 0.00823 0-5A -&gt;</td><td>16-5A</td><td>-0.00246 742.725560 0.00419</td><td>5990486.3</td><td>1.7</td><td>0.000418059</td><td>0.00002</td><td>0.00197</td><td>␣</td></tr><tr><td>↪ → 0.00126 0-5A ↪ -0.00063</td><td>-&gt;</td><td>17-5A 742.783062 -0.00197</td><td>5990950.1</td><td>1.7</td><td>0.000464555</td><td>0.00003</td><td>0.00461</td><td>␣</td></tr><tr><td>→ 0-5A -&gt; -0.00000</td><td>18-5A -0.00001</td><td>743.233680</td><td>5994584.5</td><td>1.7</td><td>0.000000003</td><td>0.00000</td><td>-0.00001</td><td>␣</td></tr><tr><td>↪ → 0-5A -0.00000</td><td>-&gt;</td><td>19-5A 743.406232 -0.00000</td><td>5995976.3</td><td>1.7</td><td>0.000000000</td><td>0.00000</td><td>-0.00000</td><td>␣</td></tr><tr><td>↪ → 0-5A 0.00538</td><td>-&gt;</td><td>20-5A 743.562910 -0.00165</td><td>5997239.9</td><td>1.7</td><td>0.000577479</td><td>0.00003</td><td>0.00001</td><td>␣</td></tr><tr><td>↪ → 0-5A -&gt;</td><td></td><td>21-5A 743.597306</td><td>5997517.4</td><td>1.7</td><td>0.000009265</td><td>0.00000</td><td>-0.00029</td><td>␣</td></tr><tr><td>↪ → -0.00017 0-5A -&gt;</td><td></td><td>-0.00063 22-5A 743.658216 0.00029</td><td>5998008.6</td><td>1.7</td><td>0.000010720</td><td>0.00000</td><td>-0.00070</td><td>␣</td></tr><tr><td>↪ → 0.00011 0-5A ↪ -0.00059</td><td>-&gt;</td><td>23-5A 744.043391 -0.00184</td><td>6001115.3</td><td>1.7</td><td>0.000081920</td><td>0.00000</td><td>-0.00088</td><td>␣</td></tr><tr><td>→ 0-5A ↪ → -0.00389 ...</td><td>-&gt;</td><td>24-5A 744.092953 0.00119</td><td>6001515.0</td><td>1.7</td><td>0.000301862</td><td>0.00002</td><td>-0.00017</td><td>␣</td></tr></tbody></table>
+<p>After calculation of SOC in the basis of all calculated ROCIS roots, the program prints out the composition of the spin-orbit coupled states (if PrintLevel &gt;2) and the corresponding absorption spectrum.</p>
+<p>Eigenvectors of SOC calculation:</p>
+<p>the threshold for printing is: 0.010000</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th>weight</th><th>real</th><th>image</th><th>:</th><th>Root Block</th><th>Spin</th><th>Ms</th></tr><tr><th>0:</th><th>0.00000</th><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><th>0.00 0.135363</th><td>cm**-1 -0.028407 0.366819</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.181749 0.224125</th><td>0.362653</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.367330 -0.135925</th><td>-0.590639</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.180828 0.039792</th><td>-0.423372</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.134728 0.185875</th><td>0.316510</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>1: 0.00</th><th>0.00000</th><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><th>0.078367 -0.271364</th><td>0.068762</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.306783 0.460606</th><td>0.307612</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.228162 0.440545</th><td>0.184613</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.307656</th><td>-0.543907 -0.108722</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.079031</th><td>-0.142362 -0.242414</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>2: 0.02</th><th>0.00000</th><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><th>0.416636</th><td>0.252581 0.594003</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.072004</th><td>-0.082420 0.255363</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.022669</th><td>-0.134504 0.067662</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.071994</th><td>0.254211 0.085850</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.416695</th><td>-0.326890 -0.556631</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>3: 0.02</th><td></td><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><td></td><td>cm**-1 0.00000</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>0.080023</th><td>-0.256741 0.118772</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.319001</th><td>0.556244 0.097947</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.201858</th><td>-0.134225 0.428768</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.319074</th><td>0.512787 0.236903</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.080042</th><td>0.143270 0.243959</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>4: 0.03</th><th>0.00000</th><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><th>0.289609</th><td>cm**-1 -0.315623 -0.435879</td><td>:</td><td>0</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.120461</th><td>-0.168190</td><td>:</td><td>0</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.179979</th><td>0.303600 -0.232115 -0.355108</td><td>:</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.120448</th><td>0.275975 -0.210441</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.289502</th><td>-0.272469 -0.463963</td><td>:</td><td>0</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>5: 5767447.63</th><th>715.07230</th><th>eV</th><td></td><td></td><td></td><td></td></tr><tr><th>0.191190</th><td>cm**-1 -0.086278 0.428656</td><td>:</td><td>1</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.061035</th><td>-0.247045 -0.001820</td><td>:</td><td>1</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.055460</th><td>-0.038920 0.232262</td><td>:</td><td>1</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.061035</th><td>-0.234143 -0.078813</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.191190</th><td>-0.058171 0.433366</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>0.109587</th><td>-0.316206 -0.097982</td><td>:</td><td>2</td><td>0</td><td>2</td><td>2</td></tr><tr><th>0.026192</th><td>-0.108605 -0.119987</td><td>:</td><td>2</td><td>0</td><td>2</td><td>1</td></tr><tr><th>0.010968 0.017308</th><td>-0.103287</td><td>:</td><td>2</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.026192</th><td>-0.141786 0.078029</td><td>:</td><td></td><td>2 0</td><td>2</td><td>-1</td></tr><tr><th>0.109587</th><td>0.330874 0.010450</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>0.015452 0.041882</th><td>0.114128 -0.049265 -0.002607</td><td>:</td><td>3</td><td>0 0</td><td>2</td><td>2</td></tr><tr><th>0.027697</th><td>-0.204634</td><td>:</td><td>3</td><td></td><td>2</td><td>1</td></tr><tr><th>0.027504 0.041882</th><td>-0.164135 -0.194305</td><td>: -0.064244</td><td>3 :</td><td>0 3 0</td><td>2 2</td><td>0 -1</td></tr><tr><th>0.015452</th><td>-0.091834 -0.083778</td><td>:</td><td>3</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>6: 5767588.34</th><td>cm**-1 715.08974</td><td>eV</td><td></td><td></td><td></td><td></td></tr><tr><th>0.198585</th><td>-0.131642 0.425741 -0.161434</td><td>: 0.146261</td><td>1 :</td><td>0 1 0</td><td>2 2</td><td>2 1</td></tr><tr><th>0.047453 0.019867</th><td>-0.139025 -0.023213</td><td>:</td><td>1</td><td>0</td><td>2</td><td>0</td></tr><tr><th>0.047453</th><td>0.105160 0.190773</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-1</td></tr><tr><th>0.198585</th><td>0.013812</td><td>:</td><td>1</td><td>0</td><td>2</td><td>-2</td></tr><tr><th>0.160559</th><td>-0.445415 -0.388214</td><td>-0.099243</td><td>: 2</td><td>0</td><td>2</td><td>2 1</td></tr><tr><th>0.044707</th><td>-0.072788 -0.198517</td><td>:</td><td>2</td><td>0</td><td>2</td><td></td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>0.014352</td><td>-0.118163</td><td>-0.019729</td><td>:</td><td>2</td><td>0</td><td>2</td><td>0</td></tr><tr><td>0.044707</td><td>0.133333</td><td>-0.164102</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-1</td></tr><tr><td>0.160559</td><td>-0.399398</td><td>-0.032262</td><td>:</td><td>2</td><td>0</td><td>2</td><td>-2</td></tr><tr><td>0.012669</td><td>-0.111020</td><td>-0.018537</td><td>:</td><td>3</td><td>0</td><td>2</td><td>0</td></tr></tbody></table>
+<table><tbody><tr><th>Energy</th><th>levels:</th><th>cm-1</th><th>eV</th><th>Boltzmann</th><th>populations</th><td></td><th>for T =</th><th>300.00</th><th>K</th><td></td><td></td><td></td></tr><tr><td>0 :</td><td></td><td>0.000</td><td>0.0000</td><td></td><td colspan="8">2.00e-01</td></tr><tr><td>1</td><td>:</td><td>0.000</td><td>0.0000</td><td></td><td colspan="8">2.00e-01</td></tr><tr><td>2</td><td>:</td><td>0.018</td><td>0.0000</td><td></td><td colspan="8">2.00e-01</td></tr><tr><td>3</td><td>:</td><td>0.021</td><td>0.0000</td><td></td><td colspan="8">2.00e-01</td></tr><tr><td>4</td><td>:</td><td>0.026</td><td>0.0000</td><td></td><td colspan="8">2.00e-01 ----------------------------------------------------------------------------------- VIA TRANSITION ELECTRIC DIPOLE MOMENTS</td></tr><tr><td>----------------------------------------------------------------------------------- ↪ → --------------------- ↪</td><td>Transition |DY|</td><td>|DZ|</td><td>Energy</td><td>Energy</td><td>Wavelength</td><td></td><td>fosc(D2)</td><td>D2</td><td></td><td></td><td></td><td></td></tr><tr><td>↪ →</td><td>(au)</td><td></td><td>(eV)</td><td>(cm-1)</td><td>(nm)</td><td></td><td></td><td></td><td></td><td colspan="3">|DX|␣ (au)␣</td></tr><tr><td>→</td><td></td><td>(au)</td><td></td><td></td><td></td><td colspan="4">(*population) (au**2)</td><td></td><td></td><td></td></tr><tr><td colspan="13">----------------------------------------------------------------------------------- ↪ → ---------------------</td></tr><tr><td>0-5.0A 00000</td><td>-&gt;</td><td>1-5.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td colspan="3">0.</td></tr><tr><td>↪ → 2-5.0A ↪ → 0.00000</td><td>-&gt;</td><td>3-5.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>2927278012.6</td><td></td><td></td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>3-5.0A 0.00000</td><td>-&gt;</td><td>4-5.0A</td><td>0.000001</td><td>0.0</td><td></td><td colspan="2">2013441147.3</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>↪ → 2-5.0A ↪ → 0.00000</td><td>-&gt;</td><td>0.00000 4-5.0A 0.00000</td><td>0.00000 0.000001 0.00000</td><td>0.0</td><td></td><td colspan="2">1192923906.3</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>1-5.0A ↪ → 0.00000</td><td>-&gt;</td><td>2-5.0A 0.00000</td><td>0.000002 0.00000</td><td>0.0</td><td></td><td colspan="2">559585326.1</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>0-5.0A ↪ → 0.00000</td><td></td><td>-&gt; 2-5.0A 0.00000</td><td>0.000002 0.00000</td><td>0.0</td><td>554991701.4</td><td></td><td></td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>1-5.0A ↪ 0.00000</td><td></td><td>-&gt; 3-5.0A 0.00000</td><td>0.000003 0.00000</td><td>0.0</td><td></td><td colspan="2">469780906.9</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>→ 0-5.0A ↪ 0.00000</td><td></td><td>-&gt; 3-5.0A 0.00000</td><td>0.000003</td><td>0.0</td><td></td><td colspan="2">466539107.5</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>→ 1-5.0A ↪ → 0.00000</td><td></td><td>-&gt; 4-5.0A 0.00000</td><td>0.00000 0.000003 0.00000</td><td>0.0</td><td></td><td colspan="2">380906816.8</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>0-5.0A ↪ 0.00000</td><td>-&gt;</td><td>4-5.0A 0.00000</td><td>0.000003 0.00000</td><td>0.0</td><td></td><td colspan="2">378772788.3</td><td colspan="2">0.000000000</td><td colspan="2">0.00000</td><td>␣</td></tr><tr><td>→ 4-5.0A ↪ 00000</td><td>-&gt;</td><td>5-5.0A 0.01494</td><td>715.072294 0.00454</td><td>5767447.6</td><td></td><td>1.7</td><td colspan="2">0.000853852</td><td colspan="2">0.00024</td><td colspan="2">0.</td></tr><tr><td>→ 3-5.0A ↪ 00021</td><td>-&gt;</td><td>5-5.0A 0.00018</td><td>715.072294 0.00050</td><td>5767447.6</td><td>1.7</td><td></td><td colspan="2">0.000001143</td><td></td><td></td><td colspan="2">0.</td></tr><tr><td>→ 2-5.0A</td><td>-&gt;</td><td>5-5.0A 0.00053</td><td>715.072295 0.00012</td><td>5767447.6</td><td></td><td>1.7</td><td colspan="2">0.000001245</td><td colspan="2">0.00000 0.00000</td><td colspan="2">0.</td></tr><tr><td>↪ → 00024 1-5.0A</td><td></td><td>-&gt; 5-5.0A</td><td>715.072297</td><td>5767447.6</td><td>1.7</td><td></td><td colspan="2">0.000000330</td><td colspan="2">0.00000</td><td colspan="2">0.</td></tr><tr><td>↪ → 00000 0-5.0A</td><td></td><td>0.00029 -&gt; 5-5.0A 0.00251</td><td>0.00010 715.072297 0.00076</td><td>5767447.6</td><td></td><td>1.7</td><td colspan="2">0.000024144</td><td colspan="2">0.00001</td><td colspan="2">0.</td></tr><tr><td>↪ → 00000 4-5.0A 00067</td><td></td><td>-&gt; 6-5.0A 0.00036</td><td>715.089740 0.00042</td><td>5767588.3</td><td></td><td>1.7</td><td colspan="2">0.000002661</td><td colspan="2">0.00000</td><td colspan="2">0.</td></tr><tr><td>↪ → 3-5.0A 00000</td><td></td><td></td><td></td><td></td><td></td><td>1.7</td><td colspan="2">0.000008083</td><td colspan="2">0.00000</td><td colspan="2">0.</td></tr><tr><td>↪ → 2-5.0A 00001</td><td></td><td>-&gt; 6-5.0A 0.00145 -&gt; 6-5.0A 0.01423</td><td>715.089741 0.00045 715.089742 0.00432</td><td>5767588.3 5767588.3</td><td></td><td>1.7</td><td colspan="2">0.000775076</td><td colspan="2">0.00022</td><td colspan="2">0.</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>1-5.0A ↪ → 00002</td><td>-&gt; 6-5.0A 715.089744 0.00015 0.00035</td><td>5767588.4</td><td>1.7</td><td>0.000000497</td><td>0.00000</td><td>0.</td></tr><tr><td>0-5.0A ↪ 00056</td><td>-&gt; 6-5.0A 715.089744 0.00035 0.00007</td><td>5767588.4</td><td>1.7</td><td>0.000001537</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 4-5.0A</td><td>-&gt; 7-5.0A 715.115140</td><td>5767793.2</td><td>1.7</td><td>0.000001500</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00027 3-5.0A 00001</td><td>0.00020 0.00056 -&gt; 7-5.0A 715.115141 0.01476 0.00449</td><td>5767793.2</td><td>1.7</td><td>0.000834113</td><td>0.00024</td><td>0.</td></tr><tr><td>↪ → 2-5.0A ↪ → 00002</td><td>-&gt; 7-5.0A 715.115141 0.00150 0.00050</td><td>5767793.2</td><td>1.7</td><td>0.000008694</td><td>0.00000</td><td>0.</td></tr><tr><td>1-5.0A ↪ → 00026</td><td>-&gt; 7-5.0A 715.115143 0.00025 0.00018</td><td>5767793.2</td><td>1.7</td><td>0.000000562</td><td>0.00000</td><td>0.</td></tr><tr><td>0-5.0A ↪ → 00036</td><td>-&gt; 7-5.0A 715.115143 0.00031 0.00085</td><td>5767793.2</td><td>1.7</td><td>0.000003341</td><td>0.00000</td><td>0.</td></tr><tr><td>4-5.0A ↪ → 00004</td><td>-&gt; 8-5.0A 715.184940 0.00020 0.00001</td><td>5768356.2</td><td>1.7</td><td>0.000000146</td><td>0.00000</td><td>0.</td></tr><tr><td>3-5.0A ↪ → 00206</td><td>-&gt; 8-5.0A 715.184940 0.00012 0.00120</td><td>5768356.2</td><td>1.7</td><td>0.000019943</td><td>0.00001</td><td>0.</td></tr><tr><td>2-5.0A ↪ 00119</td><td>-&gt; 8-5.0A 715.184941 0.00064 0.00197</td><td>5768356.2</td><td>1.7</td><td>0.000019954</td><td>0.00001</td><td>0.</td></tr><tr><td>→ 1-5.0A ↪ → 00004</td><td>-&gt; 8-5.0A 715.184943 0.01152 0.00348</td><td>5768356.2</td><td>1.7</td><td>0.000507851</td><td>0.00014</td><td>0.</td></tr><tr><td>0-5.0A ↪ → 00003</td><td>-&gt; 8-5.0A 715.184943 0.00240 0.00077</td><td>5768356.2</td><td>1.7</td><td>0.000022305</td><td>0.00001</td><td>0.</td></tr><tr><td>4-5.0A ↪ → 00006</td><td>-&gt; 9-5.0A 715.206052 0.00360 0.00113</td><td>5768526.4</td><td>1.7</td><td>0.000049980</td><td>0.00001</td><td>0.</td></tr><tr><td>3-5.0A ↪ → 00077 ...</td><td>-&gt; 9-5.0A 715.206053 0.00040 0.00119</td><td>5768526.4</td><td>1.7</td><td>0.000007590</td><td>0.00000</td><td>0.</td></tr></tbody></table>
+<p>The obtained spectra can be prepared for ploting with the use of orca_mapspc . Check section orca_mapspc for details.</p>
+<h2>5.7.4 Resonant Inelastic Scattering Spectroscopy</h2>
+<h2>General</h2>
+<p>Starting from ORCA version 4.0 ROCIS module can be used to calculate RIXS spectra</p>
+<p>The present implementation is directly based on the Kramers Heisenerg Dirac (KDH) expression formula for near resonant and resonant conditions</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The resonance scattering cross section for total and direct cases, averaged over all orientations of the molecule and integrated over all directions and polarizations of scattered radiation is given in equations:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Interference effects can be then derived in a straightforward way from equation:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In order to access RIXS spectroscopy in the ROCIS module one needs in addition to specify a 2nd donor space. This is specified by defining an OrbWin array with 6 elements: The first four elements define the ranges of the two donor spaces while the last two elements the respective acceptor space range.</p>
+<pre><code>OrbWin = 0,0,2,4,45,60</code></pre>
+<p>An important difference with respect to the conventional ROCIS or DFT/ROCIS calculations is the fact that two donor spaces of very different energy ranges are involved (e.g. K-edge, L-edge) which requires to restrict somewhat the acceptor space and saturate it with as many states as possible.</p>
+<p>The main calling commands in order to perform a RIXS calculation within both ROCIS and CASSCF blocks are the following:</p>
+<ul>
+<li style="list-style-type: '· ';">RIXS true. Similar to absorption spectroscopy, this requests the RIXS calculation to be performed based on the calculated non-relativistic ground state multiplicity States</li>
+<li style="list-style-type: '· ';">RIXSSOC true. By turning-on this flag the RIXS is calculated by taking in account the relativistically corrected Ms States.</li>
+<li style="list-style-type: '· ';">Elastic true. This flag indicates whether the resonant condition in which the initial and Final states coincide should be taken into account. Note that the intensity of this spectral feature might be overestimated as presently the non resonant terms are not treated</li>
+</ul>
+<p>The respective ROCIS input reads then as follows:</p>
+<pre><code>!B3LYP def2-TZVP SlowConv %Basis AuxC "def2/J" end %ROCIS NRoots 200 PrintLevel 3 MaxCore 4000 DoRI true DoHigherMult true SOC true RIXS true # Request RIXS calculation (NoSOC) RIXSSOC true # Request RIXS calculation (with SOC) Elastic true # Request RIXS calculation (Elastic) DoDFTCIS true DFTCIS_c =0.18,0.20,0.40 OrbWin = 2,4,25,33,0,100 end * xyzfile 2 2 test.xyz</code></pre>
+<p>When running the calculation one can monitor if the requested NRoots were sufficient enough to select the states dominated by both the donor orbital spaces</p>
+<table><tbody><tr><th colspan="5">--------------------------------------------------------------------------------</th></tr><tr><th>ROOT</th><th>Mult</th><th>Excitation energy[Eh]</th><th>[cm-1]</th><th>[eV]</th></tr><tr><td>0</td><td>2</td><td>0.00000000</td><td>0.00</td><td>0.000</td></tr><tr><td>1</td><td>2</td><td>0.06611737</td><td>14511.08</td><td>1.799</td></tr><tr><td>2</td><td>2</td><td>0.07728471</td><td>16962.03</td><td>2.103</td></tr><tr><td>3</td><td>2</td><td>0.07732428</td><td>16970.72</td><td>2.104</td></tr><tr><td>84</td><td>2</td><td>33.75471831</td><td>7408304.35</td><td>918.513</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>85</td><td>2</td><td>33.77073325</td><td>7411819.22</td><td>918.948</td></tr><tr><td>86</td><td>2</td><td>33.77076955</td><td>7411827.19</td><td>918.949</td></tr><tr><td>87</td><td>4</td><td>34.06882971</td><td>7477243.83</td><td>927.060</td></tr><tr><td>88</td><td>2</td><td>34.07021441</td><td>7477547.74</td><td>927.098</td></tr></tbody></table>
+<p>If that is not the case the respective RIXS calculations will not be performed and a Warning Message will be generated:</p>
+<pre><code>Making the RIXS files ... WARNING!: Flag for RIXS property calculation was identified but there is zero number of Intermediate and/or Final states: No Cross-Section properties will be evaluated ...Skipping this part TIP: Increase the number of NRoots and/or decrease or increase the acceptor orbital space ...Done</code></pre>
+<p>A successful run on the other hand will generate the following messages for RIXS and RIXSSOC calculations.</p>
+<pre><code>----------------------------------------------------------------------------------ROCIS RIXS SPECTRUM ----------------------------------------------------------------------------------Making the RIXS data files for Inelastic and Elastic Scattering Ground State: 1 Intermediate States: 21 Final States: 59 The RIXS cross section will be generated from: 60 Ground-Final State Pairs and 21 Intermediate States/Pair Calculating Intensities... 10% done 20% done 30% done 40% done 50% done 60% done 70% done 80% done 90% done 100% done Storing the files...All Done ----------------------------------------------------------------------------------</code></pre>
+<pre><code>----------------------------------------------------------------------------------ROCIS RIXSSOC SPECTRUM ----------------------------------------------------------------------------------Making the RIXS-SOC data files for Inelastic and Elastic Scattering Ms States: 2 Intermediate States: 78 Final States: 214 The RIXS cross section will be generated from: 432 Ground-Final State Pairs and 78 Intermediate States/Pair Calculating Intensities... 10% done 20% done 30% done 40% done 50% done 60% done 70% done</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>80% done 90% done 100% done Storing the files...All Done ----------------------------------------------------------------------------------</code></pre>
+<p>In both cases the number of involved Initial, Final and Intermediate states is specified explicitly.</p>
+<p>For example in the case of RIXSSOC 2 Ms Ground states, 78 Intermediate states and 214 Final states are involved. Then the RIXS cross section for elastic and inelastic scattering will be generated by 432 (2*(2+214)) Ground-Final State-Pairs and 78 Intermediate States per Ground-Final state pair.</p>
+<h2>Processing the spectra with orca_mapspc</h2>
+<p>By calling orca_mapspc with the following keywords:</p>
+<pre><code>orca_mapspc test.el_inel.rocis.rixssoc RIXS -x0871 -x1876 -x2-1 -x34 -w0.4 -g0.4 -l -n125 -m125 -dx20 -eaxis1</code></pre>
+<p>The program will process the test.el_inel.rocis.rixssoc file with the following parameters:</p>
+<p>Energy range along x : 871-876 eV</p>
+<p>Energy range along y: -1-34 eV</p>
+<p>-l indicates Lorentzian broadening</p>
+<p>Width along x (gamma): 0.4 eV</p>
+<p>Width along y (gamma): 0.4 eV</p>
+<p>Points along x: 125</p>
+<p>Points along y:125</p>
+<p>Shift to be applied along Incident energy/Emission axis: 20 eV</p>
+<p>The y axis will be Energy Transfer axis. If -eaxis2 is the y axis will be then Emission Energy axis</p>
+<p>All this information is printed during the data processing:</p>
+<pre><code>Mode is RIXS Using Lorentzian shape Cannot read the paras.inp file ... taking the line width parameter from the command line Cannot read the udex.inp file ... taking the excitation energy ranges from the command line Cannot read the udem.inp file ... taking the emission energy ranges from the command line Cannot read the gfsp.inp file ... No Ground-Final State Pairs will be evaluated ---------------------------------------------------------------------------------PLOTTING RIXS SPECTRA ---------------------------------------------------------------------------------Input File : test.el_inel.rocis.rixssoc Incident Energy Excitation axis : 871.000 ... 876.000 eV 125 points Energy transfer axis : -1.000 ... 4.000 eV 125 points Incident Energy Shift : 20.000 eV Lorenzian Linewidth along Incident Axis : 0.400 eV Lorenzian Linewidth along Energy Transfer/Emission Axis : 0.400 eV y axis : 1 -> Energy transfer Number of user defined cuts at constant Excitation Energy axis: 0 Number of user defined cuts at constant Emission/Energy Transfer Energy axis : 0</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Making checks...Done Proccessing data... 10% done 20% done ... 100% done RIXS-plotting done Incident Energy range: 845.800 ... 869.249 Emission/Energy-transfer range: 0.000 ... 4.853 Now storing the 2D file... Done Making the Integrated spectra along Energy Transfer/Emission axis... Done Making the Integrated spectra along Incident axis... Done All Done ---------------------------------------------------------------------------------</code></pre>
+<p>Successful run will generate the following files: The RIXS planes of the Total, Direct and Interference RIXS intensity as indicated in the above equations:</p>
+<pre><code>test.el_inel.rocis.rixssoc.total_rixs.dat test.el_inel.rocis.rixssoc.direct_rixs.dat test.el_inel.rocis.rixssoc.interference_rixs.dat</code></pre>
+<p>In addition one obtains the integrated spectra at constant Incident energies (CIE):</p>
+<pre><code>test.el_inel.rocis.rixssoc.dw.dat</code></pre>
+<p>as well as at constant Emission/Energy Transfer energies (CEE/CET):</p>
+<pre><code>test.el_inel.rocis.rixssoc.wex.dat</code></pre>
+<figure><figcaption><div class="caption">Fig. 5.25: DFT/ROCIS calculated RIXS planes for [ Cu ( NH 3 ) 4 ] 2 -. Left: Total RIXS Intensity, Middle: Direct RIXS intensity and Right: Interference RIXS intensity. Lorentzian lineshape broadening with constant widths along Incident and Energy Transfer axis (0.5 and 0.2 eV respectively) were used throughout.</div></figcaption></figure>
+<h2>Generating Cuts</h2>
+<p>Cuts along x and y axis can be generated with two ways:</p>
+<ol>
+<li style="list-style-type: '1) ';">At first, this action can be performed by adding the following keywords: uex and udw accounting for generating cuts at constant Incident Energies (CIE) and at constant Emission (CEE)/or at constant Energy Transfer (CET) respectively, together with the desired number of cuts.</li>
+<li style="list-style-type: '2) ';">Alternatively, the energies of the desired cuts can be specified as lists in the files udex.inp (user defined excitations) udem.inp (user defined emissions)</li>
+</ol>
+<p>For example if in udex.inp one specifies:</p>
+<pre><code>872.5 874.2</code></pre>
+<p>and for the cuts along Energy Transfer axis one just specify -udw3</p>
+<pre><code>orca_mapspc test.el_inel.rocis.rixssoc RIXS -x0871 -x1876 -x2-1 -x34 -w0.4 -g0.4 -l -n125 -m125 -dx20 -eaxis1 -udw3</code></pre>
+<h2>Then at the end one gets:</h2>
+<pre><code>Making the specified cuts (2) at constant Excitation Energy axis... Writing file: test.el_inel.rocis.rixssoc_872.50.rxes_vs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_872.50.rxes_fs.dat ...Done</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Writing file: test.el_inel.rocis.rixssoc_874.20.rxes_vs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_874.20.rxes_fs.dat ...Done Done Making the specified cuts (3) at constant Emission/Energy Transfer axis... Writing file: test.el_inel.rocis.rixssoc_-1.00.xas_vs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_-1.00.xas_fs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_1.50.xas_vs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_1.50.xas_fs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_4.00.xas_vs.dat ...Done Writing file: test.el_inel.rocis.rixssoc_4.00.xas_fs.dat ...Done Done All Done ---------------------------------------------------------------------------↪ → ------</code></pre>
+<p>The files *_rxes_fs.dat are RXES spectra containing all individual contributions from all Final states together with the Direct, the Total and the Interference contributions at the given constant Incident Energy.</p>
+<p>Similarly, the *_rxes_vs.dat are RXES spectra containing individual contributions of the Intermediate states, together with the Direct the Total and the Interference contributions at the given constant Incident Energy</p>
+<p>Likewise, the respective *_xas_fs.dat and *_xas_vs.dat are XAS type spectra with individual contributions at a given constant Emission or Energy transfer Energy</p>
+<p>These files are Energy vs Intensity files and read like:</p>
+<pre><code>1) for *fs.dat X S1( 0- 0) S2( 01) DIRECT TOT INTERFERENCE 2) for *vs.dat X S1( 45) S2( 47) DIRECT TOT INTERFERENCE</code></pre>
+<p>In the first case S -1(0-0) represents the individual contribution of a given Ground-Final state pair. The numbering follows the numbering of the output file e.g.:</p>
+<pre><code>Eigenvalues: cm-1 eV Boltzmann populations at T = 300.000 K 0: 0.0000 0.0000 3.44e-01 1: 8.3818 0.0010 3.31e-01</code></pre>
+<p>Hence, in this case S -1 represents the elastic scattering intensity.</p>
+<p>In the second case S -1(45) represents the individual contribution of a given Intermediate state.</p>
+<pre><code>44: 66918.6071 8.2968 1.43e-140 45: 6996678.8061 867.4775 0.00e+00 46: 6996693.0276 867.4793 0.00e+00</code></pre>
+<p>In this case S -1 represents the intensity contribution of the first Intermediate state.</p>
+<p>Starting from ORCA 4.2 in every RIXS requested calculation the Off resonant XES spectrum is automatically generated in every RIXS requested calculation.</p>
+<pre><code>----------------------------------------------------------------------------------ROCIS RIXS SPECTRUM ----------------------------------------------------------------------------------Making the RIXS data files for Inelastic and Elastic Scattering Ground State: 1 Intermediate States: 28 Final States: 588</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>The RIXS cross section will be generated from: 589 Ground-Final State Pairs and 28 Intermediate States/Pair The Off-Resonance XES spectrum will be printed Calculating Intensities... 10% done 20% done 30% done 40% done 50% done 60% done 70% done 80% done 90% done 100% done Printing the XES spectrum and Storing the files... -----------------------------------------------------------------------------------↪ → --X-RAY EMISSION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → --Transition Energy INT TX TY TZ (eV) (fosc) (au) (au) (au) -----------------------------------------------------------------------------------↪ → --1 589 -> 0 6403.377 0.000000000721 0.00000 0.00000 0.00000 2 590 -> 0 6403.380 0.000000000083 -0.00000 0.00000 0.00000 3 591 -> 0 6403.685 0.000873238810 0.00236 0.00000 0.00000 4 592 -> 0 6404.766 0.000000000154 0.00000 0.00000 0.00000 5 593 -> 0 6408.288 0.000000006850 -0.00001 0.00000 0.00000 6 594 -> 0 6408.295 0.000034710300 -0.00047 0.00000 0.00000 ... 16490 614 -> 588 6387.989 0.000000000000 0.00000 0.00000 0.00000 16491 615 -> 588 6388.222 0.000000000000 0.00000 0.00000 0.00000 16492 616 -> 588 6388.881 0.000000000000 0.00000 0.00000 0.00000 All Done ----------------------------------------------------------------------------------</code></pre>
+<p>Hence also the myfile-rixs.out file can also be processed with the orca_mapspc to generate the respective XES spectra:</p>
+<pre><code>orca_mapspc myfile_rixs.out XES/XESSOC -x06000 -x16500 -w2.0 -eV -n10000</code></pre>
+<h2>5.7.5 ROCIS Magnetic Properties</h2>
+<p>Several magnetic properies are availiable in the ROCIS method Including g-tensors (G-Matrix), zero field splittings (ZFS), hyperfine couplings (HFCs) and electric field gradients (EFGs).</p>
+<p>The g-tensors as well as the zfs are calculated on the basis of the Effective Hamiltonian as well in the sum over states (SOS) framework. HFCs are calculated in the SOS framework while EFGs are calculated as expectation values. Please consult also the respective discussion in the MRCI chapter (section Multireference Configuration Interaction and Pertubation Theory (uncontracted) )</p>
+<pre><code>... DoHeff true # Requests calculation of G-tenosrs and ZFS # in the effective Hamiltonian framework DoEPR true # Requests calculation of G-tenosrs, ZFS and HFCs # in the Sum over states (SOS) framework</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>AtensorNuc 0 # Nuclei to account for the HFCs calculation NAtensors 1 # How many Nuclei are included in the HFCs calculation ATensor 0 # Nucleus to calculate HFCs and EFGs NDoubGtensor 1 # Kramers doublets to account for the g tensor calculations ...</code></pre>
+<p>This will enter the calculation in the ROCIS Spin Hamiltonian section</p>
+<pre><code>--------------------------------------------------------ROCIS SPIN HAMILTONIAN PROPERTIES --------------------------------------------------------</code></pre>
+<h2>5.7.6 Natural Transition Orbitals/ Natural Difference Orbitals</h2>
+<p>Likewise to CIS and TD-DFT (section Natural Transition Orbitals ) The nature of the calculated excited states in ROCIS and DFT/ROCIS can be analyzed by using the Natural Transition Orbitals (NTO) or Natural Difference Orbitals (NDO) machineries.[658]</p>
+<ul>
+<li style="list-style-type: '· ';">The NTO analysis is based on the transition density between ground and excited states. Hence is valid for singly excited states and for states of the same multiplicity.</li>
+<li style="list-style-type: '· ';">The NDO analysis on the otherhand is somewhat more flexible in this respect as it is based on the difference density between ground and excited states.</li>
+<li style="list-style-type: '· ';">Presently, only one analysis (NTO or NDO) can be performed at a time while when both flags are on the NTO analysis switches off.</li>
+</ul>
+<p>To request for NTOs or NDOs the user needs to provide which states are to be calculated:</p>
+<pre><code>DoNTO true NTOStates = 1,2,3,4,5,6,7,8,9,10,13,14,15 DoNDO true NDOStates = 1,2,3,4,5,6,7,8,9,10,13,14,15</code></pre>
+<h2>Which gives:</h2>
+<pre><code>------------------------------------------NATURAL TRANSITION ORBITALS FOR STATE 14 ------------------------------------------done Solving eigenvalue problem for the Occupied space ... done Solving eigenvalue problem for the Acceptor space ... done Natural Transition Orbitals were saved in nto.14.nto Threshold for printing occupation numbers 1.0e-04 E= 25.447756 au 692.469 eV 5585137.0 cm**-1 49[0] -> 46[1] : n= 0.39056909 48[0] -> 47[1] : n= 0.08619374 47[0] -> 48[1] : n= 0.00441125</code></pre>
+<pre><code>-------------------------------------------------NATURAL DIFFERENCE ORBITALS FOR STATE 14 -----------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<table><caption><div class="caption">Table 5.9: %rocis block input keywords.</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>DoGenROCIS</td><td>true</td><td>Requests the GS-ROCIS method (default: false ).</td></tr><tr><td>ReferenceMult</td><td>1</td><td>Sets the multiplicity for the reference CSF for the GS-ROCIS method.</td></tr><tr><td>NRoots</td><td>5</td><td>The number of desired roots.</td></tr><tr><td>MaxDim</td><td>25</td><td>Davidson expansion space = MaxDim * NRoots.</td></tr><tr><td>MaxIter</td><td>100</td><td>Maximum CI Iterations.</td></tr><tr><td>NGuessMat</td><td>512</td><td>The dimension of the guess CI matrix.</td></tr><tr><td>ETol</td><td>1e-6</td><td>Energy convergence tolerance.</td></tr><tr><td>RTol</td><td>1e-6</td><td>Residual Convergence tolerance.</td></tr><tr><td>MaxCore</td><td>4096</td><td>Maximum memory used by the ROCIS moduleduring the calculation in MB.</td></tr><tr><td>EWin =</td><td>-5,5-5,5</td><td>Energy Window that defines orbital excitation space.</td></tr><tr><td>OrbWin =</td><td>6,8,0,2000</td><td>Orbital Window that defines orbital excitation space (overrides EWin).</td></tr><tr><td>DoLoc</td><td>true</td><td>Switch for localization of Donor orbital space (default: false ).</td></tr><tr><td>LocOrbWin =</td><td>6,11</td><td>Obital window for the localization scheme.</td></tr><tr><td>LocMet</td><td>PipekMezey PM</td><td>Chooses the Pipek Mezey localization method.</td></tr><tr><td></td><td>FosterBoys FB</td><td>Chooses the Foster Boys localization method.</td></tr><tr><td>DoPNO</td><td>true</td><td>Performs the calculation in the PNO-ROCIS framework (default: false ).</td></tr><tr><td>TCutPNO</td><td>1e-16</td><td>Threshold for PNO selection.</td></tr><tr><td>XASelems</td><td>0,2</td><td>Selects from which atoms are the core MOs going to be used in the PNO procedure.</td></tr><tr><td>LocMet</td><td>PipekMezey PM FosterBoys FB</td><td>Chooses the Pipek Mezey localization method. Chooses the Foster Boys localization method.</td></tr><tr><td>DoNTO</td><td>true</td><td>Request Natural Transition Orbital Analysis (default: false )</td></tr><tr><td>NTOThresh</td><td>1e-4</td><td>Threshold for printing occupation numbers.</td></tr><tr><td>NTOStates =</td><td>1,2</td><td>Array input for states to be taken into account.</td></tr><tr><td>DoNDO</td><td>true</td><td>Request Natural Difference Orbital Analysis (default: false ) (if true it switches off the NTO analysis)</td></tr><tr><td>NDOThresh</td><td>1e-4</td><td>Threshold for printing occupation numbers.</td></tr><tr><td>NDOStates =</td><td>1,2</td><td>Array input for states to be taken into account.</td></tr><tr><td>PrintLevel</td><td>3</td><td>Controls the amount of output produced during the calculation.</td></tr><tr><td>Do_is</td><td>true</td><td>Include DOMO-&gt;SOMO excitations.</td></tr><tr><td>Do_sa</td><td>true</td><td>Include SOMO-&gt;Virtual excitation.</td></tr><tr><td>Do_ia</td><td>true</td><td>Include DOMO-&gt;Virtual excitations.</td></tr><tr><td>Do_ista</td><td>true</td><td>Include DOMO-&gt;SOMO excitations coupled to SOMO-&gt;Virtual excitations with s = t.</td></tr><tr><td>Do_isa</td><td>true</td><td>Include DOMO-&gt;SOMO excitations coupled to SOMO-&gt;Virtual excitations with s = t. (only used in the original ROCIS implementation)</td></tr><tr><td>DoLowerMult</td><td>true</td><td>Switch for excitation with S&#x27;=S-1.</td></tr><tr><td>Do_LM_is</td><td>true</td><td>Include DOMO-&gt;SOMO excitations with S&#x27;=S-1.</td></tr><tr><td>Do_LM_sa</td><td>true</td><td>Include SOMO-&gt;Virtual excitations with S&#x27;=S-1.</td></tr><tr><td>Do_LM_ia</td><td>true</td><td>Include DOMO-&gt;Virtual excitations with S&#x27;=S-1.</td></tr><tr><td>Do_LM_ss</td><td>true</td><td>Include SOMO-&gt;SOMO excitations with S&#x27;=S-1.</td></tr><tr><td>DoHigherMult</td><td>true</td><td>Switch for excitations with S&#x27;=S+1.</td></tr><tr><td>Do_HM_is</td><td>true</td><td>Include DOMO-&gt;SOMO excitations with S&#x27;=S+1.</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td colspan="10">done Solving eigenvalue problem for the Occupied space ... done Solving eigenvalue problem for the Acceptor space ... done</td></tr><tr><td>E= 49[0]</td><td>25.447756 -&gt;</td><td>au 46[1]</td><td>:</td><td>692.469 n=</td><td>eV 5585137.0 0.81173217</td><td></td><td></td><td></td><td></td></tr><tr><td>48[0]</td><td>-&gt;</td><td>47[1]</td><td>:</td><td>n=</td><td>0.17903699</td><td></td><td></td><td></td><td></td></tr><tr><td>47[0]</td><td>-&gt;</td><td>48[1]</td><td>:</td><td>n=</td><td>0.01165859</td><td></td><td></td><td></td><td></td></tr><tr><td>46[0]</td><td>-&gt;</td><td>49[1]</td><td>:</td><td>n=</td><td>0.00922738</td><td></td><td></td><td></td><td></td></tr><tr><td>45[0]</td><td>-&gt;</td><td>50[1]</td><td>:</td><td>n=</td><td>0.00112567</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>For closed shell cases the orbitals are save in similar way to TDDFT and CIS (section Natural Transition Orbitals ). In the case of open shell cases for convenience donor orbitals are saved with orbital operator 0 while acceptor orbitals with orbital operator 1. This needs to be specified in the orca_plot program and should not be confused with the spin-up and spin-down orbitals in the UHF and UKS cases.</p>
+<h2>5.7.7 Keyword List</h2>
+<p≯</p>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 5.9 - continued from previous page</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>Do_HM_sa</td><td>true</td><td>Include SOMO-&gt;Virtual excitations with S&#x27;=S+1.</td></tr><tr><td>Do_HM_ia</td><td>true</td><td>Include DOMO-&gt;Virtual excitations with S&#x27;=S+1.</td></tr><tr><td>DoCD</td><td>true</td><td>Request circular dichroism calculation.</td></tr><tr><td>DoDipoleLength</td><td>true</td><td>Request the use of electric moments in a length formulation (default: false ).</td></tr><tr><td>DoDipoleVelocity</td><td>true</td><td>Request the use of electric moments in a velocity formulation (default: false ).</td></tr><tr><td>DoFullSemiclassical</td><td>true</td><td>Request the calculation of complete semiclassical multipolar moments (default: false ).</td></tr><tr><td>DecomposeFosc</td><td>true</td><td>Request the decomposition of the oscillator strengths in a multipolar expansion. (default: false )</td></tr><tr><td>RIXS</td><td>true</td><td>Requests a RIXS calculation (default: false ).</td></tr><tr><td>RIXSSOC</td><td>true</td><td>Perform a RIXS calculation on the basis of relativistically corrected states (default: false ).</td></tr><tr><td>Elastic</td><td>true</td><td>Include the elastic line in the generation of the RIXS or RIXSSOC spectra (default: false ).</td></tr><tr><td>PlotDiffDens =</td><td>1,2</td><td>Array input for plotting difference densities of CI roots to the ground state.</td></tr><tr><td>PlotSOCDiffDens =</td><td>1,2</td><td>Array input for plotting difference densities of SOC states to the ground state.</td></tr><tr><td>TPrint</td><td>0.01</td><td>Threshold for contributions to CI and SOC states to be printed.</td></tr><tr><td>rel</td><td></td><td>Signals the begining of the relativistic block.</td></tr><tr><td>DoSOC</td><td>true</td><td>Requests the inclusion of spin-orbit coupling (part of the rel block).</td></tr><tr><td>DoMCD</td><td>true</td><td>Requests the calculation ofMCD spectra (part of the rel block).</td></tr><tr><td>B</td><td>30000</td><td>Sets external magnetic field (part of the rel block).</td></tr><tr><td>Temperature</td><td>5</td><td>Sets the temperature for the SOC spectra (part of the rel block).</td></tr></tbody></table>
+<h2>5.8 Excited States via MCRPA</h2>
+<p>The MCRPA method is a synonym for CASSCF linear response theory. Having converged CASSCF calculations for the electronic ground state, you can employ ORCA's MCRPA implementation to compute</p>
+<ul>
+<li style="list-style-type: '· ';">excitation energies</li>
+<li style="list-style-type: '· ';">oscillator strengths (intensities of the UV/Vis spectrum)</li>
+<li style="list-style-type: '· ';">rotatory strengths (intensities of the ECD spectrum)</li>
+<li style="list-style-type: '· ';">core excitation energies to simulate XAS spectra primarily for open-shell and strongly correlated systems.</li>
+</ul>
+<p>Before running these calculations make sure you are familiar with CASSCF calculations in general.</p>
+<h2>5.8.1 General Description</h2>
+<p>MCRPA excitation energies and transition moments are computed from the poles and residues of the linear response function of CASSCF a wave function.[592, 593, 594] Those are determined from the generalized eigenvalue equations</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>that involve the second-derivative matrices E (2) and S (2) . The eigenvalues ω correspond to the electronic excitation energies. The second-derivative matrices E (2) and S (2) have a paired structure as both kind of operators that express electronic excitation and de-excitations are involved:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The eigenvalue equations above are valid for all variational wave functions methods, e.g. DFT , HF , CASSCF etc. The only difference is the operator manifold and the time-independent Hamiltonian ˆ H that is used. For the CASSCF linear response and eigen value equations, the super matrices A , B , Σ , and ∆ have the following structure:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>There are two types of operators for describing electronic excitations, i.e. orbital excitation q † i and de-excitation operators q i ,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>as well as so called state-transfer operators</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<p>Intensities of the (UV/Vis) absorption and electronic circular dichroism (ECD) spectra are obtained from the transition moments. Transition moments are easily computed as dot product</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>from the eigenvectors X and Y of root f and the electronic gradients C and D of the dipole operators ˆ V .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The eigenvalue equations are solved iteratively by a customized version of the Davidson algorithm that simultaneously determines the N lowest lying roots. The most time of the calculation is spent on the transformation of trial vectors that contain an orbital and CI coefficient part with the electronic Hessian matrix E (2) . The working equations are very similar to those of the CASSCF electronic gradient that is computed when minimizing the CASSCF ground state energy. Further technical aspects are described in subsection Computational Aspects .</p>
+<figure><figcaption><div class="caption">Fig. 5.26: Structure and frontier orbitals of Ni(II) hexaquo complex.</div></figcaption></figure>
+<p>As a show case example, the lowest valence excitation energies of the octahedrally coordinated Ni(II) hexaquo complex are computed with MCRPA (for structure and frontier orbitals see Fig. Fig. 5.26). We include the 3d and 4d Ni orbitals in the active space and converge the CASSCF triplet ground state, first. Then, the MCRPA calculation is launched. It is only necessary to specify the number of desired roots NRoots .</p>
+<pre><code>%casscf nel 10 # number of active electrons norb 10 # number of active orbitals nroots 1 # only the ground state mult 3 # triplet multiplicity end %mcrpa NRoots 15 # number of roots / excited states end</code></pre>
+<p>Note that in contrast to state-averaged CASSCF, the MCRPA excitation energies do not dependent on NRoots as for TDDFT or EOM-CC calculations.</p>
+<p>It is also possible to omit the orbital part of MCTDA or MCRPA calculations by toggling the DoOrbResp false flag. For such calculation, the CASCI excitation energies are obtained. Note that for such MCRPA calculations the orbitals were optimized for the CASSCF ground state.</p>
+<h2>5.8.2 Analyzing Transitions</h2>
+<p>After convergence, the most significant contributions of the excitation / eigen vector is given for each state. When comparing with the ground state CI coefficients</p>
+<pre><code>---------------------------------------------CAS-SCF STATES FOR BLOCK 0 MULT= 3 NROOTS= 1 ---------------------------------------------ROOT 0: E= -1962.8698444660 Eh 0.98088 [ 0]: 2221100000</code></pre>
+<p>we see that the lowest excited state is dominated by a transition from active orbital 3 (dyz) to active orbitals 4 and 5 (mixture of dz2 and dx2-y2).</p>
+<pre><code>STATE 1 3A : E= 0.033027 au 0.899 eV 7248.5 cm**-1 (+) CI 0.72808 [ 21]: 2212100000 (+) CI 0.25245 [ 27]: 2211200000</code></pre>
+<p>The (+) denotes the upper component of the eigenvectors.</p>
+<p>By default the largest elements of the CI eigenvector are printed in the configuration basis. By changing PrintWF to DET or CSF you can also print that in the determinant or configuration state function (CSF) basis, respectively.</p>
+<p>Note that the analysis of CI coefficient depends also on the choice of active orbitals which are chosen to be natural orbitals (default option).</p>
+<p>There are also transitions dominated by single-electron excitations represented by the orbital part of the eigenvector. In case of the Ni(II) hexaquo complex those are primarily Rydberg states. Below find the most significant orbital pairs (upper (+) and lower (-) component) for the 24th excited state.</p>
+<pre><code>STATE 24 3A : E= 0.469596 au 12.778 eV 103064.3 cm**-1 (+) I 24 ( 35) -> V 0 ( 49) : 0.01744 (c= 0.13206324) (+) I 26 ( 37) -> V 2 ( 51) : 0.02398 (c= -0.15485895) (+) I 24 ( 35) -> V 4 ( 53) : 0.02513 (c= 0.15853501) (+) A 0 ( 39) -> V 0 ( 49) : 0.26647 (c= -0.51620412) (+) A 7 ( 46) -> V 0 ( 49) : 1.55291 (c= 1.24615978) (+) A 0 ( 39) -> V 16 ( 65) : 0.11782 (c= -0.34324922) (+) A 7 ( 46) -> V 16 ( 65) : 0.73241 (c= 0.85580859) (-) I 0 ( 11) -> A 0 ( 39) : 0.05738 (c= 0.23954155)</code></pre>
+<h2>5.8.3 Natural Transition Orbitals</h2>
+<p>Rather than analyzing the sections of the excitation vectors directly, visualizing natural transition orbitals[594, 595] (NTO) can be very insightful. Since NTOs are obtained from a singular value decomposition of the MCRPA groundto-excited state (f) transition density matrices ρ 0 → f pq , they are independent of any unitary transformation of the molecular orbital (inactive, active, and virtual) sections and, thus, independent of type of orbitals (canonical, localized, natural, etc.).</p>
+<p>As for TDDFT and ROCIS one obtains two sets of orbitals for each state that describe the donation (occupied and active) and acceptance (active and virtual) of an electron in the electronic transition. The orbital structure of ρ 0 → f pq for CASSCF wave functions is illustrated in Fig. 5.27.</p>
+<figure><figcaption><div class="caption">Fig. 5.27: Structure of MCRPA transition density matrix ρ 0 → f pq</div></figcaption></figure>
+<p>Note that the configuration part of the excitation vector contributes to the active-active block of ρ 0 → f pq and is thus respected.</p>
+<p>To compute NTOs, only the DoNTO flag in the input has to switched on ( DoNTO true ):</p>
+<pre><code>%mcrpa nroots 20 # number of roots DoNTO true # generate NTOs for converged roots NTOThresh 5e-5 # NTO selection threshold end</code></pre>
+<p>This will compute all NTOs with a singular value larger then the NTOThresh threshold for ALL roots.</p>
+<pre><code>------------------------------------------------NATURAL TRANSITION ORBITALS FOR STATE 1 3A ------------------------------------------------STATE 1 3A : E= 0.033027 au 0.899 eV 7248.5 cm**-1 Threshold for printing occupation numbers 1.0000e-03 0 : n= 0.99567919 1 : n= 0.02731085 2 : n= 0.02231787 ... => Natural Transition Orbitals (donor ) were saved in ni-II-h2o-6-cas-8-10-mcrpa. ↪ → mcrpa.1-3A_nto-donor.gbw => Natural Transition Orbitals (acceptor) were saved in ni-II-h2o-6-cas-8-10-mcrpa. ↪ → mcrpa.1-3A_nto-acceptor.gbw</code></pre>
+<p>For the above example, the most important (controlled by NTOThresh ) donating and accepting NTOs of state 1 are written to the gbw -type files. The NTOs can be visualized with the orca_plot program (see Sec. orca_plot ), for the donating NTOs</p>
+<pre><code>orca_plot ni-II-h2o-6-cas-8-10-mcrpa.mcrpa.1-3A_nto-donor.gbw -i</code></pre>
+<p>and for the accepting NTOs</p>
+<pre><code>orca_plot ni-II-h2o-6-cas-8-10-mcrpa.mcrpa.1-3A_nto-acceptor.gbw -i</code></pre>
+<p>The NTOs are ordered according to their singular value in descending order as given in the output, starting with index 0 for the most significant NTO pair.</p>
+<p>The most dominant NTO pairs (index 0) for the three lowest valence 3Tg transitions of Ni(H2O)62+ are given in Fig. Fig. 5.28.</p>
+</div>
+</body>
+</html>

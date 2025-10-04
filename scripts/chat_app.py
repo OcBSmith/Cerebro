@@ -1,5 +1,6 @@
 import argparse
 import os
+import re
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -29,19 +30,34 @@ def load_qwen(model_id: str):
     local_path = Path(model_id) if os.path.isdir(model_id) else None
     src = str(local_path) if local_path else model_id
     tokenizer = AutoTokenizer.from_pretrained(src, use_fast=True)
+
+    # Preferir GPU (fp16) y caer a CPU (fp32) automáticamente si falla
+    force_cpu = os.getenv("FORCE_CPU", "0").lower() in ("1", "true", "yes")
+    if not force_cpu:
+        try:
+            model = AutoModelForCausalLM.from_pretrained(
+                src,
+                torch_dtype=torch.float16,
+                device_map="auto",
+            )
+            return tokenizer, model
+        except Exception as e:
+            print(f"[load_qwen] Fallback a CPU por error en GPU: {e}")
+
+    # CPU (estable)
     model = AutoModelForCausalLM.from_pretrained(
         src,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto",
+        torch_dtype=torch.float32,
+        device_map="cpu",
     )
     return tokenizer, model
-
 
 def format_prompt(system_prompt: str, history: List[Tuple[str, str]], user_msg: str, tokenizer) -> List[dict]:
     # Build chat markup for models supporting chat templates
     messages: List[dict] = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
+    sys_text = system_prompt.strip() if system_prompt else ""
+    if sys_text:
+        messages.append({"role": "system", "content": sys_text})
     for h_user, h_assistant in history:
         if h_user:
             messages.append({"role": "user", "content": h_user})
@@ -49,40 +65,269 @@ def format_prompt(system_prompt: str, history: List[Tuple[str, str]], user_msg: 
             messages.append({"role": "assistant", "content": h_assistant})
     messages.append({"role": "user", "content": user_msg})
 
-    if hasattr(tokenizer, "apply_chat_template"):
-        # return string prompt ready for generation
-        prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        return prompt_text
-    else:
-        # Fallback: simple concatenation
-        sys = f"[SYSTEM]\n{system_prompt}\n\n" if system_prompt else ""
-        chat_lines = []
-        for u, a in history:
-            if u:
-                chat_lines.append(f"[USER] {u}")
-            if a:
-                chat_lines.append(f"[ASSISTANT] {a}")
-        chat_lines.append(f"[USER] {user_msg}\n[ASSISTANT]")
-        return sys + "\n".join(chat_lines)
+    # If the tokenizer supports chat templates and it's not Gemma, try with 'system'; if it fails, fold system into user
+    tok_name = getattr(tokenizer, "name_or_path", "").lower()
+    if hasattr(tokenizer, "apply_chat_template") and ("gemma" not in tok_name):
+        try:
+            prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            return prompt_text
+        except Exception:
+            # Some templates (e.g., Gemma) do not support 'system' role. Fold system into first user message.
+            folded_history: List[dict] = []
+            # Build folded conversation without explicit system role
+            if sys_text:
+                first_user = f"<<SYS>>\n{sys_text}\n<</SYS>>\n\n{user_msg}"
+            else:
+                first_user = user_msg
+            for h_user, h_assistant in history:
+                if h_user:
+                    folded_history.append({"role": "user", "content": h_user})
+                if h_assistant:
+                    folded_history.append({"role": "assistant", "content": h_assistant})
+            folded_messages = folded_history + [{"role": "user", "content": first_user}]
+            try:
+                prompt_text = tokenizer.apply_chat_template(folded_messages, tokenize=False, add_generation_prompt=True)
+                return prompt_text
+            except Exception:
+                # Fall through to plain concatenation below
+                pass
+    # Plain concatenation fallback (works for Gemma and others if templates fail)
+    folded_user = user_msg
+    if sys_text:
+        folded_user = f"<<SYS>>\n{sys_text}\n<</SYS>>\n\n{user_msg}"
+    chat_lines = []
+    for u, a in history:
+        if u:
+            chat_lines.append(f"[USER] {u}")
+        if a:
+            chat_lines.append(f"[ASSISTANT] {a}")
+    chat_lines.append(f"[USER] {folded_user}\n[ASSISTANT]")
+    return "\n".join(chat_lines)
 
 
 def build_system_prompt(spanish_only: bool, rag_context: Optional[str]) -> str:
     parts = []
     if spanish_only:
         parts.append(
-            "Eres un asistente técnico. RESPONDE SIEMPRE EN ESPAÑOL. "
-            "Si la pregunta no está en español, tradúcela y responde en español."
+            "Eres un asistente t�cnico. RESPONDE SIEMPRE EN ESPA?'OL. "
+            "Si la pregunta no est� en espa�ol, trad�cela y responde en espa�ol."
         )
     else:
-        parts.append("Eres un asistente técnico.")
+        parts.append("Eres un asistente t�cnico.")
+
+    # Permanent tone/style guidance
+    parts.append(
+        "Responde con tono cordial y did�ctico, usando p�rrafos cortos y listas claras. "
+        "Incluye un breve 'Resumen' y 'Siguientes pasos'. "
+        "Evita tecnicismos innecesarios; si son necesarios, def�nelos brevemente."
+    )
     if rag_context:
         parts.append(
-            "Usa únicamente la información del siguiente contexto cuando contestes; "
-            "si falta información, dilo explícitamente.\n\n[Contexto]\n" + rag_context
+            "Usa �nicamente la informaci�n del siguiente contexto cuando contestes; "
+            "si falta informaci�n, dilo expl�citamente.\n\n[Contexto]\n" + rag_context
         )
     return "\n\n".join(parts)
 
 
+def maybe_enhance_prompt_for_chem(
+    user_msg: str,
+    system_prompt: str,
+    force_zmat: bool = False,
+    wants_input_only: bool = False,
+) -> str:
+    """If the user asks for ORCA/DLPNO inputs, request strict multi-line code block formatting."""
+    msg = user_msg.lower()
+    trigger = any(k in msg for k in ["orca", "dlpno", "ccsd(t)", "input orca"])  # basic heuristic
+    if not trigger and not force_zmat:
+        return system_prompt
+    extra = (
+        "\n\nAl dar archivos de entrada de qu�mica computacional (por ejemplo ORCA), "
+        "formatea SIEMPRE como bloque de c�digo con saltos de l�nea exactos. "
+        "Estructura t�pica ORCA:\n"
+        "- L�nea de comandos que empieza con '!'.\n"
+        "- Bloques de secci�n como '%mdci' ... 'end' en l�neas separadas.\n"
+        "- Bloque de geometr�a: '* xyz charge multiplicity' y coordenadas una por l�nea, luego '*' de cierre.\n"
+        "NO devuelvas todo en una sola l�nea. Usa bloque ```text ... ```\n"
+    )
+    # If user requests a matrix or checkbox forces it, ask for Z-matrix formatting explicitly
+    if force_zmat or any(k in msg for k in ["matriz", "z-matrix", "zmat"]):
+        extra += (
+            "\nSi el usuario pide 'una matriz' del sistema, incluye adem�s una secci�n en formato Z-matrix "
+            "(internas) usando '* zmat' con variables en l�neas separadas y el '*' de cierre."
+        )
+    # If an ORCA input is explicitly requested, require ONLY an ORCA input block
+    if wants_input_only:
+        extra += (
+            "\nIMPORTANTE: Si el usuario pide un 'input' o 'archivo de entrada' para ORCA, "
+            "devuelve ?sNICAMENTE un bloque de c�digo con el archivo de entrada ORCA v�lido, sin comentarios ni explicaciones, "
+            "en un bloque ```text ...``` y con saltos de l�nea exactos. No devuelvas c�digo Python ni pseudo-c�digo."
+        )
+    # Enforce the canonical block order shown by the user screenshot
+    extra += (
+        "\nSigue este ESQUELETO y orden de bloques exactamente (si aplica):\n"
+        "1) L�nea '! ...'\n"
+        "2) %pal / end\n"
+        "3) %maxcore / end\n"
+        "4) * xyz charge multiplicity  (coordenadas una por l�nea)  *\n"
+        "5) %scf / end\n"
+        "6) %output / end\n"
+    )
+    return system_prompt + extra
+
+
+def format_orca_input_if_needed(user_msg: str, text: str) -> str:
+    """Best-effort formatter when the model collapsed ORCA input into one line.
+    Adds line breaks around '!' header, '%' blocks, 'end', and geometry '* xyz'.
+    Only triggers if message mentions ORCA/DLPNO and the output has very few newlines.
+    """
+    msg_l = user_msg.lower()
+    if not ("orca" in msg_l or "dlpno" in msg_l or "ccsd(" in msg_l or "ccsd(t)" in msg_l):
+        return text
+    # Work on the inner code block if present
+    block = extract_orca_block_if_present(text)
+    s = block.strip()
+    if s.count("\n") >= 4:
+        # Ensure fenced output
+        return f"```text\n{s}\n```"
+    # Normalize excessive spaces
+    s = re.sub(r"[\t ]+", " ", s)
+    # Insert newline before '%' and before 'end'
+    s = re.sub(r"\s+%", "\n%", s)
+    s = re.sub(r"\s+end\b", "\nend", s, flags=re.I)
+    # Ensure command line starting with '!'
+    if "!" in s and not s.startswith("!"):
+        idx = s.find("!")
+        s = s[:idx] + "\n" + s[idx:]
+    # If starts with '!' and rest is flat, insert newline after first segment
+    if s.startswith("!") and "\n" not in s.split("\n", 1)[0]:
+        s = re.sub(r"^!(.+?)\s+", r"!\1\n", s, count=1)
+    # Geometry block: '* xyz' on its own line
+    s = s.replace(" * xyz", "\n* xyz")
+    # Closing star on its own line (best effort)
+    s = s.replace(" * ", "\n* ")
+    # After 'end' ensure newline
+    s = s.replace("end *", "end\n*")
+
+    # Regex: insert newline before common ORCA keywords/sections and flags
+    s = re.sub(
+        r"\s+(VeryTightSCF|TightSCF|NormalPNO|NORMALPNO|RIJCOSX|PAL\d*|PAL|def2\-[A-Za-z0-9\-]+|def2/[A-Za-z0-9\-]+|NROOTS|nroots|DT0L|DTol|PNO\w*|FragInter|%[A-Za-z]+|\*\s+xyz)\b",
+        r"\n\1",
+        s,
+        flags=re.I,
+    )
+
+    # If still too few lines, split remaining long segments after ':' or ';' or by spaces heuristically
+    if s.count("\n") < 4 and s.startswith("!"):
+        # break after functional/basis tokens one-per-line
+        s = s.replace(" !", "! ")
+        head, rest = s.split("\n", 1) if "\n" in s else (s, "")
+        head = re.sub(r"\s+(def2\-[A-Za-z0-9\-]+|def2/[A-Za-z0-9\-]+)", r"\n\1", head)
+        head = re.sub(r"\s+(VeryTightSCF|TightSCF|PAL\d*|PAL)\b", r"\n\1", head)
+        s = head + ("\n" + rest if rest else "")
+
+    # Ensure at least 6 lines by adding blank lines between sections as needed
+    lines = [ln.rstrip() for ln in s.splitlines()]
+    if len(lines) < 6:
+        # try to expand % sections and geometry markers to their own lines
+        expanded = []
+        for ln in lines:
+            # split multiple %sections on same line
+            parts = re.split(r"(?=(?:%[A-Za-z]+|\*\s+xyz\b|end\b))", ln)
+            for p in parts:
+                if p:
+                    expanded.append(p.strip())
+        lines = [l for l in expanded if l]
+    # If still too short, split header tokens aggressively
+    if len(lines) < 5 and lines and lines[0].lstrip().startswith("!"):
+        head = lines[0].strip()
+        # keep leading '!'
+        head_tokens = head[1:].strip().split()
+        new_head = [head.split()[0]] if head.startswith("!") else ["!"]
+        new_head += head_tokens
+        lines = new_head + lines[1:]
+    # If still insufficient, inject a minimal safe skeleton
+    if len(lines) < 5:
+        lines = [
+            "! PBE0 def2-SVP TightSCF",
+            "%pal",
+            " nprocs 1",
+            "end",
+            "* xyz 0 1",
+            "O 0.000000 0.000000 0.000000",
+            "H 0.000000 0.000000 0.960000",
+            "H 0.000000 0.920000 -0.240000",
+            "*",
+        ]
+    s = "\n".join(lines)
+    # Always wrap in code fence for display
+    return f"```text\n{s}\n```"
+
+
+def wants_orca_input(user_msg: str) -> bool:
+    msg = user_msg.lower()
+    return (
+        ("orca" in msg or "dlpno" in msg)
+        and any(k in msg for k in ["input", "archivo de entrada", "inp", "plantilla", "ejemplo de input"])
+    )
+
+
+def extract_orca_block_if_present(text: str) -> str:
+    """If there is a fenced code block, return the one that looks like ORCA input."""
+    import re
+    blocks = re.findall(r"```[a-zA-Z0-9]*\n([\s\S]*?)```", text)
+    for b in blocks:
+        bb = b.strip()
+        if bb.startswith("!") or "* xyz" in bb or bb.startswith("%"):
+            return bb
+    return text
+
+
+def dedupe_lines(text: str) -> str:
+    lines = [ln.rstrip() for ln in text.splitlines()]
+    out = []
+    prev = None
+    for ln in lines:
+        if ln != prev:
+            out.append(ln)
+            prev = ln
+    return "\n".join(out)
+
+def safe_generate(model, inputs, gen_kwargs):
+    import os, gc, torch
+    from transformers import AutoModelForCausalLM
+
+    try:
+        with torch.inference_mode():
+            return model.generate(**inputs, **gen_kwargs)
+    except Exception as e:
+        # Fallback: recarga el modelo en CPU float32 y reintenta
+        print(f"[safe_generate] GPU error, hard-fallback reload on CPU: {e}")
+        try:
+            src = getattr(getattr(model, "config", None), "_name_or_path", None)
+            if not src:
+                # último recurso: usa repr del config
+                src = str(model.config)
+            # liberar memoria GPU/estado
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
+            del model
+            gc.collect()
+            os.environ["CUDA_VISIBLE_DEVICES"] = ""  # evitar nuevas asignaciones CUDA
+            # mover inputs a CPU
+            inputs = {k: (v.cpu() if hasattr(v, "cpu") else v) for k, v in inputs.items()}
+            # recargar modelo en CPU
+            model_cpu = AutoModelForCausalLM.from_pretrained(
+                src,
+                torch_dtype=torch.float32,
+                device_map="cpu",
+            )
+            with torch.inference_mode():
+                return model_cpu.generate(**inputs, **gen_kwargs)
+        except Exception as e2:
+            print(f"[safe_generate] CPU reload failed: {e2}")
+            raise
 def generate(
     message: str,
     history: List[Tuple[str, str]],
@@ -92,8 +337,10 @@ def generate(
     temperature: float,
     top_p: float,
     top_k: int,
+    repetition_penalty: float,
     rag_enabled: bool,
     retriever,
+    force_zmat: bool,
 ) -> str:
     # Build RAG context if enabled
     rag_context = None
@@ -103,7 +350,7 @@ def generate(
         for n in nodes[:5]:
             text = n.get_text().strip()
             if len(text) > 600:
-                text = text[:600].rstrip() + " …"
+                text = text[:600].rstrip() + " ???"
             meta = n.metadata or {}
             title = meta.get("title") or ""
             if title:
@@ -113,6 +360,10 @@ def generate(
         rag_context = "\n---\n".join(snippets)
 
     system_prompt = build_system_prompt(spanish_only=True, rag_context=rag_context)
+    only_input = wants_orca_input(message)
+    system_prompt = maybe_enhance_prompt_for_chem(
+        message, system_prompt, force_zmat=force_zmat, wants_input_only=only_input
+    )
     prompt = format_prompt(system_prompt, history, message, tokenizer)
 
     inputs = tokenizer(prompt, return_tensors="pt")
@@ -124,45 +375,65 @@ def generate(
         "temperature": max(temperature, 1e-6) if temperature > 0 else 1.0,
         "top_p": top_p,
         "top_k": top_k,
+        "repetition_penalty": repetition_penalty,
         "eos_token_id": tokenizer.eos_token_id,
         "pad_token_id": tokenizer.eos_token_id,
+        "no_repeat_ngram_size": 3,
     }
 
-    with torch.inference_mode():
-        output_ids = model.generate(**inputs, **gen_kwargs)
+    output_ids = safe_generate(model, inputs, gen_kwargs)
     output_text = tokenizer.decode(output_ids[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
     # Simple cleanups
     output_text = output_text.strip()
+    # If user explicitly asked for an ORCA input, avoid accidental Python and try to extract the code block
+    if wants_orca_input(message):
+        if ("import " in output_text) or ("from " in output_text) or ("def " in output_text):
+            output_text = extract_orca_block_if_present(output_text)
+    output_text = format_orca_input_if_needed(message, output_text)
+    if not wants_orca_input(message):
+        output_text = dedupe_lines(output_text)
     return output_text
 
 
-def create_interface(tokenizer, model, rag_enabled: bool, retriever):
-    def _respond(message, history):
+def create_interface(tokenizer, model, rag_enabled: bool, retriever, model_id: str, embed_model_id: str):
+    # Controls
+    max_new_tokens = gr.Slider(minimum=64, maximum=2048, step=64, value=512, label="Max tokens respuesta")
+    temperature = gr.Slider(minimum=0.0, maximum=1.0, step=0.05, value=0.05, label="Temperature")
+    top_p = gr.Slider(minimum=0.0, maximum=1.0, step=0.05, value=0.85, label="Top-p")
+    top_k = gr.Slider(minimum=1, maximum=200, step=1, value=50, label="Top-k")
+    repetition_penalty = gr.Slider(minimum=1.0, maximum=2.0, step=0.01, value=1.15, label="Repetition penalty")
+    force_zmat = gr.Checkbox(value=False, label="Incluir Z-matrix si aplica")
+
+    def _respond(message, history, ui_max_new_tokens, ui_temperature, ui_top_p, ui_top_k, ui_rep_pen, ui_force_zmat):
         return generate(
             message=message,
             history=history or [],
             tokenizer=tokenizer,
             model=model,
-            max_new_tokens=512,
-            temperature=0.1,
-            top_p=0.9,
-            top_k=50,
+            max_new_tokens=int(ui_max_new_tokens),
+            temperature=float(ui_temperature),
+            top_p=float(ui_top_p),
+            top_k=int(ui_top_k),
+            repetition_penalty=float(ui_rep_pen),
             rag_enabled=rag_enabled,
             retriever=retriever,
+            force_zmat=bool(ui_force_zmat),
         )
+
+    # Examples must include values for each additional input, in order
+    examples = [
+        ["�Qu� es DLPNO-CCSD(T) en ORCA?", 512, 0.1, 0.9, 50, 1.08, False],
+        ["Dame un input m�nimo para DLPNO-CCSD(T)", 512, 0.1, 0.9, 50, 1.08, True],
+        ["Diferencias entre DLPNO y LPNO en ORCA 6.1", 512, 0.1, 0.9, 50, 1.08, False],
+    ]
 
     chat = gr.ChatInterface(
         fn=_respond,
-        title="Chat RAG (Qwen 0.5B Instruct)",
-        description=(
-            "Modelo: Qwen/Qwen2.5-0.5B-Instruct. Responde en español. "
-            + ("RAG activado: usa el índice LlamaIndex." if rag_enabled else "RAG desactivado: chat base.")
-        ),
-        examples=[
-            "¿Qué es DLPNO-CCSD(T) en ORCA?",
-            "Dame un input mínimo para DLPNO-CCSD(T)",
-            "Diferencias entre DLPNO y LPNO en ORCA 6.1",
-        ],
+        title=f"Chat RAG - {model_id}",
+        description=(f"Modelo chat: {model_id} | Embeddings: {embed_model_id}. Responde en espanol. "
+                     + ("RAG activado: usa el indice LlamaIndex." if rag_enabled else "RAG desactivado: chat base.")),
+        additional_inputs=[max_new_tokens, temperature, top_p, top_k, repetition_penalty, force_zmat],
+        examples=examples,
     )
     return chat
 
@@ -170,10 +441,10 @@ def create_interface(tokenizer, model, rag_enabled: bool, retriever):
 def main():
     parser = argparse.ArgumentParser(description="Gradio chat app con Qwen 0.5B y RAG opcional")
     parser.add_argument("--model-id", default="Qwen/Qwen2.5-0.5B-Instruct", help="HF model id")
-    parser.add_argument("--rag", action="store_true", help="Activar RAG con índice LlamaIndex")
-    parser.add_argument("--persist", default=str(DEFAULT_PERSIST), help="Directorio del índice LlamaIndex")
-    parser.add_argument("--embed-model", default="BAAI/bge-m3", help="Modelo de embeddings si RAG está activo")
-    parser.add_argument("--models-dir", default=None, help="Directorio local de modelos/caché HF para modo offline")
+    parser.add_argument("--rag", action="store_true", help="Activar RAG con �ndice LlamaIndex")
+    parser.add_argument("--persist", default=str(DEFAULT_PERSIST), help="Directorio del �ndice LlamaIndex")
+    parser.add_argument("--embed-model", default="BAAI/bge-m3", help="Modelo de embeddings si RAG est� activo")
+    parser.add_argument("--models-dir", default=None, help="Directorio local de modelos/cach� HF para modo offline")
     parser.add_argument("--offline", action="store_true", help="Forzar modo offline (HF_HUB_OFFLINE=1)")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=7860)
@@ -192,7 +463,7 @@ def main():
         persist_dir = Path(args.persist).expanduser().resolve()
         if not persist_dir.exists():
             raise FileNotFoundError(f"Persist dir no encontrado: {persist_dir}")
-        print(f"Cargando índice LlamaIndex desde: {persist_dir}")
+        print(f"Cargando �ndice LlamaIndex desde: {persist_dir}")
         # Inyectar embeddings (debe coincidir con build-time). Permitir ruta local
         embed_src = str(Path(args.embed_model)) if os.path.isdir(args.embed_model) else args.embed_model
         embed_model = HuggingFaceEmbedding(
@@ -205,9 +476,24 @@ def main():
         retriever = index.as_retriever(similarity_top_k=8)
 
     # UI
-    app = create_interface(tokenizer, model, rag_enabled=args.rag, retriever=retriever)
-    app.queue().launch(server_name=args.host, server_port=args.port, share=False)
+    app = create_interface(tokenizer, model, rag_enabled=args.rag, retriever=retriever, model_id=args.model_id, embed_model_id=args.embed_model)
+    app.queue().launch(server_name=args.host, server_port=args.port, share=False, show_error=True, debug=True)
 
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

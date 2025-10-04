@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part007</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<table><caption><div class="caption">Table 2.45: %method block input keywords for the RI approximations.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>RI</td><td>on / off</td><td>Activates/deactivates RI (default: Split-RI-J)</td></tr><tr><td>IntAccX</td><td>&lt;Acc1, Acc2, Acc3&gt;</td><td>Control exchange grid accuracy parameters (cf. Numeri- cal Integration )</td></tr><tr><td>GridX</td><td>&lt;Ang1, Ang2, Ang3&gt;</td><td>Controls exchange grid parameters (cf. Numerical Inte- gration )</td></tr><tr><td>UseSFitting</td><td>true / false</td><td>Activates SFitting (default: true)</td></tr><tr><td>SFitInvertType</td><td>Cholesky</td><td>Uses Cholesky inversion (default)</td></tr><tr><td></td><td>Cholesky_Q</td><td>Uses Cholesky + full Q matrix</td></tr><tr><td></td><td>Diag</td><td>Activates inversion via diagonalization</td></tr><tr><td></td><td>Diag_Q</td><td>Activates diagonalization + full Q matrix</td></tr><tr><td>SInvThresh</td><td>&lt;real&gt;</td><td>Inversion threshold for Diag and Diag_Q (default: 1e-8)</td></tr><tr><td>UseQGradFit</td><td>true / false</td><td>Activates SCF fitting matrix for gradient calculations (de- fault: true)</td></tr><tr><td>COSX_PartialContraction</td><td>true / false</td><td>Activates intermediate basis for generally contracted shells (default: true)</td></tr><tr><td>COSX_IntSymmetry</td><td>full</td><td>Use fully symmetrized integrals</td></tr><tr><td></td><td>standard</td><td>Use original COSX algorithm</td></tr></tbody></table>
+<h2>2.9 Numerical Integration</h2>
+<p>Starting from its version 5.0, ORCA has a new scheme for the quadratures used in numerical integration. It is based on the same general ideas which were used for the old grids, except that we used machine learning methods, together with some final hands-on optimization, to find the optimal parameters for all atoms up to the 6th row of the periodic table, with the 7th row being extrapolated from that. For further details look at Ref. [120]. We also realized that the COSX and DFT grids have overall different requirements, and these were optimized separately.</p>
+<p>The big advantage of this new scheme is that it is significantly more accurate and robust than the old one, even if having the same number of grid points. We tested energies, geometries, frequencies, excitation energies and properties to develop three new grid schemes named: DEFGRID1, DEFGRID2 and DEFGRID3, that will automatically fix all grids that are used in the calculations. DEFGRID1 behaves essentially like the old defaults, but it is more robust. The second is the new default, and is expected to yield sufficiently small errors for all kinds of applications. The last is a heavier, higher-quality grid, that is close to the limit if one considers an enormous grid as a reference.</p>
+<p>In order to change from the default DEFGRID2, one just needs to add !DEFGRID1 or !DEFGRID3 to the main input.</p>
+<p>It is also important to note that the COSX approximation is now the default for DFT, whenever HFexchange is neede. This can always be turned off by using !NOCOSX.</p>
+<h2>2.10 Details on the Numerical Integration Grids</h2>
+<p>As in all other popular grid schemes, our grids are constructed from assembling a set of atomic grids into a molecular one, using Becke's approach. Each individual atomic grid is build based on optimized parameters for that atom, and are composed of an angular and a radial part, that are defined separately.</p>
+<p>The whole scheme was updated from ORCA 5.0, but we tried to keep things as close as possible to the previous one. First, the overall construction of these grids needs to be explained.</p>
+<h2>2.10.1 The Angular Grid Scheme</h2>
+<p>Instead of using a single angular grid throughout the whole atom, most schemes apply a so-called grid pruning in order to reduce the number of grid points outside of the most important regions, as we do in ORCA. In the current scheme, we split the atomic grids into five regions, using Lebedev grids with the following number of points on each of those:</p>
+<table><caption><div class="caption">Table 2.46: Different angular grid schemes used in ORCA. The numbers indicate the Lebedev grids used.</div></caption><tbody><tr><th>AngularGrid</th><th>Region 1</th><th>Region 2</th><th>Region 3</th><th>Region 4</th><th>Region 5</th></tr><tr><td>1</td><td>14</td><td>26</td><td>50</td><td>50</td><td>26</td></tr><tr><td>2</td><td>14</td><td>26</td><td>50</td><td>110</td><td>50</td></tr><tr><td>3</td><td>26</td><td>50</td><td>110</td><td>194</td><td>110</td></tr><tr><td>4</td><td>26</td><td>110</td><td>194</td><td>302</td><td>194</td></tr><tr><td>5</td><td>26</td><td>194</td><td>302</td><td>434</td><td>302</td></tr><tr><td>6</td><td>50</td><td>302</td><td>434</td><td>590</td><td>434</td></tr><tr><td>7</td><td>110</td><td>434</td><td>590</td><td>770</td><td>590</td></tr></tbody></table>
+<p>The ideal cutoffs between those regions were subjected to optimization, and are defined for all atoms. Whenever we refer to a AngularGrid flag in ORCA, one of these schemes is chosen.</p>
+<h2>2.10.2 The Radial Grid Scheme</h2>
+<p>The number of radial points ( n r ) for a given atom is simply defined using the equation first defined by Krack and Köster:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ε is called the IntAcc of that grid in ORCA, b is any number and ROW refers to the row of the periodic table for that atom. In its original formulation, b was set to 5 , but here it as now optimized and varies slightly depending on the AngularGrid schemes shown above.</p>
+<p>One important thing to note is that each increase of IntAcc by 1 , adds 15 radial points to the atomic grids, as in the previous grid scheme. These IntAcc values were optimized for each angular grid:</p>
+<table><caption><div class="caption">Table 2.47: Optmimized IntAcc parameters for the exchange-correlation and COSX grids.</div></caption><tbody><tr><td>AngularGrid</td><td>XC</td><td>COSX</td></tr><tr><td>1</td><td>4.004</td><td>3.816</td></tr><tr><td>2</td><td>4.004</td><td>4.020</td></tr><tr><td>3</td><td>4.159</td><td>4.338</td></tr><tr><td>4</td><td>4.388</td><td>4.871</td></tr><tr><td>5</td><td>4.629</td><td>4.871</td></tr><tr><td>6</td><td>4.959</td><td>4.871</td></tr><tr><td>7</td><td>4.959</td><td>4.871</td></tr></tbody></table>
+<p>After defining the number of radial points n r , the actual radial grid is then defined from a Gauss-Chebyschev quadrature using the so-called M3 mapping from Treutler and Ahlrich:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where -1 ≤ x ≤ 1 , and the center of the grid ( x = 0 ) coincides with the value of ξ . These ξ parameters were also optimized for each atom type.</p>
+<h2>2.10.3 The DEFGRIDs</h2>
+<p>With all that in mind, we can now present how the DEFGRIDs are built in terms of their AngularGrid scheme and IntAccs, which define the angular and radial parts of the atomic grids. More details can be found in Ref. [120].</p>
+<table><caption><div class="caption">Table 2.48: Angular grid schemes used in different part of ORCA. The XC and COSX grids are separated by a slash, and multiple COSX grid schemes are separated by a comma.</div></caption><tbody><tr><td>Grid Name</td><td>SCF</td><td>TD-DFT</td><td>CP-SCF</td><td>MP2 grad</td><td>MP2 2ndder</td></tr><tr><td>DEFGRID1</td><td>3 / 1, 1, 2</td><td>1 / 1</td><td>1 / 1</td><td>3</td><td>1</td></tr><tr><td>DEFGRID2 4 / 1,</td><td>2, 3</td><td>1 / 1</td><td>1 / 1</td><td>4</td><td>4</td></tr><tr><td>DEFGRID3</td><td>6 / 2, 3, 4</td><td>3 / 2</td><td>3 / 2</td><td>5</td><td>4</td></tr></tbody></table>
+<p>OBS.: The IntAccs for TD-DFT and the CP-SCF are 3.467 for the XC and 3.067 for the COSX instead of the default. These numbers can be smaller here and we exploit this to increase the overall speed.</p>
+<p>From the Table 2.48 one can see, for instance, that the default SCF XC grid now is defined from AngularGrid 4 (with no extra final integration in the end). The default COSX uses a 1,2,3 grid scheme, with the COSX third grid being used to update the energy after the SCF converges and for the gradients.</p>
+<h2>2.10.4 Other Details and Options</h2>
+<p>The new adaptive pruning. The current pruning scheme uses lower grids close to the nucleus, and far away from the bonding region. However, if the basis set has polarized functions close to the nuclei, or diffuse Gaussians, this might not be sufficient.</p>
+<p>To improve the grids for these problems, we now use by default an adaptive pruning scheme, that detects corepolarization, diffuse functions and steep basis set orbitals by analyzing the expectation value of the position operator, ⟨ ˆ r ⟩ , and fixes the grid accordingly. This can increase the grids in these cases by 10-20%, but gives significantly better results. To use the non-adaptive scheme, just set %METHOD GRIDPRUNING OLDPRUNING END. For a completely unpruned grid, set GRIDPRUNING to UNPRUNED.</p>
+<p>Asimpler Gauss-Legendre angular grid. By setting AngularGrid to 0 , instead of using the Lebedev grids, a GaussLegendre angular grid will be built, as suggested by Treutler and Ahlrich [123]. The number of θ points is defined as 0 . 4 n r by default and the number of ϕ points is chosen as to avoid crowding close to the poles.</p>
+<p>These grids are in general less efficient than the Lebedev's, but are useful if one needs to construct extremely large grids for specific applications.</p>
+<p>The SpecialGrid Option. Sometimes, you might want to increase the integration accuracy for some atoms that need special care, while it is not necessary to enlarge the grid generally. ORCA provides you with a basic mechanism to increase the radial integration accuracy for a few atoms while maintaining the chosen grid for all others.</p>
+<pre><code>%METHOD # a maximum of 64 assignments can be made # in = 0 : no changes are made # in > 0 : the grid will be changed for all atoms with # atomic number=in to IntAcc=an # in < 0 : only the specific n'th atom will have its # IntAcc value changed to an</code></pre>
+<p>(continues on next page)</p>
+<pre><code>SpecialGridAtoms i1, i2, i3,...,in; SpecialGridIntAcc a1,a2,a3,...,an; END</code></pre>
+<p>OBS.: Starting from ORCA 5.0 it is not necessary to use this option anymore unless you have very specific reasons. The basis set is considered during the grid construction and that is automatically extended if needed.</p>
+<h2>2.10.5 SCF Grid Keyword List</h2>
+<p>A complete description of the SCF grid options is given below. There are keywords specific to the XC integration, COSX integration and a general part that applies to all:</p>
+<pre><code>%METHOD # XC grids AngularGrid 1 #Lebedev50 2 #Lebedev110 3 #Lebedev194 4 #Lebedev302 5 #Lebedev434 6 #Lebedev590 7 #Lebedev770 0 #SimpleGrid IntAcc 5.0 # determines no. of radial points # COSX grids AngularGridX 1,1,2,4,5 # the first three are used in the SCF # the 4th in the MP2 gradient and # the 5th for MP2 second derivatives IntAccX 3.56,-1,4.5 # if a -1 is given, the default IntAcc is used. # General NThetaMax 0.4 # only for AngularGrid=0, multiplier for nr GridPruning Unpruned # no Pruning OldPruning # the old pruning Adaptive # default (and recommended) HGridReduced true # Reduce grids for H and He by one # unit (default and recommended) BFCut 1e-10 # basis fcn. cut. Is adjusted according to # convergence tolerances WeightCut 1e-14 # grid weight cut. default: 1e-14 END</code></pre>
+<h2>2.10.6 Changing TD-DFT, CP-SCF and Hessian Grids</h2>
+<p>TD-DFT. The grids used in CIS or TD-DFT can be changed in their respective block:</p>
+<pre><code>%TDDFT # or %CIS, they are equivalent # XC grids IntAccXC 3.467 GridXC 1 #COSX grids IntAccX 3.076 GridX 1 END</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>%METHOD # XC grids Z_IntAccXC 3.467 Z_GridXC 1 #COSX grids Z_IntAccX 3.076 Z_GridX 1 Z_GridX_RHS 2 END</code></pre>
+<p>OBS.: The Z_Grid_RHS is only used in MP2 and the number here has a different meaning. It refers to which of the COSX grids used in the SCF will be chosen, rather than an AngularGrid scheme. The default is to use the second COSX grid.</p>
+<p>Hessian. The XC grids used to compute the DFT terms in the Hessian are automatically chosen to be one unit higher than the SCF grids. Because of the second derivative terms, we found that it is better to have a slightly higher XC grid here. The COSX grid can be changed freely:</p>
+<pre><code>%FREQ HessGridX = 2,2,2,2 END</code></pre>
+<p>These four numbers refer to the possible usages of COSX in the Hessian, as explained in Sec. Vibrational Frequencies</p>
+<p>Non-local functionals (VV10 and alike). The default non-local grid is defined by AngularGrid 2, and is not recommended to be changed. In any case, these can be altered by using:</p>
+<pre><code>%METHOD # non-local grids VdwAngularGrid 2 # same scheme as the SCF ones VdWIntAcc 5.0 # determines no. of radial points VdwGridPruning Adaptive # default VdwDistTCut 10 # cutoff distance between grid points, in angstroem END</code></pre>
+<h2>2.10.7 When to Change from the Default Grids?</h2>
+<p>In general, the errors from the default grids are rather small and reasonable for most applications. After benchmarking against the GMTNK55 test set with the default !DEFGRID2, we found an error of about 0 . 01 ± 0 . 03 kcal/mol from DFT(compared to a reference grid), and 0 . 05 ± 0 . 10 kcal/mol for the COSX (compared to the analytical integration). We also benchmarked geometries, excitation energies and frequencies, and all errors are systematically low.</p>
+<p>However, there might still be cases where an improved grid is needed:</p>
+<ul>
+<li style="list-style-type: '· ';">If you need to be confident that your energy error is below 0.2 kcal/mol;</li>
+<li style="list-style-type: '· ';">When dealing with anions with large negative charges ( &lt; -3 );</li>
+<li style="list-style-type: '· ';">For very subtle intermolecular interactions;</li>
+<li style="list-style-type: '· ';">When dealing with weird electronic structures;</li>
+<li style="list-style-type: '· ';">With large conjugated systems - graphene-like structures and large polyaromatics.</li>
+</ul>
+<p>Whenneeded, the !DEFGRID3 is very large and conservative - it was built to cover almost all these cases. In contrast, !DEFGRID1 will yield grids of the size close to previous ORCA versions defaults, but still with increased accuracy.</p>
+<h2>2.11 Counterpoise Corrections</h2>
+<h2>2.11.1 Boys-Bernardi Counterpoise Correction (BB-CP)</h2>
+<p>In calculating weak molecular interactions the nasty subject of the basis set superposition error (BSSE) arises. It consists of the fact that if one describes a dimer, the basis functions on A help to lower the energy of fragment B and vice versa. Thus, one obtains an energy that is biased towards the dimer formation due to basis set effects. Since this is unwanted, the Boys and Bernardi procedure aims to correct for this deficiency by estimating what the energies of the monomers would be if they had been calculated with the dimer basis set. This will stabilize the monomers relative to the dimers. The effect can be a quite sizable fraction of the interaction energy and should therefore be taken into account. The original Boys and Bernardi formula for the interaction energy between fragments A and B is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here E Y X ( Z ) is the energy of fragment X calculated at the optimized geometry of fragment Y with the basis set of fragment Z. Thus, you need to do a total the following series of calculations:</p>
+<ol>
+<li style="list-style-type: '1. ';">optimize the geometry of the dimer and the monomers with some basis set Z. This gives you E AB AB ( AB ) , E A A ( A ) and E B B ( B )</li>
+<li style="list-style-type: '2. ';">delete fragment A (B) from the optimized structure of the dimer and re-run the single point calculation with basis set Z. This gives you E AB B ( B ) and E AB A ( A ) .</li>
+<li style="list-style-type: '3. ';">Now, the final calculation consists of calculating the energies of A and B at the dimer geometry but with the dimer basis set. This gives you E AB A ( AB ) and E AB B ( AB ) .</li>
+</ol>
+<p>In order to achieve the last step efficiently, a special notation was put into ORCA which allows you to delete the electrons and nuclear charges that come with certain atoms but retain the assigned basis set. This trick consists of putting a ':' after the symbol of the atom. Here is an example of how to run such a calculation of the water dimer at the MP2 level (with frozen core):</p>
+<pre><code># # Calculations for Boys-Bernardi CP correction # # --------------------------------------------# First the monomer. In principle, you only need # to run it once, but we keep it for clarity. # --------------------------------------------! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer" * xyz 0 1 O 7.405639 6.725069 7.710504 H 7.029206 6.234628 8.442160 H 8.247948 6.296600 7.554030 * $new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer" * xyz 0 1 O 7.405639 6.725069 7.710504 H 7.029206 6.234628 8.442160 H 8.247948 6.296600 7.554030 * # --------------------------------------------# now the dimer # --------------------------------------------$new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%id "dimer" * xyz 0 1 O 7.439917 6.726792 7.762120 O 5.752050 6.489306 5.407671 H 7.025510 6.226170 8.467436 H 8.274883 6.280259 7.609894 H 6.313507 6.644667 6.176902 H 5.522285 7.367132 5.103852 * # --------------------------------------------# Now the calculations of the monomer at the # dimer geometry # --------------------------------------------$new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer_1" * xyz 0 1 O 7.439917 6.726792 7.762120 H 7.025510 6.226170 8.467436 H 8.274883 6.280259 7.609894 * $new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer_1" * xyz 0 1 O 5.752050 6.489306 5.407671 H 6.313507 6.644667 6.176902 H 5.522285 7.367132 5.103852 * # --------------------------------------------# Now the calculation of the monomer at the # dimer geometry but with the dimer basis set # --------------------------------------------$new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer_2" * xyz 0 1 O 7.439917 6.726792 7.762120 O : 5.752050 6.489306 5.407671 H 7.025510 6.226170 8.467436 H 8.274883 6.280259 7.609894 H : 6.313507 6.644667 6.176902 H : 5.522285 7.367132 5.103852 * $new_job ! RHF MP2 cc-pVTZ VeryTightSCF PModel %id "monomer_2" * xyz 0 1 O : 7.439917 6.726792 7.762120 O 5.752050 6.489306 5.407671 H : 7.025510 6.226170 8.467436 H : 8.274883 6.280259 7.609894 H 6.313507 6.644667 6.176902 H 5.522285 7.367132 5.103852 *</code></pre>
+<p>From these calculations, you obtain the respective energies to compute the BB-CP correction:</p>
+<p>(continued from previous page)</p>
+<table><caption><div class="caption">Table 2.49: Energies calculated for the Boys-Bernardi counter-poise correction and final dimerization energies.</div></caption><tbody><tr><th>Component</th><th>E [a.u.]</th><th>E [kcal/mol]</th></tr><tr><td>E AB AB ( AB )</td><td>-152.646980</td><td></td></tr><tr><td>E A A ( A )</td><td>-76.318651</td><td></td></tr><tr><td>E B B ( B )</td><td>-76.318651</td><td></td></tr><tr><td>E AB A ( AB )</td><td>-76.320799</td><td></td></tr><tr><td>E AB A ( A )</td><td>-76.318635</td><td></td></tr><tr><td>E AB B ( AB )</td><td>-76.319100</td><td></td></tr><tr><td>E AB B ( B )</td><td>-76.318605</td><td></td></tr><tr><td>∆ E dim.</td><td>-0.009677</td><td>-6.07</td></tr><tr><td>∆ E BB - CP</td><td>0.002659</td><td>1.67</td></tr><tr><td>∆ E dim.,corr.</td><td>-0.007018</td><td>-4.40</td></tr></tbody></table>
+<p>In this example, we calculated a BSSE correction of 1.67 kcal/mol.</p>
+<p>It is also possible to set entire fragments as ghost atoms using the GhostFrags keyword as shown below. See section Input of Coordinates for different ways of defining fragments.</p>
+<pre><code>! MP2 cc-pVTZ VeryTightSCF PModel * xyz 0 1 O 7.439917 6.726792 7.762120 O 5.752050 6.489306 5.407671 H 7.025510 6.226170 8.467436 H 8.274883 6.280259 7.609894 H 6.313507 6.644667 6.176902 H 5.522285 7.367132 5.103852 * %geom GhostFrags {1} end # space-separated list and X:Y ranges accepted fragments 1 {0 2 3} end 2 {1 4 5} end end end</code></pre>
+<p>Starting from ORCA 6.0, we support geometry optimizations with the counterpoise correction, using analytic gradients. This opens up the way of obtaining accurate non-covalent complex geometries (instead of just interaction energies) using modest basis sets. To use this functionality, one should NOT simply add !Opt to the above input files, but should instead use the dedicated compound script BSSEOptimization.cmp available in the ORCA Compound Script repository. Detailed usage are described in the comments of the compound script.</p>
+<h2>2.11.2 Geometrical Counterpoise Correction (gCP)</h2>
+<p>The central idea of the gCP correction [124] is to add a semi-empirical correction ∆ E gCP to the energies of molecular systems that removes artificial overbinding effects from BSSE. gCP uses atomic corrections and therefore also has the ability to correct for intramolecular BSSE. The parametrization is constructed such that it approximates the Boys and Bernadi counterpoise (CP) correction ∆ E CP in the intermolecular case. That is,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where e.g. for a complexation reaction A + B → C , our correction is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In practice, E gCP can be simply added to the HF/DFT energy</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which is done automatically in ORCA (the FINAL SINGLE POINT ENERGY includes the gCP correction).</p>
+<p>The central equation of the gCP correction over all atoms N reads:</p>
+<p≯</p>
+<p>where the energy e miss a is a measure of the incompleteness of the chosen target basis set (which is typically small) and f dec ( R ab ) is a decay function that depends on the interatomic distance R ab . The scaling factor σ is one of 4 parameters needed for every method/basis set combination. More details on this can be found in the original gCP paper [124].</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Analytical gradients with gCP are available for geometry optimization. Due to its semi-empirical nature, the correction is calculated within seconds, even for very large systems.</p>
+<h2>Basic Usage</h2>
+<p>The gCP correction can be invoked by the !GCP(level) keyword, where level is a combination of the method (Hartree-Fock, HF or density functional theory, DFT ) and a basis set definition. See Table 2.50 for the available basis sets and the corresponding keywords. For example, gCP can be invoked in a B3LYP calculation with the def2-SV(P) basis set using the input:</p>
+<pre><code>! B3LYP def2-SV(P) GCP(DFT/SV(P))</code></pre>
+<p>The gCP input can also be defined in the %method block of the input:</p>
+<pre><code>! B3LYP def2-SV(P) %method DoGCP true GCPMETHOD dft/sv(p) end</code></pre>
+<p>Table 2.50: Overview of parametrized basis sets. The level keyword in !GCP(level) is a combination of HF or DFT and the basis set keyword. Valid inputs are, for example: !GCP(HF/MINIS) , !GCP(DFT/LANL) , !GCP(HF/TZ) , !GCP(DFT/631GD) , . . .</p>
+<table><tbody><tr><th>Parametrized basis set</th><th>Definition</th><th>HF</th><th>DFT</th></tr><tr><th>MINIS</th><td>MINIS</td><td>yes</td><td>yes</td></tr><tr><th>SV</th><td>SV</td><td>yes</td><td>yes</td></tr><tr><th>6-31G(d)</th><td>631GD</td><td>yes</td><td>yes</td></tr><tr><th>6-31G(d) + LANL2DZ (Sc-Zn)</th><td>LANL</td><td>no</td><td>yes</td></tr><tr><th>def2-SV(P)</th><td>SV(P)</td><td>no</td><td>yes</td></tr><tr><th>def2-SVP</th><td>SVP</td><td>yes</td><td>yes</td></tr><tr><th>def2-TZVP</th><td>TZ</td><td>yes</td><td>yes</td></tr></tbody></table>
+<p>At all print levels, warnings from the gCP program are printed. Using the default print level, the only additional output is the final gCP correction before FINAL SINGLE POINT ENERGY . Using !LargePrint or %output Print[P_gCP] 2 end states the gCP level , the 4 parameters mentioned above, and the computed correction. A larger print level can be specified to get more details (more information on this below).</p>
+<p>Several warnings and notices may be issued. Elements of the 5th and higher periods are treated as their 4th period analogs - e.g. Sn is treated with the same parameters as Ge. If this is the case, a note is printed. Another note is printed if there is a mismatch between the basis used for the SCF calculation and that of the requested gCP calculation. For example, the following input with tetramethyltin</p>
+<pre><code>! HF def2-SVP GCP(HF/MINIS) *xyzfile 0 1 tetramethyltin.xyz</code></pre>
+<p>should use the parameters of Ge in place of Sn and there should be a mismatch between the basis set in ORCA (def2-SVP) and gCP (MINIS). Sure enough, the output is as follows:</p>
+<pre><code>** NOTE ** -> element sn will be treated as ge NOTIFICATION: Different basis set in ORCA and otool_gcp: ORCA: 142 gCP: 32 If you are NOT using ECPs, check your basis set inputs! -----------------------------------gCP correction 0.073031339 -----------------------------------</code></pre>
+<p>A mismatch between the basis sets used is allowed since a minor mismatch may only result in a small error. One should still be careful with such results; use your own judgment! This also allows gCP in calculations that use an unparametrized basis set. However, in this case, the number of basis functions and exponents should be very similar!</p>
+<p>It should be noted that some elements are not parametrized, depending on the gCP level used. If only a few atoms in a large molecule are treated inaccurately or not at all, the error is expected to be small. To check all parameters used and the individual atomic contributions, specify the print level %output Print[P_gCP] 3 end . For example, the above tetramethyltin input with this print level has the following output:</p>
+<pre><code>------------------------------------------------------------------------------g C P -geometrical counterpoise correction ------------------------------------------------------------------------------Method: hf/minis ** NOTE ** -> element sn will be treated as ge Parameters: sigma eta alpha beta 0.1290 1.1526 1.1549 1.1763 Nbf: 32 NAtoms: 17 gCP element parameters: elem emiss nbas elem emiss nbas elem emiss nbas h 0.04240 1 he 0.02832 1 li 0.25266 2 be 0.19720 2 b 0.22424 5 c 0.27995 5 n 0.35791 5 o 0.47901 5 f 0.63852 5 ne 0.83235 5 na 1.23292 6 mg 1.34339 6 al 1.44828 9 si 1.61336 9 p 1.76814 9 s 1.99201 9 cl 2.23311 9 ar 2.49323 9 k 3.02964 10 ca 3.38998 10 sc 0.00000 0 ti 0.00000 0 v 0.00000 0 cr 0.00000 0 mn 0.00000 0 fe 0.00000 0 co 0.00000 0 ni 0.00000 0 cu 0.00000 0 zn 0.00000 0 ga 0.00000 0 ge 0.00000 0 as 0.00000 0 se 0.00000 0 br 0.00000 0 kr 0.00000 0 # ON sites Nvirt Emiss BSSE [kcal/mol]</code></pre>
+<p>(continues on next page)</p>
+<pre><code>1 6 15 2.0 0.2799 10.0090 2 32 16 -16.0 0.0000 0.0000 3 6 15 2.0 0.2799 10.0084 4 6 15 2.0 0.2799 10.0095 5 6 15 2.0 0.2799 10.0083 6 1 15 0.5 0.0424 0.4827 7 1 15 0.5 0.0424 0.4828 8 1 15 0.5 0.0424 0.4828 9 1 15 0.5 0.0424 0.4827 10 1 15 0.5 0.0424 0.4827 11 1 15 0.5 0.0424 0.4827 12 1 15 0.5 0.0424 0.4828 13 1 15 0.5 0.0424 0.4827 14 1 15 0.5 0.0424 0.4828 15 1 15 0.5 0.0424 0.4827 16 1 15 0.5 0.0424 0.4827 17 1 15 0.5 0.0424 0.4827 Egcp: 0.0730313386 a.u. NOTIFICATION: Different basis set in ORCA and otool_gcp: ORCA: 142 gCP: 32 If you are NOT using ECPs, check your basis set inputs! -----------------------------------gCP correction 0.073031339 -----------------------------------</code></pre>
+<p>From this, it can be seen that the Sn atom (atom 2 in the list of atomic contributions) gives no contribution because its Emiss is zero (unparametrized for the given gCP level ). This is confirmed by looking at the gCP element parameters section, which lists the emiss of Sn as zero for !GCP(HF/MINIS) . Rerunning this example with !GCP(HF/SVP) now gives a contribution for Sn, as seen by the following output. Note that this calculation also has a much smaller basis set mismatch, and so should be the more accurate gCP correction of the two.</p>
+<pre><code>------------------------------------------------------------------------------g C P -geometrical counterpoise correction ------------------------------------------------------------------------------Method: hf/svp ** NOTE ** -> element sn will be treated as ge Parameters: sigma eta alpha beta 0.2054 1.3157 0.8136 1.2572 Nbf: 148 NAtoms: 17 gCP element parameters: elem emiss nbas elem emiss nbas elem emiss nbas h 0.00811 5 he 0.00805 5 li 0.11358 9 be 0.02837 9 b 0.04937 14 c 0.05538 14 n 0.07278 14 o 0.10031 14 f 0.13327 14 ne 0.17360 14 na 0.18114 15 mg 0.12556 18 al 0.16719 18 si 0.14984 18 p 0.14540 18 s 0.16431 18 cl 0.18299 18 ar 0.20567 18 k 0.20096 24 ca 0.29966 24 sc 0.32599 31 ti 0.30549 31 v 0.29172 31 cr 0.29380 31 mn 0.29179 31 fe 0.29673 31 co 0.30460 31 ni 0.24204 31 cu 0.35419 31 zn 0.35072 31 ga 0.35002 32 ge 0.34578 32 as 0.34953 32 se 0.36731 32 br 0.38201 32 kr 0.39971 32 # ON sites Nvirt Emiss BSSE [kcal/mol] 1 6 16 11.0 0.0554 2.5093</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>2</td><td>32</td><td>16</td><td>16.0 0.3458</td><td>6.8274</td></tr><tr><td>3</td><td>6</td><td>16 11.0</td><td>0.0554</td><td>2.5092</td></tr><tr><td>4</td><td>6</td><td>16 11.0</td><td>0.0554</td><td>2.5094</td></tr><tr><td>5</td><td>6</td><td>16 11.0</td><td>0.0554</td><td>2.5092</td></tr><tr><td>6</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>7</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>8</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>9</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>10</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>11</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>12</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>13</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>14</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>15</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>16</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td>17</td><td>1</td><td>16 4.5</td><td>0.0081</td><td>0.1703</td></tr><tr><td colspan="5">Egcp: 0.0301322002 a.u. NOTIFICATION: Different basis set in ORCA and otool_gcp: ORCA: 142 gCP: 148 If you are NOT using ECPs, check your basis set inputs!</td></tr></tbody></table>
+<h2>General advice</h2>
+<ul>
+<li style="list-style-type: '· ';">Small basis sets show not only a large BSSE, but general shortcomings. These effects are not always clearly distinguishable.</li>
+<li style="list-style-type: '· ';">If computationally affordable, large basis sets (tripleζ and higher) are always preferable.</li>
+<li style="list-style-type: '· ';">gCP only makes sense for somewhat large molecules</li>
+<li style="list-style-type: '· ';">gCP should always be applied together with a dispersion correction. gCP in combination with D3 or D4 is well tested, but gCP with NL also works well (see chapter Dispersion Corrections ).</li>
+<li style="list-style-type: '· ';">It has been demonstrated that the popular combination of B3LYP with 6-31G(d) can be strongly improved using DFT-D3 and gCP [125]. For convenience, the keyword !B3LYP-gCP-D3/6-31G* has been defined. This is equivalent to !B3LYP 6-31G* D3BJ GCP(DFT/631GD) .</li>
+</ul>
+<h2>® Technical Notes</h2>
+<ul>
+<li style="list-style-type: '· ';">!GCP(HF/MINIS) automatically sets the refitted D3 parameter, as proposed in the original gCP paper.</li>
+<li style="list-style-type: '· ';">The gCP method is implemented via an external tool called otool_gcp , which is based on the original Fortran program used in the publication. Thus, the otool_gcp binary can also be called directly via the command line ( otool_gcp -h gives an overview of the options).</li>
+<li style="list-style-type: '· ';">It is also possible to read an external parameter file ( $HOME/.gcppar ) using the !GCP(FILE) keyword. For further information, please look at the manual for the gcp program as provided by the Grimme group (gCP manual).</li>
+<li style="list-style-type: '· ';">During the calculation, some temporary output files are written by ORCA: BASENAME.gcp.in.tmp and BASENAME.gcp.out.tmp will contain the input for otool_gcp and its output, respectively.</li>
+</ul>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 2.51: Simple input keywords for the gCP correction.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>GCP(&lt;level&gt;)</td><td>Activates the gCP correction for a specified level of theory defined as &lt;level&gt;</td></tr></tbody></table>
+<table><caption><div class="caption">Table 2.52: %method block input keywords and options for the gCP correction.</div></caption><tbody><tr><th>Keyword</th><th>Option</th><th>Description</th></tr><tr><td>DoGCP</td><td>true / false</td><td>Activate/deactivate the gCP correction</td></tr><tr><td>GCPMETHOD</td><td>&lt;level&gt;</td><td>Define the gCP level string, e.g. dft/svp</td></tr><tr><td></td><td>hf/minis</td><td>Parameterization for HF with MINIS basis set</td></tr><tr><td></td><td>hf/sv</td><td>Parameterization for HF with SV basis set</td></tr><tr><td></td><td>hf/631gd</td><td>Parameterization for HF with 6-31G(d) basis set</td></tr><tr><td></td><td>hf/svp</td><td>Parameterization for HF with def2-SVP basis set</td></tr><tr><td></td><td>hf/tz</td><td>Parameterization for HF with def2-TZVP basis set</td></tr><tr><td></td><td>dft/minis</td><td>Parameterization for DFT with MINIS basis set</td></tr><tr><td></td><td>dft/sv</td><td>Parameterization for DFT with SV basis set</td></tr><tr><td></td><td>dft/631gd</td><td>Parameterization for DFT with 6-31G(d) basis set</td></tr><tr><td></td><td>dft/lanl</td><td>Parameterization for DFT with mixed 6-31G(d) + LANL2DZ (Sc-Zn) basis set</td></tr><tr><td></td><td>dft/sv(p)</td><td>Parameterization for DFT with def2-SV(P) basis set</td></tr><tr><td></td><td>dft/svp</td><td>Parameterization for DFT with def2-SVP basis set</td></tr><tr><td></td><td>dft/tz</td><td>Parameterization for DFT with def2-TZVP basis set</td></tr><tr><td></td><td>file</td><td>Read parameters from external parameterfile $HOME/.gcppar</td></tr><tr><td>GCP. D3MINIS</td><td>true / false</td><td>Use special DFT-D3 refit for HF/MINIS (default=true)</td></tr></tbody></table>
+<h2>2.12 Relativistic Calculations</h2>
+<p>ORCA features three different approximations to cover relativistic effects:</p>
+<ol>
+<li style="list-style-type: '1. ';">The 'Exact 2 component' ( X2C ) Hamiltonian</li>
+<li style="list-style-type: '2. ';">The Douglas-Kroll-Hess ( DKH ) Hamiltonian to second order</li>
+<li style="list-style-type: '3. ';">The 0th order regular approximation ( ZORA ) with a model potential</li>
+</ol>
+<p>Earlier versions of ORCA offered a number of additional approximations, which are no longer supported.</p>
+<p>The main relativistic Hamiltonian that will be pursued in further development is the X2C Hamiltonian. Of the three alternatives, we believe that X2C has the best feature set and we recommend to all of our users to preferentially use this method.</p>
+<p>All three relativistic model Hamiltonians are implemented for scalar relativistic energy calculations and these are carried through consistently through the entire program. Scalar relativity shows up as an additional effective potential that is added to the one-electron matrix. Scalar relativistic corrections to the two-electron interaction are not available in ORCA. Furthermore, self-consistent field calculations (HF, DFT, CASSCF) with inclusion of spin-orbit-coupling (SOC) are also not available in ORCA but we will not exclude the possibility to add this feature in a future version of the program.</p>
+<h2>2.12.1 Basic Usage</h2>
+<p>The relativistic methods in ORCA are implemented in a fairly straightforward way but do require some caution from the user. The basic options are available via simple input keywords and finer control is possible through the %rel block - see Section 2.12.9 for a full list of keywords. There are also settings specific to each Hamiltonian - these are explained in the respective section below.</p>
+<p>The following three (mutually exclusive) input lines request, respectively:</p>
+<ul>
+<li style="list-style-type: '· ';">a TPSS optimization with the ZORA Hamiltonian, together with the relativistically recontracted ZORA-def2-TZVP basis set and the SARC/J auxiliary basis set ;</li>
+<li style="list-style-type: '· ';">a DLPNO-CCSD(T) energy calculation with the second order DKH Hamiltonian with, together with a matching correlation-consistent basis set and suitable AuxC ;</li>
+<li style="list-style-type: '· ';">a double-hybrid DFT NMR calculation with the X2C Hamiltonian and appropriate basis sets .</li>
+</ul>
+<pre><code>! TPSS Opt ZORA ZORA-def2-TZVP SARC/J # or ! DLPNO-CCSD(T) DKH cc-pVTZ-DK cc-pVTZ/C # or ! DSD-PBEP86/2013 NMR X2C x2c-TZVPall-s x2c/J</code></pre>
+<p>See Section 2.12.6 for an explanation of the basis set requirements in relativistic calculations and Section 2.7.3 for a list of available basis sets.</p>
+<h2>Á Warning</h2>
+<ul>
+<li style="list-style-type: '· ';">Older versions of ORCA made extensive use of automatic basis set substitution and aliasing when the use of the DKH or ZORA Hamiltonians was detected. This is no longer the case! Relativistic versions of basis sets now have to be requested explicitly with the appropriate prefix. SARC basis sets also have to be requested explicitly for elements beyond Kr.</li>
+<li style="list-style-type: '· ';">Geometry optimizations with DKH and ZORA (but not X2C) automatically use the one-center approximation . When computing relative energies, do not mix energies from single-point calculations without the one-center approximation with those from geometry optimizations that do make use of this feature.</li>
+</ul>
+<h2>Scalar-Relativistic Gradients and Properties</h2>
+<p>Of the three model Hamiltonians, only X2C features analytic gradients. Hence, for geometry optimizations this is also the preferred method. For DKH and ZORA, the program automatically switches to the one-center approximation . This requires some attention by the users since final single point energies obtained with the one-center approximation are inconsistent with energies obtained without it. The one-center approximation is usually of sufficient accuracy but we have observed cases in actual applications where it leads to clearly wrong geometries. Hence, we strongly recommend to use the X2C Hamiltonian (or even an ECP-based calculation) in this realm.</p>
+<p>If relativistic calculations are used for molecular properties there is a potential mismatch between non-relativistically calculated property integrals and the relativistic Hamiltonian. The procedure to remove these inconsistencies is referred to as 'picture change'. It is controlled by the keyword PictureChange in %rel and is activated by default in most calculations.</p>
+<pre><code>%rel FiniteNuc true # Invokes the Gaussian finite nucleus model. PictureChange 1 or 2 # First or second order picture change effects. # Second order is potentially more accurate and more␣ ↪ → expensive. end</code></pre>
+<p>Picture change effects are implemented for DKH and X2C and to some extent also for ZORA. However, they are not implemented for all properties that ORCA can calculate. Please pay attention to the output of the property integral and property programs. Both programs will explicitly state which picture change effects are included in the molecular integrals. For more details, see Section 2.12.7. The example above also invokes the finite nucleus model - see Section 2.12.8.</p>
+<h2>2.12.2 Approximate Relativistic Hamiltonians</h2>
+<p>In the relativistic domain, calculations are based on the one-electron, stationary Dirac equation in atomic units (rest mass subtracted)</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The spinor Ψ can be decomposed in its so-called large and small components</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These are obviously coupled through the Dirac equation. More precisely, upon solving for Ψ S , the following relation is obtained:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Through the unitary transformation with</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>the Hamiltonian can be brought into block-diagonal form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The (electronic) large component thus has to satisfy the following relation</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The approximate relativistic schemes implemented in ORCA (DKH and ZORA) use different methods to substitute the exact relation (2.30) with approximate ones, while the X2C formalism solves the model one-electron problem exactly.</p>
+<h2>One-Center Approximation</h2>
+<p>In the one-center approximation, which can be applied to any of the DKH, ZORA, or X2C methods, the model potential V in (2.26) only contains one-center terms, i.e. interactions with other atoms are ignored. This has several benefits:</p>
+<ul>
+<li style="list-style-type: '· ';">The unitary decoupling transformation (2.29) only needs to be solved for each atom type, within the atomic basis, not for the whole system.</li>
+<li style="list-style-type: '· ';">There are no gauge noninvariance errors in ZORA or IORA.</li>
+<li style="list-style-type: '· ';">Most importantly, there are no picture-change effects for geometric perturbations (i.e. gradients/Hessians), because the relativistic correction is independent of the molecular geometry. Thus, all relativistic methods can be used for geometry optimizations and frequency calculations at negligible computational effort, relative to the non-relativistic calculation.</li>
+</ul>
+<p>Several papers in the literature show that this approximation is fairly accurate for the calculation of structural parameters and vibrational frequencies. Thus, it is enabled by default for DKH and ZORA calculations that require analytic gradients or Hessians, and indeed such calculations are not implemented without it (although fully numerical gradients/Hessians are available). For X2C, picture-change corrections for geometric perturbations are implemented, so the one-center approximation is not enabled by default. The approximation can be controlled explicitly via the simple keywords !Rel1C (on) and !RelFull (off), or the OneCenter keyword in the %rel block.</p>
+<h2>Á Warning</h2>
+<p>Energies obtained with and without the one-center approximation not comparable!</p>
+<h2>2.12.3 The Regular Approximation</h2>
+<p>In the regular approximation, (2.30) is approximated by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>At the zeroth-order level (ZORA), Ω ± = 1 , so that the ZORA transformation is simply and the corresponding Hamiltonian given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>At the infinite-order level (IORA), Ω ± is taken into account, so that and</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>is the corresponding Hamiltonian. Note that despite the name infinite-order regular approximation - this is still not exact.</p>
+<p>In ORCA, the spin-free (scalar-relativistic) variant of ZORA and IORA are implemented. These are obtained from those above through the replacement</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The regular Hamiltonians contain only part of the Darwin term and no mass-velocity term. A problem with relations (2.35) and (2.33) is that due to the non-linear dependence of the resulting regular Hamiltonians on V , a constant change of V , which in the Dirac and Schrödinger equations will result in a corresponding change of energy</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>does not so in the regular approximation. Several attempts have been made to circumvent this problem. The scaled ZORA variant is one such procedure. Another one is given through the introduction of model potentials replacing V . Both approaches are available in ORCA.</p>
+<h2>The Scaled ZORA Variant</h2>
+<p>This variant goes back to van Lenthe et al. [126]. The central observation is that the Hamiltonian</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>produces constant energy-shifts E → E + const when the potential V is changed by a constant for hydrogenic ions . For many-electron systems, the scaled-ZORA Hamiltonian still does not yield simple, constant energy shift for V → V + const. But it produces the exact Dirac energy for hydrogen-like atoms and performs better than the first-order regular approximation for atomic ionization energies.</p>
+<h2>The Regular Approximation with Model Potential</h2>
+<p>The idea of this approach goes back to Van Wüllen [127], who suggested the procedure for DFT. However we also use it for other methods. The scalar relativistic ZORA self-consistent field equation is in our implementation (in atomic units):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where c is the speed of light. It looks like the normal nonrelativistic Kohn-Sham equation with the KS potential V eff :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>( Z A is the charge of nucleus A and R A is its position; ρ ( r ) is the total electron density and V xc [ ρ ] the exchangecorrelation potential - the functional derivative of the exchange-correlation energy with respect to the density). The kinetic energy operator T = -1 2 ∇ 2 of the nonrelativistic treatment is simply replaced by the ZORA kinetic energy operator:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Clearly, in the regions where the potential V is small compared to c 2 , this operator reduces to the nonrelativistic kinetic energy. V could be the actual KS potential. However, this would require to solve the ZORA equations in a special way which demands recalculation of the kinetic energy in every SCF cycle. This becomes expensive and is also undesirable since the ZORA method is not gauge invariant and one obtains fairly large errors from such a procedure unless special precaution is taken. Van Wüllen [127] has therefore argued that it is a reasonable approximation to replace the potential V with a model potential ˜ V model which is constructed as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The model density is constructed as a sum over spherically symmetric (neutral) atomic densities:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Thus, this density neither has the correct number of electrons (for charged species) nor any spin polarization. Yet, in the regions close to the nucleus, where the relativistic effects matter, it is a reasonable approximation. The atomic density is expanded in a sum of s-type Gaussian functions like:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The fit coefficients were determined in three different ways by near basis set limit scalar relativistic atomic HF calculations and are stored as a library in the program. The fitting densities are available for elements up to Rn, as well as the actinoids. Through the variable ModelDens the user can choose between these fits and study the dependence of the results in this choice (it should be fairly small except, perhaps, with the heavier elements and the HF densities which are not recommended). The individual components of the model potential (eq. (2.41)) can be turned on or off through the use of the variable ModelPot . The available options for these keywords are listed in Section 2.12.9. For example:</p>
+<pre><code>! ZORA ZORA-def2-TZVP SARC/J # for more detail use %rel ModelPot 1,1,1,1 ModelDens rhoZORA end</code></pre>
+<h2>Á Attention</h2>
+<p>The ZORA method is highly dependent on numerical integration and it is very important to pay attention to the subject of radial integration accuracy! By default, from ORCA 5.0 we consider that during the grid construction and the defaults should work very well. Only for very problematic cases, consider using a higher IntAcc parameter or at least to increase the radial integration accuracy around the heavy atoms using SpecialGridAtoms and SpecialGridIntAcc (see Section 2.10.4).</p>
+<h2>2.12.4 The Douglas-Kroll-Hess Method</h2>
+<p>The Douglas-Kroll-Hess (DKH) method expands the exact relation (2.30) in the external potential V. In ORCA the first- and second-order DKH methods are implemented. The first-order DKH Hamiltonian is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>define the second-order contribution. In ORCA, the spin-free part of ˜ h (2) ++ is implemented.</p>
+<p>The occurrence of the relativistic kinetic energy, E P , which is not well-defined in position space, makes a transformation to the p 2 -eigenspace necessary. Thus any DKH calculation will start with a decontraction of the basis set, to ensure a good resolution of the identity. Then the non-relativistic kinetic energy is diagonalized and the E P -dependent operators calculated in that space. The potential V and V ( p ) are transformed to p 2 -eigenspace. After all with</p>
+<p>At second order, it reads where</p>
+<p>contributions are multiplied to yield the (first- or second-order) Hamiltonian, the transformation back to AO space is carried out and the basis is recontracted.</p>
+<p>The (spin-free) DKH-Hamiltonians contain all spin-free, relativistic correction terms, e.g. the mass-velocity and Darwin terms. As the potential enters linearly, no scaling or model potential is necessary to introduce the correct behaviour of the energy under a change</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In all these respects the DKH Hamiltonians are much cleaner than the regular approximation Hamiltonians.</p>
+<p>The first- or second-order DKH method be requested via the simple input keywords DKH1 or DKH2 , respectively ( DKH is an alias for the latter), together with appropriate basis sets:</p>
+<pre><code>! DKH DKH-def2-TZVP SARC/J</code></pre>
+<p>For most calculations, no other settings are needed. A full list of available keywords is given in Section 2.12.9.</p>
+<h2>Magnetic Properties with DKH</h2>
+<p>For magnetic properties, the DKH transformation and consequently the DKH Hamiltonian and the corresponding property operators are not unique. Depending on whether the magnetic field is included in the free-particle FoldyWouthuysen (fpFW) transformation carried out in the first step of the DKH protocol or not, two different Hamiltonians result. If the magnetic field is included in the fpFW transformation, the resulting Hamiltonian is a function of the gauge invariant momentum</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>It is therefore gauge invariant under gauge transformations of the magnetic vector potential A and thus are the property operators derived from it. This is referred to as f π FWDKHHamiltonian. If the magnetic field is not included in the FW transformation, the resulting Hamiltonian is a function of the kinetic momentum p only and thus is not gauge invariant. The latter Hamiltonian is referred to as fpFW DKH Hamiltonian. A comparison of both Hamiltonians is given in Table Table 2.53.</p>
+<table><caption><div class="caption">Table 2.53: Comparison of the properties of the fpFW and fπFW DKH Hamiltonians. For details see Ref. [128].</div></caption><tbody><tr><th>Criterion</th><th>fpFW Hamiltonian</th><th>fπFW Hamiltonian</th></tr><tr><th>Convergence of Eigenvalues to Dirac Eigenvalues</th><td>?</td><td>yes</td></tr><tr><th>1st order is bounded</th><td>no</td><td>yes</td></tr><tr><th>Reproduces Pauli Hamiltonian</th><td>no</td><td>yes</td></tr><tr><th>Gauge invariance</th><td>no</td><td>yes</td></tr><tr><th>Lorentz invariance</th><td>no</td><td>no</td></tr></tbody></table>
+<p>From this Table, it becomes clear that the f π FWDKHHamiltonian is clearly preferred over the fpFW Hamiltonian. To obtain the property operators, it is however necessary to take the derivatives of these Hamiltonians. It turns out that in the case of the hyperfine-coupling tensor, the necessary derivatives produce divergent property operators in the case of the f π FW DKH Hamiltonian. This may be due to the unphysical assumption of a point-dipole as a source of the magnetic field of the nucleus. As a physical description of the magnetization distribution of the nucleus is not available due to a lack of experimental data, the magnetization distribution is assumed to be the same as the charge distribution of the nucleus, see Section Finite Nucleus Model . This is unphysical as the magnetization is caused by the one unpaired nucleon in the nucleus whereas the charge distribution is generated by the protons in the nucleus. So, physically, the magnetization should occupy a larger volume in space than the charge. This might also be the reason why the resulting finite-nucleus model is insufficient to remedy the divergences in the f π FWhyperfinecoupling tensor. Consequently, the hyperfine-coupling tensor is only implemented in the version resulting from the fpFW DKH Hamiltonian. In the case of the g-tensor both versions are implemented and accessible via the keyword</p>
+<pre><code>%rel fpFWtrafo true/false end</code></pre>
+<p>By default, this keyword is set to true . Adetailed form of the property operators used for the g-tensor and hyperfinetensors can be found in Ref. [128].</p>
+<h2>2.12.5 Exact Two-Component Theory (X2C)</h2>
+<p>The X2C implementation in ORCA closely follows that of Franzke, Weigend, and their coworkers, described in the references: [129] (energy), [130] (gradient), [131] (EPR hyperfine coupling), [132] (NMR spin-spin coupling), [133] (NMR shielding). These are also consistent with the work of Gauss and coworkers in refs: [134] (gradient, electric properties), [135] (Hessian), [136] (NMR shielding). However, despite the name, only a scalar relativistic (spin-free) version is available at present, resulting effectively in a one-component method (more aptly called 'SF-X2C-1e'), very similar to the DKH and ZORA approaches described above. The main difference to the latter two is that the decoupling of the one-electron Dirac Hamiltonian is exact, rather than approximate. SF-X2C-1e is implemented in ORCA for energies, gradients, and various properties (see below) with both a point- and finite nucleus model.</p>
+<p>We briefly describe the working equations here, using the notation of the aforementioned references, which differs somewhat from that in the previous sections. The one-electron Dirac equation is solved directly:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>to obtain the unitary transformation matrix:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which exactly block-diagonalizes the Hamiltonian:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where V , T , S , and W are the potential, kinetic, overlap, and relativistic potential ( ˆ p ˆ V ˆ p ) integral matrices. h + is thus the matrix form of the relativistically-corrected one-electron Hamiltonian used for the rest of the calculation.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Note that the potential operator ˆ V used in the above equations only includes the electron-nuclear Coulomb interaction. External point charges may optionally be included via %rel ModelPot[4]=1 (default 0). This option affects energy and NMR shielding calculations but it is presently not available for gradients or Hessians.</p>
+<p>In the simplest case, it is sufficient to add the X2C simple keyword to the input and choose an appropriate basis set:</p>
+<p>! X2C X2C-TZVPall X2C/J</p>
+<h2>DLU Approximation</h2>
+<p>Thediagonal local approximation to the unitary transformation matrix (DLU), as introduced by Peng and Reiher,[137] reduces the computational cost of the X2C transformation by approximating U (i.e., R and X ) as an atomic-blockdiagonal matrix. It leads to very minor loss of accuracy and is particularly suited for gradient/Hessian calculations.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ⊕ A denotes a direct sum of atomic diagonal blocks. Eqs (2.48)-(2.51) can then be solved independently for diagonal atomic blocks h + AA . Off-diagonal blocks h + AB are obtained as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+</div>
+</body>
+</html>

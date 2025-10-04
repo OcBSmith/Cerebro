@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part060</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>5.41 Static Ground State DFT (SGS-DFT)</h2>
+<h2>5.41.1 Suitability of SGS-DFT for X-ray Spectroscopy</h2>
+<p>SGS-DFT reduces the complexity of many-electron systems to a one-electron framework by leveraging the KohnSham equations, focusing on electron density that is used to compute ground-state orbitals. In this concept, excited state problems can be constructed on the basis of orbital energy differences, in strict difference to excited state methodologies (e.g., TD-DFT, ROCIS, RASCI/CASCI/NEVPT2, MRCI/MREOM-CC). This simplicity makes it computationally efficient while still providing reliable results in a number of X-ray spectroscopy experiments, such as X-ray Absorption Spectroscopy (XAS), X-ray Emission Spectroscopy (XES), and Resonant Inelastic X-ray Scattering (RIXS).</p>
+<p>SGS-DFT has found significant applications in Valence-to-Core X-ray Emission Spectroscopy (VtC-XES), which probes valence orbitals via core-hole transitions, offering insights into ligand-metal interactions. It complements other one-electron methods like TD-DFT for XAS, as well as wavefunction-based approaches (ROCIS, RASCI/CASCI/NEVPT2, MRCI/MREOM-CC) and Ligand Field-based CI methods, balancing accuracy and computational cost. A collective review about all these methodologies their advantages and their limitationsisin computing X-ray spectroscopy spectra is provided in reference [458].</p>
+<h2>5.41.2 Summary of Cross Section Equations</h2>
+<p>In this section we sumarize the general, non-relativistic and releativistic expressions for cross sections in X-ray spectroscopy, including XAS, XES, and RIXS.</p>
+<p>Indices and Notations</p>
+<p>ρ, ρ ′ : Cartesian components of the dipole moment, summing over x, y, z , i.e., ρ, ρ ′ ∈ x, y, z .</p>
+<p>I : Initial state (ground state in general expressions).</p>
+<p>F : Final state in general cross-section and XAS expressions, with summation over F including all possible final states.</p>
+<p>V, V ′ : Intermediate states in RIXS expressions, with energies ϵ V , ϵ V ′ .</p>
+<p>i σ , j σ : Occupied 1-electron orbitals in non-relativistic treatment, where σ ∈ α, β denotes spin.</p>
+<p>a σ : Unoccupied 1-electron orbitals in non-relativistic treatment, with σ ∈ α, β .</p>
+<p>ν σ , ν ′ σ : Intermediate states in non-relativistic RIXS expressions, with σ ∈ α, β .</p>
+<p>ω ex : Excitation energy (incident radiation frequency).</p>
+<p>ω em : Emission energy (scattered radiation frequency in XES).</p>
+<p>ω sc : Scattering energy (used in RIXS for scattered radiation frequency).</p>
+<p>∆ ω : Energy transfer in RIXS, typically ∆ ω = ω ex -ω sc .</p>
+<p>ω FI : Transition energy between initial state I and final state F .</p>
+<p>ω V I : Transition energy between initial state I and intermediate state V .</p>
+<p>ω a σ i σ : Transition energy between unoccupied orbital a σ and occupied orbital i σ , defined as ϵ a σ -ϵ i σ .</p>
+<p>ω j σ i σ : Transition energy between occupied orbitals j σ and i σ , defined as ϵ j σ -ϵ i σ .</p>
+<p>ϵ a σ , ϵ i σ , ϵ ν σ , ϵ ν ′ σ : Orbital energies for unoccupied orbital aσ , occupied orbital i σ , and intermediate states ν σ , ν ′ σ .</p>
+<p>Γ , Γ ν σ , Γ ν ′ σ : Linewidth parameters for lifetime broadening.</p>
+<p>Γ F : Linewidth parameter for final state F .</p>
+<p>c : Speed of light ( ∼ 137 in atomic units).</p>
+<p>General Expressions m : Electric dipole transition operator, defined as m = ∑ i r i + ∑ A Z A R A , where r i are electron coordinates and Z A R A are nuclear contributions.</p>
+<h2>· XAS Cross Section</h2>
+<p>The XAS cross section, describing absorption from initial state I to final state F , is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>or equivalently:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>· XES Cross Section</h2>
+<p>The XES cross section, describing emission from an intermediate state to a final state F , is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>· RIXS Cross Section</h2>
+<p>The inelastic scattering cross section for RIXS is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>· Polarizability Tensor</h2>
+<p>The polarizability tensor from the Kramers-Heisenberg-Dirac expression is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.41.3 Orbitals, States, and Energies</h2>
+<p>The present treatment is based on a single one-electron approach. The orbitals come from a density functional theory (DFT) calculation and satisfy the Kohn-Sham equations</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where F KS is the Kohn-Sham operator, | ρ k ⟩ is a spin-orbital with spin σ k = 0 , β and ε k is the orbital energy. The Kohn-Sham operator is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where h is the one-electron Hamiltonian (kinetic energy plus electron-nuclear potential together with possibly present other external potentials), the second term presents the Coulomb repulsion where</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>is the electron density and the exchange correlation potential is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The quantity E xc [ ρ ] is the exchange-correlation functional. Associated with the Kohn-Sham procedure is the KohnSham determinant:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In general, occupied orbitals of the electronic ground state are labeled with i, j, k, . . . and unoccupied ones with a, b, c, . . . . In the one-electron approach, the initial, intermediate, and final states are constructed as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In the specific application at hand, orbital i is a core-orbital, e.g., the metal 1s derived orbital of a given absorber atom, a is an arbitrary unoccupied orbital (but most importantly an empty metal d-based orbital) and j is another core-level orbital of the same atom.</p>
+<p>Rather than trying to obtain accurate total energies for all of these states, the simple approximations are adopted:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This is of course fairly simplistic. In terms of time-dependent DFT, it can be shown that the orbital energy difference is a well-defined approximation to the state energy difference if no Hartree-Fock exchange is present in the DFT potential. For a semi-quantitative discussion it should be good enough since the substantial errors of the presently used DFT potentials prevent the calculations from predicting accurate transition energies anyways.</p>
+<h2>5.41.4 Non-Relativistic Treatment in 1-Electron Orbital Basis</h2>
+<p>In the non-relativistic treatment, states are expressed using 1-electron orbitals. The initial state is a Slater determinant of occupied orbitals i σ , and the final state involves excitations to unoccupied orbitals a σ , with σ ∈ α, β denoting the spin.</p>
+<h2>· Non-Relativistic XAS</h2>
+<p>The non-relativistic XAS cross section is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>or equivalently:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>· Non-Relativistic XES</h2>
+<p>The non-relativistic XES cross section is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>· Non-Relativistic Polarizability Tensor</h2>
+<p>The non-relativistic polarizability tensor is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Alternatively, if ω ex is tuned to resonance with an intermediate state, the dominant term is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Along the ω sc axis, this is a resonance centered at ε σ j -ε σ a . This suggests providing a list of ( i σ , j σ ) with transition energies E ω ex = ε σ a -ε σ i , E ω sc = ε σ a -ε σ j , and values |⟨ a σ | m ρ | i σ ⟩| 2 |⟨ i σ | m λ | j σ ⟩| 2 . Tools like orca_mapspc can read the linewidth and convolute peaks with a lineshape function, such as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This emphasizes that RIXS effectively measures L or M-edges through excitation at, e.g., the K-edge. Other lineshapes (Lorentzian, Gaussian, Voigt) are possible, as explained in sections (placeholder mapspc).</p>
+<h2>· Non-Relativistic RIXS</h2>
+<p>Hence the non-relativistic RIXS cross section becomes:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.41.5 Inclusion of Relativistic Effects</h2>
+<p>There are two leading types of relativistic effects: scalar relativistic (spin free) relativistic effects and spin-orbit coupling.</p>
+<h2>· Scalar Relativistic Effects</h2>
+<p>Scalar relativistic effects can be included employing various schemes as described in Relativistic Calculations by modifying the one-electron part of the HamiltonianThe scalar relativistic effects show up as an attractive potential close to the nucleus. Hence s -, and p -orbitals are stabilized, d - and f -orbitals are destabilized. Concomitant with these effects, the radial functions of s - and p -orbitals will contract those of d -orbitals will expand. Hence, transition dipole moments will also be modified</p>
+<h2>· Spin-Orbit Coupling (SOC)</h2>
+<p>The spin-orbit coupling is much more problematic since the SOC is a two-electron operator that couples different spin-manifold and pure-spin multiplets. A good approximation is the spin-orbit meanfield (SOMF) treatment The Spin-Orbit Coupling Operator In this case, the SOC shows up as an effective one-electron operator of the form::</p>
+<h2>· Inclusion of SOC in 1-electron framework</h2>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In \textit{ab initio} quantum chemistry one can use the Wigner-Eckart algebra in order to explicitly couple all M s substates for states of total spin S . This corresponds roughly to LS coupling in the atomic case. For the SGS-DFT approach that we use here this is not an option and hence we are tied to jj coupling type treatments. The more rigorous version of this approach are two-component DFT approaches. Here we try a simple version of this more elaborate procedure. It consists of diagonalizing the Kohn-Sham and SOC operators in the basis of the converged non- or scalar relativistic spin-orbitals. Hence, the eigenvalue equation is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The matrix elements are in more detail:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The matrix elements L pq , are the spatial parts of the SOC operator and have the property that they are antisymmetric L pq = -L pq .</p>
+<p>The diagonalization of this complex Hermitian matrix yields SOC corrected orbital energies and 'two component' orbitals that are linear combinations of the spin-free spin-orbitals:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>From these orbitals one readily calculates the transition moments:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the V 's are the eigenfunctions of the F + h SOC matrix. With these transition moments and orbital energies all XAS, XES and RIXS is computed as before; one simply has the spin-orbit label p .</p>
+<h2>5.41.6 Computations of X-ray Spectroscopic Properties</h2>
+<p>In the following examples we present a variety of X-ray spectroscopic employing the conventional BP86 in conjuctuon with the X2C relativstic hamiltonian and the reseoctive triple-zeta basis set. However in principle any relativistic scheme can be used instead Basis Sets in Relativistic Calculations</p>
+<p>We choose to describeexplicitely the X-ray computed spectra of the octagedral Fe III complex [ Fe III Cl 6 ] 3 -.</p>
+<pre><code>!BP86 X2C x2c-TZVPall-s x2c/J %xes #-------------------------------# General Definitions #-------------------------------CoreOrb 0,0 OrbOp 0,1 CoreOrbSOC 0,1 #-------------------------------# Spectroscopic Properties #-------------------------------DoXAS true DoSOC true #-------------------------------# Spectra Intensities #-------------------------------DoDipoleLength true DoFullSemiclassical true end * xyz -1 6 Fe -0.008368229 0.000000000 0.012210784 Cl -1.375773751 -1.142123897 -0.186609497 Cl -0.530592683 1.387798468 1.019718298 Cl 0.513856225 0.592852206 -1.597007114 Cl 1.359037292 -0.838526778 0.812741448 *</code></pre>
+<p>As the core of the SCF-XES or SGS-XES method involves the derivation of all important quantities in orbital and spin-orbital basis for computing the K-edge Fe XAS as well as the resepctive Mainline XES and the corresponding (Valence to Core) VtC-XES spectra one chooses the list of the desired core orbitals here the Fe 1 s with the resepctive Orbital (0 and 1) and SOC Orbital operators (here 0 and 1).</p>
+<pre><code>CoreOrb 0,0 OrbOp 0,1 CoreOrbSOC 0,1</code></pre>
+<p>And we compute both the:</p>
+<ul>
+<li style="list-style-type: '· ';">K α : Fe 2 p → Fe 1 s (Mainline XES)</li>
+<li style="list-style-type: '· ';">K β 1 , 3 : Fe 3 p → Fe 1 s (Mainline XES)</li>
+<li style="list-style-type: '· ';">K β 2 , 5 / K β ′ : ( Cl 2 p + Fe 3 d ) → Fe 1 s (VtC-XES)</li>
+</ul>
+<h2>besides the K-edge Fe XAS spectra</h2>
+<p>In the non relativistic section one then obtains the XAS and XES spectra within the ORCA's One-Photon Spectroscopy framework</p>
+<pre><code>--------------------------------------CALCULATION OF X-RAY EMISSION SPECTRUM --------------------------------------Reading and Transforming integrals ... Generating transition␣ ↪ → densities between Orbitals ... done Reading integrals ... Reading the Dipole integrals ... done Calculating the Full-semiclassical Transition moment on transition block:0 . ↪ → .. 10% done 20% done 30% done 40% done 50% done 60% done 70% done 80% done 90% done 100% done All done in ( 29.14 sec) --------------------------------------------------------------------Using One-Photon Spectroscopy Tool -------------------------------------------------------------------------------------------------------------------------------------------------------↪ → -----------------X-RAY EMISSION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → -----------------Transition Energy Energy Wavelength fosc(D2) D2 DX ␣ ↪ → DY DZ (eV) (cm-1) (nm) (au**2) (au) ␣ ↪ → (au) (au) -----------------------------------------------------------------------------------↪ → -----------------1a-a -> 0a-a 4243.560625 34226628.2 0.3 0.000000000 0.00000 0. ↪ → 00000 -0.00000 -0.00000 2a-a -> 0a-a 4243.562891 34226646.5 0.3 0.000000000 0.00000 0. ↪ → 00000 0.00000 0.00000 3a-a -> 0a-a 4243.563723 34226653.2 0.3 0.000000000 0.00000 -0. ↪ → 00000 0.00000 -0.00000 4a-a -> 0a-a 4243.563845 34226654.2 0.3 0.000000000 0.00000 0. ↪ → 00000 0.00000 -0.00000 1b-a -> 0b-a 4243.609379 34227021.5 0.3 0.000000000 0.00000 0. ↪ → 00000 -0.00000 -0.00000 2b-a -> 0b-a 4243.611639 34227039.7 0.3 0.000000000 0.00000 0. ↪ → 00000 0.00000 0.00000 3b-a -> 0b-a 4243.612467 34227046.4 0.3 0.000000000 0.00000 0. ↪ → 00000 -0.00000 0.00000 4b-a -> 0b-a 4243.612590 34227047.4 0.3 0.000000000 0.00000 0.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><td>↪ 00000</td><td>0.00000</td><td></td><td>-0.00000</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>→ 5a-a ↪ → 00000</td><td>-&gt; 0a-a 0.00000</td><td>6174.919612 0.00000</td><td>49804090.7</td><td>0.2</td><td></td><td>0.000000000</td><td>0.00000</td><td>-0.</td></tr><tr><td>5b-a ↪ → 00000</td><td>-&gt; 0b-a 0.00000</td><td>6176.509051 0.00000</td><td>49816910.3</td><td></td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>-0.</td></tr><tr><td>6a-a 02354</td><td>-&gt; 0a-a 0.00780</td><td>6296.393596 -0.00648</td><td>50783844.5</td><td></td><td>0.2</td><td>0.101316564</td><td>0.00066</td><td>-0.</td></tr><tr><td>↪ → 7a-a</td><td>-&gt; 0a-a 0.00037</td><td>6296.393628 0.02474</td><td>50783844.8</td><td></td><td>0.2</td><td>0.101316573</td><td>0.00066</td><td>-0.</td></tr><tr><td>↪ → 00668 8a-a ↪ 00762</td><td>-&gt; 0a-a -0.02441</td><td>6296.393675 -0.00169</td><td></td><td>50783845.1</td><td>0.2</td><td>0.101316586</td><td>0.00066</td><td>-0.</td></tr><tr><td>→ 6b-a 02425</td><td>-&gt; 0b-a -0.00783</td><td>6297.611741 0.00303</td><td></td><td>50793669.5</td><td>0.2</td><td>0.101563788</td><td>0.00066</td><td>0.</td></tr><tr><td>↪ → 7b-a ↪ → 00317</td><td>-&gt; 0b-a 0.00003</td><td>6297.611770 0.02546</td><td></td><td>50793669.7</td><td>0.2</td><td>0.101563797</td><td>0.00066</td><td>-0.</td></tr><tr><td>8b-a ↪ → 00777</td><td>-&gt; 0b-a -0.02443</td><td>6297.611810 -0.00094</td><td>50793670.1</td><td></td><td>0.2</td><td>0.101563807</td><td>0.00066</td><td>-0.</td></tr><tr><td colspan="9">...</td></tr><tr><td colspan="9">----------------------------------------------------------------------------- X-RAY EMISSION SPECTRUM VIA FULL SEMI-CLASSICAL FORMULATION</td></tr><tr><td colspan="3">Transition</td><td>Energy (eV)</td><td>Energy (cm-1)</td><td>----------------------------------------------------------------------------- Wavelength (nm)</td><td colspan="3">fosc(FFMIO)</td></tr><tr><td>1a-a</td><td>-&gt;</td><td>0a-a</td><td>4243.560625</td><td>34226628.2</td><td>0.3</td><td colspan="3">-----------------------------------------------------------------------------</td></tr><tr><td>2a-a</td><td>-&gt;</td><td>0a-a</td><td>4243.562891</td><td>34226646.5</td><td>0.3</td><td colspan="3">0.00000000000264</td></tr><tr><td>3a-a</td><td>-&gt;</td><td>0a-a</td><td>4243.563723</td><td>34226653.2</td><td>0.3</td><td colspan="3">0.00000000000270</td></tr><tr><td>4a-a</td><td>-&gt;</td><td>0a-a</td><td>4243.563845</td><td>34226654.2</td><td>0.3</td><td colspan="3">0.00000000000328</td></tr><tr><td>1b-a</td><td>-&gt;</td><td>0b-a</td><td>4243.609379</td><td>34227021.5</td><td>0.3</td><td colspan="3">0.00000000000163</td></tr><tr><td>2b-a</td><td>-&gt;</td><td>0b-a</td><td>4243.611639</td><td>34227039.7</td><td>0.3</td><td colspan="3">0.00000000000264</td></tr><tr><td>3b-a</td><td>-&gt;</td><td>0b-a</td><td>4243.612467</td><td>34227046.4</td><td>0.3</td><td colspan="3">0.00000000000270</td></tr><tr><td>4b-a</td><td>-&gt;</td><td>0b-a</td><td>4243.612590</td><td>34227047.4</td><td>0.3</td><td colspan="3">0.00000000000327 0.00000000000163</td></tr><tr><td>5a-a</td><td>-&gt;</td><td>0a-a</td><td>6174.919612</td><td>49804090.7</td><td>0.2</td><td colspan="3">0.00000000000007</td></tr><tr><td>5b-a</td><td>-&gt;</td><td>0b-a</td><td>6176.509051</td><td>49816910.3</td><td>0.2</td><td colspan="3">0.00000000000006</td></tr><tr><td>6a-a</td><td>-&gt;</td><td>0a-a</td><td>6296.393596</td><td>50783844.5</td><td>0.2</td><td colspan="3">0.10239197992333</td></tr><tr><td>7a-a</td><td>-&gt;</td><td>0a-a</td><td>6296.393628</td><td>50783844.8</td><td>0.2</td><td colspan="3">0.10239199025533</td></tr><tr><td>8a-a</td><td>-&gt;</td><td>0a-a</td><td>6296.393675</td><td>50783845.1</td><td>0.2</td><td colspan="3">0.10239200379726</td></tr><tr><td>6b-a</td><td>-&gt;</td><td>0b-a</td><td>6297.611741</td><td>50793669.5</td><td>0.2</td><td colspan="3">0.10265622291301</td></tr><tr><td>7b-a</td><td>-&gt;</td><td>0b-a</td><td>6297.611770</td><td>50793669.7</td><td>0.2</td><td colspan="3">0.10265623313526</td></tr><tr><td>8b-a</td><td>-&gt;</td><td>0b-a</td><td>6297.611810</td><td>50793670.1</td><td>0.2</td><td colspan="3">0.10265624471656</td></tr><tr><td colspan="9">---------------------------------------- CALCULATION OF X-RAY ABSORPTION SPECTRUM</td></tr><tr><td colspan="9">----------------------------------------</td></tr><tr><td colspan="9">Reading integrals ...</td></tr><tr><td colspan="9">Reading the Dipole integrals ... done Calculating the Full-semiclassical Transition moment on transition block:0 . ↪ → .. 10% done 20% done</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th>All done in</th><th>(</th><th>105.64</th><th>sec)</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="10">-------------------------------------------------------------------- Using One-Photon Spectroscopy Tool --------------------------------------------------------------------</td></tr><tr><td colspan="10">-----------------------------------------------------------------------------------</td></tr><tr><td colspan="2">↪ → ----------------- Transition DY DZ</td><td>----------------------------------------------------------------------------------- Energy</td><td>Energy</td><td></td><td>Wavelength</td><td>fosc(D2)</td><td>D2</td><td>DX</td><td>␣</td></tr><tr><td colspan="2">↪ →</td><td>(eV)</td><td>(cm-1)</td><td colspan="2">(nm)</td><td></td><td>(au**2)</td><td>(au)</td><td>␣</td></tr><tr><td colspan="2">↪ → (au)</td><td>(au)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th colspan="10">----------------------------------------------------------------------------------- ↪ → -----------------</th></tr><tr><td>0b-a → 00000</td><td>-&gt; 45b-a 0.00000</td><td>6988.978848 -0.00000</td><td colspan="2">56369921.9</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ 0b-a 00000</td><td>-&gt; 46b-a -0.00000</td><td>6988.978999 -0.00000</td><td colspan="2">56369923.1</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 0b-a ↪ → 00045</td><td>-&gt; 47b-a 0.00053</td><td>6990.167972 0.00040</td><td colspan="2">56379512.8</td><td>0.2</td><td>0.000111632</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>0b-a 00048</td><td>-&gt; 48b-a -0.00060</td><td>6990.168059 0.00026</td><td colspan="2">56379513.5</td><td>0.2</td><td>0.000111638</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>↪ → 0b-a ↪ 00047</td><td>-&gt; 49b-a 0.00010</td><td>6990.168100 -0.00065</td><td colspan="2">56379513.8</td><td>0.2</td><td>0.000111637</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>→ 0a-a ↪ → 00000</td><td>-&gt; 50a-a 0.00000</td><td>6992.570956 0.00000</td><td colspan="2">56398894.2</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>0b-a 00000</td><td>-&gt; 50b-a 0.00000</td><td>6992.689756</td><td colspan="2">56399852.4</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>↪ → 0a-a ↪ → 00036</td><td>-&gt; 51a-a -0.00006</td><td>0.00000 6995.905926 0.00029</td><td colspan="2">56425792.5</td><td>0.2</td><td>0.000037002</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>0a-a ↪ → 00006</td><td>-&gt; 52a-a -0.00046</td><td>6995.906125 -0.00003</td><td colspan="2">56425794.1</td><td>0.2</td><td>0.000036975</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>0a-a 00029</td><td>-&gt; 53a-a</td><td>6995.906494</td><td colspan="2">56425797.1</td><td>0.2</td><td>0.000037064</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>↪ → 0a-a</td><td>-0.00002 -&gt; 54a-a</td><td>-0.00036 6996.058845</td><td colspan="2">56427025.9</td><td>0.2</td><td>0.000006536</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00010 0a-a ↪ 00016</td><td>-0.00009 -&gt; 55a-a</td><td>0.00014 6996.059201 -0.00005</td><td colspan="2">56427028.8</td><td>0.2</td><td>0.000006569</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>→ 0a-a</td><td>0.00010 -&gt; 56a-a</td><td>6996.059311</td><td colspan="2">56427029.7</td><td>0.2</td><td>0.000006619</td><td>0.00000</td><td>-0.</td><td></td></tr><tr><td>↪ → 00004 0b-a ↪ → 00021</td><td>0.00014 -&gt; 51b-a -0.00015</td><td>0.00013 6996.206394 -0.00013</td><td colspan="2">56428216.0</td><td>0.2</td><td>0.000014342</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td colspan="10">----------------------------------------------------------------------------- X-RAY ABSORPTION SPECTRUM VIA FULL SEMI-CLASSICAL FORMULATION</td></tr><tr><th colspan="3">Transition Energy</th><th>Energy (cm-1)</th><th colspan="2">Wavelength (nm)</th><th colspan="4">----------------------------------------------------------------------------- fosc(FFMIO)</th></tr><tr><th colspan="10">(eV) -----------------------------------------------------------------------------</th></tr><tr><td>0b-a</td><td>-&gt; 45b-a</td><td>6988.978848</td><td colspan="2">56369921.9</td><td>0.2</td><td colspan="4">0.00000231997701</td></tr><tr><td>0b-a</td><td>-&gt; 46b-a</td><td>6988.978999</td><td colspan="2">56369923.1</td><td>0.2</td><td colspan="4">0.00000232027335</td></tr><tr><td>0b-a</td><td>-&gt; 47b-a</td><td>6990.167972</td><td colspan="2">56379512.8</td><td>0.2</td><td colspan="4">0.00011661916478</td></tr><tr><td>0b-a</td><td>-&gt; 48b-a</td><td>6990.168059</td><td colspan="2">56379513.5</td><td>0.2</td><td colspan="4">0.00011662652902</td></tr><tr><td>0b-a</td><td>-&gt; 49b-a</td><td>6990.168100</td><td colspan="2">56379513.8</td><td>0.2</td><td colspan="4">0.00011662384321</td></tr><tr><td>0a-a</td><td>-&gt; 50a-a</td><td>6992.570956</td><td></td><td></td><td>0.2</td><td colspan="4">0.00000000000014</td></tr><tr><td>0b-a</td><td>-&gt; 50b-a</td><td>6992.689756</td><td colspan="2">56398894.2 56399852.4</td><td>0.2</td><td colspan="4">0.00000000000008</td></tr><tr><td>0a-a</td><td>-&gt; 51a-a</td><td>6995.905926</td><td colspan="2">56425792.5</td><td>0.2</td><td colspan="4">0.00004544364720</td></tr><tr><td>0a-a</td><td>-&gt; 52a-a</td><td>6995.906125</td><td colspan="2">56425794.1</td><td>0.2</td><td colspan="4">0.00004540088165</td></tr><tr><td>0a-a</td><td>-&gt; 53a-a</td><td>6995.906494</td><td colspan="2">56425797.1</td><td>0.2</td><td colspan="4">0.00004552596978</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<pre><code>0a-a -> 54a-a 6996.058845 56427025.9 0.2 0.00001087977536 0a-a -> 55a-a 6996.059201 56427028.8 0.2 0.00001092658019 0a-a -> 56a-a 6996.059311 56427029.7 0.2 0.00001099716202 0b-a -> 51b-a 6996.206394 56428216.0 0.2 0.00001669184884</code></pre>
+<h2>The program the proceeds to generate the SOC corrected orbitals</h2>
+<pre><code>-----------------------------------------XES/XAS SPECTRUM WITH SPIN ORBIT COUPLING -----------------------------------------Reading the SOC integrals ... done Forming the SOC Hamiltonian ... done Diagonalizing the SOC Hamiltonian ... done -------------------------------SOC CORRECTED OCCUPIED ORBITALS -------------------------------E[ 0] = -6987.772 eV: ( -0.512 + -0.859 *i)| 0a> E[ 1] = -6987.756 eV: ( 0.002 + -1.000 *i)| 0b> E[ 2] = -2744.212 eV: ( 0.383 + -0.924 *i)| 1a> E[ 3] = -2744.209 eV: ( -0.772 + -0.636 *i)| 2a> E[ 4] = -2744.208 eV: ( -0.952 + 0.307 *i)| 3a> E[ 5] = -2744.208 eV: ( -0.923 + 0.384 *i)| 4a> E[ 6] = -2744.147 eV: ( -0.001 + -1.000 *i)| 1b> E[ 7] = -2744.144 eV: ( 0.001 + -1.000 *i)| 2b> E[ 8] = -2744.144 eV: ( 0.244 + 0.970 *i)| 3b> E[ 9] = -2744.143 eV: ( 0.025 + -1.000 *i)| 4b> E[ 10] = -812.853 eV: ( 0.512 + -0.859 *i)| 5a> E[ 11] = -811.247 eV: ( 0.163 + 0.987 *i)| 5b> E[ 12] = -698.833 eV: ( 0.548 + -0.181 *i)| 6a> ( 0.155 + -0.009 *i)| ␣ ↪ → 7a> ( 0.177 + 0.568 *i)| 8a> ( -0.534 + -0.000 *i)| 7b> E[ 13] = -698.431 eV: ( 0.072 + -0.139 *i)| 6a> ( -0.275 + 0.529 *i)| ␣ ↪ → 7a> ( 0.393 + -0.388 *i)| 6b> ( 0.392 + 0.394 *i)| 8b> E[ 14] = -687.512 eV: ( -0.671 + 0.134 *i)| 6a> ( -0.165 + 0.082 *i)| ␣ ↪ → 7a> ( 0.150 + 0.689 *i)| 8a> E[ 15] = -687.067 eV: ( -0.092 + 0.176 *i)| 6a> ( 0.350 + -0.673 *i)| ␣ ↪ → 7a> ( 0.309 + -0.305 *i)| 6b> ( 0.308 + 0.310 *i)| 8b> E[ 16] = -686.654 eV: ( -0.349 + 0.116 *i)| 6a> ( -0.113 + -0.362 *i)| ␣ ↪ → 8a> ( -0.837 + -0.000 *i)| 7b> E[ 17] = -686.266 eV: ( 0.500 + 0.493 *i)| 6b> ( 0.499 + -0.501 *i)| ␣ ↪ → 8b></code></pre>
+<h2>in following all spectra are recomputed in the OPS framework in the presence of SOC</h2>
+<pre><code>Generating transition densities between SOC_Corrected_Orbitals ... done ------------------------------------------------------CALCULATION OF SOC CORRECTED X-RAY EMISSION SPECTRUM ------------------------------------------------------Reading integrals ... Reading the Dipole integrals ... done Calculating the Full-semiclassical Transition moment on transition block:0 . ↪ → .. 10% done 20% done 30% done 40% done 50% done 60% done 70% done 80% done</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th colspan="2">90% done 100% done All done in</th><th>( 58.75 sec)</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th colspan="9">-------------------------------------------------------------------- Using One-Photon Spectroscopy Tool -------------------------------------------------------------------- -----------------------------------------------------------------------------------</th></tr><tr><th colspan="9">↪ → --------------------- SPIN-ORBIT X-RAY EMISSION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS</th></tr><tr><th>↪ → ↪ → |DY|</th><th colspan="2">--------------------- Transition |DZ|</th><td>Energy</td><th>Energy</th><th>Wavelength</th><th>fosc(D2)</th><th>D2</th><th>|DX|␣</th><td></td></tr><tr><th>↪ →</th><td></td><td>(eV)</td><th>(cm-1)</th><th>(nm)</th><td></td><th>(au**2)</th><th>(au)␣</th><td></td></tr><tr><td></td><th colspan="2">(au) (au)</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th colspan="9">----------------------------------------------------------------------------------- ↪ → ---------------------</th></tr><tr><th>2-a ↪ 00000</th><th>-&gt; 0-a</th><th>4243.560625</th><th>34226628.2</th><th>0.3</th><th>0.000000000</th><th>0.00000</th><th>0.</th><td></td></tr><tr><td>→ 2-a</td><td>0.00000 -&gt; 1-a</td><td>0.00000 4243.544569</td><td>34226498.7</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 3-a</td><td>0.00000 -&gt; 0-a</td><td>0.00000 4243.562891</td><td>34226646.5</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 3-a</td><td>0.00000 -&gt; 1-a</td><td>0.00000 4243.546835</td><td>34226517.0</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 4-a ↪ → 00000</td><td>0.00000 -&gt; 0-a 0.00000</td><td>0.00000 4243.563723 0.00000</td><td>34226653.2</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>4-a 00000</td><td>-&gt; 1-a 0.00000</td><td>4243.547667</td><td>34226523.7</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 5-a ↪ 00000</td><td>-&gt; 0-a 0.00000</td><td>0.00000 4243.563845 0.00000</td><td>34226654.2</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>→ 5-a 00000</td><td>-&gt; 1-a 0.00000</td><td>4243.547790 0.00000</td><td>34226524.7</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 6-a</td><td>-&gt; 0-a</td><td>4243.625435 0.00000</td><td>34227151.0</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 6-a</td><td>0.00000 -&gt; 1-a</td><td>4243.609379</td><td>34227021.5</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 7-a</td><td>0.00000 -&gt; 0-a</td><td>0.00000 4243.627694</td><td>34227169.2</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 7-a</td><td>0.00000 -&gt; 1-a</td><td>0.00000 4243.611639</td><td>34227039.7</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 8-a</td><td>0.00000 -&gt; 0-a</td><td>0.00000 4243.628523</td><td>34227175.9</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 8-a 00000</td><td>0.00000 -&gt; 1-a 0.00000</td><td>0.00000 4243.612467 0.00000</td><td>34227046.4</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 9-a</td><td>-&gt; 0-a</td><td>4243.628646</td><td>34227176.9</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 00000 9-a 00000</td><td>0.00000 -&gt; 1-a 0.00000</td><td>0.00000 4243.612590 0.00000</td><td>34227047.4</td><td>0.3</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 10-a ↪ → 00000</td><td>-&gt; 0-a 0.00000</td><td>6174.919612 0.00000</td><td>49804090.7</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>10-a 00000</td><td>-&gt; 1-a 0.00000</td><td>6174.903556 0.00000</td><td>49803961.2</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>↪ → 11-a ↪ 00000</td><td>-&gt; 0-a 0.00000</td><td>6176.525107 0.00000</td><td>49817039.8</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>→ 11-a ↪ 00000</td><td>-&gt; 1-a 0.00000</td><td>6176.509051 0.00000</td><td>49816910.3</td><td>0.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td>→ 12-a ↪</td><td>-&gt; 0-a</td><td>6288.939050</td><td>50723719.5</td><td>0.2</td><td>0.072768392</td><td>0.00047</td><td>0.</td><td></td></tr><tr><td>→ 01537 12-a</td><td>0.01537 -&gt; 1-a</td><td>0.00000 6288.922994</td><td>50723590.0</td><td>0.2</td><td>0.029738152</td><td>0.00019</td><td>0.</td><td></td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<pre><code>↪ → 00000 0.00000 0.01389 13-a -> 0-a 6289.340683 50726958.9 0.2 0.039112694 0.00025 0. ↪ → 00000 0.00000 0.01593 13-a -> 1-a 6289.324627 50726829.4 0.2 0.063473047 0.00041 0. ↪ → 01435 0.01435 0.00000 14-a -> 0-a 6300.260175 50815030.6 0.2 0.100751569 0.00065 0. ↪ → 01807 0.01807 0.00000 ... and so on for the rest of the spectra tables</code></pre>
+<p>All Spectra are generated using orca_mapspc with [Options] for XAS, XES, XASFFMIO and XESSFFMIO, including electric dipole (ED), with full field matter interaction operator (FFMIO) with and without SOC:</p>
+<pre><code>orca_mapspc FileName.out [Options] -x06000 -x18000 -w2.0 -n10000</code></pre>
+<p>The computed XAS spectra in the electric dipole approximation EDA, and employing the FFMIO semicalssical operator with and wthout SOC are shown in Figure Fig. 5.73.</p>
+<figure><figcaption><div class="caption">Fig. 5.73: Comparison of the calculated SGS-DFT Fe K-edge XAS spectra of [ FeCl 4 ] 1 -. within the EDA (blue) and FFMIO (red) approximations.</div></figcaption></figure>
+<p>In following the computed K α : Mainline XES spectra employing the FFMIO semicalssical operator with and wthout SOC are shown in Figure Fig. 5.74. In the case of SOC one observes explicitely the SOC splitting owning to the 2p core-hole in the 2p → Fe 1 s (Mainline XES) electron decay process.</p>
+<figure><figcaption><div class="caption">Fig. 5.74: Comparison of the calculated SGS-DFT K α : Mainline XES spectra of [ FeCl 4 ] 1 -. employing the FFMIO semicalssical operator with SOC (red) and without SOC (blue) corrections.</div></figcaption></figure>
+<p>in this state to orbital approach where in principle every orbital excitation constitute a state withing the SGS-DFT framework, in the same calculation setup, one also obtains in addition all accesible electron decay processes. This means that in addition to the</p>
+<p>K β 1 , 3 : Fe 3 p → Fe 1 s (Mainline XES) as well as the K β 2 , 5 / K β ′ : ( Cl 2 p + Fe 3 d ) → Fe 1 s (VtC-XES) maybe accessed as is shown in Figure Fig. 5.75.</p>
+<figure><figcaption><div class="caption">Fig. 5.75: Calculated SGS-DFT K β : Mainline XES (red) and VtC XES (blue) spectra of [ FeCl 4 ] 1 -. employing the FFMIO semicalssical operator with SOC corrections</div></figcaption></figure>
+<p>In the same framework one can also compute Simple RIXS spectra in the Direct RIXS fashion… To become available in the next minor release. For more information about the RIXS spectra theory and generation please have a look in section: Resonant Inelastic Scattering Spectroscopy</p>
+<p>The entire keyword setup in the %xes block of SCF-XES or SSS-DFT method is given below</p>
+<p>(continues on next page)</p>
+<p>#-------------------------------</p>
+<p>DoDipoleLength true # Calculate Spectra in Electric Dipole EDA (Length/Velocity) DoFullSemiclassical true # Calculate Spectra in Semiclassical FFMIO framework end</p>
+<h2>Note</h2>
+<p>It is in general not recomended to compute X-ray spectra with complex multiplet structure via the SGS-DFT approach. This involves e.g. metal L/M-edge XAS spectra, K α : Fe 2 p → Fe 1 s and K β 1 , 3 : Fe 3 p → Fe 1 s (Mainline XES) as well as RIXS spectra. The computation of such spectroscopic problem is preferably tackled on the basis of wavefunction methodologies:</p>
+<ul>
+<li style="list-style-type: '· ';">ROCIS and CASCI/RASCI (in combination with NEVPT2) or multirefernce approaches (e.g. MREOMCC) and MCRPA are able to tackle a variety of such complex spectroscopes, see discussions in Transition Metal L-Edges with ROCIS or DFT/ROCIS , Resonant Inelastic Scattering Spectroscopy , Core Excited Spectra: CAS-CI/RAS-CI XES , Excited States via MCRPA</li>
+<li style="list-style-type: '· ';">In a similar framework TD-DFT has been proven instrumental in computing metal and ligand K-edge spectra, see discussions in Excited States via RPA, CIS, TD-DFT and SF-TDA .</li>
+<li style="list-style-type: '· ';">Core level spectroscopy spectra (presently Metal/Ligand K-edge XAS) can also be computed with couplecluster (EOM-CC, STEOM-CC) methods see discussions in Core-Level Spectroscopy with Coupled Cluster Methods</li>
+</ul>
+<p>(continued from previous page)</p>
+<h2>MULTISCALE SIMULATIONS</h2>
+<h2>6.1 Overview on ORCA's Multiscale Implementation</h2>
+<p>ORCAfeatures five primary methods suitable for diverse applications such as proteins, DNA, large molecules, explicit solvation, and crystalline solids:</p>
+<ul>
+<li style="list-style-type: '· ';">Additive QM/MM for proteins and DNA/RNA.</li>
+<li style="list-style-type: '· ';">QM1/QM2 (2-layered ONIOM) for small proteins, RNA, large molecules and explicit solvation.</li>
+<li style="list-style-type: '· ';">QM1/QM2/MM (3-layered ONIOM) for proteins and DNA/RNA.</li>
+<li style="list-style-type: '· ';">MOL-CRYSTAL-QMMM for molecular crystals.</li>
+<li style="list-style-type: '· ';">IONIC-CRYSTAL-QMMM for semiconductors and insulators.</li>
+</ul>
+<p>All methods integrate seamlessly with other ORCA modules, simplifying the preparation and execution of multiscale calculations.</p>
+<p>The multiscale features are optimally connected to all other modules and tools available in ORCA allowing the user to handle multiscale calculations from a QM-centric perspective in a simple and efficient way, with a focus on simplifying the process to prepare, set up and run multiscale calculations. Since version 6.1 ORCA provides an automated tool for setting up QM and active regions, which is described here .</p>
+<p>From the input side all methods share a common set of concepts and keywords, which will be outlined in this section. In subsequent sections the different methods are described and further input options are discussed.</p>
+<h2>6.1.1 Combining Multiscale Features with other ORCA Features</h2>
+<p>The multiscale features can be used together with all other possible ORCA methods:</p>
+<ul>
+<li style="list-style-type: '· ';">Single Point Calculations : Use all kinds of available electronic structure methods as QM method.</li>
+<li style="list-style-type: '· ';">Optimization : Use all kinds of geometry optimizations with all kinds of constraints, TS optimization, relaxed surface scans, and the ScanTS feature. Use the L-Opt and L-OptH features including the combination of all kinds of fragment optimizations (fix fragments, relax fragments, relax only specific elements in fragments, treat a fragment as a rigid body).</li>
+<li style="list-style-type: '· ';">Transition States and Minimum Energy Paths : Use all kinds of Nudged-Elastic Band calculations Nudged-Elastic Band calculations (Fast-NEB-TS, NEB, NEB-CI, NEB-TS, including their ZOOM variants) and Intrinsic Reaction Coordinate calculations. (not implemented for MOL-CRYSTAL-QMMM and IONIC-CRYSTAL-QMMM )</li>
+</ul>
+<p>•</p>
+<ul>
+<li style="list-style-type: '· ';">Conformational Searches : Conformational Searches can be run with ORCA's GOAT module.</li>
+<li style="list-style-type: '· ';">Frequency Calculations : Use regular frequency calculations . If required, ORCA automatically switches on the Partial Hessian Vibrational Analysis (PHVA) [531] calculation. (not tested for IONIC-CRYSTAL-QMMM )</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">Molecular Dynamics : Use the Molecular Dynamics (MD) module for Born-Oppenheimer MD (BOMD) with QM/MM in combination with all kinds of electronic structure methods. (not implemented for MOL-CRYSTAL-QMMM and IONIC-CRYSTAL-QMMM )</li>
+<li style="list-style-type: '· ';">Property Calculation : All kinds of regular property calculations are available. For electrostatic embedding the electron density is automatically perturbed by the surrounding point charges.</li>
+<li style="list-style-type: '· ';">Excited State Calculations : Use all kinds of excited state calculations (TD-DFT, EOM, single point calculations, optimizations, frequencies).</li>
+</ul>
+<h2>6.1.2 Required Settings for a Multiscale Simulation</h2>
+<p>In the following, the basic concepts are introduced.</p>
+<ul>
+<li style="list-style-type: '· ';">QMatoms : The user can define the QM region either directly, or via flags in a pdb file. See QM and Active Region Definition . For an automated buildup</li>
+<li style="list-style-type: '· ';">of the QM region with miminal user input see here .</li>
+<li style="list-style-type: '· ';">Active Atoms : The user can choose an active region, e.g. for geometry optimizations the atoms that are optimized, for a frequency calculation the atoms that are allowed to vibrate for the PHVA, or for an MD run the atoms that are propagated. More background is provided here . Input options on how to define the active region in an automated way or in an explicit way are provided below.</li>
+</ul>
+<p>A minimal user input for an ONIOM2 type calculation looks like this.</p>
+<pre><code>!QM/XTB %qmmm QMCoreAtoms {7 12} end ActiveCoreAtoms {7 12} end end *xyz 0 1 ...</code></pre>
+<p>Other aspects that often need to be addressed for multiscale simulations are treated automatically and with reasonable defaults- which can, of course, be controlled by the user. The boundary treatment , i.e. bonds that have to be cut between QM and MM region, and the treatment of overpolarization is covered in the paragraph Boundary Region . Available embedding types are discussed in section Embedding Types . QM2 atoms , which define the low-level region in 3-layer ONIOM calculations, are discussed in section QM2 Atoms .</p>
+<p>Detailed information on the different available input and runtime options and additionally available keywords (see Additional Keywords ) are given below.</p>
+<h2>Note</h2>
+<p>In order to check the multiscale setup done by ORCA, without the need to run the entire simulation, you can invoke the keyword ! QMMMSetup . This makes sure that ORCA stops after the multiscale preparation. The information on the QMMM setup is printed in the output, and a file with the QM region including link atoms is stored ( basename_QM.xyz ).</p>
+<h2>6.1.3 QM and Active Region Definition</h2>
+<p>QMand active region atoms can be defined in three different ways:</p>
+<ul>
+<li style="list-style-type: '· ';">Explicit definition of all atom indices.</li>
+<li style="list-style-type: '· ';">Defining the most important atoms (the core atoms) and ORCA determines the full QM and active region.</li>
+<li style="list-style-type: '· ';">Definition in a pdb file.</li>
+</ul>
+<h2>Explicit Definition of QM and Active Region</h2>
+<p>The QM and active region can be directly defined in the input as shown in the following example:</p>
+<pre><code>%qmmm QMAtoms {0 1 2 27 28} end # lists of atoms (counting starts from 0) or ActiveAtoms {0:5 16 21:30} end # ranges of atoms (range defined via start:end) end *pdbfile 0 1 ubq.pdb</code></pre>
+<h2>Automated Definition of QM and Active Region</h2>
+<p>A standard approach in the QMMM scientific literature for defining QM and active regions involves:</p>
+<h2>Identifying Important Atoms or Functional Groups</h2>
+<p>Examples include:</p>
+<ul>
+<li style="list-style-type: '· ';">Atoms involved directly in bond formation or breakage.</li>
+<li style="list-style-type: '· ';">Functional groups essential for spectroscopy.</li>
+<li style="list-style-type: '· ';">Metal ions central to catalytic activities.</li>
+<li style="list-style-type: '· ';">Entire molecules or ligands binding to proteins.</li>
+<li style="list-style-type: '· ';">Additional criteria as necessary.</li>
+</ul>
+<h2>Including Surrounding Atoms</h2>
+<ul>
+<li style="list-style-type: '· ';">Include all atoms within a defined spatial distance around these important atoms.</li>
+</ul>
+<h2>Applying Rules to Avoid Artifacts</h2>
+<p>Specifically ensure that:</p>
+<ul>
+<li style="list-style-type: '· ';">The boundary between QM and MM regions cuts through a non-polarized single bond.</li>
+<li style="list-style-type: '· ';">The topological distance between two QM-MM cuts (the MM gap) is sufficiently large,</li>
+<li style="list-style-type: '· ';">preventing overly close placement of link atoms.</li>
+</ul>
+<h2>Automated procedure in ORCA 6.1</h2>
+<p>In ORCA 6.1, an automatic scheme has been developed to manage this multistep process. Users specify only key atoms ( core atoms) that define the core part of the QM and active regions.</p>
+<p>ORCA requires:</p>
+<ul>
+<li style="list-style-type: '· ';">Knowledge of the system's topology .</li>
+<li style="list-style-type: '· ';">Information about functional groups within the system.</li>
+</ul>
+<p>Using the newly introduced fragmentation procedure , ORCA automatically determines this information at the start of the calculation. Functional groups are stored as separate fragments based on the user-selected fragmentation procedure.</p>
+<h2>Steps of the Automated Procedure (Illustrated for QM Region; analogous steps apply for active regions)</h2>
+<ol>
+<li style="list-style-type: '1. ';">Accept user-defined input QMCoreAtoms .</li>
+<li style="list-style-type: '2. ';">If QMCore_Type is Fragments , extend QMCoreAtoms to entire fragments, producing an updated QMCoreAtoms set.</li>
+<li style="list-style-type: '3. ';">Determine all atoms within QMCore_Extension Å around QMCoreAtoms , yielding QMAtoms .</li>
+<li style="list-style-type: '4. ';">If QMCoreExtension_Type is Fragments , extend QMAtoms to entire fragments, updating the set again.</li>
+<li style="list-style-type: '5. ';">Include any explicitly user-defined atoms ( QMAtoms ) in the automatically generated set.</li>
+<li style="list-style-type: '6. ';">If CheckAutoFragForQMGaps is true , verify no topologically close QM atoms are separated by fewer MMatoms than QMGap_MinLength . If so, add necessary connecting fragments to QMAtoms .</li>
+<li style="list-style-type: '7. ';">If CheckAutoFragBoundaries is true , ensure that QM-MM boundaries do not cut polarized or problematic bonds.</li>
+<li style="list-style-type: '8. ';">Repeat steps 6 and 7 until no further fragments need addition.</li>
+</ol>
+<p>You can add the keyword QMMMSetup to your input. This allows you to check the autogenerated QM region ( basename_QM.xyz ) and verify the charge and multiplicity required for the actual multiscale calculation. that is needed for the actual multiscale calculation.</p>
+<p>The automated QM and active region setup can be defined in the input as shown in the following example:</p>
+<pre><code>! QM/XTB ! QMMMSetup # just do the preparation and stop %qmmm QMCoreAtoms {2032} end ActiveCoreAtoms {2032} end frag FragProc NABackbone, NASideChains, FunctionalGroups, Extend, Connectivity end end *xyz 0 1</code></pre>
+<figure><figcaption><div class="caption">Fig. 6.1: QM region for QMCoreAtom 2032. Left is the QM region in ball-and-stick style as part of the full system in cartoon style, right is the QM region with link atoms.</div></figcaption></figure>
+<p>In the above example, which is a ligand bound to RNA, we first define the fragments using the fragmentator ) using RNA specific groups and functional groups (for the ligand), and then build the QM and active region around the ligand (atom 2032 is an atom of the ligand).</p>
+<pre><code>! QMMMSetup # just do the preparation and stop ! QMMM %qmmm ORCAFFFilename "reactant.ORCAFF.prms" QMCoreAtoms {183 2745} end ActiveCoreAtoms {183 2745} end frag FragProc SEQBACKBONE, AASCFINEGRAINED, FUNCTIONALGROUPS, EXTEND, Connectivity UseTopology true TopolFile "reactant.ORCAFF.prms" end end *pdbfile 0 1 reactant.pdb</code></pre>
+<p>In the above example, involving a covalent ligand bound within a protein active site, we first define the fragments using the fragmentator , specifying protein-specific groups and functional groups for ligands and cofactors. We then construct the QM and active regions around the two critical atoms directly involved in the covalent binding process: atom 183 from the Cys reside, and atom 2745 from the covalently binding ligand.</p>
+<p>Table 6.1: Options to automatically define the QM and active region.</p>
+<table><tbody><tr><th>Op- tions</th><th>Description</th></tr><tr><td>{ints. ..}</td><td>Defines the core atoms of the QM region. Single indices can be given as int int . Ranges of atom indices can be provided as int:int . All these can be combined.</td></tr><tr><td>ACTIVECOREATOMS {ints} As de- fined here</td><td>Defines the core atoms of the active region.</td></tr><tr><td>Fragments Atoms</td><td>(Default) Take as QM core the atoms that the user defines plus all atoms of the fragments which they belong to. Take as QMcore only the atoms that the user defines.</td></tr><tr><td>QMCoreExtension_Type Fragments Atoms</td><td>(Default) Take as QMAtoms the atoms that belong to fragments which have at least one atom which has a distance of less than QMCore_Extension to any of the QMCoreAtoms . Take as QMAtoms the atoms that have a distance of less than</td></tr><tr><td>true /</td><td>ing fragments to QMAtoms . Topological distance between two QM atoms which determines whether the con- MMatoms are considered as a QMgap. Default 3 CheckAutoFragBoundaries false Check whether a QM-MM bond is an unpolar single bond. If not, add the MM</td></tr><tr><td>QMGap_MinLength 0 to 6</td><td>necting</td></tr><tr><td>ActiveCore_Type Fragments</td><td>atom&#x27;s fragment to QMAtoms . (Default) Take as active core the atoms that the user defines plus all atoms of the</td></tr><tr><td>Atoms</td><td>fragments which they belong to. Take as active core only the atoms that the user defines.</td></tr><tr><td>ActiveCoreExtension_Type Fragments</td><td>(Default) Take as ActiveAtoms the atoms that belong to fragments which have least one atom which has a distance of less than any of the ActiveCoreAtoms .</td></tr><tr><td>Atoms</td><td>at ActiveCore_Extension to Take as ActiveAtoms the atoms that have a distance of less than</td></tr><tr><td>ActiveCore_Extension real</td><td>ActiveCore_Extension to any of the ActiveCoreAtoms . Distance by how much the active core is extended to yield ActiveAtoms . De- fault 5.</td></tr><tr><td>true /</td><td>CheckAutoFragForQMGaps_Active false Check whether two active atoms show a gap, i.e. they are topologically connected by more than QMGap_MinLength non-active atoms and if so, add the connect- ing fragments to ActiveAtoms .</td></tr><tr><td>true /</td><td>CheckAutoFragBoundaries_Active false Check whether a active-nonactive bond is an unpolar single bond. If not, add the atom&#x27;s fragment to ActiveAtoms .</td></tr><tr><td></td><td>non-active</td></tr></tbody></table>
+<p>®</p>
+<h2>Note</h2>
+<p>Automated setup can be combined with explicit definition of QM or active atoms via QMAtoms and ActiveAtoms .</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part024</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>2 2 2 2 2 0 1 1 0 2 2 2 2 2 0 2 0 0 2 2 2 2 2 1 0 0 1 2 2 2 2 2 1 0 1 0 2 2 2 2 2 1 1 0 0 2 2 2 2 2 2 0 0 0 end DoDipoleVelocity true DecomposeFosc true rel dosoc true XESSOC true XASMOs 59 DoDTensor false DoVelocity true end end %method SpecialGridAtoms 26 #Increase the radial integration accuracy on Fe SpecialGridIntAcc 7 #Requested radial integration accuracy values end * xyz -2 5 Fe 0 0 0 Cl 2.40 0 0 Cl -2.40 0 0 Cl 0 2.40 0 Cl 0 -2.40 0 Cl 0 0 2.40 Cl 0 0 -2.40 *</code></pre>
+<p>In ORCA 6 all these type of inputs have been unified across the wavefunction based modiles (e.g. CASSCF MRCI, RASCI, ROCIS and LFT) so in a similar fashion to X-ray Spectroscopy one can also specify the respective RAS excitation space as following:</p>
+<pre><code>%casscf nel 12 norb 9 nroots 1000, 1000 mult 7, 5 maxiter 1 refs ras(12:4 1/5/ 0 0) end DoDipoleVelocity true DecomposeFosc true rel DoSOc true Xessoc true xasmos 59 DoDTensor false DoVelocity true end end</code></pre>
+<p>In the above inputs one notes that the exact knowledge of the states to saturate the excitations space is not required. One only need to specify a large number (e.g. 1000) and the program will automatically detect the required 19 septet and 270 quintet states:</p>
+<pre><code>BLOCK 1 WEIGHT= 0.5000 Multiplicity ... 7 #(Configurations) ... 4 #(CSFs) ... 4 #(Roots) ... 1000 WARNING (ORCA_CASSCF): NRoots > NCSFs. Adjusting to maximum number of roots.␣ ↪ → Please check the output carefully! #(Roots) ... 4 ... BLOCK 2 WEIGHT= 0.5000 Multiplicity ... 5 #(Configurations) ... 89 #(CSFs) ... 105 #(Roots) ... 1000 WARNING (ORCA_CASSCF): NRoots > NCSFs. Adjusting to maximum number of roots.␣ ↪ → Please check the output carefully! #(Roots) ... 105</code></pre>
+<h2>By now running the above input for the 4 septet and the 81 quintet states the following output is generated</h2>
+<pre><code>-----------------------------------------------------------------------------------↪ → ---------------------SOC CORRECTED EMISSION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → ---------------------Transition Energy Energy Wavelength fosc(D2) D2 |DX|␣ ↪ → |DY| |DZ| (eV) (cm-1) (nm) (au**2) (au)␣ ↪ → (au) (au) -----------------------------------------------------------------------------------↪ → ---------------------421-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000000870 0.00000 ␣ ↪ → 0.00000 0.00000 0.00007 423-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000001088 0.00000 ␣ ↪ → 0.00006 0.00006 0.00000 424-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000000898 0.00000 ␣ ↪ → 0.00002 0.00003 0.00006 422-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000000000 0.00000 ␣ ↪ → 0.00000 0.00000 0.00000 426-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000001048 0.00000 ␣ ↪ → 0.00005 0.00005 0.00003 425-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000000664 0.00000 ␣ ↪ → 0.00005 0.00004 0.00001 427-7.0A -> 420-5.0A 7084.189573 57137848.2 0.2 0.000000653 0.00000 ␣ ↪ → 0.00004 0.00004 0.00000 421-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000001233 0.00000 ␣ ↪ → 0.00007 0.00005 0.00003 423-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000000354 0.00000 ␣ ↪ → 0.00002 0.00002 0.00004 422-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000001427 0.00000 ␣ ↪ → 0.00004 0.00008 0.00000 424-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000000467 0.00000 ␣ ↪ → 0.00005 0.00002 0.00001 426-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000000216 0.00000 ␣ ↪ → 0.00003 0.00002 0.00001 425-7.0A -> 419-5.0A 7084.189691 57137849.2 0.2 0.000001334 0.00000 ␣ ↪ → 0.00001 0.00002 0.00009 421-7.0A -> 418-5.0A 7084.189691 57137849.2 0.2 0.000000757 0.00000 ␣ ↪ → 0.00000 0.00005 0.00004 ...</code></pre>
+<p>Finally by processing the .out file with orca_mapspc:</p>
+<pre><code>orca_mapspc fecl6_xes.out XESSOC -x07000 -x17200 -w4.0 -eV -n10000</code></pre>
+<p>and by plotting the resulted XES spectrum one will get the respective RASCI-XES spectrum presented in Fig. 3.23 This will result in Fig. 3.23.</p>
+<figure><figcaption><div class="caption">Fig. 3.23: Calculated RASCI K β Mainline XES spectrum of [ Fe ( Cl ) 6 ] 3+</div></figcaption></figure>
+<p>Since Orca 6.0 the computed transition moments in the presence of SOC can be taken beyond the dipole approximation by using the OPS tool, check section Section 5.14 for details.</p>
+<p>All the possible approximations can be requested with the following commands:</p>
+<pre><code>#Non-Relativistic/Relativistic treatment %casscf DoDipoleLength true DoDipoleVelocity true DecomposeFosc true DoFullSemiclassical true end</code></pre>
+<pre><code>® Note The recomended process for generating XES spectra · within the electric dipole approximation (EDA) is via DoDipoleLength or DoDipoleVelocity</code></pre>
+<ul>
+<li style="list-style-type: '· ';">beyond EDA, employing the Full Field Matter Interatcion Operator FFMIO via the DoFullSemiclassical</li>
+</ul>
+<p>Orca_mapspc can process all these files. The list of the relevant keywords in the case of RASCI-XES protocol is</p>
+<pre><code>XESSOC #This will process the SOC corrected beyond the electric dipole␣ ↪ → approcimation (EDA) XESSOCFFMIO #This will process the SOC corrected FFMIO X-ray Emission spectra</code></pre>
+<p>A more complete list can be found in ( orca_mapspc )</p>
+<h2>Note</h2>
+<p>This is inpriciple the recomended protocol for computing X-ray related spectra XAS, XES, RXES, RIXS:</p>
+<ul>
+<li style="list-style-type: '· ';">As it provides more direct and computationally efficient protocol for computing</li>
+<li style="list-style-type: '· ';">Metal K, L and M edge XAS spectra</li>
+<li style="list-style-type: '· ';">K α : Fe 2 p → Fe 1 s</li>
+<li style="list-style-type: '· ';">K β 1 , 3 : Fe 3 p → Fe 1 s (Mainline XES)</li>
+<li style="list-style-type: '· ';">K β 2 , 5 / K β ′ : ( Cl 2 p + Fe 3 d ) → Fe 1 s (VtC-XES)</li>
+<li style="list-style-type: '· ';">as well the respective resonant XES (RIXS) spectra.</li>
+<li style="list-style-type: '· ';">Combined with NEVPT2 the protocol can actually treat quite challenging cases in terms of electron correltion.</li>
+<li style="list-style-type: '· ';">Weshould mention that within the limits of their applicability XES and RIXS spectra can also be computed on the basis of Static Ground State DFT (SGS-DFT), see discussion in Static Ground State DFT (SGS-DFT) and ROCIS family of methods, see discussion in Resonant Inelastic Scattering Spectroscopy .</li>
+<li style="list-style-type: '· ';">A general discussion regarding X-ray spectroscopy experiements and how to approach them on the basis of modern computational spectroscopy methodologies is provided in reference [458]</li>
+</ul>
+<h2>3.14 Approximate Full CI Calculations in Subspace: ICE-CI</h2>
+<h2>3.14.1 Introduction</h2>
+<p>In many circumstances, one would like to generate a wavefunction that is as close as possible to the full-CI result, but Full CI itself is out of the question for computational reasons. Situations in which that may be desirable include a) one wants to generate highly accurate energies for small molecules or b) one wants to sort out a number of low-lying states or c) one wants to run CASSCF calculations with larger active spaces than the about fourteen orbitals that have been the state of the art for a long time.</p>
+<p>ORCA features a method that has been termed Iterative-Configuration Expansion Configuration Interaction (ICECI).[443, 444] It is based on much older ideas brought forward by Jean-Paul Malrieu and his co-workers in the framework of the CIPSI (an abbreviation for a method with a rather bulky name Configuration Interaction by Perturbation with multiconfigurational zeroth-order wave functions Selected by Iterative process ) in the early 1970s.</p>
+<p>The goal of the ICE-CI is to provide compact wavefunction(s) (e.g. one or several states) close to the full-CI limit at a small fraction of the computational cost. However, ICE-CI itself is not designed to deal with hundreds of atoms or thousands of basis functions. Thus, unlike, say DLPNO-CCSD(T) which is a high accuracy method for treating large sytems, ICE-CI is either a highly robust high accuracy method for very small systems or a 'building block' for large systems. By itself it can treat a few dozen electrons and orbitals - e.g. much more than full CI - but it cannot</p>
+<p>do wonders. Its scope is similar to the density matrix renormalization group (DMRG) or Quantum Monte Carlo Full CI (QMCFCI) procedures.</p>
+<p>ICE-CI should be viewed as a multireference approach. It is self-adaptive and robust, even in the presence of near or perfect degeneracies. It yields orthogonal states (when applied to several states) and spin eigenfunctions. It also yields a density and a spin density.</p>
+<h2>3.14.2 The ICE-CI and CIPSI Algorithms</h2>
+<p>The general idea of ICE-CI is straightforward: Consider a many-particle state that has at least a sizeable contribution from a given configuration n 0 (this is a set of occupation numbers for the active orbitals that are n 0 p = 0 , 1 or 2 ( p = any active orbital). By nature of the non-relativisitic Hamiltonian only configurations that differ by at most two orbital occupations from n 0 will interact with it. We can use perturbation theory to select the subset of singles and doubles that interact most strongly with n 0 and then solve the variational problem. We can then analyze the CI vector for configurations that make a dominant contribution to the ground state. Say, we single out the configurations with C 2 I &gt; T gen . This defines the 'generator' set of configurations. The other configurations are called 'variational' configurations. They are treated to infinite order by the variational principle, but are not important enough to bring in their single and double excitations. In the next iteration, we perform singles and doubles relative to these general configurations and select according to their interaction with the dominant part of the previous CI vector (truncated to the generators). This procedure can be repeated until no new important configurations are found and the total energy converges (See Fig. 3.24).</p>
+<figure><figcaption><div class="caption">Fig. 3.24: Flowchart of the ICE-CI procedure.</div></figcaption></figure>
+<p>The described procedure is very similar to Malrieu's three level CIPSI procedure. One major technical difference, is that ICE is centered around configurations and configuration state functions rather than determinants . Aconfiguration is a set of occupation numbers 0, 1 or 2 that describes how the electrons are distributed among the available spatial orbitals. A configuration state function (CSF) is created by coupling the unpaired spins in a given configuration to a</p>
+<p>given total spin S . In general there are several, if not many ways to construct a linearly independent set of CSFs. CSFs on the other hand can be expanded in terms of Slater determinants, but there are more Slater determinants to a given configuration than CSFs. For example for a CAS(14,18) calculation one has about 10 9 determinants, but only about 3x10 8 CSFs and 3x10 7 configurations. In the configuration based ICE (CFG-ICE) all logic happens at the level of configurations. That is, it is the relationship between two configurations that determines whether and if yes, by which integrals the CSFs or determinants of two given configurations interact. Since the configuration space is so much more compact than the determinant space substantial computational benefit can be realized by organizing the calculation around the concept of a configuration. In general, in CFG-ICE all CSFs that belong to a given configuration are included and all selection quantities are summed over all CSFs of a given configuration before it is decided whether this CSFs is included or not. In the configuration state functions based ICE (CSF-ICE) the logic of generation and selection occurs at the level of individual CSFs and therefore we get rid of the requirement to carry around all the CSFs for a given configuration. This provides substantial gains in the case of molecules containing a large number of transition metal atoms, where each atom contains a high-spin center. In such cases only a few CSFs of a the dominant CFG play a dominant role and other show negligible contribution to the wavefunction. Finally, in some cases the original determinant based CIPSI procedure could be preferred. Such cases can be handled by the determinant based ICE termed DET-ICE. The three variants of ICE therefore cover all the possible types of multi-reference systems that one encounters in quantum chemistry.</p>
+<p>It should be noted that although the procedure contains a perturbative element, the final energy is strongly dominated by the variational energy and hence, for all intents and purposes, the ICE-CI procedure is variational (but not rigorously size consistent - size consistency errors are on the same order of magnitude as the error in absolute energy).</p>
+<h2>3.14.3 A Simple Example Calculation</h2>
+<p>Let us look at a simple calculation on the water molecule:</p>
+<pre><code># # Check the ICECI implementation # ! SV %ice nel 10 # number of active electrons norb 13 # number of active orbitals nroots 1 # number of requested roots integrals exact # exact 4-index transformation # can be set to RI to avoid bottlenecks icetype CFGs # The configuration based ICE-CI CSFs # The CSF based ICE-CI DETs # The determinnat based ICE-CI # please choose one of these three Tgen 1e-04 # value for Tgen. Default is 1e-4 Tvar 1e-11 # value for Tvar. Default is 1e-11 (1e-7*Tgen) etol 1e-06 # energy convergence tolerance end * int 0 1 O 0 0 0 0.0 0.000 0.000 H 1 0 0 1.0 0.000 0.000 H 1 2 0 1.0 104.060 0.000 *</code></pre>
+<p>Let us look at the output:</p>
+<pre><code>------------------------------------------------------------------------------ORCA Iterative Configuration Expansion - a configuration driven CIPSI type approach -</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>------------------------------------------------------------------------------(some startup information) Making an initial 'Aufbau' configuration ... done Performing S+D excitations from 1 configs ... done ( 0.0 sec) NCFG=581 Performing perturbative selection ... done ( 0.0 sec) # of configurations before selection ... 581 # of configurations after selection ... 191 'rest' energy (probably not very physical) ... -3.736391e-10 ****************************** * ICECI MACROITERATION 1 * ****************************** # of active configurations = 191 Now calling CI solver (269 CSFs) (...) CI SOLUTION : STATE 0 MULT= 1: E= -76.0463127108 Eh W= 1.0000 DE= 0.000 eV 0.0 cm**-1 0.95752 : 2222200000000 Selecting new configurations ... done ( 0.0 sec) # of selected configurations ... 191 # of generator configurations ... 69 Performing single and double excitations relative to generators ... done ( 0.0␣ ↪ → sec) # of configurations after S+D ... 13174 Selecting from the generated configurations ... done ( 0.1 sec) # of configurations after Selection ... 3827 Root 0: -76.046312711 -0.000000063 -76.046312773 (...) ****************************** * ICECI MACROITERATION 3 * ****************************** # of active configurations = 3866 Now calling CI solver (9606 CSFs) CI SOLUTION : STATE 0 MULT= 1: E= -76.0539542296 Eh W= 1.0000 DE= 0.000 eV 0.0 cm**-1 0.95097 : 2222200000000 (...) ********* ICECI IS CONVERGED ********* (one final CI) ******************************************** ** ICECI Problem solved in 2.6 sec ** ******************************************** FINAL CIPSI ENERGIES Final CIPSI Energy Root 0: -76.053954291 EH</code></pre>
+<p>From the output the individual steps in the calculation are readily appreciated. The program keeps cycling between variational solution of the CI problem, generation of new configurations and perturbative selection until convergence of the energy is achieved. Normally, this occurs rapidly and rarely requires more than five iterations. The result will be close to the Full CI result.</p>
+<p>Let us look at a H2O/cc-pVDZ calculation in a bit more detail (See Fig. 3.25). The calculation starts out with a single Hartree-Fock configuration. The first iteration of ICE-CI creates the singles and doubles and altogether 544 configurations are selected. These singles and doubles bring in about half of the correlation energy. Already</p>
+<p>the second iteration, which leads to 73000 selected CSFs provides a result close to the full CI. At this point up to quadruple excitations from the Hartree-Fock reference have been included. It is well known that such quadruple excitations are important for the correct behavior of the CI procedure (near size consistency will come from the part of the quadruple excitations that are products of doubles). However, only a very small fraction of quadruples will be necessary for achieving the desired accuracy. In the first iteration the procedure is already converged and provides 99.8% of the correlation energy, using 0.5% of the CSFs in the full CI space and at less than 0.2% the calculation time required for solving the full CI problem. Hence, it is clear that near exact results can be obtained while realizing spectacular savings.</p>
+<h2>H2O, cc-pVDZ, 1s frozen, 8 electrons, 23 orbitals TGen=10-4, Tvgr=10-11</h2>
+<table><caption><div class="caption">Fig. 3.25: An ICE-CI calculation on the water molecule in the cc-pVDZ basis (1s frozen)</div></caption><tbody><tr><td></td><th>Energy</th><th>N(CFG)</th><th>N(CSF)</th><th>time(sec)</th></tr><tr><td>Hartree-Fock</td><td>-76.0260966</td><td>1</td><td>1</td><td>2</td></tr><tr><td></td><td colspan="3">1977 CrG&#x27;s genarated, 544 selocted</td><td>&lt;0.1</td></tr><tr><td>lter=1</td><td>-76.2292278</td><td>544</td><td>805 S+D</td><td>0.3</td></tr><tr><td></td><td colspan="3">98717 crG&#x27;s generated, 22471 selacted</td><td>1.1</td></tr><tr><td>lter=2</td><td>-76.2412460</td><td>22471</td><td>73296 T+Q</td><td>17.1</td></tr><tr><td></td><td colspan="3">10677 CrG&#x27;s generated, 2324l salactad</td><td>2.2</td></tr><tr><td>lter=3</td><td>-76.2412769</td><td>23241</td><td>75705 P+H</td><td>20.1</td></tr><tr><td></td><td colspan="3">10677 crG&#x27;s generated, 23241 selacted</td><td>3.3</td></tr><tr><td>lter=4</td><td>-76.2412769</td><td>23241</td><td>75705 $+O</td><td>20.1</td></tr><tr><td></td><td>99.75t of Ec</td><td>0.57%</td><td>0.4%</td><td>83.5 (1 final CI) 0.18% of FCI</td></tr><tr><td>Full-CI</td><td>-76.2418240</td><td>4065963</td><td>18818646</td><td>44529.0</td></tr></tbody></table>
+<h2>3.14.4 Accuracy</h2>
+<p>The accuracy of the procedure is controlled by two parameters Tgen and Tvar Since we have found that Tvar = 10 -7 Tgen always provides converged results, this choice is the default. However, Tvar can be set manually. It can be reduced considerably in order to speed up the calculations at the expense of some accuracy. Our default values are Tgen = 10 -4 and Tvar = 10 -11 . This provides results within about 1 mEh of the full CI results (roughly speaking, a bit better than CCSDT for genuine closed-shell systems).</p>
+<p>During the development of ICE-CI systematic test calculations have been performed using a reference set of 21 full CI energies on small molecules. The convergence pattern of the mean absolute error is shown in Fig. 3.26. It is evident from the figure that the convergence of ICE-CI towards the FCI result is very smooth and that high accuracy can be obtained. In fact, the default settings lead to an accuracy of &lt;1 mEh deviation to the full-CI result. µ Eh accuracy can be achieved by further tightening. The achieved accuracy relative to accurate coupled-cluster results shows that the accuracy of even CCSDTQ can be surpassed by ICE-CI. The achievable accuracy is only limited by the value of Tgen and much less so by the value of Tvar. Hence, it is advisable to use a value for T var that is essentially converged and control the accuracy of the procedure by Tgen.</p>
+<figure><figcaption><div class="caption">Fig. 3.26: Convergence of the ICE-CI procedure towards the full CI results for a test set of 21 full CI energy. Shown is the RMS error relative to the Full CI results. The corresponding errors for various coupled-cluster variants is shown by broken horizontal lines.</div></figcaption></figure>
+<h2>3.14.5 Scaling behavior</h2>
+<p>ICE-CI will break the factorial scaling of the full CI problem and scale polynomially. The actual order of the polynomial scaling is system dependent and accuracy dependent. In order to provide some impression, consider some calculations on linear polyene chains.</p>
+<figure><figcaption><div class="caption">Fig. 3.27: Polyene chains used for scaling calculations.</div></figcaption></figure>
+<p>The results are displayed in the Fig. 3.28. It is evident from Fig. 3.28 that ICE-CI breaks the factorial scaling of the full CI problem. In fact, for a thresholds of T gen = 10 -4 , 10 -3 and 10 -2 the observed scalings are approximately O (N 8 ) , O (N 7 ) and O (N 6 ) respectively. These numbers will obviously be very system dependent but should serve as a rough guide. The calculations become quickly much more expensive if Tgen is tightened. A rule of thumb is that each order of magnitude tightening of Tgen increases the computation time by a factor of 10. The above calculations have been performed on a simple desktop computer and it was already possible to solve a CAS(30,30) problem in less than one day of elapsed time using the default thresholds. Large active spaces will require either loosening of the tresholds or large, more powerful machines.</p>
+<figure><figcaption><div class="caption">Fig. 3.28: Scaling behavior of ICE-CI for linear polyene chains (Full π -electron active space) as a functions of system size for different generator thresholds.</div></figcaption></figure>
+<h2>3.14.6 Accuracy of the Wavefunction</h2>
+<p>The accuracy of the many particle wavefunction is not straightforward to check. A reasonable measure, however, is how well it converges towards the exact result for one-electron expectation values. Since every expectation value can be written in terms of natural orbitals of the one-particle density as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ˆ o ( x i ) is an arbitrary one-particle operator, D pq is the density matrix of the ICE-CI wavefunction, ˜ ψ p are the natural orbitals of the ICE-CI wavefunction and n p are their occupations numbers. It is reasonable to take the deviation of the natural orbital occupation numbers as a measure for wavefunction convergence.</p>
+<p>For example, we treat the H2O/cc-pVDZ problem again. From the results in Fig. 3.29 it becomes evident that the ICE-CI wavefunction is fairly accurate. At the default threshold the occupation numbers agree to within 10 -3 with the full CI reference numbers, which means that expectation values will be of similar accuracy. Interestingly, the largest errors occur in the region of the HOMO-LUMO gap, where apparently all approximate wavefunction approaches tend to depopulate the high lying orbitals too much and put too much electron density in the low lying empty orbitals. From comparison, it is seen, that the CCSD natural occupation numbers for this problem are significantly less accurate. Hence, this is evidence that the ICE-CI wavefunction is properly converging to the right result.</p>
+<figure><figcaption><div class="caption">Fig. 3.29: Convergence of the ICE-CI natural orbital occupation numbers. The upper panel is showing the Full CI occupation numbers, the lower panel the deviation of the ICE-CI values from these exact values. For comparison, the CCSD natural orbital occupation numbers are also provided.</div></figcaption></figure>
+<h2>3.14.7 Potential Energy Surfaces</h2>
+<p>You can use ICE-CI to scan entire potential energy surfaces. In general, the non-parallelity error along a potential energy surface is very small. Thus, ICE-CI yields consistent quality throughout the surface.</p>
+<p>For example, let us look at the potential energy surface of the N2 molecule (Fig. 3.30) - a common test case for quantum chemical methods. There are not too many methods that would disscociate the triple bond of N2 correctly ICE-CI is one of them. The potential energy surface is entirely smooth and also correctly behaves in the dissociation limit. Near the minimum it is very close to high-level coupled-cluster methods that, however, all fail badly as the bond is stretched.</p>
+<figure><figcaption><div class="caption">Fig. 3.30: Potential energy surface of the N 2 molecule in the SV basis. For comparison higher level coupled-cluster results are also shown.</div></figcaption></figure>
+<p>It is interesting to observe the variations of the ICE-CI wavefunction along the dissociation potential energy surface. As an example, we look at the dissociation curve of H2O where both O-H bonds are simultaneously stretched (Fig. 3.31). It is seen that the ICE-CI method is extremely parallel to the full CI curve at all distances. Hence, the description of the bond remains consistent, even when Hartree-Fock becomes a bad approximation. The agreement is particularly good if MP2 natural orbitals are used in the ICE-CI procedure. With the default value of T gen = 10 -4 and MP2 natural orbitals the error is consistently below 0.2 mEh. For tighter thresholds, the error is below 0.05 mEh. By contrast, the CCSD(T) method shows relatively large deviations from the full CI results and also behaves very non-parallel as a function of O-H distance.</p>
+<figure><figcaption><div class="caption">Fig. 3.31: Non-parallelity error of ICE-CI for the H 2 Omolecule in the SV basis. Shown is the deviation from the full CI value as a function of O-H distance (both bonds stretched). For comparison, the CCSD(T) curve is also shown</div></figcaption></figure>
+<p>It is instructive to analyze the ICE-CI wavefunction along the dissociation pathway (Fig. 3.32). It becomes apparent that the wavefunctions stays compact along the entire surface, even in the dissociation limit, where the weight of the Hartree-Fock wavefunction drops to less than 25%. Even in this drastic limit, the ICE-CI wavefunction consists of only about 60000 CSFs, which is very similar to the size of the wavefunction at equilibrium geometry. As the wavefunction becomes more multiconfigurational, the number of generator configurations goes slightly up from the equilibrium value of 77 to a maximum of 118 and finally 112 at dissociation. It is also interesting to note that along the entire dissociation pathway no configuration with more than 8 open shells is generated, which means that no more than quadruple excitations are contained in the ICE-CI wavefucntion. The number of iterations required in the ICE-CI procedure also stays constant along the surface at 4 iterations, which impressively shows that a dominant configuration is not necessary for a successful ICE-CI calculation.</p>
+<figure><figcaption><div class="caption">Fig. 3.32: Analysis of the ICE-CI wavefunction along the O-H dissociation pathway.</div></figcaption></figure>
+<h2>3.14.8 Excited States</h2>
+<p>ICE-CI can be used to obtain some insight into excited states starting from no knowledge at all. Of course, the best was to start an excited state calculation is to have some idea which configurations are important for the low-lying states of the system. If this is not the case, an automated procedure is used. The program will first generate an 'Aufbau' configuration using the orbitals that are provided on input. Starting from this Aufbau configuration, single excitations at the configuration level are performed an the Hamiltonian is diagonalized for the required number of roots. These roots are then analyzed for the leading configurations and the regular ICE-CI procedure is started from those configurations. For example, look at a calculation on the CN radical. In this case, we know the relevant orbitals and leading configurations for the lowest four roots (a doublet Σ ground state, a doublet Π excited state and a doublet Σ excited state) and hence can provide them in the input file as shown below.</p>
+<pre><code># ! cc-pVDZ VeryTightSCF %maxcore 4096 %casscf nel 7 norb 4 nroots 4 mult 2 end %ice nel 9 norb 26 nroots 4 cimode 3 tvar 1e-11 tgen 1e-4</code></pre>
+<p>(continues on next page)</p>
+<pre><code>refs { 2 2 2 2 1 } { 2 2 2 1 2 } { 2 2 1 2 2 } { 2 1 2 2 2 } end end * xyz 0 2 C 0 0 0 N 0 0 1.07 *</code></pre>
+<p>The result is shown below. The excitation energies are reasonable but not highly accurate due to the limitations of the basis set (experimentally the doublet Π state is at 1.32 eV and the doublet Σ state at 3.22 eV). There is a very slight symmetry breaking In the doublet Π state that arises from the selection procedure. It should be noted that the state averaged CASSCF excitation energies are 0.25 eV and 3.18 eV.</p>
+<pre><code>STATE 0 MULT= 2: E= -92.4542949092 Eh W= 0.2500 DE= 0.000 eV 0.0 cm**-1 0.67408 : 22221000000000000000000000 STATE 1 MULT= 2: E= -92.3777338429 Eh W= 0.2500 DE= 2.083 eV 16803.2 cm**-1 0.65997 : 22212000000000000000000000 0.12092 : 22122000000000000000000000 0.11545 : 22221000000000000000000000 STATE 2 MULT= 2: E= -92.3776916150 Eh W= 0.2500 DE= 2.084 eV 16812.5 cm**-1 0.69860 : 21222000000000000000000000 0.16565 : 22122000000000000000000000 STATE 3 MULT= 2: E= -92.3412510872 Eh W= 0.2500 DE= 3.076 eV 24810.3 cm**-1 0.51251 : 22122000000000000000000000 0.16825 : 22212000000000000000000000 0.11151 : 21222000000000000000000000</code></pre>
+<p>Below, it is described how to do ICE-CI calculations on excited states if the dominant configurations are not known.</p>
+<h2>3.14.9 Tips and Tricks</h2>
+<p>ICE-CI can be used very fruitfully together with, say, MP2 natural orbitals. This usually results in results that are closer to full CI results and at the same lead to more compact wavefunctions (it may be called nICE). The use of MP2 natural orbitals is requested by choosing UseMP2nat true inside the %ice block. Alternatively, improved virtual orbitals can be used (requested by UseIVOs true ). Acomparison is shown in Scheme Comparison of MP2 natural orbitals and improved virtual orbitals for the ICE-CI procedure (H2O molecule, cc-pVDZ basis, equilibrium geometry) . It is evident that the calculations based on the MP2 natural orbitals show an error relative to full CI that is almost a factor of two smaller than the corresponding result with canonical orbitals while at the same time the wavefunction is more compact by more than 30%. Hence, the use of MP2 natural orbitals appears to be a very good idea in conjunction with the ICE-CI procedure. This also holds when MP2 itself is a bad approximation (for example in the dissociation limit of the H2O molecule as shown above). On the other hand, the IVOs behave very similar to canonical orbitals and hence, seem to offer fewer advantages.</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td></td><th>#(lterations)</th><th>#(CSF)</th><th>Energy/Eh</th><th>Error/μEh</th></tr><tr><th>Canonical orbitals:</th><td>4</td><td>85220</td><td>-76.241 306 7</td><td>518</td></tr><tr><th>Improved virtual orbitals:</th><td>4</td><td>85064</td><td>-76.241 316 6</td><td>508</td></tr><tr><th>MP2 natural orbitals:</th><td>4</td><td>59447 (0.3% of FCI)</td><td>-76.241 434 0 (99.82% of Ecl)</td><td>390</td></tr><tr><th>Full Cl result</th><td>18818646</td><td></td><td>-76.241 824 0</td><td></td></tr></tbody></table>
+<p>Fig. 3.33: Comparison of MP2 natural orbitals and improved virtual orbitals for the ICE-CI procedure (H2O molecule, cc-pVDZ basis, equilibrium geometry)</p>
+<p>If ICE-CI is used in conjunction with MP2 natural orbitals, there also is the possibility of letting the program automatically choose the active space (this is called auto-ICE). The general idea is simple - we base the active space on the MP2 natural orbitals and their occupation numbers. All orbitals between occupation number say 1.98 down to 0.02 will be included in the active space. A relevant input is shown below.</p>
+<pre><code>! cc-pVDZ aug-cc-pV6Z/C Auto-ICE %ice nmin 1.99 nmax 0.01 end %paras R= 1.0 end * int 0 1 O 0 0 0 0 0 0 H 1 0 0 { R} 0 0 H 1 2 0 { R} 104 0 *</code></pre>
+<p>If we scan along the H2O dissociation surface one can see that despite changing active spaces, the dissociation curves are smooth and remain fairly parallel to the full CI dissociation curve. Depending on the tightness of the thresholds the active space may change from a small 6 electrons in 5 orbitals to a larger 8 electrons in 7 or 8 orbitals upon dissociation. This is the expected behavior as the σ -antibonding orbital becomes more stable along the bond stretching coordinate. Hence, these results are encouraging in as far as in many situations the program will be able to select a sensible active space without extended input from the user.</p>
+<figure><figcaption><div class="caption">Fig. 3.34: Automatic active space selection along the H 2 O dissociation surface. The reference curve (blue triangles) is the ICE-CI method for the full orbital space with the default parameters.</div></figcaption></figure>
+<p>Another place, where automatic selection comes in conveniently is in the calculation of excited states. If there are no user supplied configurations, what happens is that the program will first choose an Aufbau 'reference' configuration and then perform all single excitations relative to this configuration. The program will then diagonalize the Hamiltonian over the this set of configurations to create 0 th order approximations for the chosen number of roots of interest and then initiate the ICE-CI procedure starting from the leading configurations of these states. Here is an example for the benzene molecule:</p>
+<pre><code>! RHF def2-SVPD def2-SVP/C Auto-ICE %cclib "/user/me/orca/cclib/orcacc" %ice nroots 5 nmin 1.98 nmax 0.02 integrals ri end * int 0 1 C 0 0 0 0.000000 0.000 0.000 C 1 0 0 1.389437 0.000 0.000 C 2 1 0 1.389437 120.000 0.000 C 3 2 1 1.389437 120.000 0.000 C 4 3 2 1.389437 120.000 0.000 C 5 4 3 1.389437 120.000 0.000 H 1 2 3 1.082921 120.000 180.000 H 2 1 3 1.082921 120.000 180.000 H 3 2 1 1.082921 120.000 180.000 H 4 3 2 1.082921 120.000 180.000 H 5 4 3 1.082921 120.000 180.000</code></pre>
+<p>(continues on next page)</p>
+<pre><code>H 6 5 4 1.082921 120.000 180.000 *</code></pre>
+<p>(The %cclib statement is explained below and is not mandatory here). The Auto-ICE procedure comes up with as many as 24 electrons in 19 orbitals, which already is a fairly heavy calculation. The procedure converges in five iterations and provides indeed the correct states: the gorund state, the 1 B2u state at 6.4 eV, the 1 B1u state at 8.9 eV and a degenerate 1 E1u state at 10.0 eV. These excitation energies are still in error by about 2 eV relative to experiment, which is mainly due to missing dynamic correlation. However, the correct states and their sequence has been found.</p>
+<p>The ICE-CI can be used to find the ground state if the actual ground state is not known. To this end, one simply has to turn off the selection steps. This makes the calculations more expensive, but they will converge to the lowest state. In the example below (again, the H2O molecule) we start from a random quintuply excited configuration - the ICE-CI still finds the ground state after four iterations:</p>
+<pre><code>%ice nel 8 norb 23 nroots 1 tvar 1e-11 tgen 1e-04 etol 1e-06 # selection SelStart false SelIter false # algorithm details useivos false integrals exact cimaxdim 5 #Davidson expansion space = MaxDim * NRoots cimode 3 # spatial sym (only supported for ICEType = CFGs) irrep 0 # startup (optional) refs { 2 1 0 1 0 2 1 0 1 } end end</code></pre>
+<p>However, if one wants to converge to an excited state, one should turn on the selection. In the example below (once more the water molecule) one can converge to the second excitated singlet state by judicious choice of the start configuration:</p>
+<pre><code>%ice nel 8 norb 23 nroots 1 tvar 1e-11 tgen 1e-04 etol 1e-06 # selection SelStart true SelIter true # algorithm details useivos false integrals exact cimaxdim 5 cimode 3</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code># spatial sym (only supported for ICEType = CFGs) irrep 0 { #} startup (optional) refs { 2 2 1 2 0 1 } end end</code></pre>
+<h2>3.14.10 Large-scale approximate CASSCF: ICE-SCF</h2>
+<p>ICE-CI can be used in place of the default CIStep in a CASSCF framework. In this way, much larger CASSCF calculations than previously possible can be envisioned. In using the ICE-CI in this way, the active orbitals should be chosen as natural orbitals in order to ensure a proper canonicalization. In general, ICE-CI results will not be invariant with respect to the choice of orbitals. However, in practice we have not found this to be problematic. We refer to this as ICE-SCF.</p>
+<p>The use is simple: In the %casscf block choose CIStep ICE . Optionally, starting configurations (CFGs) or configuration state functions (CSFs) can be defined in the refs sub-block. All other parameters are accessible through the 'CI' sub-block in %casscf . The program also supports FIC-NEVPT2 calculations with the ICE as reference wavefunction.[459]</p>
+<pre><code>%casscf ... # mandatory CIStep ICE # optional starting references for ICE # using the refs sub-block # refs {2 2 ...} end # optional refined settings # with keywords as in the %ice block ci ICEType CFGs # select ICE expansion type: # 'CFGs' (default), 'DETS' or 'CSFs' TGen 1e-4 # controls accuracy (default = 1e-4) TVar 1e-11 # default = 1e-7 * TGen MaxIter 100 # number of allowed cycles (default = 64) # Scratch space dimension (number of singles/double excitations per CSF) # If scratch is too small, the program may crash. CIBufferLength 10240 # ~82kB (factor 8/10³ to get the memory in kB): end end</code></pre>
+<p>The entire remaining input is the one for standard CASSCF calculations. In this way one can do CASSCF calculations with very large active space in reasonable turnaround times. We have not observed convergence problems that are worse than in the standard CASSCF procedure. The results in Fig. 3.35 show that the deviations from regular CASSCF energies are very small. The largest deviation observed for C 2 H4 is on the order of 0.2 mEh, which appears acceptable. Note that the CASSCF tutorial also covers larger examples and excitations energies computed with the ICE-CI as CI solver.</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 3.35: Deviations of ICE-SCF from CASSCF energies for a selection of molecules (standard truncation parameters T gen = 10 -4 and T var = 10 -11 )</div></figcaption></figure>
+<p>Since CASSCF is fully variational, it is possible to optimize geometries with that procedure. It is our experience so far, that the ICE-SCF geometries are virtually indistinguishable from CASSCF geometries (an example is shown in Fig. 3.36).</p>
+<figure><figcaption><div class="caption">Fig. 3.36: CASSCF and ICE-SCF optimized geometries for methylene and ozone (cc-pVDZ basis set, default parameters).</div></figcaption></figure>
+</div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part055</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>For matrix elements between states of the same multiplicity, it can be simplified to</p>
+<p>Here,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>represents the two-electron quintet density. The operators E pq = ˆ a ↑ p ˆ a q + ˆ b ↑ p ˆ b q and S z pq = ˆ a ↑ p ˆ a q -ˆ b ↑ p ˆ b q symbolize the one-electron density operator and the spin density operator, respectively. The spatial part</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>denotes the two-electron field gradient integrals. These two-electron integrals can be evaluated using the RI approximation.</p>
+<p>Finally, the Zeeman Hamiltonian is included in the form of:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with ^ L representing the total orbital momentum operator, and ^ S being the total spin operator.</p>
+<p>In this concept, the solution of a selected relativistic Hamiltonian provides access to numerous magnetic properties, namely EPR properties ( EPRNMR-keywords for magnetic properties ) and magnetization and susceptibility properties ( Magnetization and Magnetic Susceptibility ). Additionally, monitoring the impact of an external magnetic field to the relativistic eigenstates and eigenvectors ( Addition of Magnetic Fields ) becomes straightforward.</p>
+<p>Collectively within the QDPT framework, the following magnetic properties become available:</p>
+<ul>
+<li style="list-style-type: '· ';">Common QDPT magnetic properties</li>
+<li style="list-style-type: '(1) ';">g-Tensor/Matrix</li>
+<li style="list-style-type: '(2) ';">D-Tensor/Matrix (Zero Field Splitting, ZFS)</li>
+<li style="list-style-type: '(3) ';">A-Tensor/Matrix (Hyperfine, HFC)</li>
+<li style="list-style-type: '(4) ';">Electric Field Gradient</li>
+<li style="list-style-type: '(5) ';">Magnetization</li>
+<li style="list-style-type: '(6) ';">Susceptibility</li>
+<li style="list-style-type: '(7) ';">Inclusion of Magnetic Fields</li>
+<li style="list-style-type: '· ';">Special treatments also include</li>
+<li style="list-style-type: '(8) ';">g-Tensor/Matrix and A-Tensor/Matrix using the 2nd-order sum-over-states approximation</li>
+<li style="list-style-type: '(9) ';">Magnetic Relaxation functionality</li>
+</ul>
+<h2>5.31.2 Magnetic Properties Through the Effective Hamiltonian</h2>
+<p>Since both the energies and the wavefunction of the low-lying spin-orbit states are available, the effective Hamiltonian theory can be used to extract EPR parameters such as the full g-, Zero Field Splitting (ZFS) and hyperfine A-tensors.</p>
+<p>Provided that the ground state is non-degenerate. By applying this Hamiltonian on the basis of the model space, i.e. the | S, M S ⟩ components of the ground state, the interaction matrix is constructed.</p>
+<p>The construction of effective Hamiltonian relies on the information contained in both the energies and the wavefunctions of the low-lying spin-orbit states. Following des Cloizeaux formalism, the effective Hamiltonian reproduces the energy levels of the 'exact' Hamiltonian E k and the wavefunctions of the low-lying states projected onto the model space ˜ Ψ :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These projected vectors are then symmetrically orthonormalized resulting in an Hermitian effective Hamiltonian, which can be written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The effective interaction matrix obtained by expanding this Hamiltonian into the basis of determinants belonging to the model space, is then compared to the matrix resulted from expanding the model Hamiltonian. Based on a singular value decomposition procedure, all 9 elements of the g-, A- and/or ZFS-tensors may be extracted.</p>
+<h2>5.31.3 QDPT Keywords</h2>
+<p>Starting from ORCA 6.0, the calculation of the magnetic properties through the Quasi Degenerate Perturbation Theory (QDPT) in all available correlation-type modules is unified and simplified. Following the general architecture design of ORCA 6.0, the computation of all the involved magnetic properties are centrally performed by a driver data structure called the QDPT Driver. The Driver takes into account all of the specific variables that are populated by the involved module and proceeds accordingly to calculate and represent the requested property in a uniform fashion. This presently involves the casscf , mrci , rocis , and lft modules</p>
+<p>In this way,</p>
+<ol>
+<li style="list-style-type: '1) ';">the analysis of results from the user's perspective is simplified</li>
+<li style="list-style-type: '2) ';">cross-module correlation and comparisons are easily accessible</li>
+</ol>
+<p>The general keywords that activate the generation of QDPT properties are:</p>
+<pre><code>%METHOD (casscf, mrci, rasci, rocis, lft, ...) REL # the name of the relativistic block DoSOC true # include the SOC contribution DoSSC true # include the SSC contribution END END</code></pre>
+<p>Starting from ORCA 6.1, the relativistic bock has a common structure across the methods that are connected to the QDPT driver. Hence, rel is the default block name for all connected methods. In the case of the %mrci block, soc is an alternative name to maintain for this release consistency with the old input relativistic blocks. The soc block name will be deprecated in the next release, so one is recommended to use the rel block name for requesting QDPT properties.</p>
+<p>The QDPT keywords are:</p>
+<pre><code>%METHOD (CASSCF, RASCI, MRCI, ROCIS, LFT) REL #-------------------------------------------------------# SOC/SSC #-------------------------------------------------------DoSOC true DoSSC true PrintLevel 4 #======================================================= # MAGNETIC PROPERIES #======================================================= #-------------------------------------------------------#Do Magnetization Magntization/Susceptibily Properties #-------------------------------------------------------DoMagnetization true DoSusceptibility true #-------------------------------------------------------LebedevPrec 5 # Precision of the grid for different field</code></pre>
+<p>(continues on next page)</p>
+<pre><code>(continued from previous page) nPointsFStep 5 # number of steps for numerical differentiation MAGFieldStep 100.0 # Size of field step for numerical differentiation MAGTemperatureMIN 4.0 # minimum temperature (K) for magnetization MAGTemperatureMAX 4.0 # maximum temperature (K) for magnetization MAGTemperatureNPoints 1 # number of temperature points for magnetization MAGFieldMIN 0.0 # minimum field (Gauss) for magnetization MAGFieldMAX 70000.0 # maximum field (Gauss) for magnetization MAGNpoints 15 # number of field points for magnetization SUSTempMIN 1.0 # minimum temperature (K) for susceptibility SUSTempMAX 300.0 # maximum temperature (K) for susceptibility SUSNPoints 300 # number of temperature points for susceptibility SUSStatFieldMIN 0.0 # minimum static field (Gauss) for susceptibility SUSStatFieldMAX 0.0 # maximum static field (Gauss) for susceptibility SUSStatFieldNPoints 1 # number of static fields for susceptibility #-------------------------------------------------------# Magnetic Field Magnetic Filed Perturbation (Zeeman Effect) #-------------------------------------------------------DoMagneticField true Temperature 10, 50, 300 B 10000, 20000, 30000 #-------------------------------------------------------# EPR g-Tensor/Matrix #-------------------------------------------------------DoGTensor true NDoubGtensor 2 #-------------------------------------------------------# EPR D-Tensor/Matrix (Zero Field Splitting, ZFS) #-------------------------------------------------------DoDTensor true #-------------------------------------------------------# EPR A-Tensor/Matrix (Hyperfine, HFC) # => Presently only in CASSCF and LFT #-------------------------------------------------------DoAMatrix true AMatrixNuc 0,1 #-------------------------------------------------------# 2nd-order SUM OVER STATES (g-, A-Tensors/Matrices) # => Presently only in CASSCF and MRCI #-------------------------------------------------------DoSOS True #-------------------------------------------------------# ZFS from an excited state multiplet #-------------------------------------------------------IStates 4,5,6 #-------------------------------------------------------# Magnetic Relaxation # => Presently only in CASSCF and MRCI #-------------------------------------------------------DoMagrelax True projectHSOC True # Project QDPT ground multiplet (always true) projectedstates Number # Multiplicity of the ground multipler #======================================================= # OPTICAL/X-RAY SPECTROSCOPIES</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<h2>5.31.4 Organization of QDPT Magnetic Properties Computation</h2>
+<p>In a first step, SOC contributions will be computed for any level of theory that is available</p>
+<pre><code>----------------------------------QDPT WITH CASSCF/NEVPT2/MRCI/LFT... DIAGONAL ENERGIES ----------------------------------************************************* COMPUTING QDPT HAMILTONIAN *************************************</code></pre>
+<p>Initially, the SOC part to the splitting is calculated. Firstly, the diagonal (with respect to the spin) matrix element type of</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>are evaluated between states of the same multiplicity and</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>between states of different multiplicities.</p>
+<p>Requesting PrintLevel &gt; 3 prints this table:</p>
+<table><tbody><tr><th colspan="7">---------------------------------------------------------------------------- CALCULATED REDUCED SOC MATRIX ELEMENTS ----------------------------------------------------------------------------</th></tr><tr><th colspan="2">Block</th><th colspan="2">Root</th><th>&lt;I|Lx S |J&gt;</th><th>&lt;I|Ly S</th><th>|J&gt; &lt;I|Lz S |J&gt;</th></tr><tr><th>I(Mult) ----------------------------------------------------------------------------</th><th>J(Mult)</th><th>I</th><th>J</th><th>cm-1</th><th>cm-1</th><th>cm-1</th></tr><tr><td>0( 3)</td><td>0( 3)</td><td>0</td><td>0</td><td>0.00</td><td>-0.00</td><td>-0.00</td></tr><tr><td>0( 3)</td><td>0( 3)</td><td>1</td><td>0</td><td>-0.00</td><td>-0.00</td><td>0.00</td></tr><tr><td>0( 3)</td><td>0( 3)</td><td>1</td><td>1</td><td>0.00</td><td>-0.00</td><td>-0.00</td></tr><tr><td>0( 3)</td><td>0( 3)</td><td>2</td><td>0</td><td>0.00</td><td>-0.00</td><td>-0.00</td></tr><tr><td>0( 3)</td><td>0( 3)</td><td>2</td><td>1</td><td>-199.78</td><td>174.81</td><td>-142.34</td></tr><tr><th colspan="7">...</th></tr><tr><td>0( 3)</td><td>1( 1)</td><td>0</td><td>1</td><td>-0.67</td><td>0.59</td><td>-0.48</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>0( 3) 0( 3) 0( 3) 3)</td><td>1( 1)</td><td>0</td><td>2</td><td>-157.31</td><td>137.65</td><td>-112.09</td></tr><tr><td></td><td>1( 1)</td><td>0</td><td>3</td><td>-0.00</td><td>-0.00</td><td>-0.00</td></tr><tr><td></td><td>1( 1)</td><td>0</td><td>4</td><td>-79.51</td><td>-33.73</td><td>70.17</td></tr><tr><td>0(</td><td>1( 1)</td><td>0</td><td>5</td><td>24.77</td><td>84.05</td><td>68.46</td></tr></tbody></table>
+<pre><code>************************************* Doing QDPT with ONLY SOC! *************************************</code></pre>
+<p>Next, the non-zero SOC Matrix Elements will be printed</p>
+<table><tbody><tr><th>NONZERO</th><th colspan="12">------------------------------------</th></tr><tr><th>&lt;Block | HSOC | ↪ → part</th><th colspan="3">------------------------------------</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>----------------------------------------------------------------------------------- ↪ → --- 0</td><th>Root</th><th>S</th><th>Ms</th><th>Block</th><th>Ket Root</th><th>S</th><th>Ms&gt;</th><th>= Real-part</th><th>Imaginary␣</th><td></td><td></td><td></td></tr><tr><th>↪ 172</th><td>2</td><td>1.0</td><td>1.0</td><td>0</td><td>1</td><td>1.0</td><td>1.0</td><td>0.000</td><td>-71.</td><td></td><td></td><td></td></tr><tr><th>→ 0</th><td>3</td><td>1.0</td><td>1.0</td><td>0</td><td>2</td><td>1.0</td><td>1.0</td><td>0.000</td><td>1.</td><td></td><td></td><td></td></tr><tr><th>↪ → 542 0 ↪ 048</th><td>4</td><td>1.0</td><td>1.0</td><td>0</td><td>0</td><td>1.0</td><td>1.0</td><td>0.000</td><td>50.</td><td></td><td></td><td></td></tr><tr><th>→ 0</th><td>5</td><td>1.0</td><td>1.0</td><td>0</td><td>0</td><td>1.0</td><td>1.0</td><td>0.000</td><td>-48.</td><td></td><td></td><td></td></tr><tr><th>↪ → 827 0</th><td>5</td><td>1.0</td><td>1.0</td><td>0</td><td>4</td><td>1.0</td><td>1.0</td><td>0.000</td><td>-40.</td><td></td><td></td><td></td></tr><tr><th>↪ → 119 0</th><td>6</td><td>1.0</td><td>1.0</td><td>0</td><td>1</td><td>1.0</td><td>1.0</td><td>0.000</td><td>-0.</td><td></td><td></td><td></td></tr><tr><th>↪ → 197 0</th><td>6</td><td>1.0</td><td>1.0</td><td>0</td><td>3</td><td>1.0</td><td>1.0</td><td>0.000</td><td>8.</td><td></td><td></td><td></td></tr><tr><th>↪ → 724 0 ↪ → 695</th><td>7</td><td>1.0</td><td>1.0</td><td>0</td><td>1</td><td>1.0</td><td>1.0</td><td>0.000</td><td>-2.</td><td></td><td></td><td></td></tr><tr><th>...</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>1 ↪ → 318</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>4</td><td>1.0</td><td>1.0</td><td>16.671</td><td>-39.</td><td></td><td></td><td></td></tr><tr><th>1 256</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>5</td><td>1.0</td><td>1.0</td><td>-41.569</td><td>12.</td><td></td><td></td><td></td></tr><tr><th>↪ → 1</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>4</td><td>1.0</td><td>0.0</td><td>-0.000</td><td>-49.</td><td></td><td></td><td></td></tr><tr><th>↪ → 087 1</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>5</td><td>1.0</td><td>0.0</td><td>-0.000</td><td>-47.</td><td></td><td></td><td></td></tr><tr><th>↪ → 869 1</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>4</td><td>1.0</td><td>-1.0</td><td>16.671</td><td>39.</td><td></td><td></td><td></td></tr><tr><th>↪ → 318 1 ↪ 256</th><td>0</td><td>0.0</td><td>0.0</td><td>0</td><td>5</td><td>1.0</td><td>-1.0</td><td>-41.569</td><td>-12.</td><td></td><td></td><td></td></tr><tr><th>→ 1 ↪ 336</th><td>1</td><td>0.0</td><td>0.0</td><td>0</td><td>0</td><td>1.0</td><td>1.0</td><td>0.294</td><td>0.</td><td></td><td></td><td></td></tr><tr><th>→ 1 ↪ → 307 / ...</th><td>1</td><td>0.0</td><td>0.0</td><td>0</td><td>4</td><td>1.0</td><td>1.0</td><td>41.742</td><td>-12.</td><td></td><td></td><td></td></tr></tbody></table>
+<p>followed by the printing of the SOC Hamiltonian</p>
+<pre><code>Note: In the following the full <I|HBO+SOC|J> are printed in the CI Basis. I,J are compound indices for |Block/Mult, Ms, Root>, where the states are ordered first by MultBlock, then Ms and finally Root. -----------------SOC MATRIX (A.U.) -----------------</code></pre>
+<h2>Finally, the relativistically corrected eigenvalues and eigenvectors are printed</h2>
+<table><tbody><tr><td>Lowest Energy</td><td>eigenvalue of the stabilization:</td><td>SOC matrix:</td><td>-149.86223277</td><td>Eh</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="10">-2.54512 cm-1 Eigenvalues: cm-1 eV Boltzmann populations at T = 300.000 K 0: 0.00 0.0000 3.36e-01 1: 2.37 0.0003 3.32e-01 2: 2.37 0.0003 3.32e-01 3: 7757.65 0.9618 2.33e-17 4: 7757.66 0.9618 2.33e-17 5: 11913.81 1.4771 5.15e-26 ...</td></tr><tr><td colspan="10">The threshold for printing is 0.0100</td></tr><tr><td>↪ → Ms STATE</td><td>Eigenvectors: 0: 0.0000</td><td>Weight</td><td>Real</td><td>Image</td><td>:</td><td>Block</td><td>Root</td><td>Spin</td><td>␣</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>0 0</td><td></td><td>1</td></tr><tr><td></td><td></td><td>0.310686</td><td></td><td></td><td></td><td></td><td>0</td><td>1 1</td><td></td></tr><tr><td></td><td></td><td>0.223270 0.388265</td><td>-0.000000 0.410320</td><td>0.472514 0.468937</td><td>:</td><td>0 0</td><td>0</td><td>1 1</td><td>0 -1</td></tr><tr><td>STATE</td><td>1: 2.3703</td><td>0.378606 0.310706</td><td>0.534586 0.000017</td><td>-0.157747</td><td>:</td><td>0 0</td><td>0</td><td></td><td>1</td></tr><tr><td>STATE</td><td>2.3703</td><td>0.300970</td><td></td><td>0.157809 -0.615309</td><td>:</td><td>0</td><td></td><td></td><td>0</td></tr><tr><td></td><td>2:</td><td></td><td>0.534623</td><td>-0.505146</td><td>: :</td><td></td><td>0 0</td><td>1</td><td>-1</td></tr><tr><td></td><td></td><td></td><td>-0.214003</td><td></td><td>:</td><td>0</td><td></td><td></td><td>1</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>1 1</td><td></td></tr><tr><td></td><td></td><td></td><td></td><td>-0.630934</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>0.398078</td><td>-0.000007</td><td></td><td>:</td><td>0</td><td>0</td><td></td><td>0</td></tr><tr><td></td><td></td><td>0.300949</td><td>-0.214019</td><td>0.505119</td><td>:</td><td>0</td><td>0</td><td></td><td>-1</td></tr><tr><td>...</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td><td></td></tr></tbody></table>
+<p>Now, all relevant QDPT properties are calculated and printed:</p>
+<pre><code>************************************* COMPUTING QDPT PROPERTIES *************************************</code></pre>
+<h2>(1) For g-Tensor/Matrix</h2>
+<pre><code>----------------------------------------------ELECTRONIC G-MATRIX FROM EFFECTIVE HAMILTONIAN ----------------------------------------------</code></pre>
+<h2>(2) For ZFS (D-Tensor/Matrix) on the basis of the 2nd-order and Effective Hamiltonian approximations</h2>
+<pre><code>--------------------------------------------ZERO-FIELD SPLITTING 2ND ORDER SOC CONTRIBUTION ----------------------------------------------------------------------------------------------------ZERO-FIELD SPLITTING EFFECTIVE HAMILTONIAN SOC CONTRIBUTION --------------------------------------------------------</code></pre>
+<h2>(3) For HFC (A-Tensor/Matrix)</h2>
+<pre><code>-------------------------QDPT HFC A-MATRICES -------------------------</code></pre>
+<p>In the CASSCF and LFT modules, one may request the A-Matrix using, for example:</p>
+<pre><code>AMatrix true AMatrixNuc 0, 2</code></pre>
+<p>If requested, one can specify isotopes for the calculations</p>
+<pre><code>AMatrix true AMatrixNuc 0, 2, 3 #e.g. for Nuclei 0, this requires partially or fully populating the following ␣ ↪ → quantities: AMATRIXP[0]=125.6 #the P-value for the hyperfine ge*gN*beta*betaN AMATRIXQ[0]=3.87 #the quadrupole value (in barn) AMATRIXIP[0]=2.5 #spin of the isotope for the A-tensor AMATRIXIQ[0]=0.0 #spin of the isotope of the Q-tensor AMATRIXTP[0]=237 #AMatrixISTPP[0] AMATRIXTQ[0]=0 #AMatrixISTPQ[0] # It follows that for Nuclei 2, one does AMATRIXTP[1]=36 ... # and so on.</code></pre>
+<h2>(4) For Electric Field Gradient Tensor</h2>
+<pre><code>---------------------------------------EFG TENSOR ---------------------------------------</code></pre>
+<h2>(5) &amp; (6) For Magnetization/Susceptibility</h2>
+<pre><code>-------------------------------------------------SOC CORRECTED MAGNETIZATION AND/OR SUSCEPTIBILITY -------------------------------------------------</code></pre>
+<h2>(7) For External Magnetic Fields Contributions</h2>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → 00067630 0.00078545 1 1 0.00 0.0000 0.00000000 0.00000000 0.00003430 0. ↪ → 00002347 0.00001909 -----------------------------------------------------------------------------------↪ → -----------------------</code></pre>
+<p>Following this, all relativistically corrected optical spectra are printed under the same correction scheme (as Discussed in One Photon Spectroscopy ).</p>
+<pre><code>-----------------------------------------------------------------------------------↪ → ---------------------SOC CORRECTED ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS -----------------------------------------------------------------------------------↪ → ---------------------Transition Energy Energy Wavelength fosc(D2) D2 |DX|␣ ↪ → |DY| |DZ| (eV) (cm-1) (nm) (*population) (au**2) (au)␣ ↪ → (au) (au) -----------------------------------------------------------------------------------↪ → ---------------------...</code></pre>
+<ol>
+<li style="list-style-type: '(8) ';">Sum-over-states g- and A-tensors/matrices (for now, available only in CASSCF and MRCI) get printed in much the same way as those of the Effective Hamiltonian. The main difference here is the designator:</li>
+</ol>
+<pre><code>---------------------------------------------------------------------------SUM OVER STATES CALCULATION OF THE SPIN HAMILTONIAN (for g and HFC tensors) ---------------------------------------------------------------------------</code></pre>
+<p>The matrix elements that are used in the summation are printed after</p>
+<pre><code>-----------------------MATRIX ELEMENT PRINTING -----------------------</code></pre>
+<p>The g-tensor additionally prints out the contribution of each state to the g(OZ/SOC) term.</p>
+<pre><code>-------------------------------BREAKDOWN OF g(OZ/SOC) BY STATE -------------------------------STATE g1 g2 g3 --------------------------------------------------------------------</code></pre>
+<p>Note that for CASSCF, CASSCF Linear Response without the orbital response is equivalent to the sum-over-states when including all states. As such, the main draw of the sum-over-states is this state-by-state breakdown.</p>
+<p>If the SSC is requested, Spin-Spin Coupling contributions will be generated in a second step and will be added to the SOC Hamiltonian to generate SOC+SSC contributions</p>
+<pre><code>-------------------------------------------Calculating Spin-Spin Coupling Integrals -------------------------------------------</code></pre>
+<p>The program will then undergo the exact same analysis as above, printing the SOC+SSC analysis.</p>
+<pre><code>*********************************************************** * DOING EVERYTHING A SECOND TIME: THIS TIME INCLUDING SSC * ***********************************************************</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>************************************* COMPUTING QDPT HAMILTONIAN ************************************* ************************************* Doing QDPT with SOC AND SSC! ************************************* ------------------------------------NONZERO SOC and SSC MATRIX ELEMENTS (cm**-1) ------------------------------------Bra Ket <Block Root S Ms | HSOC + HSSC | Block Root S Ms> = Real-part ␣ ↪ → Imaginary part -----------------------------------------------------------------------------------↪ → ---0 2 1.0 1.0 0 1 1.0 1.0 -0.000 ␣ ↪ → -71.172 0 3 1.0 1.0 0 1 1.0 1.0 -0.001 ␣ ↪ → 0.000 0 3 1.0 1.0 0 2 1.0 1.0 0.020 ␣ ↪ → 1.542 0 4 1.0 1.0 0 0 1.0 1.0 -0.222 ␣ ↪ → 50.048 0 5 1.0 1.0 0 0 1.0 1.0 -0.228 ␣ ↪ → -48.827 0 5 1.0 1.0 0 4 1.0 1.0 0.332 ␣ ↪ → -40.119 0 6 1.0 1.0 0 1 1.0 1.0 -0.030 ␣ ↪ → -0.197</code></pre>
+<p>This is done for both the magnetic properties, e.g. the ZFS,</p>
+<pre><code>--------------------------------------------------------ZERO-FIELD SPLITTING EFFECTIVE HAMILTONIAN SOC and SSC CONTRIBUTION --------------------------------------------------------</code></pre>
+<h2>as well as the optical properties</h2>
+<h2>5.32 Magnetic Relaxation</h2>
+<h2>5.32.1 General description of the program.</h2>
+<p>For magnetic molecules, ORCA now offers the possibility of computing the magnetic relaxation times. This is done using the Orca_Magrelax module. In general, for a system with electronic and vibrational degrees of freedom, the Hamiltonian can be written as [740, 741]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here ˆ H spin is the electronic Hamiltonian and ˆ H ph is the phononic (vibrational) Hamiltonian. These first two terms constitute the Born-Oppenheimer approach and if this all that the hamiltonian contained then the total wavefunction would just be the product of the electronic and phononic wavefunctions. The ˆ H sph term is the term that introduces interaction between the electronic and phononic parts and makes the total wavefunction a linear combination of the aforementioned product states.</p>
+<p>The phononic Hamiltonian can be approximated as a harmonic oscillator. The coupling ˆ H sph is usually expressed as a Herzberg-Teller expansion of ˆ H spin . The ˆ H spin has been expressed in literature [742, 743] as a parametric spin hamiltonian and more recently as a CASSCF Hamiltonian [744]. In our present methodology, the QDPT Hamiltonian is used as ˆ H spin ( Magnetic Properties Through Quasi Degenerate Perturbation Theory ). This allows for a parameterfree first-principles estimation of magnetic relaxation. The derivatives of the QDPT matrix are numerically computed. We use the Fermi golden rule to compute the elements of the rate matrix.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where the ˆ H µ pert is the µ -order perturbation theory expansion of the transition operator. It is described by the expression[745]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Thus we see that our implmentation depends on the two infinite order expansions that must be truncted in a finite manner for practical considerations. The first is the Herzberg-Teller expansion and the second is the perturbation theory expression.</p>
+<figure><figcaption><div class="caption">Fig. 5.65: Mechanism of energy exchange between the electronic and phononic degrees of freedom.</div></figcaption></figure>
+<p>If we truncate both of these at the first order, we recover expressions for the one-phonon process, also known as the Orbach Relaxation. If one of these expressions is truncated to the second order, we get a component of the twophonon processes collectively known as the Raman processes. The second-order Herzberg-Teller gives the so-called Raman I component, and the second-order perturbation theory gives the Raman II component.</p>
+<p>The Raman I process is rapid and oscillatory and is presently assumed to average out to zero in our implementation [746]. This leaves the Orbach process, which dominates magnetic relaxation at higher temperatures, and the Raman Process, which dominates magnetic relaxation at lower temperatures. The resulting rate equations for Orbach process are as follows [747]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and the Raman rate equations become[748]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<p>Here, V α FI = ⟨ F | ˆ V α | I ⟩ is a matrix element of the linear spin-phonon coupling for the mode α on the electronic basis. The convention α ≥ β for the phonon modes is a convenient choice. This convention introduces a factor of (1 -( δ αβ /2)) inside the first summation. The diagonal element of the rate matrix is determined by Γ II = ∑ F = I -Γ FI . This rate matrix can be diagonalised to give eigenvalues that are -τ -1 k for each mode of relaxation k . The lowest eigenvalue corresponds to the system being in equilibrium. The second lowest value is the magnetic relaxation rate.</p>
+<h2>5.32.2 Computing magnetic relaxation times using Orca_Magrelax.</h2>
+<p>Orca_Magrelax can be used either from an Orca input or as a standalone module. The following example shows how such a calculation can be run from the ORCA main program for a [ DyF 2 ] 2+ toy system. 'dyf2casoptfreq' is a separately converged geometry optimisation + hessian calculation in ORCA, and 'dyf2cas' is a converged CASSCF calculation on the optimised geometry. The use of magrelax inside orca requires the following additions to a typical CASSCFcalculation. Inside the CASSCF block, 'projectHSOC' must be set to true, and the keyword 'projectedstates' must be set to the multiplicity of the lowest multiplet of the magnetic system. In the example, the lowest multiplet is 6 H 15/2 state, which has a multiplicity of 16. The keyword 'domagrelax' must be set to true in the rel block of CASSCF. The '%qgprop' block tells the program to compute numerical derivatives for the QDPT matrix. Then the magrelax block itself provides additional details on the computation of the magnetic relaxation rates.</p>
+<pre><code>!DKH2 DKH-def2-TZVP AutoAux moread %moinp "dyf2cas.gbw" #--------------------converged CASSCF single point␣ ↪ → calculation #----------------------------------------------------------------------------------↪ → ---------------------------------------------#picture change effects for DKH2 #----------------------------------------------------------------------------------↪ → ---------------------------------------------%rel picturechange 2 end #----------------------------------------------------------------------------------↪ → ---------------------------------------------#SARC2 basis for the Dy atom #----------------------------------------------------------------------------------↪ → ---------------------------------------------%basis NewGTO Dy "SARC2-DKH-QZV" end NewAuxGTO Dy "SARC/J" end</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>end #----------------------------------------------------------------------------------↪ → ---------------------------------------------#CASSCF settings #----------------------------------------------------------------------------------↪ → ---------------------------------------------%casscf nel 9 #----------------------------number of electrons in valence norb 7 #---------------------------number of orbitals in valence mult 6 #---------------------------list of multiplicities to be considered nroots 21 #------------------------number of roots corresponding to each␣ ↪ → multiplicity trafostep RI #---------------------Use RI maxiter 400 #----------------------maximum iterations for CASSCF projectHSOC true #-----------------project H_SOC = QDPT matrix to the␣ ↪ → lowest multiplet projectedstates 16 #---------------number of states in the lowest multiplet rel dosoc true #-----------------------enables generation of QDPT matrix domagrelax true #------------------stores data from the QDPT driver needed␣ ↪ → for magrelax end end #----------------------------------------------------------------------------------↪ → ---------------------------------------------#quantized geometry properties module (generates derivatives of H_SOC) #----------------------------------------------------------------------------------↪ → ---------------------------------------------%qgprop MODE DERIV #-------------------------------compute derivatives COORDSTYPE ENWNORMAL #---------------------displace energy weighted distance along␣ ↪ → normal modes STEPSIZE 0.00005 #-------------------------base displacement HESSIAN "dyf2casoptfreq.hess" #------------hessian file DERHSOC true #-----------------------------property for which derivatives are␣ ↪ → needed (H_SOC) end #----------------------------------------------------------------------------------↪ → ---------------------------------------------#magrelax settings #----------------------------------------------------------------------------------↪ → ---------------------------------------------%magrelax magfld 0.0, 0.0,0.01 #---------------------magnetic field in x, y, z directions␣ ↪ → (in Tesla) #inputfile "dyf2test_magrelax2_maxsoc" #---use if casscf and qgprop blocks are in ␣ ↪ → a separate file HESSIAN "dyf2casoptfreq.hess" #------------hessian file temperature 2,150,1 #----------------------temperature range start, finish, step␣ ↪ → size (K) degenThresh 0.1 #--------------------------energy threshold for detecting␣ ↪ → degeneracy (in cm-1) doRaman false #----------------------------orbach is always true raman can be␣ ↪ → selected gridMax 8000 #-----------------------------upper limit of integration (Raman only) gridMin 0 #--------------------------------lower limit of integration (Raman only) nGrid 2000 #-------------------------------no of integration grid points of␣ ↪ → integration (Raman only)</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>Every time magrelax is run from Orca, it generates a magrelax input file which can be modified to run for different experimental conditions. It will read the files generated by the previous run. The file contains all the keywords that can be called from within ORCA, described with the comments next to each line. This file can be run from the command line as 'orca_magrelax dyf2.magrelaxinp' as long as the main orca program is in the path directory.</p>
+<pre><code>none #DMAGRELAXINP InputFile dyf2casoptfreq.hess #DMAGRELAXINP Hessfile 2.000000 150.000000 1.000000 #DMAGRELAXINP templist start, stop, stepsize 0.00000000000000000000 0.00000000000000000000 0.01000000000000000021 #DMAGRELAXINP␣ ↪ → magfld x, y, z 1 0 1 0#DMAGRELAXINP ratemodes, doRaman, keepData, debug 0.10000000000000000555 #DMAGRELAXINP degenThresh 1000.000000 0.000000 1000#DMAGRELAXINP gridmax, gridmin, ngrid 10.000000 #DMAGRELAXINP gamma</code></pre>
+<h2>5.32.3 Running Orca_Magrelax calculations in various modules</h2>
+<p>It is also possible to compute magnetic relaxation in other modules, which produce a QDPT matrix in ORCA, such as NEVPT2 or HQD-NEVPT2. These can be simply enabled in the CASSCF and they will be automatically used for the magrelax calculations. For calculations that involve the %mrci block the magrelax keywords must not be put in the CASSCF block and instead included in the respective mrci input block. If calculation such as MREOM, MRCEPA or MRACPF that requires an mrci block is run then the magrelax related keywords would still go into the mrci block.</p>
+<pre><code>%casscf nel 9 norb 7 trafostep RI maxiter 400 mult 6 nroots 21 rel dosoc true end end %mrci newblock 6 * nroots 21 refs cas(9,7) end excitations cis end soc dosoc true domagrelax true projectHSOC true projectedstates 16 end end</code></pre>
+<h2>5.32.4 Fixing common issues</h2>
+<ul>
+<li style="list-style-type: '· ';">Single point crashes: QGPROP will generate 2 geometries per vibrational mode. This can result in (3 N -6) × 2 geometries which have to be run in single point. These are named '&lt;Basename&gt;.geom-&lt;geometry index&gt;'. A user can rerun any geometry that didn't run with modified settings if needed.</li>
+<li style="list-style-type: '· ';">Modified settings don't show up in computation of linear spin phonon coupling constants: Each time QGPROP is run, it looks if the displaced geometries have converged from a previous run. If converged files are found, they are not recomputed to save on compute time. If the data of a previous run is not need by user 'keepData false' in the magrelax block will delete magrelax and qgprop related data after each run.</li>
+<li style="list-style-type: '· ';">Integration Grid: The Raman computation involves a numerical integration over phonon energies. The upper limit, lower limit and the number of grid points can be selected using the keywords 'gridMax', 'gridMin' and 'nGrid'.</li>
+<li style="list-style-type: '· ';">Differentiation grid: Since linear derivatives are calculated numerically, the step size given to qgprop can have influence the numerical stability of the results. Currently, the displacement of each vibrational mode is weighted by the reciprocal of energy. The 'Stepsize' keyword in qgprop can be used to scale a base displacement of 1 Angstrom.</li>
+<li style="list-style-type: '· ';">Magnetic Field misaligned: Current implmentation requires the user to input the magnetic field to be parallel with the axis of anisotropy. The ground KD g-tensor in CASSCF provides a rotation matrix that can be used to rotate from the molecular frame z-axis.</li>
+</ul>
+<h2>5.32.5 Magrelax Keywords</h2>
+<table><caption><div class="caption">Table 5.20: %method block input keywords relevant for Magrelax calculations</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>domagrelax projectHSOC projectedstates</td><td>true &#x27;true&#x27; number</td><td>Store data needed for magrelax project QDPT ground multiplet (always true) multiplicity of ground multipler</td></tr></tbody></table>
+<p>Table 5.21: %qgprop block input keywords relevant for Magrelax calculations</p>
+<table><caption><div class="caption">Table 5.22: %magrelax block input keywords relevant for Magrelax calculations</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>MODE COORDSTYPE STEPSIZE HESSIAN DERHSOC</td><td>DERIV ENWNORMAL number name true</td><td>Calculate derivatives Use energy weighted displacements for normal modes scaling of the unweighted step size hessian file name Calculate derivatives of the QDPT hamiltonian with SOC</td></tr></tbody></table>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>magfld</td><td>vector</td><td>magnetic field (T)</td></tr><tr><td>inputfile</td><td>name</td><td>input file name (no file extension) for data if casscf and qgprop is skipped (optional)</td></tr><tr><td>HESSIAN</td><td>name</td><td>hessian file name</td></tr><tr><td>temperature</td><td>start, end, step</td><td>temperature start,end, step size (K)</td></tr><tr><td>degenThresh</td><td>threshold</td><td>threshold of degeneracy (states within this are ignored) (cm-1)</td></tr><tr><td>doRaman</td><td>&#x27;true&#x27;/&#x27;false&#x27;</td><td>include raman relaxation (orbach always on)</td></tr><tr><td>gridMax</td><td>number</td><td>upper limit for numerical integration (raman only)</td></tr><tr><td>gridMin</td><td>number</td><td>lower limit for numerical integration (raman only)</td></tr><tr><td>nGrid</td><td>number</td><td>number of grid points for numerical integration (raman only)</td></tr><tr><td>keepData</td><td>&#x27;true&#x27;/&#x27;false&#x27;</td><td>keepData generated by magrelax for future run</td></tr></tbody></table>
+<h2>5.33 Simulation of (Magnetic) Circular Dichroism and Absorption Spectra</h2>
+<h2>5.33.1 General description of the program</h2>
+<p>ORCA can now simulate optical spectra that include spin-orbit coupling contributions at all levels of theory by using a common implementation. [749]</p>
+<p>Following the energy-loss approach, the absorption cross section for a transition between states ˜ P and ˜ Q can be expressed as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where c is the speed of light; E ˜ P and E ˜ Q are the energy of the states ˜ P and ˜ Q , respectively; T ˜ P ˜ Q is the transition moment between states ˜ P and ˜ Q and it can be computed with different expressions based on the applied approximation.</p>
+<p>Under a dipolar approximation to the light-matter interaction, the transition moment takes the form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the sum runs over all electrons i ; ˆ p i is the linear momentum operator; and E is the polarization vector of the incident light.</p>
+<p>In order to take into account all the electric and magnetic mechanisms in the transition, it is necessary to use the full field-matter interaction operator (FFMIO). For transition moment, it leads to the equation (5.182).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ˆ r i is the position operator of i-th electron and k is the wave vector that points in the direction of the light propagation whose magnitude is related to the wavelength by λ = 2 π / | k | .</p>
+<p>For free-rotating molecules, it is necessary to consider all possible orientations of the molecule with respect to the direction of the incident light. In some cases, such as the absorption of linear-polarized light under a dipolar approximation, the effect of the orientation can be averaged analytically. However, numerical integration over some selected molecular orientations, labeled as o in equation (5.183), is generally necessary.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where w o is the weight of the orientation in the quadrature.</p>
+<p>The implementation has been designed to compute the absorption of circularly-polarized light on systems under the effect of an additional external magnetic field, B, which modifies the states ˜ P and ˜ Q for each orientation o through a Zeeman perturbation. The computed results are presented as the difference in the absorption of the left (-) and right (+) circularly-polarized light ( ∆ f osc ) and as the sum of the oscillator strength (f osc ), which corresponds to the linearly-polarized light absorption. The molecular orientations are constructed by using rotation matrices with three Euler angles: χ , θ , and ϕ . Herein, χ (the rotation angle on a plane perpendicular to the direction of external magnetic field/incident light) is integrated analytically whereas θ and ϕ are taken on a grid.</p>
+<p>Finally, the states ˜ P and ˜ Q are obtained from QDPT by expanding the states over non-relativistic eigenstates of ˆ H 0 ( { I, J } ) and the coefficients of the expansion ( d I ˜ Q ) are obtained from the diagonalization of the complex matrix, which contains ˆ H 0 as well as the SOC and Zeeman contributions (and SSC, if it is implemented in the selected electronic structure theory) expressed in { I, J } .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.33.2 Running and analyzing MCD calculations in TDDFT module</h2>
+<p>Aminimum input to compute the Magnetic Circular Dichroism (MCD) requires setting the keyword DoMCD to true and to include an intensity for the external magnetic field B (in Gauss). An example input for the TD-DFT module is as follows:</p>
+<pre><code>! B3LYP def2-QZVPP %tddft TDA False NROOTS 10 DoSOC True DoMCD True B 50000.0 end *xyz 0 1 O 0.24287127056830 0.00033994295362 0.29479344369591 C 0.13113617562040 0.00013705972874 1.65093880501262 C 1.35780003491446 -0.00017874911331 2.22574232397512 C 2.30247996517358 -0.00017814489451 1.14947275232337 C 1.57300244613625 0.00013652073221 0.00793218434497 H -0.86951534119903 0.00025858475406 2.04160438459058 H 1.56899490845286 -0.00038874637444 3.28047030533440 H 3.37570289422870 -0.00038632501973 1.22171814100713 H 1.83015664610447 0.00025985723335 -1.03506234028415 *</code></pre>
+<p>In the output file of this job, the estimated oscillator strengths (f osc ) and the difference between left and right circularly polarized light absorption ( ∆ f osc ) are provided:</p>
+<pre><code>------------------------------------------------------------------------------MCD Transitions via transition electric dipole moments B = 50000.00 Gauss T = 300.000 K ------------------------------------------------------------------------------dfosc fosc dfosc/fosc 0 -> 1 -0.0000000000 0.0000000003 -0.0663180503 0 -> 2 0.0000000000 0.0000000005 0.0000209714 0 -> 3 0.0000000000 0.0000000003 0.0661609417 0 -> 4 -0.0000000001 0.0000000004 -0.2991916107 0 -> 5 -0.0000000000 0.0000000006 -0.0009270335</code></pre>
+<pre><code>0 -> 6 0.0000000001 0.0000000004 0.2984154405 0 -> 7 0.0000000003 0.0000000008 0.3721777693 0 -> 8 -0.0000000000 0.0000000009 -0.0002960328 0 -> 9 -0.0000000003 0.0000000008 -0.3689867758 0 ->10 -0.0000050986 0.1741092913 -0.0000292840</code></pre>
+<p>These results may not be accurate when the energetic order of the states changes with respect to the relative orientation between the molecule and the external magnetic field. To obtain accurate results, it is necessary to perform a postprocessing step for all orientations using the orca_mapspc program, which saves the results in a file that has the</p>
+<p>.cis-el.dipole-length.1.mcd extension:</p>
+<pre><code>orca_mapspc fur-mcd.cis-el.exact.1.mcd MCD -x050000 -x155000 -n10000 -w2000</code></pre>
+<p>In this example, we generate the spectrum (M -1 ) between 50000 and 55000 cm -1 (-x050000 -x155000), using 10000 points (-n10000) and including a broadened normalized Gaussian function with a full width at half maximum of 2000cm -1 (-w2000).</p>
+<p>Multiple MCD calculations can be performed in one run by setting multiple values for B. Transition moments can be also obtained through ED velocity formulation and FFMIO operator by setting the keywords DoDipoleVelocity and DoFullSemiClassical to true, respectively:</p>
+<pre><code>! B3LYP def2-QZVPP %tddft TDA False nroots 10 DoSOC True DoMCD True DoDipoleVelocity True DoFullSemiClassical True B 50000.0, 0.0 end</code></pre>
+<p>The results are printed separately in the output file for each setting:</p>
+<pre><code>------------------------------------------------------------------------------MCD Transitions via transition electric dipole moments B = 50000.00 Gauss T = 300.000 K ------------------------------------------------------------------------------dfosc fosc dfosc/fosc 0 -> 1 -0.0000000000 0.0000000003 -0.0663180503 . . . ------------------------------------------------------------------------------MCD Transitions via transition velocity dipole moments B = 50000.00 Gauss T = 300.000 K ------------------------------------------------------------------------------dfosc fosc dfosc/fosc 0 -> 1 -0.0000000001 0.0000000013 -0.0477214281 . . . ------------------------------------------------------------------------------MCD Transitions via full Semi-classical formulation B = 50000.00 Gauss T = 300.000 K</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<pre><code>------------------------------------------------------------------------------dfosc fosc dfosc/fosc 0 -> 1 -0.0000000001 0.0000000016 -0.0731029604 . . .</code></pre>
+<p>Post-processing results are saved in the files having the .cis-el.dipole-length.1.mcd , .cis-el. dipole-vel.1.mcd , and .cis-el.exact.1.mcd extensions.</p>
+<p>NOTE: It is worth enphasizing that the computed values of ∆ f osc correspond to the difference in absorption between left and right circularly polarized light for the selected transition moments. In the case of both ED approximations, ∆ f osc corresponds to the MCD signal. The sum of natural circular dichroism and magnetic-induced circular dichroism is obtained when the FFMIO is requested. To obtain only the MCD spectrum in an FFMIO scheme, it is necessary to subtract the natural circular dichroism by setting B to 0.0.</p>
+<h2>5.33.3 Running MCD calculations in other modules</h2>
+<p>The MCD implementation can also be used in other modules such as STEOM-CCSD, CAS, ROCIS, and MRCI (see the input file examples given below) by using the same keywords as those described for the TDDFT module.</p>
+<pre><code>%mrci DoDipoleLength true DoDipoleVelocity true DoFullSemiClassical true Soc DoSoc true DoMCD true B 50000.0 end end</code></pre>
+<pre><code>%casscf DoDipoleLength true DoDipoleVelocity true DoFullSemiClassical true rel DoSoc true DoMCD true B 50000.0 end end</code></pre>
+<pre><code>%rocis DoDipoleLength true DoDipoleVelocity true DoFullSemiClassical true rel DoSOC true DoMCD true B 50000.0 end end</code></pre>
+<pre><code>%mdci DoSOC true</code></pre>
+<p>(continues on next page)</p>
+<pre><code>DoMCD true DoDipoleLength true DoDipoleVelocity true B 50000.0 end</code></pre>
+<p>It is important to keep in mind that the calculation of the MCD relies on the proper description of the transition moments and angular momentum for calculating the Zeeman perturbation. Therefore, the user is responsible for selecting the proper electronic structure method.</p>
+<h2>5.33.4 List of related keywords</h2>
+<pre><code>%selected module DoMCD false # Enables the use of the MCD module DoDipoleVelocity true # Use the electric dipolar velocity formulation # for the light-matter interaction DoFullSemiClassical false # Use the full semiclasical ligth-matter # interaction transition moments MCDGridtype 1 # Grid for the molecular orientational average # 1 = Lebedev grid (default) # 2 = Regular grid MCDLebedev 14 # Number of points if Lebedev grid is selected # 6, 12, 14(default), 26, 50, 110, 194, 302, 434, 590, 770 NPOINTSPHI 10 # Number of points for phi angle if regular grid is selected NPOINTSTHETA 10 # Number of points for theta angle if regular grid is␣ ↪ → selected B 3000.0 # Magnetic field in Gauss Temperature 300.0 # Self-explanatory. One temperature must be defined # for each B value end</code></pre>
+<h2>5.34 Interface to SINGLE_ANISO Module</h2>
+<h2>5.34.1 General Description</h2>
+<p>The SINGLE_ANISO program allows the non-perturbative calculation of effective spin (pseudospin) Hamiltonians and static magnetic properties of mononuclear complexes and fragments on the basis of an ab initio , including the spin-orbit interaction. As a starting point it uses the results of a CASSCF/NEVPT2/SOC calculation for the ground and several excited spin-orbit multiplets.</p>
+<p>The following quantities can be computed:</p>
+<ul>
+<li style="list-style-type: '· ';">Parameters of pseudospin magnetic Hamiltonians (the methodology is described in [750]) :</li>
+<li style="list-style-type: '1. ';">First order (linear after pseudospin) Zeeman splitting tensor ( g tensor), including the determination of the sign of the product g X · g Y · g Z .</li>
+<li style="list-style-type: '2. ';">Second order (bilinear after pseudospin) zero-field splitting tensor ( D tensor).</li>
+<li style="list-style-type: '3. ';">Higher order zero-field splitting tensors ( D 2 , D 4 , D 6 , ..., etc. )</li>
+<li style="list-style-type: '4. ';">Higher order Zeeman splitting tensors ( G 1 , G 3 , G 5 , ..., etc. )</li>
+<li style="list-style-type: '· ';">Crystal-Field parameters for the ground atomic ˜ J multiplet for lanthanides. [751, 752]</li>
+<li style="list-style-type: '· ';">Crystal-Field parameters for the ground atomic ˜ L term for lanthanides and transition metals.</li>
+<li style="list-style-type: '· ';">Static magnetic properties [753, 754]:</li>
+<li style="list-style-type: '1. ';">Van Vleck susceptibility tensor χ αβ ( T ) .</li>
+</ul>
+<p>(continued from previous page)</p>
+</div>
+</body>
+</html>

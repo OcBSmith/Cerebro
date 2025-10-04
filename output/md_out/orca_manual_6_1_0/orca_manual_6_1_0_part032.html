@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part032</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>4.1.3 Coordinate Systems for Optimizations</h2>
+<p>The coordinate system for the optimization can be chosen by the coordsys variable that can be set to cartesian or redundant within the %geom block. The default is the redundant internal coordinate system. If the optimization with redundant fails, you can still try cartesian . If the optimization is then carried out in Cartesian displacement coordinates with a simple model force-field Hessian, the convergence will be only slightly slower. With a unit matrix initial Hessian very slow convergence will result.</p>
+<p>Acompound job two_step_opt.inp that first computes a semi-empirical Hessian to start from is shown below:</p>
+<pre><code>* int 0 1 C 0 0 0 0 0 0 O 1 0 0 1.3 0 0 H 1 2 0 1.1 110 0 H 1 2 3 1.1 110 180 * %compound # Step 1: semiempirical calculation of the Hessian New_Step ! AM1 NumFreq Step_End # Step 2: optimization starting from previous Hessian New_Step !B3LYP def2-svp def2/J Opt %geom InHess Read InHessName "two_step_opt_Compound_1.hess" # this file must be either a .hess file from a # frequency run or, a .opt/.carthess file left over from a # previous geometry optimization end Step_End End</code></pre>
+<h2>Tip</h2>
+<ul>
+<li style="list-style-type: '· ';">For transition metal complexes MNDO, AM1 or PM3 Hessians are not available. You can use ZINDO/1 or NDDO/1 Hessians instead. They are of lower quality than MNDO, AM1 or PM3 for organic molecules but they are still far better than the standard unit matrix choice.</li>
+<li style="list-style-type: '· ';">If the quality of the initial semi-empirical Hessian is not sufficient you may use a 'quick' RI-DFT job (e.g. BP def2-sv(p) defgrid1 )</li>
+<li style="list-style-type: '· ';">In semi-empirical geometry optimizations on larger molecules or in general when the molecules become larger the redundant internal space may become large and the relaxation step may take a significant fraction of the total computing time.</li>
+</ul>
+<p>For condensed molecular systems and folded molecules (e.g. a U-shaped carbon chain) atoms can get very close in space, while they are distant in terms of number of bonds connecting them. As damping of optimization steps in internal coordinates might not work well for these cases, convergence can slow down. ORCA's automatic internal coordinate generation takes care of this problem by assigning bonds to atom pairs that are close in real space, but distant in terms of number of bonds connecting them. See keywords AddExtraBonds , AddExtraBonds_MaxLength , and AddExtraBonds_MaxDist within the keyword list found in Section Geometry Optimization Keywords .</p>
+<p>For solid systems modeled as embedded solids the automatically generated set of internal coordinates might become very large, rendering the computing time spent in the optimization routine unnecessarily large. Usually, in such calculations the cartesian positions of outer atoms, coreless ECPs and point charges are constrained during the opti-</p>
+<p>mization - thus most of their internal coordinates are not needed. By requesting ReduceRedInts true within the %geom block only the required needed internal coordinates (of the constrained atoms) are generated.</p>
+<p>OBS: If the step in redundant fails badly and only Cartesian constrains are set (or no constrains), ORCA will fallback to a cartesian step automatically. This can be turned off by setting CARTFALLBACK to FALSE.</p>
+<h2>Redundant Internal Coordinates</h2>
+<p>There are three types of internal coordinates: redundant internals, old redundant internals (redundant_old) and a new set of redundant internals (redundant_new, with improved internals for nonbonded systems). All three sets work with the same 'primitive' space of internal coordinates (stretches, bends, dihedral angles and improper torsions). Only the redundant internals works with one more type of bends in cases where a normal bend would have been approximately 180 ◦ . In redundant internal coordinates the full primitive set is kept and the Hessian and gradient are transformed into this - potentially large - space. A geometry optimization step requires, depending on the method used for the geometry update, perhaps a diagonalization or inversion of the Hessian of dimension equal to the number of variables in the optimization. In redundant internal coordinates this space may be 2-4 times larger than the nonredundant subspace which is of dimension 3 N atoms -6(5) . Since the diagonalization or inversion scales cubically the computational overhead over nonredundant spaces may easily reach a factor of 8-64. Thus, in redundant internal coordinates there are many unnecessary steps which may take some real time if the number of primitive internals is greater than 2000 or so (which is not so unusual). The timing problem may become acute in semiempirical calculations where the energy and gradient evaluations are cheap.</p>
+<p>We briefly outline the theoretical background which is not difficult to understand:</p>
+<p>Suppose, we have a set of n I (redundant) primitive internal coordinates q constructed by some recipe and a set of n C = 3 N atoms Cartesian coordinates x . The B-matrix is defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This matrix is rectangular. In order to compute the internal gradient one needs to compute the 'generalized inverse' of B . However, since the set of primitive internals is redundant the matrix is rank-deficient and one has to be careful. In practice one first computes the n I × n I matrix G :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The generalized inverse of G is denoted G -and is defined in terms of the eigenvalues and eigenvectors of G :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here U are the eigenvectors belonging to the nonzero eigenvalues 2/7 which span the nonredundant space and R are the eigenvectors of the redundant subspace of the primitive internal space. If the set of primitive internals is carefully chosen, then there are exactly 3 N atoms -6(5) nonzero eigenvalues of G . Using this matrix, the gradient in internal coordinates can be readily computed from the (known) Cartesian gradient:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The initial Hessian is formed directly in the redundant internal space and then itself or its inverse is updated during the geometry optimization.</p>
+<p>Before generating the Newton step we have to ensure that the displacements take place only in the nonredundant part of the internal coordinate space. For this purpose a projector P ′ :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>is applied on both the gradient and the Hessian:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The second term for ˜ H sets the matrix elements of the redundant part of the internal coordinate space to very large values ( α = 1000) .</p>
+<h2>Coordinate steps</h2>
+<p>A Quasi-Newton (QN) step is the simplest choice to update the coordinates and is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>A more sophisticated step is the rational function optimization step which proceeds by diagonalizing the augmented Hessian:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The lowest eigenvalue ν 0 approaches zero as the equilibrium geometry is approached and the nice side effect of the optimization is a step size control. Towards convergence, the RFO step is approaching the quasi-Newton step and before it leads to a damped step is taken. In any case, each individual element of ∆ q is restricted to magnitude MaxStep and the total length of the step is restricted to Trust . In the RFO case, this is achieved by minimizing the predicted energy on the hypersphere of radius Trust which also modifies the direction of the step while in the quasi-Newton step, the step vector is simply scaled down.</p>
+<p>Thus, the new geometry is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>However, which Cartesian coordinates belong to the new redundant internal set? This is a somewhat complicated problem since the relation between internals and Cartesians is very nonlinear and the step in internal coordinates is not infinitesimal. Thus, an iterative procedure is taken to update the Cartesian coordinates. First of all consider the first (linear) step:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with A = B T G -. With the new Cartesian coordinates x k +1 = x k +∆ x a trial set of internals q k +1 can be computed. This new set should ideally coincide with q new but in fact it usually will not. Thus, one can refine the Cartesian step by forming</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which should approach zero. This leads to a new set of Cartesians ∆ x ′ = A ∆∆ q which in turn leads to a new set of internals and the procedure is iterated until the Cartesians do not change and the output internals equal q new within a given tolerance (10 -7 RMS deviation in both quantities is imposed in ORCA).</p>
+<h2>Constrained Optimization</h2>
+<p>Constraints on the redundant internal coordinates can be imposed by modifying the above projector P ′ with a projector for the constraints C :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>C is a diagonal matrix with 1's for the constraints and 0's elsewhere. The gradient and the Hessian are projected with the modified projector:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>Running Constrained Optimizations - examples</h2>
+<p>You can perform constrained optimizations which can, at times, be extremely helpful. This works as shown in the following example:</p>
+<pre><code>! RKS B3LYP/G SV(P) Opt %geom Constraints { B 0 1 1.25 C } { A 2 0 3 120.0 C } end end * int 0 1 C 0 0 0 0.0000 0.000 0.00 O 1 0 0 1.2500 0.000 0.00 H 1 2 0 1.1075 122.016 0.00 H 1 2 3 1.1075 122.016 180.00 *</code></pre>
+<pre><code>Constraining bond distances : { B N1 N2 value C } Constraining bond angles : { A N1 N2 N1 value C } Constraining dihedral angles : { D N1 N2 N3 N4 value C } Constraining cartesian coordinates : { C N1 C } Constraining only X-coordinates : { X N1 C } Constraining only Y-coordinates : { Y N1 C } Constraining only Z-coordinates : { Z N1 C }</code></pre>
+<ul>
+<li style="list-style-type: '· ';">Like for normal optimizations you can use numerical gradients (see Numerical Gradients .) for constrained optimizations. In this case the numerical gradient will be evaluated only for non-constrained coordinates, saving a lot of computational effort, if a large part of the structure is constrained.</li>
+<li style="list-style-type: '· ';">'value' in the constraint input is optional. If you do not give a value, the present value in the structure is constrained. For cartesian constraints you can't give a value, but always the initial position is constrained.</li>
+<li style="list-style-type: '· ';">It is recommended to use a value not too far away from your initial structure.</li>
+<li style="list-style-type: '· ';">It is possible to constrain whole sets of coordinates:</li>
+<li style="list-style-type: '· ';">For Cartesian constraints (full or X/Y/Z-only) lists of atoms can be defined:</li>
+<li style="list-style-type: '· ';">If there are only a few coordinates that have to be optimized you can use the invertConstraints option:</li>
+</ul>
+<pre><code>all bond lengths where N1 is involved : { B N1 * C} all bond lengths : { B * * C} all bond angles where N2 is the central atom: { A * N2 * C } all bond angles : { A * * * C } all dihedral angles with central bond N2-N3 : { D * N2 N3 * C } all dihedral angles : { D * * * * C }</code></pre>
+<pre><code>a list of atoms (10 to 17) with Cartesian constraints : { C 10:17 C} a list of atoms (0 to 5) with Cartesian Y constraints : { Y 0:5 C}</code></pre>
+<pre><code>%geom Constraints { B 0 1 C } end invertConstraints true # only the C-O distance is optimized # does not affect Cartesian coordinates end</code></pre>
+<ul>
+<li style="list-style-type: '· ';">In some cases it is advantageous to optimize only the positions of the hydrogen atoms and let the remaining molecule skeleton fixed:</li>
+</ul>
+<p>%geom optimizehydrogens true end</p>
+<h2>® Note</h2>
+<ul>
+<li style="list-style-type: '· ';">In the special case of a fragment optimization (see next point) the optimizehydrogens keyword does not fix the heteroatoms, but ensures that all hydrogen positions are relaxed.</li>
+<li style="list-style-type: '· ';">In Cartesian optimization, only Cartesian constraints are allowed.</li>
+</ul>
+<h2>Constrained Fragments and Molecular Cluster Optimization</h2>
+<p>The constrained fragments option was implemented in order to provide a convenient way to handle constraints for systems consisting of several molecules. The difference to a common optimization lies in the coordinate setup. In a common coordinate setup the internal coordinates are built up as described in the following:</p>
+<p>In a first step, bonds are constructed between atom pairs which fulfill certain (atom type specific) distance criteria. If there are fragments in the system, which are not connected to each other (this is the case when there are two or more separate molecules), an additional bond is assigned to the nearest atom pair between the nonbonded fragments. All other internal coordinates are constructed on the basis of this set of bonds. Here, in a second step, bond angles are constructed between the atoms of directly neighboured bonds. If such an angle reaches more than 175 ◦ , a special type of linear angles is constructed. In a third step, dihedral angles (and improper torsions) are constructed between the atoms of directly neighbouring angles.</p>
+<p>If the constrained fragments option is switched on, the set of bonds is constructed in a different way. The user defines a number of fragments (details on fragments definition can be found in Fragment Specification section.</p>
+<p>For each fragment a full set of bonds (not seeing the atoms of the other fragments) is constructed as described above. When using this option, the user also has to define which fragments are to be connected. The connection between these fragments can either be user-defined or automatically chosen. If the user defines the connecting atoms N1 and N2, then the interfragmental bond is the one between N1 and N2. If the user does not define the interfragmental bond, it is constructed between the atom pair with nearest distance between the two fragments. Then the angles and dihedrals are constructed upon this (different) set of bonds in the already described fashion.</p>
+<p>Now let us regard the definition of the fragment constraints: A fragment is constrained internally by constraining all internal coordinates that contain only atoms of the respective fragment. The connection between two fragments A and B is constrained by constraining specific internal coordinates that contain atoms of both fragments. For bonds, one atom has to belong to fragment A and the other atom has to belong to fragment B. Regarding angles, two atoms have to belong to fragment A and one to fragment B and vice versa. With respect to dihedrals, only those are constrained where two atoms belong to fragment A and the other two belong to fragment B.</p>
+<p>Here is an example : if you want to study systems, which consist of several molecules (e.g. the active site of a protein) with constraints, then you can either use cartesian constraints (see above) or use ORCA's fragment constraint option. ORCA allows the user to define fragments in the system. For each fragment one can then choose separately whether it should be optimized or constrained. Furthermore, it is possible to choose fragment pairs whose distance and orientation with respect to each other should be constrained. Here, the user can either define the atoms which make up the connection between the fragments, or the program chooses the atom pair automatically via a closest distance criterion. ORCA then chooses the respective constrained coordinates automatically. An example for this procedure is shown below.</p>
+<p>The coordinates are taken from a crystal structure [PDB-code 2FRJ]. In our gas phase model we choose only a small part of the protein, which is important for its spectroscopic properties. Our selection consists of a hemegroup (fragment 1), important residues around the reaction site (lysine (fragment 2) and histidine (fragment 3)), an important water molecule (fragment 4), the NO-ligand (fragment 5) and part of a histidine (fragment 6) coordinated to the heme-iron. In this constrained optimization we want to maintain the position of the heteroatoms of the heme group. Since the protein backbone is missing, we have to constrain the orientation of lysine and histidine (fragments 2 and 3) side chains to the heme group. All other fragments (the ones which are directly bound to the heme-iron and the water molecule) are fully optimized internally and with respect to the other fragments. Since the crystal structure does not reliably resolve the hydrogen positions, we relax also the hydrogen positions of the heme group.</p>
+<pre><code># !! If you want to run this optimization: be aware # !! that it will take some time! ! BP86 SV(P) Opt %geom ConstrainFragments { 1 } end # constrain all internal # coordinates of fragment 1 ConnectFragments {1 2 C 12 28} # connect the fragments via the atom pair 12/28 and 15/28 and {1 3 C 15 28} # constrain the internal coordinates connecting # fragments 1/2 and 1/3 {1 5 O} {1 6 O} {2 4 O} {3 4 O} end optimizeHydrogens true # do not constrain any hydrogen position end * xyz 1 2 Fe(1) -0.847213 -1.548312 -1.216237 newgto "TZVP" end</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><td>N(5)</td><td>-0.712253</td><td>-2.291076</td><td>0.352054</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>O(5)</td><td>-0.521243</td><td>-3.342329</td><td>0.855804</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(6)</td><td>-0.953604</td><td>-0.686422</td><td>-3.215231</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(3)</td><td>-0.338154</td><td>-0.678533</td><td>3.030265</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(3)</td><td>-0.868050</td><td>0.768738</td><td>4.605152</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(6)</td><td>-1.770675</td><td>0.099480</td><td>-5.112455</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(1)</td><td>-2.216029</td><td>-0.133298</td><td>-0.614782</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(1)</td><td>-2.371465</td><td>-2.775999</td><td>-1.706931</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(1)</td><td>0.489683</td><td>-2.865714</td><td>-1.944343</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(1)</td><td>0.690468</td><td>-0.243375</td><td>-0.860813</td><td>&quot;TZVP&quot;</td><td>end</td></tr><tr><td>N(2)</td><td>1.284320</td><td>3.558259</td><td>6.254287</td><td></td><td></td></tr><tr><td>C(2)</td><td>5.049207</td><td>2.620412</td><td>6.377683</td><td></td><td></td></tr><tr><td>C(2)</td><td>3.776069</td><td>3.471320</td><td>6.499073</td><td></td><td></td></tr><tr><td>C(2)</td><td>2.526618</td><td>2.691959</td><td>6.084652</td><td></td><td></td></tr><tr><td>C(3)</td><td>-0.599599</td><td>-0.564699</td><td>6.760567</td><td></td><td></td></tr><tr><td>C(3)</td><td>-0.526122</td><td>-0.400630</td><td>5.274274</td><td></td><td></td></tr><tr><td>C(3)</td><td>-0.194880</td><td>-1.277967</td><td>4.253789</td><td></td><td></td></tr><tr><td>C(3)</td><td>-0.746348</td><td>0.566081</td><td>3.234394</td><td></td><td></td></tr><tr><td>C(6)</td><td>0.292699</td><td>0.510431</td><td>-6.539061</td><td></td><td></td></tr><tr><td>C(6)</td><td>-0.388964</td><td>0.079551</td><td>-5.279555</td><td></td><td></td></tr><tr><td>C(6)</td><td>0.092848</td><td>-0.416283</td><td>-4.078708</td><td></td><td></td></tr><tr><td>C(6)</td><td>-2.067764</td><td>-0.368729</td><td>-3.863111</td><td></td><td></td></tr><tr><td>C(1)</td><td>-0.663232</td><td>1.693332</td><td>-0.100834</td><td></td><td></td></tr><tr><td>C(1)</td><td>-4.293109</td><td>-1.414165</td><td>-0.956846</td><td></td><td></td></tr><tr><td>C(1)</td><td>-1.066190</td><td>-4.647587</td><td>-2.644424</td><td></td><td></td></tr><tr><td>C(1)</td><td>2.597468</td><td>-1.667470</td><td>-1.451465</td><td></td><td></td></tr><tr><td>C(1) C(1)</td><td>-1.953033</td><td>1.169088 1.886468</td><td>-0.235289</td><td></td><td></td></tr><tr><td></td><td>-3.187993 -4.209406</td><td></td><td>0.015415</td><td></td><td></td></tr><tr><td>C(1)</td><td></td><td>0.988964</td><td>-0.187584</td><td></td><td></td></tr><tr><td>C(1)</td><td>-3.589675</td><td>-0.259849</td><td>-0.590758</td><td></td><td></td></tr><tr><td>C(1)</td><td>-3.721903</td><td>-2.580894</td><td>-1.476315</td><td></td><td></td></tr><tr><td>C(1)</td><td>-4.480120</td><td>-3.742821</td><td>-1.900939</td><td></td><td></td></tr><tr><td>C(1)</td><td>-3.573258</td><td>-4.645939</td><td>-2.395341</td><td></td><td></td></tr><tr><td>C(1)</td><td>-2.264047</td><td>-4.035699</td><td>-2.263491</td><td></td><td></td></tr><tr><td>C(1)</td><td>0.211734</td><td>-4.103525</td><td>-2.850669</td><td></td><td></td></tr><tr><td>C(1)</td><td>1.439292</td><td>-4.787113</td><td>-2.488426</td><td></td><td></td></tr><tr><td>C(1)</td><td>2.470808</td><td>-3.954284</td><td>-2.499593</td><td></td><td></td></tr><tr><td>C(1)</td><td>1.869913</td><td>-2.761303</td><td>-1.932055</td><td></td><td></td></tr><tr><td>C(1)</td><td>2.037681</td><td>-0.489452</td><td>-0.943105</td><td></td><td></td></tr><tr><td>C(1)</td><td>2.779195</td><td>0.652885</td><td>-0.459645</td><td></td><td></td></tr><tr><td>C(1)</td><td>1.856237</td><td>1.597800</td><td>-0.084165</td><td></td><td></td></tr><tr><td>C(1)</td><td>0.535175</td><td>1.024425</td><td>-0.348298</td><td></td><td></td></tr><tr><td>O(4)</td><td>-1.208602</td><td>2.657534</td><td>6.962748</td><td></td><td></td></tr><tr><td>H(3)</td><td>-0.347830</td><td>-1.611062</td><td>7.033565</td><td></td><td></td></tr><tr><td>H(3)</td><td>-1.627274</td><td>-0.387020</td><td>7.166806</td><td></td><td></td></tr><tr><td>H(3)</td><td>0.121698</td><td>0.079621</td><td>7.324626</td><td></td><td></td></tr><tr><td>H(3)</td><td>0.134234</td><td>-2.323398</td><td>4.336203</td><td></td><td></td></tr><tr><td>H(3)</td><td>-1.286646</td><td>1.590976</td><td>5.066768</td><td></td><td></td></tr><tr><td>H(3)</td><td>-0.990234</td><td>1.312025</td><td>2.466155</td><td></td><td></td></tr><tr><td>H(4)</td><td>-2.043444</td><td>3.171674</td><td>7.047572</td><td></td><td></td></tr><tr><td>H(2)</td><td>1.364935</td><td>4.120133</td><td>7.126900</td><td></td><td></td></tr><tr><td>H(2)</td><td>0.354760</td><td>3.035674</td><td>6.348933</td><td></td><td></td></tr><tr><td>H(2)</td><td>1.194590</td><td>4.240746</td><td>5.475280</td><td></td><td></td></tr><tr><td>H(2)</td><td>2.545448</td><td>2.356268</td><td>5.027434</td><td></td><td></td></tr><tr><td>H(2)</td><td>2.371622</td><td>1.797317</td><td>6.723020</td><td></td><td></td></tr><tr><td>H(2)</td><td>3.874443</td><td>4.385720</td><td>5.867972</td><td></td><td></td></tr><tr><td>H(2)</td><td>3.657837</td><td>3.815973</td><td>7.554224</td><td></td><td></td></tr><tr><td>H(2)</td><td>5.217429</td><td>2.283681</td><td>5.331496</td><td></td><td></td></tr><tr><td>H(2)</td><td>5.001815</td><td>1.718797</td><td>7.026903</td><td></td><td></td></tr><tr><td>H(6)</td><td>-3.086380</td><td>-0.461543</td><td>-3.469767</td><td></td><td></td></tr><tr><td>H(6)</td><td>-2.456569</td><td>0.406212</td><td>-5.813597</td><td></td><td></td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>H(6)</td><td>1.132150</td><td>-0.595619</td><td>-3.782287</td></tr><tr><td>H(6)</td><td>0.040799</td><td>1.559730</td><td>-6.816417</td></tr><tr><td>H(6)</td><td>0.026444</td><td>-0.139572</td><td>-7.404408</td></tr><tr><td>H(6)</td><td>1.392925</td><td>0.454387</td><td>-6.407850</td></tr><tr><td>H(1)</td><td>2.033677</td><td>2.608809</td><td>0.310182</td></tr><tr><td>H(1)</td><td>3.875944</td><td>0.716790</td><td>-0.424466</td></tr><tr><td>H(1)</td><td>3.695978</td><td>-1.736841</td><td>-1.485681</td></tr><tr><td>H(1)</td><td>3.551716</td><td>-4.118236</td><td>-2.608239</td></tr><tr><td>H(1)</td><td>1.487995</td><td>-5.784645</td><td>-3.308145</td></tr><tr><td>H(1)</td><td>-1.133703</td><td>-5.654603</td><td>-3.084826</td></tr><tr><td>H(1)</td><td>-3.758074</td><td>-5.644867</td><td>-2.813441</td></tr><tr><td>H(1)</td><td>-5.572112</td><td>-3.838210</td><td>-1.826943</td></tr><tr><td>H(1)</td><td>-0.580615</td><td>2.741869</td><td>0.231737</td></tr><tr><td>H(1)</td><td>-3.255623</td><td>2.942818</td><td>0.312508</td></tr><tr><td>H(1)</td><td>-5.292444</td><td>1.151326</td><td>-0.096157</td></tr><tr><td>H(1)</td><td>-5.390011</td><td>-1.391441</td><td>-0.858996</td></tr><tr><td>H(4)</td><td>-1.370815</td><td>1.780473</td><td>7.384747</td></tr><tr><td>H(2)</td><td>5.936602</td><td>3.211249</td><td>6.686961</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">You have to connect the fragments in such a way that the whole system is connected.</li>
+<li style="list-style-type: '· ';">You can divide a molecule into several fragments.</li>
+<li style="list-style-type: '· ';">Since the initial Hessian for the optimization is based upon the internal coordinates: Connect the fragments in a way that their real interaction is reflected.</li>
+<li style="list-style-type: '· ';">This option can be combined with the definition of constraints, scan coordinates(see Surface Scans ) and the optimizeHydrogens option (but: its meaning in this context is different to its meaning in a normal optimization run, relatively straightforward see section Geometry Optimizations ).</li>
+<li style="list-style-type: '· ';">Can be helpful in the location of complicated transition states (with relaxed surface scans), see Surface Scans .</li>
+<li style="list-style-type: '· ';">Since constraints must be defined manually, Automatic Fragmentation will not be enabled automatically if there are unassigned atoms to fragments. However, it can be activated by including a %frag block.</li>
+</ul>
+<h2>4.1.4 Optimization Assuming a Rigid Body</h2>
+<p>If you want to optimize one or multiple fragments assuming these as a 'rigid bodies', i.e. only allowing for movements of the center of mass and pure rotations for each fragment, the keyword !RIGIDBODYOPT can be used.</p>
+<p>It needs to be combined with one of the optimization flags, such as !OPT RIGIDBODYOPT or !L-OPT RIGIDBODYOPT , and all fragments which were defined in any way will be treated as such.</p>
+<p>For a more fine control, whenever fragments are defined for the system, each fragment can be optimized differently (similar to the fragment optimization described above). The following options are available: FixFrags , RelaxHFrags , RelaxFrags , and RigidFrags shown within Section Geometry Optimization Keywords .</p>
+<p>A more complex example is depicted in the following:</p>
+<pre><code>! L-Opt # or !COPT or !OPT *xyzfile 0 1 geometry.xyz %frag Definition</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>1 {0:12} end 2 {13:17} end 3 {18:38} end 4 {39:53} end end end %geom RelaxFrags {1} end # Fragment 1 is fully relaxed RigidFrags {2 3 4} end # Fragments 2, 3 and 4 are treated as rigid bodies each. end</code></pre>
+<h2>Note</h2>
+<p>The manual definition of fragments have to be done after the coordinate input.</p>
+<h2>ǩ Important</h2>
+<ul>
+<li style="list-style-type: '· ';">If there are atoms not assigned to any fragment, Automatic Fragmentation will be enabled by default. Users can explicitly control this behavior, as described in Fragment Specification .</li>
+<li style="list-style-type: '· ';">Fragment enumeration will be reordered if manual assignments exceed the total number of fragments and Automatic Fragmentation is enabled. However, the values of RelaxFrags and RigidFrags will not be updated accordingly.</li>
+</ul>
+<h2>4.1.5 Adding Arbitrary Bias and Wall Potentials</h2>
+<p>For some applications, it might be interesting to add arbitrary bias potentials during the geometry optimization. For example, if you want to optimize an intermolecular complex and need that both structures stick together, without one flying away during the optimization, you might want to add a wall bias. Or you might need a bond bias to guide the DOCKER to dock structures onto certain specific regions of others.</p>
+<h2>Note</h2>
+<p>All these walls and biases are integrated with the other electronic-structure methods in ORCA, including their Hessian.</p>
+<h2>Bond Bias Potentials</h2>
+<p>FromORCA6.1,weintroducedabondbiaspotential that can be added between two arbitrary atoms. It will effectively create a fictitious bond between atoms A and B, using a symmetric Morse-like potential:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where E AB is the energy difference from the bottom of the well to the top, R min is the equilibrium distance. α is a decay parameter that will be automatically determined if not given such as to ensure 50% intensity at 2 × R min . In practice, it looks like this:</p>
+<p>Rmin</p>
+<p>The input to create a simple bias between atoms 0 and 1 is:</p>
+<pre><code>%GEOM BIAS { B 0 1 } END END</code></pre>
+<p>Up to three other parameters can be given: R min in Angstroem, E AB in kcal/mol and the alpha. If none of those are given the default values are: sum of Van der Walls radii, 25 kcal/mol and α will be chosen as described above.</p>
+<p>In order to define a bond with R min = 1 . 5 ˚ A and a E AB = 100 kcal / mol , for example:</p>
+<pre><code>%GEOM BIAS { B 0 1 1.5 100 } END END</code></pre>
+<p>If a star symbol (*) is used for any of those three, that quantity will be taken from the defaults. For example, in order to set the energy depth, but not the distance, simply use:</p>
+<pre><code>%GEOM BIAS { B 0 1 * 100 } END END</code></pre>
+<p>® Note A negative number on the E AB will create the inverse, repulsive potential instead!</p>
+<h2>ǩ Important</h2>
+<p>The ORCA DOCKER has its own BIAS block and needs a different input than this to work there, please check Section Adding a bond bias to the docking process for more details.</p>
+<h2>Wall Bias Potentials</h2>
+<p>you can also add three kinds of arbitrary 'wall potentials': an ellipsoid or spherical of the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>or a rectangular box potential with 6 walls of the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These can be given in two ways: by explicitly defining the origin of the potential and its limits, e.g:</p>
+<pre><code>%GEOM ELLIPSEPOT 0,0,0,5,3,4 # the last are the a,b and c radii END</code></pre>
+<p>or:</p>
+<pre><code>%GEOM SPHEREPOT 0,0,0,5 # the last is the radius END</code></pre>
+<p>or:</p>
+<pre><code>%GEOM BOXPOT 0,0,0,4,-4,3,-3,6,-6 # maxx, minx, maxy, miny, maxz and minz last END</code></pre>
+<p>where the first three numbers are the center and the last is the radius for the sphere (or a,b and c for the ellipsoid) and the max and min x,y and z dimensions of the box. All numbers should be given in Ångström.</p>
+<p>In case a single number is given instead, the walls will be automatically centered around the centroid of the molecule and that number will be added to the minimum sphere or box that is necessary to contain the molecule. For example:</p>
+<pre><code>%GEOM SPHEREPOT 2 END</code></pre>
+<p>or:</p>
+<pre><code>%GEOM BOXPOT 2 END</code></pre>
+<p>will build a minimum wall centered on the centroid that encloses the molecule and add 2 Ångström on top of it. Still on the sphere case, a negative number like</p>
+<pre><code>%GEOM SPHEREPOT -2 END</code></pre>
+<p>will make the total radius of the sphere to be Ångström.</p>
+<p>This will apply to regular geometry optimizations, as well as to the Global Optimizer (GOAT), NEB, DOCKER, SOLVATOR, etc.</p>
+<h2>4.1.6 Constant External Force - Mechanochemistry</h2>
+<p>Constant external force can be applied on the molecule within the EFEI formalism[539] by pulling on the two defined atoms. To apply the external force, use the POTENTIALS in the geom block. The potential type is C for Constant force, indexes of two atoms (zero-based) and the value of force in nN.</p>
+<pre><code>! def2-svp OPT %geom POTENTIALS { C 2 3 4.0 } end end * xyz 0 1 O 0.73020 -0.07940 -0.00000 O -0.73020 0.07940 -0.00000 H 1.21670 0.75630 0.00000 H -1.21670 -0.75630 0.00000 *</code></pre>
+<p>The results are seen in the output of the SCF procedure, where the total energy already contains the force term.</p>
+<pre><code>----------------TOTAL SCF ENERGY ----------------Total Energy : -150.89704913 Eh -4106.11746 eV Components: Nuclear Repulsion : 36.90074715 Eh 1004.12038 eV External potential : -0.25613618 Eh -6.96982 eV Electronic Energy : -187.54166010 Eh -5103.26802 eV :language: orca</code></pre>
+<h2>4.1.7 Printing Hessian in Internal Coordinates</h2>
+<p>When a Hessian is available, it can be printed out in redundant internal coordinates as in the following example:</p>
+<pre><code>! opt %geom inhess read inhessname "h2o.hess" PrintInternalHess true end *xyz 0 1 O 0.000000 0.000000 0.000000 H 0.968700 0.000000 0.000000 H -0.233013 0.940258 0.000000 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The Hessian in internal coordinates is (for the input printHess.inp ) stored in the file printHess_internal.hess .</li>
+<li style="list-style-type: '· ';">The corresponding lists of redundant internals is stored in printHess.opt .</li>
+<li style="list-style-type: '· ';">Although the !Opt keyword is necessary, an optimization is not carried out. ORCA exits after storing the Hessian in internal coordinates.</li>
+</ul>
+<h2>4.1.8 Using model Hessian from previous calculations</h2>
+<p>If you had a geometry optimization interrupted, or for some reason want to use the model Hessian updated from a previous calculation, you can do that by passing a basename.opt file, a basename.carthess file or the initial Hessian on a new calculation.</p>
+<pre><code>%GEOM InHess READ InHessName "basename.carthess" END</code></pre>
+<h2>4.1.9 Geometry Optimizations using the L-BFGS optimizer</h2>
+<p>Optimizations using the L-BFGS optimizer are done in Cartesian coordinates. They can be invoked quite simple as in the following example:</p>
+<pre><code>! L-Opt ! MM %MM ORCAFFFILENAME "CHMH.ORCAFF.prms" END *pdbfile 0 1 CHMH.pdb</code></pre>
+<p>Using this optimizer systems with 100s of thousands of atoms can be optimized. Of course, the energy and gradient calculations should not become the bottleneck for such calculations, thus MM or QM/MM methods should be used for such large systems.</p>
+<p>The default maximum number of iterations is 200, and can be increased as follows:</p>
+<pre><code>! L-Opt %GEOM maxIter 500 # default 200 END *pdbfile 0 1 CHMH.pdb</code></pre>
+<p>Only the hydrogen positions can be optimized with the following command:</p>
+<pre><code>! L-OptH</code></pre>
+<p>But also other elements can be exclusively optimized with the following command:</p>
+<pre><code>! L-OptH %GEOM OptElement F # optimize fluorine only when L-OptH is invoked. # Does not work with optimization in internal coordinates. END</code></pre>
+<pre><code>® Note If you want to use the previously (ORCA5 and ORCA6.0) available L-Opt option, you need to specify</code></pre>
+<p>MD-L-Opt or MD-L-OptH .</p>
+<h2>4.1.10 Optimizing with External Methods</h2>
+<p>Although ORCA features a many electronic structure models, it cannot cover all available methods. Therefore, ORCA features an interface to external programs that allows you to use ORCA's features with electronic structure methods and model potentials provided by external programs. This way, you'll be able to utilize the latest MNDO based semiempirical methods like PM7 or neural network potentials like AIMNet2 and UMA within the ORCA infrastructure, e.g. to optimize structures , search transition states with NEB-TS , or sample conformers with GOAT .</p>
+<p>The external optimization infrastructure can be accessed via the ORCA simple input keyword !ExtOpt which can be combined with other common keywords like !Opt or !GOAT . As every program typically provides differently formatted output, individual wrapper scripts are required to link ORCA and its external optimizer infrastructure. The full path to your wrapper script can be provided via the %method block in the ORCA input file:</p>
+<pre><code>! ExtOpt %method ProgExt "/full/path/to/wrapperscript" Ext_Params "optional command line arguments" end</code></pre>
+<p>Alternatively, you can also provide the script as a file or link named otool_external in the same directory as the ORCA executables, or by assigning the EXTOPTEXE environment variable to the full path to the external program.</p>
+<p>Regardless of which option is used, the keyword Ext_Params can be used to specify the additional command line arguments as a single string.</p>
+<pre><code>® Note All information that you give on the electronic structure is discarded.</code></pre>
+<p>After executing ORCA, it automatically writes an input file called basename_EXT.extinp.tmp in each step containing the following info:</p>
+<pre><code>basename_EXT.xyz # xyz filename: string, ending in '.xyz' 0 # charge: integer 1 # multiplicity: positive integer 1 # NCores: positive integer 0 # do gradient: 0 or 1 pointcharges.pc # point charge filename: string (optional)</code></pre>
+<p>Comments from # until the end of the line should be ignored. The file basename_EXT.xyz will also be written to the working directory. While the energy is always requested, the gradient is only calculated when needed.</p>
+<p>ORCA then calls:</p>
+<pre><code>scriptname basename_EXT.extinp.tmp [args]</code></pre>
+<p>Here, args are the optional command line arguments provided defined with the Ext_Params in the ORCA input. They are passed to the external program without any changes.</p>
+<p>The external script starts the energy (and gradient) calculation and finally provides the results in a file called basename_EXT.engrad using the same basename as the XYZ file. This file must have the following format:</p>
+<pre><code># # Number of atoms: must match the XYZ # 3 # # The current total energy in Eh #</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>-5.504066223730 # # The current gradient in Eh/bohr: Atom1X, Atom1Y, Atom1Z, Atom2X, etc. # -0.000123241583 0.000000000160 -0.000000000160 0.000215247283 -0.000000001861 0.000000001861 -0.000092005700 0.000000001701 -0.000000001701</code></pre>
+<p>Comments from # until the end of the line are ignored, as are any comment-only lines.</p>
+<p>The script may also print relevant output to STDOUT and/or STDERR . STDOUT will either be printed in the ORCA standard output, or redirected to a temporary file and removed afterwards, depending on the type of job (e.g., for NumFreq the output for the displaced geometries is always redirected) and the ORCA output settings:</p>
+<pre><code>%output Print[P_EXT_OUT] 1 # (default) print the external program output Print[P_EXT_GRAD] 1 # (default) print the gradient from the ext. program end</code></pre>
+<h2>ǩ Important</h2>
+<p>Some wrapper scripts and how to use them can be found in the official GitHub repository. While some methods and programs such as MOPAC, AIMNet2, and UMA are already supported, you are free to write your own wrapper scripts to extend the available methods usable with ORCA. If you do so, please contribute to the repository via pull requests to share with the community.</p>
+<p>Note that depending on your OS and infrastructure, you may need to do some modifications to the wrapper script.</p>
+<h2>4.1.11 Optimization FAQs</h2>
+<p>I can't locate the transition state (TS) for a reaction expected to feature a low/very low barrier, what should I do?</p>
+<p>For such critical case of locating the TS, running a very fine (e.g. 0.01 Å increment of the bond length) relaxed scan of the key reaction coordinate is recommended, see Surface Scans . In this way the highest energy point on a very shallow surface can be identified and used for the final TS optimisation.</p>
+<h2>During the geometry optimisation some atoms merge into each other and the optimisation fails. How can this problem be solved?</h2>
+<p>This usually occurs due to the wrong or poor construction of initial molecular orbital involving some atoms. Check the basis set definition on problematic atoms and then the corresponding MOs!</p>
+<h2>4.1.12 Geometry Optimization Keywords</h2>
+<table><caption><div class="caption">Table 4.1: Simple input keywords for geometry optimization.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>Opt</td><td>Optimization with default convergence tolerance (Alias: NormalOpt )</td></tr><tr><td>LooseOpt</td><td>Optimization with looser convergence tolerance</td></tr><tr><td>TightOpt</td><td>Optimization with tight convergence tolerance</td></tr><tr><td>VeryTightOpt</td><td>Optimization with very tight convergence tolerance</td></tr><tr><td>COpt</td><td>Optimization in Cartesian coordinates (can be combined with TightOpt , etc.)</td></tr></tbody></table>
+<table><caption><div class="caption">Table 4.2: %method block input keywords and options for geometry optimization.</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>%method</td><td>RunTyp Opt RunTyp=Geom</td><td>Sets geometry optimization as the run type. Alternative syntax for geometry optimization.</td></tr></tbody></table>
+<p>Table 4.3: %geom block input keywor</p>
+<table><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>MaxIter</td><td>50</td><td>Maximum number of geometry iterations (default max(3N, 50)).</td></tr><tr><td>coordsys</td><td>redundant</td><td>Use redundant internal coordinates.</td></tr><tr><td></td><td>cartesian</td><td>Use Cartesian coordinates.</td></tr><tr><td>cartfallback</td><td>true</td><td>Use Cartesian step if internal coordinate step fails.</td></tr><tr><td>modify_internal</td><td>{B 10 0 A}</td><td>Add bond between atoms 0 and 10.</td></tr><tr><td></td><td>{A 8 9 10 R}</td><td>Remove angle between atoms 8, 9, and 10.</td></tr><tr><td></td><td>{D 7 8 9 10 R}</td><td>Remove dihedral between atoms 7, 8, 9, and 10.</td></tr><tr><td>Constraints</td><td>{B 1 2 value C}</td><td>Constrain bond between atoms 1 and N.</td></tr><tr><td></td><td>{A 1 2 3 value C}</td><td>Constrain angle defined by atoms 1, 2, and 3.</td></tr><tr><td></td><td>{D 1 2 3 4 value C}</td><td>Constrain dihedral defined by atoms 1-4.</td></tr><tr><td></td><td>{C 1 C}</td><td>Constrain Cartesian position of atom 1.</td></tr><tr><td></td><td>{B 1 * C}</td><td>Constrain all bonds involving atom 1.</td></tr><tr><td></td><td>{B * * C}</td><td>Constrain all bonds.</td></tr><tr><td></td><td>{A * 2 * C}</td><td>Constrain all angles with atom 2 as central.</td></tr><tr><td></td><td>{A * * * C}</td><td>Constrain all angles.</td></tr><tr><td></td><td>{D * 2 3 * C}</td><td>Constrain all dihedrals with 2 and 3 as central atoms.</td></tr><tr><td></td><td>{D * * * * C}</td><td>Constrain all dihedrals.</td></tr><tr><td>ReduceRedInts</td><td>true</td><td>Generates the internal coordinates of the constrains atoms.</td></tr><tr><td>ConnectFragments</td><td>{1 3 O}</td><td>Optimize internal coordinates connecting fragments 1 and 3.</td></tr><tr><td></td><td>{1 3 O N1 N2}</td><td>Connect fragments 1 and 3 via atoms N1 and N2.</td></tr><tr><td>ConstrainFragments</td><td>{1}</td><td>Constrain all internal coordinates within fragment 1.</td></tr><tr><td>Frags</td><td>X {0:12}</td><td>Defining fragment X, containing atoms 0-12. Note that all other atoms not specified in t</td></tr><tr><td>AUTOFRAG</td><td>true</td><td>Automatically select fragments based on topology</td></tr><tr><td>FixFrags</td><td>{1}</td><td>Freeze the coordinates of all atoms of the specified fragment(s).</td></tr><tr><td>RelaxHFrags</td><td>{1}</td><td>Relax the hydrogen atoms of the specified fragment(s). Default for all atoms if !L-OptH</td></tr><tr><td>RelaxFrags</td><td>{1}</td><td>Relax all atoms of the specified fragment(s). Default for all atoms if !L-Opt is defined.</td></tr><tr><td>RigidFrags</td><td>{1}</td><td>Treat each specified fragment as a rigid body, but relax the position and orientation of th</td></tr><tr><td>optimizeHydrogens</td><td>true</td><td>Optimize coordinates involving H atoms while constraining others.</td></tr><tr><td>freezeHydrogens</td><td>true</td><td>Freeze H positions relative to heteroatoms.</td></tr><tr><td>invertConstraints</td><td>true</td><td>Invert the defined constraints (only affects redundant internals).</td></tr><tr><td>Step</td><td>qn</td><td>Use quasi-Newton step.</td></tr><tr><td></td><td>rfo</td><td>Use Rational Function Optimization step (default for !Opt ).</td></tr><tr><td></td><td>prfo</td><td>Use partitioned RFO step (default for !OptTS ).</td></tr><tr><td>MaxStep</td><td>0.3</td><td>Maximum step length in internal coordinates (default: 0.3 au).</td></tr><tr><td>Trust</td><td>-0.3</td><td>Use fixed trust radius of 0.3 au (negative sign indicates fixed).</td></tr><tr><td>TolE</td><td>5e-6</td><td>Convergence threshold for energy change (a.u.).</td></tr><tr><td>TolRMSG</td><td>1e-4</td><td>Convergence threshold for RMS gradient (a.u.).</td></tr><tr><td>TolMaxG</td><td>3e-4</td><td>Convergence threshold for max gradient component (a.u.).</td></tr></tbody></table>
+<table><caption><div class="caption">Table 4.3 - continu</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>TolRMSD</td><td>2e-3</td><td>Convergence threshold for RMS displacement (a.u.).</td></tr><tr><td>TolMaxD</td><td>4e-3</td><td>Convergence threshold for max displacement (a.u.).</td></tr><tr><td>Convergence</td><td>normal</td><td>Default convergence threshold.</td></tr><tr><td></td><td>loose</td><td>Looser convergence thresholds.</td></tr><tr><td></td><td>tight</td><td>Tighter convergence thresholds.</td></tr><tr><td>ProjectTR</td><td>false</td><td>Disable translation and rotation projection (must be false for internals).</td></tr><tr><td>inhess</td><td>unit</td><td>Start optimization with a unit matrix Hessian.</td></tr><tr><td></td><td>Read</td><td>Read Hessian from external file. Requires InHessName .</td></tr><tr><td>InHessName</td><td>&quot;filename.hess&quot;</td><td>Specifies file containing the Hessian (e.g., .hess , .opt , .carthess ).</td></tr><tr><td></td><td>Lindh</td><td>Use Lindh&#x27;s model Hessian (only for redundant coordinates).</td></tr><tr><td></td><td>Almloef</td><td>Use Almloef&#x27;s model Hessian.</td></tr><tr><td></td><td>Schlegel</td><td>Use Schlegel&#x27;s model Hessian.</td></tr><tr><td></td><td>Swart</td><td>Use Swart and Bickelhaupt&#x27;s model Hessian.</td></tr><tr><td></td><td>XTB0</td><td>Use GFN0-xTB Hessian.</td></tr><tr><td></td><td>XTB1</td><td>Use GFN1-xTB Hessian.</td></tr><tr><td></td><td>XTB2</td><td>Use GFN2-xTB Hessian.</td></tr><tr><td></td><td>GFNFF</td><td>Use GFN-FF Hessian.</td></tr><tr><td>Calc_Hess</td><td>true</td><td>Calculate numerical Hessian at the beginning of optimization.</td></tr><tr><td>Recalc_Hess</td><td>5</td><td>Recalculate Hessian every 5 cycles.</td></tr><tr><td>Hybrid_Hess</td><td>{0 1 5 6} end</td><td>Calculate exact Hessian for specified atoms, use model for the rest.</td></tr><tr><td>NumHess</td><td>true</td><td>Request numerical Hessian.</td></tr><tr><td>Hess_Internal</td><td>{A 3 2 1 D 2.0}</td><td>Manually set Hessian value (Eh/Bohr²) for angle between atoms 3-2-1.</td></tr><tr><td></td><td>reset 5</td><td>Reset modified Hessian values after 5 cycles.</td></tr><tr><td></td><td>{B 1 0 C}</td><td>Coordinates for Hessian refinement after a relaxed surface scan.</td></tr><tr><td></td><td>XYZ1 &quot;scanName.003.xyz&quot;</td><td>Structure file before maximum in scan.</td></tr><tr><td></td><td>XYZ2 &quot;ScanName.005.xyz&quot;</td><td>Structure file after maximum in scan.</td></tr><tr><td></td><td>GBW1 &quot;ScanName.003.gbw&quot;</td><td>Optional GBWfile before max in scan.</td></tr><tr><td></td><td>GBW2 &quot;ScanName.005.xyz&quot;</td><td>Optional GBWfile after max in scan.</td></tr><tr><td>Update</td><td>Powell</td><td>Use Powell update for Hessian.</td></tr><tr><td></td><td>Bofill</td><td>Use Bofill update (default for TS optimization).</td></tr><tr><td></td><td>BFGS</td><td>Use BFGS update (default for geometry optimization).</td></tr><tr><td>HESS_Modification</td><td>Shift_Diag</td><td>Shift diagonal elements of Hessian (default).</td></tr><tr><td></td><td>EV_Reverse</td><td>Reverse sign of diagonal elements.</td></tr><tr><td>HESS_MinEV</td><td>0.0001</td><td>Minimum allowed Hessian eigenvalue.</td></tr><tr><td>NResetHess</td><td>20</td><td>Rebuild model Hessian after 20 steps (BFGS only).</td></tr><tr><td>NStepsInResetHess</td><td>5</td><td>Number of previous steps used to inform new model Hessian.</td></tr><tr><td>UseSOSCF</td><td>false</td><td>Switches the converger to SOSCF after the first point. May converge better than DIIS if</td></tr><tr><td>ReducePrint</td><td>true</td><td>Reduces printout after the first point. Default: true .</td></tr><tr><td>OptGuess</td><td></td><td>The initial guess can be changed after the first point. The default is MORead. The MOs</td></tr><tr><td>OptGuess</td><td>OneElec</td><td>Use the one-electron matrix guess.</td></tr><tr><td></td><td>Hueckel</td><td>Use the extended Hückel guess.</td></tr><tr><td></td><td>PAtom</td><td>Use the PAtom guess.</td></tr><tr><td></td><td>PModel</td><td>Use the PModel guess.</td></tr><tr><td></td><td>MORead</td><td>Use MOs of the previous point. Default.</td></tr><tr><td>AddExtraBonds</td><td>true</td><td>Enables assigning bonds to atom pairs connected by more than MaxLength bonds and</td></tr><tr><td>AddExtraBonds_MaxLength</td><td>10</td><td>Maximum number of bonds connecting two atoms to consider for extra bonding. Defaul</td></tr><tr><td>AddExtraBonds_MaxDist</td><td>5</td><td>Maximum distance (in Å) between two atoms to be considered for extra bonding. Defau</td></tr><tr><td>BIAS</td><td>{B 0 1}</td><td>Create a fictitious bond between atoms 1 and 2 to create Morse-like potential</td></tr><tr><td>ELLIPSEPOT</td><td>0,0,0,5,3,4</td><td>Defines an ellipsoidal potential centered at (0,0,0) with semi-axes a=5, b=3, c=4.</td></tr><tr><td>SPHEREPOT</td><td>0,0,0,5</td><td>Defines a spherical potential centered at (0,0,0) with radius 5.</td></tr><tr><td>BOXPOT</td><td>0,0,0,4,-4,3,-3,6,-6</td><td>Defines a box potential: maxx=4, minx=-4, maxy=3, miny=-3, maxz=6, minz=-6.</td></tr><tr><td>OptElement</td><td>N</td><td>Optimize element &#x27;N&#x27; atoms only (requires L-OptH; not compatible with internal coord</td></tr></tbody></table>
+<h2>4.2 Surface Scans</h2>
+<p>Relaxed surface scans are an invaluable tool when exploring potential energy surfaces. They allow the user to vary one or more coordinates (bond lengths, angles, or dihedrals) while relaxing the remaining degrees of freedom. This section outlines the theoretical background, gives practical examples, and summarizes relevant input keywords.</p>
+<h2>4.2.1 Theory</h2>
+<p>In a relaxed surface scan, a selected coordinate is varied over a defined range, and at each point, a constrained geometry optimization is performed. This can reveal transition states, reaction mechanisms, or approximate energy barriers. ORCA supports scans over bond lengths ( B ), bond angles ( A ), and dihedral angles ( D ).</p>
+<p>Multiple coordinates can also be scanned either independently (nested loops) or simultaneously using the Simul_Scan keyword, the latter reducing computational cost.</p>
+<h2>4.2.2 Simple Example</h2>
+<p>The following input scans the bond length between C and O from 1.35 Å to 1.10 Å in 12 equidistant steps. Each step involves a constrained geometry optimization.</p>
+<pre><code>! B3LYP SV(P) Opt %geom scan B 0 1 = 1.35, 1.10, 12 # C-O distance that will be scanned end end * int 0 1 C 0 0 0 0.0000 0.000 0.00 O 1 0 0 1.3500 0.000 0.00 H 1 2 0 1.1075 122.016 0.00 H 1 2 3 1.1075 122.016 180.00 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">As in constrained geometry optimizations it is possible to start the relaxed surface scan with a different scan parameter than the value present in your molecule. But keep in mind that this value should not be too far away from your initial structure.</li>
+</ul>
+<h2>4.2.3 Complex Example</h2>
+<p>Amorechallenging example is shown below. Here, the H-atom abstraction step from CH 4 to OH-radical is computed with a relaxed surface scan ( vide supra ). The job was run as follows:</p>
+<pre><code>! B3LYP SV(P) Opt SlowConv NoTRAH %geom scan B 1 0 = 2.0, 1.0, 15 end end</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>* int C</td><td>0</td><td>2 0 0</td><td>0</td><td>0.000000</td><td>0.000</td><td>0.000</td></tr><tr><td>H</td><td>1</td><td>0</td><td>0</td><td>1.999962</td><td>0.000</td><td>0.000</td></tr><tr><td>H</td><td>1</td><td>2</td><td>0</td><td>1.095870</td><td>100.445</td><td>0.000</td></tr><tr><td>H</td><td>1</td><td>2</td><td>3</td><td>1.095971</td><td>90.180</td><td>119.467</td></tr><tr><td>H</td><td>1</td><td>2</td><td>3</td><td>1.095530</td><td>95.161</td><td>238.880</td></tr><tr><td>O</td><td>2</td><td>1</td><td>3</td><td>0.984205</td><td>164.404</td><td>27.073</td></tr><tr><td>H</td><td>6</td><td>2</td><td>1</td><td>0.972562</td><td>103.807</td><td>10.843</td></tr></tbody></table>
+<p>It is obvious that the reaction is exothermic and passes through an early transition state in which the hydrogen jumps from the carbon to the oxygen. The structure at the maximum of the curve is probably a very good guess for the true transition state that might be located by a transition state finder.</p>
+<p>You will probably find that such relaxed surface scans are incredibly useful but also time consuming. Even the simple job shown below required several hundred single point and gradient evaluations (convergence problems appear for the SCF close to the transition state and for the geometry once the reaction partners actually dissociate - this is to be expected). Yet, when you search for a transition state or you want to get insight into the shapes of the potential energy surfaces involved in a reaction it might be a good idea to use this feature. One possibility to ease the burden somewhat is to perform the relaxed surface scan with a 'fast' method and a smaller basis set and then do single point calculations on all optimized geometries with a larger basis set and/or higher level of theory. At least you can hope that this should give a reasonable approximation to the desired surface at the higher level of theory - this is the case if the geometries at the lower level are reasonable.</p>
+<figure><figcaption><div class="caption">Fig. 4.1: Relaxed surface scan for the H-atom abstraction from CH 4 by OH-radical (B3LYP/SV(P)).</div></figcaption></figure>
+<h2>4.2.4 Multidimensional Scans</h2>
+<p>After several requests from our users ORCA now allows up to three coordinates to be scanned within one calculation.</p>
+<pre><code>! B3LYP SV(P) Opt %geom scan B 0 1 = 1.35, 1.10, 12 # C-O distance that will be scanned B 0 2 = 1.20, 1.00, 5 # C-H distance that will be scanned A 2 0 1 = 140, 100, 5 # H-C-O angle that will be scanned end end * int 0 1 C 0 0 0 0.0000 0.000 0.00 O 1 0 0 1.3500 0.000 0.00 H 1 2 0 1.1075 122.016 0.00 H 1 2 3 1.1075 122.016 180.00 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">For finding transition state structures of more complicated reaction paths ORCA now offers its very efficient NEB-TS implementation (see section Nudged Elastic Band Method ).</li>
+<li style="list-style-type: '· ';">2-dimensional or even 3-dimensional relaxed surface scans can become very expensive - e.g. requesting 10 steps per scan, ORCA has to carry out 1000 constrained optimizations for a 3-D scan.</li>
+<li style="list-style-type: '· ';">The results can depend on the direction of the individual scans and the ordering of the scans.</li>
+</ul>
+<p>Simultaneous multidimensional scans, in which all scan coordinates are changed at the same time, can be requested via the following keyword (which brings the cost of a multidimensional relaxed surface scan down to the cost of a single relaxed surface scan):</p>
+<pre><code>%geom Scan B 0 1 = 3, 1, 15 end Scan B 1 2 = 1, 3, 15 end Simul_Scan true end</code></pre>
+<h2>4.2.5 Multiple XYZ File Scans</h2>
+<p>A different type of scan is implemented in ORCA in conjunction with relaxed surface scans. Such scans produce a series of structures that are typically calculated using some ground state method. Afterwards one may want to do additional or different calculations along the generated pathway such as excited state calculations or special property calculations. In this instance, the 'multiple XYZ scan' feature is useful. If you request reading from a XYZ file via:</p>
+<pre><code>* xyzfile Charge</code></pre>
+<pre><code>Multiplicity FileName</code></pre>
+<p>this file could contain a number of structures. The format of the file is:</p>
+<pre><code>Number of atoms M Comment line AtomName1 X Y Z AtomName2 X Y Z ... AtomNameM X Y Z Number of atoms M Comment line</code></pre>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

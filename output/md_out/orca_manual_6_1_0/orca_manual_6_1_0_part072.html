@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part072</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>↪ → Atoms NHFAtoms HF Atoms Number Specify the number of the HF␣ ↪ → Atoms NECPAtoms ECP Atoms Number Specify the number of the ECP␣ ↪ → Atoms NPCAtoms PC Atoms Number Specify the number of the PC␣ ↪ → Atoms QCAtoms QC Atoms List Specify the List of the QC␣ ↪ → Atoms (e.g. 0,1,4,10... HFAtoms HF Atoms List Specify the List of the HF␣ ↪ → Atoms (e.g. 0,1,4,10... ECPAtoms ECP Atoms List Specify the List of the ECP␣ ↪ → Atoms (e.g. 0,1,4,10... PCAtoms PC Atoms List Specify the List of the PC␣ ↪ → Atoms (e.g. 0,1,4,10... Example Input NQAtoms= 4 QCAtoms 0,1,4,10 -----------------------------------------------------------------------------------↪ → --------------------------Request an Explicit Atom Definion in Ionic-Crystal-QMMM HINT: This is automatically Set to true if an Atom List (QC Atoms, ECP Atoms, ...)␣ ↪ → is provided by the user -----------------------------------------------------------------------------------↪ → --------------------------SetQCAtoms true Set explicitely the QC Atoms SetHFAtoms true Set explicitely the HF Atoms SetECPAtoms true Set explicitely the ECP Atoms SetPCAtoms true Set explicitely the PC Atoms SetPC2Atoms true Set explicitely the PC2 Atoms -----------------------------------------------------------------------------------↪ → --------------------------Load a User Defined QC Cluster -----------------------------------------------------------------------------------↪ → --------------------------LoadQCCluster true Load the QC Cluster InputXYZ "QCXYZFileName" Set the name of the QC␣ ↪ → XYZFileName -----------------------------------------------------------------------------------↪ → --------------------------NOTE: This ALWAYS requires to build symmetric Super Cells. Hence DoSymetricSC␣ ↪ → turns on by default! -----------------------------------------------------------------------------------↪ → --------------------------STEPS: 1) Build a minimal (1x1x1 or 2x2x2) and define the QC cluster that is saved␣ ↪ → as QCXYZFileName 2) Build the actual SuperCell (e.g. 10x10x10) by Loading the QC cluster and define the QC cluster that is saved as QCXYZFileName 3) Build the Embedded Cluster around the Loaded QC employin the Layers scheme -----------------------------------------------------------------------------------↪ → --------------------------Redefine SuperCell Origin. This is for shifting the center origin to a desired␣ ↪ → atom during the SC Construction This Helps to automatically construct desired Cluster structures using the Layers␣ ↪ → Definition -----------------------------------------------------------------------------------↪ → --------------------------ShiftOrigin true Request Origin Shift to a␣ ↪ → particular Atom ChosenAtom an Atom Number The Number of the Chosen atom␣</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → (e.g. 2) -----------------------------------------------------------------------------------↪ → --------------------------Neutralize the Embedded Cluster in the Simple Input Note that in the Ionic-Crustal QMMM Input this step is taken care on demand during␣ ↪ → the QM/MM run -----------------------------------------------------------------------------------↪ → --------------------------ChargePoints the charge points Specify the number of the␣ ↪ → charge points (default 1000) ChargeStep the charge points Define the step during the␣ ↪ → iterations (default 0.01) ChargeThres the threshold Define the neutralization␣ ↪ → threshold (default 0.01) Neutralization Schemes: NeutralizingScheme1 true -> Neutralization is based on␣ ↪ → All Charges NeutralizingScheme2 true -> Neutralization is based on␣ ↪ → different charges Equiping the ECP and PC␣ ↪ → regions NeutralizingScheme3 true -> Neutralization is based on␣ ↪ → PC2 Region -----------------------------------------------------------------------------------↪ → --------------------------Special Definitions for the .metainfo File in the Ionic-Crustal QMMM This helps Setting Charge/Spin in a specific atom type It can also aid the neutralization step of the Embedded Cluster in the Simple Input -----------------------------------------------------------------------------------↪ → --------------------------NAtomTypes Number of Atom Types Specify The Atom types that␣ ↪ → will be defined Example Input #-------------------------#Atom Type Charge Spin #-------------------------AtomTypes 2 Co 1 2.0 1.5 Co 2 3.0 0 end This specifies the local Spin and Charge of a Td HS Co2+ center (Type 1) and a OH␣ ↪ → Co3+ center (Type 2) During the Embedding cluster construction -----------------------------------------------------------------------------------↪ → --------------------------</code></pre>
+<p>In the first step, the orca_crystalprep tool can be used to generate its own input by running:</p>
+<p>orca_crystalprep crystalprep.inp -geninput</p>
+<h2>This will generate an initial input:</h2>
+<p>---------------------------------------------------------------------------------</p>
+<pre><code>Initial Input: crystalprep.inp for Orca_CrystalPrep has been generated. All Done!</code></pre>
+<p>---------------------------------------------------------------------------------</p>
+<h2>It looks like the following:</h2>
+<p>%crystalprep</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>As outlined in Fig. 9.11, by specifying the names of the desired *.cif or *.xyz file along with the appropriate options, a ready-to-run embedding cluster input can be generated.</p>
+<figure><figcaption><div class="caption">Fig. 9.11: Embedded cluster IC-QM/MM Input generation</div></figcaption></figure>
+<p>By default, the embedded cluster structure is constructed using a layer-based approach, in which different structural layers are generated as multiples-or fractions-of the unit cell.</p>
+<p>The unit cell fractions, expressed in terms of volume units, are specified using the following keyword:</p>
+<pre><code>CellVolumeFraction N #by default N=1</code></pre>
+<p>As an example, let us consider the NaCl case in detail . We aim to generate a complete embedding cluster setup that includes:</p>
+<ol>
+<li style="list-style-type: '1. ';">a 20x20x20 supercell, constructed from the nacl.cif file,</li>
+<li style="list-style-type: '2. ';">an embedding cluster with 1 QC layer and 1 ECP layer, and</li>
+<li style="list-style-type: '3. ';">an IC-QM/MM embedding cluster input</li>
+</ol>
+<p>These can be prepared with the following ORCA input file calling orca_crystalprep program through the %crystalprep block:</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>In the first step, the orca_crystalprep processes the nacl.cif file and creates the unit cell and the requested 20x20x20 supercell:</p>
+<pre><code>-------------------------------------------------------------Reading Information from the provided CIF file: nacl.cif -------------------------------------------------------------------------------------Unit Cell Parameters----------------Hermann-Mauguin Space Group: P1 Space Group ID: 1 Unit Cell Symmetry: Unit Cell Volume: 46.09 Unit Cell alpha angle: 60.00 Unit Cell beta angle: 60.00 Unit Cell gamma angle: 60.00 Unit Cell alpha length: 4.024 Unit Cell beta length: 4.024 Unit Cell gamma length: 4.024 Atom Type AO x y z occ Na 0 11 0.000 0.000 0.000 1.00 Cl 1 17 0.500 0.500 0.500 1.00 Done -----------------------------------------------------------------------Making a SuperCell with 20x20x20 dimensions----------Unit Cell: 0 1 2 0 4.024000 0.000000 0.000000 1 0.000000 4.024000 0.000000 2 0.000000 0.000000 4.024000 Transformation Matrix: 0 1 2 0 80.480000 0.000000 0.000000 1 0.000000 80.480000 0.000000 2 0.000000 0.000000 80.480000 ---------------------------------------------------------------------Saving xyz file: nacl4.cif_20x20x20.xyz ...Done ---------------------------------------------------------------------</code></pre>
+<p>Then, the costruction of the embedding cluster structure is initiated:</p>
+<pre><code>------------Making a Embedding Cluster Input -----------------------Using the Layers Approach with : ------------QC_Layers: 1 ECP_Layers: 1 PC_Layers: 1 --------------Preparing Inputs ...</code></pre>
+<p>In the next step, the center of the supercell ( .xyz ) is assigned to the closest atom to the center:</p>
+<pre><code>-------------------------------The Center of XYZ Coordinates -------------------------------41.246, 41.246, 41.246 -------------------------------Closest Atom to Center -------------------------------Na(4630) 40.240, 40.240, 40.240 -------------------------------Shifting Origin to closest atom -------------------------------40.240, 40.240, 40.240</code></pre>
+<p>After that, layers are generated automatically:</p>
+<pre><code>--------------------------------------Saving Generated Layers XYZ Files ... --------------------------------------Saving Layer 0 XYZ File: nacl.cif_20x20x20.xyz_0.xyz Saving Layer 1 XYZ File: nacl.cif_20x20x20.xyz_1.xyz Saving Layer 2 XYZ File: nacl.cif_20x20x20.xyz_2.xyz Saving Layer 3 XYZ File: nacl.cif_20x20x20.xyz_3.xyz Saving Layer 4 XYZ File: nacl.cif_20x20x20.xyz_4.xyz Saving Layer 5 XYZ File: nacl.cif_20x20x20.xyz_5.xyz Saving Layer 6 XYZ File: nacl.cif_20x20x20.xyz_6.xyz Saving Layer 7 XYZ File: nacl.cif_20x20x20.xyz_7.xyz Saving Layer 8 XYZ File: nacl.cif_20x20x20.xyz_8.xyz Saving Layer 9 XYZ File: nacl.cif_20x20x20.xyz_9.xyz --------------------------------------Saving Generated Layers PDB File ... --------------------------------------</code></pre>
+<p>This is followed by the embedding cluster construction:</p>
+<pre><code>--------------------------------------Saving Generated Cluster XYZ Files ... --------------------------------------Saving QC XYZ File: nacl.cif_20x20x20.xyz_QC.xyz Saving ECP Region XYZ File: nacl.cif_20x20x20.xyz_ECP.xyz Saving PC Region XYZ File: nacl.cif_20x20x20.xyz_PC.xyz</code></pre>
+<p>Finally, the IC-QM/MM embedding cluster is generated:</p>
+<pre><code>--------------------------------------Saving Embedding Cluster Inputs ... --------------------------------------Saving ICQMMM Input: nacl.cif_20x20x20.xyz.ICQMMM.inp Done --------------------------------------------------------------</code></pre>
+<p>Ionic-Crystal QM/MM calculations require the generation of a simple force field, which is stored in a *.prms file, as described in section Overview on ORCA's Multiscale Implementation . The necessary information, including charge and spin, is taken from a .metainfo file. The orca_crystalprep tool allows for externally setting the charge and spin in the .metainfo file, as described below:</p>
+<p>First, during processing of the .cif file, atom types are assigned to all atoms detected in the asymmetric unit.</p>
+<pre><code>Atom Type AO x y z occ Na 0 11 0.000 0.000 0.000 1.00 Cl 1 17 0.500 0.500 0.500 1.00</code></pre>
+<p>In the orca_crystalprep input, the charge and spin of specific atom types can be assigned as follows:</p>
+<pre><code>NAtomTypes 2 Na 0 1.0 0.0 Cl 1 -1.0 0.0</code></pre>
+<p>This information is then passed in the .metainfo file</p>
+<pre><code>18522 # atom nr. -element -atom type - formal charge -formal spin -molecule nr 0 Na 0 1 0 1 1 Na 0 1 0 1 2 Na 0 1 0 1 ... 9261 Cl 1 -1 0 1 9262 Cl 1 -1 0 1 9263 Cl 1 -1 0 1 ...</code></pre>
+<p>After completing the preparatory steps, the embedded cluster is constructed as shown in Fig. 9.12.</p>
+<figure><figcaption><div class="caption">Fig. 9.12: Generated Embedded cluster. QC: Na 4 Cl 4 , ECP region red dots, PC region small green and purple dots</div></figcaption></figure>
+<p>The generated input for running IC-QM/MM embeding cluster calculation is as provided below:</p>
+<pre><code>!Ionic-Crystal-QMMM #Include Method %qmmm #--------Define the Cluster---------</code></pre>
+<pre><code>(continues on next page)</code></pre>
+<pre><code>ORCAFFFilename= "" Use_QM_InfoFromPDB true Use_QM3_InfoFromPDB true ECPLayerECP= "SDD" #--------Charge Convergence---------CONV_Charges false ENFORCETOTALCHARGE true CHARGE_TOTAL 0 PrintLevel 4 end #-----------------------------------*pdbfile 0 1 nacl.cif_20x20x20.pdb</code></pre>
+<p>Staring from ORCA 6.1 the orca_crystalprep utility has been expanding its capabilities in:</p>
+<h2>· Processing a large variety of .cif files</h2>
+<p>In principle any type of .cif files can be processed to create a variety of supecells of any chemical system ranging from molecules to solids in a large variaty of structural complexity and space group symmetries as shown in Figure Fig. 9.13. It is noteworthy that the structure of Crystallographic Information Files (.cif) has undergone considerable evolution since their introduction by the International Union of Crystallography (IUCr). In earlier .cif files-particularly those generated prior to the standardization of the CIF Core Dictionary-header sections were often inconsistent, lacking standardized data items such as _symmetry_space_group_name_H-M, _cell_length_a, or _atom_site_label. Instead, custom or abbreviated notations were frequently used, and essential metadata (e.g., units, symmetry operations, or publication references) were often incomplete or omitted altogether.In contrast, modern .cif files, compliant with IUCr Core CIF and mmCIF dictionaries, follow a rigorously defined syntax and include extensive metadata that supports interoperability, reproducibility, and automated processing. These enhancements include explicit data block naming conventions, hierarchical loop structures for atom positions, and clearly defined symmetry operations through items like _space_group_symop_operation_xyz. Given this disparity, it is imperative that contemporary .cif parsers be designed with sufficient flexibility to accommodate structural heterogeneity while ensuring accurate extraction of intrinsic crystallographic information. This includes the correct identification and interpretation of symmetry operations and lattice parameters for all 230 crystallographic space groups and their corresponding subgroups, as defined by the International Tables for Crystallography. Such robustness is critical for enabling reliable symmetry analysis, structure refinement, and high-throughput computational workflows in crystallography and materials science. In this context Orca_crystalprep contains its own symmetry operations library and it will try to repair any potential deficiency contained in the .cif file. It is activated automatically if symmetry operations are not detected or alternatively it can be requested through the keyword SymmetryOperations true</p>
+<p>For example in the case of CeO2 the orca_crystalprep input file for the generation of a spherical supercell will look like the following</p>
+<p>(continued from previous page)</p>
+<p>Fig. 9.13: Various generated supercells by employing the orca_crystalprep utility program</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>#************************ #Setup Embedding Approach #************************ DoEmbedding false #Turn off the Embended Cluster generation</code></pre>
+<h2>Running this will process the .cif file</h2>
+<pre><code>*************** ORCA CRYSTALPREP TOOL ************ -------------------------------------------------------------Reading Information from the provided CIF file: CeO2.cif -------------------------------------------------------------------------------------Unit Cell Parameters----------------Hermann-Mauguin Space Group: P1 Space Group ID: 1 Unit Cell Symmetry: Unit Cell Volume: 163.40 Unit Cell alpha angle: 90.00 Unit Cell beta angle: 90.00 Unit Cell gamma angle: 90.00 Unit Cell alpha length: 5.467 Unit Cell beta length: 5.467 Unit Cell gamma length: 5.467 Atom Type AO x y z occ ox Ce 0 58 0.000 0.000 0.000 1.00 4.00 Ce 1 58 0.000 0.500 0.500 1.00 4.00 Ce 2 58 0.500 0.000 0.500 1.00 4.00 Ce 3 58 0.500 0.500 0.000 1.00 4.00 O 4 8 0.250 0.750 0.750 1.00 -2.00 O 5 8 0.750 0.250 0.250 1.00 -2.00 O 6 8 0.250 0.250 0.250 1.00 -2.00 O 7 8 0.750 0.750 0.750 1.00 -2.00 O 8 8 0.750 0.750 0.250 1.00 -2.00 O 9 8 0.250 0.250 0.750 1.00 -2.00 O 10 8 0.750 0.250 0.750 1.00 -2.00 O 11 8 0.250 0.750 0.250 1.00 -2.00 Done -----------------------------------------------------------------------Making a SuperCell with 10x10x10 dimensions----------Doing Symmetry Operations ... Detected 1 Operations for Hermann-Mauguin Space Group: P1 Space Group ID: 1 Done Unit Cell: 0 1 2 0 5.467000 0.000000 0.000000 1 0.000000 5.467000 0.000000 2 0.000000 0.000000 5.467000 Transformation Matrix: 0 1 2 0 54.670000 0.000000 0.000000 1 0.000000 54.670000 0.000000 2 0.000000 0.000000 54.670000 -----------------------------Super Cell Origin: 0, 0, 0 -----------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>and will create the 10x10x10 spherical supecell shown in Figure Fig. 9.14 in a cubic (a) or in a hemisphere (b) construction fashion if the DoHemiSphereSC keyword is turned on. Note that while the cubic supercell construction scheme is appropriete for creating embedded clusters to tackle bulk chemical propblems (e.g. computation of the Optical band gaps of semiconductors, [599]). In contrast the hemisphere supercell build option is expected to be very usefull for constructing embedded clusters to tackle surface related problems (e.g. computation of adsorption energies of molecules on surfaces, [822]).</p>
+<figure><figcaption><div class="caption">Fig. 9.14: Cubic (left) versus Hemisphere (right) generated 10x10x10 supercell of CeO2</div></figcaption></figure>
+<h2>· Enable loading of a tailored QC.xyz file</h2>
+<p>Staring from ORCA 6.1, it is possible to generate and load a tailored QC file directly in orca_crystalprep.</p>
+<p>This is achieved by enabling the DoSymetricSC keyword. In this way all generated supercells share the same center. Hence in the case of CeO2, one can generate a 1x1x1 or 2x2x2 minimum supercell and construct/tailor the QC.xyz file (in this case Ce24O64.xyz). In following one can now re-execure the orca_crystalprep by now loading the QC file by setting LoadQCCluster true</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>This will generate the embedded cluster shown in Figure Fig. 9.15 for the tailored QC= [ Ce 24 O 48 ] 0 quantum cluster and 3-layers of ECPs.</p>
+<p>Note that in this case the different layers to equiop the ECPs and PCs regions are by default generated on the basis of the volume of the chosen QC cluster. In this case it is beneficial to use a small fraction of the unitcell volume defined by CellVolumeFraction 0.01 that can be used as a criterion for the layers generation.</p>
+<figure><figcaption><div class="caption">Fig. 9.15: CeO2 embedded cluster generated for the QC= [ Ce 24 O 48 ] 0 quantum cluster and 3-layers of ECPs</div></figcaption></figure>
+<p>In a final step the orca_crystalprep generates the IC-QM/MM input file as</p>
+<pre><code>!Ionic-Crystal-QMMM #Include Method %qmmm #--------Define the Cluster--------ORCAFFFilename= "CeO2.cif_10x10x10.ORCAFF.prms" Use_QM_InfoFromPDB true Use_QM3_InfoFromPDB true ECPLayerECP= "SDD" #--------Charge Convergence---------CONV_Charges false ENFORCETOTALCHARGE true CHARGE_TOTAL 0 PrintLevel 4 end #-----------------------------------*pdbfile 0 1 CeO2.cif_10x10x10.pdb</code></pre>
+<p>Note that the information on the QC, ECP and PC regions is read from the generated .pdb file.</p>
+<ul>
+<li style="list-style-type: '· ';">Further information on the IC-QM/MM and QM/MM modules in general can be found in section Overview on ORCA's Multiscale Implementation</li>
+<li style="list-style-type: '· ';">Additional details and examples related to the orca_crystalprep tool and the embedding approach are provided in the tutorial 'Treating Solids with the Embedding Cluster approach'.</li>
+</ul>
+<h2>9.3 orca_2json</h2>
+<p>This utility program supports the exchange of external ORCA data like geometry, orbitals and basisets but also of internal ORCA data like 1-electron and 2-electron integals with other programs.</p>
+<h2>9.3.1 Export ORCA data</h2>
+<p>The program reads information like geometries, basis sets, MOs etc. stored in the .gbw file or other equivalent ones as .uno , .mp2nat , .qro etc. and calculates integrals to export them in JSON standard output formats. For density information the .densities file must also be available. The program is called as a standalone via command line.</p>
+<h2>Syntax:</h2>
+<pre><code>orca_2json BaseName.gbw -options or orca_2json BaseName.mp2nat -options or orca_2json BaseName.uno -options</code></pre>
+<p>The following ASCII and binary JSON-formats are available as command line options. It is possible to specify more than one format option.</p>
+<pre><code>-json Write ASCII JSON file (default) -bson Write binary JSON file -ubjson Write universal binary JSON specification file -msgpack Write MessagePack file</code></pre>
+<p>In addition two more options are availble. The first of them is used to translate a basename.property.txt file to a corresponding one in JSON format (see Property File ).</p>
+<pre><code>-property Translate a *.txt property file to a *.json one</code></pre>
+<p>Finally, orca_2json has the ability to create a .gbw file from a json file. For this one needs to use the '-gbw' option (see Import JSON data into ORCA ).</p>
+<pre><code>-gbw Create a GBW file from a json one</code></pre>
+<h2>Automatic export from ORCA job</h2>
+<p>It is also possible to run orca_2json on the GBW file automatically at the end of an ORCA job using the input:</p>
+<pre><code>%output JSONGBWFile true end</code></pre>
+<p>This will simply run orca_2json BaseName.gbw with no additional options, respecting any applicable configuration file, if present (see below).</p>
+<h2>9.3.2 Configuration file</h2>
+<p>The data stored in the json file can be configured more individually. Some information like atom information, geometry and charge are always written in the outputfile (see Basic Information ). Other data can be requested via keywords in a JSON-formatted configuration file that either exists for every ORCA output file or for all files in a directory. Without these configuration files ALL available data are stored except for the densities and the integrals. Because of the huge amount of data these are only available when explicitly requested in the configuration file.</p>
+<p>You can specify a basename-dependend configuration file</p>
+<pre><code>BaseName.json.conf</code></pre>
+<p>or a global file used for all requests in a directory.</p>
+<pre><code>orca.json.conf</code></pre>
+<p>Most keywords in the configuration file can be activated or deactivated with true or false but some keywords like densities or output formats have more options and require a list of values. If an option is not specifically selected it is omitted.</p>
+<h2>Structure of the configuration file :</h2>
+<pre><code>{ "keyword": true/false, ... "keyword": true/false, "keyword": ["option",...."option"] ... }</code></pre>
+<h2>Example</h2>
+<pre><code>{ "MOCoefficients":false, "BasisSet":false }</code></pre>
+<p>Using the above configuration file in the working directory, orca_2json will not export the molecular coefficients and the basis set information.</p>
+<h2>Example</h2>
+<p>Here is an example configuration file with most available keywords where everything is disabled except for the basis set information and the specified Integrals, all densities stored in the density file are requested and the output format should be ascii json and binary json.</p>
+<pre><code>{ "MOCoefficients": false, "Basisset": true, "1elPropertyIntegrals": ["dipole", "quadrupole", "velocity", "printLinMom", ↪ → "angular_momentum", "higherMoment", "soc"], "1elPropertyRelIntegrals": ["dipole", "quadrupole", "angular_momentum", ↪ → "soc"], "1elIntegrals": ["H", "S", "T", "V", "HMO"], "1elIntegralsRel": ["H", "S", "T", "V", "HMO"], "FockMatrix": ["F", "J", "K", "VXC", "Vsol"], "Vaux": false, "AuxBasisType": "AuxC", "FullTrafo": false, "OrbWin": [0,0,0,0,0,0,0,0], "2elIntegrals": [ "MO_IJKL", "RI_IAV", "RI_IJKL"], "2elNonRedIntegrals": false, "2elNonRedRIIntegrals": false,</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>"MullikenCharge": false, "LoewdinCharge": false, "Densities": ["all"], <--- here you specify the names like "scfp" or ↪ → "scfr" or all "JSONFormats": ["json", "bson"] }</code></pre>
+<h2>9.3.3 Available information</h2>
+<h2>Property File</h2>
+<p>Beside all information that we will see orca_2json can create, it can also translate the property file of ORCA (basename.property.txt) to a JSON file. This option gives access to all properties stored in the property file. (For more information on property file see Property File ).</p>
+<p>The syntax is:</p>
+<pre><code>orca_2json basename -property</code></pre>
+<p>Where basename is the name of the property file without the extension property.txt .</p>
+<h2>Example</h2>
+<p>If we use the following ORCA input (with the name test.inp):</p>
+<pre><code>!HF *xyz 0 1 H 0.0 0.0 0.0 H 0.0 0.0 0.8 *</code></pre>
+<p>ORCA will create and store on disk, a file named 'test.property.txt' . The start of the file will look like this:</p>
+<pre><code>************************************************* ******************* ORCA 6.0.1 ****************** ************************************************* $Calculation_Status &GeometryIndex 1 &version [&Type "String"] "6.0.1" &progName [&Type "String"] "LeanSCF" &Status [&Type "String"] "NORMAL TERMINATION" $End $Geometry &GeometryIndex 1 &NAtoms [&Type "Integer"] 2 &NCorelessECP [&Type "Integer"] 0 &NGhostAtoms [&Type "Integer"] 0 &CartesianCoordinates [&Type "Coordinates", &Dim(2,4), &Units "Bohr"] H 0.000000000000 0.000000000000 0.000000000000 H 0.000000000000 0.000000000000 1.511780907137 $End $SCF_Energy &GeometryIndex 1 &totalEnergy [&Type "Double"] -1.1271129220233282e+00 $End</code></pre>
+<p>Then running orca_2json in the following way:</p>
+<pre><code>orca_2json test -property</code></pre>
+<p>ORCAwill create a new file on disk, named 'test.property.json' . The corresponding part of this file will look like this:</p>
+<pre><code>{ "Calculation_Status" : { "Status" : "NORMAL TERMINATION", "progName" : "LeanSCF", "version" : "6.0.x" }, "Geometries" : [ { "Geometry" : { "Coordinates" : { "Cartesians" : [ [ "H", 0.0, 0.0, 0.0 ], [ "H", 0.0, 0.0, 1.511780907137 ] ], "Type" : "Cartesians", "Units" : "a.u." }, "NAtoms" : 2, "NCorelessECP" : 0, "NGhostAtoms" : 0 }, "SCF_Energy" : { "totalEnergy" : -1.1271129220233282 } } ] }</code></pre>
+<h2>Note</h2>
+<p>The property.json structure has changed somewhat since ORCA version 6.0 and so have some of the property components. Converting an version 6.0 property.txt file to the current JSON format is partially possible but some data may be lost (with a warning).</p>
+<h2>Basic Information</h2>
+<p>Some basic information will always be written into the JSON-file as</p>
+<table><tbody><tr><td>per Atom</td><td>-</td><td>Coords</td></tr><tr><td></td><td>-</td><td>ElementLabel</td></tr><tr><td></td><td>-</td><td>ElementNumber</td></tr><tr><td></td><td>-</td><td>Idx</td></tr><tr><td></td><td>-</td><td>NuclearCharge</td></tr><tr><td>per molecule</td><td>-</td><td>BaseName</td></tr><tr><td></td><td>-</td><td>Charge</td></tr><tr><td></td><td>-</td><td>CoordinateUnits</td></tr><tr><td></td><td>-</td><td>HFTyp</td></tr><tr><td></td><td>-</td><td>Multiplicity</td></tr><tr><td></td><td>-</td><td>PointGroup</td></tr></tbody></table>
+<p>For example using the following configuration file where we set everything to false:</p>
+<pre><code>{ "MOCoefficients" : false , "Basisset" : false , "MullikenCharge" : false , "LoewdinCharge" : false , "JSONFormats" : ["json"] }</code></pre>
+<p>will still produce a json file which for the case of a H2 molecule should look like:</p>
+<pre><code>{ "Molecule" : { "Atoms" : [ { "Coords" : [ 0.0, 0.0, 0.0 ], "ElementLabel" : "H", "ElementNumber" : 1, "Idx" : 0, "NuclearCharge" : 1.0 }, { "Coords" : [ 0.0, 0.0, 0.8 ],</code></pre>
+<p>(continues on next page)</p>
+<h2>2RDM</h2>
+<p>As of ORCA 6.1.0, it is possible to export 2RDM(s) in MO basis as calculated by the AutoCI module to JSON. See the AutoCI keywords table for the available options. The 2RDMs are not stored inside the .densities file, but in their own .RDM2 files. The following 2RDMs are available</p>
+<ul>
+<li style="list-style-type: '· ';">RDM2 (RHF, Γ pr qs )</li>
+<li style="list-style-type: '· ';">RDM2_aa (UHF, Γ p α r α q α s α )</li>
+<li style="list-style-type: '· ';">RDM2_ab (UHF, Γ p α r β q α s β )</li>
+<li style="list-style-type: '· ';">RDM2_bb (UHF, Γ p β r β q β s β )</li>
+</ul>
+<p>Consider the general CI 2RDM:</p>
+<pre><code>Γ pr qs = ⟨ Ψ | E pq E rs | Ψ ⟩ .</code></pre>
+<p>For every available combination of p and q , there will be a matrix r x s in the JSON. The values of p , q , r , s range from 0 to the number of basis functions. For example, a fictional case in which there are only 2 basis functions and all elements of the 2RDM have been set to 0 will produce the following JSON.</p>
+<pre><code>{ "Densities" : { "RDM2" : { "0,0" : [[0.0, 0.0], [0.0, 0.0]] // p=0, q=0 "0,1" : [[0.0, 0.0], [0.0, 0.0]] // p=0, q=1 "1,0" : [[0.0, 0.0], [0.0, 0.0]] // p=1, q=0 "1,1" : [[0.0, 0.0], [0.0, 0.0]] // p=1, q=1 }</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>"ElementLabel" : "H", "ElementNumber" : 1, "Idx" : 1, "NuclearCharge" : 1.0 } ], "BaseName" : "test", "Charge" : 0, "CoordinateUnits" : "Angs", "HFTyp" : "RHF", "Multiplicity" : 1, "PointGroup" : "C1" }, "ORCA Header" : { "Date" : "2024-06-03 00:06:37 +0200", "Git" : "548015a5a0", "Version" : " Program Version 6.0 -CURRENT -\n" } }</code></pre>
+<h2>Densities</h2>
+<p>orca_2json can also export calculated densities in json format.</p>
+<pre><code>Densities -densities as available in the .densities file</code></pre>
+<p>(continues on next page)</p>
+<pre><code>} }</code></pre>
+<p>Please note that the relaxed 2RDMs have been symmetrised to posses the following permutational symmetry</p>
+<pre><code>Γ pr qs = Γ qr ps = Γ ps qr = Γ qs pr = Γ rp sq = Γ sp rq = Γ rq sp = Γ sq rp .</code></pre>
+<h2>Syntax</h2>
+<p>'Densities' : [list of densities]</p>
+<p>Where list of densities should be a list of strings with the expected densities.</p>
+<p>NOTE By default densities, due to their potential size, are not exported to a json file.</p>
+<p>NOTE An empty bracket syntax ( 'Densities' : [] ) will cause the program to crash.</p>
+<p>NOTE There is the string 'All' available where the program will export all available densities.</p>
+<h2>Electron Integrals</h2>
+<p>The list of available electron integrals is shown in the next table.</p>
+<table><tbody><tr><td>1elIntegrals</td><td>-</td><td>1-electron integrals</td></tr><tr><td>1elPropertyIntegrals</td><td>-</td><td>1-electron property integrals</td></tr><tr><td>1elIntegralsRel</td><td>-</td><td>relativistic 1-electron integrals</td></tr><tr><td>1elPropertyRelIntegrals</td><td>-</td><td>relativistic 1-electron property integrals</td></tr><tr><td>2elIntegrals</td><td>-</td><td>two-electron integrals</td></tr><tr><td>2elNonRedIntegrals</td><td>-</td><td>non-redundant two-electron integrals</td></tr><tr><td>2elNonRedRIIntegrals</td><td>-</td><td>non-redundant two-electron RI integrals</td></tr><tr><td>FockMatrix</td><td>-</td><td>two-electron contributions to the Fock matrix</td></tr></tbody></table>
+<h2>1-electron integrals</h2>
+<p>For 1-electron integrals we use the following notation:</p>
+<table><tbody><tr><td>H</td><td>-</td><td>one electron matrix</td></tr><tr><td>HMO</td><td>-</td><td>one electron matrix in MObasis</td></tr><tr><td>S</td><td>-</td><td>overlap matrix</td></tr><tr><td>T</td><td>-</td><td>kinetic energy matrix</td></tr><tr><td>V</td><td>-</td><td>nuclear attraction matrix</td></tr></tbody></table>
+<h2>Example</h2>
+<pre><code>{ "1elIntegrals" : ["H", "S"], "JSONFormats" : ["json"] }</code></pre>
+<p>will produce a json file were only the H-Matrix and the Overlap matrix are printed (beside the basic information). Please note that for the one electron relativistic integrals there is a separate variable (see 1-electron relativistic integrals )</p>
+<p>(continued from previous page)</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part033</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>AtomName1 X Y Z</td></tr><tr><td>...</td></tr></tbody></table>
+<p>Thus, the structures are simply of the standard XYZ format and they are provided one after the other. There is no need to add any extra character between them. This was the case for ORCA versions older than 6.0.0, where the structures were separated by a '&gt;' sign. The user can still use this format, if preferred, but is not needed anymore. After processing the XYZ file, single point calculations are performed on each structure in sequence and the results are collected at the end of the run in the same kind of trajectory .dat files as produced from trajectory calculations.</p>
+<p>In order to aid in using this feature, the relaxed surface scans produce a file called MyJob.allxyz that is of the correct format to be re-read in a subsequent run.</p>
+<h2>4.2.6 Surface Scan Keywords</h2>
+<table><caption><div class="caption">Table 4.4: %geom block input keywords and options for surface scanned geometry optimization.</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>Scan</td><td>B 1 2 = v1, v2, N</td><td>Scan atom 1 to atom 2 bond distance from v1 to v2 in N steps.</td></tr><tr><td></td><td>B 1 2 [v1 v2 ... ]</td><td>Scan atom 1 to atom 2 bond with custom step values.</td></tr><tr><td></td><td>A 1 2 3</td><td>Scan an angle using atoms 1,2,3.</td></tr><tr><td></td><td>D 1 2 3 4</td><td>Scan a dihedral of atoms 1,2,3,4.</td></tr><tr><td>Simul_Scan</td><td>true</td><td>Enable simultaneous multidimensional scans (up to 3 coordinates). Forces ).</td></tr><tr><td>FullScan</td><td>true</td><td>full surface scan before TS optimization ( !ScanTS</td></tr></tbody></table>
+<h2>4.3 Transition State Searches</h2>
+<h2>4.3.1 Transition State Search Theory</h2>
+<p>As transition state finder we implemented the well-established eigenvector following algorithm using a P-RFO step as implemented by Baker [538]. This algorithm is a quasi-Newton like algorithm.</p>
+<p>The Taylor series of the energy, truncated after the quadratic term, is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The Newton-Raphson step to get from the actual point to a stationary point is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with V i and b i as eigenvectors and eigenvalues of the Hessian H q . This step leads to the nearest stationary point on the PES. This stationary point can be a minimum or a saddle point, according to the curvature of the PES at the actual point.</p>
+<p>With a simple shift of the Hessian eigenvalues b i in this equation one can guide the step to a stationary point with the required characteristics (Hessian with exactly one negative eigenvalue). The transition state search is separated into two different optimization problems. The energy is maximized along one Hessian eigenmode and minimized along the remaining 3 N -7(6) eigenmodes. We introduce two different shift parameters λ p and λ n , where λ p is the shift parameter for the eigenmode being maximized and λ n shifts the Hessian eigenvalues of the modes being minimized.</p>
+<p>This method allows us to maximize along any mode, not only the one with smallest eigenvalue. Starting from two different RFO-matrices for the different optimization problems (see description above) we get for λ p and λ n :</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>whereas F i = V + i g is the component of g along the Hessian eigenmode V i and λ n has to get solved iteratively. The solution for λ n has to be negative and lower than b 2 (or lower than b 1 , if not the lowest mode is being followed). If the Hessian has more than one negative eigenvalue, these properties might not be fulfilled, and the Hessian would have to be modified. In our implementation the Hessian diagonal elements are either shifted or reversed in such a case.</p>
+<p>Once the shift parameters are known the P-RFO step h is calculated as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>4.3.2 Introduction to Transition State Searches</h2>
+<p>If you provide a good estimate for the structure of the transition state (TS) structure, then you can find the respective transition state with the following keywords OptTS and ScanTS (in this example we take the structure with highest energy of the above relaxed surface scan):</p>
+<pre><code>! B3LYP SV(P) TightSCF SlowConv OptTS # performs a TS optimization with the EF-algorithm # Transition state: H-atom abstraction from CH4 to OH-radical %geom Calc_Hess true # calculation of the exact Hessian # before the first optimization step end * int 0 2 C 0 0 0 0.000000 0.000 0.000 H 1 0 0 1.285714 0.000 0.000 H 1 2 0 1.100174 107.375 0.000 H 1 2 3 1.100975 103.353 119.612 H 1 2 3 1.100756 105.481 238.889 O 2 1 3 1.244156 169.257 17.024 H 6 2 1 0.980342 100.836 10.515 *</code></pre>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">You need a good guess of the TS structure. Relaxed surface scans can help in almost all cases (see also example above).</li>
+<li style="list-style-type: '· ';">For TS optimization (in contrast to geometry optimization) an exact Hessian, a Hybrid Hessian or a modification of selected second derivatives is necessary.</li>
+<li style="list-style-type: '· ';">Analytic Hessian evaluation is available for HF and SCF methods, including the RI and RIJCOSX approximations and canonical MP2.</li>
+<li style="list-style-type: '· ';">Check the eigenmodes of the optimized structure for the eigenmode with a single imaginary frequency. You can also visualize this eigenmode with orca_pltvib (section Animation of Vibrational Modes ) or any other visualization program that reads ORCA output files.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">If the Hessian is calculated during the TS optimization, it is stored as basename.001.hess, if it is recalculated several times, then the subsequently calculated Hessians are stored as basename.002.hess, basename.003.hess, …</li>
+<li style="list-style-type: '· ';">If you are using the Hybrid Hessian, then you have to check carefully at the beginning of the TS optimization (after the first three to five cycles) whether the algorithm is following the correct mode (see TIP below). If this is not the case you can use the same Hybrid Hessian again via the inhess read keyword and try to target a different mode (via the TS_Mode keyword, see below).</li>
+</ul>
+<p>In the example above the TS mode is of local nature. In such a case you can directly combine the relaxed surface scan with the TS optimization with the</p>
+<pre><code>! ScanTS</code></pre>
+<p>command, as used in the following example:</p>
+<pre><code>! B3LYP SV(P) TightSCF SlowConv ! ScanTS # perform a relaxed surface scan and TS optimization # in one calculation %geom scan B 1 0 = 2.0, 1.0, 15 end end * int 0 2 C 0 0 0 0.000000 0.000 0.000 H 1 0 0 1.999962 0.000 0.000 H 1 2 0 1.095870 100.445 0.000 H 1 2 3 1.095971 90.180 119.467 H 1 2 3 1.095530 95.161 238.880 O 2 1 3 0.984205 164.404 27.073 H 6 2 1 0.972562 103.807 10.843 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The algorithm performs the relaxed surface scan, aborts the Scan after the maximum is surmounted, chooses the optimized structure with highest energy, calculates the second derivative of the scanned coordinate and finally performs a TS optimization.</li>
+<li style="list-style-type: '· ';">If you do not want the scan to be aborted after the highest point has been reached but be carried out up to the last point, then you have to type:</li>
+</ul>
+<pre><code>%geom fullScan true # do not abort the scan with !ScanTS end</code></pre>
+<p>As transition state finder we implemented the quasi-Newton like Hessian mode following algorithm.[531, 533, 534, 535, 536, 537, 538, 540, 541] This algorithm maximizes the energy with respect to one (usually the lowest) eigenmode and minimizes with respect to the remaining 3 N -7 (6) eigenmodes of the Hessian.</p>
+<ul>
+<li style="list-style-type: '· ';">You can check at an early stage if the optimization will lead to the 'correct' transition state. After the first optimization step you find the following output for the redundant internal coordinates:</li>
+</ul>
+<p>---------------------------------------------------------------------------</p>
+<pre><code>Redundant Internal Coordinates</code></pre>
+<table><tbody><tr><td colspan="9">(Angstroem and degrees)</td></tr><tr><td colspan="5">Definition ↪ → mode)</td><th>Value</th><th>dE/dq Step</th><th>New-Value</th><th>comp.(TS␣</th></tr><tr><th>1. B(H ↪ → 58</th><td>1,C</td><td>0)</td><td></td><td></td><td>1.2857</td><td>0.013136</td><td>0.0286 1.3143</td><td>0.</td></tr><tr><th>2. B(H</th><td>2,C</td><td>0)</td><td></td><td></td><td>1.1002</td><td>0.014201</td><td>-0.0220 1.0782</td><td></td></tr><tr><th>3. B(H</th><td>3,C</td><td>0)</td><td></td><td></td><td>1.1010</td><td>0.014753 -0.0230</td><td>1.0779</td><td></td></tr><tr><th>4. B(H</th><td>4,C</td><td>0)</td><td></td><td></td><td>1.1008</td><td>0.014842</td><td>-0.0229 1.0779</td><td></td></tr><tr><th>5. B(O</th><td>5,H</td><td>1)</td><td></td><td></td><td>1.2442</td><td>-0.015421</td><td>-0.0488 1.1954</td><td>0.</td></tr><tr><th colspan="9">↪ → 80</th></tr><tr><th>6. B(H</th><td>6,O</td><td>5)</td><td></td><td></td><td>0.9803</td><td>0.025828</td><td>-0.0289 0.9514</td><td></td></tr><tr><th>7. A(H</th><td>1,C</td><td>0,H</td><td>2)</td><td></td><td>107.38</td><td>-0.001418</td><td>-0.88 106.49</td><td></td></tr><tr><th>8. A(H</th><td>1,C</td><td>0,H</td><td>4)</td><td></td><td>105.48</td><td>-0.002209</td><td>-0.46 105.02</td><td></td></tr><tr><th>9. A(H</th><td>1,C</td><td>0,H</td><td>3)</td><td></td><td>103.35</td><td>-0.003406</td><td>0.08 103.43</td><td></td></tr><tr><th>10. A(H</th><td>2,C</td><td>0,H</td><td>4)</td><td></td><td>113.30</td><td>0.001833</td><td>0.35 113.65</td><td></td></tr><tr><th>11. A(H</th><td>3,C</td><td>0,H</td><td>4)</td><td></td><td>113.38</td><td>0.002116</td><td>0.26 113.64</td><td></td></tr><tr><th>12. A(H</th><td>2,C</td><td>0,H</td><td>3)</td><td></td><td>112.95</td><td>0.001923</td><td>0.45 113.40</td><td></td></tr><tr><th>13. A(C</th><td>0,H</td><td>1,O</td><td>5)</td><td></td><td>169.26</td><td>-0.002089</td><td>4.30 173.56</td><td></td></tr><tr><th>14. A(H</th><td>1,O</td><td>5,H</td><td>6)</td><td></td><td>100.84</td><td>0.003097</td><td>-1.41 99.43</td><td></td></tr><tr><th>15. D(O</th><td>5,H</td><td>1,C</td><td>0,H</td><td>2)</td><td>17.02 0.000135</td><td>0.24</td><td>17.26</td><td></td></tr><tr><th>16. D(O</th><td>5,H</td><td>1,C</td><td>0,H</td><td>4)</td><td>-104.09 -0.000100</td><td>0.52</td><td>-103.57</td><td></td></tr><tr><th>17. D(O</th><td>5,H</td><td>1,C</td><td>0,H</td><td>3)</td><td>136.64</td><td>0.000004 0.39</td><td>137.03</td><td></td></tr><tr><th>18. D(H</th><td>6,O</td><td>5,H</td><td>1,C</td><td>0)</td><td>10.52</td><td>0.000078 -0.72</td><td>9.79</td><td></td></tr></tbody></table>
+<p>Every Hessian eigenmode can be represented by a linear combination of the redundant internal coordinates. In the last column of this list the internal coordinates, that represent a big part of the mode which is followed uphill, are labelled. The numbers reflect their magnitude in the TS eigenvector (fraction of this internal coordinate in the linear combination of the eigenvector of the TS mode). Thus at this point you can already check whether your TS optimization is following the right mode (which is the case in our example, since we are interested in the abstraction of H1 from C0 by O5.</p>
+<ul>
+<li style="list-style-type: '· ';">If you want the algorithm to follow a different mode than the one with lowest eigenvalue, you can either choose the number of the mode or you can give an internal coordinate that should be strongly involved in this mode using the TS_Mode keyword.</li>
+</ul>
+<h2>b Tip</h2>
+<ul>
+<li style="list-style-type: '· ';">If you look for a TS of a breaking bond the respective internal coordinate might not be included in the list of redundant internal coordinates due to the bond distance being slightly too large, leading to slow or even no convergence at all. In order to prevent that behavior a region of atoms that are active in the TS search can be defined, consisting of e.g. the two atoms of the breaking bond. During the automatic generation of the internal coordinates the bond radii of these atoms (and their neighbouring atoms) are increased, making it more probable that breaking or forming bonds in the TS are detected as bonds. See keywords TS_Active_Atoms and TS_Active_Atoms_Factor in the keywords list below.</li>
+</ul>
+<h2>Hessians for Transition State Calculations</h2>
+<p>For transition state (TS) optimization a simple initial Hessian, which is used for minimization, is not sufficient. In a TS optimization we are looking for a first order saddle point, and thus for a point on the PES where the curvature is negative in the direction of the TS mode (the TS mode is also called transition state vector, the only eigenvector of the Hessian at the TS geometry with a negative eigenvalue). Starting from an initial guess structure the algorithm used in the ORCA TS optimization has to climb uphill with respect to the TS mode, which means that the starting structure has to be near the TS and the initial Hessian has to account for the negative curvature of the PES at that point. The simple force-field Hessians cannot account for this, since they only know harmonic potentials and thus positive curvature.</p>
+<p>The most straightforward option in this case would be (after having looked for a promising initial guess structure with the help of a relaxed surface scan) to calculate the exact Hessian before starting the TS optimization. With this Hessian (depending on the quality of the initial guess structure) we know the TS eigenvector with its negative eigenvalue and we have also calculated the exact force constants for all other eigenmodes (which should have positive force constants). For the HF, DFT methods and MP2, the analytic Hessian evaluation is available and is the best choice, for details see section Frequencies ( Vibrational Frequencies ).</p>
+<p>When only the gradients are available (most notably the CASSCF), the numerical calculation of the exact Hessian is very time consuming, and one could ask if it is really necessary to calculate the full exact Hessian since the only special thing (compared to the simple force-field Hessians) that we need is the TS mode with a negative eigenvalue.</p>
+<p>Here ORCA provides two different possibilities to speed up the Hessian calculation, depending on the nature of the TS mode: the Hybrid Hessian and the calculation of the Hessian value of an internal coordinate. For both possibilities the initial Hessian is based on a force-field Hessian and only parts of it are calculated exactly. If the TS mode is of very local nature, which would be the case when e.g. cleaving or forming a bond, then the exactly calculated part of the Hessian can be the second derivative of only one internal coordinate, the one which is supposed to make up the TS mode (the formed or cleaved bond). If the TS mode is more complicated and more delocalized, as e.g. in a concerted proton transfer reaction, then the hybrid Hessian, a Hessian matrix in which the numerical second derivatives are calculated only for those atoms, which are involved in the TS mode (for more details, see section Geometry Optimizations ), should be sufficient. If you are dealing with more complicated cases where these two approaches do not succeed, then you still have the possibility to start the TS optimization with a full exact Hessian.</p>
+<p>Numerical Frequency calculations are quite expensive. You can first calculate the Hessian at a lower level of theory or with a smaller basis set and use this Hessian as input for a subsequent TS optimization:</p>
+<pre><code>%geom inhess Read # this command comes with: InHessName "yourHessian.hess" # filename of Hessian input file end</code></pre>
+<p>Another possibility to save computational time is to calculate exact Hessian values only for those atoms which are crucial for the TS optimization and to use approximate Hessian values for the rest. This option is very useful for big systems, where only a small part of the molecule changes its geometry during the transition and hence the information of the full exact Hessian is not necessary. With this option the coupling of the selected atoms are calculated exactly and the remaining Hessian matrix is filled up with a model initial Hessian:</p>
+<pre><code>%geom Calc_Hess true Hybrid_Hess {0 1 5 6} end # calculates a Hybrid Hessian with # exact calculation for atoms 0, 1, 5 and 6 end</code></pre>
+<p>For some molecules the PES near the TS can be very far from ideal for a Newton-Raphson step. In such a case ORCA can recalculate the Hessian after a number of steps:</p>
+<pre><code>%geom Recalc_Hess 5 # calculate the Hessian at the beginning # and recalculate it after 5,10,15,... steps end</code></pre>
+<p>Another solution in that case is to switch on the trust radius update, which reduces the step size if the Newton-Raphson steps behave unexpected and ensures bigger step size if the PES seems to be quite quadratic:</p>
+<pre><code>%geom Trust 0.3 # Trust <0 -use fixed trust radius (default: -0.3 au) # Trust >0 - use trust radius update, i.e. 0.3 means: # start with trust radius 0.3 and use trust radius update end</code></pre>
+<h2>Special Coordinates for Transition State Optimizations</h2>
+<ul>
+<li style="list-style-type: '· ';">If you look for a TS of a breaking bond the respective internal coordinate might not be included in the list of redundant internal coordinates (but this would accelerate the convergence). In such a case (and of course in others) you can add coordinates to or remove them from the set of autogenerated redundant internal coordinates (alternatively check the TS_Active_Atoms keyword):</li>
+</ul>
+<pre><code># add ( A ) or remove ( R ) internal coordinates %geom modify_internal { B 10 0 A } # add a bond between atoms 0 and 10 { A 8 9 10 R } # remove the angle defined # by atoms 8, 9 and 10 { D 7 8 9 10 R } # remove the dihedral angle defined end # by atoms 7, 8, 9 and 10 end</code></pre>
+<h2>4.3.3 ScanTS option</h2>
+<p>For TS modes of rather local nature (involving only one bond or an angle; no concerted movements over multiple atoms) we implemented the ScanTS feature. Here the user can carry out a relaxed surface scan and a TS optimization in one calculation. After the relaxed surface scan the algorithm chooses the optimized structure of the scan with highest energy as initial guess structure and the two neighbouring structures for the calculation of the second derivative of the scanned coordinate (e.g., if scan step number 4 gives the structure with highest energy, then structure basename.004.xyz is the initial guess for the TS optimization; the structures basename.003.xyz and basename.005.xyz are used for the calculation of the second derivative). Before the first step of the subsequent TS optimization the energies and gradients for all three structures are calculated. The gradients are then transformed to internal coordinates. The diagonal Hessian value of the scanned coordinate is then calculated via finite difference of the internal gradients of the two given structures (003 and 005 in our example).</p>
+<p>For the construction of the initial Hessian a model force field Hessian is built up (this Hessian has got only diagonal entries and zeros as off-diagonal elements). The exactly calculated diagonal Hessian value replaces the model force field Hessian entry for the respective internal coordinate.</p>
+<p>If the user already performed a regular relaxed surface scan without the subsequent TS optimization, then he can nevertheless use these structures for the same procedure. A relaxed surface scan always gives you the xyz-files and gbw-files of the optimized structures of each scan step. A separate TS optimization can be carried out where the structure with highest energy is the starting structure. Additionally the two files with the two adjacent structures (as explained above) have to be provided (via the Hess_Internal keyword, see below). Furthermore, the internal coordinate, for which the diagonal Hessian value has to be calculated, has to be given (the previously scanned coordinate). This exact Hessian calculation is only possible for one internal coordinate:</p>
+<pre><code>%geom Hess_Internal {B 1 0 C} # previously scanned coordinate XYZ1 "scanName.003.xyz" # the xyz-files of the structures XYZ2 "ScanName.005.xyz" # next to the highest energy point GBW1 "ScanName.003.gbw" # the gbw-files of the structures GBW2 "ScanName.005.xyz" # next to the highest energy</code></pre>
+<p>(continues on next page)</p>
+<pre><code># the gbw-files are optional end end</code></pre>
+<p>Additionally the manipulation of the diagonal Hessian values of the internal Hessian is possible for further internal coordinates, but without an extra calculation. Here the user can just define a value (in Eh/Bohr 2 ).</p>
+<pre><code>Hess_Internal {A 3 2 1 D 2.0} # define a diagonal Hessian value of # 2 Eh/Bohr2 for the angle between # atoms 3 2 1 {B 1 0 D -0.5} # define a diagonal Hessian value of # -0.5 Eh/Bohr2 for the bond between # atoms 1 and 0 end</code></pre>
+<p>The definition of such Hessian (diagonal) elements is possible for multiple internal coordinates. These just replace the values of the force field model Hessian.</p>
+<h2>4.3.4 Hybrid Hessian</h2>
+<p>We implemented the calculation of a 'Hybrid Hessian' as an alternative to the full Hessian calculation for TS optimization. Here only those parts of the Hessian, that are important for the TS optimization, are calculated exactly. For this calculation we define two kinds of atoms: atoms whose couplings with the other atoms are treated exactly (E) and atoms whose couplings are treated approximately (A).</p>
+<p>In a first step an Almloef model Hessian is built up in redundant internal coordinates and transformed to Cartesian coordinates. This Hessian gives the second derivative elements for atom pairs A/A. In a second step the second derivative elements between pairs E/E and E/A are calculated numerically as in a numerical frequency calculation:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with:</p>
+<pre><code>i, j x-, y- or z-direction B,C pairs of E/E, E/A, A/E displ. magnitude of displacement g eq. j,C force on atom C in direction j in current geometry g i,B j,C force on atom C in direction j after displacement of atom B in direction i</code></pre>
+<h2>4.3.5 Partial Hessian Vibrational Analysis</h2>
+<p>We implemented the Partial Hessian Vibrational Analysis (PHVA), as published by Li, Jensen in [531], for the analysis of the nature of stationary points of structures obtained with QM/MM optimizations.</p>
+<pre><code># PHVA after a QM/MM optimization in the (dispersion-/PC-) field # caused by the MM-atoms ! NumFreq %LJCoefficients "temp.LJ" # file with the Lennard Jones # coefficients for dispersion interaction # obtained from last QM/MM run %pointcharges "temp.pc" # file with the point charges for (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<p>With:</p>
+<p>(continued from previous page)</p>
+<pre><code># electrostatic interaction # obtained from last QM/MM run # %freq PARTIAL_Hess {0 1 2} # atoms which are "frozen" and which make # the boundary to the MM-system end end</code></pre>
+<ul>
+<li style="list-style-type: '· ';">This procedure should be used for QM/MM optimized structures only to verify the nature of the stationary point and have an estimate of the ZPE.</li>
+</ul>
+<p>Here we shortly describe the procedure: In PHVA we divide the system into two parts B (of size n atoms) and C (size N -n ). Let the atom set B belong to the region where the chemical change is localized. The Partial Hessian matrix is built up as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>K BB : x, y, z direction</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>this corresponds to using near-infinite masses for the atoms in C .</p>
+<p>With this procedure we get the following eigenvalue structure:</p>
+<ul>
+<li style="list-style-type: '· ';">Six zero eigenvalues with modes corresponding to translational and rotational motion of the entire molecule.</li>
+<li style="list-style-type: '· ';">3( N -n ) -6 small (less than 1 cm -1 ) eigenvalues with modes corresponding mainly to internal motion within region C .</li>
+<li style="list-style-type: '· ';">Three eigenvalues (typically less than 10 cm -1 ) with modes corresponding mainly to motion of region C relative to region B .</li>
+<li style="list-style-type: '· ';">(3 n -3) eigenvalues with modes corresponding mainly to relative motion of B and C as well as internal motion within region B .</li>
+</ul>
+<h2>4.3.6 Tranistion State Theory Keywords</h2>
+<table><caption><div class="caption">Table 4.5: %geom block input keywords and options for transition state geometry opti</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>OptTS</td><td></td><td>Transition structure optimization. Included as !OptTS</td></tr><tr><td>Scan</td><td></td><td>Must include !ScanTS for transition state scan.</td></tr><tr><td></td><td>B 1 2 = v1, v2, N</td><td>Scan atom 1 to atom 2 bond distance from v1 to v2 in N s</td></tr><tr><td></td><td>B 1 2 [v1 v2 ...]</td><td>Scan atom 1 to atom 2 bond with custom step values.</td></tr><tr><td></td><td>A 1 2 3</td><td>Scan an angle using atoms 1,2,3.</td></tr><tr><td></td><td>D 1 2 3 4</td><td>Scan a dihedral of atoms 1,2,3,4.</td></tr><tr><td>Simul_Scan</td><td>true</td><td>Enable simultaneous multidimensional scans (up to 3 coor</td></tr><tr><td>FullScan</td><td>true</td><td>Forces full surface scan before TS optimization ( !ScanT</td></tr></tbody></table>
+<table><caption><div class="caption">Table 4.5 - continued from previous page</div></caption><tbody><tr><th>Keyword</th><th>Option / Value</th><th>Description</th></tr><tr><td>TS_search</td><td>EF</td><td>Enable TS search using Eigenvector Following.</td></tr><tr><td>TS_Mode</td><td>{M 0}</td><td>Follow eigenvector 0 (lowest mode). 1.</td></tr><tr><td></td><td>{B 0 1}</td><td>Follow bond between atoms 0 and</td></tr><tr><td></td><td>{A 2 1 0}</td><td>Follow angle between atoms 2, 1, and 0.</td></tr><tr><td></td><td>{D 3 2 1 0}</td><td>Follow dihedral between atoms 3, 2, 1, and 0.</td></tr><tr><td>TS_Active_Atoms</td><td>{ 1 2 3 }</td><td>Atoms that are involved in TS, e.g. for proton transfer the</td></tr><tr><td>TS_Active_Atoms_Factor</td><td>1.5</td><td>Factor by which the cutoff for bonds is increased for the a</td></tr><tr><td>inhess</td><td>unit</td><td>Start optimization with a unit matrix Hessian.</td></tr><tr><td></td><td>Read</td><td>Read Hessian from external file. Requires InHessName</td></tr><tr><td>InHessName</td><td>&quot;filename.hess&quot;</td><td>Specifies file containing the Hessian (e.g., .hess , .opt ,</td></tr><tr><td></td><td>Lindh</td><td>Use Lindh&#x27;s model Hessian (only for redundant coordinat</td></tr><tr><td></td><td>Almloef</td><td>Use Almloef&#x27;s model Hessian.</td></tr><tr><td></td><td>Schlegel</td><td>Use Schlegel&#x27;s model Hessian.</td></tr><tr><td></td><td>Swart</td><td>Use Swart and Bickelhaupt&#x27;s model Hessian.</td></tr><tr><td></td><td>XTB0</td><td>Use GFN0-xTB Hessian.</td></tr><tr><td></td><td>XTB1</td><td>Use GFN1-xTB Hessian.</td></tr><tr><td></td><td>XTB2</td><td>Use GFN2-xTB Hessian.</td></tr><tr><td></td><td>GFNFF</td><td>Use GFN-FF Hessian.</td></tr><tr><td>Calc_Hess</td><td>true</td><td>Calculate numerical Hessian at the beginning of optimizat</td></tr><tr><td>Recalc_Hess</td><td>5</td><td>Recalculate Hessian every 5 cycles.</td></tr><tr><td>Hybrid_Hess</td><td>{0 1 5 6} end</td><td>Calculate exact Hessian for specified atoms, use model for</td></tr><tr><td>NumHess</td><td>true</td><td>Request numerical Hessian.</td></tr><tr><td>Hess_Internal</td><td>{A 3 2 1 D 2.0}</td><td>Manually set Hessian value (Eh/Bohr²) for angle between</td></tr><tr><td></td><td>reset 5</td><td>Reset modified Hessian values after 5 cycles.</td></tr><tr><td></td><td>{B 1 0 C}</td><td>Coordinates for Hessian refinement after a relaxed surface</td></tr><tr><td></td><td>XYZ1 &quot;scanName.003.xyz&quot;</td><td>Structure file before maximum in scan.</td></tr><tr><td></td><td>XYZ2 &quot;ScanName.005.xyz&quot;</td><td>Structure file after maximum in scan.</td></tr><tr><td></td><td>GBW1 &quot;ScanName.003.gbw&quot;</td><td>Optional GBWfile before max in scan.</td></tr><tr><td></td><td>GBW2 &quot;ScanName.005.xyz&quot;</td><td>Optional GBWfile after max in scan.</td></tr><tr><td>Update</td><td>Powell</td><td>Use Powell update for Hessian.</td></tr><tr><td></td><td>Bofill</td><td>Use Bofill update (default for TS optimization).</td></tr><tr><td></td><td>BFGS</td><td>Use BFGS update (default for geometry optimization).</td></tr><tr><td>HESS_Modification</td><td>Shift_Diag</td><td>Shift diagonal elements of Hessian (default).</td></tr><tr><td></td><td>EV_Reverse</td><td>Reverse sign of diagonal elements.</td></tr><tr><td>HESS_MinEV</td><td>0.0001</td><td>Minimum allowed Hessian eigenvalue.</td></tr><tr><td>NResetHess</td><td>20</td><td>Rebuild model Hessian after 20 steps (BFGS only).</td></tr><tr><td>NStepsInResetHess</td><td>5</td><td>Number of previous steps used to inform new model Hess</td></tr><tr><td>Trust</td><td>-0.3</td><td>Use fixed trust radius of 0.3 au (negative sign indicates fix</td></tr><tr><td>modify_internal</td><td>{B 10 0 A}</td><td>Add bond between atoms 0 and 10.</td></tr><tr><td></td><td>{A 8 9 10 R}</td><td>Remove angle between atoms 8, 9, and 10.</td></tr><tr><td></td><td>{D 7 8 9 10 R}</td><td>Remove dihedral between atoms 7, 8, 9, and 10.</td></tr></tbody></table>
+<h2>4.4 Intrinsic Reaction Coordinate</h2>
+<p>The Intrinsic Reaction Coordinate (IRC) is a special form of a minimum energy path, connecting a transition state (TS) with its downhill-nearest intermediates. A method determining the IRC is thus useful to determine whether a transition state is directly connected to a given reactant and/or a product. The implementation in ORCA follows the method suggested by Morokuma and coworkers.[542]</p>
+<p>The IRC method follows the gradient of the nuclear coordinates. As the gradient is negligible at a TS, first an initial displacement from the TS structure has to be carried out, based on the eigenmodes of the Hessian, in order to get to a region with a non-negligible gradient. For the initial displacement the eigenvector of the eigenmode with the lowest frequency (hessMode=0) is normalized and then scaled by Scale_Displ_SD (which by default is chosen such that an</p>
+<p>energy change of Init_Displ_DE can be expected). Two initial displacements, forward and backward, are taken by adding the resulting displacement vector (multiplied with +1 and -1, respectively) to the initial structure. If the user requests the downhill direction (e.g. from a previous unconverged IRC run), it is assumed that the gradient is nonzero and thus no initial displacement is carried out.</p>
+<p>After the initial displacement, the iterations of the IRC method begin. Each iteration consists of two main steps, each of which consists again of multiple SP and gradient runs:</p>
+<ol>
+<li style="list-style-type: '1. ';">Initial steepest descent (SD) step:</li>
+<li style="list-style-type: '1. ';">The gradient (grad0) of the starting geometry (G0) is normalized, scaled by Scale_Displ_SD, and the resulting displacement vector (SD1) is applied to G0.</li>
+<li style="list-style-type: '2. ';">Optional (if SD_ParabolicFit is true): If SD1 increases the energy, a linear search is taken along the direction of the displacement vector:</li>
+<li style="list-style-type: '1. ';">The displacement vector SD1 is scaled by 0.5 (SD2 = 0.5 x SD1) and again added to G0.</li>
+<li style="list-style-type: '2. ';">A parabolic fit for finding the displacement vector (SD3) which leads to minimal energy is carried out using the three SP energies (G0, geometry after SD1 and after SD2 step). SD3 has the same direction as SD1 and SD2, but can have a different length.</li>
+<li style="list-style-type: '3. ';">The keyword Interpolate_only controls whether the length of SD3 has to be in between 0 and the length of SD1. If that is the case, the maximum length is determined by SD1, the minimum length is zero.</li>
+<li style="list-style-type: '3. ';">At the resulting geometry G1 (G0+SD1 or G0+SD3) the gradient is calculated (grad1).</li>
+<li style="list-style-type: '2. ';">Optional (if Do_SD_Corr is true): Correction to the steepest descent step:</li>
+<li style="list-style-type: '1. ';">Based on grad0 and grad1 a vector is computed which represents a correction to the first SD (SD1 or SD3) step. This correction brings the geometry closer to the IRC.</li>
+<li style="list-style-type: '2. ';">This vector is normalized, scaled by Scale_Displ_SD_Corr times the length of SD1 or SD3, and the resulting displacement vector (SDC1) is applied to G1.</li>
+<li style="list-style-type: '3. ';">Optional (if SD_Corr_ParabolicFit is true):</li>
+<li style="list-style-type: '1. ';">If the energy increases after applying step SDC1, SDC1 is scaled by 0.5 (SDC2 = 0.5 x SD1), if the energy decreases, SDC1 is scaled by 2 (SDC2 = 2 x SD1). SDC2 is then added to G1.</li>
+<li style="list-style-type: '2. ';">Aparabolic fit for finding the displacement vector (SDC3) which leads to minimal energy is carried out using the three SP energies (G1, geometry after SDC1 and after SDC2 step). SDC3 has the same direction as SDC1 and SDC2, but can have a different length.</li>
+<li style="list-style-type: '3. ';">The keyword Interpolate_only controls whether the length of SDC3 has to be in between 0 and the length of SDC1. If that is the case, the maximum length is determined by SDC1, the minimum length is zero.</li>
+<li style="list-style-type: '4. ';">At the resulting geometry G2 (G1+SDC1 or G1+SDC3) the gradient is calculated (grad2).</li>
+<li style="list-style-type: '3. ';">The gradient at the new geometry is checked for convergence.</li>
+<li style="list-style-type: '4. ';">Optional (if Adapt_Scale_Displ is true):</li>
+<li style="list-style-type: '1. ';">If the resulting overall step size is smaller than 0.5 times Scale_Displ_SD, Scale_Displ_SD is multiplied by 0.5.</li>
+<li style="list-style-type: '2. ';">If the resulting overall step size is larger than 2 times Scale_Displ_SD, Scale_Displ_SD is multiplied by 2.</li>
+<li style="list-style-type: '3. ';">Scale_Displ_SD may not become smaller than 1/16 times the initial Scale_Displ_SD and not larger than 4 times the initial Scale_Displ_SD.</li>
+</ol>
+<h2>4.4.1 Basic Usage</h2>
+<p>The following keywords are available:</p>
+<pre><code>! B3LYP SV(P) TightSCF KDIIS SOSCF Freq IRC * xyz 0 2 C -0.000 0.001 -0.000 H 1.290 0.005 -0.006 H -0.330 1.050 -0.002 H -0.252 -0.532 -0.929 H -0.286 -0.545 0.911 O 2.499 0.220 0.065 H 2.509 1.085 0.525 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The same method and basis set as used for optimization and frequency calculation should be used for the IRC run.</li>
+<li style="list-style-type: '· ';">The IRC keyword can be requested without, but also together with OptTS, ScanTS, NEB-TS, AnFreq and NumFreq keywords.</li>
+<li style="list-style-type: '· ';">In its default settings the IRC code checks whether a Hessian was computed before the IRC run. If that is not the case, and if no Hessian is defined via the %irc block, a new Hessian is computed at the beginning of the IRC run.</li>
+<li style="list-style-type: '· ';">A final trajectory (_IRC_Full_trj.xyz) is generated which contains both directions, forward and backward, by starting from one endpoint and going to the other endpoint, visualizing the entire IRC. Forward (_IRC_F_trj.xyz and _IRC_F.xyz) and backward (_IRC_B_trj.xyz and _IRC_B.xyz) trajectories and xyz files contain the IRC and the last geometry of that respective run.</li>
+</ul>
+<h2>4.4.2 Keywords</h2>
+<pre><code>! IRC %irc MaxIter 20 PrintLevel 1 Direction both # both - default # forward # backward # down # Initial displacement InitHess read # by default ORCA uses the Hessian from AnFreq or NumFreq, or # computes a new one # read -reads the Hessian that is defined via Hess_Filename # calc_anfreq - computes the analytic Hessian # calc_numfreq - computes the numeric Hessian Hess_Filename "h2o.hess" # input Hessian for initial displacement, must be used # together with InitHess = read hessMode 0 # Hessian mode that is used for the initial displacement. Default␣ ↪ → 0 Init_Displ_DE # DE (default) -energy difference # length -step size Scale_Init_Displ 0.1 # step size for initial displacement from TS. Default 0.1␣ ↪ → a.u. DE_Init_Displ 2.0 # energy difference that is expected for initial␣ ↪ → displacement # based on provided Hessian (Default: 2 mEh)</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># Steps Follow_CoordType cartesian # default and only option Scale_Displ_SD 0.15 # Scaling factor for scaling the 1st SD step Adapt_Scale_Displ true # modify Scale_Displ_SD when the step size becomes # smaller or larger SD_ParabolicFit true # Do a parabolic fit for finding an optimal SD step # length Interpolate_only true # Only allow interpolation for parabolic fit, not # extrapolation Do_SD_Corr true # Apply a correction to the 1st SD step Scale_Displ_SD_Corr 0.333 # Scaling factor for scaling the correction step to # the SD step. It is multiplied by the length of the # final 1st SD step SD_Corr_ParabolicFit true # Do a parabolic fit for finding an optimal␣ ↪ → correction # step length # Convergence thresholds - similar to LooseOpt TolRMSG 5.e-4 # RMS gradient (a.u.) TolMaxG 2.e-3 # Max. element of gradient (a.u.) # Output options Monitor_Internals # Up to three internal coordinates can be defined {B 0 1} # for which the values are printed during the IRC run. {B 1 5} # Possible are (B)onds, (A)ngles, (D)ihedrals and (I)mpropers end end</code></pre>
+<h2>NOTE</h2>
+<ul>
+<li style="list-style-type: '· ';">For direction=down (downhill) no initial displacement is necessary, and thus no Hessian is needed.</li>
+</ul>
+<h2>4.5 Nudged Elastic Band Method</h2>
+<p>The Nudged Elastic Band (NEB) method is used to find a minimum energy path (MEP) connecting given reactant and product state minima on the energy surface. An initial path is generated and represented by a discrete set of configurations of the atoms, referred to as images of the system. The number of images is specified by the user and has to be large enough to obtain sufficient resolution of the path. The implementation in ORCA is described in detail in the article by Ásgeirsson et. al.[543] and in section Nudged Elastic Band Method along with the input options. The most common use of the NEB method is to find the highest energy saddle point on the potential energy surface specifying the transition state for a given initial and final state. Rigorous convergence to a first-order saddle point can be obtained with the climbing image NEB (CI-NEB), where the highest energy image is pushed uphill in energy along the tangent to the path while relaxing downhill in orthogonal directions. Another method for finding a first-order saddle point is the NEB-TS which uses the CI-NEB method with a loose tolerance to begin with and then switches over to the OptTS method to converge on the saddle point. This combination can be a good choice for calculations of complex reactions where the ScanTS method fails or where 2D relaxed surface scans are necessary to find a good initial guess structure for the OptTS method. The zoomNEB variants are a good choice in case of very complex transition states with long tails. For more detailed information on the various NEB variants implemented in ORCA please consult section Nudged Elastic Band Method .</p>
+<p>In their simplest form NEB, NEB-CI and NEB-TS only require the reactant and product state configurations (one via the xyz block, and the other one via the keyword neb_end_xyzfile):</p>
+<pre><code>!NEB-TS # or !NEB or !NEB-CI or !ZOOM-NEB-TS or !ZOOM-NEB-CI # or !Fast-NEB-TS (corresponds to IDPP-TS defined in the NEB-TS␣ ↪ → manuscript) # or !Loose-NEB-TS (corresponds to default NEB-TS in the NEB-TS manuscript) %neb neb_end_xyzfile "final.xyz" end</code></pre>
+<p>Below is an example of an NEB-TS run involving an intramolecular proton transfer within acetic acid. The simplest input is</p>
+<pre><code>!XTB NEB-TS %neb neb_end_xyzfile "final.xyz" end *xyz 0 1 C 0.416168 0.038758 -0.014077 C 0.041816 0.011798 1.439610 O 1.524458 0.176600 -0.453888 O -0.654209 -0.127881 -0.803857 H -0.391037 -0.126036 -1.737478 H -0.913438 0.507022 1.585301 H -0.057787 -1.026455 1.750845 H 0.819515 0.485425 2.030252 *</code></pre>
+<p>Where the final.xyz structure contains the corresponding structure with the proton on the other oxygen.</p>
+<p>The initial path is reasonable and the CI calculation can be switched on after five NEB iterations.</p>
+<pre><code>Starting iterations: Optim. Iteration HEI E(HEI)-E(0) max(|Fp|) RMS(Fp) dS Switch-on CI threshold 0.020000 LBFGS 0 4 0.081017 0.073897 0.018915 3.2882 LBFGS 1 5 0.070244 0.056668 0.013913 3.2770 LBFGS 2 5 0.062934 0.038972 0.008763 3.3376 LBFGS 3 5 0.057358 0.032076 0.006535 3.3950 LBFGS 4 4 0.053260 0.019015 0.003599 3.4826 Image 4 will be converted to a climbing image in the next iteration (max(|Fp|) <␣ ↪ → 0.0200) Optim. Iteration CI E(CI)-E(0) max(|Fp|) RMS(Fp) dS max(|FCI|) ␣ ↪ → RMS(FCI) Convergence thresholds 0.020000 0.010000 0.002000 0. ↪ → 001000</code></pre>
+<p>The CI run converges after another couple of iterations:</p>
+<pre><code>*********************H U R R A Y********************* *** THE NEB OPTIMIZATION HAS CONVERGED *** *****************************************************</code></pre>
+<p>Subsequently a summary of the MEP is printed:</p>
+<pre><code>---------------------------------------------------------------PATH SUMMARY ---------------------------------------------------------------All forces in Eh/Bohr. Image Dist.(Ang.) E(Eh) dE(kcal/mol) max(|Fp|) RMS(Fp) 0 0.000 -14.45993 0.00 0.00011 0.00004 1 0.426 -14.44891 6.91 0.00092 0.00033 2 0.652 -14.42864 19.63 0.00084 0.00038 3 0.805 -14.41132 30.50 0.00075 0.00027 4 0.932 -14.40562 34.08 0.00057 0.00018 <= CI 5 1.044 -14.41047 31.03 0.00057 0.00024 6 1.153 -14.42200 23.80 0.00103 0.00034 7 1.280 -14.43666 14.60 0.00098 0.00037</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>8</td><td>1.476</td><td>-14.45106</td><td>5.56</td><td>0.00106</td><td>0.00033</td></tr><tr><td>9</td><td>1.869</td><td>-14.45988</td><td>0.03</td><td>0.00013</td><td>0.00006</td></tr></tbody></table>
+<p>Additionally, detailed information on the highest energy image (or the CI) is printed:</p>
+<p>Finally, a TS optimization is started, after which the MEP information is updated by including the TS structure:</p>
+<p>Note that here both TS and CI are printed for comparison.</p>
+<h2>4.6 Nudged Elastic Band Method</h2>
+<p>The Nudged Elastic Band (NEB)[544, 545, 546] method is used to find a minimum energy path (MEP) connecting two local energy minima on the potential energy surface (PES) and thereby an estimate of the activation energy for the transition. The two minima are referred to as the reactant and product in the following discussion. The path can have one or more maxima, each one corresponding to a first order saddle point on the energy surface. The NEB method offers an advantage over eigenvector-following methods in that it is guaranteed to find saddle points that connect the given reactant and product states. The minimum energy path is often used to represent the reaction coordinate of the transition between the two states. The methods and implementation outlined below are discussed further in Ref. [543].</p>
+<p>The user needs to specify the reactant and product configurations. The reactant energy minimum is inserted into the regular ORCA input file while the product should be in a separate .xyz file (keyword: neb_end_xyzfile ). The reactant and product configurations should be optimized a priori by relaxing to energy minima on the PES, see section Geometry Optimizations . This can also be achieved via the 'preopt_ends' keyword. It is important to carefully prepare the reactant and product such that the position (or index) of the atoms is the same in the two configuration files, i.e. there should be one-to-one mapping between the reactant and product configurations.</p>
+<p>The discretized path between the two minima is represented by a set of M system configurations that are referred to as images, i.e. R = [ r 0 , r 1 , ..., r M -1 ] . The number of intermediate images between the end points (i.e. reactant and product) is specified by the user. The general rule of thumb is to include M = 7 -12 , or 5 -10 intermediate images per energy maximum in order to obtain a high enough resolution of the path and the saddle point. However, calculations can often converge and give accurate results with fewer images but complex paths with multiple maxima or long tails may require more images. During an NEB calculation the intermediate images are iteratively shifted towards the MEP using the component of the atomic force that is perpendicular to the current path as estimated from the tangent to the path at each image, while the endpoint images are typically kept fixed. In each step of the iterative process, the energy and atomic forces of each intermediate image need to be computed. One of the main advantages of the NEB method is that the calculations of the images are carried out in parallel, where the electronic structure computations can be distributed over multiple processors (see discussion below for more details on the parallelization). While the CPU time is proportional to the number of images, the number of iterations needed for convergence to the MEP can become smaller when more images are included in the discrete representation of the path.</p>
+<p>The tangent to the path at each image, ˆ τ i , can be estimated in two ways (keyword: tangent ), either by the original method [545] or by the more numerically stable improved [546] estimate (default option). In the former, the tangent at an image is taken to be a linear combination of the two line segments that connect to image i ,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In the improved tangent estimate, the line segment from the current image to the adjacent image with higher energy is used, i.e.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where τ + = r i +1 -r i and τ -= r i -r i -1 . With the exception of image i being at an energy extremum along the path, then an energy-weighted average of the two line segments to adjacent images is used,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Then the tangent is normalized, ˆ τ i = τ i / | τ i | . With an accurate estimate of the tangent, the perpendicular component of the atom force is computed by,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where</p>
+<p>In the free-end NEB method, the endpoint images are optimized simultaneously along with the intermediate images, i.e. M movable images are used. Three different variants of the free-end NEB method (keywords: free_end , free_end_type ) are included in ORCA: where (i) the endpoints are restrained to move along the same (or separate) energy isocontour[547, 548], (ii) according to the atomic force acting perpendicular to the path and (iii) the full atomic force. For the first variant, the 'reactant' and 'product' endpont images, can be restrained to move along two different energy contours, E 0 (given by keyword: free_end_ec ) and E 1 (given by keyword: free_end_ec_end ), to keep the path bounded. Then, if the images drift away from the isocontour because of curvature of the energy surface, an harmonic restraint term is used to pull the image back to the contour.[548] The stiffness of the harmonic restraint is given by a user-supplied parameter (keyword: free_end_kappa ). It is important to carefully select the energy values and the strength of the harmonic restraint, otherwise the path may become kinked. For the second variant, the endpoint images are unbounded but displaced directly towards the MEP. This is typically acceptable if the endpoint images are already in vicinity to the MEP and is less prone to kinks developing along the path. For the third variant, the endpoint images become optimized to the reactant and product energy minimum.</p>
+<h2>4.6.1 Spring forces</h2>
+<p>In order to control the distribution of the images along the path, spring forces are included to act between adjacent images, tangential to the path[545],</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The magnitude of the spring forces (i.e. stiffness) is controlled by spring constants, k sp . The typical values of the spring constant (keyword: springconst ) can be taken to be within the range of 0.01 Eh/Bohr 2 to 1.0 Eh/Bohr 2 . If the spring constants are choosen to be the same for all pairs of adjacent images, the images will be equally distributed along the path. However, it is also possible to choose energy-weighted spring constants (keyword: energy_weighted ) so as to increase the density of images in the higher energy regions[543, 549]. In an energy-weighted NEB calculation the spring constants are scaled according to the relative energy of the images, from a lower-bound value (keyword: springconst ) to an upper-bound value (keyword: springconst2 ), by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where k u and k l are the upper- and lower-bound values for the spring constant. E max is the current estimate of the maximum energy along the path, E i is the higher energy image of the pair of images connected by line segment i and E ref is the energy of the higher energy minimum. The energy-weighted springs will typically serve to improve the tangent estimate in the barrier region and hence stabilize the calculations. The inclusion of energy-weighted springs can be important in reactions where the energy barrier is narrow and/or the pathway is characterized by a long 'energy tail', e.g., in rearrangements or dissociation reactions. The choice of spring constants will affect the behavior of a calculation, especially the number of iterations needed to reach convergence. Other formulations for spring forces are also available since ORCA 4.2 (keyword: springtype ). These are referred to as the original[545] and ideal[550] spring forces. The original spring forces are estimated by a spring acting on each degree of freedom between a pair of adjacent images. For ideal springs each image is assigned an ideal position along the path based on a linear interpolation of the current location of the images and the individual images interact with the ideal locations via spring forces. The ideal springs are currently not implemented to work with energy weighted spring constants.</p>
+<p>While only the component of the spring force parallel to the path is included in an NEB calculation (by default) the user can choose to include a fraction of the spring force acting perpendicular to the path to stabilize calculations (keyword: perpspring . Since, the perpendicular component of the spring force can serve to straighten out the path and is useful for complex pathways with multiple energy extrema and low resolution of the path. The inclusion of the perpendicular component of the spring force is always accompanied by a switching function that is used to scale it according to (i) convergence to the MEP (the 'tan' function)[551] (ii) the angle between adjacent images (the 'cos' function)[545] or a combination of both. The inclusion of the perpendicular spring force can help to reduce the number of iterations and eliminate kinks on the path. However, it is important to stress that by inclusion of the perpendicular spring forces, the images may not converge on the MEP. Alternatively, the user can choose to use the modified DNEB method[551, 552].</p>
+<h2>4.6.2 Optimization and convergence of the NEB method</h2>
+<p>The effective force used in a standard NEB calculations is the sum of the atomic force component perpendicular to the path and the spring force component parallel to the path,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The path can be brought to the MEP by moving according to the effective force, as is shown in Fig. 4.2.</p>
+<figure><figcaption><div class="caption">Fig. 4.2: Visualization of the effective force, F NEB and its two components: F ⊥ i and F sp , ∥ i for three images along an intermediate path in a NEB optimization. The figure is taken from Ref. [553]</div></figcaption></figure>
+<p>This can be achieved by using any of the three optimization methods implemented (keyword: opt_method ): velocity projection optimization (VPO)[545], fast inertial relxation engine (FIRE)[554] and L-BFGS[555]. VPO and FIRE are more robust for regions that are far from the MEP, while L-BFGS converges faster when the images are close to the MEP. FIRE and VPO both have a local and global implementation (keyword: local ). In the local variant, all of the images are treated individually when taking an optimization step, while in the latter the whole band is treated as a single point. A constant 'trust-radius' is used for all optimization methods, where if the magnitude of the maximum Cartesian component of an optimization step exceeds a user-supplied threshold (keyword: maxmove ), the whole displacement is scaled down accordingly. The number of steps stored in the L-BFGS optimization for the construction of the approximate Hessian matrix can be adjusted by the user (keyword: lbfgs_memory ). For a more conservative optimization with L-BFGS, the memory can also be erased if a large step is attempted (keyword: lbfgs_restart_on_maxmove ).</p>
+<p>The convergence of the intermediate images is gauged from the maximum Cartesian component of the perpendicular atom force as well as the root-mean-square, i.e. max ( | F ⊥ | ) , RMS ( F ⊥ ) . The atomic force on the images perpendicular to the path vanishes as the images are located on the MEP. A typical value of the tolerance for the maximum component of the atomic force perpendicular to the path is 1 · 10 -3 Eh/Bohr. Typically the tolerance for the rootmean-square value is chosen to be smaller by a factor of 1/2 or 1/3. Sometimes a tighter tolerance for the maximum component of the force is needed, for example 5 · 10 -4 Eh/Bohr or even 2 · 10 -4 Eh/Bohr. The maximum number of optimization steps allowed is set by the keyword 'maxiter'.</p>
+<p>The configuration of each image after each iteration is written to a '_trj.xyz' file (see file: basename_MEP_ALL_trj.xyz). This file is useful for troubleshooting non-convergent calculations.</p>
+<h2>4.6.3 Climbing image NEB</h2>
+<p>In order make the highest energy image converge more accurately to the (highest) energy maximum along the MEP, the climbing image variant of the NEB method (CI-NEB) can be used. [549] In the CI-NEB method, the effective force F NEB acting on the climbing image (i.e. i = ci) is transformed to:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the climbing image is pushed up-hill along the path and relaxed down-hill perpendicular to the path. That is, the energy is maximized with respect to one degree of freedom corresponding to the direction of the tangent while the energy is minimized with respect to all other degrees of freedom. The effective force on the climbing image does not include any spring force and the density of images then becomes different on either side of the climbing image. As long as the tangent estimate is accurate enough the climbing image will converge rigorously to the point of highest energy along the path. An illustration of how the climbing image NEB method works is shown in Fig. 4.3 for a simple two-dimensional energy function.</p>
+<figure><figcaption><div class="caption">Fig. 4.3: Illustration of how the CI-NEB method works on a two-dimensional Müller-Brown energy surface, E ( x, y ) .[556] The calculation is started from a linear interpolation between the reactant ( R ) and product ( P ) energy minima, using M = 10 . The images are displaced in the orthogonal direction to the path (red curves), until they converge to the minimum energy path (white dashed curve). The climbing image accurately locates the higher energy first-order saddle point along the path (denoted by SP ). The optimization profile is shown as an inset. In such a plot the interpolated energy along the path is plotted as a function of displacement, for each (or selected) optimization step. The figure is taken from Ref. [553]</div></figcaption></figure>
+<p>It can be useful to start the climbing image after the magnitude of the atomic forces perpendicular to the path drops below a given user supplied threshold (keyword: tol_turn_on_ci ). Then, the highest energy image along the current path is converted to a climbing image. It is usually most efficient to initiate the climbing image early on or even from the start of the NEB calculation. This applies when using the VPO optimization method. For L-BFGS it is recommended to start CI-NEB when the path has partially converged to the MEP, e.g., around 0.01-0.02 Eh/Bohr.</p>
+<p>If there are two or more maxima in the energy along the MEP it is possible that the image near the highest maximum is not chosen as the climbing image at an early stage of the NEB calculation. Then, later on the choice of the climbing image can be switched automatically. Also, for barrierless reactions, the climbing image is not turned on. The atom coordinates of the climbing image (in a CI-NEB calculation) or the highest energy image (in an NEB calculation) are written to files '_NEB-CI_converged.xyz' and '_NEB-HEI_converged.xyz', respectively, when a calculation has successfully completed.</p>
+<p>The convergence of a CI-NEB calculation can either be gauged by monitoring the forces on all images or only on the climbing image, (keyword: convtype ). The latter option may be used when the objective of the calculation is to locate the highest energy saddle point connecting the reactant and product states and can save significant computational effort. To gauge for convergence on the climbing image, both the root-mean-square and magnitude of the maximum (Cartesian) component of the atom force are monitored, i.e. max ( | F ci | ) , RMS ( F ci ) . When gauging the convergence of all images in a CI-NEB calculation it is typically acceptable to converge the regular images more loosely than the climbing image. By default, the tolerance for the regular images is a factor of 10 larger than that of the climbing image. This scaling of the tolerances is a parameter that can be set by the user (keyword: tol_scale ). Typically for an acceptable convergence to the saddle point, the tolerance threshold for the maximum magnitude of an atomic force component of the climbing image can be set to 5 · 10 -4 Eh/Bohr.</p>
+<h2>4.6.4 Generation of the initial path</h2>
+<p>One of the most important aspects of any NEB or CI-NEB calculation is the generation of the initial path between the reactant and product energy minima (keyword: interpolation . The recommended method is the image-dependent pair potential (IDPP) method [557]. An alternative and simpler method is linear interpolation in Cartesian coordinates. In either case, the user should always inspect the initial path (see file: basename_initial_path_trj.xyz) to make certain that it is acceptable.</p>
+<p>By default, the endpoint structures are scanned for covalently linked fragments. If two fragments are detected in either of the endpoint structures, the structure is automatically prepared such that the distance between the fragments is no larger than a maximum distance defaulted to 3.5 Angstrom.</p>
+<p>The linear interpolation in Cartesian coordinates may result in overlap of atoms leading to large, initial, atomic forces and even divergence in the SCF cycles. The IDPP method solves these problems by interpolating pairwise distances between neighboring atoms in the reactant and product energy minimum. Then, a path is generated to match those distances as closely as possible. Since there are many more pairwise distances than atom coordinates, the initial path is found by minimizing the objective function,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where d AB is the pairwise distance between atoms A and B for intermediate image i . d κ AB is the ideal interpolated distance between atoms A and B of the same image. w is a weight function to give shorter bond distances more weight and make unnecessary bond-breaking unfavorable. The weight function is given as w = ( d AB ) -4 . The IDPP path avoids the overlap of atoms and can also generate a path that is closer to the MEP than the linear interpolation in Cartesian coordinates[557]. The IDPP path is obtained from an NEB calculation using the IDPP objective function starting from a linear interpolation of the Cartesian coordinates between the endpoint structures, but this calculation requires little computational effort since it does not require any electronic structure computations. Note that it is possible that the initial path breaks covalent bonds and that it can be far from the optimal MEP. If this is the case, the default algorithm detects it and automatically regenerates a different IDPP initial path. This is repeated until either an initial path without unnecessary bond changes is obtained or all initial path option are exhausted, at which point the best initial path is identified. In any case, the user should always inspect the initial path before starting an NEB calculation. The user can adjust the settings of the IDPP calculations using the 'idpp' related keywords, but the default values should suffice for most applications. Note that the units of the IDPP are in Ångströms instead of atomic units. The matrix of ideal interpolated distance between the atoms A and B at image i , d κ AB, i , is most simply obtained by linear interpolation as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where P i = i n im -1 is the position of image i on the path between 0, corresponding to the initial image, and 1, corresponding to the final image, and n im is the total number of images.</p>
+<p>As this linear distance interpolation may not be ideal, one can alternatively choose a bilinear distance interpolation scheme that takes atomic bonds into account. Bonds between the atoms A and B in the initial and final images are identified if their distance d AB &lt; t bond = t c ( R cov A + R cov B ) , where t c is an input factor impacting at what distances a bond is detected by default taken to be 1.3, and R cov X is the covalent radius of atom X . If a bond is detected in one of the endpoint structures but not the other, two linear distance interpolations are performed to obtain d κ AB,i . The first interpolates the distance between the endpoint structure in which the atoms are bonded and t bond , the second interpolates the distance between t bond and the endpoint structure in which the bond is broken. The two linear distance interpolations are joined at the path position P join defaulted to 0.5, corresponding to the midpoint on the path between the endpoint images. If the atoms are bonded in the initial structure but not in the final structure, the interpolation is</p>
+<p>If the atoms are bonded in the final structure but not in the initial structure, the interpolation is</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This bilinear interpolation leads to a slower increase of the atom distance in the bonded region compared to the nonbonded region in most cases, emphasizing the bond-breaking process and thus the region where the energy is changed most by a change in the bond distance. If the change in the bond distance in the non-bonded region is slower than the change in the bonded region, the implementation falls back to the regular linear distance interpolation.</p>
+<p>In challenging cases, even the IDPP NEB calculation starting from a linear interpolation of the Cartesian coordinates between the endpoint structures may not provide a reasonable initial path. This may happen when the linear interpolation path has atoms come very close to each other in intermediate images, which leads to bond breaking even after NEB optimization using the IDPP objective function. In such cases, a reasonable initial path can often be obtained by avoiding the linear interpolation by sequentially adding images to the path starting from both endpoint structures instead. This method is referred to as sequential IDPP (S-IDPP).[558] The two sets of images close to each endpoint structure are separated by a larger distance than the images in each set by choosing a smaller spring constant than between the images in each set where equal spring constants are used. The images closest to the center are converged in an NEB calculation and an image added at an appropriate distance from the converged image between the two images closest to the center. This process is repeated until the requested amount of images has been added. The tangent of the images closest to the center follows the improved tangent definition and always treats them as extrema on the path, i.e. an average of the normalized distance vectors to the adjacent images is used. The number of images used to form the S-IDPP initial path can be different from the number of images used in the subsequent NEB calculation involving electronic structure calculations. It can be beneficial to use an even number of images in the S-IDPP computation since no image is placed at the center of the initial path then and moving to the requested odd number of images in an additional IDPP NEB calculation afterwards. This option is used by default, but can be deactivated. For systems involving very heavy rotations of large groups, the method becomes more robust when twice the amount of images is used in the S-IDPP calculation. Half the images are then removed automatically for the subsequent NEB calculation involving electronic structure calculations. This option is available, but not used by default.</p>
+<p>The initial path generated with the chosen settings is checked for unnecessary bond breaking or bond formation. Bonds between the atoms A and B are identified if their distance d AB &lt; t bond = t c ( R cov A + R cov B ) , where t c is an input factor impacting at what distances a bond is detected by default taken to be 1.3, and R cov X is the covalent radius of atom X . A change in the connectivity of atoms A and B is considered unnecessary if their connectivity does not change between the endpoint structures. If it does change between the endpoint structures, the connectivity is allowed to change exactly once, but any further connectivity changes along the initial path are considered unnecessary. If any unnecessary connectivity changes occur on the initial path, the flexibility of S-IDPP is used to generate more initial paths with different settings systematically, until one without unnecessary connectivity changes is obtained. The parameter space for this hyperparameter search consists of all combinations of the settings SIDPP_Reparam , SIDPP_Energy_Weighted_Tangent , SIDPP_Even_NIm, SIDPP_Double_NIm , SIDPP_Ideal_Springconst , and four values (0.05, 0.01, 0.005, and 0.001) for SIDPP_Tol_MaxF , leading to a total of 128 options in addition to the chosen settings. Once an initial path without unnecessary connectivity changes is found, the hyperparameter search is terminated. In the unlikely scenario that none of the generated initial paths show no unnecessary connectivity changes, the initial path with the fewest is taken by default, but the user may prefer to have the calculation abort to inspect the initial path, which may be set with the keyword SIDPP_HyperSearch_StrictConnectivity .</p>
+</div>
+</body>
+</html>

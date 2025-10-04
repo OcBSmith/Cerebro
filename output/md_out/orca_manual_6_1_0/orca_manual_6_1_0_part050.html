@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part050</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>As can be shown on the basis of quantum chemical calculations this progression has essentially multimode character. However, the experimental spectra can be well fitted under the assumption of a single vibronically active mode. The input has the following structure:</p>
+<pre><code># # example009.inp # # Parameters to be varied: # 1) adiabatic minima transition energy # 2) homogeneous and inhomogeneous linewidths # 3) normal mode frequency and corresponding dimensionless displacement of the # excited-state origin # %sim Model IMDHO EnInput E0 # we assume adiabatic minima separation energies end %fit Fit true # global flag to turn on the fit AbsFit true # flag to include absorption spectrum into the fit FlFit true # flag to include fluorescence spectrum into the fit WeightsAdjust true AbsRange 19000.0, 28000.0 # spectral range for absorption # which will be included into the fit FlRange 17800.0, 22300.0 # spectral range for absorption # which will be considered in the fit AbsName "absexp.dat" # name of the file containing experimental # absorption spectrum in a simple two-column # ASCII format FlName "flexp.dat" # name of the file with experimental fluorescence spectrum ExpAbsScaleMode Rel # flags indicating that only relative shapes of the ExpFlScaleMode Rel # absorption and fluorescence bands will be fitted. CWAF 1.000 # important parameter to have a balanced relative quality of fit # of fluorescence and absorption NMaxFunc 10000 # maximum number of function evaluations in simplex # algorithm MWADRelTol= 0.0001 # Relative Tolerance of the Mean Weighted Absolute # Difference (MWAD) function which specifies the # convergence criterion TMStep 0.5 # initial step for the transition dipole moments # in the simplex fitting E0SDStep 500.0 # initial step for the inhomogeneous linewidth (Sigma) FREQGStep 100.00 # initial step for the vibrational frequencies E0Step 1000.0 # initial step for the transition energies SSStep 10.0 # initial step for the Stokes shift</code></pre>
+<p>(continued from previous page)</p>
+<p>The parameter CWAF=1.0 in the %fit block specifies the weight of absorption relative to the weight of fluorescence in the difference function to be minimized. If this parameter was not specified the quality of the fit would be biased towards the spectrum with a larger number of experimental points. In some typical situations where the error in the measured experimental intensity is expected to be smaller for absorption than for emission it is desirable to choose the value of CWAF to be more than 1.0.</p>
+<p>In order to account for a broad featureless background signal in the absorption spectrum above 24000 cm -1 , the second band was included into the analysis and approximated with a Voigt lineshape which means also that the corresponding frequency in the $vib_freq_gs block and displacement parameter in the $sdnc block are fixed to zero in the fit. Thus, the $el_states block contains an initial guess on the transition energies, transition electric dipole moments and linewidth parameters for 2 states:</p>
+<pre><code>$el_states 2 1 21100.00 100.00 100.00 1.0000 0.0000 0.0000 2 24000.00 100.00 1000.00 1.0000 0.0000 0.0000</code></pre>
+<p>The initial value of the adiabatic minima separation energy for the first state was approximated by the energy corresponding to the first vibronic peak in the absorption spectrum (21100 cm -1 ) . The transition energies and linewidth parameters are varied independently as indicated in the $el_states_c block. Since we allow to fit only bandshapes, but not the overall intensities of the spectra, only relative absolute values of the transition electric dipole moments of two bands are important. Therefore it is reasonable to fix all components of the transition moment for the first state and vary only M x component for the second one:</p>
+<pre><code>$el_states_c 2 1 1 1 1 0 0 0 2 2 2 2 2 0 0</code></pre>
+<p>Since we assume the absorption by both states and emission only from the first one, it is necessary to include Boolean arrays $abs_bool and $fl_bool which specify states which will be included in the treatment of the absorption and fluorescence spectra, respectively:</p>
+<pre><code>$abs_bool 2 1 1 # 1 indicates that the corresponding state will be included in the␣ ↪ → calculation of 2 1 # absorption $fl_bool 2 1 1 2 0 # 0 indicates that the corresponding state will be excluded from the␣ ↪ → calculation # of emission spectrum</code></pre>
+<p>Weneed also to vary the value of vibrational frequency of the mode which determines separation of vibrational peaks in the spectra. This is done via the constraint block $vib_freq_gs_c :</p>
+<pre><code>$vib_freq_gs_c 1 1 1</code></pre>
+<p>Note that it is meaningless to include into the treatment the Stokes shift for the second state which give rise to the background signal in the absorption since the corresponding emission is not present. Therefore λ for the second state is fixed to zero as indicated in the $ss block and its constraint counterpart $ss_c :</p>
+<pre><code>$ss 2 1 100.000000 # initialization of the Stokes shift for the 1st electronic␣ ↪ → state 2 0.000000 $ss_c 2 1 1 # the Stokes shift for the 1st electronic state will be varied in␣</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → the fit 2 0 # the Stokes shift for the 2nd electronic state will be fixed in␣ ↪ → the fit</code></pre>
+<p>The fit run of orca_asa on file example009.inp will converge upon approximately 700 function evaluations (for MWADRelTol=1e-4 ). The file example009.001.inp will contain the fitted effective values of the vibrational frequency and dimensionless displacement: ω = 1404 cm -1 , ∆ = 1 . 35 . One can notice that the fit is rather poor in the low- and high-energy edges of the absorption and fluorescence spectra, respectively (Fig. 5.47). The source of this discrepancy is the single-mode approximation which was employed here. The quality of the fit can be significantly improved assuming several modes with non-zero displacement parameters. Note that in such a case the proper guess on the number of active modes and corresponding dimensionless displacements can be deduced from quantum chemical calculations.</p>
+<h2>5.16.4 Quantum-Chemically Assisted Simulations and Fits of Optical Bandshapes and Resonance Raman Intensities</h2>
+<p>In this section we finally connect the spectra simulation algorithms to actual quantum chemical calculations and outline a detailed approach for the analysis of absorption, fluorescence and resonance Raman spectra within the IMDHO model. Our procedure becomes highly efficient and nearly automatic if analytical excited state derivatives with respect to nuclear displacements are available. However, this availability is not mandatory and hence, spectral predictions may as well be achieved by means of normal mode scan calculations for high-level electronic structure methods for which analytic gradients have not been implemented.</p>
+<h2>Example: Quantum-Chemically Assisted Analysis and Fit of the Absorption and Resonance Raman Spectra for 11 A g → 11 B u Transition in trans -1,3,5-Hexatriene</h2>
+<p>The following input file for an ORCA run invokes the calculation of the excited-state origin displacements along all normal modes by means of energy and excited state gradient calculations at the ground-state equilibrium geometry. The method is valid for the IMDHO model for which the excited-state energy gradient along a given normal mode and corresponding origin shift are related in a very simple way.</p>
+<pre><code># # example010.inp # # TDDFT BHLYP Normal Mode Gradient Calculation # # The keyword NMGrad invokes the normal mode gradient calculation # ! RKS BHandHLYP TightSCF SV(P) NMGrad %cis NRoots 1 triplets false end %rr # the nuclear Hessian must have been calculated before -for example by a # DFT calculation. HessName= "hexatriene.hess" states 1 # Perform energy-gradient calculations for the 1st # excited state. Tdnc 0.005 # Threshold for dimensionless displacements to be # included in the input file for spectral simulations # generated at the end of the program run. # By default Tdnc= 0.005 ASAInput true # Generate the input file for spectra simulations</code></pre>
+<p>(continues on next page)</p>
+<pre><code>end * xyz 0 1 C -0.003374 0.678229 0.00000 H -0.969173 1.203538 0.00000 C 1.190547 1.505313 0.00000 H 2.151896 0.972469 0.00000 C 1.189404 2.852603 0.00000 H 0.251463 3.423183 0.00000 H 2.122793 3.426578 0.00000 C 0.003374 -0.678229 0.00000 H 0.969172 -1.203538 0.00000 C -1.190547 -1.505313 0.00000 H -2.151897 -0.972469 0.00000 C -1.189404 -2.852603 0.00000 H -0.251463 -3.423183 0.00000 H -2.122793 -3.426578 0.00000 *</code></pre>
+<p>In the ORCA run the TDDFT excited state gradient calculations are performed on top of a TDDFT calculation. Note, that the numbers of the excited-states which have to be included into analysis and input file for spectral simulations must be specified after the States keyword in the %rr block. They should also be consistent with the required number of roots in the %tddft block. The 11 B u excited state appears to be the first root in the TDDFT calculation. Therefore, NRoots=1 in the %tddft block, and States=1 in the %rr block. One should also provide the name of the file containing the nuclear Hessian matrix via the HessName keyword in the %rr block. Here we used the .hess file obtained in a frequency calculation at the BHLYP/SV(P) level of theory.</p>
+<p>After the ORCA calculation you will find in your directory a file called example010.asa.inp that is appropriate to be used together with the orca_asa program as defined in the preceding sections.</p>
+<pre><code># # example010.asa.inp # # ASA input # %sim model IMDHO method Heller AbsRange 5000.0, 100000.0 NAbsPoints 0 FlRange 5000.0, 100000.0 NFlPoints 0 RRPRange 5000.0, 100000.0 NRRPPoints 0 RRSRange 0.0, 4000.0 NRRSPoints 4000 RRS_FWHM 10.0 AbsScaleMode Ext FlScaleMode Rel RamanOrder 0 EnInput E0 CAR 0.800</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>end %fit Fit false AbsFit false FlFit false RRPFit fsalse RRSFit false method Simplex WeightsAdjust true AbsRange 0.0, 10000000.0 FlRange 0.0, 10000000.0 RRPRange 0.0, 10000000.0 RRSRange 0.0, 10000000.0 AbsName "" FlName "" ExpFlScaleMode Rel ExpAbsScaleMode Rel CWAR -1.000 CWAF -1.000 NMaxFunc 100 MWADRelTol= 1.000000e-004 SFRRPSimStep= 1.000000e+002 SFRRSSimStep 1.000000e+002 FREQGStep 1.000000e+001 FREQEStep 1.000000e+001 E0Step 3.000000e+002 SSStep 2.000000e+001 TMStep 5.000000e-001 GammaStep 5.000000e+001 E0SDStep 5.000000e+001 SDNCStep 4.000000e-001 end $el_states 1 1 42671.71 100.00 0.00 1.0725 3.3770 -0.0000 $vib_freq_gs 12 1 359.709864 2 456.925612 3 974.521651 4 1259.779018 5 1356.134238 6 1370.721341 7 1476.878592 8 1724.259894 9 1804.572974 10 3236.588264 11 3244.034359 12 3323.831066 $sdnc 12 1</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>1 1 -0.594359 2 0.369227 3 -0.132430 4 -0.727616 5 0.406841 6 -0.105324 7 0.177617 8 -0.090105 9 -1.412258 10 0.048788 11 0.021438 12 0.008887</code></pre>
+<p>This input file can be used to construct theoretical absorption and rR spectra. In order to compare experimental and theoretical rR spectra, it is necessary to use in both cases excitation energies that are approximately in resonance with the same vibrational transitions in the absorption spectrum. Therefore, in the case of the absorption spectrum with resolved or partially resolved vibrational structure it is necessary to modify the transition energies in the %el_states such that they coincide with the experimentally observed 00 vibrational peaks. It is also desirable to roughly adjust homogeneous and, possibly, inhomogeneous linewidth parameters such that the experimental and calculated absorption spectra show similar slopes in the preresonance region (below the 0-0 transition). Then the assignment of experimental rR spectra can be done on the basis of comparison with the theoretical rR spectra calculated for the corresponding experimental excitation energies. For the sake of consistency and simplicity it is better to use those excitation energies which fall into the preresonace region and/or are in resonance with the 0-0 transition. In the case of diffuse absorption spectra (i.e. those not showing resolved vibrational structure) it is also necessary to adjust the theoretical transition energies and linewidth parameters such that experimental and calculated positions of absorption maxima roughly coincide, and corresponding slopes below the maxima have a similar behavior. According to above mentioned considerations one needs to modify the %el_states block in the file example010.asa.inp :</p>
+<pre><code>$el_states 1 1 39808.0 150.00 0.00 1.0725 3.3770 -0.0000</code></pre>
+<p>The calculated absorption spectrum obtained by providing AbsScaleMode= Rel , AbsRange= 39000 , 49000 and NAbsPoints= 2000 is shown in Fig. 5.48. Upon comparison with the experimental spectrum one can notice that the BHLYP functional gives relatively small discrepancies with somewhat lower intensity in the lowfrequency edge and larger intensity on the high-energy side of the spectrum. Besides, there is a noticeable mismatch in the separation between individual vibronic peaks which is due to overestimation of vibrational frequencies by the BHLYP functional (typically by ≈ 10%).</p>
+<p>You can arbitrarily vary various normal coordinate displacements in %sdnc block within 10-30% of their values in order to observe modifications of the calculated spectrum. This will tell you how these parameters influence the spectrum and probably it will be possible to obtain better initial guesses for the fit. In the present example you will find that reduction of the absolute value of the displacement parameter corresponding to the ninth mode by ≈ 10%, and reduction of vibrational frequencies by ≈ 10% can noticeably improve the spectral envelope. Such a quick analysis suggests that experimentally observed peaks in the absorption spectrum represent different vibrational transitions corresponding to a single electronically excited state rather than to different electronic excitations. This conclusion will be confirmed upon establishing the fact that the absorption and rR spectra can be successfully fitted based on the assumption of a single electronic transition.</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 5.48: Experimental and calculated at the BHLYP/SV(P) and B3LYP/SV(P) levels of theory absorption (left panel) and rR spectra (right panel) corresponding to 11 A g → 11 B u transition in trans -1,3,5-hexatriene.</div></figcaption></figure>
+<p>In order to calculate the rR spectrum for experimental excitation energies you need to specify its value through RRSE keyword in %sim block as well as possibly to modify the parameters related to the spectral range and linewidth of rR bands which are suitable for comparison with the experimental rR spectrum:</p>
+<pre><code># excitation energies (cm**-1) for which rR spectra will be calculated: RRSE 39808 # full width half maximum of Raman bands in rR spectra (cm**-1): RRS_FWHM 20 RSRange 0, 4000 # spectral range for simulation of rR spectra (cm**-1) NRRSPoints 4000 # number of points to simulate rR spectra (cm**-1) # resonance Raman intensities will be calculated # for all vibrational states with excitation number # up to RamanOrder: RamanOrder 3</code></pre>
+<p>The calculated rR spectrum is shown in Fig. 5.48. In the input we have invoked the calculation of rR intensities for the transitions with up to 3 vibrational quanta in the final vibrational state ( RamanOrder = 3 ). Make sure that the rR intensity pattern in the given spectral range does not change noticeably upon further increase of this parameter. Typically, the larger are the normal coordinate displacements the greater order of Raman scattering is required in the calculation to account for all the most intense transitions in the rR spectrum. The inclusion of vibrational transitions beyond the fundamentals is a particular feature of the orca_asa program.</p>
+<p>Comparison of the calculated and experimental rR spectra (Fig. 5.48) mainly shows discrepancies in the values of the Raman shifts that are mainly related to the low accuracy of the vibrational frequencies obtained at the BHLYP level (typically overestimated by ≈ 10%). However, the intensity patterns of the calculated and experimental rR spectra show very nice agreement with experiment that is already sufficient to assign the experimental peaks to individual</p>
+<p>vibrational transitions. This can be done upon examination of file example010.asa.o3.rrs.39808.stk which provides intensity, Raman shift, and specification for each vibrational transition. It is actually one of the most consistent procedures that enables one to identify different fundamental, overtone and combination bands in the experimentally observed rR spectrum. Such an assignment is a necessary prerequisite for the fit. The current example is relatively straightforward since the spectral region 1-1700 cm -1 is actually dominated by fundamental bands while the most intense overtone and combination transitions occur at higher frequencies. However, in many cases even the low-frequency spectral range is characterized by significant contributions from overtone and combination bands that sometimes are even more intense than fundamental transitions! Thus, quantum chemical calculations can greatly facilitate the assignment of experimental rR bands.</p>
+<p>After having performed the assignment it is advisable to discard those modes from the analysis that are not involved in any of the experimentally observed fundamental, overtone, or combination rR bands with noticeable intensities. In the present example these are the modes 6, 8, 10-12 from the input file given above. For these modes it is implied that the fitted displacement parameters are zero. You will find that the calculated displacement values are rather small indeed. Also it is advisable to change the ground-state vibrational frequencies in the $vib_freq_gs block to their experimental values.</p>
+<p>Below is the modified input file for the fit run:</p>
+<pre><code># # example010-01.asa.inp # # ASA input # %sim model IMDHO method Heller end %fit Fit true AbsFit true RRSFit true AbsExpName "hex-abs.dat" ExpAbsScaleMode Rel CWAR 5.0 NMaxFunc 1000 SDNCStep 0.5 end $el_states 1 1 39808.0 150.00 0.00 -0.8533 -3.3690 -0.0000 $el_states_c 1 1 1 1 0 0 0 0 $vib_freq_gs 7 1 354.0 2 444.0 3 934.0 4 1192.0 5 1290.0 6 1403.0</code></pre>
+<p>(continues on next page)</p>
+<pre><code>7 1635.0 $sdnc 7 1 1 1 -0.594359 2 0.369227 3 -0.132430 4 -0.727616 5 0.406841 6 0.177617 7 -1.412258 $sdnc_c 7 1 1 1 1 2 2 3 3 4 4 5 5 6 6 7 7 $rrs_exp 1 1 1 Ex 39809.0 NTr 11 1 int 10.0 1.0 modes 1 quanta 1; 2 int 5.0 1.0 modes 2 quanta 1; 3 int 1.5 1.0 modes 3 quanta 1; 4 int 21.0 1.0 modes 4 quanta 1; 5 int 7.5 1.0 modes 5 quanta 1; 6 int 2.0 1.0 modes 6 quanta 1; 7 int 46.0 1.0 modes 7 quanta 1; 8</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>int 9 int</td><td>6.8 1.0 modes 1, 7 quanta 1, 1;</td></tr><tr><td></td><td>4.0 1.0 modes 2, 7 quanta 1, 1;</td></tr><tr><td>10 int</td><td>2.0 1.0 modes 3, 7 quanta 1, 1;</td></tr><tr><td>11</td><td>int 17.0 1.0 modes 7 quanta 2;</td></tr></tbody></table>
+<p>In addition to the experimental intensities of fundamental bands the input file also contains the information about some overtone and combination transitions. Note that it is not really necessary to include all of them them into the fit, in particular if some of the rR bands are strongly overlapping with each other.</p>
+<p>Fitted normal coordinate displacements of the excited-state origin show nice agreement with the published values:</p>
+<table><tbody><tr><td>$sdnc 7 1</td><td></td></tr><tr><td></td><td>1</td></tr><tr><td>1</td><td>-0.638244</td></tr><tr><td>2</td><td>0.455355</td></tr><tr><td>3</td><td>-0.229126</td></tr><tr><td>4</td><td>-0.854357</td></tr><tr><td>5</td><td>0.501219</td></tr><tr><td>6</td><td>0.197679</td></tr><tr><td>7</td><td>-1.292997</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">It is not really important to employ the BHLYP/SV(P) method in the frequency calculations in order to obtain the .hess file (this was merely done to be consistent with the TDDFT/BHLYP/SV(P) method for the excited-state model parameters calculation). The frequency calculations can for example be carried out at the BP86/TZVP or RI-SCS-MP2/TZVP level of theory. This will provide displacements pattern very similar to that of the BHLYP/SV(P) method, but much more accurate vibrational frequencies which will further facilitate the assignment of rR spectra (Fig. 5.48). However, such a procedure can be inconsistent if the two methods give noticeably different normal mode compositions and/or vibrational frequencies. From our experience it can lead to significant overestimation of the excited-state displacements for some low-frequency modes.</li>
+<li style="list-style-type: '· ';">It is known that predicted dimensionless normal coordinate displacements critically depend on the fraction of the 'exact' Hartree-Fock exchange (EEX) included in hybrid functionals. In general no universal amount of EEX exists that provides a uniformly good description for all systems and states. Typically, for a given molecule either the BHLYP/TZVP (50% of EEX) or B3LYP/TZVP (20% of EEX) methods yields simulated spectra that compare very well with those from experiment if vibrational frequencies are appropriately scaled.</li>
+</ul>
+<h2>Important Notes about Proper Comparison of Experimental and Quantum Chemically Calculated Resonance Raman Spectra</h2>
+<p>In order to compare experimental and theoretical rR spectra, it is necessary to use in both cases excitation energies that are approximately in resonance with the same vibrational transitions in the absorption spectrum . Therefore, in the case of diffuse absorption spectra (i.e. those not showing resolved vibrational structure) one needs to adjust the transition energies and linewidth paramters in the %el_states block such that the envelopes of the experimental and theoretical spectra rouhgly coincide, and then to employ experimental values of excitation energies to construct theoretical rR spectra. Typically in the case of diffuse absorption spectra rR profiles are rather smooth. Therefore, even though excitation energies are not in resonance with the same vibrational transition in the absorption spectrum, the rR spectra are not expected to vary significantly in the case of such mismatch.</p>
+<p>In the case of the absorption spectrum with resolved or partially resolved vibrational structure it is necessary to modify the transition energies in the %el_states block such that the calculated and experimentally observed 00 vibrational peaks coincide, and modify linewidth parameters so that the low-energy slopes in the calculated and experimental spectra have a similar behavior.</p>
+<p>Consider a single-mode model system for which 'experimental' and calculated absorption spectra are shown in Fig. 5.49.</p>
+<figure><figcaption><div class="caption">Fig. 5.49: Experimental and theoretical absorption spectra for a single-mode model system. The calculated spectrum is adjusted such that the position of 0-0 peak coincide with the experimental one.</div></figcaption></figure>
+<p>Comparison of the calculated and experimental spectra shows that some adjustment of the linewidth parameters is neceassy before construction of theoretical rR spectra. One can directly compare calculated and experimental rR spectra upon the excitation at 16200 cm -1 which is in resonance with the 0-0 vibronic band. However, it is not consistent to use experimental values of the excitation energy in the calculation of rR spectrum which is in resonance with one of the other vibronic bands since the separation between vibrational peaks in the experimental and calculated spectra is different whereby positions of the peaks in both spectra do not coincide. Instead one should use the excitaition energy which corresponds to the same vibronic peak in the calculated absorption spectrum as in the experimental one . Alternatively, one can adjust theoretical value of vibrational frequency such that positions of corresponding vibronic peaks in the spectra coincide, and then use experimental values of excitation energies for the calculation of rR spectra.</p>
+<h2>Example: Normal Mode Scan Calculations of Model Parameters for 11 A g → 11 B u Transition in trans -1,3,5-Hexatriene</h2>
+<p>If excited state gradients are not available (which is the case for many of the electronic structure methods supported by ORCA), you have to resort to a more laborious procedure - single point calculations at geometries that are displaced along the various normal modes of the system. This roughly corresponds to taking numerical derivatives - however, once this extra effort is invested more information can be obtained from the calculation than what would be possible from an analytic derivative calculation.</p>
+<p>The present example illustrates the application of normal mode scan calculations for the evaluation of excited state harmonic parameters that are necessary to simulate optical spectra within the IMDHO model. This method can be applied with any method like CIS, CASSCF, MRCI or TD-DFT.</p>
+<p>The reference wavefunctions for the multireference calculations reported below are of the state-averaged CASSCF (SA-CASSCF) type. The complete active space CAS(6,6) includes all 6 valence shell π -orbitals. The average is taken over the first four states which was found necessary in order to include the ground state and the strongly allowed 11 B u state.</p>
+<pre><code># # example011.inp # # CASSCF normal mode scan calculations # # first do single point RHF calculation ! RHF TZVP TightSCF * xyz 0 1 C -0.002759 0.680006 0.000000 H -0.966741 1.204366 0.000000 C 1.187413 1.500920 0.000000 H 2.146702 0.969304 0.000000 C 1.187413 2.850514 0.000000 H 0.254386 3.420500 0.000000 H 2.116263 3.422544 0.000000 C 0.002759 -0.680006 0.000000 H 0.966741 -1.204366 0.000000 C -1.187413 -1.500920 0.000000 H -2.146702 -0.969304 0.000000 C -1.187413 -2.850514 0.000000 H -0.254386 -3.420500 0.000000 H -2.116263 -3.422544 0.000000 * # perform SA-CASSCF calculation upon appropriate rotation of MOs $new_job ! TZVP TightSCF</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%scf rotate {23,27} end end %casscf nel 6 norb 6 mult 1 nroots 4 end * xyz 0 1 C -0.002759 0.680006 0.000000 H -0.966741 1.204366 0.000000 C 1.187413 1.500920 0.000000 H 2.146702 0.969304 0.000000 C 1.187413 2.850514 0.000000 H 0.254386 3.420500 0.000000 H 2.116263 3.422544 0.000000 C 0.002759 -0.680006 0.000000 H 0.966741 -1.204366 0.000000 C -1.187413 -1.500920 0.000000 H -2.146702 -0.969304 0.000000 C -1.187413 -2.850514 0.000000 H -0.254386 -3.420500 0.000000 H -2.116263 -3.422544 0.000000 * # do normal mode scan calculations # to map CASSCF ground and excited-state PESs $new_job ! TZVP TightSCF NMScan %casscf nel 6 norb 6 mult 1 nroots 4 end %rr HessName "hexatriene_bp86.hess" NMList 10,11,18,24,26,28,29,31,32 NSteps 6 FreqAlter true EnStep 0.0001 State 3 end * xyz 0 1 C -0.002759 0.680006 0.000000 H -0.966741 1.204366 0.000000 C 1.187413 1.500920 0.000000 H 2.146702 0.969304 0.000000 C 1.187413 2.850514 0.000000 H 0.254386 3.420500 0.000000 H 2.116263 3.422544 0.000000 C 0.002759 -0.680006 0.000000 H 0.966741 -1.204366 0.000000 C -1.187413 -1.500920 0.000000</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>H -2.146702 -0.969304 0.000000 C -1.187413 -2.850514 0.000000 H -0.254386 -3.420500 0.000000 H -2.116263 -3.422544 0.000000 *</code></pre>
+<p>The file containing the Hessian matrix ( "hexatriene_bp86.hess" ) was obtained from the BP86/TZVP frequency calculations. The keyword NMList provides the list of the normal modes to be scanned. These should be only the totally symmetric vibrations, since only they can be significant for absorption and resonance Raman spectra within the constraints of the IMDHO model. The FreqAlter flag indicates whether frequency alterations are assumed in the post-scan potential surface fit. The Parameter EnStep is used to select the appropriate step during the scan calculations. The value is chosen such that the average energy change (in Eh) in both directions is not less than this parameter.</p>
+<h2>5.17 Absorption and Fluorescence Bandshapes using ORCA_ASA</h2>
+<p>Please also consider using the more recent ORCA_ESD, described in Section Excited State Dynamics , to compute bandshapes.</p>
+<p>Bandshape calculations are nontrivial but can be achieved with ORCA using the procedures described in section Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance Raman Excitation Profiles and Spectra with the orca_asa Program . Starting from version 2.80, analytical TD-DFT gradients are available, which make these calculations quite fast and applicable without expert knowledge to larger molecules.</p>
+<ul>
+<li style="list-style-type: '· ';">Functionals with somewhat more HF exchange produce better results and are not as prone to 'ghost states' as GGA functionals unfortunately are!</li>
+<li style="list-style-type: '· ';">Calculations can be greatly sped up by the RI or RIJCOSX approximations!</li>
+<li style="list-style-type: '· ';">Analytic gradients for the (D) correction and hence for double-hybrid functionals are NOT available.</li>
+</ul>
+<p>In a nutshell, let us look into the H 2 CO molecule. First we generate some Hessian (e.g. BP86/SV(P)). Then we run the job that makes the input for the orca_asa program. For example, let us calculate the five lowest excited states:</p>
+<pre><code>! aug-cc-pVDZ BHandHLYP TightSCF NMGrad %tddft nroots 5 end # this is ASA-specific input %rr states 1,2,3,4,5 HessName "Test-ASA-H2CO-freq.hess" ASAInput True end *int 0 1 C 0 0 0 0 0 0 O 1 0 0 1.2 0 0 H 1 2 0 1.1 120 0 H 1 2 3 1.1 120 180 *</code></pre>
+<p>The ORCA run will produce a file Test-ASA-H2CO.asa.inp that is an input file for the program that generates various spectra. It is an ASCII file that is very similar in appearance to an ORCA input file:</p>
+<p>(continued from previous page)</p>
+<pre><code># # ASA input # %sim model IMDHO method Heller AbsRange 25000.0, 100000.0 NAbsPoints 1024 FlRange 25000.0, 100000.0 NFlPoints 1024 RRPRange 5000.0, 100000.0 NRRPPoints 1024 RRSRange 0.0, 4000.0 NRRSPoints 4000 # Excitation energies (cm**-1) for which rR spectra will # be calculated. Here we choose all allowed transitions # and the position of the 0-0 band RRSE 58960, 66884, 66602 # full width half maximum of Raman bands in rR spectra # (cm**-1): RRS_FWHM 10.0 AbsScaleMode Ext FlScaleMode Rel # RamanOrder=1 means only fundamentals. For 2 combination # bands and first overtones are also considered, for 3 # one has second overtones etc. RamanOrder 1 # E0 means the adiabatic excitation energy # EV would mean the vertical one. sprints vertical # excitations in the TD-DFT output but for the input into # the ASA program the adiabatic excitation energies are # estimated. A rigorous calculation would of course in-# volve excited state geometry optimization EnInput E0 CAR 0.800 end # These are the calculated electronic states and transition moments # Note that this is in the Franck-Condon approximation and thus # the transition moments have been calculated vertically $el_states 5 1 32200.79 100.00 0.00 -0.0000 0.0000 -0.0000 2 58960.05 100.00 0.00 0.0000 -0.4219 0.0000 3 66884.30 100.00 0.00 -0.0000 0.4405 0.0000 4 66602.64 100.00 0.00 -0.5217 -0.0000 0.0000 5 72245.42 100.00 0.00 0.0000 0.0000 0.0000 # These are the calculated vibrational frequencies for the totally # symmetric modes. These are the only ones that contribute. They # correspond to x, H-C-H bending, C=O stretching and C-H stretching # respectively $vib_freq_gs 3</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>1 1462.948534 2 1759.538581 3 2812.815170 # These are the calculated dimensional displacements for all # electronic states along all of the totally symmetric modes. $sdnc 3 5 1 2 3 4 5 1 -0.326244 0.241082 -0.132239 0.559635 0.292190 2 -1.356209 0.529823 0.438703 0.416161 0.602301 3 -0.183845 0.418242 0.267520 0.278880 0.231340</code></pre>
+<p>After setting NAbsPoints variable and spectral ranges in this file to the desired values, we invoke orca_asa as:</p>
+<pre><code>orca_asa Test-ASA-H2CO.asa.inp</code></pre>
+<p>This produces the following output:</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → 200.00 200.00 2: 100.00 0.00 200.00 0.00 0.00 0.00 200.00 ␣ ↪ → 200.00 200.00 3: 100.00 0.00 200.00 0.00 0.00 0.00 200.00 ␣ ↪ → 200.00 200.00 4: 100.00 0.00 200.00 0.00 0.00 0.00 200.00 ␣ ↪ → 200.00 200.00 5: 100.00 0.00 200.00 0.00 0.00 0.00 200.00 ␣ ↪ → 200.00 200.00 Calculating absorption spectrum ... The maximum number of grid points ... 5840 Time for absorption ... 9.569 sec (= 0.159 min) Writing file: Test-ASA-H2CO.asa.abs.dat ... done Writing file: Test-ASA-H2CO.asa.abs.as.dat ... done Generating vibrational states up to the 1-th(st) order ... done Total number of vibrational states ... 3 Calculating rR profiles for all vibrational states up to the 1-th order State 1 ... The maximum number of grid points ... 6820 Resonance Raman profile is done State 2 ... The maximum number of grid points ... 6820 Resonance Raman profile is done State 3 ... The maximum number of grid points ... 6820 Resonance Raman profile is done Writing file: Test-ASA-H2CO.asa.o1.dat... done Writing file: Test-ASA-H2CO.asa.o1.info... done Calculating rR spectra involving vibrational states up to the 1-th(st) order State 1 ... done State 2 ... done State 3 ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.58960.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.58960.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.66884.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.66884.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.66602.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.66602.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.58960.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.58960.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.66884.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.66884.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.66602.dat ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.as.66602.stk ... done Writing file: Test-ASA-H2CO.asa.o1.rrs.all.xyz.dat ... done TOTAL RUN TIME: 0 days 0 hours 1 minutes 17 seconds 850 msec</code></pre>
+<p>The computed vibrationally resolved absorption spectrum is plotted as shown in Figure Fig. 5.50.</p>
+<figure><figcaption><div class="caption">Fig. 5.50: The computed vibrationally resolved absorption spectrum of the H 2 CO molecule</div></figcaption></figure>
+<p>The computed fluorescence spectrum of the lowest energy peak is plotted as shown in Figure Fig. 5.51. This peak corresponds to S2. Although it is not realistic, it is sufficient for illustrative purposes.</p>
+</div>
+</body>
+</html>

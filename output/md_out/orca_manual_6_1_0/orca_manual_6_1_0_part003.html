@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part003</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>ESSENTIAL CALCULATION ELEMENTS</h2>
+<h2>2.1 General Structure of the Input File</h2>
+<p>In general, the input file is a free format ASCII file and can contain:</p>
+<ul>
+<li style="list-style-type: '· ';">one or more 'simple' keyword lines that start with a ' ! ' character,</li>
+<li style="list-style-type: '· ';">one or more input blocks enclosed between an ' % ' sign and ' end ' that provide finer control over specific aspects of the calculation,</li>
+<li style="list-style-type: '· ';">the specification of the coordinates , total charge, and spin multiplicity for the system, either with a %coords block, or more usually enclosed within two ' * ' symbols.</li>
+</ul>
+<p>Here is an example of a simple input file that contains all three input elements:</p>
+<pre><code>! HF def2-TZVP %scf convergence tight end * xyz 0 1 C 0.0 0.0 0.0 O 0.0 0.0 1.13 *</code></pre>
+<p>Comments in the file start by a '#'. For example:</p>
+<pre><code># This is a comment. Continues until the end of the line</code></pre>
+<p>Comments can also be closed by a second '#', as the example below where TolE and TolMaxP are two variables that can be user specified:</p>
+<pre><code>TolE=1e-5; #Energy conv.# TolMaxP=1e-6; #Density conv.#</code></pre>
+<p>The input may contain several blocks, which consist of logically related data that can be user controlled. The program tries to choose sensible default values for all of these variables. However, it is impossible to give defaults that are equally sensible for all systems. In general the defaults are slightly on the conservative side and more aggressive cutoffs etc. can be chosen by the user and may help to speed things up for actual systems or give higher accuracy if desired.</p>
+<ul>
+<li style="list-style-type: '· ';">The ORCAinput is NOT case sensitive. UPPER CASE, lower case, or aNy cOMmBINAtiON are allowed. An exception is file names (e.g. for %MOInp or *XYZName ), which are case-sensitive on Unix-like OSs.</li>
+<li style="list-style-type: '· ';">In general, the order of the simple keywords and input blocks is not important - see Input Priority and Processing Order for the finer details.</li>
+</ul>
+<h2>2.1.1 Input Blocks</h2>
+<p>Input blocks start with ' % ', followed by the block name and end with ' end '. For example:</p>
+<pre><code>%method method HF END</code></pre>
+<p>Alist of available input blocks is given in Section 2.1.6. No blocks need to be present in an input file but they can be present if detailed control over the behavior of the program is desired. Otherwise, most jobs can be defined via the simple keywords described in Section 2.1.7. Variable assignments within blocks have the following general structure:</p>
+<pre><code>VariableName Value # or with an optional "=" sign OtherVariableName = OtherValue</code></pre>
+<p>Values can be either numeric, quote-delimited strings (see below), or predefined aliases (such as HF in the example above), which are internally converted to some numeric representation.</p>
+<p>Some variables are actually arrays. In this case several possible assignments are useful:</p>
+<pre><code>Array[1] Value1 Array[1] Value1,Value2,Value3 Array Value1,Value2</code></pre>
+<h2>Note</h2>
+<p>Arrays always start with index 0 in ORCA (this is because ORCA is a C++ program). The first line in the example gives the value ' Value1 ' to Array[1] , which is the second member of this array. The second line assigns Value1 to Array[1] , Value2 to Array[2] and Value3 to Array[3] . The third line assigns Value1 to Array[0] and Value2 to Array[1] .</p>
+<p>Strings (such as filenames) must be enclosed in quotes. For example:</p>
+<pre><code>%scf MOInp "Myfile.gbw" end</code></pre>
+<p>Note that file names on Unix-like systems are case-sensitive (i.e., MYFILE.GBW and MyFile.gbw are different files). Under Windows the file names are not case sensitive.</p>
+<p>Some input block keywords either open a nested sub-block, which must be closed with an additional end , or have a specific syntax, different from the simple variable assignment described above. For example:</p>
+<pre><code>%scf Guess PModel # variable assignment SOSCF # nested sub-block start 0.002 # variable assignment end # closes the SOSCF sub-block end %mdci # special syntax MP2FragInter {1 1} {2 2} end %basis NewGTO # nested sub-block # special syntax inside H "def2-SVP" S 1 1 0.05 1.0</code></pre>
+<p>(continues on next page)</p>
+<pre><code>end # closes the NewGTO sub-block end</code></pre>
+<p>Finally, there are input 'blocks' which only set a single variable and are not closed with ' end '. These are listed in Table 2.2. For example:</p>
+<pre><code>%MOInp "MyFile.gbw" %maxcore 3000</code></pre>
+<h2>2.1.2 Input Priority and Processing Order</h2>
+<p>In more complicated calculations, the input can get quite involved. Therefore it is worth knowing how it is internally processed by the program:</p>
+<ul>
+<li style="list-style-type: '· ';">First, all the simple input lines (starting with ' ! ') are collected into a single string.</li>
+<li style="list-style-type: '· ';">The program looks for all known keywords in a predefined order, regardless of the order in the input file.</li>
+<li style="list-style-type: '· ';">An exception are basis sets: if two different orbital basis sets (e.g. ! def2-SVP def2-TZVP ) are given, the latter takes priority. The same applies to auxiliary basis sets of the same type (e.g. ! def2/J SARC/J ).</li>
+<li style="list-style-type: '· ';">Some simple input keywords set multiple internal variables. Therefore, it is possible for one keyword to overwrite an option, set by another keyword. We have tried to resolve most such cases in a reasonable way (e.g. the more 'specific' keyword should take precedence over a more 'general' one) but it is difficult to foresee every combination of options.</li>
+<li style="list-style-type: '· ';">Next, the block input is parsed in the order it is given in the input file.</li>
+<li style="list-style-type: '· ';">Most block input keywords control a single variable (although there are exceptions). If a keyword is duplicated, the latter value is used.</li>
+<li style="list-style-type: '· ';">In principle, the same block may exist multiple times with different variables set within. However, some blocks 'reset' certain internal data whenever they are opened, or have certain mandatory contents, which must be present in each block instance (and override previous instances). Therefore, it is not recommended to have multiple instances of the same block.</li>
+</ul>
+<p>Consider the following (bad) example:</p>
+<pre><code>! def2-TZVP UKS %method functional BP86 correlation C_LYP SpecialGridAtoms[1] 26, 27 SpecialGridIntacc 8, 8, 8 SpecialGridAtoms 28, 29 end ! PBE def2-SVP RKS</code></pre>
+<p>Using the rules above, one can figure out why it is equivalent to this one:</p>
+<pre><code>! UKS BLYP def2-SVP %method SpecialGridAtoms 28, 29, 27 SpecialGridIntacc 8, 8, 8 end</code></pre>
+<p>(continued from previous page)</p>
+<h2>2.1.3 Global Memory Use</h2>
+<p>Some ORCA modules (in particular those that perform some kind of wavefunction based correlation calculations) require large scratch arrays. Each module has an independent variable to control the size of these dominant scratch arrays. However, since these modules are never running simultaneously, we provide a global variable MaxCore that assigns a certain amount of scratch memory to all of these modules. Thus:</p>
+<pre><code>%MaxCore 2000</code></pre>
+<p>sets 2000 MB as the limit for these scratch arrays. This limit applies per processing core . Do not be surprised if the program takes more than that - this size only refers to the dominant work areas. Thus, you are well advised to provide a number that is no more than 75-80% of your physical memory. Some memory-hungry operations will take longer if given less than the required memory, while others will abort completely if MaxCore is insufficient. The default value is 4GB, which is plenty for most standard DFT calculations. For coupled clusters and the like, at least 8GB are recommended.</p>
+<h2>2.1.4 Changing the Default BaseName</h2>
+<p>ORCA generates a number of output files, as well as many temporary files, which are removed at the end of a successful run. To prevent filename clashes, all generated files start with the same prefix or BaseName . This is usually inferred from the name of the input file by removing the extension, i.e. running ORCA with MyJob.inp will create MyJob.gbw , MyJob.properties.txt , etc. It is also possible to set the BaseName explicitly using the %base variable. In the following example, the names of all generated files will start with job1 , regardless of the name of the input file:</p>
+<pre><code>%base "job1"</code></pre>
+<h2>2.1.5 Jobs with Multiple Steps</h2>
+<h2>Warning</h2>
+<p>The $new_job feature is a deprecated function. Using $new_job might result in erratic results and strange behavior of succeeding calculations. Please use the compound feature of ORCA for tasks like this - it is safer and by far more powerful!</p>
+<p>ORCAsupports input files with multiple jobs. This feature is designed to simplify series of closely related calculations on the same molecule or calculations on different molecules. The objectives for implementing this feature include:</p>
+<ul>
+<li style="list-style-type: '· ';">Calculate of a molecular property using different theoretical methods and/or basis sets for one molecule.</li>
+<li style="list-style-type: '· ';">Calculations on a series of molecules with identical settings.</li>
+<li style="list-style-type: '· ';">Geometry optimization followed by more accurate single points and perhaps property calculations.</li>
+<li style="list-style-type: '· ';">Crude calculations to provide good starting orbitals that may then be used for subsequent calculations with larger basis sets.</li>
+</ul>
+<p>For example consider the following job that in the first step computes the g-tensor of BO at the LDA level, and in the second step using the BP86 functional.</p>
+<p>(continued from previous page)</p>
+<p>What happens if you use the $new_job feature is that all calculation flags for the actual job are transferred from the previous job and that only the changes in the settings must be input by the user. Thus if you turn on some flags for one calculation that you do not want for the next, you have to turn them off again yourself (for example the use of the RI approximation)! In addition, the default is that the new job takes the orbitals from the old job as input. If you do not want this you have to overwrite this default by specifying your desired guess explicitly.</p>
+<h2>2.1.6 List of Input Blocks</h2>
+<p>Table 2.1 lists the known input block names, along with any accepted synonyms/aliases. The keywords defined in each block are listed in the respective section of the manual and references to these lists are also given in the table. The list of 'blocks' which are not closed with end is given in Table 2.2.</p>
+<table><caption><div class="caption">Table 2.1: Input block keywords. Synonyms are given in parentheses.</div></caption><tbody><tr><th>Block</th><th>Description (Keyword Reference)</th></tr><tr><td>autoci</td><td>Autogenerated single- and multi-reference correlation methods (Section 3.11.9)</td></tr><tr><td>basis</td><td>Basis sets (Table 2.41)</td></tr><tr><td>casresp</td><td>CASSCF static linear response (Section 5.26.6)</td></tr><tr><td>casscf</td><td>CASSCF/NEVPT2 and DMRG calculations (Section 3.13.4)</td></tr><tr><td>chelpg</td><td>CHELPG charges (Section 5.1.8)</td></tr><tr><td>cim</td><td>Cluster-in-molecules calculations (Section 3.10.9)</td></tr><tr><td>cis ( tddft )</td><td>CIS and TD-DFT calculations (Section 5.6.19)</td></tr><tr><td>compound</td><td>Compound jobs (Section 8.2)</td></tr><tr><td>conical</td><td>Optimization of conical intersections (Section 4.9)</td></tr><tr><td>coords</td><td>Input of atomic coordinates (Section 2.2)</td></tr><tr><td>cosmors</td><td>OpenCOSMO-RS options (Section 2.13.6)</td></tr><tr><td>cpcm</td><td>Conductor-like Polarizable Continuum Model (Section 2.13.8)</td></tr><tr><td>docker</td><td>Host-guest docking algorithm (Table 4.12)</td></tr><tr><td>eda</td><td>(Table 5.28)</td></tr><tr><td>elprop</td><td>Electric properties (Section 5.20.2)</td></tr><tr><td>eprnmr</td><td>EPR and NMR properties (Section 5.21.9; g-tensor: Table 5.13, HFC: Table 5.14, ZFS: Table 5.16, Möss- bauer: Table 5.18)</td></tr><tr><td>esd</td><td>Excited state dynamics (Section 5.5.12)</td></tr><tr><td>frag</td><td>Automatic fragmentation procedure (Table 2.62)</td></tr><tr><td>freq</td><td>Vibrational frequencies (Section 4.7.4)</td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 2.1 - continued from previous page</div></caption><tbody><tr><th>Block</th><th>Description (Keyword Reference)</th></tr><tr><td>geom</td><td>Geometry optimization (Table 4.3; Scan: Table 4.4, TS: Table 4.5)</td></tr><tr><td>goat</td><td>Global optimization algorithm (Table 4.9)</td></tr><tr><td>ice ( iceci , cipsi )</td><td>Iterative configuration expansion CI calculations (Sec- tion 3.14.11)</td></tr><tr><td>irc</td><td>Intrinsic reaction coordinate calculations (Section 4.4.2)</td></tr><tr><td>lft</td><td>Ligand field theory utility orca_lft (Section 9.2.15)</td></tr><tr><td>loc</td><td>Localization of orbitals (Section 9.2.5)</td></tr><tr><td>mcrpa</td><td>CASSCF linear response (Section 5.8.6)</td></tr><tr><td>md</td><td>Molecular dynamics (Table 7.1)</td></tr><tr><td>mdci</td><td>Single reference correlation methods (Section 3.10.14; RHF EOM-CC: Table 5.11, UHF EOM-CC: Table 5.12, STEOM-CC: Section 5.10.1, MR-EOM-CC: Section 3.20.4, LED: Section 5.38.7, ADLD/ADEX:</td></tr><tr><td>mecp</td><td>Minimum energy crossing points optimization (Section 4.10.1)</td></tr><tr><td>method</td><td>Choice of computation method and various options • Run types and method classes: Table 2.5 • RI/COSX: Table 2.45 • Grids: Section 2.10.5 • CP-SCF: Section 2.22 • Frozen core: Section 2.21 • Population analysis: Table 5.3 • DFT: Table 3.3 • DFT/hybrid: Table 3.5 • DFT/range-separated: Table 3.7 • DFT/double-hybrid: Table 3.10 • DFT/LibXC: Section 3.3.6 • DFT/dispersion: Table 3.14 • DFT/NLC: Table 3.20 • gCP: Table 2.52 • NDO: Table 3.23 • Native xTB: Table 3.28 • FMM: Section 6.5.4</td></tr><tr><td>mm</td><td>Molecular mechanics force-fields (Section 3.23.5)</td></tr><tr><td>mp2</td><td>MP2 calculations (Section 3.9.1; DLPNO: Sec- tion 3.9.10, DLPNO/gradient: Section 3.9.11, DLPNO/response: Section 3.9.11, DLPNO/multi- level: Section 3.9.11, OO-RI-MP2: Section 3.9.14, regularized: Section 3.9.15)</td></tr><tr><td>mrci</td><td>3.19.15)</td></tr><tr><td></td><td>Multi-reference CI calculations (Section</td></tr><tr><td>nbo</td><td>NBO analysis (Section 5.2)</td></tr><tr><td></td><td>Parameters for NDO-based semi-empirical</td></tr><tr><td>ndoparas</td><td>methods (Table 3.21)</td></tr><tr><td>numgrad</td><td>Numerical gradients (Section 2.23.2)</td></tr><tr><td>output</td><td>Control of output (Table 2.6)</td></tr><tr><td>pal</td><td>Parallel jobs (Section 2.5)</td></tr><tr><td>paras</td><td>Input of geometric parameters, equivalent to paras or</td></tr><tr><td></td><td>pardef in %coords (Section 2.2.4)</td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 2.1 - continued from previous page</div></caption><tbody><tr><th>Block</th><th>Description (Keyword Reference)</th></tr><tr><td>plots</td><td>Plot generation (Section 9.1)</td></tr><tr><td>qmmm</td><td>Multiscale (QM/MM) calculations (Section 6.1)</td></tr><tr><td>rel</td><td>Relativistic options (Table 2.55; SOC: Section 5.28)</td></tr><tr><td>rocis</td><td>Restricted-open-shell CIS (Section 5.7.7)</td></tr><tr><td>rr</td><td>Resonance Raman and absorption/fluorescence band- shape calculations via orca_asa (Section 5.16.4)</td></tr><tr><td>scf</td><td>SCF procedure settings (Section 2.6; TRAH-SCF: Sec- tion 2.6.7, AVAS: Section 3.13.7, ROHF: Section 3.1.1, native xTB: Table 3.29, ∆ SCF: Table 5.27, ini- tial guess: Section 2.20, rotate MOs: Section 2.20.7 )</td></tr><tr><td>shark</td><td>SHARK integral package (Section 2.15.6)</td></tr><tr><td>solvator</td><td>Explicit solvation algorithm (Table 4.10)</td></tr><tr><td>symmetry ( sym )</td><td>Spatial symmetry recognition (Table 2.67)</td></tr><tr><td>vpt2</td><td>Vibrational perturbation theory (Section 5.19)</td></tr><tr><td>xtb</td><td>Options for the xtb program interface (Table 3.26)</td></tr></tbody></table>
+<table><caption><div class="caption">Table 2.2: Input keywords, which are prefixed with % but have no closing end .</div></caption><tbody><tr><th>Keyword</th><th>Value</th><th>Description (Reference)</th></tr><tr><td>base</td><td>&quot;&lt;BaseName&gt;&quot;</td><td>Base name for the files created by the job (Section 2.1.4)</td></tr><tr><td>cclib</td><td>&quot;&lt;FileName&gt;&quot;</td><td>File with one-particle coupling coefficients for ICE-CI (Section 3.14.12)</td></tr><tr><td>id</td><td>&quot;&lt;string&gt;&quot;</td><td>Deprecated! Identifier for the job used to summarize computed energies (Section 2.1</td></tr><tr><td>ljcoefficients</td><td>&quot;&lt;FileName&gt;&quot;</td><td>File with Lennard-Jones coefficients for PHVA (Section 4.3.5)</td></tr><tr><td>maxcore</td><td>4096</td><td>Maximum heap memory to use in MB, default: 4GB (Section 2.1.3)</td></tr><tr><td>moinp</td><td>&quot;&lt;FileName&gt;&quot;</td><td>GBWfile from which to read guess MOs for the MORead guess (Section 2.20.5)</td></tr><tr><td>pointcharges</td><td>&quot;&lt;FileName&gt;&quot;</td><td>File to read external point charges from (Section 2.2.6)</td></tr></tbody></table>
+<h2>2.1.7 Simple Keyword Lines</h2>
+<p>It is possible to give a line of keywords that assign certain variables that normally belong to different input blocks. The syntax for this 'simple input' is line-oriented. A keyword line starts with the ' ! ' sign and can contain any number of space-separated keywords. The input file can contain any number of keyword lines and they do not need to be at the beginning (although that is common practice) - see also Input Priority and Processing Order .</p>
+<pre><code>! Keyword1 Keyword2 ! Keyword3</code></pre>
+<p>Most simple input keywords are documented in the relevant section of the manual. Table 2.3 provides references to these sections, grouped by topic. Since simple keywords are usually related to variables within one or more input blocks, it is also instructive to consult the documentation for the respective block - see Table 2.1.</p>
+<table><caption><div class="caption">Table 2.3: References to the documentation of simple input keywords. Related input blocks are also listed.</div></caption><tbody><tr><th>Keyword Group</th><th>Reference</th><th>Input block</th></tr><tr><td>Run types and method classes</td><td>Table 2.4</td><td>method</td></tr><tr><td>Basis sets</td><td>Table 2.40</td><td>basis</td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 2.3 - continued from previous page</div></caption><tbody><tr><th>Keyword Group</th><th>Reference</th><th>Input block</th></tr><tr><td>DFT functionals</td><td>• LDA: Table 3.1 • GGA: Table 3.2 • global hybrid: Table 3.4 • range-separated hybrid: Ta- ble 3.6 • global double-hybrid: Table 3.8 • range-separated double hy- brid: Table 3.9 • LibXC: Table 3.12 • Non-local correlation: Table 3.19</td><td>method</td></tr><tr><td>Dispersion corrections</td><td>Table 3.13</td><td>method</td></tr><tr><td>Composite (3c) methods</td><td>Table 3.32</td><td></td></tr><tr><td>NDO-based semi-empirical meth- ods</td><td>Table 3.27</td><td>method</td></tr><tr><td>Native xTB-based methods</td><td>Table 3.22</td><td>method</td></tr><tr><td>Second order Møller-Plesset per- turbation theory</td><td>Table 3.34</td><td>mp2</td></tr><tr><td>Single-reference correlated meth- ods via MDCI</td><td>Table 3.43</td><td>mdci</td></tr><tr><td>Correlated methods using auto- matic code generation (AUTOCI)</td><td>Section 3.11.2</td><td>autoci</td></tr><tr><td>CASSCF</td><td>Table 3.47</td><td>casscf</td></tr><tr><td>Multireference correlated methods via MRCI</td><td>Table 3.52</td><td>mrci</td></tr><tr><td>Excited states via correlated wavefunction-based methods</td><td>• EOM-CC: Table 5.10 • STEOM-CC: Section 5.10 • others: Section 5.4</td><td>mdci</td></tr><tr><td>Initial guess</td><td>Table 2.68</td><td>scf</td></tr><tr><td>SCF procedure</td><td>Table 2.11</td><td>scf</td></tr><tr><td>Integral approximations (RI/COSX)</td><td>Table 2.44</td><td>method</td></tr><tr><td>Relativistic methods</td><td>Table 2.54</td><td>rel</td></tr><tr><td>Implicit solvation (CPCM)</td><td>Table 2.56</td><td>cpcm</td></tr><tr><td>Spin-orbit coupling operator</td><td>Table 5.19</td><td>rel</td></tr><tr><td>Numerical integration grids</td><td>Table 2.48</td><td>method</td></tr><tr><td>Integral storage and handling</td><td>Table 2.58</td><td>scf</td></tr><tr><td>Population analysis</td><td>Table 5.1</td><td>output</td></tr><tr><td>Output control</td><td>Table 2.8</td><td>output</td></tr><tr><td>Nudged elastic band method</td><td>Section 4.6.14</td><td>neb</td></tr></tbody></table>
+<h2>2.2 Input of Coordinates</h2>
+<p>Coordinates can be either specified directly in the input file or read from an external file, and they can be in either Cartesian ('xyz') or internal coordinate format ('Z-matrix').</p>
+<h2>2.2.1 Reading coordinates from the input file</h2>
+<p>The easiest way to specify coordinates in the input file is by including a block like the following, enclosed by star symbols:</p>
+<pre><code>* CType Charge Multiplicity ... coordinate specifications ... *</code></pre>
+<p>Here CType can be one of xyz , int (or internal ), or gzmt , which correspond to Cartesian coordinates, internal coordinates, and internal coordinates in Gaussian Z-matrix format.</p>
+<p>The input of Cartesian coordinates in the ' xyz ' option is straightforward. Each line consists of the label for a given atom type and three numbers that specify the coordinates of the atom. The units can be either Ångström (default) or Bohr. This can be specified via the simple keywords !Angs or !Bohrs , respectively, or via the variable Units in the %coords block described below.</p>
+<pre><code>* xyz Charge Multiplicity Atom1 x1 y1 z1 Atom2 x2 y2 z2 ... *</code></pre>
+<p>For example for CO + in a S = 1/2 state (multiplicity = 2 × 1/2 + 1 = 2 )</p>
+<pre><code>* xyz 1 2 C 0.0 0.0 0.0 O 0.0 0.0 1.1105 *</code></pre>
+<p>Internal coordinates are specified in the form of the familiar 'Z-matrix'. A Z-matrix basically contains information about molecular connectivity, bond lengths, bond angles and dihedral angles. The program then constructs Cartesian coordinates from this information. Both sets of coordinates are printed in the output such that conversion between formats is facilitated. The input in that case looks like:</p>
+<pre><code>* int Charge Multiplicity Atom1 0 0 0 0.0 0.0 0.0 Atom2 1 0 0 R1 0.0 0.0 Atom3 1 2 0 R2 A1 0.0 Atom4 1 2 3 R3 A2 D1 . . . AtomN NA NB NC RN AN DN *</code></pre>
+<p>The rules for connectivity in the ' internal ' mode are as follows:</p>
+<ul>
+<li style="list-style-type: '· ';">NA : The atom that the actual atom has a distance ( RN ) with.</li>
+<li style="list-style-type: '· ';">NB : The actual atom has an angle ( AN ) with atoms NA and NB .</li>
+<li style="list-style-type: '· ';">NC : The actual atom has a dihedral angle ( DN ) with atoms NA , NB and NC . This is the angle between the actual atom and atom NC when looking down the NA-NB axis.</li>
+<li style="list-style-type: '· ';">Note that - contrary to other parts in ORCA - atoms are counted starting from 1.</li>
+</ul>
+<p>Angles are always given in degrees! The rules are compatible with those used in the well known MOPAC and ADF programs.</p>
+<p>Finally, gzmt specifies internal coordinates in the format used by the Gaussian program. This resembles the following:</p>
+<pre><code>* gzmt 0 1 C O 1 4.454280 Si 2 1.612138 1 56.446186 O 3 1.652560 2 114.631525 1 -73.696925 C 4 1.367361 3 123.895399 2 -110.635060 ... *</code></pre>
+<p>Analternative way to specify coordinates in the input file is through the use of the %coords block, which is organized as follows:</p>
+<pre><code>%coords CTyp xyz # the type of coordinates = xyz or internal Charge 0 # the total charge of the molecule Mult 2 # the multiplicity = 2S+1 Units Angs # the unit of length = angs or bohrs # the subblock coords is for the actual coordinates # for CTyp=xyz coords Atom1 x1 y1 z1 Atom2 x2 y2 z2 end # for CTyp=internal coords Atom1 0 0 0 0.0 0.0 0.0 Atom2 1 0 0 R1 0.0 0.0 Atom3 1 2 0 R2 A1 0.0 Atom4 1 2 3 R3 A2 D1 . . . AtomN NA NB NC RN AN DN end end</code></pre>
+<h2>ǩ Important</h2>
+<p>Since ORCA is a C++ based program its internal counting starts from zero. Therefore all electrons, atoms, frequencies, orbitals, excitation energies etc. are counted from zero. User-based counting such as the numeration of fragments is counted from one.</p>
+<h2>2.2.2 Reading coordinates from external files</h2>
+<p>It is also possible to read the coordinates from external files. The most common format is a .xyz file, which can in principle contain more than one structure (see section Multiple XYZ File Scans for this multiple XYZ feature):</p>
+<pre><code>* xyzfile Charge Multiplicity Filename</code></pre>
+<h2>For example:</h2>
+<pre><code>* xyzfile 1 2 mycoords.xyz</code></pre>
+<p>Alot of graphical tools like Gabedit, molden or Jmol can write Gaussian Z-Matrices ( .gzmt ). ORCAcan also read them from an external file with the following</p>
+<pre><code>* gzmtfile 1 2 mycoords.gzmt</code></pre>
+<p>Note that if multiple jobs are specified in the same input file then new jobs can read the coordinates from previous jobs. If no filename is given as fourth argument then the name of the actual job is automatically used.</p>
+<pre><code>... specification for the first job $new_job ! keywords * xyzfile 1 2</code></pre>
+<p>In this way, optimization and single point jobs can be very conveniently combined in a single, simple input file. Examples are provided in the following sections.</p>
+<h2>2.2.3 Special definitions</h2>
+<ul>
+<li style="list-style-type: '· ';">Dummy atoms are defined in exactly the same way as any other atom, by using 'DA', 'X', or 'Xx' as the atomic symbol.</li>
+<li style="list-style-type: '· ';">Ghost atoms are specified by adding ':' right after the symbol of the element (see Counterpoise Corrections ).</li>
+<li style="list-style-type: '· ';">Point charges are specified with the symbol 'Q', followed by the charge (see Inclusion of Point Charges ).</li>
+<li style="list-style-type: '· ';">Embedding potentials are specified by adding a '&gt;' right after the symbol of the element (see ECP Embedding ).</li>
+<li style="list-style-type: '· ';">Non-standard isotopes or nuclear charges are specified with the statements ' M = …' and ' Z = …', respectively, after the atomic coordinate definition.</li>
+<li style="list-style-type: '1. ';">The nuclear charge can adopt non-integer values</li>
+<li style="list-style-type: '2. ';">When the nuclear charge is modified throughca ' Z = …' statement, the total charge of the system should still be calculated based on the unmodified charge. For example, for a calculation of a single hydrogen atom whose Z is set to 1.5, a charge of 0 and a spin multiplicity of 2 should be entered into the charge and multiplicity sections of the input file, despite that the actual total charge is 0.5.</li>
+<li style="list-style-type: '· ';">Fragments can be conveniently defined by declaring the fragment number a given atom belongs to in parentheses ' (n) ' following the element symbol (see Fragment Specification ).</li>
+</ul>
+<h2>2.2.4 Defining Geometry Parameters and Scanning Potential Energy Surfaces</h2>
+<p>ORCA lets you define the coordinates of all atoms as functions of user defined geometry parameters. By giving not only a value but a range of values (or a list of values) to this parameters potential energy surfaces can be scanned. In this case the variable RunTyp is automatically changed to Scan . The format for the parameter specification is straightforward:</p>
+<pre><code>%coords CTyp internal Charge 0 Mult 1 pardef rCH = 1.09; # a C-H distance ACOH = 120.0; # a C-O-H angle rCO = 1.35, 1.10, 26; # a C-O distance that will be scanned end coords</code></pre>
+<p>(continues on next page)</p>
+<pre><code>C 0 0 0 0 0 0 O 1 0 0 {rCO} 0 0 H 1 2 0 {rCH} {ACOH} 0 H 1 2 3 {rCH} {ACOH} 180 end end</code></pre>
+<p>In the example above the geometry of formaldehyde is defined in internal coordinates (the geometry functions work exactly the same way with Cartesian coordinates). Each geometric parameter can be assigned as a function of by enclosing an expression within function braces, ' {} '. For example, a function may look like *cos(Theta)*rML+R . Note that all trigonometric functions expect their arguments to be in degrees and not radians. The geometry parameters are expected to be defined such that the lengths come out in Ångströms and the angles in degrees. After evaluating the functions, the coordinates will be converted to atomic units. In the example above, the variable rCO was defined as a 'Scan parameter'. Its value will be changed in 26 steps from 1.3 Å down to 1.1 Å and at each point a single point calculation will be done. At the end of the run the program will summarize the total energy at each point. This information can then be copied into the spreadsheet of a graphics program and the potential energy surface can be plotted. Up to three parameters can be scan parameters. In this way grids or cubes of energy (or property) values as a function of geometry can be constructed.</p>
+<p>If you want to define a parameter at a series of values rather than evenly spaced intervals, the following syntax is to be used:</p>
+<pre><code>%coords CTyp internal Charge 0 Mult 1 pardef rCH = 1.09; # a C-H distance ACOH= 120.0; # a C-O-H angle rCO [1.3 1.25 1.22 1.20 1.18 1.15 1.10]; # a C-O distance that will be scanned end coords C 0 0 0 0 0 0 O 1 0 0 {rCO} 0 0 H 1 2 0 {rCH} {ACOH} 0 H 1 2 3 {rCH} {ACOH} 180 end end</code></pre>
+<p>In this example the C-O distance is changed in seven non-equidistant steps. This can be used in order to provide more points close to a minimum or maximum and fewer points at less interesting parts of the surface.</p>
+<p>A special feature has also been implemented into ORCA - the parameters themselves can be made functions of the other parameters as in the following (nonsense) example:</p>
+<pre><code>%coords CTyp internal Charge 0 Mult 1 pardef rCOHalf= 0.6; rCO = { 2.0*rCOHalf }; end coords C 0 0 0 0 0 0 O 1 0 0 {rCO} 0 0 O 1 0 0 {rCO} 180 0 end end</code></pre>
+<p>In this example the parameter rCO is computed from the parameter rCOHalf . In general the geometry is computed</p>
+<p>(continued from previous page)</p>
+<p>(assuming a Scan calculation) by: (a) incrementing the value of the parameter to be scanned (b) evaluating the functions that assign values to parameters, and (c) evaluating functions that assign values to geometrical variables.</p>
+<p>Although it is not mandatory, it is good practice to first define the static or scan-parameters and then define the parameters that are functions of these parameters.</p>
+<p>Finally, ORCA has some special features that may help to reduce the computational effort for surface scans:</p>
+<pre><code>%method SwitchToSOSCF true # switches the converger to SOSCF # after the first point. SOSCF may # converge better than DIIS if the # starting orbitals are good. # default = false ReducePrint true # reduce printout after the first point # default=true # The initial guess can be changed after the first point. # The default is MORead. The MOs of the previous point will, # in many cases, be a very good guess for the next point. # However, in some cases you may want to be more conservative # and use a general guess. ScanGuess OneElec # the one-electron matrix Hueckel # the extended Hueckel guess PAtom # the PAtom guess PModel # the PModel guess MORead # MOs of the previous point end</code></pre>
+<ul>
+<li style="list-style-type: '· ';">You can scan along normal modes of a Hessian using the NMScan feature as described in section Normal Mode Scan Calculations Between Different Structures .</li>
+<li style="list-style-type: '· ';">The surface scan options are also supported in conjunction with TD-DFT/CIS or MR-CI calculations (see section Potential Energy Surface Scans ).</li>
+</ul>
+<h2>2.2.5 Mixing internal and Cartesian coordinates</h2>
+<p>In some cases it may be practical to define some atomic positions in Cartesian and some in internal coordinates. This can be achieved by specifying all coordinates in the *int block: using '0 0 0' as reference atoms indicates Cartesian coordinates. Note that for the first atom the flags are '1 1 1', as '0 0 0' would be the normal values for internal coordinates. Consider, for example, the relaxed surface scan from section Theory , where the methyl group is given first in an arbitrary Cartesian reference frame and then the water molecule is specified in internal coordinates:</p>
+<pre><code>! UKS B3LYP SV(P) TightSCF Opt SlowConv %geom scan B 4 0 = 2.0, 1.0, 15 end end * int 0 2 # First atom -reference atoms 1,1,1 mean Cartesian coordinates C 1 1 1 -0.865590 1.240463 -2.026957 # Next atoms -reference atoms 0,0,0 mean Cartesian coordinates H 0 0 0 -1.141534 2.296757 -1.931942 H 0 0 0 -1.135059 0.703085 -2.943344 H 0 0 0 -0.607842 0.670110 -1.127819 # Actual internal coordinates H 1 2 3 1.999962 100.445 96.050 O 5 1 2 0.984205 164.404 27.073</code></pre>
+<p>(continues on next page)</p>
+<pre><code>H 6 5 1 0.972562 103.807 10.843 *</code></pre>
+<p>Internal and Cartesian coordinates can thus be mixed in any order but it is recommended that the first 3 atoms are specified in Cartesian coordinates in order to define a unique reference frame.</p>
+<h2>2.2.6 Inclusion of Point Charges</h2>
+<p>In some situations it is desirable to add point charges to the system. In ORCA there are two mechanisms to add pointcharges. If you only want to add a few point charges you can 'mask' them as atoms as in the following (nonsense) input:</p>
+<pre><code># A water dimer ! BP86 def2-SVP * xyz 0 1 O 1.4190 0.0000 0.0597 H 1.6119 0.0000 -0.8763 H 0.4450 0.0000 0.0898 Q -0.834 -1.3130 0.0000 -0.0310 Q 0.417 -1.8700 0.7570 0.1651 Q 0.417 -1.8700 -0.7570 0.1651 *</code></pre>
+<p>Here the 'Q''s define the atoms as point charges. The next four numbers are the magnitude of the point charge and its position. The program will then treat the point charges as atoms with no basis functions and nuclear charges equal to the 'Q' values.</p>
+<p>If you have thousands of point charges to treat, as in a QM/MM calculation, it is more convenient, and actually necessary, to read the point charges from an external file as in the following example:</p>
+<pre><code># A water dimer ! BP86 def2-SVP % pointcharges "pointcharges.pc" * xyz 0 1 O 1.4190 0.0000 0.0597 H 1.6119 0.0000 -0.8763 H 0.4450 0.0000 0.0898 *</code></pre>
+<p>The program will now read the file ' pointcharges.pc ' that contains the point-charge information and then call the module orca_pc which adds the point charge contribution to the one-electron matrix and the nuclear repulsion. The file ' pointcharges.pc ' is a simple ASCII file in the following format:</p>
+<pre><code>3 -0.834 -1.3130 0.0000 -0.0310 0.417 -1.8700 0.7570 0.1651 0.417 -1.8700 -0.7570 0.1651</code></pre>
+<p>The first line gives the number of point charges. Each consecutive line gives the magnitude of the point charge (in atomic units) and its position (in Ångström units!). However, it should be noted that ORCA treats point charges from an external file differently than 'Q' atoms. When using an external point charge file, the interaction between the point charges is not included in the nuclear energy. This behavior originates from QM/MM, where the interactions among the point charges is done by the MM program. These programs typically use an external point charge file when generating the ORCA input. To add the interaction of the point charges to the nuclear energy, the DoEQ keyword is used either in the simple input or the %method block as shown below.</p>
+<p>(continued from previous page)</p>
+<pre><code># A non QM/MM pointcharge calculation ! DoEQ %pointcharges "pointcharges.pc" %method DoEQ true end</code></pre>
+<pre><code>Á Warning The DoEQ keyword has no effect for semi-empirical calculations (e.g., AM1)!</code></pre>
+<h2>2.3 Basic Calculation Settings</h2>
+<h2>2.3.1 Run Types</h2>
+<p>The type of calculation to be performed can be chosen via the simple input - for example, ! Opt - or via the RunTyp variable in %method :</p>
+<pre><code>%method RunTyp Gradient # Single point energy and gradient end</code></pre>
+<p>The full list of available run types is given in Section 2.3.3. Note that some run types are triggered automatically under certain conditions and cannot be requested explicitly via the RunTyp keyword.</p>
+<h2>2.3.2 Method Classes</h2>
+<p>ORCA provides several classes of methods: Hartree-Fock (HF), Density functional theory (DFT), semi-empirical methods based on the NDDO approach, etc. This choice is controlled via the simple input, e.g. !HF , or via the method variable in the %method block:</p>
+<pre><code>%method method DFT end</code></pre>
+<p>The list of available methods is given in Section 2.3.3.</p>
+<h2>2.3.3 Keywords</h2>
+<p>Table 2.4: Simple input keywords for basic calculation settings.</p>
+<table><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><th>Run Types</th><td></td></tr><tr><td>Energy</td><td>Single point energy calculation (Default. Aliases: SinglePoint , SP )</td></tr><tr><td>EnGrad</td><td>Single point energy and gradient calculation (Alias: EnergyGrad )</td></tr><tr><td>Opt</td><td>Geometry optimization , see also Table 4.1</td></tr><tr><td>MD</td><td>Molecular dynamics simulation</td></tr><tr><td>CIM</td><td>Cluster-in-molecules calculation</td></tr><tr><td>PrintThermoChem</td><td>Thermochemistry calculation from previously calculated Hessian</td></tr><tr><td>PropertiesOnly</td><td>Compute properties from previously calculated densities</td></tr><tr><td>Docker</td><td>Host-guest docking</td></tr><tr><td>EDA</td><td>Energy decomposition analysis</td></tr><tr><td>NMScan</td><td>Deprecated! Normal mode scan (Alias: NormalModeScan )</td></tr><tr><td>NMGrad</td><td>Deprecated! Normal mode gradient (Alias: NMGradient )</td></tr><tr><td>MTR</td><td>Deprecated! Mode trajectory (Aliases: MT , ModeTrajectory )</td></tr><tr><th>Methods</th><td></td></tr><tr><td>HF</td><td>Hartree-Fock ; RHF , UHF , and ROHF also set the wavefunction type</td></tr><tr><td>DFT</td><td>Density functional theory ; RKS , UKS , and ROKS also set the wavefunction type</td></tr><tr><td>&lt;NDO-Method&gt;</td><td>NDO -based method keywords are given in Table 3.22</td></tr><tr><td>&lt;XTB-Method&gt;</td><td>Native xTB -based method keywords are given in Table 3.27</td></tr><tr><td>MM</td><td>Molecular mechanics</td></tr></tbody></table>
+<p>Table 2.5: %method block input keywords for basic calculation settings.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>RunTyp</td><td>Energy</td><td>Single point energy calculation (Default. Aliases: SinglePoint , SP ) Single point energy and gradient calculation Geometry optimization (Aliases: Geom , Geometry , GeometryOpt ) Unrelaxed geometry parameter scan (Alias: Trajectory ) Cluster-in-molecules calculation</td></tr><tr><td></td><td>Gradient</td><td></td></tr><tr><td></td><td>Opt</td><td></td></tr><tr><td></td><td>Scan</td><td></td></tr><tr><td></td><td>CIM</td><td></td></tr><tr><td></td><td>NMScan</td><td>Deprecated! Normal mode scan (Alias: NormalModeScan )</td></tr><tr><td></td><td>NMGrad</td><td>Deprecated! Normal mode gradient (Aliases: NMGradient , NormalModeGradient )</td></tr><tr><td></td><td>MTR</td><td>Deprecated! Mode trajectory (Aliases: MT , ModeTrajectory )</td></tr><tr><td>Method</td><td>HF</td><td>(Default) Hartree-Fock</td></tr><tr><td></td><td>DFT</td><td>Density functional theory</td></tr><tr><td></td><td>&lt;NDO-Method&gt;</td><td>NDO -based method options are given in Table 3.23</td></tr></tbody></table>
+<h2>2.4 Control of Output</h2>
+<p>ORCA provides various options to control the amount of printed output. This is specifically important as some methods and protocols can create very large amount of output and data. General control of the output is provided by the PrintLevel and Print[&lt;option&gt;] keywords in the %output block: PrintLevel can be used to select certain default settings for the print array. Specifying Print after PrintLevel can be used to modify these defaults.</p>
+<pre><code>%output PrintLevel Normal Print[ Flag ] 0 # turn print off 1 # turn print on n # some flags are more sophisticated end</code></pre>
+<h2>2.4.1 Print Options</h2>
+<p>A detailed list of options for PrintLevel and Print is given in table Table 2.6. A list of option toggled by each printlevel can be found in Table 2.7.</p>
+<table><caption><div class="caption">Table 2.6: %output block input keywords and options for print control.</div></caption><tbody><tr><th>Keyword</th><th>Option</th><th>Description</th></tr><tr><td>PrintLevel</td><td>nothing</td><td>Deactivates output printing</td></tr><tr><td></td><td>mini</td><td>Sets printlevel to mini</td></tr><tr><td></td><td>small</td><td>Sets printlevel to small</td></tr><tr><td></td><td>normal</td><td>Sets printlevel to normal (default)</td></tr><tr><td></td><td>maxi</td><td>Sets printlevel to maxi</td></tr><tr><td></td><td>large</td><td>Sets printlevel to large</td></tr><tr><td></td><td>huge</td><td>Sets printlevel to huge</td></tr><tr><td></td><td>debug</td><td>Sets printlevel to debug</td></tr><tr><td>Print[ &lt;option&gt;</td><td>P_InputFile</td><td>Echo the input file</td></tr><tr><td></td><td>P_Cartesian</td><td>Print the cartesian coordinates</td></tr><tr><td></td><td>P_Internal</td><td>Print the internal coordinates</td></tr><tr><td></td><td>P_Basis</td><td>= 1 : Print the basis set information = 2 : Also print the primitives in input format</td></tr><tr><td></td><td>P_OneElec</td><td>Print of the one electron matrix</td></tr><tr><td></td><td>P_Overlap</td><td>Print the overlap matrix</td></tr><tr><td></td><td>P_KinEn</td><td>Print the kinetic energy matrix</td></tr><tr><td></td><td>P_S12</td><td>Print the S - 1/2 matrix</td></tr><tr><td></td><td>P_GuessOrb</td><td>Print the initial guess orbitals</td></tr><tr><td></td><td>P_OrbEn</td><td>= 1 : Print orbital energies up to LUMO+9 = 2 : Print all orbital energies</td></tr><tr><td></td><td>P_MOs</td><td>Print the MOcoefficients on convergence</td></tr><tr><td></td><td>P_Density</td><td>Print the converged electron density</td></tr><tr><td></td><td>P_SpinDensity</td><td>Print the converged spin density</td></tr><tr><td></td><td>P_EHTDetails</td><td>Print initial guess extended Hückel details</td></tr><tr><td></td><td>P_SCFInfo</td><td>Print the SCF input flags</td></tr><tr><td></td><td>P_SCFMemInfo</td><td>Print the estimated SCF memory requirements</td></tr><tr><td></td><td>P_SCFIterInfo</td><td>= 1 : Print short iteration information</td></tr><tr><td></td><td></td><td>= 2 : Print longer iteration information</td></tr><tr><td></td><td></td><td>= 3 : In a direct SCF also print integral progress</td></tr><tr><td></td><td>P_Fockian</td><td>Print Fockian matrix</td></tr><tr><td></td><td>P_DIISMat</td><td>Print DIIS matrix</td></tr><tr><td></td><td>P_DIISError</td><td>Print DIIS error</td></tr><tr><td></td><td>P_Iter_P</td><td>Print Density</td></tr><tr><td></td><td>P_Iter_C</td><td>Print MOcoefficients</td></tr><tr><td></td><td>P_Iter_F</td><td>Print Fock matrix</td></tr><tr><td></td><td>P_Mayer</td><td>Print Mayer population analysis (Default = on)</td></tr><tr><td></td><td>P_NatPop</td><td>Print Natural population analysis (Default = off)</td></tr><tr><td></td><td>P_NPA</td><td>Print Natural population analysis (Default = off)</td></tr><tr><td></td><td>P_Hirshfeld</td><td>Print Hirshfeld population analysis (Default = off)</td></tr><tr><td></td><td>P_MBIS</td><td>Print MBIS population analysis (Default = off)</td></tr><tr><td></td><td>P_Mulliken</td><td>Print Mulliken population analysis (Default = on)</td></tr><tr><td></td><td>P_AtCharges_M</td><td>Print Mulliken atomic charges</td></tr><tr><td></td><td>P_OrbCharges_M</td><td>Print Mulliken orbital charges</td></tr><tr><td></td><td>P_FragCharges_M</td><td>Print Mulliken fragment charges</td></tr><tr><td></td><td>P_FragBondOrder_M</td><td>Print Mulliken fragment bond orders</td></tr><tr><td></td><td>P_BondOrder_M</td><td>Print Mulliken bond orders</td></tr><tr><td></td><td>P_ReducedOrbPop_M</td><td>Print Mulliken reduced orbital charges</td></tr><tr><td></td><td>P_FragPopMO_M</td><td>Print Mulliken fragment population for eachMO</td></tr><tr><td></td><td>P_FragOvlMO_M</td><td>Print Mulliken overlap populations per fragment pair</td></tr></tbody></table>
+<p>continues on n</p>
+<table><caption><div class="caption">Table 2.6 - continued from previous page</div></caption><tbody><tr><th>Keyword</th><th>Option</th><th>Description</th></tr><tr><td></td><td>P_AtPopMO_M</td><td>Print Mulliken atomic charges in eachMO</td></tr><tr><td></td><td>P_OrbPopMO_M</td><td>Print Mulliken orbital population for eachMO</td></tr><tr><td></td><td>P_ReducedOrbPopMO_M</td><td>Print Mulliken reduced orbital population for eachMO</td></tr><tr><td></td><td>P_Loewdin</td><td>Print Loewdin population analysis (Default = on)</td></tr><tr><td></td><td>P_AtCharges_L</td><td>Print Loewdin atomic charges</td></tr><tr><td></td><td>P_OrbCharges_L</td><td>Print Loewdin orbital charges</td></tr><tr><td></td><td>P_FragCharges_L</td><td>Print Loewdin fragment charges</td></tr><tr><td></td><td>P_FragBondOrder_L</td><td>Print Loewdin fragment bond orders</td></tr><tr><td></td><td>P_BondOrder_L</td><td>Print Loewdin bond orders</td></tr><tr><td></td><td>P_ReducedOrbPop_L</td><td>Print Loewdin reduced orbital charges</td></tr><tr><td></td><td>P_FragPopMO_L</td><td>Print Loewdin fragment population for eachMO</td></tr><tr><td></td><td>P_FragOvlMO_L</td><td>Print Loewdin overlap populations per fragment pair</td></tr><tr><td></td><td>P_AtPopMO_L</td><td>Print Loewdin atomic charges in eachMO</td></tr><tr><td></td><td>P_OrbPopMO_L</td><td>Print Loewdin orbital population for eachMO</td></tr><tr><td></td><td>P_ReducedOrbPopMO_L</td><td>Print Loewdin reduced orbital population for eachMO</td></tr><tr><td></td><td>P_NPA</td><td>Natural population analysis</td></tr><tr><td></td><td>P_Fragments</td><td>Print fragment information</td></tr><tr><td></td><td>P_GUESSPOP</td><td>Print initial guess populations</td></tr><tr><td></td><td>P_UNO_FragPopMO_M</td><td>Print Mulliken fragment population per UNO</td></tr><tr><td></td><td>P_UNO_OrbPopMO_M</td><td>Print Mulliken orbital pop. per UNO</td></tr><tr><td></td><td>P_UNO_AtPopMO_M</td><td>Print Mulliken atomic charges per UNO</td></tr><tr><td></td><td>P_UNO_ReducedOrbPopMO_M</td><td>Print Mulliken reduced orbital pop. per UNO</td></tr><tr><td></td><td>P_UNO_FragPopMO_L</td><td>Print Loewdin fragment population per UNO</td></tr><tr><td></td><td>P_UNO_OrbPopMO_L</td><td>Print Loewdin orbital pop. per UNO</td></tr><tr><td></td><td>P_UNO_AtPopMO_L</td><td>Print Loewdin atomic charges per UNO</td></tr><tr><td></td><td>P_UNO_ReducedOrbPopMO_L</td><td>Print Loewdin reduced orbital pop. per UNO</td></tr><tr><td></td><td>P_UNO_OccNum</td><td>Print occupation numbers per UNO</td></tr><tr><td></td><td>P_AtomExpVal</td><td>Print atomic expectation values</td></tr><tr><td></td><td>P_AtomBasis</td><td>Print atomic basis</td></tr><tr><td></td><td>P_AtomDensFit</td><td>Print electron density fit</td></tr><tr><td></td><td>P_Symmetry</td><td>Symmetry basic information</td></tr><tr><td></td><td>P_Sym_Salc</td><td>Symmetry process printing</td></tr><tr><td></td><td>P_SCFSTABANA</td><td>Information on progress, convergence, and results of SCF stabilit</td></tr><tr><td></td><td>P_DFTD</td><td>Print info on Grimme&#x27;s dispersion correction</td></tr><tr><td></td><td>P_DFTD_GRAD</td><td>Print gradient info on Grimme&#x27;s dispersion correction</td></tr><tr><td></td><td>P_G1EL2EL</td><td>Print one- and two-electron contributions to g-tensor</td></tr></tbody></table>
+<p>The various choices for PrintLevel have the following defaults:</p>
+<table><caption><div class="caption">Table 2.7: Default print options invoked by the respective PrintLevel .</div></caption><tbody><tr><th>PrintLevel</th><th colspan="3">Print options included</th></tr><tr><td>mini</td><td>P_OrbEn</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Cartesian</td><td>=</td><td>1</td></tr><tr><td></td><td>P_InputFile</td><td>=</td><td>1</td></tr><tr><td></td><td>P_SCFIterInfo</td><td>=</td><td>1</td></tr><tr><td>small</td><td>all the previous plus</td><td></td><td></td></tr><tr><td></td><td>P_SCFInfo</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Mayer</td><td>=</td><td>1</td></tr><tr><td></td><td>P_MULLIKEN</td><td>=</td><td>1</td></tr><tr><td></td><td>P_AtCharges_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_ReducedOrbPop_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Loewdin</td><td>=</td><td>1</td></tr><tr><td></td><td>P_AtCharges_L</td><td>=</td><td>1</td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 2.7 - continued from previous page</div></caption><tbody><tr><th>PrintLevel</th><th>Print options included</th><td></td><td></td></tr><tr><td></td><td>P_ReducedOrbPop_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Fragments</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragCharges_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragBondOrder_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragCharges_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragBondOrder_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_DFTD</td><td>=</td><td>1</td></tr><tr><td>normal</td><td>all the previous plus</td><td></td><td></td></tr><tr><td></td><td>P_Internal</td><td>=</td><td>1</td></tr><tr><td></td><td>P_BondOrder_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_BondOrder_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragPopMO_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_ReducedOrbPopMO_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_SCFIterInfo</td><td>=</td><td>2</td></tr><tr><td>maxi</td><td>all the previous plus</td><td></td><td></td></tr><tr><td></td><td>P_OrbEn</td><td>=</td><td>2</td></tr><tr><td></td><td>P_GuessOrb</td><td>=</td><td>1</td></tr><tr><td></td><td>P_MOs</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Density</td><td>=</td><td>1</td></tr><tr><td></td><td>P_SpinDensity</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Basis</td><td>=</td><td>1</td></tr><tr><td></td><td>P_FragOVLMO_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_OrbPopMO_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_OrbCharges_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_DFTD</td><td>=</td><td>2</td></tr><tr><td></td><td>P_DFTD_GRAD</td><td>=</td><td>1</td></tr><tr><td>huge</td><td>All the previous plus</td><td></td><td></td></tr><tr><td></td><td>P_OneElec</td><td>=</td><td>1</td></tr><tr><td></td><td>P_Overlap</td><td>=</td><td>1</td></tr><tr><td></td><td>P_S12</td><td>=</td><td>1</td></tr><tr><td></td><td>P_AtPopMO_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_OrbPopMO_M</td><td>=</td><td>1</td></tr><tr><td></td><td>P_AtPopMO_L</td><td>=</td><td>1</td></tr><tr><td></td><td>P_EHTDetails</td><td>=</td><td>1</td></tr><tr><td></td><td>P_DFTD_GRAD</td><td>=</td><td>2</td></tr><tr><td>debug</td><td>Prints everything</td><td></td><td></td></tr></tbody></table>
+<h2>2.4.2 Simple Input Keywords</h2>
+<p>For convenience, a variety of simple input keywords that control specific print settings and additional outputs have been implemented as well (cf. Table 2.8).</p>
+<p>Table 2.8: Simple input keywords for specific output control.</p>
+<table><tbody><tr><th>Keyword</th><th>Print options toggled</th><th>Description</th></tr><tr><td>MiniPrint</td><td>PrintLevel mini</td><td>Activates printlevel mini</td></tr><tr><td>SmallPrint</td><td>PrintLevel small</td><td>Activates printlevel small (default)</td></tr><tr><td>NormalPrint</td><td>PrintLevel normal</td><td>Activates printlevel normal</td></tr><tr><td>LargePrint</td><td>PrintLevel large</td><td>Activates printlevel mini</td></tr><tr><td>PrintMOs</td><td>Print[ p_MOs ]</td><td>Prints MOcoefficients</td></tr><tr><td>NoPrintMOs</td><td></td><td>Suppress printing of MOcoefficients</td></tr><tr><td>PrintBasis</td><td>Print[ p_basis ]</td><td>Print the basis set in input format</td></tr><tr><td>PrintGap</td><td>Print[ p_homolumogap ]</td><td>Prints the HOMO/LUMO gap in each SCF iteration.</td></tr><tr><td>ReducedPop</td><td></td><td>Prints Loewdin reduced orb.pop perMO</td></tr><tr><td>NoReducedPop</td><td></td><td>Deactivates printing of Loewdin reduced orb.pop per MO</td></tr><tr><td>AIM</td><td></td><td>Produce a WFN file</td></tr><tr><td>XYZFILE</td><td></td><td>Produce an XYZ coordinate file</td></tr><tr><td>PDBFILE</td><td></td><td>Produce a PDB file</td></tr><tr><td>UNO</td><td></td><td>Produce a UHF natural orbitals</td></tr><tr><td>NoPropFile</td><td></td><td>Do not write to the property file</td></tr><tr><td>KeepTransDensity</td><td></td><td>Keep the transition density matrices on disk</td></tr></tbody></table>
+<h2>2.5 Parallel and Multi-Process Runs</h2>
+<p>Most of the important modules in ORCA can run in parallel or in multi-process mode: There are parallel versions for Linux, MAC and Windows computers which make use of OpenMPI (open-source MPI implementation) and Microsoft MPI (Windows only). Parallel execution means that the different processes perform the task in synchronous manner, communicating results and synchronizing execution (via MPI). The multi-process mode also employs multiple processes. But these work independently, not knowing - and not needing to know what the other processes are doing. The latest ORCA version even can combine both modes. Please see the remarks in Multi-Process Calculations for more details.</p>
+<p>Parallel (or multi-process) execution is requested in the input via</p>
+<pre><code>! PAL4 # everything from PAL2 to PAL8 and Pal16, Pal32, Pal64 is recognized</code></pre>
+<p>or</p>
+<pre><code>%pal nprocs 4 end # any number (positive integer)</code></pre>
+<p>Assuming that the MPI libraries are properly installed on your computer, it is fairly easy to run the parallel version of ORCA: You simply specify the number of parallel processes in the input and call (serial) ORCA (with full path!) The parallelized modules of ORCA are started by the (serial) ORCA-Driver. If the driver finds PAL4 or %pal nprocs 4 end (e.g.) in the input, it will start up the parallel modules instead of the serial ones.</p>
+<h2>Warning</h2>
+<p>Do not start the ORCA driver with mpirun!</p>
+</div>
+</body>
+</html>

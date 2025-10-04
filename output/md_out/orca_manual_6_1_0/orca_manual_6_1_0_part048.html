@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part048</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<pre><code>DoAlpha true NRoots 4 DTol 1e-6 DoCore true DoCVS true CoreOrb[0]=0,1 CoreOrb[1]=0,1 end *xyz 0 3 O 0.0 0.0 0.0 O 0.0 0.0 1.207 * step_end new_step !UHF IP-EOM-CCSD cc-pVDZ ExtremeSCF KDIIS nofrozencore %mdci DoBeta true NRoots 4 DTol 1e-6 DoCore true DoCVS true CoreOrb[0]=0,1 CoreOrb[1]=0,1 end *xyz 0 3 O 0.0 0.0 0.0 O 0.0 0.0 1.207 * step_end end</code></pre>
+<h2>The output for 'DoAlpha' looks like</h2>
+<pre><code>-------------------------------UHF IP-EOM-CCSD RESULTS (RHS) -------------------------------IROOT= 1: 20.137719 au 547.975 eV 4419718.6 cm**-1 Amplitude Excitation 0.894649 0a -> x 0.115737 0a -> x 5b -> 12b 0.115737 0a -> x 6b -> 13b -0.123325 1a -> x 5b -> 7b -0.120347 1a -> x 5b -> 8b -0.120347 1a -> x 6b -> 7b 0.123325 1a -> x 6b -> 8b Percentage singles character= 80.04 IROOT= 2: 20.137008 au 547.956 eV 4419562.4 cm**-1 Amplitude Excitation 0.894673 1a -> x -0.123144 0a -> x 5b -> 7b -0.120171 0a -> x 5b -> 8b -0.120171 0a -> x 6b -> 7b 0.123144 0a -> x 6b -> 8b 0.115678 1a -> x 5b -> 12b</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><td>0.115678</td><td>1a -&gt; x</td><td>6b -&gt; 13b</td></tr><tr><td>Percentage</td><td>singles character=</td><td>80.04</td></tr><tr><td>IROOT= 3:</td><td>1.418592 au</td><td>38.602 eV 311344.9 cm**-1</td></tr><tr><td>Amplitude</td><td>Excitation</td><td></td></tr><tr><td>0.531451</td><td>2a -&gt; x</td><td></td></tr><tr><td>0.266889</td><td>4a -&gt; x</td><td>3b -&gt; 7b</td></tr><tr><td>0.431978</td><td>4a -&gt; x</td><td>3b -&gt; 8b</td></tr><tr><td>0.116970</td><td>4a -&gt; x</td><td>3b -&gt; 14b</td></tr><tr><td>-0.431978</td><td>5a -&gt; x</td><td>3b -&gt; 7b</td></tr><tr><td>0.266889</td><td>5a -&gt; x</td><td>3b -&gt; 8b</td></tr><tr><td>-0.116970</td><td>5a -&gt; x</td><td>3b -&gt; 15b</td></tr><tr><td>-0.112676</td><td>7a -&gt; x</td><td>2b -&gt; 8b</td></tr><tr><td>0.105473</td><td>7a -&gt; x</td><td>4b -&gt; 8b</td></tr><tr><td>-0.112676</td><td>8a -&gt; x</td><td>2b -&gt; 7b</td></tr><tr><td>0.105473</td><td>8a -&gt; x</td><td>4b -&gt; 7b</td></tr><tr><td>Percentage</td><td>singles character=</td><td>29.23</td></tr><tr><td>IROOT= 4:</td><td>0.964260 au</td><td>26.239 eV 211630.5</td></tr><tr><td>Amplitude</td><td>Excitation</td><td>cm**-1</td></tr><tr><td>0.825207</td><td>3a -&gt; x</td><td></td></tr><tr><td>0.147947</td><td>6a -&gt; x</td><td>5b -&gt; 7b</td></tr><tr><td>0.144375</td><td>6a -&gt; x</td><td>5b -&gt; 8b</td></tr><tr><td>0.144375</td><td>6a -&gt; x</td><td>6b -&gt; 7b</td></tr><tr><td>-0.147947</td><td>6a -&gt; x</td><td>6b -&gt; 8b</td></tr><tr><td>-0.267515</td><td>7a -&gt; x</td><td>3b -&gt; 8b</td></tr><tr><td>-0.267515</td><td>8a -&gt; x</td><td>3b -&gt; 7b</td></tr><tr><td></td><td>character=</td><td></td></tr><tr><td>Percentage</td><td>singles</td><td>68.10</td></tr></tbody></table>
+<h2>and for 'DoBeta'</h2>
+<pre><code>-------------------------------UHF IP-EOM-CCSD RESULTS (RHS) -------------------------------IROOT= 1: 20.102122 au 547.007 eV 4411905.8 cm**-1 Amplitude Excitation 0.904712 0b -> x Percentage singles character= 81.85 IROOT= 2: 20.100495 au 546.962 eV 4411548.8 cm**-1 Amplitude Excitation 0.904679 1b -> x Percentage singles character= 81.84 IROOT= 3: 1.482975 au 40.354 eV 325475.4 cm**-1 Amplitude Excitation 0.911468 2b -> x -0.437544 2b -> x 3b -> 10b 0.117502 2b -> x 3b -> 17b -0.181512 2b -> x 3b -> 27b -0.150802 2b -> x 4b -> 16b 0.155724 3b -> x 4b -> 9b -0.362017 3b -> x 4b -> 10b 0.170790 3b -> x 4b -> 27b 0.414703 2b -> x 5b -> 18b -0.477670 3b -> x 5b -> 15b 0.121834 4b -> x 5b -> 13b -0.266578 4b -> x 5b -> 19b -0.414703 2b -> x 6b -> 19b 0.477670 3b -> x 6b -> 14b</code></pre>
+<pre><code>0.121834 4b -> x 6b -> 12b -0.266578 4b -> x 6b -> 18b -0.132721 5b -> x 6b -> 20b 0.918380 5b -> x 6b -> 21b 0.170340 3b -> x 6a -> 9a -0.124771 5b -> x 7a -> 9a -0.124771 6b -> x 8a -> 9a Percentage singles character= 83.16 IROOT= 4: 0.889071 au 24.193 eV 195128.5 cm**-1 Amplitude Excitation 0.946265 3b -> x 0.272057 4b -> x 5b -> 7b -0.223370 4b -> x 5b -> 8b 0.223370 4b -> x 6b -> 7b 0.272057 4b -> x 6b -> 8b Percentage singles character= 89.54</code></pre>
+<h2>5.15.3 Core-Excitation</h2>
+<p>The STEOM-CCSD approach provides an efficient and accurate way to do the K-edge core-excitation spectroscopy. A typical input file for the STEOM-CCSD will look like</p>
+<pre><code>!STEOM-CCSD ExtremeSCF cc-pCVTZ Bohrs NoFrozencore %mdci nroots 5 FollowCIS true DoSimpleDens False # use exact STEOM transition moment maxiter 500 DoCVS true DoCore true CoreOrb[0]=0,0 end *xyz 0 1 O 0 0 0.913973 C 0 0 -1.218243 *</code></pre>
+<h2>The output will be</h2>
+<pre><code>-------------------------------STEOM-CCSD RESULTS (SINGLETS) -------------------------------IROOT= 1: 19.685582 au 535.672 eV 4320485.8 cm**-1 Amplitude Excitation -0.932683 6 -> 8 0.281517 6 -> 12 -0.211943 6 -> 14 Ground state amplitude: 0.000000 Percentage Active Character 99.41 Amplitude Excitation in Canonical Basis -0.846006 0 -> 7 -0.428151 0 -> 8 0.252869 0 -> 12</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>0.151677 0 -> 15 IROOT= 2: 19.685582 au 535.672 eV 4320485.9 cm**-1 Amplitude Excitation -0.932691 6 -> 7 0.281484 6 -> 11 0.211959 6 -> 15 Ground state amplitude: 0.000000 Percentage Active Character 99.41 Amplitude Excitation in Canonical Basis -0.428151 0 -> 7 0.846006 0 -> 8 -0.252868 0 -> 11 -0.151677 0 -> 14 IROOT= 3: 19.964529 au 543.262 eV 4381707.6 cm**-1 Amplitude Excitation 0.978863 6 -> 9 0.157708 6 -> 10 -0.101384 6 -> 16 Ground state amplitude: -0.001155 Percentage Active Character 99.39 Amplitude Excitation in Canonical Basis -0.978751 0 -> 9 0.125406 0 -> 10 -0.112036 0 -> 18 0.102538 0 -> 21 IROOT= 4: 20.091389 au 546.714 eV 4409550.1 cm**-1 Amplitude Excitation 0.269952 6 -> 8 0.958312 6 -> 12 Ground state amplitude: -0.000000 Percentage Active Character 99.78 Amplitude Excitation in Canonical Basis 0.218969 0 -> 7 0.110818 0 -> 8 -0.210211 0 -> 11 0.940678 0 -> 12 IROOT= 5: 20.091389 au 546.714 eV 4409550.1 cm**-1 Amplitude Excitation 0.269914 6 -> 7 0.958327 6 -> 11 Ground state amplitude: -0.000000 Percentage Active Character 99.78 Amplitude Excitation in Canonical Basis 0.110818 0 -> 7 -0.218969 0 -> 8 -0.940678 0 -> 11 -0.210211 0 -> 12</code></pre>
+<p>MultiCore excitations are also available by setting 'CoreOrb[0]=0,1'. In following example, we directly access the oxygen 1S and carbon 1S core excitations</p>
+<p>(continued from previous page)</p>
+<pre><code>!STEOM-CCSD ExtremeSCF cc-pCVTZ Bohrs NoFrozencore %mdci nroots 5 FollowCIS true DoSimpleDens False # use exact STEOM transition moment maxiter 500 DoCVS true DoCore true CoreOrb[0]=0,1 end *xyz 0 1 O 0 0 0.913973 C 0 0 -1.218243 *</code></pre>
+<p>It will give the oxygen and carbon K-edge spectrum as follows</p>
+<pre><code>-------------------------------STEOM-CCSD RESULTS (SINGLETS) -------------------------------IROOT= 1: 10.577651 au 287.833 eV 2321526.1 cm**-1 Amplitude Excitation -0.508570 6 -> 7 0.849534 6 -> 8 0.127575 6 -> 10 Ground state amplitude: -0.000000 Percentage Active Character 99.67 Amplitude Excitation in Canonical Basis 0.803788 1 -> 7 0.418299 1 -> 8 -0.381488 1 -> 12 -0.116973 1 -> 15 IROOT= 2: 10.577651 au 287.833 eV 2321526.1 cm**-1 Amplitude Excitation 0.849534 6 -> 7 0.508570 6 -> 8 0.127575 6 -> 11 Ground state amplitude: 0.000000 Percentage Active Character 99.67 Amplitude Excitation in Canonical Basis 0.418299 1 -> 7 -0.803788 1 -> 8 0.381488 1 -> 11 0.116973 1 -> 14 IROOT= 3: 10.900722 au 296.624 eV 2392431.9 cm**-1 Amplitude Excitation -0.893589 6 -> 9 0.426665 6 -> 12 Ground state amplitude: 0.000202 Percentage Active Character 79.85 Warning:: the state may have not converged with respect to active space</code></pre>
+<p>(continues on next page)</p>
+<pre><code>-------------------- Handle with Care --------------------Amplitude Excitation in Canonical Basis -0.972609 1 -> 9 0.135434 1 -> 10 -0.157896 1 -> 18 IROOT= 4: 19.690061 au 535.794 eV 4321468.9 cm**-1 Amplitude Excitation 0.677274 5 -> 7 -0.726090 5 -> 8 Ground state amplitude: -0.000000 Percentage Active Character 98.89 Amplitude Excitation in Canonical Basis -0.733267 0 -> 7 -0.606483 0 -> 8 0.247689 0 -> 12 0.137742 0 -> 15 IROOT= 5: 19.690061 au 535.794 eV 4321468.9 cm**-1 Amplitude Excitation -0.726090 5 -> 7 -0.677274 5 -> 8 Ground state amplitude: 0.000000 Percentage Active Character 98.89 Amplitude Excitation in Canonical Basis -0.606483 0 -> 7 0.733267 0 -> 8 -0.247689 0 -> 11 -0.137742 0 -> 14</code></pre>
+<p>The core-valence separation should be used similar to that in the core-ionization. The only difference is that the natural orbital based active space selection scheme in STEOM-CCSD always rotate the particular core orbital to the HOMO. Now ORCA will automatically set the core orbitals to be the HOMO in STEOM-CCSD irrespective of the core-hole. One should use the exact STEOM-CCSD transition moment by using DoSimpleDens False. Fig. 5.32 presents the STEOM-CCSD oxygen K-edge spectra in thymine.</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 5.31: Comparison of theoretical and experimental X-ray absorption spectra of oxygen K-edge in thymine. The simulated spectrum is shifted by -3.7 eV to align with the experimental spectrum.</div></figcaption></figure>
+<p>One can interpret the results in terms of NTOs caculated from STEOM-CC eigen vectors</p>
+<figure><figcaption><div class="caption">Fig. 5.32: Natural transition orbitals (ntos) for the oxygen K edge spectrum of thymine. All the core EE values mentioned are in eV and provided in the format (EE,Oscillator Strength).</div></figcaption></figure>
+<h2>5.15.4 Core-Excitation (UHF)</h2>
+<p>ORCA is now able to also perform core-excitations using the open-shell STEOM-CCSD method in a similar way to that of closed-shell.[671] By setting 'CoreOrb' for each spin channel we can perform a single core or a multicore calculation. In the following example, we determine the nitrogen and oxygen K-Shell excitations in the NO radical.</p>
+<pre><code>!UHF STEOM-CCSD ExtremeSCF nofrozencore usesym !cc-pCVDZ %mdci nroots 10 DoCVS true DoCore true CoreOrb[0]=0,1 #N and O core orbitals (spin up) CoreOrb[1]=0,1 #N and O core orbitals (spin down) end *xyz 0 2 N 0.00000000000000 0.00000000000000 0.00490803701002 O 0.00000000000000 0.00000000000000 1.14109196298998 *</code></pre>
+<h2>and its corresponding output</h2>
+<pre><code>----------------------UHF STEOM-CCSD RESULTS ----------------------IROOT= 1: 14.743862 au 401.201 eV 3235903.7 cm**-1 <S**2>= 0.877361 Sym: A2</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Amplitude Excitation 0.637991 7a -> 8a 0.750732 6b -> 7b 0.136839 6b -> 10b Percentage Active Character 99.93 Amplitude Excitation in Canonical Basis -0.613647 1a -> 8a -0.186064 1a -> 11a -0.722892 1b -> 7b -0.225768 1b -> 10b IROOT= 2: 14.786433 au 402.359 eV 3245247.0 cm**-1 <S**2>= 0.849392 Sym: A1 Amplitude Excitation 0.985414 6b -> 8b 0.154505 6b -> 11b Percentage Active Character 99.49 Amplitude Excitation in Canonical Basis -0.954188 1b -> 8b 0.267334 1b -> 12b -0.121297 1b -> 16b IROOT= 3: 14.794166 au 402.570 eV 3246944.1 cm**-1 <S**2>= 2.669487 Sym: A2 Amplitude Excitation -0.772273 7a -> 8a 0.623458 6b -> 7b Percentage Active Character 99.47 Amplitude Excitation in Canonical Basis 0.754282 1a -> 8a 0.166288 1a -> 11a -0.611046 1b -> 7b -0.132336 1b -> 10b IROOT= 4: 15.243078 au 414.785 eV 3345469.0 cm**-1 <S**2>= 1.387083 Sym: B1 Amplitude Excitation -0.682643 7a -> 9a -0.101529 7a -> 11a -0.697873 6b -> 9b -0.133350 6b -> 12b Percentage Active Character 98.11 Amplitude Excitation in Canonical Basis 0.573243 1a -> 9a 0.237647 1a -> 12a -0.265168 1a -> 13a -0.165128 1a -> 14a 0.583678 1b -> 9b 0.348965 1b -> 11b 0.201568 1b -> 14b IROOT= 5: 15.285144 au 415.930 eV 3354701.4 cm**-1 <S**2>= 2.434830 Sym: B1 Amplitude Excitation -0.690438 7a -> 9a -0.146046 7a -> 13a 0.676597 6b -> 9b</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>0.173127 6b -> 13b Percentage Active Character 93.48 ------------------------- Handle with Care ---------------------------Warning:: State 5 may have not converged with respect to active space -----------------------------------------------------------------------Amplitude Excitation in Canonical Basis 0.645706 1a -> 9a 0.148300 1a -> 12a -0.211256 1a -> 13a -0.147915 1a -> 14a -0.643471 1b -> 9b -0.207585 1b -> 11b -0.158649 1b -> 14b IROOT= 6: 19.682450 au 535.587 eV 4319798.5 cm**-1 <S**2>= 2.233840 Sym: A2 Amplitude Excitation -0.952369 6a -> 8a -0.128170 6a -> 10a -0.262026 5b -> 7b Percentage Active Character 99.52 Amplitude Excitation in Canonical Basis -0.940546 0a -> 8a 0.202713 0a -> 16a -0.254077 0b -> 7b IROOT= 7: 19.714860 au 536.469 eV 4326911.7 cm**-1 <S**2>= 1.012274 Sym: A2 Amplitude Excitation -0.427285 6a -> 8a 0.895703 5b -> 7b Percentage Active Character 99.27 Amplitude Excitation in Canonical Basis -0.425513 0a -> 8a 0.883394 0b -> 7b -0.176873 0b -> 15b IROOT= 8: 19.746849 au 537.339 eV 4333932.5 cm**-1 <S**2>= 0.787890 Sym: A1 Amplitude Excitation 0.992767 5b -> 8b Percentage Active Character 99.45 Amplitude Excitation in Canonical Basis 0.973851 0b -> 8b 0.215849 0b -> 16b IROOT= 9: 20.119392 au 547.476 eV 4415696.1 cm**-1 <S**2>= 2.441183 Sym: B1 Amplitude Excitation 0.771305 6a -> 9a -0.127276 6a -> 11a 0.122051 6a -> 13a 0.592132 5b -> 9b Percentage Active Character 96.84</code></pre>
+<h2>5.16 Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance Raman Excitation Profiles and Spectra with the orca_asa Program</h2>
+<h2>® Deprecated since ORCA 6.0.0</h2>
+<ul>
+<li style="list-style-type: '· ';">The orca_asa program is no longer supported. It is still included in the 6.0.0 release and the documentation is preserved below. However, it may not function correctly and will be removed in a future ORCA version!</li>
+<li style="list-style-type: '· ';">The !NMScan and !NMGrad keywords are still available but these calculations may fail or not generate valid input for orca_asa . Please use the ESD module instead, if applicable.</li>
+</ul>
+<p>In this section various aspects of the simulation and fit of optical spectra, including absorption, fluorescence, and resonance Raman are considered. This part of the ORCA is fairly autonomous and can also be used in a data analysis context, not only in a 'quantum chemistry' mode. The program is called orca_asa , where ASA stands for 'Advanced Spectral Analysis'. The program was entirely designed by Dr. Taras Petrenko.</p>
+<p>The general philosophy is as follows: An ORCA run produces the necessary data to be fed into the orca_asa program and writes an initial input file. This input file may be used to directly run orca_asa in order to predict an absorption, fluorescence or resonance Raman spectrum. Alternatively, the input file may be edited to change the parameters used in the simulations. Last - but certainly not least - the orca_asa program can be used to perform a fit of the model parameters relative to experimental data.</p>
+<p>All examples below are taken from [672], which must be cited if you perform any work with the orca_asa program!</p>
+<h2>5.16.1 General Description of the Program</h2>
+<p>The program input comprises the following information: (1) model and specification of the model parameters characterizing the electronic structure of a molecule, as well as lineshape factors; (2) spectral ranges and resolution for simulations; (3) specification of vibrational transitions for rR excitation profile and spectra generation; (4) certain algorithm-selecting options depending on the model; (5) fitting options.</p>
+<p>All optional parameters (1)-(3) are given in the %sim block, and fitting options are in the %fit block. The model parameters are specified within various blocks that will be described below. The program orca_asa is interfaced to ORCA and inherits its input style. The input for orca_asa run can be also generated upon ORCA run.</p>
+<p>The current implementation features so called 'simple', 'independent mode, displaced harmonic oscillator' (IMDHO), and 'independent mode, displaced harmonic oscillator with frequency alteration' (IMDHOFA) models.</p>
+<h2>5.16.2 Spectral Simulation Procedures: Input Structure and Model Parameters</h2>
+<h2>Example: Simple Mode</h2>
+<p>This model represents the simplest approach which is conventionally used in analysis of absorption spectra. It neglects vibrational structure of electronic transitions and approximates each individual electronic band by a standard lineshape, typically a Gaussian, Lorentzian or mixed (Voigt) function. This model can only make sense if vibrational progressions are not resolved in electronic spectra. Upon this approximation the intensity of absorption spectrum depends on the energy of the incident photon ( E L ) , the electronic transition energy ( E T ) , the transition electric dipole moment ( M , evaluated at the ground-state equilibrium geometry). Lineshape factors are specified by homogeneous linewidth Γ and standard deviation parameter σ corresponding to Gaussian distribution of transition energies. The following example illustrates a simple input for simulation of absorption bandshapes using various intensity and lineshape parameters.</p>
+<pre><code># example001.inp # # Input file to generate absorption spectrum consisting # of 3 bands with different lineshape factors: # # 1. Lorentzian centered at 18000cm**-1 (damping factor Gamma= 100 cm**-1) # 2. Gaussian centered at 20000cm**-1 # (standard deviation Sigma= 100 cm**-1) # 3. Mixed Gaussian-Lorentzian band representing Voigt profile # centered at 21000 cm**-1 %sim Model Simple # Spectral range for absorption simulation: AbsRange 17000.0, 23000.0 # Number of points to simulate absorption spectrum: NAbsPoints 2000 end #---------------------------------------------------------------------------# Transition Gamma Sigma Transition Dipole Moment (atomic unit) # Energy (cm**-1) (cm**-1) (cm**-1) Mx My Mz #---------------------------------------------------------------------------$el_states 3 # number of electronic states 1 18000.0 100.00 0.0 1.0 0.0 0.0</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>2</td><td>20000.0</td><td>0.00</td><td>100.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><td>3</td><td>22000.0</td><td>50.00</td><td>50.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr></tbody></table>
+<p>The parameters of of the final electronic states reached by the respective transitions are specified in the $el_states block. The spectral range and resolution used in the calculation are defined by the AbsRange and NAbsPoints keywords in %sim block. The calculation of the absorption spectrum is automatically invoked if NAbsPoints&gt;1 . After the orca_asa run you will find in your directory file example001.abs.dat containing absorption spectrum in simple two-column ASCII format suitable to be plotted with any spreadsheet program. Absorption spectra corresponding to individual electronic transitions are stored in file example001.abs.as.dat ( the suffix ' as ' stands for 'All States').</p>
+<figure><figcaption><div class="caption">Fig. 5.33: Absorption spectrum generated after orca_asa run on file example001.inp. Three bands have different lineshape pararameters. Note that although all transitions are characterized by the same transition electric dipole moment their intensities are scaled proportionally to the transition energies.</div></figcaption></figure>
+<p>The output of the program run also contains information about oscillator strengths and full-width-half-maximum (FWHM) parameters corresponding to each electronic band:</p>
+<table><tbody><tr><th colspan="6">----------------------------------------------</th></tr><tr><th>State</th><th>EV (cm**-1)</th><th>fosc</th><th>Stokes shift (cm**-1)</th><td></td><td></td></tr><tr><td>1:</td><td>18000.00</td><td>0.054676</td><td>0.00</td><td></td><td></td></tr><tr><td>2:</td><td>20000.00</td><td>0.060751</td><td>0.00</td><td></td><td></td></tr><tr><td>3:</td><td>22000.00</td><td>0.066826</td><td>0.00</td><td></td><td></td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><th colspan="4">---------------------------------------- BROADENING PARAMETETRS (cm**-1)</th></tr><tr><th>State</th><th>Gamma</th><th>Sigma</th><th>FWHM</th></tr><tr><td>1:</td><td>100.00</td><td>0.00</td><td>200.00</td></tr><tr><td>2:</td><td>0.00</td><td>100.00</td><td>235.48</td></tr><tr><td>3:</td><td>50.00</td><td>50.00</td><td>180.07</td></tr></tbody></table>
+<p>Note that although all three types of lineshape functions are symmetric this is not true for the overall shapes of individual absorption bands since the extinction coefficient (absorption cross-section) is also proportional to the incident photon energy. Therefore, if the linewidth is larger than 10% of the peak energy the asymmetry of the electronic band can be quite noticeable.</p>
+<h2>Example: Modelling of Absorption and Fluorescence Spectra within the IMDHO Model</h2>
+<p>The IMDHO model is the simplest approach that successfully allows for the prediction of vibrational structure in electronic spectra as well as rR intensities for a large variety of real systems. This model assumes:</p>
+<ol>
+<li style="list-style-type: '1. ';">harmonic ground- and excited-state potential energy surfaces;</li>
+<li style="list-style-type: '2. ';">origin shift of the excited-state potential energy surface relative to the ground-state one;</li>
+<li style="list-style-type: '3. ';">no vibrational frequency alteration or normal mode rotation occurs in the excited state;</li>
+<li style="list-style-type: '4. ';">no coordinate dependence of the electronic transition dipole moment.</li>
+</ol>
+<p>In addition to the parameters that enter the 'Simple model' defined above it requires some information about the vibrational degrees of freedom. The required information consists of the ground-state vibrational frequencies { ω gm } and (dimensionless) origin shifts { ∆ mi } , where i and m refer to electronic states and normal modes respectively. ∆ is expressed in terms of dimensionless normal coordinates. Accordingly, for the IMDHO model one has to specify the following blocks</p>
+<ul>
+<li style="list-style-type: '· ';">The $el_states block contains the parameters E T , Γ , σ, M for each electronic state. By default E T is assumed to be adiabatic minima separation energy. Alternatively, it can be redefined to denote for the vertical transition energy.This is achieved by specifiying the keyword EnInput=EV in the %sim block.</li>
+<li style="list-style-type: '· ';">A $vib_freq_gs block specifies ground-state vibrational frequencies.</li>
+<li style="list-style-type: '· ';">A $sdnc block contains parameters { ∆ mi } in matrix form such that the i -th column represents the dimensionless displacements along all normal modes for the i -th excited-state PES.</li>
+</ul>
+<p>The file example002.inp provides the input for simulation of absorption and fluorescence spectra of a system characterized by significant displacements of the excited-state origin along 5 normal coordinates.</p>
+<pre><code># example002.inp # # Input file for simulation of vibrational structure # in absorption and fluorescence spectra assuming # origin shift of excited PES along 5 normal coordinates. # The simulated spectra closely reproduce the experimental # optical bandshapes for the tetracene molecule. # %sim Model IMDHO # spectral range for absorption simulation (cm**-1) AbsRange 20000.0, 27000.0 NAbsPoints 2000 # number of points in absorption spectrum # spectral range for simulation of fluorescence (cm**-1) FlRange 22000.0, 16000.0</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>NFlPoints 2000 # number of points in fluorescence spectrum # the following options require the spectra to be normalized # so that their maxima are equal to 1.0 AbsScaleMode Rel FlScaleMode Rel # default for fluorescence # for absorption spectrum the default option is AbsScaleMode= Ext # which stands for extinction coefficient end #---------------------------------------------------------------------------# Transition Gamma Sigma Transition Dipole Moment (atomic unit) # Energy (cm**-1) (cm**-1) (cm**-1) Mx My Mz #---------------------------------------------------------------------------$el_states 1 1 21140.0 50.00 100.0 1.0 0.0 0.0 # Block specifying Stokes Shift parameter for each electronic state # This information is optional $ss 1 # number of excited states 1 300.0 # the Stokes shift for the 1st electronic transition # Block providing the values of VIBrational FREQuencies # for 5 Ground-State normal modes. # Obligatory for IMDHO and IMDHOFA models. $vib_freq_gs 5 1 310.0 2 1193.0 3 1386.0 4 1500.0 5 1530.0 # Block specifying origin Shift of the excite-state PES # along each normal mode in terms of the ground-state # Dimensionless Normal Coordinates # Obligatory for IMDHO and IMDHOFA models. $sdnc 5 1 1 1 0.698 2 -0.574 3 0.932 4 -0.692 5 0.561</code></pre>
+<p>The calculation of absorption and fluorescence spectra is automatically invoked if the parameters NAbsPoints&gt;1 and NFlPoints&gt; 1 . The input file also contains the optional block $ss which specifies the Stokes shift λ for each electronic transition. This parameter is equal to the energy separation between the 0-0 vibrational peaks in the absorption and fluorescence spectra as shown in Fig. 5.34 . In general λ accounts for solvent induced effects as well as unresolved vibrational structure corresponding to low-frequency modes that are not specified in the input. Note that we have specified parameters AbsScaleMode=Rel and FlScaleMode=Rel in %sim block in order to ensure that the simulated spectra are normalized to unity. The calculated absorption and fluorescence spectra are stored in example002.abs.dat and example002.fl.dat files, respectively.</p>
+<figure><figcaption><div class="caption">Fig. 5.34: Absorption and fluorescence spectra generated after orca_asa run on the file example002.inp. If the homogeneous broadening is set to be Γ = 10 cm -1 one can resolve underlying vibrational structure and identify various fundamental and combination transitions.</div></figcaption></figure>
+<h2>Example: Modelling of Absorption and Fluorescence Spectra within the IMDHOFA Model</h2>
+<p>IMDHOFA (Independent Mode Displaced Harmonic Oscillators with Frequency Alteration) is based on the same assumptions as the IMDHO model except for vibrational frequency alteration in excited state can take place. The file example003.inp features almost the same input parameters as example002.inp . The IMDHOFA model is invoked by the keyword Model=IMDHOFA in the %sim block. Additionally, one has to provide the obligatory block $vib_freq_es . It contains the excited-state vibrational frequencies { ω emi } in matrix form such that the i -th column represents the vibrational frequencies of all normal modes for the i -th excited-state PES.</p>
+<pre><code># Block providing the values of VIBrational FREQuencies # for 5 Excited-State normal modes. # Obligatory for IMDHOFA model. $vib_freq_es 5 1 # number of modes and number of excited states 1 1 410.0 2 1293.0 3 1400.0 4 1600.0 5 1730.0</code></pre>
+<figure><figcaption><div class="caption">Fig. 5.35: Absorption and fluorescence spectra generated after orca_asa run on the file example003.inp . Also, the high-resolution spectra corresponding to homogeneous broadening Γ = 10 cm -1 are shown.</div></figcaption></figure>
+<h2>Example: Modelling of Effective Broadening, Effective Stokes Shift and Temperature Effects in Absorption and Fluorescence Spectra within the IMDHO Model</h2>
+<p>For the IMDHO model the orca_asa is capable to model absorption and emission spectra in the finite-temperature approximation. While the keyword Model=IMDHO assumes the zero-temperature approximation, the value of Model=IMDHOT invokes the calculation of the spectra for the finite temperature which is specified by the paramter TK in the block %sim :</p>
+<pre><code># example004.inp # # %sim Model IMDHOT TK 300 # temperature (in Kelvin) # spectral range for absorption simulation (cm**-1) AbsRange 18000.0, 35000.0 NAbsPoints 5000 # number of points in absorption spectrum # spectral range for simulation of fluorescence (cm**-1) FlRange 22000.0, 10000.0 NFlPoints 5000 # number of points in fluorescence spectrum # the following options require the spectra to be normalized</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># so that their maxima are equal to 1.0 AbsScaleMode Rel FlScaleMode Rel # default for fluorescence end #---------------------------------------------------------------------------# Transition Gamma Sigma Transition Dipole Moment (atomic unit) # Energy (cm**-1) (cm**-1) (cm**-1) Mx My Mz #---------------------------------------------------------------------------$el_states 1 1 21140.0 50.00 100.0 1.0 0.0 0.0 # Block specifying Stokes Shift parameter for each electronic state $ss 1 # number of excited states 1 300.0 # the Stokes shift for the 1st electronic transition # Block providing the values of VIBrational FREQuencies # for 10 Ground-State normal modes. $vib_freq_gs 10 1 30.0 2 80.0 3 100.0 4 120.0 5 130.0 6 140.0 7 160.0 8 200.0 9 310.0 10 1300.0 # Block specifying origin Shift of the excite-state PES # along each normal mode in terms of the ground-state # Dimensionless Normal Coordinates $sdnc 10 1 1 1 2.5 2 2.0 3 1.8 4 1.9 5 1.5 6 1.9 7 2.4 8 1.9 9 2.5 10 0.9</code></pre>
+<p>This example illustrates a typical situation in large molecules which feature a number of low frequency modes with significant values of dimensionless displacements for a given excited-state PES. In the case of high density of vibrational states with frequencies below or comparable to the intrincic value of FWHM (determined by Γ and σ ) the vibrational progression is unresolved, whereby the spectra become very diffuse and show large separation between the maxima of absorption and emission spectra (Fig. 5.35). Besides, upon the condition hν i ⩽ kT the effective bandwidths and positions of maxima in the spectra can be strongly subject to temperature effects.</p>
+<figure><figcaption><div class="caption">Fig. 5.36: Absorption and fluorescence spectra for T = 0 K (blue) and T = 300 K (red) generated after orca_asa run on the file example004.inp . Black lines show spectra corresponding to the case where all low-frequency modes were excluded from the calculation.</div></figcaption></figure>
+<p>The effective Stokes shift and linewidth parameters which are evaluated in the simple self-consistent procedure are given in the output of the orca_asa run:</p>
+<p>Note that the evaluation of the effective parameters is rather approximate and these values can noticeable deviate from those which can be directly deduced from the calculated spectra. However, such an information usually provides the proper order of magnitude of the effective vibronic broadening and Stokes shift. As indicated in the program output above, the effective bandshape has predominantly a Gaussian character which varies with the temperature so that σ = 1125 cm -1 ( T = 0 K) and σ = 1414 cm -1 ( T = 300 K). Indeed, as shown in Fig. 5.37 the absorption spectrum at T = 300 K can be well fitted using Gaussian lineshape with σ = 1388 cm -1 (FWHM = 3270 cm -1 ). One can see that at higher temperatures the deviation between the spectrum and its Gauss fit becomes even smaller.</p>
+<p>In molecules the normal distribution of the electronic transition energies in the ensemble would give rise to a Gaussian bandshape of the absorption band. However, the corresponding standard deviation is expected to be of the order of 100 cm -1 , whereby a typical Gaussian bandwidth of the order of 1000 cm -1 appears to result from unresolved vibronic progression. In general, this statement is supported by quantum chemical calculation of the model parameters. In principle the effective bandwidth parameters can also be used for characterization and assignement of individual electronic bands.</p>
+<figure><figcaption><div class="caption">Fig. 5.37: Absorption spectrum (blue) for T = 300 K generated after orca_asa run on the file example004. inp . Red line represents the Gauss-fit of the calculated spectrum.</div></figcaption></figure>
+<h2>Example: Modelling of Absorption and Resonance Raman Spectra for the 11 A g → 11 B u Transition in trans -1,3,5-Hexatriene</h2>
+<p>The hexatriene molecule is characterized by 9 totally-symmetric normal modes which dominate vibrational structure in absorption and are active in rR spectra corresponding to the strongly dipole-allowed 1 -1 A g → 1 -1 B u transition around 40000 cm -1 . Except for some peculiarities related to the neglect of normal mode rotations in the excited state the optical spectra are quite satisfactorily described by the IMDHO model.</p>
+<p>The following input exemplifies simulation of absorption spectrum and rR spectra for an arbitrary predefined number of excitation energies.</p>
+<p>#</p>
+<p># example005.inp</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part071</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<pre><code>↪ → -------------------------TIP: Switch ON a Property calculation as DoProperty true: -----------------------------------------------------------------------------------↪ → ------------------------------------------------------------------------------------------------------------↪ → -------------------------General Input Parameters: -----------------------------------------------------------------------------------↪ → -------------------------NEl Sets the number of electrons Shell_PQN Sets the principle quantum number per type of shells␣ ↪ → (s,p,d,f) LFTCase !!!ALTERNATIVE TO Shell_PQN!!! Sets the given LFT␣ ↪ → problem (2p3d, 1s3p3d, ...) -----------------------------------------------------------------------------------↪ → ------------------------LFTCase WILL replace Shell_PQN -----------------------------------------------------------------------------------↪ → ------------------------(e.g. Shell_PQN = 0,2,3,0 for a 2p3d calculation) Mult Sets the Multiplicity/Multiplicities NRoots Sets the number of Roots/Multiplicity TMultiplets (0.01) Threshold for the Multiplets grouping in eV DoeV All values in eV. This is default. If set false the␣ ↪ → cm-1 unit is used throughout DoRAS Requests a RASCI calculation RAS(nel: m1 h/ m2 / m3 p) Computes the X-Ray Emission Spectra RAS-reference with nel electrons m1= number orbitals in RAS-1 h = max. number of holes in RAS-1 m2= number of orbitals in RAS-2 (any number of electrons or holes) m3= number of orbitals in RAS-3 p = max. number of particles in RAS-3 DoElastic Computes in addition the Elastic Scattering terms in␣ ↪ → RIXS/RIXSSOC calculations -----------------------------------------------------------------------------------↪ → -------------------------Non Relativistic Spectroscopic Properties: -----------------------------------------------------------------------------------↪ → -------------------------DoABS/DoXAS Computes the Absorption like Spectra DoCD Computes the CD Spectra DoXES Computes the X-Ray Emission Spectra DoRIXS Computes the RIXS Spectra DoQuadrupole Computes the ABS,XAS,RIXS Spectra beyond dipole␣ ↪ → approximation -----------------------------------------------------------------------------------↪ → -------------------------Relativistically Corrected Spectroscopic Properties: -----------------------------------------------------------------------------------↪ → -------------------------DoSOC Requests the Spin Orbit Coupling Calculations Note that this turned on automatically if zeta SOC constant are provided -----------------------------------------------------------------------------------↪ → -------------------------DoABS/DoXAS Computes the SOC Corrected Absorption like Spectra DoCD Computes the SOC Corrected CD Spectra</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>DoMCD/DoXMCD Computes the SOC Corrected MCD/XMCD Spectra DoXESSOC: Computes the SOC Corrected XES Spectra DoRIXSSOC: Computes the SOC Corrected RIXS Spectra DoQuadrupole Computes the SOC Corrected ABS,XAS, XES RIXS Spectra␣ ↪ → beyond dipole approximation -----------------------------------------------------------------------------------↪ → -------------------------Magnetic Properties: -----------------------------------------------------------------------------------↪ → -------------------------DoMagnetization Computes the Magnetization DoSusceptibility Computes the Susceptibilities DoGTensor Computes the g-Tensors/Matrices DoDTensor Computes the Zero-Field Splittings DoATensor Computes the Hyperfine Tensors DoEFGTensor Computes the Electric Field Gradient Tensors (also Moesbauer Parameters in the presence of Fe centers) -----------------------------------------------------------------------------------↪ → -------------------------Variable Parameters (if they are not given, default values are used) -----------------------------------------------------------------------------------↪ → -------------------------Temperature(300) Temperature to be used in the SOC calculations MagneticField(0) Magnetic Field (in Gauss) NPointsPsi(10) Solid Angle Integration points Psi for MCD and XMCD NPointsPhi(10) Solid Angle Integration points Phi for MCD and XMCD NPointsTheta(10) Solid Angle Integration points Theta for MCD and XMCD -----------------------------------------------------------------------------------↪ → -------------------------Variable Parameters needed for Magnetization and Susceptibility calculations -----------------------------------------------------------------------------------↪ → -------------------------LebedevIntegrationPoints(26) Number for Integration points for Lebedev) LebedevPrec(5) Precision of the grid for different field directions (meaningful values range from 1 (smallest) to 10 (largest) nPointsFStep (5) Number of steps for numerical differentiation (def: 5, meaningful values are 3, 5 7 and 9) MAGTemperatureMIN(4.0) Minimum Temperature (K) for Magnetization MAGTemperatureMAX(4.0) Maximum Temperature (K) for Magnetization MAGTemperatureNPoints(1) Number of Temperature points for Magnetization MAGFieldStep(100.0) Size of Field step for numerical differentiation␣ ↪ → (def: 100 Gauss) MAGFieldMin(0.0) Minimum Field (Gauss) for Magnetization MAGFieldMax(70000.0) Minimum Field (Gauss) for Magnetization MAGNPoints(15) Number of Field points for Magnetization SUSTempMin(1) Minimum Temperature (K) for Susceptibility SUSTempMxn(300.0) Maximum Temperature (K) for Susceptibility SUSNPoints(300) Number of Temperature points for Susceptibility SUSStatFieldMIN(0.0) Minimum Static Field (Gauss) for Susceptibility SUSStatFieldMAX(1) Maximum Static field (Gauss) for Susceptibility SUSStatFieldNPoints(1) Number of Static Fields for Susceptibility -----------------------------------------------------------------------------------↪ → -------------------------</code></pre>
+<p>orca_lft can run standalone by processing an input file ( Basename.lft.inp ) with orca_lft</p>
+<pre><code>orca_lft BaseName.lft.inp -sim</code></pre>
+<p>Alternatively, one can call the main orca program like</p>
+<pre><code>orca BaseName.lft.inp</code></pre>
+<p>The different benefits of the two runs are provided in the orca_lft tutorial orca_lft can also be used to automatically generate initial proper input files. For example, an initial bare input file basename.lft_pd.inp can be generated by running</p>
+<pre><code>orca_lft BaseName -pd_case -----------------------------------------------------------------Initial Input: BaseName.lft_pd.inp for Orca_LFT has been generated: -----------------------------------------------------------------</code></pre>
+<p>The generated example input must be filled in with the required LFT parameters and the desired spectroscopic properties, after which the simulation can be started-just like in any standard multiplet program.</p>
+<pre><code>%lft #-----Parameters-----NEl= 0 Shell_PQN= 0, 2, 3, 0 Mult= 0 NRoots= -1 #--------------------#---Slater-Condon Parameters--#---All Values in eV--PARAMETERS F0pp = 0.00 F2pp = 0.00 F0dd = 0.00 F2dd = 0.00 F4dd = 0.00 F0pd = 0.00 F2pd = 0.00 G1pd = 0.00 G3pd = 0.00 end #--------------------#---Diagonal LFT-Matrix Elelemnts--#---All Values in eV--FUNCTIONS 0 0 " 0.00" 1 1 " 0.00" 2 2 " 0.00" 3 3 " 0.00" 4 4 " 0.00" 5 5 " 0.00" 6 6 " 0.00" 7 7 " 0.00" end #--------------------#---SPECTRA/PROPERTIES--DoABS true #---------end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>*xyz 0 0 Atom 0.00 0.00 0.00 *</code></pre>
+<p>Special initial inputs based on an internal NEVPT2 database can also be generated. For the 2p3d LFT case of Ni(II), this can be done as follows:</p>
+<pre><code>orca_lft BaseName -atno28 -2p3d_case ------------------------------------------------------------------------------Creating input for Atom Ni(II) ... -----------------------------------------------------------------------------------------------------------------------------------------------Initial Input: BaseName.lft_pd.inp for Orca_LFT has been generated: -----------------------------------------------------------------</code></pre>
+<p>The generated BaseName.lft_pd.inp file includes pre-filled LFT parameters from an internal NEVPT2 database, based on precomputed CASCI/NEVPT2 AILFT values. The resulting input-ready to runfor Ni II -is as follows:</p>
+<pre><code>%lft #-----Parameters-----NEl= 14 LFTCase 2p3d Mult= 3, 1 NRoots= 25, 30 #--------------------#---Slater-Condon Parameters--#---All Values in eV--PARAMETERS F0pp = 85.88 F2pp = 54.77 F0dd = 23.31 F2dd = 13.89 F4dd = 9.14 F0pd = 33.03 F2pd = 7.76 G1pd = 6.42 G3pd = 2.11 end #--------------------#---Diagonal LFT-Matrix Elelemnts--#---All Values in eV--FUNCTIONS 0 0 " 0.00" 1 1 " 0.00" 2 2 " 0.00" 3 3 "1138.35" 4 4 "1138.35" 5 5 "1138.35" 6 6 "1138.35" 7 7 "1138.35" end #--------------------</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>#---SPECTRA/PROPERTIES--DoABS true #---------end *xyz 2 3 Ni 0.00 0.00 0.00 *</code></pre>
+<p>Alternatively, as discussed in the Ab initio Ligand Field Theory section ( 1- and 2-shell Abinitio Ligand Field Theory (AILFT) ), one may actually run a 2-shell AILFT calculation and produce the respective .nevpt2.lft.inp file</p>
+<pre><code>!NoIter NEVPT2 def2-SVP def2-SVP/C %method frozencore fc_none end #--------------------#Rotate Orbitals #--------------------%scf rotate {2,6,90} {3,7,90} {4,8,90} end end #--------------------#General Options #--------------------%casscf nel 14 norb 8 mult 3,1 nroots 100,100 LFTCase 2p3d rel dosoc true end end *xyz 2 3 Ni 0.0000000000 0.0000000000 0.0000000000 *</code></pre>
+<p>The structure of an orca_lft input is the following:</p>
+<h2>It contains:</h2>
+<ul>
+<li style="list-style-type: '· ';">The General Parameters Block where the LFT problem is defined</li>
+</ul>
+<pre><code>-----Parameters-----NEl= 14 LFTCase 2p3d</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>#Shells_PQN 0,2,3,0, Alternative definition using s,p,d,f main quantum numbers ␣ ↪ → Mult= 3, 1 NRoots= 25, 30 --------------------</code></pre>
+<ul>
+<li style="list-style-type: '· ';">The PARAMETERS Block where the SCPs and SOC constant parameters are defined</li>
+<li style="list-style-type: '· ';">The FUNCTIONS Block where the LFT matrix is defined</li>
+<li style="list-style-type: '· ';">The Properties Block where the desire simulation properties are specified</li>
+<li style="list-style-type: '· ';">The xyz Block where the ion, charge, multiplicity and coordinates (0. 0. 0.) are defined</li>
+</ul>
+<pre><code>---Slater-Condon Parameters-----All Values in eV--PARAMETERS F0pp = 85.88 F2pp = 54.77 F0dd = 23.31 F2dd = 13.89 F4dd = 9.14 F0pd = 33.03 F2pd = 7.76 G1pd = 6.42 G3pd = 2.11 end --------------------</code></pre>
+<pre><code>---SOC-CONSTANTS-----All Values in eV--PARAMETERS ZETA_P = 10.68 ZETA_D = 0.08 end --------------------</code></pre>
+<pre><code>---Diagonal LFT-Matrix Elelemnts---</code></pre>
+<pre><code>---All Values in eV--FUNCTIONS 0 0 " 0.00" 1 1 " 0.00" 2 2 " 0.00" 3 3 "1138.35" 4 4 "1138.35" 5 5 "1138.35" 6 6 "1138.35" 7 7 "1138.35" end --------------------</code></pre>
+<pre><code>---SPECTRA/PROPERTIES---</code></pre>
+<pre><code>DoABS true --------------------</code></pre>
+<pre><code>*xyz 2 3 Ni 0.0000000000 0.0000000000 0.0000000000</code></pre>
+<p>It should be emphasized the orca_lft through the FUNCTIONS and PARAMETERS subblocks provides</p>
+<ul>
+<li style="list-style-type: '· ';">Arbitrary parameterization of both the one-electron LFT matrix and the Slater-Condon parameters</li>
+<li style="list-style-type: '· ';">Powerful parameter scan capabilities</li>
+</ul>
+<p>which helps to performs any kind of simulation without any symmetry restrictions. An example regarding the use of the FUNCTIONS and PARAMETERS subblocks is provided below, while a detailed orca_lft tutorial with worked out examples will be soon become available.</p>
+<p>Let us perform the Ni 2+ L-edge XAS spectrum simulation using the following input:</p>
+<pre><code>%lft #-----Parameters-----NEl= 14 LFTCase 2p3d Mult= 3, 1 NRoots= 25, 30 #--------------------#---Slater-Condon Parameters--#---All Values in eV--PARAMETERS F0pp = 85.88 F2pp = 54.77 F0dd = 23.31 F2dd = 13.89 F4dd = 9.14 F0pd = 33.03 F2pd = 7.76 G1pd = 6.42 G3pd = 2.11 end #--------------------#---Diagonal LFT-Matrix Elelemnts--#---All Values in eV--FUNCTIONS 0 0 " 0.00" 1 1 " 0.00" 2 2 " 0.00" 3 3 "1138.35" 4 4 "1138.35" 5 5 "1138.35" 6 6 "1138.35" 7 7 "1138.35" end #--------------------#---SOC-CONSTANTS--#---All Values in eV--PARAMETERS ZETA_P = 11.341 ZETA_D = 0.085 end #--------------------#---SPECTRA/PROPERTIES--DoABS true Rel</code></pre>
+<p>(continues on next page)</p>
+<pre><code>DoSOC true End #---------end *xyz 2 3 Ni 0.00 0.00 0.00 *</code></pre>
+<ul>
+<li style="list-style-type: '· ';">From ORCA 6.1 orca_lft is properly connected with the QDPT driver</li>
+<li style="list-style-type: '· ';">This implies that all QDPT properties Magnetic Properties Through Quasi Degenerate Perturbation Theory can be requested within the Rel block</li>
+</ul>
+<p>In the first step, the LFT problem at hand is defined:</p>
+<pre><code>------------------------------------------------------------------------------L I G A N D F I E L D T H E O R Y ------------------------------------------------------------------------------============================================================================== LFT PARAMETERS DEFINITION BLOCK ============================================================================== Number of electrons = 14 Multiplicities = 3 1 Roots = 25 30 Shells included = 0 2 3 0 ----------------------------------------------------------Definition of the ligand field basis set: ----------------------------------------------------------0 = pz 1 = px 2 = py 3 = dz2 4 = dxz 5 = dyz 6 = dx2y2 7 = dxy ----------------------------------------------------------Definition of the static ligand field by the user: There are 11 ligand field parameters ----------------------------------------------------------Nr. Name Initial Value -----------------------------------------1 F0PP 85.880000 2 F2PP 54.770000 3 F0DD 23.310000 4 F2DD 13.890000</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>5 F4DD 9.140000 6 F0PD 33.030000 7 F2PD 7.760000 8 G1PD 6.420000 9 G3PD 2.110000 10 ZETA_P 11.341000 11 ZETA_D 0.085000 ----------------------------------------------------------Definition of the ligand field functions by the user: There are 8 ligand field functions ----------------------------------------------------------Nr. H-element value function ----------------------------------------------1 H(0,0) 0.000000000 0.00 2 H(1,1) 0.000000000 0.00 3 H(2,2) 0.000000000 0.00 4 H(3,3) 1138.350000000 1138.35 5 H(4,4) 1138.350000000 1138.35 6 H(5,5) 1138.350000000 1138.35 7 H(6,6) 1138.350000000 1138.35 8 H(7,7) 1138.350000000 1138.35</code></pre>
+<h2>After that, the CI problem is defined:</h2>
+<pre><code>=> Defining the CI spaces and setting up the CI ... ============================================================================== CI SETUP AND SOLUTION BLOCK ============================================================================== Making Checks... Multiplicty = 3, #(configurations) = 28 #(CSF's) = 28 #(Roots) = ␣ ↪ → 25 NRoots<NCSFs Adjussting ==> (CSF's) = 25 Setting up CI... Multiplicty = 3, #(configurations) = 28 #(CSF's) = 25 #(Roots) = ␣ ↪ → 25 ============================================================================== CI SETUP AND SOLUTION BLOCK ============================================================================== Making Checks... Multiplicty = 1, #(configurations) = 36 #(CSF's) = 36 #(Roots) = ␣ ↪ → 30 NRoots<NCSFs Adjussting ==> (CSF's) = 30 Setting up CI... Multiplicty = 1, #(configurations) = 36 #(CSF's) = 30 #(Roots) = ␣ ↪ → 30 CI setup done</code></pre>
+<h2>Then, the CI problem is solved:</h2>
+<pre><code>-----------------------------LFT-CI TRANSITION ENERGIES ------------------------------</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th>LOWEST</th><th>ROOT</th><th>(ROOT</th><th>0, MULT 3)</th><th>=</th><th>460.113216547</th><th>Eh 12520.317 eV</th></tr><tr><td>STATE</td><td>ROOT</td><td>MULT</td><td>DE/a.u.</td><td>DE/eV</td><td>DE/cm**-1</td><td></td></tr><tr><td>1:</td><td>1</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>2:</td><td>2</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>3:</td><td>3</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>4:</td><td>5</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>5:</td><td>4</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>6:</td><td>6</td><td>3</td><td>0.000000</td><td>0.000</td><td>0.0</td><td></td></tr><tr><td>7:</td><td>0</td><td>1</td><td>0.086266</td><td>2.347</td><td>18933.2</td><td></td></tr><tr><td>8:</td><td>1</td><td>1</td><td>0.086266</td><td>2.347</td><td>18933.2</td><td></td></tr><tr><td>9:</td><td>2</td><td>1</td><td>0.086266</td><td>2.347</td><td>18933.2</td><td></td></tr><tr><td>10:</td><td>3</td><td>1</td><td>0.086266</td><td>2.347</td><td>18933.2</td><td></td></tr><tr><td>11:</td><td>4</td><td>1</td><td>0.086266</td><td>2.347</td><td>18933.2</td><td></td></tr><tr><td>12:</td><td>7</td><td>3</td><td>0.099001</td><td>2.694</td><td>21728.2</td><td></td></tr><tr><td>13:</td><td>8</td><td>3</td><td>0.099001</td><td>2.694</td><td>21728.2</td><td></td></tr><tr><td>14:</td><td>9</td><td>3</td><td>0.099001</td><td>2.694</td><td>21728.2</td><td></td></tr><tr><td>15:</td><td>5</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>16:</td><td>6</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>17:</td><td>7</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>18:</td><td>8</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>19:</td><td>9</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>20:</td><td>10</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>21:</td><td>12</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>22:</td><td>11</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>23:</td><td>13</td><td>1</td><td>0.132624</td><td>3.609</td><td>29107.7</td><td></td></tr><tr><td>24:</td><td>14</td><td>1</td><td>0.331652</td><td>9.025</td><td>72789.3</td><td></td></tr><tr><td>25:</td><td>15</td><td>1</td><td>29.897078</td><td>813.541</td><td>6561650.2</td><td></td></tr><tr><td>26:</td><td>16</td><td>1</td><td>29.897078</td><td>813.541</td><td>6561650.2</td><td></td></tr><tr><td>27:</td><td>17</td><td>1</td><td>29.897078</td><td>813.541</td><td>6561650.2</td><td></td></tr><tr><td>28:</td><td>18</td><td>1</td><td>29.897078</td><td>813.541</td><td>6561650.2</td><td></td></tr><tr><td>29:</td><td>19</td><td>1</td><td>29.897078</td><td>813.541</td><td>6561650.2 6565721.2</td><td></td></tr><tr><td>30:</td><td>10</td><td>3</td><td>29.915627</td><td>814.046</td><td></td><td></td></tr><tr><td>31:</td><td>11</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>32:</td><td>13</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>33:</td><td>12</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>34:</td><td>14</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>35:</td><td>15</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>36:</td><td>16</td><td>3</td><td>29.915627</td><td>814.046</td><td>6565721.2</td><td></td></tr><tr><td>37:</td><td>17</td><td>3</td><td>29.978158</td><td>815.747</td><td>6579445.1</td><td></td></tr><tr><td>38:</td><td>18</td><td>3</td><td>29.978158</td><td>815.747</td><td>6579445.1</td><td></td></tr><tr><td>39:</td><td>19</td><td>3</td><td>29.978158</td><td>815.747</td><td>6579445.1</td><td></td></tr><tr><td>40:</td><td>20</td><td>3</td><td>29.978158</td><td>815.747</td><td>6579445.1</td><td></td></tr><tr><td>41:</td><td>21</td><td>3</td><td>29.978158</td><td>815.747</td><td>6579445.1</td><td></td></tr><tr><td>42:</td><td>22</td><td>3</td><td>30.016020</td><td>816.777</td><td>6587754.9</td><td></td></tr><tr><td>43:</td><td>23</td><td>3</td><td>30.016020</td><td>816.777</td><td>6587754.9</td><td></td></tr><tr><td>44:</td><td>24</td><td>3</td><td>30.016020</td><td>816.777</td><td>6587754.9</td><td></td></tr><tr><td>45:</td><td>20</td><td>1 1</td><td>30.087356 30.087356</td><td>818.719</td><td>6603411.3</td><td></td></tr><tr><td>46:</td><td>21</td><td></td><td></td><td>818.719</td><td>6603411.3</td><td></td></tr><tr><td>47:</td><td>22</td><td>1</td><td>30.087356</td><td>818.719</td><td>6603411.3</td><td></td></tr><tr><td>48:</td><td>23 24</td><td>1 1</td><td>30.106270 30.106270</td><td>819.233 819.233</td><td>6607562.6 6607562.6</td><td></td></tr><tr><td>49: 50:</td><td>25</td><td>1</td><td></td><td>819.233</td><td>6607562.6</td><td></td></tr><tr><td></td><td></td><td></td><td>30.106270</td><td>819.233</td><td>6607562.6</td><td></td></tr><tr><td>51:</td><td>26</td><td>1</td><td>30.106270 30.106270</td><td>819.233</td><td>6607562.6</td><td></td></tr><tr><td>52: 53:</td><td>27 29</td><td>1 1</td><td>30.106270</td><td>819.233</td><td>6607562.6</td><td></td></tr><tr><td>54:</td><td>28</td><td>1</td><td>30.106270</td><td>819.233</td><td>6607562.6</td><td></td></tr></tbody></table>
+<p>accompanied by a multiplet analysis:</p>
+<p>---------------------------------------------------</p>
+<pre><code>Atomic calculation : Multiplet analysis (LFT) ---------------------------------------------------11 multiplets found (Threshold = 0.01 eV) 0 3F | E = 0.000 eV | 2p(6)3d(8) 1 3P | E = 2.694 eV | 2p(6)3d(8) 2 3F | E = 814.046 eV | 2p(5)3d(9) 3 3D | E = 815.747 eV | 2p(5)3d(9) 4 3P | E = 816.777 eV | 2p(5)3d(9) 5 1D | E = 2.347 eV | 2p(6)3d(8) 6 1G | E = 3.609 eV | 2p(6)3d(8) 7 1S | E = 9.025 eV | 2p(6)3d(8) 8 1D | E = 813.541 eV | 2p(5)3d(9) 9 1P | E = 818.719 eV | 2p(5)3d(9) 10 1F | E = 819.233 eV | 2p(5)3d(9) ---------------------------------------------------</code></pre>
+<p>This is followed by SOC computation in the QDPT framework:</p>
+<pre><code>************************************* Doing QDPT with ONLY SOC! ************************************* ------------------------------------NONZERO SOC MATRIX ELEMENTS (cm**-1) ------------------------------------Bra Ket <Block Root S Ms | HSOC | Block Root S Ms> = Real-part Imaginary␣ ↪ → part -----------------------------------------------------------------------------------↪ → ---0 1 1.0 1.0 0 0 1.0 1.0 0.000 -685.571 0 3 1.0 1.0 0 2 1.0 1.0 0.000 342.781 0 4 1.0 1.0 0 2 1.0 1.0 0.000 0.134 0 4 1.0 1.0 0 3 1.0 1.0 0.000 -2.946 0 5 1.0 1.0 0 2 1.0 1.0 0.000 0.987 0 5 1.0 1.0 0 3 1.0 1.0 0.000 7.920 0 5 1.0 1.0 0 4 1.0 1.0 0.000 -1022.995 0 6 1.0 1.0 0 2 1.0 1.0 0.000 -3.379 ... 1 29 0.0 0.0 0 17 1.0 -1.0 -2850.628 3039. ↪ → 103 1 29 0.0 0.0 0 18 1.0 -1.0 -16745.172 2885. ↪ → 219 1 29 0.0 0.0 0 19 1.0 -1.0 -1533.311 4672.283 1 29 0.0 0.0 0 20 1.0 -1.0 105.943 -43.140 1 29 0.0 0.0 0 21 1.0 -1.0 14.076 39.149 Note: In the following the full <I|HBO+SOC|J> are printed in the CI Basis. I,J are compound indices for |Block/Mult, Ms, Root>, where the states are ordered first by MultBlock, then Ms and finally Root. ...</code></pre>
+<h2>The corrected SOC states are then printed out:</h2>
+<pre><code>The threshold for printing is 0.0010 Eigenvectors: Weight Real Image : Block Root Spin ␣ (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<table><tbody><tr><th>↪ → Ms</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>STATE</th><th>0:</th><th>0.0000 0.014868</th><td>-0.121920</td><td>0.001813</td><td>:</td><td>0</td><td>0 1</td><td>1</td></tr><tr><td></td><td></td><th>0.158642</th><td>0.118778</td><td>0.380175</td><td>:</td><td>0</td><td>1 1</td><td>1</td></tr><tr><td></td><td></td><th>0.022316</th><td>0.003329</td><td>0.149347</td><td>:</td><td>0</td><td>2 1</td><td>1</td></tr><tr><td></td><td></td><th>0.073524</th><td>-0.037132</td><td>0.268598</td><td>:</td><td>0</td><td>3 1</td><td>1</td></tr><tr><td></td><td></td><th>0.071062</th><td>-0.251422</td><td>0.088592</td><td>:</td><td>0 4</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.068532</th><td>-0.250758</td><td>0.075180</td><td>:</td><td>0</td><td>5 1</td><td>1</td></tr><tr><td></td><td></td><th>0.010310</th><td>0.057750</td><td>0.083513</td><td>:</td><td>0</td><td>6 1</td><td>1</td></tr><tr><td></td><td></td><th>0.003333</th><td>-0.030103</td><td>-0.049264</td><td>:</td><td>0</td><td>0 1</td><td>0</td></tr><tr><td></td><td></td><th>0.007037</th><td>0.072029</td><td>-0.042999</td><td>:</td><td>0</td><td>1 1</td><td>0</td></tr><tr><td></td><td></td><th>0.245464</th><td>0.484256</td><td>0.104691</td><td>:</td><td>0</td><td>2 1</td><td>0</td></tr><tr><td></td><td></td><th>0.052920</th><td>-0.229815</td><td>-0.010229</td><td>:</td><td>0</td><td>3 1</td><td>0</td></tr><tr><td></td><td></td><th>0.017953</th><td>0.132002</td><td>0.022989</td><td>:</td><td>0</td><td>4 1</td><td>0</td></tr><tr><td></td><td></td><th>0.005423</th><td>-0.072174</td><td>0.014613</td><td>:</td><td>0</td><td>5 1</td><td>0</td></tr><tr><td></td><td></td><th>0.003723</th><td>0.024970</td><td>0.055669</td><td>:</td><td>0</td><td>6 1</td><td>0</td></tr><tr><td></td><td></td><th>0.018821</th><td>0.098122</td><td>0.095882</td><td>:</td><td>0</td><td>0 1</td><td>-1</td></tr><tr><td></td><td></td><th>0.081892</th><td>-0.206481</td><td>0.198135</td><td>:</td><td>0</td><td>1 1</td><td>-1</td></tr><tr><td></td><td></td><th>0.002458</th><td>-0.042784</td><td>0.025041</td><td>:</td><td>2</td><td>1</td><td>-1</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td>0 0</td><td>1</td><td>-1</td></tr><tr><td></td><td></td><th>0.057211</th><td>-0.099749</td><td>0.217397</td><td>:</td><td></td><td>3</td><td></td></tr><tr><td></td><td></td><th>0.039565</th><td>0.098450</td><td>0.172838</td><td>:</td><td>0</td><td>4 1</td><td>-1</td></tr><tr><td></td><td></td><th>0.043388</th><td>0.182357</td><td>0.100666</td><td>:</td><td>0</td><td>5 1</td><td>-1</td></tr><tr><td></td><td></td><th>0.001044</th><td>0.019418</td><td>0.025827</td><td></td><td></td><td>6</td><td>-1</td></tr><tr><th>STATE</th><td></td><th>0.0000</th><td></td><td></td><td>:</td><td>0</td><td>1</td><td></td></tr><tr><td></td><th>1:</th><th>0.042839</th><td>-0.206750</td><td>-0.009682</td><td>:</td><td>0</td><td>0 1</td><td>1</td></tr><tr><td></td><td></td><th>0.096567</th><td>0.259529</td><td>0.170915</td><td>:</td><td>3</td><td>1</td><td>1</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>:</td><td>0 0</td><td></td><td></td></tr><tr><td></td><td></td><th>0.019022</th><td>-0.134583</td><td>-0.030166</td><td>:</td><td>4 5</td><td>1 1</td><td>1</td></tr><tr><td></td><td></td><th>0.029125</th><td>-0.070877 0.150354</td><td>0.155246 0.042856</td><td>:</td><td>0</td><td>6 1</td><td>1 1</td></tr><tr><td></td><td></td><th>0.024443</th><td></td><td></td><td>:</td><td>0 0</td><td>1</td><td>0</td></tr><tr><td></td><td></td><th>0.126000</th><td>-0.140903</td><td>-0.325802</td><td>:</td><td>0 1</td><td>1</td><td>0</td></tr><tr><td></td><td></td><th>0.066620 0.034344</th><td>-0.112104 -0.075363</td><td>-0.232493 -0.169305</td><td>:</td><td>0 0</td><td>2 1</td><td>0</td></tr><tr><td></td><td></td><th>0.043496</th><td>-0.012839</td><td>-0.208161</td><td>:</td><td>0</td><td>3 1</td><td>0</td></tr><tr><td></td><td></td><th>0.035068</th><td>-0.017670</td><td>0.186428</td><td>:</td><td>0 0</td><td>4 1</td><td>0</td></tr><tr><td></td><td></td><th>0.088777</th><td>-0.019366</td><td>-0.297325</td><td>:</td><td>5 6</td><td>1</td><td>0</td></tr><tr><td></td><td></td><th>0.032394</th><td>-0.009435</td><td>-0.179735</td><td>:</td><td>0</td><td>1</td><td>0 -1</td></tr><tr><td></td><td></td><th>0.033273</th><td>-0.179716</td><td>-0.031232</td><td>:</td><td>0 0</td><td>0 1</td><td></td></tr><tr><td></td><td></td><th>0.038086</th><td>-0.175066</td><td>0.086245</td><td>:</td><td>1</td><td>1</td><td>-1</td></tr><tr><td></td><td></td><th>0.058972</th><td>-0.201976</td><td>0.134823</td><td>:</td><td>0 2</td><td>1 3 1</td><td>-1 -1</td></tr><tr><td></td><td></td><th>0.091992</th><td>0.163866 -0.117870</td><td>-0.255226 0.194975</td><td>: :</td><td>0 0</td><td>4 1</td><td>-1</td></tr><tr><td></td><td></td><th>0.051908</th><td>-0.106696</td><td>-0.062470</td><td>:</td><td>0</td><td>1</td><td>-1</td></tr><tr><td></td><td></td><th>0.015287</th><td></td><td></td><td></td><td></td><td>5</td><td></td></tr><tr><td></td><td></td><th>0.036319</th><td>0.039383</td><td>-0.186462</td><td></td><td>6</td><td>1</td><td></td></tr><tr><th>...</th><td></td><td></td><td></td><td></td><td>:</td><td>0</td><td></td><td>-1</td></tr><tr><th>STATE</th><th>104: 6683223.2237</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>0.048335</th><td>-0.215907</td><td>0.041467</td><td>:</td><td>0</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.001350</th><td>-0.015566</td><td>-0.033287</td><td>:</td><td>17 0 18</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.058642</th><td>-0.018471</td><td>-0.241456</td><td>:</td><td>0</td><td>19 1</td><td>1</td></tr><tr><td></td><td></td><th>0.014743</th><td>-0.111453</td><td>-0.048181</td><td>:</td><td>0 20</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.019424</th><td>-0.128940</td><td>0.052904</td><td>:</td><td>0 21</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.013441</th><td>-0.042408</td><td>-0.107900</td><td>:</td><td>0</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.013136</th><td>0.106586</td><td>-0.042134</td><td></td><td>0</td><td>22</td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>:</td><td>23</td><td>1</td><td>1</td></tr><tr><td></td><td></td><th>0.027360</th><td>-0.066625</td><td>-0.151399</td><td>:</td><td>0</td><td>24</td><td>1</td></tr><tr><td></td><td></td><th>0.030687</th><td>0.028711</td><td>0.172808</td><td>:</td><td>17</td><td>1 1</td><td>0</td></tr><tr><td></td><td></td><th>0.005134</th><td>-0.016659</td><td>-0.069691</td><td>:</td><td>0 0 18</td><td>1</td><td>0</td></tr><tr><td></td><td></td><th>0.006811</th><td>-0.016403 -0.057415</td><td>-0.080880</td><td>:</td><td>0 20 0</td><td>1 1</td><td>0 0</td></tr><tr><td></td><td></td><th>0.100510</th><td></td><td>-0.311791</td><td>:</td><td>0</td><td>21 23</td><td>0</td></tr><tr><td></td><td></td><th>0.054414 0.048345</th><td>-0.044209 -0.215766</td><td>-0.229041 0.042306</td><td>: :</td><td>0 17</td><td>1 1</td><td>-1</td></tr></tbody></table>
+<p>(continued from previous page)</p>
+<pre><code>0.001057 -0.001549 0.032472 : 0 18 1 -1 0.060316 0.071066 0.235085 : 0 19 1 -1 0.015880 -0.093356 0.084643 : 0 20 1 -1 0.019274 -0.138702 -0.005996 : 0 21 1 -1 0.013436 -0.004756 0.115817 : 0 22 1 -1 0.013139 0.114517 0.004987 : 0 23 1 -1 0.026471 -0.005403 0.162611 : 0 24 1 -1 0.050526 0.219718 -0.047434 : 1 20 0 0 0.293497 -0.532819 0.097985 : 1 21 0 0 0.064015 0.249661 -0.041039 : 1 22 0 0</code></pre>
+<p>Then, the SOC-corrected absorption (here XAS) spectrum is provided:</p>
+<table><tbody><tr><th colspan="8">----------------------------------------------------------------------------------- --------------------- SOC CORRECTED ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS</th></tr><tr><th>↪ →</th><th>--------------------- Transition |DY| |DZ|</th><th>Energy</th><th>Energy</th><th>Wavelength</th><th>fosc(D2)</th><th>D2</th><th>|DX|␣</th></tr><tr><th>↪ → ↪ →</th><th>(au) (au)</th><th>(eV)</th><th>(cm-1)</th><th>(nm)</th><th>(*population)</th><th>(au**2)</th><th>(au)␣</th></tr><tr><td>----------------------------------------------------------------------------------- ↪ → 1-3.0A ↪ → 00000</td><td>--------------------- -&gt; 2-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>0-3.0A ↪ → 00000</td><td>-&gt; 1-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>0-3.0A ↪ → 00000</td><td>-&gt; 2-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>1-3.0A 00000</td><td>-&gt; 3-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 2-3.0A 00000</td><td>-&gt; 3-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 0-3.0A</td><td>-&gt; 3-3.0A</td><td>0.000000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00000 1-3.0A ↪ 00000</td><td>0.00000 -&gt; 4-3.0A 0.00000</td><td>0.00000 0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 2-3.0A ↪ → 00000</td><td>-&gt; 4-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>2-3.0A ↪ 00000</td><td>-&gt; 5-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 2-3.0A 00000</td><td>-&gt; 6-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 0-3.0A 00000</td><td>-&gt; 4-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 1-3.0A 00000</td><td>-&gt; 7-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 1-3.0A</td><td>-&gt; 6-3.0A</td><td>0.000000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00000 2-3.0A 00000</td><td>0.00000 -&gt; 7-3.0A 0.00000</td><td>0.00000 0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 1-3.0A 00000</td><td>-&gt; 5-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 0-3.0A 00000</td><td>-&gt; 6-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 0-3.0A</td><td>-&gt; 7-3.0A</td><td>0.000000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00000 0-3.0A</td><td>0.00000 -&gt; 5-3.0A 0.00000</td><td>0.00000 0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00000 1-3.0A</td><td>-&gt; 8-3.0A</td><td>0.000000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>↪ → 00000 2-3.0A ↪ 00000</td><td>0.00000 -&gt; 8-3.0A</td><td>0.00000 0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 0-3.0A ↪ 00000</td><td>0.00000 -&gt; 8-3.0A 0.00000</td><td>0.000000 0.00000</td><td>0.0</td><td>0.0</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 2-3.0A ↪ 00000</td><td>-&gt; 9-3.0A 0.00000</td><td>0.171933 0.00000</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 1-3.0A ↪ → 00000</td><td>-&gt; 9-3.0A 0.00000</td><td>0.171933 0.00000</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>0-3.0A ↪ 00000</td><td>-&gt; 9-3.0A 0.00000</td><td>0.171933 0.00000</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>→ 1-3.0A ↪ → 00000</td><td>-&gt; 10-3.0A 0.00000</td><td>0.171933 0.00000</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>2-3.0A</td><td>-&gt; 10-3.0A 0.00000</td><td>0.171933 0.00000</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td>↪ → 00000 0-3.0A ↪ → 00000</td><td>-&gt; 10-3.0A 0.00000</td><td>0.171933 0.0</td><td>1386.7</td><td>7211.2</td><td>0.000000000</td><td>0.00000</td><td>0.</td></tr><tr><td colspan="8">...</td></tr><tr><td>2-3.0A ↪ → 01199</td><td>-&gt; 45-3.0A 0.00520</td><td>808.419525 0.01856</td><td>6520343.9</td><td>1.5</td><td>0.001132627</td><td>0.00052</td><td>0.</td></tr><tr><td>1-3.0A ↪ 00950</td><td>-&gt; 45-3.0A 0.00818</td><td>808.419525 0.00742</td><td>6520343.9</td><td>1.5</td><td>0.000466250</td><td>0.00021</td><td>0.</td></tr><tr><td>→ 0-3.0A</td><td>-&gt; 45-3.0A</td><td>808.419525</td><td>6520343.9</td><td>1.5</td><td>0.001659029</td><td>0.00075</td><td>0.</td></tr><tr><td>↪ → 01729 2-3.0A</td><td>0.00696 -&gt; 46-3.0A</td><td>0.02018 808.419525</td><td>6520343.9</td><td>1.5</td><td>0.001163057</td><td>0.00053</td><td>0.</td></tr><tr><td>↪ → 01282 1-3.0A</td><td>0.00222 -&gt; 46-3.0A</td><td>0.01896 808.419525</td><td>6520343.9</td><td>1.5</td><td>0.000718139</td><td>0.00033</td><td>0.</td></tr><tr><td>↪ → 00902 0-3.0A</td><td>0.01359 -&gt; 46-3.0A 0.01112</td><td>0.00780 808.419525 0.00211</td><td>6520343.9</td><td>1.5</td><td>0.000710800</td><td>0.00032</td><td>0.</td></tr><tr><td>↪ → 01397 2-3.0A ↪ 02588</td><td>-&gt; 47-3.0A 0.01640</td><td>808.419525 0.01943</td><td>6520343.9</td><td>1.5</td><td>0.002893681</td><td>0.00132</td><td>0.</td></tr><tr><td>→ 1-3.0A ↪ → 02045</td><td>-&gt; 47-3.0A 0.00869</td><td>808.419525 0.00955</td><td>6520343.9</td><td>1.5</td><td>0.001285542</td><td>0.00058</td><td>0.</td></tr><tr><td>2-3.0A ↪ → 00885</td><td>-&gt; 48-3.0A 0.01380</td><td>808.419525 0.01228</td><td>6520343.9</td><td>1.5</td><td>0.000921831</td><td>0.00042</td><td>0.</td></tr></tbody></table>
+<p>By processing the *.out file as usual with orca_mapspc orca_mapspc , the *.dat and *.stk files are generated. The XAS spectrum plotted using these files is given in Fig. 9.10.</p>
+<figure><figcaption><div class="caption">Fig. 9.10: orca_lft simulated Ni 2+ L-edge XAS spectrum for the Nickel atom (red) and for the Nickel atom in the presence of an Oh field</div></figcaption></figure>
+<p>The power of orca_lft stems from the fact that is entirely paramerizable. This flexibility is enabled through the intrinsic capabilities of the PARAMETERS and FUNCTIONS subblocks</p>
+<ul>
+<li style="list-style-type: '· ';">Parameters Scanability Anygiven parameter-for example, the ZETA_D spin-orbit coupling (SOC) constant in the D-shell can be:</li>
+<li style="list-style-type: '· ';">Switched on/off : ZETA_D= 0.0</li>
+<li style="list-style-type: '· ';">Scanned over a range of parameters : ZETA_D= 0.0, 0.1, 11 , which spans the range 0.0-0.1 eV for 11 steps.</li>
+<li style="list-style-type: '· ';">Definition of New Parameters</li>
+<li style="list-style-type: '· ';">Users may define any number or type of custom parameters within the PARAMETERS subblock : e.g. 10Dq= 1.2</li>
+<li style="list-style-type: '· ';">Algebraic Relations in the PARAMETERS and FUNCTIONS Subblocks</li>
+<li style="list-style-type: '· ';">Algebraic relations in the PARAMETERS subblock :</li>
+<li style="list-style-type: '· ';">Algebraic relations in the FUNCTIONS subblock</li>
+</ul>
+<pre><code>`DOh = 1.2` `D1 = {-0.4*DOh}` `D2 = {0.6*DOh}`</code></pre>
+<pre><code>`3 3 "1138.35 + D2" # => dz2` `4 4 "1138.35 + D1" # => dxz`</code></pre>
+<p>This provides the necessary flexibility to set up arbitrarily parameterized ligand field theory (LFT) models tailored to specific experimental chemical problems.</p>
+<pre><code>:</code></pre>
+<p>As an example, let us revisit the nickel complex discussed above and introduce a barycentric octahedral ligand field splitting of the d-orbital shell with 10Dq=1.2 eV.</p>
+<p>The input now reads:</p>
+<pre><code>%lft #-----Parameters-----NEl= 14 LFTCase 2p3d Mult= 3, 1 NRoots= 25, 30 #--------------------#---Slater-Condon Parameters--#---All Values in eV--PARAMETERS F0pp = 85.88 F2pp = 54.77 F0dd = 23.31 F2dd = 13.89 F4dd = 9.14 F0pd = 33.03 F2pd = 7.76 G1pd = 6.42 G3pd = 2.11 DOh = 1.2 D1 = {-0.4*DOh} D2 = {0.6*DOh} end #--------------------#---Diagonal LFT-Matrix Elelemnts--#---All Values in eV--FUNCTIONS 0 0 " 0.00" 1 1 " 0.00" 2 2 " 0.00" 3 3 "1138.35 + D2" # => dz2 4 4 "1138.35 + D1" # => dxz 5 5 "1138.35 + D1" # => dyz 6 6 "1138.35 + D2" # => dx2-y2 7 7 "1138.35 + D1" # => dxy end #--------------------#---SOC-CONSTANTS--#---All Values in eV--PARAMETERS ZETA_P = 11.341 ZETA_D = 0.085 end #--------------------#---SPECTRA/PROPERTIES--DoABS true Rel DoSOC true End #---------</code></pre>
+<p>(continues on next page)</p>
+<pre><code>End *xyz 2 3 Ni 0.00 0.00 0.00 *</code></pre>
+<p>By running the above inputone see that the new parameters DOH , D1 and D2 are succesfully defined:</p>
+<pre><code>----------------------------------------------------------Definition of the ligand field basis set: ----------------------------------------------------------0 = pz 1 = px 2 = py 3 = dz2 4 = dxz 5 = dyz 6 = dx2y2 7 = dxy ----------------------------------------------------------Definition of the static ligand field by the user: There are 14 ligand field parameters ----------------------------------------------------------Nr. Name Initial Value -----------------------------------------1 F0PP 85.880000 2 F2PP 54.770000 3 F0DD 23.310000 4 F2DD 13.890000 5 F4DD 9.140000 6 F0PD 33.030000 7 F2PD 7.760000 8 G1PD 6.420000 9 G3PD 2.110000 10 DOH 1.200000 11 D1 -0.480000 12 D2 0.720000 13 ZETA_P 11.341000 14 ZETA_D 0.085000</code></pre>
+<table><tbody><tr><th>Nr.</th><th>Name</th><th>Initial Value</th></tr><tr><td>1</td><td>F0PP</td><td>85.880000</td></tr><tr><td>2</td><td>F2PP</td><td>54.770000</td></tr><tr><td>3</td><td>F0DD</td><td>23.310000</td></tr><tr><td>4</td><td>F2DD</td><td>13.890000</td></tr><tr><td>5</td><td>F4DD</td><td>9.140000</td></tr><tr><td>6</td><td>F0PD</td><td>33.030000</td></tr><tr><td>7</td><td>F2PD</td><td>7.760000</td></tr><tr><td>8</td><td>G1PD</td><td>6.420000</td></tr><tr><td>9</td><td>G3PD</td><td>2.110000</td></tr><tr><td>10</td><td>DOH</td><td>1.200000</td></tr><tr><td>11</td><td>D1</td><td>-0.480000</td></tr><tr><td>12</td><td>D2</td><td>0.720000</td></tr><tr><td>13</td><td>ZETA_P</td><td>11.341000</td></tr><tr><td>14</td><td>ZETA_D</td><td>0.085000</td></tr></tbody></table>
+<h2>And the Oh LFT splitting is take into account in the 1-electron LFT matrix as:</h2>
+<pre><code>----------------------------------------------------------Definition of the ligand field functions by the user: There are 8 ligand field functions ----------------------------------------------------------Nr. H-element value function ----------------------------------------------1 H(0,0) 0.000000000 0.00 2 H(1,1) 0.000000000 0.00 3 H(2,2) 0.000000000 0.00 4 H(3,3) 1139.070000000 1138.35 + D2 5 H(4,4) 1137.870000000 1138.35 + D1 6 H(5,5) 1137.870000000 1138.35 + D1 7 H(6,6) 1139.070000000 1138.35 + D2 8 H(7,7) 1137.870000000 1138.35 + D1</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td colspan="6">=&gt; Defining the one-electron LFT matrix ... ----------------------------------------------------------</td><td colspan="2">done</td></tr><tr><td colspan="8">The ligand field one electron eigenfunctions:</td></tr><tr><td>Orbital ↪</td><td>Energy (eV) dxz dyz</td><td colspan="2">---------------------------------------------------------- Energy(cm-1) dx2-y2</td><td>pz dxz</td><td>px</td><td>py</td><td>dz2 ␣</td></tr><tr><td>→ 1 ↪ → 000000</td><td>0.000 0.000000</td><td>0.0 0.000000 0.0</td><td>0.000000</td><td>1.000000 0.000000 0.000000</td><td>0.000000 1.000000</td><td>0.000000</td><td>0.</td></tr><tr><td>2 ↪ → 000000 3</td><td>0.000 0.000000 0.000</td><td>0.000000 0.0</td><td>0.000000</td><td>0.000000 0.000000</td><td>0.000000</td><td>0.000000 1.000000</td><td>0. 0.</td></tr><tr><td>↪ → 000000 4</td><td>0.000000 1137.870</td><td>0.000000 9177541.4</td><td>0.000000</td><td>0.000000 0.000000</td><td>0.000000</td><td>0.000000</td><td>0.</td></tr><tr><td>↪ → 000000 5</td><td>1.000000 1137.870</td><td>0.000000 9177541.4</td><td>0.000000</td><td>0.000000 0.000000</td><td></td><td></td><td>0.</td></tr><tr><td>↪ → 000000</td><td>0.000000</td><td>1.000000</td><td>0.000000</td><td>0.000000 0.000000</td><td>0.000000</td><td>0.000000</td><td></td></tr><tr><td>6</td><td>1137.870</td><td>9177541.4 0.000000</td><td>0.000000</td><td>1.000000</td><td>0.000000</td><td>0.000000</td><td>0.</td></tr><tr><td>↪ → 000000 7</td><td>0.000000 1139.070</td><td>9187220.1</td><td></td><td>0.000000 0.000000</td><td>0.000000</td><td>0.000000</td><td>0.</td></tr><tr><td>↪ → 000000 8</td><td>0.000000 1139.070</td><td>0.000000 9187220.1</td><td>1.000000</td><td>0.000000</td><td>0.000000</td><td>0.000000</td><td>1.</td></tr><tr><td>↪ → 000000</td><td>0.000000</td><td>0.000000</td><td>0.000000</td><td>0.000000</td><td></td><td></td><td></td></tr></tbody></table>
+<p>Upon successful termination, one can process the Ni L-edge XAS spectrum and plot the resulting data, as shown in Fig. 9.10 (blue line), which indeed reproduces characteristic features of the Ni L-edge XAS spectrum of, for example, Ni ( H 2 O ) 6 .</p>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">A detailed tutorial will soon become available that further explores the capabilites of orca_lft</li>
+</ul>
+<h2>9.2.16 orca_crystalprep</h2>
+<p>ORCA features a utility program orca_crystalprep that can process crystallographic .cif files or .xyz supercell files and produce proper inputs for the embedded cluster calculations.</p>
+<p>To perform an embedded cluster calculation conventionally or within the Ionic-Crystal-QMMM, one needs to define basically 3 regions:</p>
+<ol>
+<li style="list-style-type: '1. ';">The quantum cluster QC that will be treated quantum mechanically.</li>
+<li style="list-style-type: '2. ';">The point charge region PC that represents the solid's environment.</li>
+<li style="list-style-type: '3. ';">A boundary region BR or ECP that is located between the QC and PC with the main role to prevent charge communication between the QC and PC regions.</li>
+</ol>
+<p>This implies that, in the first step, a SuperCell (.xyz) must be generated, with different regions separated according to the calculation design. In the second step, the charge of the system must be balanced. Finally, all these need to be combined into a proper calculation input.</p>
+<p>This is clearly a multistep and many times multiplatform process that is</p>
+<ol>
+<li style="list-style-type: '1. ';">complicated,</li>
+<li style="list-style-type: '2. ';">time consuming,</li>
+<li style="list-style-type: '3. ';">not user friendly.</li>
+</ol>
+<p>The orca_crystalprep utility is designed to automatically generate proper inputs for ORCA embedded cluster calculations with the aim to allow to a wide range of experienced and not experienced users the ability to setup an embedded cluster calculation with a minimal effort.</p>
+<p>orca_crystalprep requires its own input. By simply executing it from the terminal:</p>
+<pre><code>orca_crystalprep</code></pre>
+<h2>one gets printings for the usage</h2>
+<pre><code>************************************************************************************************* Generate initial ORCA CrystalPrep Input ************************************************************************************************* ================================================================================================= Usage: orca_crystalprep [Basename Input] [options] ================================================================================================= -----------------------------------------------------------------------------------↪ → -------------------------[Options]: -----------------------------------------------------------------------------------↪ → --------------------------geninput Generate Initial Input -----------------------------------------------------------------------------------↪ → -------------------------************************************************************************************************* Generate ORCA Embedding Cluster Inputs using the CrystalPrep Utility ************************************************************************************************* ================================================================================================= Usage: orca_crystalprep [CrystalPrep Input] =================================================================================================</code></pre>
+<h2>and the different options:</h2>
+<pre><code>-----------------------------------------------------------------------------------↪ → -------------------------[CrystalPrep Input Options]: -----------------------------------------------------------------------------------↪ → --------------------------General Definitions -----------------------------------------------------------------------------------↪ → --------------------------DoCIF true This will process a .cif file DoXYZ true This will process a .xyz file InputCIF "CIFFileName" Set the name of the␣ ↪ → CIFFileName InputXYZ "XYZFileName" Set the name of the␣ ↪ → XYZFileName -----------------------------------------------------------------------------------↪ → --------------------------SuperCell Construction Definitions -----------------------------------------------------------------------------------↪ → --------------------------DoSuperCell true Flag to generate a SuperCell SCDimension "axbxc" The Dimension of the␣ ↪ → SuperCell (e.g. "1x1x1") InputCIF "CIFFileName" Set the name of the␣ ↪ → CIFFileName InputXYZ "XYZFileName" Set the name of the␣ ↪ → XYZFileName -----------------------------------------------------------------------------------↪ → --------------------------Special Tasks on SuperCells -----------------------------------------------------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → --------------------------DoFractional true Flag to Transform Cartesian␣ ↪ → to Fractional coordinates DoSymmetryOperations true Flag to enforce using built␣ ↪ → in Symmetry Operations DoHemiSphereSC true Flag to request a Hemisphere␣ ↪ → Super Cell build DoSymetricSC true/false Flag to request a Symmetric␣ ↪ → Super Cell build false => Origin Build : 0 -ra, 0 -rb, 0 -␣ ↪ → rc => Default for Now! true => Symmetric Build : -ra - ra, -rb - rb, -rc -␣ ↪ → rc -----------------------------------------------------------------------------------↪ → --------------------------Embedding Cluster Definitions -----------------------------------------------------------------------------------↪ → --------------------------DoEmbedding true Flag to generate the files␣ ↪ → for the embedding approach UseVolumeCriterion true Volume Criterion to generate␣ ↪ → layers UseDistanceCriterion true Distance Criterion to␣ ↪ → generate layers CellVolumeFraction value Cell(UniCell/SuperCell)␣ ↪ → fraction (default 1.0) DoMolecularFragments value Define Molecular Fragments␣ ↪ → during the build DoSimpleInput true Flag to generate a␣ ↪ → conventional Embedding Cluster input DoICQMMMInput true Flag to generate a Ionic-↪ → Crystal-QMMM input DoMCQMMMInput true Flag to generate a Mol-↪ → Crystal-QMMM input WritePDB true Flag to run a Ionic-Crystal-↪ → QMMM input from a PDF file QCCharge Charge Number Specify the total QC Charge QCMult Multiplicity Number Specify the total Multiplicity -----------------------------------------------------------------------------------↪ → --------------------------Special Tasks on Embedding Cluster Construction/Definition -----------------------------------------------------------------------------------↪ → --------------------------DoLayers true Request Layers Definition 1) Layers Definition. There are 2 Options: a) The Differnt regions are build in layers as multipoles of the␣ ↪ → UnitCell b) The Differnt regions are build in layers around a predefined QC␣ ↪ → cluster via a QCAtom List QCLayers QC Layers Number Specify the number of the QC␣ ↪ → Layers ECPLayers ECP Layers Number Specify the number of the ECP␣ ↪ → Layers PCLayers PC Layers Number Specify the number of the PC␣ ↪ → Layers HFLayers HF Layers Number Specify the number of the HF␣ ↪ → Layers Example Input QCLayers 1 2) Atoms Definition. This is alternative to Layers Definition (e.g. DoLayers false) NQCAtoms QC Atoms Number Specify the number of the QC␣</code></pre>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

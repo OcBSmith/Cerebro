@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part053</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<figure><figcaption><div class="caption">Fig. 5.62: Simulated 1 3 C (top) and 1H (bottom) NMR spectra. Note that as only HH couplings have been computed, the spectra do not include any CH couplings and the carbon spectrum is also uncoupled.</div></figcaption></figure>
+<p>This makes comparison to experiment and assessment of the computed parameters much easier, however, it is not as advanced as other codes and does not, for example, take conformational degrees of freedom etc. into account. Note that the corresponding property files can also be modified to tinker with the computed shieldings and couplings.</p>
+<h2>5.21.4 Visualizing shielding tensors using orca_plot</h2>
+<p>For the visualization it is recommended to perform an ORCA NMR calculation such that the corresponding gbw and density files required by orca_plot are generted by using the !keepdens keyword along with !NMR . If orca_plot is called in the interactive mode by specifying orca_plot myjob.gbw -i (note that myjob. gbw , myjob.densities and myjob.property.txt have to be in this directory), then following 1 type of plot and choosing 17 - shielding tensor , confirming the name of the property file and then choosing 11 Generate the plot will generate a .cube file with shielding tensors depicted as ellipsoids at the corrsponding nuclei. These can be plotted for example using Avogadro, isosurface values of around 1.0 and somewhat denser grids for the cube file (like 100x100x100) are recommended. A typical plot for CF 3 SCH 3 generated with Avogadro looks like this 2 :</p>
+<p>2 the same scheme can be applied to visualize polarisability tensors in the molecular framework using orca_plot .</p>
+<figure><figcaption><div class="caption">Fig. 5.63: The shielding tensors of each atom in CF 3 SCH 3 have been plotted as ellipsoids (a,b and c axis equivalent to the normalized principle axes of the shielding tensors) at the given nuclei.</div></figcaption></figure>
+<h2>5.21.5 Nucleus-independent chemical shielding</h2>
+<p>Aromaticity is a fundamental concept in chemistry and much attention has been payed to its analysis in quantum chemistry. One possibility to gain insight into aromaticity is to sample the ring current effect in NMR close to the π -system. As this is not done by inspecting the chemical shielding of any of the atoms, this quantity is called nucleus independent chemical shielding (NICS). Usually, a 'dummy' atom is placed in the center of the ring and/or at some distance away from it. In ORCA, one needs to use a ghost atom, e.g. ' H: ' to ensure that the program generates DFT or COSX grid points in the region on interest. For technical reasons, this atom must also have at least one basis function, which can be set with NewGTO . An s-function with a sufficiently large exponent will not overlap with any other basis function in the molecule and will thus have no effect on the results, but only satisfy the technical requirement (note that the extra grid points may change some of the calculation results by increasing the accuracy of the numerical integration). If RI is used, a dummy fitting function must also be added to the AuxJ, AuxJK, and/or AuxC basis set. A typical input for benzene looks like this:</p>
+<pre><code>! TightSCF NMR PBE def2-TZVP RI def2/J * gzmt 0 1 H: NewGTO S 1 1 1e6 1 end NewAuxJGTO S 1 1 2e6 1␣ ↪ → end H: 1 1 NewGTO S 1 1 1e6 1 end NewAuxJGTO S 1 1 2e6 1␣ ↪ → end C 1 1.39 2 90 C 1 1.39 2 90 3 60 C 1 1.39 2 90 4 60 C 1 1.39 2 90 5 60 C 1 1.39 2 90 3 -60 C 1 1.39 2 90 6 60 H 3 1.09 4 120 1 180 H 4 1.09 3 120 1 180 H 5 1.09 4 120 1 180 H 6 1.09 5 120 1 180 H 7 1.09 3 120 1 180 H 8 1.09 7 120 1 180 *</code></pre>
+<h2>5.21.6 Shielding tensor orbital decomposition</h2>
+<p>It is possible to decompose the NMR shielding tensor into orbital- or orbital pair contributions. One such option is the Natural Chemical Shielding analysis (see Section Natural Chemical Shielding Analysis (NCS) ), while another is presented here. The shielding tensor for nucleus A can be exactly decomposed as follows:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<p>Note that for SCF methods (HF or DFT), σ A, para/dia a = 0 . To request the analysis, a valid GBW file must be given with the keyword LocOrbGBW , which can contain any orthonormal MOs in the same basis, e.g. canonical or localized, although the decomposition above assumes that the Brillouin condition is fulfilled and may be misleading if performed over NBOs for example. Orbital contributions over 0.01 ppm are printed - this is currently not user-configurable. The separate orbital pair contributions can also be printed using Printlevel=3 . The following example input calculates HF and RI-MP2 shieldings for formaldehyde and decomposes them over Pipek-Mezey localized orbitals (note that the virtual orbitals are likely not well localized AHFB would be better suited there). The second subcalculation just prints the LMOs for convenient visualization with Avogadro.</p>
+<pre><code>! RI-MP2 NMR TightSCF RIJK pcSseg-1 cc-pwCVDZ/C def2/JK %base "H2CO_NMR_PM" (continues on next page)</code></pre>
+<p>where B is the applied magnetic field vector.</p>
+<p>(continued from previous page)</p>
+<pre><code>%loc LocMet PM # Pipek-Mezey localization Occ true # localize both occupied Virt true # and virtual orbitals (better use AHFB for these!) T_core -1e5 # including the core end %eprnmr PrintLevel 3 # print orbital pair contributions (lots of output!) LocOrbGBW "H2CO_NMR_PM.loc" # use these orbitals end !xyzfile # store the coordinates *gzmt 0 1 O C 1 1.2078 H 2 1.1161 1 121.74 H 2 1.1161 1 121.74 3 180 * # read the localized orbitals and print them in the output # for easy visualization with Avogadro $new_job ! HF pcSseg-1 NoRI MORead NoIter PrintBasis PrintMOs %moinp "H2CO_NMR_PM.loc" *xyzfile 0 1 H2CO_NMR_PM.xyz</code></pre>
+<h2>5.21.7 Treatment of Tau in Meta-GGA Functionals</h2>
+<p>For GIAO-based calculations with meta-GGAs, different options are available for the kinetic energy density τ . The current-independent τ 0 is not gauge-invariant. Ignoring the terms, which produce the gauge-dependence, leads to an ad-hoc gauge-invariant treatment (this was the default up to ORCA 5). A gauge-invariant definition τ MS, containing an explicit dependence on the magnetic field, was proposed by Maximoff and Scuseria.[693] However, this ansatz produces unphysical paramagnetic contributions to the shielding tensor.[694] The last option, introduced by Dobson,[695] is gauge-invariant but requires the solution of the CP-SCF equations, even for pure density functionals. For a discussion and comparison of these alternatives see refs [696] (in the context of TDDFT) and [694, 697] (in the context of NMR shielding). Note that the calculated shieldings can differ substantially between the different approaches! Some other electronic structure programs use the MS ansatz by default, so be careful when comparing results between different codes. In ORCA the treatment of τ in GIAO-based calculations is chosed as follows</p>
+<pre><code>%eprnmr Tau 0 # gauge-variant GI # ad-hoc gauge-invariant MS # field-dependent, gauge-invariant version of Maximoff and Scuseria Dobson # (default) current density-dependent, gauge-invariant version of␣ ↪ → Dobson end</code></pre>
+<h2>5.21.8 Cartesian Index Conventions for EPR and NMR Tensors</h2>
+<p>The NMR shielding tensor σ and the EPR g and A tensors are in general nonsymmetric matrices. It is therefore important to know the conventions used with regard to their cartesian indices. These conventions stipulate the order of the vector-matrix-vector multiplications in the respective spin Hamiltonians. Unless stated otherwise, ORCA adopts the following conventions:</p>
+<p>For the NMR shielding tensor the nuclear Zeeman Hamiltonian assumes the form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For the EPR g and A tensors the EPR spin Hamiltonian assumes the form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.21.9 EPRNMR - keywords for magnetic properties</h2>
+<p>Calculation of EPR and NMR response properties can be requested in the %eprnmr input block. The individual flags are given below.</p>
+<pre><code>%eprnmr # Calculate the g-tensor using CP-KS theory gtensor true # Calculate and print one- and two-electron contributions to the g-tensor gtensor_1el2el true # Calculate the D-tensor DTensor so # spin orbit part ss # spin-spin part ssandso # both parts DSOC qro # quasi-restricted method; must be done with the keyword !uno pk # Pederson-Khanna method. # NOTE: both approximations are only valid for # pure functionals (no HF exchange) cp # coupled-perturbed method (default) cvw # van W\"ullen method DSS direct # directly use the canonical orbitals for the spin density uno # use spin density from UNOs PrintLevel n # Amount of output (default 2) # whether to calculate and print the Euler angles via `orca_euler` if the # calculation of the g-tensor or the D-tensor is requested PrintEuler false # For the solution of the CP-SCF equations: Solver Pople # Pople solver (default) CG # conjugate gradient DIIS # DIIS type solver MaxIter 64 # maximum number of iterations MaxDIIS 10 # max. number of DIIS vectors (only DIIS) Tol 1e-3 # convergence tolerance LevelShift 0.05 # level shift for DIIS (ignored otherwise) Ori CenterOfElCharge # center of electronic charge CenterOfNucCharge # center of nuclear charge CenterOfSpinDens # center of spin density CenterOfMass # center of mass GIAO # use the GIAO formalism (default) N # number of the atom to put the origin X,Y,Z # explicit position of the origin # in coordinate input units (Angstrom by default) # Calculate the NMR shielding tensor NMRShielding 1 # for chosen nuclei - specified with the Nuclei keyword 2 # for all nuclei - equivalent to the 'NMR' simple input keyword # treatment of 1-electron integrals in the RHS of the CPSCF equations giao_1el = giao_1el_analytic # analytical, default giao_1el_numeric # numerical -for testing only # treatment of 2-electron integrals in the RHS of the CPSCF equations</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># various options for combination of approximations in Coulomb (J) and # exact (HF) exchange (K) part. The default is the same as used for the SCF. giao_2el = giao_2el_rijk # RIJK approximation giao_2el_same_as_scf # use same scheme as in SCF giao_2el_analytic # fully analytical giao_2el_rijonx # RIJ approximation with analytical K giao_2el_cosjonx # COSJ approximation with analytical K giao_2el_rijcosx # RIJ approximation with COSX approximation giao_2el_cosjx # COSJ approximation with COSX apprxomation giao_2el_exactjcosx # exact J with COSX approximation giao_2el_exactjrik # exact J with RIK approximation # for g-tensor calculations using the SOMF-operator for the SOC # treatment, the 2-electron contribution to the GIAO terms can be # computed as well, but they take much more time and usually do not # contribute significantly and therefore are disabled by default do_giao_soc2el false # treatment of tau in meta-GGA DFT -see above Tau = Dobson # (default) Other options: 0, MS, GI # use effective nuclear charges for the gauge correction to the A-tensor # (this makes sense if an effective 1-electron SOC operator is used) hfcgaugecorrection_zeff true # calculate diamagnetic spin-orbit (DSO) integrals needed for the gauge # correction to the A-tensor numerically (faster than the analytical way) hfcgaugecorrection_numeric true # Grid settings for the above: <0 means to use the DFT grid setting hfcgaugecorrection_angulargrid -1 hfcgaugecorrection_intacc -1 hfcgaugecorrection_prunegrid -1 hfcgaugecorrection_bfcutoff -1 hfcgaugecorrection_wcutoff -1 Nuclei = all type { flags } # Calculate nuclear properties. Here the properties # for all nuclei of "type" are calculated ("type" is # an element name, for example Cu.) # Flags can be the following: # aiso -calculate the isotropic part of the HFC # adip -calculate the dipolar part of the HFC # aorb -2nd order contribution to the HFC from SOC # fgrad - calculate the electric field gradient # rho -calculate the electron density at the # nucleus # shift - NMR shielding tensor (orbital contribution) # srot -spin-rotation tensor # ssdso - spin-spin coupling constants, diamagnetic spin orbit term # sspso - spin-spin coupling constants, paramagnetic spin orbit term # ssfc -spin-spin coupling constants, Fermi contact term # sssd -spin-spin coupling constants, spin dipole term # ssall - spin-spin coupling constants, calculate all above contributions # In addition you can change several parameters # e.g. for a different isotope. Nuclei = all N { PPP=39.1, QQQ=0.5, III=1.0 }; # PPP - the HFC proportionality factor for this nucleus # = ge*gN*betaE*betaN # QQQ - the quadrupole moment for this nucleus</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># III - the spin for this nucleus # ist -isotope # ssgn - nuclear g-factor for spin-spin coupling # and spin-rotation constants (overrides ist) # For example: # calculates the hyperfine coupling for all nitrogen atoms Nuclei = all N { aiso, adip, fgrad, rho}; # calculates the spin-spin coupling constants for all carbon atoms # assuming all carbon atoms are 13C Nuclei = all C { ssall, ist = 13}; # You can also calculate properties for individual atoms # as in the following example: Nuclei = 1,5,8 { aiso, adip}; # NOTE: Counting starts with atom 1! # WARNING: All the nuclei, mentioned in one line # as above will be assigned the same parameters ! # For spin-spin coupling constants, a distance threshold is # applied in the eprnmr block to restrict the number of couplings # to be computed, given in Angstroms: SpinSpinRThresh 5.0 # default # Coupling can be restricted to certain element pairs # (if they are added to the "Nuclei" list and are within RThresh). # The syntax accepts multiple pairs of element symbols or # atomic numbers or "*" as a wildcard SpinSpinElemPairs {C C} {H *} {6 7} # default is {* *}, i.e. all # Similarly, coupling can be restricted to certain atom pairs # (if they are added to the "Nuclei" list and are within RThresh). # The syntax accepts multiple pairs of indices (starting at 0!) # or "*" as a wildcard SpinSpinAtomPairs {1 0} {5 *} # default is {* *}, i.e. all # whether to print reduced spin-spin coupling constants PrintReducedCoupling false end</code></pre>
+<h2>5.22 Paramagnetic NMR Shielding Tensors</h2>
+<p>For systems with spin S &gt; 0 , the nuclear shielding contains a contribution which arises from the paramagnetism of the unpaired electrons. 3 This contribution is temperature-dependent and is called the 'paramagnetic shielding' ( σ p ). It adds to the temperature-indendent contribution to the shielding, also called the 'orbital' contribution:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>ORCA currently supports the calculation of σ p for systems whose paramagnetism can be described by the effective EPR spin Hamiltonian</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The theoretical background can be found in Refs. [698, 699]. We reproduce here the main equations.</p>
+<p>3 For a comprehensive review on paramagnetic NMR, see e.g. [701].</p>
+<p>For a spin state described by Eq. (5.97), the paramagnetic shielding tensor is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where Z is a dimensionless 3 × 3 matrix which is determined by the ZFS and the temperature, as follows: Diagonalization of the ZFS Hamiltonian SDS yields energy levels E λ and eigenstates | Sλa ⟩ , where a labels degenerate states if E λ is degenerate. Then Z is defined as ( i, j = x, y, z )</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The orbital part of the shielding, σ orb , is calculated in the same manner as for closed-shell molecules. It is available in ORCA for the unrestricted HF and DFT methods and for MP2 (see Section MP2 Level Magnetic Properties for more information on the latter).</p>
+<p>where Q 0 = ∑ λ ′ ,a e -E λ / kT denotes the partition function. An important property of the Z matrix as defined above is that it goes to the identity matrix as D / kT goes to zero.</p>
+<p>The orca_pnmr tool uses Eq. (5.101) to calculate σ p . Usage of orca_pnmr is described in Section orca_pnmr .</p>
+<h2>5.23 Spin-rotation Constants</h2>
+<p>Spin-rotation constant calculations are implemented using perturbation-dependent atomic orbitals following [700]. As given in eq. 34 of that reference, the spin-rotation tensor of nucleus K , M K , is related to the nuclear shielding tensor computed with GIAOs, σ GIAO K , and the diamagnetic part of the shielding tensor with the gauge origin set at that nucleus, σ dia K ( R K ) :</p>
+<p>where M nuc K is the nuclear component (given in eq. 14 of the reference), I is the inertia tensor, and γ K is the nuclear magnetogyric ratio. Accordingly, upon requesting spin-rotation constants, ORCA automatically computes the NMR shieldings with GIAOs as well. Note that a complete list of possible keywords for the eprnmr module can be found in EPRNMR - keywords for magnetic properties .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The following input shows an example calculation of M ( 17 O ) in H2 12 C 17 O:</p>
+<pre><code>! HF pcSseg-1 Mass2016 Bohrs *xyz 0 1 O -0.00000000 -0.00000000 1.13863731 M=16.999131 C -0.00000000 -0.00000000 -1.14131773 M=12.0 H -0.00000000 1.76770755 -2.24076285 H 0.00000000 -1.76770755 -2.24076285 * %eprnmr Nuclei = all O {srot, ist=17} end</code></pre>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">The magnetogyric ratio used can be changed either by choosing the correct isotope via ist , or by providing the nuclear g-factor directly via ssgn .</li>
+<li style="list-style-type: '· ';">The masses used to compute the inertia tensor are independent of the chosen isotopes! The example above requests atomic masses of the most abundant isotope (via the Mass2016 keyword) and explicitly specifies those of 12 C (which is the default) and 17 O.</li>
+</ul>
+<h2>5.24 Electron Paramagnetic Resonance (EPR) Parameters</h2>
+<p>Electron paramagnetic resonance probes the magnetic sublevels of the electronic ground state. In the %eprnmr input block, calculations of the parameters of a spin Hamiltonian of the form</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>can be requested. The properties are evaluated via analytical derivative/response theory methods. For the analytic response approach based on CC, please see AUTOCI Response Properties via Analytic Derivatives . For evaluation of spin Hamiltonian parameters using quasi-degenerate perturbation theory, you may be interested in Magnetic Properties Through Quasi Degenerate Perturbation Theory A complete list of possible keywords for the eprnmr module can be found in EPRNMR - keywords for magnetic properties . The cartesian index convention for EPR can be found in Cartesian Index Conventions for EPR and NMR Tensors .</p>
+<h2>5.24.1 The g-Tensor</h2>
+<p>The g-tensor determines the position of the signal in an EPR spectrum. It can be calculated as a second derivative of the energy and it is implemented as such in ORCA for the SCF methods (HF and DFT), CASSCF, as well as all-electron MP2 (or RI-MP2) and double-hybrid DFT, plus Coupled Cluster (CCSD and CCSD(T)).</p>
+<h2>Theory</h2>
+<p>The g-tensor has four contributions which may be evaluated in ORCA,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These contributions are:</p>
+<ul>
+<li style="list-style-type: '· ';">The spin Zeeman contribution, which is isotropic and characterized by a simple constant, the free-electron g-value g e = 2 . 002319 . . .</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>meaning that it doesn't require any computation. The remaining terms contribute to the deviation from the free-electron value, which is sometimes called the g-shift.</p>
+<ul>
+<li style="list-style-type: '· ';">The first-order relativistic mass correction , which is a usually rather small scalar-relativistic correction and can be evaluated as an expectation value over the spin density</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<ul>
+<li style="list-style-type: '· ';">The diamagnetic spin-orbit (also called gauge correction) term, another first-order correction which is often small</li>
+<li style="list-style-type: '· ';">The second-order orbital Zeeman/SOC contribution, usually the main source of deviation from the freeelectron g-value in a molecule,</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Its calculation requires the solution of response equations to obtain the perturbed spin density, this is done for the magnetic field perturbation in ORCA. Precise details depend on the level of theory. At the SCF level, it is achieved by solving coupled-perturbed SCF equations (see CP-SCF Options ). At the CASSCF level, the CP-CASSCF equations are solved ( CASSCF Linear Response ).</p>
+<p>In these equations, S is the total spin, α the fine structure constant, P α -β is the spin density matrix, ϕ is the basis set, ˆ T is the kinetic energy operator, ξ ( r A ) an approximate radial operator, h SOC the spatial part of an effective one-electron spin-orbit operator and B µ is a component of the magnetic field.</p>
+<h2>Basic usage</h2>
+<p>As an example, consider the following simple g-tensor job:</p>
+<pre><code>! BP86 Def2-SVP TightSCF g-tensor SOMF(1X) * int 1 2 O 0 0 0 0 0 0 H 1 0 0 1.1056 0 0 H 1 2 0 1.1056 109.62 0 *</code></pre>
+<p>The simplest way is to call the g-tensor property in the simple input line as shown above. It can also be specified in the %eprnmr block with gtensor true . SOMF(1X) defines the chosen spin-orbit coupling (SOC) operator.</p>
+<p>The output looks like the following. It contains information on the contributions to the g-tensor (relativistic mass correction, diamagnetic spin-orbit term (= gauge-correction), paramagnetic spin-orbit term (= OZ/SOC)), the isotropic g-value and the orientation of the total tensor.</p>
+<pre><code>-------------------ELECTRONIC G-MATRIX -------------------The g-matrix: 2.0104321 -0.0031354 -0.0000000 -0.0031354 2.0081968 -0.0000000 -0.0000000 -0.0000000 2.0021275 Breakdown of the contributions gel 2.0023193 2.0023193 2.0023193 gRMC -0.0003174 -0.0003174 -0.0003174 gDSO(tot) 0.0000808 0.0001539 0.0001515 gPSO(tot) 0.0000449 0.0038301 0.0104898 ------------------------------g(tot) 2.0021275 2.0059858 2.0126431 iso= 2.0069188 Delta-g -0.0001917 0.0036665 0.0103238 iso= 0.0045995 Orientation: X 0.0000000 0.5762906 -0.8172448 Y 0.0000000 0.8172448 0.5762906 Z 1.0000000 -0.0000000 0.0000000</code></pre>
+<p>g-tensor calculations at the SCF level are not highly demanding in terms of basis set size. Basis sets that give reliable SCF results (at least valence double-zeta plus polarization) usually also give reliable g-tensor results. For many molecules the Hartree-Fock approximation will give reasonable predictions. In a number of cases, however, it breaks down completely. DFT is more robust and the number of molecules where it fails is much smaller. Among the density functionals, the hybrid functionals seem to be the most accurate.</p>
+<h2>Note</h2>
+<p>There are different options for treatment of the spin-orbit coupling operator available in the program. The defaults should be quite reliable. Check out The Spin-Orbit Coupling Operator for more information.</p>
+<h2>Gauge origin treatment</h2>
+<p>The g-tensor is not gauge-independent. Without taking special precautions, the results will have an unphysical dependence on where the gauge origin is placed with respect to the molecule. Unless a fully invariant procedure (such as GIAOs) is used, this undesirable aspect is always present in the calculations.</p>
+<p>Starting from ORCA 5.0, the default treatment for g-tensor calculations gauge is the GIAO approach (GIAO stands for 'gauge including atomic orbitals'). GIAOs are available at the SCF level, RI-MP2 as well as Coupled Cluster up to CCSD(T) level. GIAOs are not currently available with CASSCF linear response and a common gauge origin must be provided in the %eprnmr block.</p>
+<p>The GIAO one-electron integrals are done analytically by default whereas the treatment of the GIAO two-electron integrals is chosen to be same as for the SCF. The available options which can be set with giao_1el / giao_2el in the %eprnmr block can be found in section EPRNMR - keywords for magnetic properties . Concerning the computational time, for small systems, e.g. phenyl radical (41 electrons), the rijk -approximation is good to use for the SCF-procedures as well as the GIAO two-electron integrals. Going to larger systems, e.g. chlorophyll radical (473 electrons), the rijcosx -approximation reduces the computational time enormously. While the new default grid settings in ORCA 5.0 ( defgrid2 ) should be sufficient in most cases, certain cases might need the use of defgrid3 . Note that for the current implementation of CC-NMR/EPR, both giao_1el and giao_2el need to be evaluated fully analytically, which is also the default when CC-NMR/EPR is requested.</p>
+<p>If the choice of the gauge origin is not outrageously poor, a common gauge origin often gives reasonable results for g-tensors (much more reasonable than in NMR, where it shouldn't be used). This is especially true with a large basis set. The origin may be modified with the keyword ori inside the %eprnmr input block. If you are using a common gauge origin, it is wise to check the sensitivity of the results with respect to origin location, especially when small g-shifts on the order of only a few hundred ppm are calculated.</p>
+<h2>Keywords</h2>
+<table><caption><div class="caption">Table 5.13: %eprnmr block input keywords relevant for g-tensor calculations. For more GIAO-related options, see EPRNMR - keywords for magnetic properties</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>gtensor</td><td>true/false</td><td>Calculate the g-tensor</td></tr><tr><td>gtensor_1el2el</td><td>true/false</td><td>Print the 1- and 2-electron contributions to the g-tensor</td></tr><tr><td>ori</td><td>GIAO</td><td>use the GIAO formalism (default)</td></tr><tr><td></td><td>CenterOfElCharge</td><td>Common gauge origin at center of electronic charge</td></tr><tr><td></td><td>CenterOfNucCharge</td><td>Common gauge origin at center of nuclear charge</td></tr><tr><td></td><td>CenterOfSpinDens</td><td>Common gauge origin at center of spin density</td></tr><tr><td></td><td>CenterOfMass</td><td>Common gauge origin at center of mass</td></tr><tr><td></td><td>N</td><td>Common gauge origin at atom N</td></tr><tr><td></td><td>x, y, z</td><td>Common gauge origin at position x, y, z (in coordinate input units, default Angstrom)</td></tr><tr><td>do_giao_soc2el</td><td>true/false</td><td>whether to include the 2-el contributiontoGIAOtermfromtheSOMFoperator (usually small but expensive, disabled by default)</td></tr></tbody></table>
+<h2>5.24.2 Hyperfine Coupling</h2>
+<p>Hyperfine couplings characterize the interaction between the electronic spin and the spin of a nucleus in the molecule. In typical EPR spectra, they lead to a splitting of the signal.</p>
+<h2>Theory</h2>
+<p>The hyperfine coupling has four contributions which may be evaluated in ORCA,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These contributions are:</p>
+<ul>
+<li style="list-style-type: '· ';">The isotropic Fermi contact term that arises from finite spin density on the nucleus under investigation. It is calculated for nucleus N from:</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, ⟨ S z ⟩ is the expectation value of the z-component of the total spin, g e and g N are the electron and nuclear g-factors and β e and β N are the electron and nuclear magnetons respectively. ρ ( ⃗ R N ) is the spin density at the nucleus. The proportionality factor P N = g e g N β e β N is commonly used and has the dimensions MHz bohr 3 in ORCA.</p>
+<ul>
+<li style="list-style-type: '· ';">The spin dipole term that arises from the through-space dipole-dipole interaction of the magnetic nucleus with the magnetic moment of the electron. It is also calculated as an expectation value over the spin density as:</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ρ is the spin-density matrix and ⃗ r N is a vector of magnitude r N that points from the nucleus in question to the electron ( { ϕ } is the set of basis functions).</p>
+<ul>
+<li style="list-style-type: '· ';">The second-order spin-orbit contribution, which arises as a cross-term between the spin-orbit and nucleusorbit coupling operators. It requires the solution of coupled-perturbed SCF equations and is consequently more computationally demanding. The contribution can be written as:</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The derivative of the spin density is computed by solving the coupled-perturbed SCF equations with respect to the nucleus-orbit coupling perturbation, which is represented by the operator</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the sum is over electrons and N is the nucleus in question.</p>
+<ul>
+<li style="list-style-type: '· ';">The gauge-correction contribution (sometimes also called diamagnetic). This term is often small. However, it is needed in order to get exactly gauge-invariant results. We recently showed that the gauge correction can become crucial in the long-distance limit between the nuclear spin and the electron spin. This is relevant for pseudocontact NMR chemical shifts (PCS).[702]</li>
+</ul>
+<h2>® Note</h2>
+<p>Second-order HFCs can be quite significant for heavier nuclei and are certainly good to include for transition metal complexes. Available treatments of the spin-orbit coupling operator are described under The Spin-Orbit Coupling Operator .</p>
+<h2>Basic usage</h2>
+<p>Hyperfine and quadrupole couplings can be requested in the %eprnmr input block. Since there may be several nuclei that you are interested in, the input is relatively sophisticated.</p>
+<p>An example how to calculate the hyperfine and field gradient tensors for the CN radical is given below:</p>
+<pre><code>! PBE0 def2-MSVP TightSCF * int 0 2 C 0 0 0 0 0 0 N 1 0 0 1.170 0 0 * %eprnmr Nuclei = all C { aiso, adip } Nuclei = 2 { aiso, adip, fgrad } end</code></pre>
+<p>In this example, the hyperfine tensor is calculated for all carbon atoms and atom 2, which is nitrogen in this case. (Additionally, the electric field gradient is calculated for nitrogen.)</p>
+<ul>
+<li style="list-style-type: '· ';">Counting of atom numbers starts from 1.</li>
+<li style="list-style-type: '· ';">Beware - all nuclei mentioned in one line will be assigned the same isotopic mass! If several different nuclei are desired (such as C and H), there has to be a new line for each of them.</li>
+<li style="list-style-type: '· ';">You have to specify the Nuclei statement after the definition of the atomic coordinates or the program will not figure out what is meant by ' all '.</li>
+</ul>
+<p>The output looks like the following. It contains detailed information about the individual contributions to the hyperfine couplings, its orientation, its eigenvalues, the isotropic part and (if requested) also the quadrupole coupling tensor.</p>
+<pre><code>-----------------------------------------ELECTRIC AND MAGNETIC HYPERFINE STRUCTURE ----------------------------------------------------------------------------------------------------Nucleus 0C : A:ISTP= 13 I= 0.5 P=134.1903 MHz/au**3 Q:ISTP= 13 I= 0.5 Q= 0.0000 barn -----------------------------------------------------------Raw HFC matrix (all values in MHz): -----------------------------------695.8952 0.0000 -0.0000 0.0000 543.0617 -0.0000 -0.0000 -0.0000 543.0617 A(FC) 594.0062 594.0062 594.0062 A(SD) -50.9445 -50.9445 101.8890 ------------------------------A(Tot) 543.0617 543.0617 695.8952 A(iso)= 594. ↪ → 0062 Orientation: X 0.0000000 0.0000000 -1.0000000 Y -0.8111216 -0.5848776 -0.0000000 Z -0.5848776 0.8111216 0.0000000 Notes: (1) The A matrix conforms to the "SAI" spin Hamiltonian convention. (2) Tensor is right-handed. -----------------------------------------------------------Nucleus 1N : A:ISTP= 14 I= 1.0 P= 38.5677 MHz/au**3</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Q:ISTP= 14 I= 1.0 Q= 0.0204 barn -----------------------------------------------------------Raw HFC matrix (all values in MHz): -----------------------------------13.2095 -0.0000 0.0000 -0.0000 -45.6036 -0.0000 0.0000 -0.0000 -45.6036 A(FC) -25.9993 -25.9993 -25.9993 A(SD) 39.2088 -19.6044 -19.6044 ------------------------------A(Tot) 13.2095 -45.6036 -45.6036 A(iso)= -25. ↪ → 9993 Orientation: X 1.0000000 0.0000000 -0.0000000 Y -0.0000000 0.9996462 0.0265986 Z 0.0000000 -0.0265986 0.9996462 Notes: (1) The A matrix conforms to the "SAI" spin Hamiltonian convention. (2) Tensor is right-handed. Raw EFG matrix (all values in a.u.**-3): ------------------------------------0.1832 -0.0000 0.0000 -0.0000 0.0916 0.0000 0.0000 0.0000 0.0916 V(El) 0.6468 0.6468 -1.2935 V(Nuc) -0.5551 -0.5551 1.1103 ------------------------------V(Tot) 0.0916 0.0916 -0.1832 Orientation: X -0.0000003 0.0000002 1.0000000 Y 0.9878165 0.1556229 0.0000003 Z -0.1556229 0.9878165 -0.0000002 Note: Tensor is right-handed Quadrupole tensor eigenvalues (in MHz;Q= 0.0204 I= 1.0) e**2qQ = -0.880 MHz e**2qQ/(4I*(2I-1))= -0.220 MHz eta = 0.000 NOTE: the diagonal representation of the SH term I*Q*I = e**2qQ/(4I(2I-1))*[-(1-↪ → eta),-(1+eta),2]</code></pre>
+<p>If also EPR g-tensor or D-tensor calculations (see next section) are carried out in the same job, ORCA automatically prints the orientation between the hyperfine/quadrupole couplings and the molecular g- or D-tensor. For more information on this see section orca_euler .</p>
+<p>For heavy nuclei you may want to consider the possibility of relativistic effects. Scalar relativistic effects can be handled with several quasi-relativistic Hamiltonians in ORCA. An overview of the possibilities and some recommendations can be found in Relativistic Calculations . Note that relativistic calculations may have special requirements on basis sets. In relativistic property calculations, you should be aware of the importance of picture change corrections (see Picture-Change Effects ). In quasi-relativistic calculations with DFT, one should also be very cautious about accuracy of the numerical integration, especially for heavier (transition metal) nuclei.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>For the calculation of HFCCs using DLPNO-CCSD, it is recommended to use the tailored truncation settings ! DLPNO-HFC1 or !DLPNO-HFC2 in the simple keyword line which correspond to the 'Default1' and 'Default2' setting in Ref. [703].</p>
+<p>If you wish to extract the A tensor for an oligonuclear transition metal complex, the A(iso) value in the output can be processed according to the method described in ref. [704].</p>
+<h2>A note on basis sets</h2>
+<p>For hyperfine (and quadrupole) couplings, standard basis sets designed for energies and geometry optimizations and are often not satisfactory (especially for atoms heavier than Ne). You should look into a basis set capable of describing the electronic structure near the nucleus. One option is to use a basis set tailored towards 'core-property' calculations. The following are good options:</p>
+<ul>
+<li style="list-style-type: '· ';">EPR-II basis of Barone and co-workers: It is only available for a few light atoms (H, B, C, N, O, F) and is essentially of double-zeta plus polarization quality with added flexibility in the core region, which should give reasonable results.</li>
+<li style="list-style-type: '· ';">IGLO-II and IGLO-III bases of Kutzelnigg and co-workers: They are fairly accurate but also only available for some first and second row elements.</li>
+<li style="list-style-type: '· ';">CP basis: They are accurate for first row transition metals as well.</li>
+<li style="list-style-type: '· ';">uncontracted Partridge basis: They are general purpose HF-limit basis sets and will probably be too expensive for routine use, but are very useful for calibration purposes.</li>
+<li style="list-style-type: '· ';">the pcH basis sets by Jensen tailored towards hyperfine coupling calculations, also with limited availability (see Jensen Basis Sets ).</li>
+</ul>
+<p>If ORCA does not yet have a dedicated basis set for your element, you will likely have to tailor the basis set to your needs. You can do this by manually adding s-type primitives with large exponents, or by decontracting core parts of the basis set (see Basis Sets for description of the decontraction feature). You can start by examining the basis set you already have - if you add the statement Print[p_basis] 2 in the %output block (or PrintBasis in the simple input line) the program will print the basis set in input format (for the basis block). You can then add or remove primitives, uncontract core functions, etc. For example, here is a printout of the carbon basis DZP in input format:</p>
+<pre><code># Basis set for element : C NewGTO 6 s 5 1 3623.8613000000 0.0022633312 2 544.0462100000 0.0173452633 3 123.7433800000 0.0860412011 4 34.7632090000 0.3022227208 5 10.9333330000 0.6898436475 s 1 1 3.5744765000 1.0000000000 s 1 1 0.5748324500 1.0000000000 s 1 1 0.1730364000 1.0000000000 p 3 1 9.4432819000 0.0570590790 2 2.0017986000 0.3134587330 3 0.5462971800 0.7599881644 p 1 1 0.1520268400 1.0000000000 d 1</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>1</td><td>1.0000000000</td></tr><tr><td>end;</td><td></td></tr></tbody></table>
+<p>Reading this information is relatively straightforward. For example: the ' s 5 ' stands for the angular momentum and the number of primitives in the first basis function. The following five lines then contain the number of the primitive, the exponent and the contraction coefficient (unnormalized) for each primitive in the function.</p>
+<p>Remember that if you add very steep functions, you must increase the size of the integration grid if your calculation uses DFT! Otherwise, your results will be inaccurate. To some extent, the program now automatically adapts the grids when it detects steep functions. If you further need to increase integration accuracy, you could globally increase the radial grid size by increasing IntAcc in the Method block, or increase integration accuracy for individual atoms only, with the latter option being less expensive. More detail can be found in section Other Details and Options . In the present example the changes caused by larger basis sets in the core region and more accurate integration are relatively modest - on the order of 3%. This is, however, still significant if you are a little puristic.</p>
+<h2>Hyperfine Coupling Keywords</h2>
+<table><tbody><tr><td>Á Warning</td></tr><tr><td>All nuclei specified on one line will be assigned with the same isotopic mass (and other parameters)!</td></tr></tbody></table>
+<p>Table 5.14: %eprnmr block input keywords relevant for HFC calculations</p>
+<table><tbody><tr><th>Key- word</th><th>Selection</th><th>What to do</th><th>Description</th></tr><tr><td>nuclei</td><td>all &lt;type&gt;</td><td></td><td>Selects all nuclei of element &lt;type&gt;</td></tr><tr><td></td><td>i1,i2,i3. ..</td><td></td><td>Selects atoms i1 , i2 , i3 …(starts at 1!)</td></tr><tr><td></td><td></td><td>{ aiso }</td><td>Calculates the isotropic Fermi-contact contribution</td></tr><tr><td></td><td></td><td>{ adip }</td><td>Calculates the spin-dipole contribution</td></tr><tr><td></td><td></td><td>{ aorb }</td><td>Calculates the spin-orbit contribution</td></tr><tr><td></td><td></td><td>{ ist=&lt;N&gt; }</td><td>Selects isotope &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ PPP=&lt;N&gt; }</td><td>Sets HFCproportionality factor g e g N β E β N to &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ III=&lt;N&gt; }</td><td>Sets nuclear spin to &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ aiso, adip, aorb }</td><td>example requesting multiple actions for selection</td></tr></tbody></table>
+<p>Table 5.15: %eprnmr block: possible tweaks for the diamagnetic gauge correction. Unless you have a special reason, it is unlikely that you need to use these settings.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>hfcgaugecorrection_zeff</td><td>true/ false</td><td>use effective nuclear charges for the gauge correc- tion</td></tr><tr><td>hfcgaugecorrection_numeric</td><td>true/ false</td><td>calculate DSO integrals numerically (faster)</td></tr><tr><td>hfcgaugecorrection_angulargrid-1</td><td></td><td>&lt; 0 means to use the DFT grid setting</td></tr><tr><td>hfcgaugecorrection_intacc</td><td>-1</td><td>&lt; 0 means to use the DFT grid setting</td></tr><tr><td>hfcgaugecorrection_prunegrid</td><td>-1</td><td>&lt; 0 means to use the DFT grid setting</td></tr><tr><td>hfcgaugecorrection_bfcutoff</td><td>-1</td><td>&lt; 0 means to use the DFT grid setting</td></tr><tr><td>hfcgaugecorrection_wcutoff</td><td>-1</td><td>&lt; 0 means to use the DFT grid setting</td></tr></tbody></table>
+<h2>5.24.3 Zero-Field Splitting</h2>
+<p>The zero-field splitting (ZFS) is typically the leading term in the Spin-Hamiltonian (SH) for transition metal complexes with a total ground state spin S &gt;1/2 (for reviews and references see chapter Publications Related to ORCA ). Its effect is to introduce a splitting of the 2 S +1 M S sublevels, which are exactly degenerate at the level of the Born-Oppenheimer Hamiltonian, even in the absence of an external magnetic field.</p>
+<h2>Theory</h2>
+<p>There are two important contributions to zero-field splitting [705]:</p>
+<ul>
+<li style="list-style-type: '· ';">A first order term arising from the direct spin-spin interaction</li>
+</ul>
+<p≯</p>
+<p>where K , L = x,y,z, α is the fine structure constant ( ≈ 1/137 in atomic units), r ij is the electronic distance vector with magnitude r ij and ˆ s i is the spin-vector operator for the i 'th electron. | 0 SS ⟩ is the exact ground state eigenfunction of the Born-Oppenheimer Hamiltonian with total spin S and projection quantum number M S = S . Since the spin-spin interaction is of first order, its evaluation presents no particular difficulties.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<ul>
+<li style="list-style-type: '· ';">A second-order spin-orbit contribution, which is substantially more complicated. Under the assumption that the spin-orbit coupling (SOC) operator can to a good approximation be represented by an effective one-electron operator ( ˆ H SOC = ∑ i ^ h SOC i ^ s i ) , ref [656] has derived the following sum-over-states (SOS) equations for the SOC contribution to the ZFS tensor:</li>
+</ul>
+<p>Here the one-electron spin-operator for electron i has been written in terms of spherical vector operator components s i,m with m = 0 , ± 1 and ∆ b = E b -E 0 is the excitation energy to the excited state multiplet ∣ ∣ b SS 〉 (all M S components are degenerate at the level of the BO Hamiltonian).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>®</p>
+<h2>Note</h2>
+<p>The second-order spin-orbit term may be evaluated using the above sum-over-states formulation in the context of wavefunction theory methods. The following section focuses on a formulation based on SCF analytical derivative/response theory. You may also be interested in QDPT, which is more reliable particularly in systems where zero-field splitting is large.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>Available treatments of the spin-orbit coupling operator are described under The Spin-Orbit Coupling Operator .</p>
+<h2>Basic usage</h2>
+<p>For example, consider the following job on a hypothetical Mn(III)-complex.</p>
+<pre><code>! BP86 def2-SVP SOMF(1X) %eprnmr DTensor ssandso DSOC cp # qro, pk, cvw DSS uno # direct end * int 1 5 Mn 0 0 0 0 0 0 O 1 0 0 2.05 0 0 O 1 2 0 2.05 90 0 O 1 2 3 2.05 90 180 O 1 2 3 2.05 180 0 F 1 2 3 1.90 90 90 F 1 2 3 1.90 90 270 H 2 1 6 1.00 127 0 H 2 1 6 1.00 127 180 H 3 1 6 1.00 127 0 H 3 1 6 1.00 127 180 H 4 1 6 1.00 127 0 H 4 1 6 1.00 127 180 H 5 1 6 1.00 127 0 H 5 1 6 1.00 127 180 *</code></pre>
+<p>The output documents the individual contributions to the D-tensor, which also contains (unlike the g-tensor) contributions from spin-flip terms.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>There are four different variants of the SOC-contribution, which alone should demonstrate that this is a difficult property. The options are:</p>
+<ul>
+<li style="list-style-type: '· ';">The QRO method is fully documented[360] and is based on a theory developed earlier.[656] The QRO method is reasonable but somewhat simplistic and is superseded by the CP method described below.</li>
+<li style="list-style-type: '· ';">The Pederson-Khanna model was brought forward in 1999 from qualitative reasoning.[706] It also contains incorrect prefactors for the spin-flip terms. We have nevertheless implemented the method for comparison. In the original form it is only valid for local functionals. In ORCA it is extended to hybrid functionals and HF.</li>
+<li style="list-style-type: '· ';">The default coupled-perturbed method is a generalization of the DFT method for ZFSs; it uses revised prefactors for the spin-flip terms and solves a set of coupled-perturbed equations for the SOC perturbation.</li>
+</ul>
+<p>Therefore it is valid for hybrid functionals. It has been described in detail.[707]</p>
+<p>The present implementation in ORCA is valid for HF, DFT and hybrid DFT.</p>
+<p>The DSS part is an expectation value that involves the spin density of the system. In detailed calibration work[708] it was found that the spin-unrestricted DFT methods behave somewhat erratically and that much more accurate values were obtained from open-shell spin-restricted DFT. Therefore the 'UNO' option allows the calculation of the SS term with a restricted spin density obtained from the singly occupied unrestricted natural orbitals.</p>
+<p>The DSS part contains an erratic self-interaction term for UKS/UHF wavefunction and canonical orbitals. Thus, UNO is recommended for these types of calculations.[709] If the option DIRECT is used nevertheless, ORCA will print a warning in the respective part of the output.</p>
+<h2>Note</h2>
+<p>In case that D-tensor is calculated using the correlated wave function methods such as (DLPNO-/LPNO-)CCSD, one should not use DSS=UNO option.</p>
+<h2>Detailed theory of the coupled-perturbed formulation</h2>
+<p>In 2007, we have developed a procedure that makes the ZFS calculation compatible with the language of analytic derivatives.[707] Perhaps the most transparent route is to start from the exact solutions of the Born-Oppenheimer Hamiltonian. To this end, we look at the second derivative of the ground state energy ( E = 〈 0 SS ∣ ∣ ∣ ˆ H ∣ ∣ ∣ 0 SS 〉 ) with respect to a spin-dependent one-electron operator of the general form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where h K pq is the matrix of the K 'th component of the spatial part of the operator (assumed to be imaginary Hermitian as is the case for the spatial components of the SOC operator) and ˆ S ( m ) pq is the second quantized form of the spin vector operator ( m = 0 , ± 1 ). The quantity x ( m ) K is a formal perturbation parameter. Using the exact eigenfunctions of the BO operator, the first derivative is:</p>
+<p>With the components of the spin density:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The second derivative with respect to a second component for m ′ = -m is:</p>
+<p>The derivative of the spin density may be written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Expanding the perturbed wavefunction in terms of the unperturbed states gives to first order:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where | n ⟩ is any of the ∣ ∣ ∣ b S ′ M ′ 〉 . Thus, one gets:</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The equality holds for exact states. For approximate electronic structure treatments, the analytic derivative approach is more attractive since an infinite sum over states can never be performed in practice and the calculation of analytic derivative is computationally less demanding than the calculation of excited many electron states.</p>
+<p>Using eq. (5.120), the components of the SOC-contribution to the D -tensor are reformulated as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>These are general equations that can be applied together with any non-relativistic or scalar relativistic electronic structure method that can be cast in second quantized form. Below, the formalism is applied to the case of a selfconsistent field (HF, DFT) reference state.</p>
+<p>For DFT or HF ground states, the equations are further developed as follows:</p>
+<p>The SCF energy is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here V NN is the nuclear repulsion energy and h µν is a matrix element of the one-electron operator which contains the kinetic energy and electron-nuclear attraction terms ( ⟨ ab ⟩ denotes the trace of the matrix product ab ). As usual, the molecular spin-orbitals ψ σ p are expanded in atom centered basis functions ( σ = α, β ) :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with MO coefficients c σ µp . The two-electron integrals are defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The mixing parameter a X controls the fraction of Hartree-Fock exchange and is of a semi-empirical nature. E XC [ ρ α , ρ β ] represent the exchange-correlation energy. The parameter c DF is an overall scaling factor that allows one to proceed from Hartree-Fock theory ( a X = 1 , c DF = 0) to pure DFT ( a X = 0 , c DF = 1) to hybrid DFT ( 0 &lt; a X &lt; 1 , c DF = 1 ). The orbitals satisfy the spin-unrestricted SCF equations:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>With V σ XC = δE XC δρ σ ( r ) and P µν = P α µν + P β µν being the total electron density. For the SOC perturbation it is customary to regard the basis set as perturbation independent. In a spin-unrestricted treatment, the first derivative is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+</div>
+</body>
+</html>

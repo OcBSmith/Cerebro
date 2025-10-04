@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part057</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>following number-of-B-centers line(s) the isotropic g factors of the center(s) defined as B are read. The spin of the B center(s) is defined: S = ( N -1)/2 , where N is the corresponding number of states to be taken into the exchange coupling for this particular center. Some examples valid for mixed situations: the system consists of centers computed ab initio and isotropic centers (case F , False):</p>
+<pre><code>NNEQ 2 F 1 2 2 2 A B 2.3 2.3 2.3</code></pre>
+<p>There are two kinds of magnetic centers in the cluster; the center of the first type has been computed ab initio , while the centers of the second type are considered isotropic with g X = g Y = g Z =2.3; the cluster consists of three magnetic centers: one center of the first kind and two centers of the second kind. Only the ground doublet state from each center is considered for the exchange coupling. As a result the N exch = 2 1 × 2 2 = 8 . File aniso_i.input (for-type 1) must be present.</p>
+<pre><code>NNEQ 3 F 2 1 1 4 2 3 A B B 2.3 2.3 2.0 2.0 2.0 2.5</code></pre>
+<p>There are three kinds of magnetic centers in the cluster; the first center type has been computed ab initio , while the centers of the second and third types are considered empirically with g X = g Y = 2.3; g Z =2.0 (second type) and g X = g Y = 2.0; g Z =2.5 (third type); the cluster consists of four magnetic centers: two centers of the first kind, one center of the second kind and one center of the third kind. From each of the centers of the first kind, four spin-orbit states are considered for the exchange coupling, two states from the second kind and three states from the center of the third kind. As a result the N exch = 4 2 × 2 1 × 3 1 = 96 . The file aniso_i.input must be present.</p>
+<pre><code>NNEQ 6 T 1 1 1 1 1 1 2 4 3 5 2 2 B B A A B A 2.12 2.12 2.12 2.43 2.43 2.43 2.00 2.00 2.00</code></pre>
+<p>There are six kinds of magnetic centers in the cluster; only three centers have been computed ab initio , while the other three centers are considered isotropic; the g factors of the first center is 2.12 (S=1/2); of the second center 2.43 (S=3/2); of the fifth center 2.00 (S=1/2); the entire cluster consists of six magnetic centers: one center of each kind. From the center of the first kind, two spin-orbit states are considered in the exchange coupling, four states from the second center, three states from the third center, five states from the fourth center and two states from the fifth and sixth centers. As a result the N exch = 2 1 × 4 1 × 3 1 × 5 1 × 2 1 × 2 1 = 480 . Three files aniso_3.input and aniso_4.input and aniso_6.input must be present.</p>
+<p>There is no maximal value for NNEQ , although the calculation becomes quite heavy in case the number of exchange functions is large.</p>
+<p>SYMM Specifies rotation matrices to symmetry equivalent sites. This keyword is mandatory in the case more centers of a given type are present in the calculation. This keyword is mandatory when the calculated polynuclear compound has exact crystallographic point group symmetry. In other words, when the number of equivalent centers of any kind i is larger than 1, this keyword must be employed. Here the rotation matrices from the one center to all the other of the same type are declared. On the following line the program will read the number 1 followed on the next lines by as many 3 × 3 rotation matrices as the total number of equivalent centers of type 1. Then the rotation matrices of centers of type 2, 3 and so on, follow in the same format. When the rotation matrices contain irrational numbers (e.g. sin π 6 = √ 3 2 ), then more digits than presented in the examples below are advised to be given: √ 3 2 = 0 . 8660254 .</p>
+<p>Examples:</p>
+<pre><code>NNEQ 2 F 1 2 2 2 A B 2.3 2.3 2.3 SYMM 1 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 2 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 -1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 -1.0</code></pre>
+<p>The cluster computed here is a tri-nuclear compound, with one center computed ab initio , while the other two centers, related to each other by inversion, are considered isotropic with g X = g Y = g Z = 2 . 3 . The rotation matrix for the first center is I (identity, unity) since the center is unique. For the centers of type 2, there are two matrices 3 × 3 since we have two centers in the cluster. The rotation matrix of the first center of type 2 is Identity while the rotation matrix for the equivalent center of type 2 is the inversion matrix.</p>
+<pre><code>NNEQ 3 F 2 1 1 4 2 3 A B B 2.1 2.1 2.1 2.0 2.0 2.0 SYMM 1 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 -1.0 0.0 -1.0 0.0 0.0 0.0 0.0 1.0 2 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 3 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0</code></pre>
+<p>In this input a tetranuclear compound is defined, all centers are computed ab initio . There are two centers of type '1', related one to each other by C 2 symmetry around the Cartesian Z axis. Therefore the SYMM keyword is mandatory. There are two matrices for centers of type 1, and one matrix (identity) for the centers of type 2 and type 3.</p>
+<pre><code>NNEQ 6 F 1 1 1 1 1 1 2 4 3 5 2 2 B B A A B A 2.12 2.12 2.12 2.43 2.43 2.43</code></pre>
+<p>(continues on next page)</p>
+<p>2.00 2.00 2.00</p>
+<p>In this case the computed system has no symmetry. Therefore, the SYMM keyword is not required. End of Input Specifies the end of the input file. No keywords after this one will be processed.</p>
+<h2>Keywords Defining the Magnetic Exchange Interactions</h2>
+<p>This section defines the keywords used to set up the interacting pairs of magnetic centers and the corresponding exchange interactions.</p>
+<p>A few words about the numbering of the magnetic centers of the cluster in the POLY_ANISO . First all equivalent centers of the type 1 are numbered, then all equivalent centers of the type 2, etc. These labels of the magnetic centers are used further for the declaration of the magnetic coupling.</p>
+<h2>PAIR or LIN1</h2>
+<p>This keyword defines the interacting pairs of magnetic centers and the corresponding exchange interaction. A few words about the numbering of the magnetic centers of the cluster in the POLY_ANISO . First all equivalent centers of the type 1 are numbered, then all equivalent centers of the type 2, etc. These labels of the magnetic centers are used now for the declaration of the magnetic coupling. Interaction Hamiltonian is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where i an j are the indices of the metal sites of the interacting pair p ; J p is the user-defined magnetic exchange interaction between the corresponding metal sites; ˆ s i and ˆ s j are the ab initio spin operators for the lowlying exchange eigenstates.</p>
+<pre><code>PAIR 3 1 2 -0.2 1 3 -0.2 2 3 0.4</code></pre>
+<p>The input above is applicable for a tri-nuclear molecule. Two interactions are antiferromagnetic while ferromagnetic interaction is given for the last interacting pair.</p>
+<p>This keyword defines a more involved exchange interaction, where the user is allowed to define 3 parameters for each interacting pair. The interaction Hamiltonian is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the α defines the Cartesian axis x, y, z .</p>
+<pre><code>LIN3 1 1 2 -0.2 -0.4 -0.6 # i, j, Jx, Jy, Jz</code></pre>
+<p>The input above is applicable for a mononuclear molecule.</p>
+<p>This keyword defines a more involved exchange interaction, where the user is allowed to define 9 parameters for each interacting pair. The interaction Hamiltonian is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the α and β defines the Cartesian axis x, y, z .</p>
+<h2>LIN3</h2>
+<h2>LIN9</h2>
+<p>(continued from previous page)</p>
+<h2>COOR</h2>
+<pre><code>LIN9 1 1 2 -0.1 -0.2 -0.3 -0.4 -0.5 -0.6 -0.7 -0.8 -0.9 # i,j,Jxx,Jxy,Jxz,Jyx,Jyy,Jyz,Jzx,Jzy,Jzz</code></pre>
+<p>The input above is applicable for a mononuclear molecule.</p>
+<p>The COOR keyword turns ON the computation of the dipolar coupling for those interacting pairs which were declared under PAIR , LIN3 or LIN9 keywords. On the NON-EQ lines following the keyword the program will read the symmetrised Cartesian coordinates of NON-EQ magnetic centers: one set of symmetrised Cartesian coordinates for each type of magnetic centers of the system. The symmetrized Cartesian coordinates are obtained by translating the original coordinates to the origin of Coordinate system, such that by applying the corresponding SYMM rotation matrix onto the input COOR data, the position of all other sites are generated.</p>
+<pre><code>COOR</code></pre>
+<pre><code>6.489149 3.745763 1.669546 5.372478 5.225861 0.505625</code></pre>
+<p>The magnetic dipole-dipole Hamiltonian is computed as follows:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and is added to ˆ H exch computed using other models. The ˆ H dip is added for all magnetic pairs.</p>
+<h2>Optional General Keywords to Control the Input</h2>
+<p>Normally POLY_ANISO runs without specifying any of the following keywords. However, some properties are only computed if it is requested by the respective keyword. Argument(s) to the keyword are always supplied on the next line of the input file.</p>
+<h2>MLTP</h2>
+<h2>TINT</h2>
+<p>The number of molecular multiplets (i.e. groups of spin-orbital eigenstates) for which g , D and higher magnetic tensors will be calculated (default MLTP =1). The program reads two lines: the first is the number of multiplets ( N MULT ) and the second the array of N MULT numbers specifying the dimension (multiplicity) of each multiplet. Example:</p>
+<pre><code>MLTP 10 2 4 4 2 2 2 2 2 2</code></pre>
+<pre><code>2</code></pre>
+<p>POLY_ANISO will compute the EPR g and D - tensors for 10 groups of states. The groups 1 and 4-10 are doublets ( ˜ S = | 1/2 ⟩ ), while the groups 2 and 3 are quadruplets, having the effective spin ˜ S = | 3/2 ⟩ . For the latter cases, the ZFS (D-) tensors will be computed. We note here that large degeneracies are quite common for exchange coupled systems, and the data for this keyword can only be rendered after the inspection of the exchange spectra.</p>
+<p>Specifies the temperature points for the evaluation of the magnetic susceptibility. The program will read three numbers: T min , T max , and nT .</p>
+<ul>
+<li style="list-style-type: '· ';">T min - the minimal temperature (Default 0.0 K)</li>
+<li style="list-style-type: '· ';">T max - the maximal temperature (Default 300.0 K)</li>
+<li style="list-style-type: '· ';">nT - number of temperature points (Default 301)</li>
+</ul>
+<p>Example:</p>
+<h2>HINT</h2>
+<h2>TMAG</h2>
+<h2>ENCU</h2>
+<h2>UBAR</h2>
+<pre><code>TINT 0.0 300.0 331</code></pre>
+<p>POLY_ANISO will compute temperature dependence of the magnetic susceptibility in 331 points evenly distributed in temperature interval: 0.0 K - 330.0 K.</p>
+<p>Specifies the field points for the evaluation of the molar magnetisation. The program will read three numbers: H min , H max , nH .</p>
+<ul>
+<li style="list-style-type: '· ';">H min - the minimal field (Default 0.0 T)</li>
+<li style="list-style-type: '· ';">H max - the maximal filed (Default 10.0 T)</li>
+<li style="list-style-type: '· ';">nH - number of field points (Default 101)</li>
+</ul>
+<h2>Example:</h2>
+<pre><code>HINT 0.0 20.0 201</code></pre>
+<p>POLY_ANISO will compute the molar magnetisation in 201 points evenly distributed in field interval: 0.0 T - 20.0 T.</p>
+<p>Specifies the temperature(s) at which the field-dependent magnetisation is calculated. Default is one temperature point, T = 2.0 K.</p>
+<h2>Example:</h2>
+<pre><code>TMAG 6 1.8 2.0 2.4 2.8 3.2 4.5</code></pre>
+<p>The keyword expects to read two integer numbers. The two parameters ( NK and MG ) are used to define the cut-off energy for the lowest states for which Zeeman interaction is taken into account exactly. The contribution to the magnetisation coming from states that are higher in energy than E (see below) is done by second order perturbation theory. The program will read two integer numbers: NK and MG . Default values are: NK = 100 , MG = 100 .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The field-dependent magnetisation is calculated at the maximal temperature value given by TMAG keyword. Example:</p>
+<pre><code>ENCU 250 150</code></pre>
+<p>If H max = 10 T and TMAG = 1.8 K, then the cut-off energy is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This means that the magnetisation arising from all exchange states with energy lower than E = 1013 . 06258( cm -1 ) will be computed exactly (i.e. are included in the exact Zeeman diagonalisation) The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<p>With UBAR set to 'true', the blocking barrier of a single-molecule magnet is estimated. The default is not to compute it. The method prints transition matrix elements of the magnetic moment according to the Figure below:</p>
+<h2>ERAT</h2>
+<h2>NCUT</h2>
+<p>In this figure, a qualitative performance picture of the investigated single-molecular magnet is estimated by the strengths of the transition matrix elements of the magnetic moment connecting states with opposite magnetisations ( n + → n -). The height of the barrier is qualitatively estimated by the energy at which the matrix element ( n + → n -) is large enough to induce significant tunnelling splitting at usual magnetic fields (internal) present in the magnetic crystals (0.01-0.1 Tesla). For the above example, the blocking barrier closes at the state ( 8+ → 8 -). All transition matrix elements of the magnetic moment are given as (( | µ X | + | µ Y | + | µ Z | )/3) . The data is given in Bohr magnetons ( µ Bohr ). Example:</p>
+<p>UBAR</p>
+<p>This flag is used to define the cut-off energy for the low-lying exchange-coupled states for which Zeeman interaction is taken into account exactly. The program will read one single real number specifying the ratio of the energy states which are included in the exact Zeeman Hamiltonian. As example, a value of 0.5 means that the lowest half of the energy states included in the spin-orbit calculation are used for exact Zeeman diagonalisation. Example:</p>
+<p>ERAT 0.333</p>
+<p>The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<p>This flag is used to define the cut-off energy for the low-lying exchange states for which Zeeman interaction is taken into account exactly. The contribution to the magnetisation arising from states that are higher in energy than lowest N CUT states, is done by second-order perturbation theory. The program will read one integer number. In case the number is larger than the total number of exchange states( N exch , then the N CUT is set to N SS (which means that the molar magnetisation will be computed exactly, using full Zeeman diagonalisation for all field points). The field-dependent magnetisation is calculated at the temperature value(s) defined by TMAG . Example:</p>
+<h2>MVEC</h2>
+<h2>ZEEM</h2>
+<h2>MAVE</h2>
+<h2>TEXP</h2>
+<pre><code>NCUT 32</code></pre>
+<p>The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<p>MVEC , define a number of directions for which the magnetisation vector will be computed. The directions are given as vectors specifying the direction i of the applied magnetic field).</p>
+<h2>Example:</h2>
+<pre><code>MVEC 4 # number of directions 1.0 0.0 0.0 # px, py, pz of each direction 0.0 1.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0</code></pre>
+<p>This keyword allows to compute Zeeman splitting spectra along certain directions of applied field. Directions of applied field are given as three real number for each direction, specifying the projections along each direction: Example:</p>
+<pre><code>ZEEM 6 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 1.0 1.0 1.0 0.0 1.0 1.0 1.0 0.0</code></pre>
+<p>The above input will request computation of the Zeeman spectra along six directions: Cartesian axes X, Y, Z (directions 1,2 and 3), and between any two Cartesian axes: YZ, XZ and XY, respectively. The program will renormalise the input vectors according to unity length. In combination with PLOT keyword, the corresponding zeeman_energy_xxx.png images will be produced.</p>
+<p>The keyword requires two integer numbers, denoted MAVE_nsym and MAVE_ngrid . The parameters MAVE_nsym and MAVE_ngrid specify the grid density in the computation of powder molar magnetisation. The program uses Lebedev-Laikov distribution of points on the unit sphere. The parameters are integer numbers: n sym and n grid . The n sym defines which part of the sphere is used for averaging. It takes one of the three values: 1 (half-sphere), 2 (a quarter of a sphere) or 3 (an octant of the sphere). n grid takes values from 1 (the smallest grid) till 32 (the largest grid, i.e. the densest). The default is to consider integration over a half-sphere (since M ( H ) = -M ( -H ) ): n sym = 1 and n sym = 15 (i.e 185 points distributed over half-sphere). In case of symmetric compounds, powder magnetisation may be averaged over a smaller part of the sphere, reducing thus the number of points for the integration. The user is responsible to choose the appropriate integration scheme. Note that the program's default is rather conservative.</p>
+<h2>Example:</h2>
+<pre><code>MAVE 1 8</code></pre>
+<p>This keyword allows computation of the magnetic susceptibility χT ( T ) at experimental points. On the line below the keyword, the number of experimental points N T is defined, and on the next N T lines the program reads the experimental temperature (in K) and the experimental magnetic susceptibility (in cm 3 Kmol -1 ). The magnetic susceptibility routine will also print the standard deviation from the experiment.</p>
+<h2>HEXP</h2>
+<h2>ZJPR</h2>
+<h2>XFIE</h2>
+<h2>TORQ</h2>
+<pre><code>TEXP 54 299.9901 55.27433 290.4001 55.45209 279.7746 55.43682 269.6922 55.41198 259.7195 55.39274 249.7031 55.34379 239.735 55.29292 229.7646 55.23266 219.7354 55.15352 209.7544 55.06556 ...</code></pre>
+<p>This keyword allows computation of the molar magnetisation M mol ( H ) at experimental points. On the line below the keyword, the number of experimental points N H is defined, and on the next N H lines the program reads the experimental field intensity (in Tesla) and the experimental magnetisation (in µ Bohr ). The magnetisation routine will print the standard deviation from the experiment.</p>
+<pre><code>HEXP 3 1.0 5.3 2.4 # temperature values 10 # numer of field points 0.30 4.17 1.26 2.51 # H(T) and M for each temperature 1.00 5.47 3.57 4.82 1.88 5.79 4.54 5.30 2.67 5.92 4.96 5.54 3.46 5.97 5.20 5.70 4.24 6.00 5.36 5.81 5.03 6.01 5.48 5.88 5.82 6.02 5.57 5.93 6.61 6.02 5.65 5.97 7.40 6.03 5.72 5.99</code></pre>
+<p>This keyword specifies the value (in cm -1 ) of a phenomenological parameter of a mean molecular field acting on the spin of the complex (the average intermolecular exchange constant). It is used in the calculation of all magnetic properties (not for spin Hamiltonians) (Default is 0.0).</p>
+<pre><code>ZJPR -0.02</code></pre>
+<p>This keyword specifies the value (in T) of applied magnetic field for the computation of magnetic susceptibility by dM / dH and M / H formulas. A comparison with the usual formula (in the limit of zero applied field) is provided. (Default is 0.0). Example:</p>
+<pre><code>XFIE 0.35</code></pre>
+<p>This keyword together with the keyword PLOT will enable the generation of two additional plots: XT_with_field_dM_over_dH.png and XT_with_field_M_over_H.png , one for each of the two above formula used, alongside with respective gnuplot scripts and gnuplot datafiles.</p>
+<p>This keyword specifies the number of angular points for the computation of the magnetisation torque function, ⃗ τ α as function of the temperature, field strength and field orientation.</p>
+<pre><code>TORQ 55</code></pre>
+<h2>PRLV</h2>
+<h2>PLOT</h2>
+<p>The torque is computed at all temperature given by TMAG or HEXP_temp inputs. Three rotations around Cartesian axes X, Y and Z are performed.</p>
+<p>This keyword controls the print level.</p>
+<ul>
+<li style="list-style-type: '· ';">2 - normal. (Default)</li>
+<li style="list-style-type: '· ';">3 or larger (debug)</li>
+</ul>
+<p>Set to 'true', the program generates a few plots (png or eps format) via an interface to the linux program gnuplot . The interface generates a datafile, a gnuplot script and attempts execution of the script for generation of the image. The plots are generated only if the respective function is invoked. The magnetic susceptibility, molar magnetisation and blocking barrier ( UBAR ) plots are generated. The files are named: XT_no_field. dat , XT_no_field.plt , XT_no_field.png , MH.dat , MH.plt , MH.png , BARRIER_TME.dat , BARRIER_ENE.dat , BARRIER.plt and BARRIER.png , zeeman_energy_xxx.png etc. All files produced by SINGLE_ANISO are referenced in the corresponding output section. Example:</p>
+<p>PLOT</p>
+<h2>5.36 DeltaSCF</h2>
+<p>DeltaSCF is a time-independent alternative to time-dependent DFT for the description of excited electronic states in a mean-field DFT framework and has been shown to yield better results than TDDFT in the common linearresponse adiabatic approximation for the topology of an avoided crossing and a conical intersection in the ethylene molecule paradigmatic for photochemistry [758], as well as for charge transfer excited states, where the absolute error in TDDFT increases rapidly with the charge transfer distance, while a balanced description is obtained with DeltaSCF [759].</p>
+<p>Typically, the SCF proceedure is used to obtain the ground electronic state represented by a minimum on the energy surface with respect to the electronic orbital rotation degrees of freedom. The idea behind ∆ SCF is to converge to a higher-energy solution on the electronic energy surface, often a saddle point instead, in order to find mean-field representations of excited electronic states. As it is usually not sufficient to form an initial guess close to such an excited state solution and use conventional SCF approaches, several strategies have been developed and implemented in ORCA to make the SCF converge to the target saddle point and prevent so-called variational collapse, convergence to undesired lower-energy solutions.</p>
+<p>One simple but often effective approach was introduced by the group of Peter Gill [760] as the Maximum Overlap Method (MOM). In ORCA, we also feature the more recent PMOM from the group of Hrant Hratchian [761]. Additionally, ORCA offers an SOSCF optimization technique that leverages the limited-memory symmetric rank-1 quasi-Newton method as well as the generalized mode following approach both capable of converging to saddle point solutions systematically. The excited state initial guess can be refined by constrained optimization within the freezeand-release SOSCF strategy. ∆ SCF has also been referred to as 'orbital optimized DFT for electronic excited states' [762] and 'excited state mean-field theory' [763].</p>
+<p>Figure Fig. 5.67 shows the schematic representation of a generic HOMO-LUMO excitation in ∆ SCF. First, the ground state is obtained in a regular SCF calculation. Then, the occupation numbers are changed to a non-aufbau occupation reflecting the desired excitation. For a HOMO-LUMO excitation, the HOMO in one of the two spin channels is chosen to be unoccupied, while the LUMO is occupied. This non-aufbau occupation together with the ground state orbitals is used as the initial guess for a variational saddle point search yielding a ∆ SCF excited state solution.</p>
+<figure><figcaption><div class="caption">Fig. 5.67: A simple scheme of a HOMO-LUMO excitation state using ∆ SCF</div></figcaption></figure>
+<p>Using ORCA's DeltaSCF , we can choose to converge the SCF to a HOMO/LUMO excited state. The excited state is obtained by fully relaxing the orbitals and can include any contributions such as the VV10 correlation or CPCM for solvation. Due to the variational optimization of the wave function, the Hellman-Feynman holds meaning that the gradient on the positions of the nuclei is available for geometry optimizations, molecular dynamics simulations, reaction path calculations, and all the other geometry search features ORCA has to offer. Additionally, all properties ORCA can calculate with a ground state SCF density can be computed with an excited state ∆ SCF density as well.</p>
+<h2>ǩ Important</h2>
+<p>∆ SCF states are represented by single-determinant wave functions within a DFT framework. As ground state DFT can struggle with multideterminantal cases, so can excited state DFT. Keep this in mind when tackling such cases!</p>
+<p>This description is, for instance, relatively reasonable when</p>
+<ol>
+<li style="list-style-type: '1. ';">the excited state can be described by a particle-hole interaction. That is for example NOT the case for the HOMO-LUMO excitation of a benzene molecule or most π -π ∗ excited states,</li>
+<li style="list-style-type: '2. ';">the occupied and virtual orbitals are separated in space such that the relevant exchange integral is zero. Examples include some n -π ∗ states, long-range charge transfer states etc.,</li>
+<li style="list-style-type: '3. ';">for closed-shell doubly excited states which can be represented by a single-determinant wavefunction.</li>
+</ol>
+<p>Furthermore, ∆ SCF wave functions can break the symmetries of the Hamiltonian (this is true for ground and excited states). Open-shell singly excited states inherently break the spin symmetry and require spin purification [764].</p>
+<h2>5.36.1 Theory</h2>
+<p>In this section, the theory of behind the ∆ SCF method is discussed.</p>
+<h2>SOSCF L-SR1 method</h2>
+<p>In ∆ SCF, one searches a stationary point on the energy surface with respect to the electronic orbital rotation degrees of freedom collected in the orbital rotation matrix</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where oo, ov, and vv represent the blocks of κ containing pairwise orbital rotations that mix two occupied, an occupied and a virtual, and two virtual orbitals, respectively. A stationary point is found as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with the energy gradient being</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where the right-hand side is a special case of the Baker-Campbell-Hausdorff formula and holds because the space of κ forms the Lie algebra corresponding to the Lie group of its exponential. Since the gradient is always zero for all elements of κ oo and κ vv , those blocks of κ are dropped as degrees of freedoms in the optimization. As e κ is required to be unitary, κ is required to be anti-Hermitian, dropping several orbital rotations as degrees of freedom in the optimization.</p>
+<p>The saddle point search is performed using the L-SR1 quasi-Newton optimizer, which is capable of forming an indefinite model Hessian, starting from an excited state initial guess. To increase the performance of the method and make it more robust, the following standard SOSCF preconditioner is used and allowed to become indefinite as well:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where f i is the occupation number of orbital i and ϵ i its energy.</p>
+<h2>Generalized Mode Following</h2>
+<p>The generalized mode following (GMF) method [765, 766] is a more robust but also a bit more expensive saddle point search method that can be used to converge to ∆ SCF excited state solutions. The method recasts the saddle point search as a minimization by modifying the gradient, such that it corresponds to a modified objective function that has a minimum where the energy function has the target saddle point. Now, a minimization can be performed to locate the target saddle point corresponding to the desired excited state, meaning the robust L-BFGS optimizer can be used instead of the L-SR1 optimizer, the preconditioner can be made positive-definite, and variational collapse to lower-energy solutions other than the targeted one becomes impossible by construction, making MOM unnecessary with GMF. For this to work, the saddle point order n of the target solution needs to be estimated at the start of the calculation, and the lowest n eigenpairs of the electronic Hessian need to be evaluated at every electronic optimization step with a finite difference Davidson method.</p>
+<p>Once the lowest n eigenvectors v i of electronic Hessian are evaluated at each optimization step, the modified gradient is calculated as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.36.2 Freeze-and-release strategy</h2>
+<p>In tricky cases, particularly those where the excitation leads to a large amount of charge transfer, it can be advantageous to shift to a freeze-and-release SOSCF strategy [767], which converges the DeltaSCF in two steps:</p>
+<pre><code>1. A constrained optimization freezing all orbitals that are excited, i.e. those␣ ↪ → orbitals for which the occupation numbers differ from the aufbau occupation. This step␣ ↪ → reduces to a minimization for the unconstrained orbitals. 2. An unconstrained optimization as usual.</code></pre>
+<p>Step 1 accounts for the orbital relaxation effect due to the first-order change in the electron density after the excitation on the orbitals that are not involved in the excitation. It can be regarded as an elaborate way of generating a very good initial guess for the excited state saddle point search in step 2.</p>
+<h2>5.36.3 Input and examples</h2>
+<p>In this section, some example calculations are presented together with the input.</p>
+<h2>First Example: HOMO-LUMO Excited State of Formaldehyde</h2>
+<p>Let's begin by trying to converge to the first excited state of formaldehyde and optimize the geometry in that electronic state starting from the regular planar structure:</p>
+<pre><code>!PBE DEF2-TZVP OPT FREQ DELTASCF UHF %SCF ALPHACONF 0,1 END * XYZ 0 1 C 0.000000 0.000000 -0.602985 O 0.000000 0.000000 0.605394 H 0.000000 0.934673 -1.182175 H 0.000000 -0.934673 -1.182175 *</code></pre>
+<p>Besides the regular keywords such as method, basis set, OPT and FREQ , one needs to specify DELTASCF in the simple input and in this case UHF since the alpha and beta orbitals will be different due to the single excitation (for doubly-excited states RHF might be sufficient).</p>
+<p>It is also necessary to add the ALPHACONF or BETACONF under the %SCF block. That is a minimal representation of the configuration you want to converge to. In this case, 0,1 means a HOMO/LUMO transition, where the HOMO has occupation zero and LUMO occupation one. For a HOMO-1/LUMO transition, it would be ALPHACONF 0, 1,1 . For a HOMO/LUMO+1 it would be ALPHACONF 0,0,1 and so on. Just picture what the frontier orbital occupation should look like. Any orbital below the first zero is assumed to be occupied and any orbital above the last occupied is assumed to be empty.</p>
+<p>After the regular startup, the ∆ SCF-specific print shows:</p>
+<pre><code>-------------------------------DELTA-SCF INITIAL CONFIGURATION -------------------------------Alpha: 1.00 1.00 1.00 0.00 1.00 0.00 0.00 0.00 Beta : 1.00 1.00 1.00 1.00 0.00 0.00 0.00 0.00 Hessian update ... L-SR1 Aufbau metric ... MOM Keep initial reference ... true</code></pre>
+<p>Here you can follow the initial configuration and some other important things:</p>
+<ol>
+<li style="list-style-type: '1. ';">Hessian update refers to which method will be used for the SOSCF Hessian update. ORCA's default is L-BFGS , which forces the electronic Hessian to be positive definite and will always push the system down to a minimum. As we want to go to a saddle point, the L-SR1 is set by default for DeltaSCF . More details on Hessian updates and their consequences at this reference from the group of Hannes Jónsson [768].</li>
+<li style="list-style-type: '2. ';">Aufbau metric is the way one measures the 'overlap' between the actual and reference wave functions (more details in [761]). It is MOM by default, but can be also set to %SCF PMOM TRUE END to use PMOM .</li>
+<li style="list-style-type: '3. ';">Keep initial reference TRUE means we will always try to keep the initial reference state defined after the guess phase. That is sometimes called IMOM in the literature [769]. If %SCF KEEPINITIALREF FALSE END is set, it is always the last SCF iteration that is taken as reference.</li>
+</ol>
+<h2>ǩ Important</h2>
+<p>Here we are using the orbitals of the PMODEL guess because it is trivial. In general, we recommend always starting the SCF by reading the orbitals of a previously converged ground state SCF! Please check Restarting SCF Calculations for more info on that.</p>
+<h2>This calculation trivially converges in 12 steps:</h2>
+<pre><code>----------------------------------------D-I-I-S------------------------------------↪ → --------Iteration Energy (Eh) Delta-E RMSDP MaxDP DIISErr Damp ␣ ↪ → Time(sec) -----------------------------------------------------------------------------------↪ → --------*** Starting incremental Fock matrix formation *** MOM changed the orbital occupation numbers 1 -114.2533654537761123 0.00e+00 2.06e-03 6.64e-02 7.14e-02 0.700 ␣ ↪ → 0.1 MOM changed the orbital occupation numbers 2 -114.2675698961360382 -1.42e-02 4.71e-04 1.46e-02 3.08e-02 0.700 ␣ ↪ → 0.1 ***Turning on AO-DIIS*** MOM changed the orbital occupation numbers 3 -114.2754325617175226 -7.86e-03 1.98e-04 3.98e-03 2.21e-02 0.700 ␣ ↪ → 0.1 MOM changed the orbital occupation numbers 4 -114.2806616906060100 -5.23e-03 4.98e-04 6.40e-03 1.60e-02 0.000 ␣ ↪ → 0.1 MOM changed the orbital occupation numbers *** Initializing SOSCF *** ---------------------------------------S-O-S-C-F-----------------------------------↪ → ---Iteration Energy (Eh) Delta-E RMSDP MaxDP MaxGrad ␣ ↪ → Time(sec) -----------------------------------------------------------------------------------↪ → ---5 -114.2932665018211225 -1.26e-02 7.19e-05 1.55e-03 2.33e-03 0.1 *** Restarting incremental Fock matrix formation *** *** Restarting Hessian update *** 6 -114.2932913947584979 -2.49e-05 5.82e-05 1.33e-03 1.11e-03 0.1 7 -114.2932671856877818 2.42e-05 2.54e-05 5.00e-04 2.58e-03 0.1 8 -114.2932914986330530 -2.43e-05 1.76e-05 3.20e-04 1.02e-03 0.1 9 -114.2932961472105404 -4.65e-06 2.13e-06 6.94e-05 6.42e-05 0.1 10 -114.2932961779292640 -3.07e-08 2.99e-05 1.10e-03 8.27e-06 0.1 11 -114.2932921911087050 3.99e-06 3.05e-05 1.12e-03 5.44e-04 0.1 12 -114.2932961794015654 -3.99e-06 2.45e-08 5.31e-07 2.39e-07 0.1 *** Gradient check signals convergence ***</code></pre>
+<pre><code>® Note The statement MOM changed the orbital occupation numbers is normal, it is just printing what</code></pre>
+<p>it is doing. Nothing to worry about.</p>
+<p>and one can see from the spin contamination, that this is indeed an open-shell singlet:</p>
+<pre><code>----------------------UHF SPIN CONTAMINATION ----------------------Warning: in a DFT calculation there is little theoretical justification to calculate <S**2> as in Hartree-Fock theory. We will do it anyways but you should keep in mind that the values have only limited relevance Expectation value of <S**2> : 1.006910 Ideal value S*(S+1) for S=0.0 : 0.000000 Deviation : 1.006910</code></pre>
+<p>The gradient is then computed, and the geometry is optimized until convergence. Finally the frequencies show this is actually not a minimum, but a saddle point on the geometry space!</p>
+<pre><code>-----------------------VIBRATIONAL FREQUENCIES -----------------------Scaling factor for frequencies = 1.000000000 (already applied!) 0: 0.00 cm**-1 1: 0.00 cm**-1 2: 0.00 cm**-1 3: 0.00 cm**-1 4: 0.00 cm**-1 5: 0.00 cm**-1 6: -591.31 cm**-1 ***imaginary mode*** 7: 799.56 cm**-1 8: 1228.37 cm**-1 9: 1271.29 cm**-1 10: 2971.77 cm**-1 11: 3067.96 cm**-1</code></pre>
+<p>The reason is: the HOMO/LUMO transition on formaldehyde populates the π ∗ LUMO, thus breaking the double bound and making the carbon atom pyramidal. If one starts from a slightly distorted structure, it then converges to the actual geometry minimum. Starting from a pyramidal structure:</p>
+<pre><code>!wB97M-D4 DEF2-TZVP DELTASCF UHF OPT FREQ %SCF ALPHACONF 0,1 END * XYZ 0 1 C 0.00000 0.00000 -0.60298 O -0.74131 -0.10909 0.45746 H 0.00000 0.93467 -1.18217 H 0.00000 -0.93467 -1.18217 *</code></pre>
+<p>now converges to a minimum, as shown by the absence of negative frequencies:</p>
+<pre><code>-----------------------VIBRATIONAL FREQUENCIES -----------------------Scaling factor for frequencies = 1.000000000 (already applied!)</code></pre>
+<p>(continues on next page)</p>
+<pre><code>0: 0.00 cm**-1 1: 0.00 cm**-1 2: 0.00 cm**-1 3: 0.00 cm**-1 4: 0.00 cm**-1 5: 0.00 cm**-1 6: 713.25 cm**-1 7: 826.75 cm**-1 8: 1206.57 cm**-1 9: 1292.70 cm**-1 10: 2826.06 cm**-1 11: 2893.16 cm**-1</code></pre>
+<p>The final geometry is surprisingly accurate for the gas phase formaldehyde, too! We will also show the results here using the range-corrected, meta-GGA hybrid wB97M-D4 and the double-hybrid DFT !B2PLYP DEF2-QZVPP AUTOAUX , just to show that MP2 also works.</p>
+<table><caption><div class="caption">Table 5.23: Geometry of gas phase formaldehyde versus the DeltaSCF results, in Angstroem and degrees.</div></caption><tbody><tr><th>parameter</th><th>exp.</th><th>PBE</th><th>wB97M-D4</th><th>B2PLYP</th></tr><tr><td>r(C-O)</td><td>1.323</td><td>1.300</td><td>1.310</td><td>1.311</td></tr><tr><td>r(C-H)</td><td>1.098</td><td>1.113</td><td>1.093</td><td>1.090</td></tr><tr><td>∠ HCH</td><td>118.8</td><td>115.0</td><td>117.0</td><td>116.8</td></tr><tr><td>∠ OOP</td><td>34.0</td><td>41.1</td><td>36.5</td><td>37.0</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">exp. taken from [760].</li>
+</ul>
+<p>ǩ</p>
+<h2>Important</h2>
+<p>We are using the default ground state SCF algorithm here, AO-DIIS + SOSCF because this is relatively simple. In general and for more complicated cases, we suggest using the approximate second-order method, to avoid escaping back to the ground state with !NODIIS NOTRAH , which is the default for ∆ SCF.</p>
+<h2>ǩ Important</h2>
+<p>Do NOT combine ∆ SCF wavefunctions with CCSD, or any such method with single excitations. It requires a speciallized version of CC which we don't have yet.</p>
+<h2>ǩ Important</h2>
+<p>When running the same calculation above with wB97M-D4 , there will not be a virtual orbital between the alpha HOMO-1 and the HOMO (so no negative HOMO-LUMO gap). There is nothing wrong here, it just optimized the orbitals to the excited state such that the occupation numbers correspond to an aufbau occupation. Hybrid functionals tend to lower the energy of the occupied orbitals with respect to the virtual orbitals.</p>
+<p>The energy is still higher than the non-∆ SCF solution and if you plot the orbitals you will see that the alpha HOMOis now a π orbital instead of an n . The eigenvalues of the electronic Hessian indicate that this solution is a first-order saddle point.</p>
+<p>(continued from previous page)</p>
+<h2>Core-ionized States</h2>
+<p>Another big advantage of the ∆ SCF is the possibility to converge to core-excited and/or core-ionized states. We have a simple keyword to remove electrons from any orbital, even the deep core ones:</p>
+<pre><code>%SCF IONIZEALPHA 2 END</code></pre>
+<p>and the electron from orbital number two will be removed. IONIZEBETA works for beta orbitals. One can start from an anion UHF electronic structure obtained by adding one extra electron and remove a core electron like this to obtain core-excited states too. Geometry optimization, EPR, and even TDDFT calculations are all valid for these states.</p>
+<p>As an example, the input below will ionize the 1s electron from a water molecule, which corresponds to MO 0 here:</p>
+<pre><code>!PBE0 DEF2-TZVP DELTASCF NODIIS UHF %SCF IONIZEALPHA 0 END * xyz 0 1 O 2.127880 -0.361920 0.104770 H 3.117210 -0.387460 0.070360 H 1.838520 -0.926280 -0.655730 *</code></pre>
+<p>If the orbital is not localized over a single atom, one might need to localized them first!</p>
+<p>and one can see from the results that is exactly what it converges to.</p>
+<pre><code>----------------ORBITAL ENERGIES ----------------SPIN UP ORBITALS NO OCC E(Eh) E(eV) 0 0.0000 -20.108086 -547.1688 1 1.0000 -1.567415 -42.6515 2 1.0000 -1.057257 -28.7694 3 1.0000 -0.939315 -25.5601 4 1.0000 -0.882871 -24.0241 5 0.0000 -0.304254 -8.2792 6 0.0000 -0.239285 -6.5113 7 0.0000 0.044344 1.2066 (...)</code></pre>
+<p>ORCA automatically adjusts charge and multiplicity here. The input should contain those from the reference system!</p>
+<p>Here are some examples of binding energies for 1s electrons. The atom from where it was removed is highlighted in bold:</p>
+<p>Table 5.24: Binding energies from 1s electrons found by DeltaSCF using wB97M-V/DEF2-TZVPP, in eV.</p>
+<table><tbody><tr><td>1s ionization</td><td>exp.</td><td>wB97M-V</td></tr><tr><td>H2 O</td><td>539.82</td><td>541.17</td></tr><tr><td>C O2</td><td>297.69</td><td>299.10</td></tr><tr><td>N H3</td><td>405.56</td><td>406.82</td></tr><tr><td>CH3C N</td><td>405.64</td><td>406.92</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">exp. taken from [770]</li>
+</ul>
+<h2>Diabatic Couplings</h2>
+<p>∆ SCF is also a quite accurate method to obtained diabatic couplings, which can later be used in Markus theory to compute electron transfer rates. These can be computed by calculating the energy difference between electron transfer states and using the Generalized Mulliken-Hush Approach (GMH). For more details please check for example this paper from the group of Blumberger [771].</p>
+<p>There is not enough space to go through the details here, but one can get these diabatic coupling from essentially one regular SCF for the ground state + a ∆ SCF for the excited state. For symmetric systems, this is trivial:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where states a and b are diabatic states, and ∆ E 12 is the energy difference between adiabatic states 1 and 2 (which are obtained via SCF solution). Here is an example of the diabatic couplings obtained for a benzene dimer, obtained by starting from the ground state cation and exciting the beta electron with:</p>
+<pre><code>%SCF BETACONF 0,1 END</code></pre>
+<p>Table 5.25: Diabatic couplings found by ∆ SCF using wB97M-V/DEF2-TZVPP, in meV.</p>
+<table><tbody><tr><th>Distance in Ang</th><th>MRCI+Q</th><th>wB97M-V</th><th>TD-DFT</th></tr><tr><td>3.5</td><td>435.2</td><td>473.1</td><td>593</td></tr><tr><td>4.0</td><td>214.3</td><td>236.7</td><td>374</td></tr><tr><td>4.5</td><td>104.0</td><td>115.9</td><td>267.5</td></tr><tr><td>5.0</td><td>51.70</td><td>56.7</td><td>218.5</td></tr></tbody></table>
+<ul>
+<li style="list-style-type: '· ';">MRCI+Q taken from [771]</li>
+</ul>
+<h2>Generalized Mode Following</h2>
+<p>For an example GMF calculation, we return to the formaldehyde molecule, this time targeting a HOMO-LUMO+1 excitation to keep it interesting and add the simple input keyword GMF :</p>
+<pre><code>!WB97X-D4 DEF2-SVP UKS DELTASCF GMF %SCF ALPHACONF 0,0,1 END * XYZ 0 1 O -3.54418 1.61112 0.04891 C -4.12047 0.61074 -0.35955 H -3.36418 -0.41948 -0.79627 H -4.84699 0.73407 -1.42962 *</code></pre>
+<p>If not provided in the input, the target saddle point order is estimated either by using the orbital energies or by evaluating the number of negative eigenvalues of the electronic Hessian. In the former case, the target saddle point order is approximated as the number of pairs of an occupied and a virtual orbital where the occupied orbital has a larger energy than the virtual orbital at the excited state initial guess after the excitation has been performed. In our example, this yields a saddle point order of 2, as is estimated by default and printed together with some other default input parameters in the DeltaSCF block:</p>
+<pre><code>-------------------------------DELTA-SCF INITIAL CONFIGURATION -------------------------------Alpha: 1.00 1.00 1.00 0.00 0.00 1.00 0.00 0.00 0.00 Beta : 1.00 1.00 1.00 1.00 0.00 0.00 0.00 0.00 0.00</code></pre>
+<p>(continues on next page)</p>
+<pre><code>Hessian update ... L-BFGS/GMF Generalized mode following: Target saddle point order ... 2 Finite difference generalized Davidson method: Finite difference mode ... Forward Finite difference step size ... 1.000e-03 Max. size of Krylov subspace ... 20 Convergence tolerance ... 1.000e-02 Max. number of iterations ... 100 Aufbau metric ... Fixed occupations</code></pre>
+<p>Before every optimization step, the lowest 2 (same as target saddle point order) eigenpairs of the electronic Hessian are evaluated, and once converged below the tolerance, the eigenvalues are printed, e.g. for the first optimization step:</p>
+<pre><code>Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 6.520e-02 6.276e-02 2 3.193e-02 2.817e-02 3 1.511e-02 9.423e-03 4 3.889e-03 9.417e-03 Eigenvalues: -3.316e-01 -2.404e-01</code></pre>
+<p>After a few optimization steps, the evaluation of the Hessian eigenpairs requires no further adjustments, so that the Davidson runs converge immediately:</p>
+<pre><code>Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 5.165e-03 8.433e-03 Eigenvalues: -2.574e-01 -1.792e-01 11 -114.1023998750192305 -1.06e-05 1.06e-03 1.96e-02 5.46e-04 1.3 Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 5.755e-03 8.231e-03 Eigenvalues: -2.575e-01 -1.791e-01 12 -114.1024101850037624 -1.03e-05 6.43e-04 1.25e-02 3.11e-04 1.3 Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 6.190e-03 8.354e-03 Eigenvalues: -2.575e-01 -1.790e-01 13 -114.1024129524389963 -2.77e-06 3.67e-04 7.30e-03 2.00e-04 1.3 Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 6.264e-03 8.286e-03 Eigenvalues: -2.574e-01 -1.790e-01 14 -114.1024142211099530 -1.27e-06 8.68e-05 1.34e-03 1.46e-04 1.3 Solving for 2 Hessian eigenvectors It. Root MAX Err.: 1 2 1 6.396e-03 8.439e-03 Eigenvalues: -2.574e-01 -1.790e-01 15 -114.1024145538739987 -3.33e-07 4.56e-05 7.31e-04 9.17e-05 1.3 **** Energy Check signals convergence ****</code></pre>
+<p>In this simple example, one would expect the configuration to be conserved during the optimization. This is not the case here, again, because a hybrid functional is used. The occupied orbitals are stabilized with respect to the virtual ones leading to this configuration:</p>
+<pre><code>----------------ORBITAL ENERGIES ----------------SPIN UP ORBITALS NO OCC E(Eh) E(eV) (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>0 1.0000 -19.374322 -527.2021 1 1.0000 -10.431285 -283.8497 2 1.0000 -1.258409 -34.2430 3 1.0000 -0.755807 -20.5666 4 1.0000 -0.635639 -17.2966 5 1.0000 -0.591213 -16.0877 6 1.0000 -0.584445 -15.9036 7 0.0000 -0.143277 -3.8988 8 1.0000 -0.113247 -3.0816 9 0.0000 -0.061224 -1.6660 10 0.0000 0.146574 3.9885 11 0.0000 0.251438 6.8420 12 0.0000 0.490702 13.3527 13 0.0000 0.537161 14.6169 14 0.0000 0.565655 15.3923 15 0.0000 0.624632 16.9971 16 0.0000 0.649717 17.6797 17 0.0000 0.710983 19.3468 18 0.0000 0.928559 25.2674</code></pre>
+<p>The two lowest eigenvalues of the Hessian at the last optimization step are clearly negative, so this solution is a secondorder saddle point, as expected and targeted in the optimization. Do not rely on the configuration to determine the saddle point order if you use hybrid functionals!</p>
+<h2>Freeze-and-release strategy</h2>
+<p>Let's take a look at a tricky excited state of the 90-degrees-twisted N-phenylpyrrole molecule. We first perform a ground state SCF calculation without DeltaSCF using this input:</p>
+<pre><code>!UKS aug-cc-pVDZ PBE *xyz 0 1 C 10.13954933 10.09711395 12.38421108 C 11.34646202 10.09711395 13.07460199 C 8.93263664 10.09711395 13.07460199 C 10.13954933 10.09711395 15.16101197 C 11.34465495 10.09711395 14.46510328 C 8.93444370 10.09711395 14.46510328 C 10.13954933 11.21630306 10.16939448 C 10.13954933 8.97792484 10.16939448 C 10.13954933 10.80761594 8.85675649 C 10.13954933 9.38661196 8.85675649 N 10.13954933 10.09711395 10.96513494 H 12.26979504 10.09711395 12.51888639 H 8.00930362 10.09711395 12.51888639 H 12.27909865 10.09711395 15.00190089 H 8.00000000 10.09711395 15.00190089 H 10.13954933 10.09711395 16.23847837 H 10.13954933 12.19422790 10.60962753 H 10.13954933 8.00000000 10.60962753 H 10.13954933 11.45309491 8.00000000 H 10.13954933 8.74113299 8.00000000 *</code></pre>
+<p>This calculation yields an energy of -440.702 Eh and a dipole moment of 2.181 D. Now we perform an excited state calculation with DeltaSCF starting from this converged ground state solution and exciting an electron from the HOMOto the LUMO in the alpha spin channel with this input:</p>
+<pre><code>!UKS aug-cc-pVDZ PBE DeltaSCF !SOSCF NoDIIS NoTRAH (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>!MORead !SCFCheckGrad %moinp "gs.gbw" %scf AlphaConf 0,1 DoMOM false SOSCFMaxStep 0.1 end *xyz 0 1 C 10.13954933 10.09711395 12.38421108 C 11.34646202 10.09711395 13.07460199 C 8.93263664 10.09711395 13.07460199 C 10.13954933 10.09711395 15.16101197 C 11.34465495 10.09711395 14.46510328 C 8.93444370 10.09711395 14.46510328 C 10.13954933 11.21630306 10.16939448 C 10.13954933 8.97792484 10.16939448 C 10.13954933 10.80761594 8.85675649 C 10.13954933 9.38661196 8.85675649 N 10.13954933 10.09711395 10.96513494 H 12.26979504 10.09711395 12.51888639 H 8.00930362 10.09711395 12.51888639 H 12.27909865 10.09711395 15.00190089 H 8.00000000 10.09711395 15.00190089 H 10.13954933 10.09711395 16.23847837 H 10.13954933 12.19422790 10.60962753 H 10.13954933 8.00000000 10.60962753 H 10.13954933 11.45309491 8.00000000 H 10.13954933 8.74113299 8.00000000 *</code></pre>
+<p>This simple-seeming excitation leads to a large charge transfer from the phenyl group to the pyrrole group which makes this excited state tricky to converge. To this end, we reduce the maximum step size of the SOSCF optimization from 0.2 (default) to 0.1 with SOSCFMaxStep 0.1 and deactivate MOM with DoMOM false since MOM tends to become counterproductive for cases with heavy charge transfer. We also use only SOSCF and deactivate DIIS and TRAH using the simple input !SOSCF NoDIIS NoTRAH and force a convergence check for the SOSCF gradient with !SCFCheckGrad . The latter amounts to personal preference.</p>
+<p>This calculation converges to a solution with an excitation energy of 189 mEh and a dipole moment difference to the ground state of 4.958 D, which are both smaller than expected for this heavy charge transfer state. This is known as a variational collapse, i.e. the calculation converged to a lower-energy solution than desired.</p>
+<p>To counteract this variational collapse, we use the freeze-and-release SOSCF approach by adding FreezeAndRelease (or FRSOSCF ) to the simple input line:</p>
+<pre><code>!UKS aug-cc-pVDZ PBE DeltaSCF FreezeAndRelease !MORead !SCFCheckGrad %moinp "gs.gbw" %scf AlphaConf 0,1 DoMOM 0 SOSCFConvFactor 500 SOSCFMaxStep 0.1 end</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

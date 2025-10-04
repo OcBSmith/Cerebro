@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part079</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<ol>
+<li style="list-style-type: '5. ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. Explicitly Correlated N-Electron Valence State Perturbation Theory (NEVPT2-F12). J. Chem. Phys. , 2017 , 147 (6), 064110. DOI: 10.1063/1.4996560.</li>
+<li style="list-style-type: '6. ';">Pathak, Shubhrodeep; Lang, Lucas; Neese, Frank. A Dynamic Correlation Dressed Complete Active Space Method: Theory, Implementation, and Preliminary Applications. J. Chem. Phys. , 2017 , 147, 234109.</li>
+<li style="list-style-type: '7. ';">Huntington, L .M. J.; Krupička, M.; Neese, F.; Izsák, R. Similarity transformed equation of motion coupledcluster theory based on an unrestricted Hartree-Fock reference for applications to high-spin open-shell systems. J. Chem. Phys. , 2017 , 147, 174104.</li>
+<li style="list-style-type: '8. ';">Dutta, Achintya Kumar; Nooijen, Marcel; Neese, Frank; Izsák, Róbert. Automatic active space selection for the similarity transformed equations of motion coupled cluster method. J. Chem. Phys. , 2017 , 146 (7), 074103.</li>
+<li style="list-style-type: '9. ';">Dutta, Achintya Kumar; Neese, Frank; Izsák, Róbert. A simple scheme for calculating approximate transition moments within the equation of motion expectation value formalism. J. Chem. Phys. , 2017 , 146 (21), 214111.</li>
+<li style="list-style-type: '10. ';">Grimme, Stefan; Bannwarth, Christoph; Dohm, Sebastian; Hansen, Andreas; Pisarek, Jana; Pracht, Philipp; Seibert, Jakob; Neese, Frank. Fully Automated Quantum-Chemistry-Based Computation of Spin-SpinCoupled Nuclear Magnetic Resonance Spectra. Angew. Chem. Int. Ed. , 2017 , 56 (46), 14763-14769. DOI: 10.1002/anie.201708266.</li>
+<li style="list-style-type: '11. ';">Kalinowski, Jaroslaw; Wennmohs, Frank; Neese, Frank. Arbitrary angular momentum electron repulsion integrals with graphical processing units: Application to the resolution of identity hartree-fock method. J. Chem. Theory Comput. , 2017 , 13 (7), 3160-3170.</li>
+<li style="list-style-type: '12. ';">Maganas, Dimitrios; DeBeer, Serena; Neese, Frank. A Restricted Open Configuration Interaction with Singles Method To Calculate Valence-to-Core Resonant X-ray Emission Spectra: A Case Study. Inorg. Chem. , 2017 , 56 (19), 11819-11836. DOI: 10.1021/acs.inorgchem.7b01810.</li>
+<li style="list-style-type: '13. ';">Mai, Sebastian; Plasser, Felix; Pabst, Mathias; Neese, Frank; Köhn, Andreas; González, Leticia. Surface Hopping Dynamics Including Intersystem Crossing Using the Algebraic Diagrammatic Construction Method. J. Chem. Phys. , 2017 , 147 (18), 184109. DOI: 10.1063/1.4999687.</li>
+<li style="list-style-type: '14. ';">Pavošević, Fabijan; Peng, Chong; Pinski, Peter; Riplinger, Christoph; Neese, Frank; Valeev, Edward F. SparseMaps-A systematic infrastructure for reduced scaling electronic structure methods. V. Linear scaling explicitly correlated coupled-cluster method with pair natural orbitals. J. Chem. Phys. , 2017 , 146 (17), 174108.</li>
+<li style="list-style-type: '15. ';">Veis, Libor; Antalík, Andrej; Brabec, Jiri; Neese, Frank; Legeza, Ors; Pittner, Jiri. Coupled cluster method with single and double excitations tailored by matrix product state wave functions. J. Phys. Chem. Lett. , 2016 , 7 (20), 4072-4078.</li>
+</ol>
+<h2>B.2 Relevant Applications, Benchmarks and Reviews</h2>
+<h2>B.2.1 2024</h2>
+<ol>
+<li style="list-style-type: '1. ';">Gray, Montgomery; Herbert, John M. Assessing the domain-based local pair natural orbital (DLPNO) approximation for non-covalent interactions in sizable supramolecular complexes. J. Chem. Phys. , 2024 , 161 (5), 054114. arXiv:https://pubs.aip.org/aip/jcp/articlepdf/doi/10.1063/5.0206533/20096343/054114\_1\_5.0206533.pdf, DOI: 10.1063/5.0206533.</li>
+</ol>
+<h2>B.2.2 2023</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neugebauer, Hagen; Pinski, Peter; Grimme, Stefan; Neese, Frank; Bursch, Markus. Assessment of DLPNOMP2 Approximations in Double-Hybrid DFT. J. Chem. Theory Comput. , 2023 , 19 (21), 7695-7703. DOI: 10.1021/acs.jctc.3c00896.</li>
+<li style="list-style-type: '2. ';">Wappett, Dominique A.; Goerigk, Lars. Exploring CPS-Extrapolated DLPNO-CCSD(T1) Reference Values for Benchmarking DFT Methods on Enzymatically Catalyzed Reactions. J. Phys. Chem. A , 2024 , 128 (1), 62-72. DOI: 10.1021/acs.jpca.3c05086.</li>
+<li style="list-style-type: '3. ';">Wang, Zikuan; Neese, Frank. Development of NOTCH, an all-electron, beyond-NDDO semiempirical method: Application to diatomic molecules. The Journal of Chemical Physics , 2023 , 158 (18), 184102. DOI: 10.1063/5.0141686.</li>
+</ol>
+<h2>B.2.3 2022</h2>
+<ol>
+<li style="list-style-type: '1. ';">Bursch, Markus; Mewes, Jan-Michael; Hansen, Andreas; Grimme, Stefan. Best-Practice DFT Protocols for Basic Molecular Computational Chemistry. Angew. Chem. Int. Ed. , 2022 , 61 (42), e202205735. DOI: 10.1002/anie.202205735.</li>
+</ol>
+<h2>B.2.4 2021</h2>
+<ol>
+<li style="list-style-type: '1. ';">Brémond, Éric; Sancho-García, Juan Carlos; Pérez-Jiménez, Ángel José; Adamo, Carlo. J. Chem. Phys. , 2014 , 141, 031101.</li>
+<li style="list-style-type: '2. ';">Beck, M. E.; Riplinger, C.; Neese, F.; Bistoni, G. Unraveling Individual Host-Guest Interactions in Molecular Recognition from First Principles Quantum Mechanics: Insights into the Nature of Nicotinic Acetylcholine Receptor Agonist Binding. J. Comput. Chem. , 2021 , 42 (5), 293-302. DOI: 10.1002/jcc.26454.</li>
+<li style="list-style-type: '3. ';">Berraud-Pache, R.; Santamaria-Aranda, E.; de Souza, B.; Bistoni, G.; Neese, F.; Sampedro, D.; Izsak, R. Redesigning Donor-Acceptor Stenhouse Adduct Photoswitches through a Joint Experimental and Computational Study. Chem. Sci. , 2021 , 12 (8), 2916-2924. DOI: 10.1039/d0sc06575g.</li>
+<li style="list-style-type: '4. ';">Bursch, Markus; Hansen, Andreas; Pracht, Philipp; Kohn, Julia T.; Grimme, Stefan. Theoretical study on conformational energies of transition metal complexes. Phys. Chem. Chem. Phys. , 2021 , 23, 287-299. DOI: 10.1039/D0CP04696E.</li>
+<li style="list-style-type: '5. ';">Daniel, C.; Gonzalez, L.; Neese, F. Quantum Theory: The Challenge of Transition Metal Complexes. Phys. Chem. Chem. Phys. , 2021 , 23 (4), 2533-2534. DOI: 10.1039/d0cp90278k.</li>
+<li style="list-style-type: '6. ';">Maurer, Leonard R.; Bursch, Markus; Grimme, Stefan; Hansen, Andreas. Assessing Density Functional Theory for Chemically Relevant Open-Shell Transition Metal Reactions. J. Chem. Theory Comput. , 2021 , 17 (10), 6134-6151. DOI: 10.1021/acs.jctc.1c00659.</li>
+<li style="list-style-type: '7. ';">Schulz, C. E.; van Gastel, M.; Pantazis, D. A.; Neese, F. Converged Structural and Spectroscopic Properties for Refined QM/MM Models of Azurin. Inorg. Chem. , 2021 , 60 (10), 7399-7412. DOI: 10.1021/acs.inorgchem.1c00640.</li>
+<li style="list-style-type: '8. ';">Schulz, C. E.; Castillo, R. G.; Pantazis, D. A.; DeBeer, S.; Neese, F. Structure-Spectroscopy Correlations for Intermediate q of Soluble Methane Monooxygenase: Insights from QM/MM Calculations. J. Am. Chem. Soc. , 2021 , 143 (17), 6560-6577. DOI: 10.1021/jacs.1c01180.</li>
+<li style="list-style-type: '9. ';">Sirohiwal, A.; Neese, F.; Pantazis, D. A. How Can We Predict Accurate Electrochromic Shifts for Biochromophores? A Case Study on the Photosynthetic Reaction Center. J. Chem. Theory Comput. , 2021 , 17 (3), 1858-1873. DOI: 10.1021/acs.jctc.0c01152.</li>
+<li style="list-style-type: '10. ';">Sirohiwal, A.; Neese, F.; Pantazis, D. A. Chlorophyll excitation energies and structural stability of the CP47 antenna of photosystem II: a case study in the first-principles simulation of light-harvesting complexes. Chem. Sci. , 2021 , 12 (12), 4463-4476. DOI: 10.1039/d0sc06616h.</li>
+</ol>
+<ol>
+<li style="list-style-type: '11. ';">Tarrago, M.; Romelt, C.; Nehrkorn, J.; Schnegg, A.; Neese, F.; Bill, E.; Ye, S. F. Experimental and Theoretical Evidence for an Unusual Almost Triply Degenerate Electronic Ground State of Ferrous Tetraphenylporphyrin. Inorg. Chem. , 2021 , 60 (7), 4966-4985. DOI: 10.1021/acs.inorgchem.1c00031.</li>
+</ol>
+<h2>B.2.5 2020</h2>
+<ol>
+<li style="list-style-type: '1. ';">Rolfes, Julian D.; Neese, Frank; Pantazis, Dimitrios A. All-Electron Scalar Relativistic Basis Sets for the Elements Rb-Xe. J. Comput. Chem. , 2020 , 41, 1842-1849. DOI: 10.1002/jcc.26355.</li>
+<li style="list-style-type: '2. ';">Chilkuri, Vijay Gopal; DeBeer, Serena; Neese, Frank. Ligand Field Theory and Angular Overlap Model Based Analysis of the Electronic Structure of Homovalent Iron-Sulfur Dimers. Inorg. Chem. , 2020 , 59 (2), 984-995. DOI: 10.1021/acs.inorgchem.9b00974.</li>
+<li style="list-style-type: '3. ';">Sirohiwal, Abhishek; Berraud-Pache, Romain; Neese, Frank; Izsák, Róbert; Pantazis, Dimitrios A. Accurate Computation of the Absorption Spectrum of Chlorophyll a with Pair Natural Orbital Coupled Cluster Methods. J. Phys. Chem. B , 2020 , 124 (40), 8761-8771. DOI: 10.1021/acs.jpcb.0c05761.</li>
+<li style="list-style-type: '4. ';">Chakarawet, K.; Atanasov, M.; Marbey, J.; Bunting, P. C.; Neese, F.; Hill, S.; Long, J. R. Strong Electronic and Magnetic Coupling in M-4 (m = Ni, Cu) Clusters via Direct Orbital Interactions between Low-Coordinate Metal Centers. J. Am. Chem. Soc. , 2020 , 142 (45), 19161-19169. DOI: 10.1021/jacs.0c08460.</li>
+<li style="list-style-type: '5. ';">Dittmer, A.; Stoychev, G. L.; Maganas, D.; Auer, A. A.; Neese, F. Computation of NMR Shielding Constants for Solids Using an Embedded Cluster Approach with DFT, Double-Hybrid DFT, and MP2. J. Chem. Theory Comput. , 2020 , 16 (11), 6950-6967. DOI: 10.1021/acs.jctc.0c00067.</li>
+<li style="list-style-type: '6. ';">Floser, B. M.; Guo, Y.; Riplinger, C.; Tuczek, F.; Neese, F. Detailed Pair Natural Orbital-Based Coupled Cluster Studies of Spin Crossover Energetics. J. Chem. Theory Comput. , 2020 , 16 (4), 2224-2235. DOI: 10.1021/acs.jctc.9b01109.</li>
+<li style="list-style-type: '7. ';">Gottschalk, H. C.; Poblotzki, A.; Fatima, M.; Obenchain, D. A.; Perez, C.; Antony, J.; Auer, A. A.; Baptista, L.; Benoit, D. M.; Bistoni, G.; Bohle, F.; Dahmani, R.; Firaha, D.; Grimme, S.; Hansen, A.; Harding, M. E.; Hochlaf, M.; Holzer, C.; Jansen, G.; Klopper, W.; Kopp, W. A.; Kroger, L. C.; Leonhard, K.; Al-Mogren, M. M.; Mouhib, H.; Neese, F.; Pereira, X. N.; Prakash, M.; Ulusoy, I. S.; Mata, R. A.; Suhm, M. A.; Schnell, M. The First Microsolvation Step for Furans: New Experiments and Benchmarking Strategies. J. Chem. Phys. , 2020 , 152 (16), 17. DOI: 10.1063/5.0004465.</li>
+<li style="list-style-type: '8. ';">Neugebauer, Hagen; Bohle, Fabian; Bursch, Markus; Hansen, Andreas; Grimme, Stefan. Benchmark Study of Electrochemical Redox Potentials Calculated with Semiempirical and DFT Methods. J. Phys. Chem. A , 2020 , 124 (35), 7166-7176. DOI: 10.1021/acs.jpca.0c05052.</li>
+<li style="list-style-type: '9. ';">Hillenbrand, J.; van Gastel, M.; Bill, E.; Neese, F.; Furstner, A. Isolation of a Homoleptic Non-Oxo Mo(V) Alkoxide Complex: Synthesis, Structure, and Electronic Properties of Penta-Tert-Butoxymolybdenum. J. Am. Chem. Soc. , 2020 , 142 (38), 16392-16402. DOI: 10.1021/jacs.0c07073.</li>
+<li style="list-style-type: '10. ';">Jung, J.; Loffler, S. T.; Langmann, J.; Heinemann, F. W.; Bill, E.; Bistoni, G.; Scherer, W.; Atanasov, M.; Meyer, K.; Neese, F. Dispersion Forces Drive the Formation of Uranium-Alkane Adducts. J. Am. Chem. Soc. , 2020 , 142 (4), 1864-1870. DOI: 10.1021/jacs.9b10620.</li>
+<li style="list-style-type: '11. ';">Maganas, D.; Kowalska, J. K.; Van Stappen, C.; DeBeer, S.; Neese, F. Mechanism of L-2,L-3-Edge x-Ray Magnetic Circular Dichroism Intensity from Quantum Chemical Calculations and Experiment-A Case Study on V-(IV)/V-(III) Complexes. J. Chem. Phys. , 2020 , 152 (11), 15. DOI: 10.1063/1.5129029.</li>
+<li style="list-style-type: '12. ';">Meyer, F.; Neese, F. Impact of Modern Spectroscopy in Inorganic Chemistry. Inorg. Chem. , 2020 , 59 (19), 13805-13806. DOI: 10.1021/acs.inorgchem.0c02755.</li>
+<li style="list-style-type: '13. ';">Reza Ghafarian Shirazi, Dimitrios A. Pantazis; Neese, Frank. Performance of density functional theory and orbital-optimised second-order perturbation theory methods for geometries and singlet-triplet state splittings of aryl-carbenes. Mol. Phys. , 2020 , 118 (21-22), e1764644. DOI: 10.1080/00268976.2020.1764644.</li>
+<li style="list-style-type: '14. ';">Sirohiwal, A.; Neese, F.; Pantazis, D. A. Protein Matrix Control of Reaction Center Excitation in Photosystem II. J. Am. Chem. Soc. , 2020 , 142 (42), 18174-18190. DOI: 10.1021/jacs.0c08526.</li>
+</ol>
+<ol>
+<li style="list-style-type: '15. ';">Spiller, N.; Chilkuri, V. G.; DeBeer, S.; Neese, F. Sulfur vs. Selenium as Bridging Ligand in Di-Iron Complexes: A Theoretical Analysis. Eur. J. Inorg. Chem. , 2020 , 2020 (15-16), 1525-1538. DOI: 10.1002/ejic.202000033.</li>
+<li style="list-style-type: '16. ';">Yepes, D.; Neese, F.; List, B.; Bistoni, G. Unveiling the Delicate Balance of Steric and Dispersion Interactions in Organocatalysis Using High-Level Computational Methods. J. Am. Chem. Soc. , 2020 , 142 (7), 3613-3625. DOI: 10.1021/jacs.9b13725.</li>
+</ol>
+<h2>B.2.6 2019</h2>
+<ol>
+<li style="list-style-type: '1. ';">Maganas, Dimitrios; Kowalska, Joanna K.; Nooijen, Marcel; DeBeer, Serena; Neese, Frank. Comparison of Multireference Ab Initio Wavefunction Methodologies for X-Ray Absorption Edges: A Case Study on [Fe(II/III)Cl₄]²⁻/¹⁻ Molecules. J. Chem. Phys. , 2019 , 150 (10), 104106. DOI: 10.1063/1.5051613.</li>
+<li style="list-style-type: '2. ';">Helmich-Paris, Benjamin. Benchmarks for Electronically Excited States with CASSCF Methods. J. Chem. Theory Comput. , 2019 , 15 (7), 4170-4179. DOI: 10.1021/acs.jctc.9b00325.</li>
+<li style="list-style-type: '3. ';">Dittmer, Anneke; Izsák, Róbert; Neese, Frank; Maganas, Dimitrios. Accurate Band Gap Predictions of Semiconductors in the Framework of the Similarity Transformed Equation of Motion Coupled Cluster Theory. Inorg. Chem. , 2019 , 58 (14), 9303-9315. DOI: 10.1021/acs.inorgchem.9b00994.</li>
+<li style="list-style-type: '4. ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. Effect of Electron Correlation on Intermolecular Interactions: APair Natural Orbitals Coupled Cluster Based Local Energy Decomposition Study. J. Chem. Theory Comput. , 2019 , 15 (1), 215-228. DOI: 10.1021/acs.jctc.8b00915.</li>
+<li style="list-style-type: '5. ';">Berraud-Pache, R.; Neese, F.; Bistoni, G.; Izsak, R. Computational Design of Near-Infrared Fluorescent Organic Dyes Using an Accurate New Wave Function Approach. J. Phys. Chem. Lett. , 2019 , 10 (17), 4822-4828. DOI: 10.1021/acs.jpclett.9b02240.</li>
+<li style="list-style-type: '6. ';">Chang, H. C.; Lin, Y. H.; Werle, C.; Neese, F.; Lee, W. Z.; Bill, E.; Ye, S. F. Conversion of a Fleeting Open-Shell Iron Nitride into an Iron Nitrosyl. Angew. Chem. Int. Ed. , 2019 , 58 (49), 17589-17593. DOI: 10.1002/anie.201908689.</li>
+<li style="list-style-type: '7. ';">Chang, H. C.; Mondal, B.; Fang, H. Y.; Neese, F.; Bill, E.; Ye, S. F. Electron Paramagnetic Resonance Signature of Tetragonal Low Spin Iron(V)-Nitrido and -Oxo Complexes Derived from the Electronic Structure Analysis of Heme and Non-Heme Archetypes. J. Am. Chem. Soc. , 2019 , 141 (6), 2421-2434. DOI: 10.1021/jacs.8b11429.</li>
+<li style="list-style-type: '8. ';">Bursch, Markus; Caldeweyher, Eike; Hansen, Andreas; Neugebauer, Hagen; Ehlert, Sebastian; Grimme, Stefan. Understanding and Quantifying London Dispersion Effects in Organometallic Complexes. Acc. Chem. Res. , 2019 , 52 (1), 258-266. DOI: 10.1021/acs.accounts.8b00505.</li>
+<li style="list-style-type: '9. ';">Keilwerth, M.; Hohenberger, J.; Heinemann, F. W.; Sutter, J.; Scheurer, A.; Fang, H. Y.; Bill, E.; Neese, F.; Ye, S. F.; Meyer, K. A Series of Iron Nitrosyl Complexes Fe-NO(6-9) and a Fleeting Fe-NO(10) Intermediate En Route to a Metalacyclic Iron Nitrosoalkane. J. Am. Chem. Soc. , 2019 , 141 (43), 17217-17235. DOI: 10.1021/jacs.9b08053.</li>
+<li style="list-style-type: '10. ';">Krewald, Vera; Neese, Frank; Pantazis, Dimitrios A. Implications of structural heterogeneity for the electronic structure of the final oxygen-evolving intermediate in photosystem II. J. Inorg. Biochem. , 2019 , 199, 110797. DOI: 10.1016/j.jinorgbio.2019.110797.</li>
+<li style="list-style-type: '11. ';">Lu, Q.; Neese, F.; Bistoni, G. London Dispersion Effects in the Coordination and Activation of Alkanes in Sigma-Complexes: A Local Energy Decomposition Study. Phys. Chem. Chem. Phys. , 2019 , 21 (22), 1156911577. DOI: 10.1039/c9cp01309a.</li>
+<li style="list-style-type: '12. ';">Neese, F.; Atanasov, M.; Bistoni, G.; Maganas, D.; Ye, S. F. Chemistry and Quantum Mechanics in 2019: Give Us Insight and Numbers. J. Am. Chem. Soc. , 2019 , 141 (7), 2814-2824. DOI: 10.1021/jacs.8b13313.</li>
+<li style="list-style-type: '13. ';">Saitow, M.; Dutta, A. K.; Neese, F. Accurate Ionization Potentials, Electron Affinities and Electronegativities of Single-Walled Carbon Nanotubes by State-of-the-Art Local Coupled-Cluster Theory. Bull. Chem. Soc. Jpn. , 2019 , 92 (1), 170-174. DOI: 10.1246/bcsj.20180254.</li>
+<li style="list-style-type: '14. ';">Salla, Cristian A. M.; Teixeira dos Santos, Jéssica; Farias, Giliandro; Bortoluzi, Adailton J.; Curcio, Sergio F.; Cazati, Thiago; Izsák, Róbert; Neese, Frank; de Souza, Bernardo; Bechtold, Ivan H. New Boron(III) Blue</li>
+</ol>
+<ul>
+<li>Emitters for All-Solution Processed OLEDs: Molecular Design Assisted by Theoretical Modeling. Eur. J. Inorg. Chem. , 2019 , 2019 (17), 2247-2257. DOI: 10.1002/ejic.201900265.</li>
+<li style="list-style-type: '15. ';">Shirazi, R. G.; Neese, F.; Pantazis, D. A.; Bistoni, G. Physical Nature of Differential Spin-State Stabilization of Carbenes by Hydrogen and Halogen Bonding: A Domain-Based Pair Natural Orbital Coupled Cluster Study. J. Phys. Chem. A , 2019 , 123 (24), 5081-5090. DOI: 10.1021/acs.jpca.9b01051.</li>
+<li style="list-style-type: '16. ';">Sirohiwal, A.; Neese, F.; Pantazis, D. A. Microsolvation of the Redox-Active Tyrosine-d in Photosystem II: Correlation of Energetics with EPR Spectroscopy and Oxidation-Induced Proton Transfer. J. Am. Chem. Soc. , 2019 , 141 (7), 3217-3231. DOI: 10.1021/jacs.8b13123.</li>
+<li style="list-style-type: '17. ';">Stavretis, Shelby E.; Cheng, Yongqiang; Daemen, Luke L.; Brown, Craig M.; Moseley, Duncan H.; Bill, Eckhard; Atanasov, Mihail; Ramirez-Cuesta, Anibal J.; Neese, Frank; Xue, Zi-Ling. Probing Magnetic Excitations in CoII Single-Molecule Magnets by Inelastic Neutron Scattering. Eur. J. Inorg. Chem. , 2019 , 2019 (8), 1119-1127. DOI: 10.1002/ejic.201801088.</li>
+<li style="list-style-type: '18. ';">Thomsen, M. K.; Nyvang, A.; Walsh, J. P. S.; Bunting, P. C.; Long, J. R.; Neese, F.; Atanasov, M.; Genoni, A.; Oyergaard, J. Insights into Single-Molecule-Magnet Behavior from the Experimental Electron Density of Linear Two-Coordinate Iron Complexes. Inorg. Chem. , 2019 , 58 (5), 3211-3218. DOI: 10.1021/acs.inorgchem.8b03301.</li>
+</ul>
+<h2>B.2.7 2018</h2>
+<ol>
+<li style="list-style-type: '1. ';">Altun, A.; Neese, F.; Bistoni, G. Local Energy Decomposition Analysis of Hydrogen-Bonded Dimers within a Domain-Based Pair Natural Orbital Coupled Cluster Study. Beilstein J. Org. Chem. , 2018 , 14, 919-929. DOI: 10.3762/bjoc.14.79.</li>
+<li style="list-style-type: '2. ';">Bistoni, G.; Polyak, I.; Sparta, M.; Thiel, W.; Neese, F. Toward Accurate QM/MM Reaction Barriers with Large QM Regions Using Domain Based Pair Natural Orbital Coupled Cluster Theory. J. Chem. Theory Comput. , 2018 , 14 (7), 3524-3531. DOI: 10.1021/acs.jctc.8b00348.</li>
+<li style="list-style-type: '3. ';">Bunting, P. C.; Atanasov, M.; Damgaard-Moller, E.; Perfetti, M.; Crassee, I.; Orlita, M.; Overgaard, J.; van Slageren, J.; Neese, F.; Long, J. R. A Linear Cobalt(II) Complex with Maximal Orbital Angular Momentum from a Non-Aufbau Ground State. Science , 2018 , 362 (6421), A Linear Cobalt(II) Complex with Ma. DOI: 10.1126/science.aat7319.</li>
+<li style="list-style-type: '4. ';">Chantzis, A.; Kowalska, J. K.; Maganas, D.; DeBeer, S.; Neese, F. Ab Initio Wave Function-Based Determination of Element Specific Shifts for the Efficient Calculation of x-Ray Absorption Spectra of Main Group Elements and First Row Transition Metals. J. Chem. Theory Comput. , 2018 , 14 (7), 3686-3702. DOI: 10.1021/acs.jctc.8b00249.</li>
+<li style="list-style-type: '5. ';">Collins, L. R.; van Gastel, M.; Neese, F.; Furstner, A. Enhanced Electrophilicity of Heterobimetallic Bi-Rh Paddlewheel Carbene Complexes: A Combined Experimental, Spectroscopic, and Computational Study. J. Am. Chem. Soc. , 2018 , 140 (40), 13042-13055. DOI: 10.1021/jacs.8b08384.</li>
+<li style="list-style-type: '6. ';">David, G.; Wennmohs, F.; Neese, F.; Ferre, N. Chemical Tuning of Magnetic Exchange Couplings Using Broken-Symmetry Density Functional Theory. Inorg. Chem. , 2018 , 57 (20), 12769-12776. DOI: 10.1021/acs.inorgchem.8b01970.</li>
+<li style="list-style-type: '7. ';">Gatzenmeier, T.; Turberg, M.; Yepes, D.; Xie, Y. W.; Neese, F.; Bistoni, G.; List, B. Scalable and Highly Diastereo- and Enantioselective Catalytic Diels-Alder Reaction of Alpha,Beta-Unsaturated Methyl Esters. J. Am. Chem. Soc. , 2018 , 140 (40), 12671-12676. DOI: 10.1021/jacs.8b07092.</li>
+<li style="list-style-type: '8. ';">Gottschalk, H. C.; Poblotzki, A.; Suhm, M. A.; Al-Mogren, M. M.; Antony, J.; Auer, A. A.; Baptista, L.; Benoit, D. M.; Bistoni, G.; Bohle, F.; Dahmani, R.; Firaha, D.; Grimme, S.; Hansen, A.; Harding, M. E.; Hochlaf, M.; Holzer, C.; Jansen, G.; Klopper, W.; Kopp, W. A.; Kroger, L. C.; Leonhard, K.; Mouhib, H.; Neese, F.; Pereira, M. N.; Ulusoy, I. S.; Wuttke, A.; Mata, R. A. The Furan Microsolvation Blind Challenge for Quantum Chemical Methods: First Steps. J. Chem. Phys. , 2018 , 148 (1), 13. DOI: 10.1063/1.5009011.</li>
+<li style="list-style-type: '9. ';">Kubas, Adam; Verkamp, Max; Vura-Weis, Josh; Neese, Frank; Maganas, Dimitrios. Restricted open-shell configuration interaction singles study on M- and L-edge x-ray absorption spectroscopy of solid chemical systems. J. Chem. Theory Comput. , 2018 , 14 (8), 4320-4334. DOI: 10.1021/acs.jctc.8b00302.</li>
+</ol>
+<ol>
+<li style="list-style-type: '10. ';">Lu, Q.; Neese, F.; Bistoni, G. Formation of Agostic Structures Driven by London Dispersion. Angew. Chem. Int. Ed. , 2018 , 57 (17), 4760-4764. DOI: 10.1002/anie.201801531.</li>
+<li style="list-style-type: '11. ';">Mondal, B.; Neese, F.; Bill, E.; Ye, S. F. Electronic Structure Contributions of Non-Herne Oxo-Iron(v) Complexes to the Reactivity. J. Am. Chem. Soc. , 2018 , 140 (30), 9531-9544. DOI: 10.1021/jacs.8b04275.</li>
+<li style="list-style-type: '12. ';">Moseley, D. H.; Stavretis, S. E.; Thirunavukkuarasu, K.; Ozerov, M.; Cheng, Y. Q.; Daemen, L. L.; Ludwig, J.; Lu, Z. G.; Smirnov, D.; Brown, C. M.; Pandey, A.; Ramirez-Cuesta, A. J.; Lamb, A. C.; Atanasov, M.; Bill, E.; Neese, F.; Xue, Z. L. Spin-Phonon Couplings in Transition Metal Complexes with Slow Magnetic Relaxation. Nature Comm. , 2018 , 9, 11. DOI: 10.1038/s41467-018-04896-0.</li>
+<li style="list-style-type: '13. ';">Romelt, C.; Ye, S. F.; Bill, E.; Weyhermuller, T.; van Gastel, M.; Neese, F. Electronic Structure and Spin Multiplicity of Iron Tetraphenylporphyrins in Their Reduced States as Determined by a Combination of Resonance Raman Spectroscopy and Quantum Chemistry. Inorg. Chem. , 2018 , 57 (4), 2141-2148. DOI: 10.1021/acs.inorgchem.7b03018.</li>
+<li style="list-style-type: '14. ';">Scheibe, B.; Pietzonka, C.; Mustonen, O.; Karppinen, M.; Karttunen, A. J.; Atanasov, M.; Neese, F.; Conrad, M.; Kraus, F. The U2F12 (2-) Anion of Sr U2F12. Angew. Chem. Int. Ed. , 2018 , 57 (11), 2914-2918. DOI: 10.1002/anie.201800743.</li>
+<li style="list-style-type: '15. ';">Shirazi, R. G.; Neese, F.; Pantazis, D. A. Accurate Spin-State Energetics for Aryl Carbenes. J. Chem. Theory Comput. , 2018 , 14 (9), 4733-4746. DOI: 10.1021/acs.jctc.8b00587.</li>
+<li style="list-style-type: '16. ';">Singh, Saurabh Kumar; Atanasov, Mihail; Neese, Frank. Challenges in multireference perturbation theory for the calculations of the g-tensor of first-row transition-metal complexes. J. Chem. Theory Comput. , 2018 , 14 (9), 4662-4677.</li>
+<li style="list-style-type: '17. ';">Van Stappen, C.; Maganas, D.; DeBeer, S.; Bill, E.; Neese, F. Investigations of the Magnetic and Spectroscopic Properties of V(III) and V(IV) Complexes. Inorg. Chem. , 2018 , 57 (11), 6421-6438. DOI: 10.1021/acs.inorgchem.8b00486.</li>
+<li style="list-style-type: '18. ';">Yamamoto, K.; Li, J. K.; Garber, J. A. O.; Rolfes, J. D.; Boursalian, G. B.; Borghs, J. C.; Genicot, C.; Jacq, J.; van Gastel, M.; Neese, F.; Ritter, T. Palladium-Catalysed Electrophilic Aromatic C-H Fluorination. Nature , 2018 , 554 (7693), 511-514. DOI: 10.1038/nature25749.</li>
+</ol>
+<h2>B.2.8 2017</h2>
+<ol>
+<li style="list-style-type: '1. ';">Jung, Julie; Atanasov, Mihail; Neese, Frank. Ab Initio Ligand-Field Theory Analysis and Covalency Trends in Actinide and Lanthanide Free Ions and Octahedral Complexes. Inorg. Chem. , 2017 , 56 (15), 8802-8816. DOI: 10.1021/acs.inorgchem.7b00642.</li>
+<li style="list-style-type: '2. ';">Singh, Saurabh Kumar; Eng, Julien; Atanasov, Mihail; Neese, Frank. Covalency and Chemical Bonding in Transition Metal Complexes: An Ab Initio Based Ligand Field Perspective. Coordin. Chem. Rev. , 2017 , 344, 2-25. DOI: 10.1016/j.ccr.2017.03.018.</li>
+<li style="list-style-type: '3. ';">Chakraborty, Uttam; Demeshko, Serhiy; Meyer, Franc; Rebreyend, Christophe; de Bruin, Bas; Atanasov, Mihail; Neese, Frank; Mühldorf, Bernd; Wolf, Robert. Electronic Structure and Magnetic Anisotropy of an Unsaturated Cyclopentadienyl Iron(I) Complex with 15 Valence Electrons. Angew. Chem. Int. Ed. , 2017 , 56 (27), 7995-7999. DOI: 10.1002/anie.201702454.</li>
+<li style="list-style-type: '4. ';">Chilkuri, Vijay Gopal; DeBeer, Serena; Neese, Frank. Revisiting the Electronic Structure of FeS Monomers Using Ab Initio Ligand Field Theory and the Angular Overlap Model. Inorg. Chem. , 2017 , 56 (17), 1041810436. DOI: 10.1021/acs.inorgchem.7b01371.</li>
+<li style="list-style-type: '5. ';">Bistoni, Giovanni; Auer, Alexander A.; Neese, Frank. Understanding the Role of Dispersion in Frustrated Lewis Pairs and Classical Lewis Adducts: A Domain-Based Local Pair Natural Orbital Coupled Cluster Study. Chem. Eur. J. , 2017 , 23 (4), 865-873.</li>
+<li style="list-style-type: '6. ';">Bistoni, Giovanni; Riplinger, Christoph; Minenkov, Yury; Cavallo, Luigi; Auer, Alexander A.; Neese, Frank. Treating Subvalence Correlation Effects in Domain Based Pair Natural Orbital Coupled Cluster Calculations: An Out-of-the-Box Approach. J. Chem. Theory Comput. , 2017 , 13 (7), 3220-3227. DOI: 10.1021/acs.jctc.7b00352.</li>
+</ol>
+<ol>
+<li style="list-style-type: '7. ';">Caldararu, Octav; Olsson, Martin A; Riplinger, Christoph; Neese, Frank; Ryde, Ulf. Binding free energies in the SAMPL5 octa-acid host-guest challenge calculated with DFT-D3 and CCSD (T). J. Comput.-Aided Mol. Des. , 2017 , 31 (1), 87-106. DOI: 10.1007/s10822-016-9957-5.</li>
+<li style="list-style-type: '8. ';">Kubas, Adam; Noak, Johannes; Trunschke, Annette; Schlögl, Robert; Neese, Frank; Maganas, Dimitrios. A combined experimental and theoretical spectroscopic protocol for determination of the structure of heterogeneous catalysts: developing the information content of the resonance Raman spectra of M1 MoVOx. Chem. Sci. , 2017 , 8 (9), 6338-6353. DOI: 10.1039/C7SC01771E.</li>
+<li style="list-style-type: '9. ';">Minenkov, Yury; Bistoni, Giovanni; Riplinger, Christoph; Auer, Alexander A; Neese, Frank; Cavallo, Luigi. Pair natural orbital and canonical coupled cluster reaction enthalpies involving light to heavy alkali and alkaline earth metals: the importance of sub-valence correlation. Phys. Chem. Chem. Phys. , 2017 , 19 (14), 9374-9391.</li>
+<li style="list-style-type: '10. ';">Neese, Frank. High-Level Spectroscopy, Quantum Chemistry, and Catalysis: Not just a Passing Fad. Angew. Chem. Int. Ed. , 2017 , 56 (37), 11003-11010.</li>
+<li style="list-style-type: '11. ';">Neese, Frank. Quantum Chemistry and EPR Parameters , chapter, pages 1-22. John Wiley &amp; Sons, Ltd, 2017 . DOI: 10.1002/9780470034590.emrstm1505.</li>
+<li style="list-style-type: '12. ';">Pedersen, Kasper S; Woodruff, Daniel N; Singh, Saurabh Kumar; Tressaud, Alain; Durand, Etienne; Atanasov, Mihail; Perlepe, Panagiota; Ollefs, Katharina; Wilhelm, Fabrice; Mathonière, Corine; others. [OsF6] x-: Molecular Models for Spin-Orbit Entangled Phenomena. Chem. Eur. J. , 2017 , 23 (47), 11244-11248.</li>
+<li style="list-style-type: '13. ';">Suturina, Elizaveta A; Nehrkorn, Joscha; Zadrozny, Joseph M; Liu, Junjie; Atanasov, Mihail; Weyhermüller, Thomas; Maganas, Dimitrios; Hill, Stephen; Schnegg, Alexander; Bill, Eckhard; others. Magneto-structural correlations in pseudotetrahedral forms of the [Co (SPh) 4] 2-complex probed by magnetometry, MCD spectroscopy, advanced EPR techniques, and ab initio electronic structure calculations. Inorg. Chem. , 2017 , 56 (5), 3102-3118.</li>
+</ol>
+<h2>B.3 Classification by Topic</h2>
+<h2>B.3.1 Ab initio Ligand Field Analyis</h2>
+<ol>
+<li style="list-style-type: '1. ';">Atanasov, Mihail; Ganyushin, Dmitry; Sivalingam, Kantharuban; Neese, Frank. A Modern First-Principles View on Ligand Field Theory Through the Eyes of Correlated Multireference Wavefunctions. In Mingos, David Michael P.; Day, Peter; Dahl, Jens Peder, editors, Molecular Electronic Structures of Transition Metal Complexes II , number 143 in Structure and Bonding, pages 149-220. Springer Berlin Heidelberg, 2011 . DOI: 10.1007/430_2011_57.</li>
+<li style="list-style-type: '2. ';">Lang, Lucas; Atanasov, Mihail; Neese, Frank. Improvement of Ab Initio Ligand Field Theory by Means of Multistate Perturbation Theory. J. Phys. Chem. A , 2020 , 124 (5), 1025-1037. DOI: 10.1021/acs.jpca.9b11227.</li>
+<li style="list-style-type: '3. ';">Rao, Shashank V.; Maganas, Dimitrios; Sivalingam, Kantharuban; Atanasov, Mihail; Neese, Frank. Extended Active Space Ab Initio Ligand Field Theory: Applications to Transition-Metal Ions. Inorg. Chem. , 2024 , 63 (52), 24672-24684. Publisher: American Chemical Society. DOI: 10.1021/acs.inorgchem.4c03893.</li>
+</ol>
+<h2>B.3.2 Absorption, Resonance Raman and Fluorescence Spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Sirohiwal, Abhishek; Berraud-Pache, Romain; Neese, Frank; Izsák, Róbert; Pantazis, Dimitrios A. Accurate Computation of the Absorption Spectrum of Chlorophyll a with Pair Natural Orbital Coupled Cluster Methods. J. Phys. Chem. B , 2020 , 124 (40), 8761-8771. DOI: 10.1021/acs.jpcb.0c05761.</li>
+<li style="list-style-type: '2. ';">Petrenko, Taras; Neese, Frank. Analysis and prediction of absorption band shapes, fluorescence band shapes, resonance Raman intensities, and excitation profiles using the time-dependent theory of electronic spectroscopy. J. Chem. Phys. , 2007 , 127 (16), 164319. DOI: 10.1063/1.2770706.</li>
+<li style="list-style-type: '3. ';">Petrenko, T.; Neese, F. Efficient and automatic calculation of optical band shapes and resonance Raman spectra for larger molecules within the independent mode displaced harmonic oscillator model. J. Chem. Phys. , 2012 , 137, 234107.</li>
+</ol>
+<ol>
+<li style="list-style-type: '4. ';">Petrenko, T.; Krylova, O.; Neese, F.; Sokolowski, M. Optical Absorption and Emission Properties of Rubrene: Insight by a Combined Experimental and Theoretical Study. New J. Phys. , 2009 , 11, 015001.</li>
+</ol>
+<h2>B.3.3 Analytic Hessian Implementation</h2>
+<ol>
+<li style="list-style-type: '1. ';">Garcia-Ratés, M.; Neese, F. Efficient implementation of the analytical second derivatives of hartree-fock and hybrid DFT energies within the framework of the conductor-like polarizable continuum model. J. Comput. Chem. , 2019 , 40 (20), 1816-1828. DOI: 10.1002/jcc.25833.</li>
+<li style="list-style-type: '2. ';">Bykov, D.; Petrenko, T.; Izsák, R.; Kossmann, S.; Becker, U.; Valeev, E.; Neese, F. Efficient implementation of the analytic second derivatives of Hartree-Fock and hybrid DFT energies: a detailed analysis of different approximations. Mol. Phys. , 2015 , 113, 1961.</li>
+</ol>
+<h2>B.3.4 ANO basis sets</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F.; Valeev, E. F. Revisiting the Atomic Natural Orbital Approach for Basis Sets: Robust Systematic Basis Sets for Explicitly Correlated and Conventional Correlated ab initio Methods. J. Chem. Theory Comput. , 2011 , 7, 33-43.</li>
+</ol>
+<h2>B.3.5 Applications</h2>
+<ol>
+<li style="list-style-type: '1. ';">Mondal, B.; Neese, F.; Ye, S. F. Toward Rational Design of 3d Transition Metal Catalysts for CO2 Hydrogenation Based on Insights into Hydricity-Controlled Rate-Determining Steps. Inorg. Chem. , 2016 , 55, 5438-5444.</li>
+<li style="list-style-type: '2. ';">Mondal, B.; Neese, F.; Ye, S. F. Control in the Rate-Determining Step Provides a Promising Strategy To Develop New Catalysts for CO2 Hydrogenation: A Local Pair Natural Orbital Coupled Cluster Theory Study. Inorg. Chem. , 2015 , 54, 7192-7198.</li>
+<li style="list-style-type: '3. ';">Krewald, V.; Retegan, M.; Cox, N.; Messinger, J.; Lubitz, W.; DeBeer, S.; Neese, F.; Pantazis, D. A. Metal oxidation states in biological water splitting. Chem. Sci. , 2015 , 6, 1676-1695.</li>
+<li style="list-style-type: '4. ';">Kochem, A.; Weyhermuller, T.; Neese, F.; van Gastel, M. EPR and Quantum Chemical Investigation of a Bioinspired Hydrogenase Model with a Redox-Active Ligand in the First Coordination Sphere. Organometallics , 2015 , 34, 995-1000.</li>
+<li style="list-style-type: '5. ';">Kochem, A.; Bill, E.; Neese, F.; van Gastel, M. Mossbauer and computational investigation of a functional NiFe hydrogenase model complex. Chem. Comm. , 2015 , 51, 2099-2102.</li>
+</ol>
+<h2>B.3.6 Approximate FCI</h2>
+<ol>
+<li style="list-style-type: '1. ';">Chilkuri, V. G.; Neese, F. Comparison of many-particle representations for selected-CI I: A tree based approach. J. Comput. Chem. , 2021 , 42, 982-1005.</li>
+<li style="list-style-type: '2. ';">Chilkuri, V. G.; Neese, F. Comparison of Many-Particle Representations for Selected Configuration Interaction: II. Numerical Benchmark Calculations. J. Chem. Theory Comput. , 2021 , 17, 2868-2885.</li>
+<li style="list-style-type: '3. ';">Lang, Lucas; Chilkuri, Vijay Gopal; Neese, Frank. Treating Spin-Orbit Coupling and Spin-Spin Coupling in the Framework of the Iterative Configuration Expansion Selected CI method (In press). 2025 . DOI: 10.1021/acs.jctc.5c00463.</li>
+</ol>
+<h2>B.3.7 CASSCF/NEVPT2/MRCI &amp; Magnetism</h2>
+<ol>
+<li style="list-style-type: '1. ';">Krupička, Martin; Sivalingam, Kantharuban; Huntington, Lee; Auer, Alexander A.; Neese, Frank. A toolchain for the automatic generation of computer codes for correlated wavefunction calculations. J. Comput. Chem. , 2017 , 38 (21), 1853-1868. DOI: 10.1002/jcc.24833.</li>
+<li style="list-style-type: '2. ';">Lechner, M. H.; Papadopoulos, A.; Sivalingam, K.; Auer, A. A.; Koslowski, A.; Becker, U.; Wennmohs, F.; Neese, F. Code generation in ORCA: Progress, Efficiency and Tight integration. Phys. Chem. Chem. Phys. , 2024 , 26 (21), 15205-15220.</li>
+<li style="list-style-type: '3. ';">Guo, Yang; Sivalingam, Kantharuban; Neese, Frank. Approximations of Density Matrices in N-Electron Valence State Second-Order Perturbation Theory (NEVPT2). I. Revisiting the NEVPT2 Construction. J. Chem. Phys. , 2021 , 154 (21), 214111. DOI: 10.1063/5.0051211.</li>
+<li style="list-style-type: '4. ';">Guo, Yang; Sivalingam, Kantharuban; Kollmar, Christian; Neese, Frank. Approximations of Density Matrices in N-Electron Valence State Second-Order Perturbation Theory (NEVPT2). II. The Full Rank NEVPT2 (FRNEVPT2) Formulation. J. Chem. Phys. , 2021 , 154 (21), 214113. DOI: 10.1063/5.0051218.</li>
+<li style="list-style-type: '5. ';">Kempfer, Emily M.; Sivalingam, Kantharuban; Neese, Frank. Efficient Implementation of Approximate Fourth Order N-Electron Valence State Perturbation Theory. J. Chem. Theory Comput. , 2025 , 21 (8), 39533967. DOI: 10.1021/acs.jctc.4c01735.</li>
+<li style="list-style-type: '6. ';">Kollmar, Christian; Sivalingam, Kantharuban; Helmich-Paris, Benjamin; Angeli, Celestino; Neese, Frank. A perturbation-based super-CI approach for the orbital optimization of a CASSCF wave function. J. Comput. Chem. , 2019 , 40 (14), 1463-1470. DOI: 10.1002/jcc.25801.</li>
+<li style="list-style-type: '7. ';">Guo, Yang; Sivalingam, Kantharuban; Chilkuri, Vijay Gopal; Neese, Frank. Approximations of density matrices in N-electron valence state second-order perturbation theory (NEVPT2). III. Large active space calculations with selected configuration interaction reference. J. Chem. Phys. , 2025 , 162 (14), 144110. DOI: 10.1063/5.0262473.</li>
+<li style="list-style-type: '8. ';">Lang, Lucas; Sivalingam, Kantharuban; Neese, Frank. The Combination of Multipartitioning of the Hamiltonian with Canonical Van Vleck Perturbation Theory Leads to a Hermitian Variant of Quasidegenerate NElectron Valence Perturbation Theory. J. Chem. Phys. , 2020 , 152 (1), 014109. DOI: 10.1063/1.5133746.</li>
+<li style="list-style-type: '9. ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. Explicitly Correlated N-Electron Valence State Perturbation Theory (NEVPT2-F12). J. Chem. Phys. , 2017 , 147 (6), 064110. DOI: 10.1063/1.4996560.</li>
+<li style="list-style-type: '10. ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+<li style="list-style-type: '11. ';">Kollmar, Christian; Sivalingam, Kantharuban; Guo, Yang; Neese, Frank. An efficient implementation of the NEVPT2 and CASPT2 methods avoiding higher-order density matrices. J. Chem. Phys. , 2021 , 155 (23), 234104. DOI: 10.1063/5.0072129.</li>
+<li style="list-style-type: '12. ';">Kollmar, Christian; Sivalingam, Kantharuban; Neese, Frank. An Alternative Choice of the Zeroth-Order Hamiltonian in CASPT2 Theory. J. Chem. Phys. , 2020 , 152 (21), 214110. DOI: 10.1063/5.0010019.</li>
+<li style="list-style-type: '13. ';">Pathak, Shubhrodeep; Lang, Lucas; Neese, Frank. A Dynamic Correlation Dressed Complete Active Space Method: Theory, Implementation, and Preliminary Applications. J. Chem. Phys. , 2017 , 147, 234109.</li>
+<li style="list-style-type: '14. ';">Chilkuri, V. G.; DeBeer, S.; Neese, F. Revisiting the Electronic Structure of FeS Monomers Using ab Initio Ligand Field Theory and the Angular Overlap Model. Inorg. Chem. , 2017 , 56, 10418.</li>
+<li style="list-style-type: '15. ';">Singh, S. K.; Eng, J.; Atanasov, M.; Neese, F. Covalency and chemical bonding in transition metal complexes: An ab initio based ligand field perspective. Coord. Chem. Rev. , 2017 , 344, 225.</li>
+<li style="list-style-type: '16. ';">Jung, J.; Atanasov, M.; Neese, F. Ab Initio Ligand-Field Theory Analysis and Covalency Trends in Actinide and Lanthanide Free Ions and Octahedral Complexes. Inorg. Chem. , 2017 , 56, 8802.</li>
+<li style="list-style-type: '17. ';">Werncke, C. G.; Suturina, E.; Bunting, P. C.; Vendier, L.; Long, J. R.; Atanasov, M.; Neese, F.; Sabo-Etienne, S.; Bontemps, S. Homoleptic Two-Coordinate Silylamido Complexes of Chromium(I), Manganese(I), and Cobalt(I). Chem. Eur. J. , 2016 , 22, 1668-1674.</li>
+</ol>
+<ol>
+<li style="list-style-type: '18. ';">Rechkemmer, Y.; Breitgoff, F. D.; van der Meer, M.; Atanasov, M.; Hakl, M.; Orlita, M.; Neugebauer, P.; Neese, F.; Sarkar, B.; van Slageren, J. A four-coordinate cobalt(II) single-ion magnet with coercivity and a very high energy barrier. Nat. Commun. , 2016 , 7, 10467.</li>
+<li style="list-style-type: '19. ';">Aravena, D.; Atanasov, M.; Neese, F. Periodic Trends in Lanthanide Compounds through the Eyes of Multireference ab Initio Theory. Inorg. Chem. , 2016 , 55, 4457-4469.</li>
+<li style="list-style-type: '20. ';">Suturina, E. A.; Maganas, D.; Bill, E.; Atanasov, M.; Neese, F. Magneto-Structural Correlations in a Series of Pseudotetrahedral Co-II(XR)(4) (2-) Single Molecule Magnets: An ab Initio Ligand Field Study. Inorg. Chem. , 2015 , 54, 9948-9961.</li>
+<li style="list-style-type: '21. ';">Schweinfurth, D.; Sommer, M. G.; Atanasov, M.; Demeshko, S.; Hohloch, S.; Meyer, F.; Neese, F.; Sarkar, B. The Ligand Field of the Azido Ligand: Insights into Bonding Parameters and Magnetic Anisotropy in a Co(II)-Azido Complex. J. Am. Chem. Soc. , 2015 , 137, 1993-2005.</li>
+<li style="list-style-type: '22. ';">Lang, Lucas; Chilkuri, Vijay Gopal; Neese, Frank. Treating Spin-Orbit Coupling and Spin-Spin Coupling in the Framework of the Iterative Configuration Expansion Selected CI method (In press). 2025 . DOI: 10.1021/acs.jctc.5c00463.</li>
+</ol>
+<h2>B.3.8 Corresponding Orbital Transformation</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F. Definition of Corresponding Orbitals and the Diradical Character in Broken Symmetry DFT Calculations on Spin Coupled Systems. J. Phys. Chem. Solids , 2004 , 65, 781-785.</li>
+</ol>
+<h2>B.3.9 COSMO Implementation</h2>
+<ol>
+<li style="list-style-type: '1. ';">Sinnecker, S.; Rajendran, A.; Klamt, A.; Diedenhofen, M.; Neese, F. Calculation of Solvent Shifts on Electronic G-Tensors with the Conductor-Like Screening Model (COSMO) and its Self-Consistent Generalization to Real Solvents (COSMO-RS). J. Phys. Chem. A , 2006 , 110, 2235-2245.</li>
+</ol>
+<h2>B.3.10 COSX</h2>
+<ol>
+<li style="list-style-type: '1. ';">Dutta, A. K.; Neese, F.; Izsak, R. Speeding up equation of motion coupled cluster theory with the chain of spheres approximation. J. Chem. Phys. , 2016 , 144, 034102.</li>
+<li style="list-style-type: '2. ';">Christian, G. J.; Neese, F.; Ye, S. F. Unravelling the Molecular Origin of the Regiospecificity in Extradiol Catechol Dioxygenases. Inorg. Chem. , 2016 , 55, 3853-3864.</li>
+</ol>
+<h2>B.3.11 Coupled-Cluster and Coupled Pair Implementation (MDCI module)</h2>
+<ol>
+<li style="list-style-type: '1. ';">Pavošević, F.; Neese, F.; Valeev, E. F. Geminal-spanning orbitals make explicitly correlated reduced-scaling coupled-cluster methods robust, yet simple. J. Chem. Phys. , 2014 , 141, 054106.</li>
+<li style="list-style-type: '2. ';">Kollmar, C.; Neese, F. The coupled electron pair approximation: variational formulation and spin adaptation. Mol. Phys. , 2010 , 108, 2449-2458.</li>
+<li style="list-style-type: '3. ';">Neese, F.; Wennmohs, F.; Hansen, A.; Grimme, S. Accurate Theoretical Chemistry with Coupled Electron Pair Models. Acc. Chem. Res. , 2009 , 42 (5), 641-648.</li>
+<li style="list-style-type: '4. ';">Wennmohs, F.; Neese, F. A Comparative Study of Single Reference Correlation Methods of the Coupled-Pair Type. Chem. Phys. , 2008 , 343, 217-230.</li>
+</ol>
+<h2>B.3.12 EPR/NMR</h2>
+<ol>
+<li style="list-style-type: '1. ';">Tran, Van Anh; Neese, Frank. Double-Hybrid Density Functional Theory for g-Tensor Calculations Using Gauge Including Atomic Orbitals. J. Chem. Phys. , 2020 , 153 (5), 054105. DOI: 10.1063/5.0013799.</li>
+<li style="list-style-type: '2. ';">Lang, Lucas; Ravera, Enrico; Parigi, Giacomo; Luchinat, Claudio; Neese, Frank. Solution of a Puzzle: HighLevel Quantum-Chemical Treatment of Pseudocontact Chemical Shifts Confirms Classic Semiempirical Theory. J. Phys. Chem. Lett. , 2020 , 11 (20), 8735-8744.</li>
+<li style="list-style-type: '3. ';">Auer, A. A.; Tran, V. A.; Sharma, B.; Stoychev, G. L.; Marx, D.; Neese, F. A case study of density functional theory and domain-based local pair natural orbital coupled cluster for vibrational effects on EPR hyperfine coupling constants: vibrational perturbation theory versus ab initio molecular dynamics. Mol. Phys. , 2020 , 118 (19-20), e1797916. DOI: 10.1080/00268976.2020.1797916.</li>
+<li style="list-style-type: '4. ';">Dittmer, A.; Stoychev, G. L.; Maganas, D.; Auer, A. A.; Neese, F. Computation of NMR Shielding Constants for Solids Using an Embedded Cluster Approach with DFT, Double-Hybrid DFT, and MP2. J. Chem. Theory Comput. , 2020 , 16 (11), 6950-6967. DOI: 10.1021/acs.jctc.0c00067.</li>
+<li style="list-style-type: '5. ';">Schulz, C. E.; van Gastel, M.; Pantazis, D. A.; Neese, F. Converged Structural and Spectroscopic Properties for Refined QM/MM Models of Azurin. Inorg. Chem. , 2021 , 60 (10), 7399-7412. DOI: 10.1021/acs.inorgchem.1c00640.</li>
+<li style="list-style-type: '6. ';">Sirohiwal, A.; Neese, F.; Pantazis, D. A. Microsolvation of the Redox-Active Tyrosine-d in Photosystem II: Correlation of Energetics with EPR Spectroscopy and Oxidation-Induced Proton Transfer. J. Am. Chem. Soc. , 2019 , 141 (7), 3217-3231. DOI: 10.1021/jacs.8b13123.</li>
+<li style="list-style-type: '7. ';">Stoychev, G. L.; Auer, A. A.; Gauss, J.; Neese, F. DLPNO-MP2 second derivatives for the computation of polarizabilities and NMR shieldings. J. Chem. Phys. , 2021 , 154, 164110.</li>
+</ol>
+<h2>B.3.13 ESD Module</h2>
+<h2>Fluorescence</h2>
+<ol>
+<li style="list-style-type: '1. ';">de Souza, Bernardo; Neese, Frank; Izsak, Robert. On the Theoretical Prediction of Fluorescence Rates from First Principles Using the Path Integral Approach. J. Chem. Phys. , 2018 , 148 (3), 034104. DOI: 10.1063/1.5010895.</li>
+</ol>
+<h2>Phosphorescence</h2>
+<ol>
+<li style="list-style-type: '1. ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Predicting Phosphorescence Rates of Light Organic Molecules Using Time-Dependent Density Functional Theory and the Path Integral Approach to Dynamics. J. Chem. Theory Comput. , 2019 , 15 (3), 1896-1904. DOI: 10.1021/acs.jctc.8b00841.</li>
+</ol>
+<h2>Resonance Raman</h2>
+<ol>
+<li style="list-style-type: '1. ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Efficient Simulation of Overtones and Combination Bands in Resonant Raman Spectra. J. Chem. Phys. , 2019 , 150 (21), 044105. DOI: 10.1063/1.5099247.</li>
+</ol>
+<h2>B.3.14 DFT/Hartree-Fock Theory of EPR Parameters</h2>
+<ol>
+<li style="list-style-type: '1. ';">Sandhoefer, B.; Neese, F. One-electron contributions to the g-tensor for second-order Douglas-Kroll-Hess theory. J. Chem. Phys. , 2012 , 137, 094102.</li>
+<li style="list-style-type: '2. ';">Neese, F. Importance of Direct Spin-Spin Coupling and Spin-Flip Excitations for the Zero-Field Splittings of Transition Metal Complexes: A Case Study. J. Am. Chem. Soc. , 2006 , 128, 10213.</li>
+<li style="list-style-type: '3. ';">Neese, F. J. Chem. Phys. , 2007 , 127, 164112.</li>
+<li style="list-style-type: '4. ';">Sinnecker, S.; Neese, F. Spin-Spin Contributions to the Zero-Field Splitting Tensor in Organic Triplets, Carbenes and Biradicals - A Density Functional and \it ab initio Study. J. Phys. Chem. A , 2006 , 110, 12267.</li>
+<li style="list-style-type: '5. ';">Neese, F. Efficient and Accurate Approximations to the Molecular Spin-Orbit Coupling Operator and their use in Molecular g-Tensor Calculations. J. Chem. Phys. , 2005 , 122, 034107.</li>
+<li style="list-style-type: '6. ';">Sinnecker, S.; Rajendran, A.; Klamt, A.; Diedenhofen, M.; Neese, F. Calculation of Solvent Shifts on Electronic G-Tensors with the Conductor-Like Screening Model (COSMO) and its Self-Consistent Generalization to Real Solvents (COSMO-RS). J. Phys. Chem. A , 2006 , 110, 2235-2245.</li>
+<li style="list-style-type: '7. ';">Ganyushin, D.; Gilka, N.; Taylor, P. R.; Marian, C. M.; Neese, F. The resolution of the identity approximation for calculations of spin-spin contribution to zero-field splitting parameters. J. Chem. Phys. , 2010 , 132, 144111.</li>
+<li style="list-style-type: '8. ';">Duboc, C.; Ganyushin, D.; Sivalingam, K.; Collomb, M. N.; Neese, F. Systematic Theoretical Study of the Zero-Field Splitting in Coordination Complexes of Mn(III). Density Functional Theory versus Multireference Wave Function Approaches. J. Phys. Chem. A , 2010 , 114, 10750-10758.</li>
+<li style="list-style-type: '9. ';">Neese, F. First principles approach to Spin-Hamiltonian Parameters. In Misra, S. K., editor, Multifrequency EPR: Theory and Applications , pages 297-326. Wiley-VCH, 2009 .</li>
+<li style="list-style-type: '10. ';">Pantazis, D. A.; Orio, M.; Petrenko, T.; Messinger, J.; Lubitz, W.; Neese, F. A new quantum chemical approach to the magnetic properties of oligonuclear transition metal clusters: Application to a model for the tetranuclear manganese cluster of Photosystem II. Chem. Eur. J. , 2009 , 15 (20), 5108-5123.</li>
+<li style="list-style-type: '11. ';">Riplinger, C.; Kao, J. P. Y.; Rosen, G. M.; Kathirvelu, V.; Eaton, G. R.; Eaton, S. S.; Kutateladze, A.; Neese, F. Interaction of Radical Pairs Through-Bond and Through-Space: Scope and Limitations of the Point-Dipole Approximation in Electron Paramagnetic Resonance Spectroscopy. J. Am. Chem. Soc. , 2009 , 131, 1009210106.</li>
+<li style="list-style-type: '12. ';">Cirera, J.; Ruiz, E.; Alvarez, S.; Neese, F.; Kortus, J. How to Build Molecules with Large Magnetic Anisotropy. Chem. Eur. J. , 2009 , 15 (16), 4078-4087.</li>
+<li style="list-style-type: '13. ';">Neese, F. Spin Hamiltonian Parameters from First Principle Calculations: Theory and Application. In Hanson, G.; Berliner, L., editors, Biological Magnetic Resonance , pages 175-232. 2008 .</li>
+<li style="list-style-type: '14. ';">Kossmann, S.; Kirchner, B.; Neese, F. Performance of modern density functional theory for the prediction of hyperfine structure: meta-GGA and double hybrid functionals. Molec. Phys. , 2007 , 105, 2049-2071.</li>
+<li style="list-style-type: '15. ';">Neese, F.; Wolf, A.; Reiher, M.; Fleig, T.; Hess, B. A. Higher Order Douglas-Kroll Calculation of Electric Field Gradients. J. Chem. Phys. , 2005 , 122, 204107.</li>
+<li style="list-style-type: '16. ';">Ray, K.; Begum, A.; Weyhermüller, T.; Piligkos, S.; van Slageren, J.; Neese, F.; Wieghardt, K. The Electronic Structure of the Isoelectronic, Square Planar Complexes [Feᴵᴵ(L)₂]²⁻ and [Coᴵᴵᴵ(Lᴮᵘ)₂]⁻ (L²⁻ and (Lᴮᵘ)²⁻ = benzene-1,2-dithiolates): an Experimental and Density Functional Theoretical Study. J. Am. Chem. Soc. , 2005 , 127, 4403-4415. DOI: 10.1021/ja042803i.</li>
+<li style="list-style-type: '17. ';">Neese, Frank. Metal and Ligand Hyperfine Couplings in Transition Metal Complexes: The Effect of SpinOrbit Coupling as Studied by Coupled Perturbed Kohn-Sham Theory. J. Chem. Phys. , 2003 , 118 (9), 39393948. DOI: 10.1063/1.1540619.</li>
+<li style="list-style-type: '18. ';">Neese, F. Prediction of Electron Paramagnetic Resonance g-values by Coupled Perturbed Hartree-Fock and Kohn-Sham Theory. J. Chem. Phys. , 2001 , 115, 11080-11096.</li>
+<li style="list-style-type: '19. ';">Neese, F. Theoretical Study of Ligand Superhyperfine Structure. Application to Cu(II) Complexes. J. Phys. Chem. A , 2001 , 105, 4290-4299.</li>
+</ol>
+<h2>B.3.15 Dispersion Corrections to DFT</h2>
+<ol>
+<li style="list-style-type: '1. ';">Grimme, S.; Antony, J.; Ehrlich, S.; Krieg, H. J. Chem. Phys. , 2010 , 132, 154104.</li>
+<li style="list-style-type: '2. ';">Grimme, S.; Ehrlich, S.; Goerigk, L. J. Comput. Chem. , 2011 , 32, 1456.</li>
+<li style="list-style-type: '3. ';">Grimme, S. Accurate description of van der Waals complexes by density functional theory including empirical corrections. J. Comput. Chem. , 2004 , 25, 1463. DOI: 10.1002/jcc.20078.</li>
+<li style="list-style-type: '4. ';">Wittmann, Lukas; Gordiy, Igor; Friede, Marvin; Helmich-Paris, Benjamin; Grimme, Stefan; Hansen, Andreas; Bursch, Markus. Extension of the D3 and D4 London dispersion corrections to the full actinides series. Phys. Chem. Chem. Phys. , 2024 , 26, 21379-21394. DOI: 10.1039/D4CP01514B.</li>
+<li style="list-style-type: '5. ';">Grimme, S. Semiempirical GGA-Type Density Functional Constructed with a Long-Range Dispersion Correction. J. Comput. Chem. , 2006 , 27, 1787. DOI: 10.1002/jcc.20495.</li>
+</ol>
+<h2>B.3.16 DLPNO</h2>
+<ol>
+<li style="list-style-type: '1. ';">Pinski, P.; Riplinger, C.; Valeev, E. F.; Neese, Frank. J. Chem. Phys. , 2015 , 143, 034108.</li>
+<li style="list-style-type: '2. ';">Pavošević, F.; Pinski, P.; Riplinger, C.; Neese, F.; Valeev, E.F. SparseMaps - A systematic infrastructure for reduced-scaling electronic structure methods. IV. Linear-scaling second-order explicitly correlated energy with pair natural orbitals. J. Chem. Phys. , 2016 , 144, 144109.</li>
+<li style="list-style-type: '3. ';">Pinski, Peter; Neese, Frank. Communication: Exact Analytical Derivatives for the Domain-Based Local Pair Natural Orbital MP2 Method (DLPNO-MP2). J. Chem. Phys. , 2018 , 148, 031101. DOI: 10.1063/1.5011204.</li>
+<li style="list-style-type: '4. ';">Pinski, Peter; Neese, Frank. Analytical Gradient for the Domain-Based Local Pair Natural Orbital Second Order Møller-Plesset Perturbation Theory Method (DLPNO-MP2). J. Chem. Phys. , 2019 , 150, 164102.</li>
+<li style="list-style-type: '5. ';">Sparta, Manuel; Retegan, Marius; Pinski, Peter; Riplinger, Christoph; Becker, Ute; Neese, Frank. Multilevel Approaches within the Local Pair Natural Orbital Framework. J. Chem. Theory Comput. , 2017 , 13 (7), 31983207. DOI: 10.1021/acs.jctc.7b00260.</li>
+<li style="list-style-type: '6. ';">Riplinger, C.; Pinski, P.; Becker, U.; Valeev, E. F.; Neese, Frank. J. Chem. Phys. , 2016 , 144, 024109.</li>
+<li style="list-style-type: '7. ';">Datta, D.; Kossmann, S.; Neese, F. Analytic energy derivatives for the calculation of the first-order molecular properties using the domain-based local pair-natural orbital coupled-cluster theory. J. Chem. Phys. , 2016 , 175, 114101. DOI: 10.1063/1.4962369.</li>
+<li style="list-style-type: '8. ';">Liakos, Dimitrios G.; Sparta, Manuel; Kesharwani, Manoj K.; Martin, Jan M. L.; Neese, Frank. Exploring the Accuracy Limits of Local Pair Natural Orbital Coupled-Cluster Theory. J. Chem. Theory Comput. , 2015 , 11 (4), 1525-1539. DOI: 10.1021/acs.jctc.5b00078.</li>
+<li style="list-style-type: '9. ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. SparseMaps-A Systematic Infrastructure for Reduced-Scaling Electronic Structure Methods. III. Linear-Scaling Multireference Domain-Based Pair Natural Orbital N-Electron Valence Perturbation Theory. J. Chem. Phys. , 2016 , 144 (9), 094111. DOI: 10.1063/1.4942769.</li>
+<li style="list-style-type: '10. ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+<li style="list-style-type: '11. ';">Dutta, Achintya Kumar; Neese, Frank; Izsák, Róbert. Towards a Pair Natural Orbital Coupled Cluster Method for Excited States. J. Chem. Phys. , 2016 , 145 (3), 034102.</li>
+<li style="list-style-type: '12. ';">Schneider, W.; Bistoni, G.; Sparta., M.; Riplinger, C.; Saitow, M.; Auer, A.; Neese, F. Decomposition of Intermolecular Interaction Energies within the Local Pair Natural Orbital Coupled Cluster Framework. J. Chem. Theory Comput. , 2016 , 12 (10), 4778-4792. DOI: 10.1021/acs.jctc.6b00523.</li>
+<li style="list-style-type: '13. ';">Kubas, A.; Berger, D.; Oberhofer, H.; Maganas, D.; Reuter, K.; Neese, F. Surface Adsorption Energetics Studied with 'Gold Standard' Wave Function-Based Ab Initio Methods: Small-Molecule Binding to TiO2(110). J. Phys. Chem. Lett. , 2016 , 7, 4207-4212.</li>
+</ol>
+<ol>
+<li style="list-style-type: '14. ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. Extrapolation to the Limit of a Complete Pair Natural Orbital Space in Local Coupled-Cluster Calculations. J. Chem. Theory Comput. , 2020 , 16 (10), 6142-6149. DOI: 10.1021/acs.jctc.0c00344.</li>
+<li style="list-style-type: '15. ';">Guo, Yang; Riplinger, Christoph; Liakos, Dimitrios G.; Becker, Ute; Saitow, Masaaki; Neese, Frank. Linear scaling perturbative triples correction approximations for open-shell domain-based local pair natural orbital coupled cluster singles and doubles theory [DLPNO-CCSD(T/T)]. J. Chem. Phys. , 2020 , 152 (2), 024116. DOI: 10.1063/1.5127550.</li>
+<li style="list-style-type: '16. ';">Liakos, D. G.; Guo, Y.; Neese, F. Comprehensive Benchmark Results for the Domain Based Local Pair Natural Orbital Coupled Cluster Method (DLPNO-CCSD(T)) for Closed- and Open-Shell Systems. J. Phys. Chem. A , 2020 , 124 (1), 90-100. DOI: 10.1021/acs.jpca.9b05734.</li>
+<li style="list-style-type: '17. ';">Pavošević, Fabijan; Peng, Chong; Pinski, Peter; Riplinger, Christoph; Neese, Frank; Valeev, Edward F. SparseMaps-A systematic infrastructure for reduced scaling electronic structure methods. V. Linear scaling explicitly correlated coupled-cluster method with pair natural orbitals. J. Chem. Phys. , 2017 , 146 (17), 174108.</li>
+<li style="list-style-type: '18. ';">Mondal, B.; Neese, F.; Ye, S. F. Control in the Rate-Determining Step Provides a Promising Strategy To Develop New Catalysts for CO2 Hydrogenation: A Local Pair Natural Orbital Coupled Cluster Theory Study. Inorg. Chem. , 2015 , 54, 7192-7198.</li>
+<li style="list-style-type: '19. ';">Stoychev, G. L.; Auer, A. A.; Gauss, J.; Neese, F. DLPNO-MP2 second derivatives for the computation of polarizabilities and NMR shieldings. J. Chem. Phys. , 2021 , 154, 164110.</li>
+<li style="list-style-type: '20. ';">Isegawa, M.; Neese, F.; Pantazis, D. A. Ionization Energies and Aqueous Redox Potentials of Organic Molecules: Comparison of DFT, Correlated ab Initio Theory and Pair Natural Orbital Approaches. J. Chem. Theory Comput. , 2016 , 12, 2272-2284.</li>
+<li style="list-style-type: '21. ';">Liakos, D. G.; Neese, F. Domain Based Pair Natural Orbital Coupled Cluster Studies on Linear and Folded Alkane Chains. J. Chem. Theory Comput. , 2015 , 11, 2137-2143.</li>
+<li style="list-style-type: '22. ';">Liakos, D. G.; Neese, F. Is It Possible To Obtain Coupled Cluster Quality Energies at near Density Functional Theory Cost? Domain-Based Local Pair Natural Orbital Coupled Cluster vs Modern Density Functional Theory. J. Chem. Theory Comput. , 2015 , 11, 4054-4063.</li>
+<li style="list-style-type: '23. ';">Demel, O.; Pittner, J.; Neese, F. A Local Pair Natural Orbital-Based Multireference Mukherjee's Coupled Cluster Method. J. Chem. Theory Comput. , 2015 , 11, 3104-3114.</li>
+<li style="list-style-type: '24. ';">Ni, Z. G.; Guo, Y.; Neese, F.; Li, W.; Li, S. H. Cluster-in-Molecule Local Correlation Method with an Accurate Distant Pair Correction for Large Systems. J. Chem. Theo. Comp. , 2021 , 17, 756-766.</li>
+</ol>
+<h2>B.3.17 Density Functionals</h2>
+<ol>
+<li style="list-style-type: '1. ';">Bursch, Markus; Neugebauer, Hagen; Ehlert, Sebastian; Grimme, Stefan. Dispersion corrected r²SCAN based global hybrid functionals: r²SCANh, r²SCAN0, and r²SCAN50. J. Chem. Phys. , 2022 , 156 (13), 134105. DOI: 10.1063/5.0086040.</li>
+<li style="list-style-type: '2. ';">Wittmann, Lukas; Neugebauer, Hagen; Grimme, Stefan; Bursch, Markus. Dispersion-corrected r²SCAN based double-hybrid functionals. J. Chem. Phys. , 2023 , 159 (22), 224103. DOI: 10.1063/5.0174988.</li>
+<li style="list-style-type: '3. ';">Neese, F.; Schwabe, T.; Grimme, S. J. Chem. Phys. , 2007 , 126, 124115.</li>
+<li style="list-style-type: '4. ';">Ehlert, Sebastian; Huniar, Uwe; Ning, Jinliang; Furness, James W.; Sun, Jianwei; Kaplan, Aaron D.; Perdew, John P.; Brandenburg, Jan Gerit. r²SCAN-D4: Dispersion Corrected Meta-Generalized Gradient Approximation for General Chemical Applications. J. Chem. Phys. , 2021 , 154 (6), 061101. arXiv:10.1063/5.0041008, DOI: 10.1063/5.0041008.</li>
+<li style="list-style-type: '5. ';">Grimme, S.; Neese, F. J. Phys. Chem. , 2007 , 127, 154116.</li>
+<li style="list-style-type: '6. ';">Kossmann, S.; Kirchner, B.; Neese, F. Performance of modern density functional theory for the prediction of hyperfine structure: meta-GGA and double hybrid functionals. Molec. Phys. , 2007 , 105, 2049-2071.</li>
+</ol>
+<h2>B.3.18 Composite Methods</h2>
+<ol>
+<li style="list-style-type: '1. ';">Müller, Marcel; Hansen, Andreas; Grimme, Stefan. ωB97X-3c: A composite range-separated hybrid DFT method with a molecule-optimized polarized valence double-ζ basis set. J. Chem. Phys. , 2023 , 158 (1), 014103. DOI: 10.1063/5.0133026.</li>
+<li style="list-style-type: '2. ';">Grimme, Stefan; Hansen, Andreas; Ehlert, Sebastian; Mewes, Jan-Michael. r2SCAN-3c: A 'Swiss Army Knife' Composite Electronic-Structure Method. J. Chem. Phys. , 2021 , 154 (6), 064103. arXiv:10.1063/5.0040021, DOI: 10.1063/5.0040021.</li>
+<li style="list-style-type: '3. ';">Grimme, S.; Brandenburg, J. G.; Bannwarth, C.; Hansen, A. Consistent structures and interactions by density functional theory with small atomic orbital basis sets. J. Chem. Phys. , 2015 , 143, 054107. DOI: 10.1063/1.4927476.</li>
+<li style="list-style-type: '4. ';">Pracht, Philipp; Grant, David F.; Grimme, Stefan. Comprehensive Assessment of GFN Tight-Binding and Composite Density Functional Theory Methods for Calculating Gas-Phase Infrared Spectra. J. Chem. Theory Comput. , 2020 , 16 (11), 7044-7060. DOI: 10.1021/acs.jctc.0c00877.</li>
+<li style="list-style-type: '5. ';">Sure, R.; Grimme, S. J. Comput. Chem. , 2013 , 34, 1672-1685.</li>
+<li style="list-style-type: '6. ';">Brandenburg, J. G.; Bannwarth, C.; Hansen, A.; Grimme, S. B97-3c: A Revised Low-Cost Variant of the B97-D Density Functional Method. J. Chem. Phys. , 2018 , 148 (6), 064104.</li>
+</ol>
+<h2>B.3.19 Extended Tight-Binding Methods</h2>
+<ol>
+<li style="list-style-type: '1. ';">Bannwarth, Christoph; Ehlert, Sebastian; Grimme, Stefan. GFN2-xTB-An Accurate and Broadly Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with Multipole Electrostatics and Density-Dependent Dispersion Contributions. J. Chem. Theory Comput. , 2019 , 15 (3), 1652-1671. DOI: 10.1021/acs.jctc.8b01176.</li>
+<li style="list-style-type: '2. ';">Grimme, Stefan; Bannwarth, Christoph; Shushkov, Philip. A Robust and Accurate Tight-Binding Quantum Chemical Method for Structures, Vibrational Frequencies, and Noncovalent Interactions of Large Molecular Systems Parametrized for All Spd-Block Elements (z = 1-86). J. Chem. Theory Comput. , 2017 , 13 (5), 19892009. DOI: 10.1021/acs.jctc.7b00118.</li>
+<li style="list-style-type: '3. ';">Pracht, Philipp; Caldeweyher, Eike; Ehlert, Sebastian; Grimme, Stefan. A Robust Non-Self-Consistent Tight-Binding Quantum Chemistry Method for Large Molecules. ChemRxiv, 2019 . DOI: 10.26434/chemrxiv.8326202.v1.</li>
+<li style="list-style-type: '4. ';">Ehlert, Sebastian; Stahn, Marcel; Spicher, Sebastian; Grimme, Stefan. Robust and Efficient Implicit Solvation Model for Fast Semiempirical Methods. J. Chem. Theory Comput. , 2021 , 17 (7), 4250-4261. DOI: 10.1021/acs.jctc.1c00471.</li>
+<li style="list-style-type: '5. ';">Plett, Christoph; Katbashev, Abylay; Ehlert, Sebastian; Grimme, Stefan; Bursch, Markus. ONIOM meets xtb: efficient, accurate, and robust multi-layer simulations across the periodic table. Phys. Chem. Chem. Phys. , 2023 , 25, 17860-17868. DOI: 10.1039/D3CP02178E.</li>
+<li style="list-style-type: '6. ';">Bursch, Markus; Hansen, Andreas; Grimme, Stefan. Fast and Reasonable Geometry Optimization of Lanthanoid Complexes with an Extended Tight Binding Quantum Chemical Method. Inorg. Chem. , 2017 , 56 (20), 12485-12491. DOI: 10.1021/acs.inorgchem.7b01950.</li>
+<li style="list-style-type: '7. ';">Bursch, Markus; Neugebauer, Hagen; Grimme, Stefan. Structure Optimisation of Large Transition-Metal Complexes with Extended Tight-Binding Methods. Angew. Chem. Int. Ed. , 2019 , 58 (32), 11078-11087. DOI: 10.1002/anie.201904021.</li>
+<li style="list-style-type: '8. ';">Neugebauer, Hagen; Bohle, Fabian; Bursch, Markus; Hansen, Andreas; Grimme, Stefan. Benchmark Study of Electrochemical Redox Potentials Calculated with Semiempirical and DFT Methods. J. Phys. Chem. A , 2020 , 124 (35), 7166-7176. DOI: 10.1021/acs.jpca.0c05052.</li>
+<li style="list-style-type: '9. ';">Bannwarth, Christoph; Caldeweyher, Eike; Ehlert, Sebastian; Hansen, Andreas; Pracht, Philipp; Seibert, Jakob; Spicher, Sebastian; Grimme, Stefan. Extended tight-binding quantum chemistry methods. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2021 , 11 (2), e1493. DOI: 10.1002/wcms.1493.</li>
+</ol>
+<h2>B.3.20 Excited States Methods and Resonance Raman Spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Schapiro, Igor; Sivalingam, Kantharuban; Neese, Frank. Assessment of N-Electron Valence State Perturbation Theory for Vertical Excitation Energies. J. Chem. Theory Comput. , 2013 , 9 (8), 3567-3580. DOI: 10.1021/ct400136y.</li>
+<li style="list-style-type: '2. ';">Roemelt, M.; Neese, F. Excited States of Large Open-Shell Molecules: An Efficient, General, and SpinAdapted Approach Based on a Restricted Open-Shell Ground State Wave function. J. Phys. Chem. A , 2013 , 117, 3069-3082. DOI: 10.1021/jp3126126.</li>
+<li style="list-style-type: '3. ';">Petrenko, T.; Kossmann, S.; Neese, F. J. Chem. Phys. , 2011 , 134, 054116.</li>
+<li style="list-style-type: '4. ';">Grimme, S.; Neese, F. J. Phys. Chem. , 2007 , 127, 154116.</li>
+<li style="list-style-type: '5. ';">Petrenko, T.; Ray, K.; Wieghardt, K.; Neese, F. Vibrational Markers for the Open-Shell Character of Metal bis-Dithiolenes: An Infrared, resonance Raman and Quantum Chemical Study. J. Am. Chem. Soc. , 2006 , 128, 4422-4436.</li>
+<li style="list-style-type: '6. ';">Neese, F.; Olbrich, G. Efficient use of the Resolution of the Identity Approximation in Time-Dependent Density Functional Calculations with Hybrid Functionals. Chem. Phys. Lett. , 2002 , 362, 170-178.</li>
+</ol>
+<h2>B.3.21 F12</h2>
+<ol>
+<li style="list-style-type: '1. ';">Pavošević, F.; Pinski, P.; Riplinger, C.; Neese, F.; Valeev, E.F. SparseMaps - A systematic infrastructure for reduced-scaling electronic structure methods. IV. Linear-scaling second-order explicitly correlated energy with pair natural orbitals. J. Chem. Phys. , 2016 , 144, 144109.</li>
+<li style="list-style-type: '2. ';">Liakos, Dimitrios G.; Izsák, Róbert; Valeev, Edward F.; Neese, Frank. What is the most efficient way to reach the canonical MP2 basis set limit? Mol. Phys. , 2013 , 111 (19-20), 2653-2662. DOI: 10.1080/00268976.2013.811812.</li>
+<li style="list-style-type: '3. ';">Guo, Yang; Sivalingam, Kantharuban; Valeev, Edward F.; Neese, Frank. Explicitly Correlated N-Electron Valence State Perturbation Theory (NEVPT2-F12). J. Chem. Phys. , 2017 , 147 (6), 064110. DOI: 10.1063/1.4996560.</li>
+<li style="list-style-type: '4. ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+</ol>
+<h2>B.3.22 FOD analysis and FOD plots</h2>
+<ol>
+<li style="list-style-type: '1. ';">Grimme, S.; Hansen, A. A Practicable Real-Space Measure and Visualization of Static Electron-Correlation Effects. Angew. Chem. Int. Ed. , 2015 , 54, 12308-12313.</li>
+</ol>
+<h2>B.3.23 Gaussian Charge Scheme (C-PCM) Implementation</h2>
+<ol>
+<li style="list-style-type: '1. ';">Garcia-Ratés, M.; Neese, F. Effect of the Solute Cavity on the Solvation Energy and its Derivatives within the Framework of the Gaussian Charge Scheme. J. Comput. Chem. , 2020 , 41 (9), 922-939. DOI: 10.1002/jcc.26139.</li>
+</ol>
+<h2>B.3.24 gCP correction to HF and DFT</h2>
+<ol>
+<li style="list-style-type: '1. ';">Kruse, Holger; Grimme, Stefan. A geometrical correction for the inter- and intra-molecular basis set superposition error in Hartree-Fock and density functional theory calculations for large systems. J. Chem. Phys. , 2012 , 136 (15), 154101. DOI: 10.1063/1.3700154.</li>
+</ol>
+<h2>B.3.25 Internally Contracted Multireference CI</h2>
+<ol>
+<li style="list-style-type: '1. ';">Sivalingam, K.; Krupicka, M.; Auer, A. A.; Neese, F. Comparison of fully internally and strongly contracted multireference configuration interaction procedures. J. Chem. Phys. , 2016 , 145, 054104. DOI: 10.1063/1.4950161.</li>
+</ol>
+<h2>B.3.26 Magnetic Circular Dichroism Spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Ganyushin, D.; Neese, F. J. Chem. Phys. , 2008 , 128, 114117.</li>
+<li style="list-style-type: '2. ';">Westphal, A.; Broda, H.; Kurz, P.; Neese, F.; Tuczek, F. Magnetic Circular Dichroism Spectrum of the Molybdenum(V) Complex (Mo(O)Cl₃dppe): C-Term Signs and Intensities for Multideterminant Excited Doublet States. Inorg. Chem. , 2012 , 51, 5748-5763.</li>
+<li style="list-style-type: '3. ';">van Slageren, J.; Piligkos, S.; Neese, F. Magnetic circular dichroism spectroscopy on the Cr(8) antiferromagnetic ring. Dalton Trans. , 2010 , 39, 4999-5004.</li>
+<li style="list-style-type: '4. ';">Sundararajan, M.; Ganyushin, D.; Ye, S.; Neese, F. Multireference \it ab initio studies of Zero-Field Splitting and Magnetic Circular Dichroism Spectra of Tetrahedral Co(II) Complexes. Dalton Trans. , 2009 , 30, 60216036.</li>
+<li style="list-style-type: '5. ';">Piligkos, S.; Slep, L.; Weyhermüller, T.; Chaudhuri, P.; Bill, E.; Neese, F. Magnetic Circular Dichroism Spectroscopy of weakly exchange coupled dimers. A model study. Coord. Chem. Rev. , 2009 , 253, 23522362.</li>
+<li style="list-style-type: '6. ';">Neese, F.; Solomon, E. I. MCD C-term Signs, Saturation Behavior and Determination of Band Polarizations in Randomly Oriented Systems with Spin S 2/7 1/2. Applications to S=1/2 and S=5/2. Inorg. Chem. , 1999 , 38, 1847-1865.</li>
+</ol>
+<h2>B.3.27 MCD</h2>
+<ol>
+<li style="list-style-type: '1. ';">Ye, S. F.; Kupper, C.; Meyer, S.; Andris, E.; Navratil, R.; Krahe, O.; Mondal, B.; Atanasov, M.; Bill, E.; Roithova, J.; Meyer, F.; Neese, F. Magnetic Circular Dichroism Evidence for an Unusual Electronic Structure of a Tetracarbene-Oxoiron(IV) Complex. J. Am. Chem. Soc. , 2016 , 138, 14312-14325.</li>
+<li style="list-style-type: '2. ';">Ye, S. F.; Xue, G. Q.; Krivokapic, I.; Petrenko, T.; Bill, E.; Que, L.; Neese, F. Magnetic circular dichroism and computational study of mononuclear and dinuclear iron(IV) complexes. Chem. Sci. , 2015 , 6, 2909-2921.</li>
+</ol>
+<h2>B.3.28 MDCI</h2>
+<ol>
+<li style="list-style-type: '1. ';">Dutta, Achintya Kumar; Neese, Frank; Izsák, Róbert. Speeding up Equation of Motion Coupled Cluster Theory with the Chain of Spheres Approximation. J. Chem. Phys. , 2016 , 144 (3), 034102.</li>
+<li style="list-style-type: '2. ';">Veis, Libor; Antalík, Andrej; Brabec, Jiri; Neese, Frank; Legeza, Ors; Pittner, Jiri. Coupled cluster method with single and double excitations tailored by matrix product state wave functions. J. Phys. Chem. Lett. , 2016 , 7 (20), 4072-4078.</li>
+</ol>
+<h2>B.3.29 Mössbauer Spectroscopy</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F. Inorg. Chim. Acta , 2002 , 337C, 181-192.</li>
+<li style="list-style-type: '2. ';">Römelt, M.; Ye, S.; Neese, F. Inorg. Chem. , 2009 , 48, 784.</li>
+<li style="list-style-type: '3. ';">Datta, D.; Saitow, M.; Sandhofer, B.; Neese, F. Fe-57 Mossbauer parameters from domain based local pairnatural orbital coupled-cluster theory. J. Chem. Phys. , 2020 , 153, 064104.</li>
+<li style="list-style-type: '4. ';">Sinnecker, S.; Slep, L.; Bill, E.; Neese, F. Performance of Nonrelativistic and Quasirelativistic Hybrid DFT for the Prediction of Electric and Magnetic Hyperfine Parameters in ⁵⁷Fe Mössbauer Spectra. Inorg. Chem. , 2005 , 44, 2245-2254.</li>
+</ol>
+<h2>B.3.30 Multireference CI Module and its application to EPR properties and optical spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F. Importance of Direct Spin-Spin Coupling and Spin-Flip Excitations for the Zero-Field Splittings of Transition Metal Complexes: A Case Study. J. Am. Chem. Soc. , 2006 , 128, 10213.</li>
+<li style="list-style-type: '2. ';">Atanasov, Mihail; Ganyushin, Dmitry; Pantazis, Dimitrios A.; Sivalingam, Kantharuban; Neese, Frank. Detailed Ab Initio First-Principles Study of the Magnetic Anisotropy in a Family of Trigonal Pyramidal Iron(II) Pyrrolide Complexes. Inorg. Chem. , 2011 , 50 (16), 7460-7477. DOI: 10.1021/ic200196k.</li>
+<li style="list-style-type: '3. ';">Neese, Frank; Petrenko, Taras; Ganyushin, Dmitry; Olbrich, Gottfried. Advanced Aspects of Ab Initio Theoretical Optical Spectroscopy of Transition Metal Complexes: Multiplets, Spin-Orbit Coupling and Resonance Raman Intensities. Coordin. Chem. Rev. , 2007 , 251 (3-4), 288-327. DOI: 10.1016/j.ccr.2006.05.019.</li>
+<li style="list-style-type: '4. ';">Neese, F. Chem. Phys. Lett. , 2003 , 380, 721-728.</li>
+<li style="list-style-type: '5. ';">Ganyushin, D.; Neese, F. J. Chem. Phys. , 2008 , 128, 114117.</li>
+<li style="list-style-type: '6. ';">Nooijen, Marcel; Demel, Ondrej; Datta, Dipayan; Kong, Liguo; Shamasundar, K. R.; Lotrich, V.; Huntington, Lee M.; Neese, Frank. Communication: Multireference Equation of Motion Coupled Cluster: A Transform and Diagonalize Approach to Electronic Structure. J. Chem. Phys. , 2014 , 140 (8), 081102.</li>
+<li style="list-style-type: '7. ';">Neese, F.; Solomon, E. I. Inorg. Chem. , 1998 , 37, 6568-6582.</li>
+<li style="list-style-type: '8. ';">Petrenko, Taras; Neese, Frank. Analysis and prediction of absorption band shapes, fluorescence band shapes, resonance Raman intensities, and excitation profiles using the time-dependent theory of electronic spectroscopy. J. Chem. Phys. , 2007 , 127 (16), 164319. DOI: 10.1063/1.2770706.</li>
+<li style="list-style-type: '9. ';">Ganyushin, D.; Neese, F. J. Chem. Phys. , 2013 , 138, 104113.</li>
+<li style="list-style-type: '10. ';">Duboc, C.; Ganyushin, D.; Sivalingam, K.; Collomb, M. N.; Neese, F. Systematic Theoretical Study of the Zero-Field Splitting in Coordination Complexes of Mn(III). Density Functional Theory versus Multireference Wave Function Approaches. J. Phys. Chem. A , 2010 , 114, 10750-10758.</li>
+<li style="list-style-type: '11. ';">Demel, O.; Pittner, J.; Neese, F. A Local Pair Natural Orbital-Based Multireference Mukherjee's Coupled Cluster Method. J. Chem. Theory Comput. , 2015 , 11, 3104-3114.</li>
+<li style="list-style-type: '12. ';">Sundararajan, M.; Ganyushin, D.; Ye, S.; Neese, F. Multireference \it ab initio studies of Zero-Field Splitting and Magnetic Circular Dichroism Spectra of Tetrahedral Co(II) Complexes. Dalton Trans. , 2009 , 30, 60216036.</li>
+<li style="list-style-type: '13. ';">Lang, L.; Sivalingam, K.; Neese, F. The combination of multipartitioning of the Hamiltonian with canonical Van Vleck perturbation theory leads to a Hermitian variant of quasidegenerate N-electron valence perturbation theory. J. Chem. Phys. , 2020 , 152, 034106.</li>
+<li style="list-style-type: '14. ';">Atanasov, M.; Zadrozny, J. M.; Long, J. R.; Neese, F. A theoretical analysis of chemical bonding, vibronic coupling, and magnetic anisotropy in linear iron(II) complexes with single-molecule magnet behavior. Chem. Sci. , 2013 , 4, 139-156.</li>
+<li style="list-style-type: '15. ';">Neese, F.; Pantazis, D. A. What is not required to make a single molecule magnet. Faraday Discuss. , 2011 , 148, 229-238.</li>
+</ol>
+<ol>
+<li style="list-style-type: '16. ';">Neese, F. Analytic Derivative Calculation of Electronic g-Tensors based on Multireference Configuration Interaction Wavefunctions. Mol. Phys. , 2007 , 105, 2507-2514.</li>
+<li style="list-style-type: '17. ';">Neese, Frank. Theoretical spectroscopy of model-nonheme [Fe(IV)OL5]2+ complexes in their lowest triplet and quintet states using multireference ab initio and density functional theory methods. J. Inorg. Biochem. , 2006 , 100 (4), 716-726. High-valent iron intermediates in biology. DOI: 10.1016/j.jinorgbio.2006.01.020.</li>
+<li style="list-style-type: '18. ';">Ganyushin, D.; Neese, F. First Principle Calculation of Zero-Field Splittings. J. Chem. Phys. , 2006 , 125, 024103.</li>
+<li style="list-style-type: '19. ';">Ray, K.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Electronic Structure of Square-Planar Bis(benzene-1,2dithiolate)metal Complexes [M(L)₂]ᶻ (z=2-,1-,0; M = Ni, Pd, Pt, Cu, Au): An experimental, Density Functional and Correlated \it ab initio Study. Inorg. Chem. , 2005 , 44, 5345-5360.</li>
+<li style="list-style-type: '20. ';">Schöneboom, J.; Neese, F.; Thiel, W. Towards Identification of the Compound I Reactive Intermediate in Cytochrome P450 Chemistry: A QM/MM Study of its EPR and Mössbauer Parameters. J. Am. Chem. Soc. , 2005 , 127, 5840-5853.</li>
+<li style="list-style-type: '21. ';">Wanko, M.; Hoffmann, M.; Strodel, P.; Thiel, W.; Neese, F.; Frauenheim, T.; Elstner, M. Calculating Absorption Shifts for Retinal Proteins: Computational Challenges. J. Phys. Chem. B , 2005 , 109, 3606-3615.</li>
+<li style="list-style-type: '22. ';">Neese, F. Sum Over States Based Multireference \it ab initio Calculation of EPR Spin Hamiltonian Parameters for Transition Metal Complexes. A Case Study. Mag. Res. Chem. , 2004 , 42, S187-S198.</li>
+<li style="list-style-type: '23. ';">Neese, F. A Spectroscopy Oriented Configuration Interaction Procedure. J. Chem. Phys. , 2003 , 119, 94289443.</li>
+<li style="list-style-type: '24. ';">Neese, F. Configuration Interaction Calculation of Electronic g-Tensors in Transition Metal Complexes. Int. J. Quant. Chem. , 2001 , 83, 104-114.</li>
+<li style="list-style-type: '25. ';">Chalupský, J.; Neese, F.; Solomon, E. I.; Ryde, U.; Rulíšek, L. Identification of intermediates in the reaction cycle of multicopper oxidases by quantum chemical calculations of spectroscopic parameters. Inorg. Chem. , 2006 , 45, 11051-11059.</li>
+</ol>
+<h2>B.3.31 NRVS</h2>
+<ol>
+<li style="list-style-type: '1. ';">Ogata, H.; Kramer, T.; Wang, H. X.; Schilter, D.; Pelmenschikov, V.; van Gastel, M.; Neese, F.; Rauchfuss, T. B.; Gee, L. B.; Scott, A. D.; Yoda, Y.; Tanaka, Y.; Lubitz, W.; Cramer, S. P. Hydride bridge in NiFehydrogenase observed by nuclear resonance vibrational spectroscopy. Nat. Commun. , 2015 , 6, 7890.</li>
+</ol>
+<h2>B.3.32 Nuclear Resonance Vibrational Spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Petrenko, Taras; DeBeer-George, Serena; Aliaga-Alcalde, Núria; Bill, Eckhard; Mienert, Bernd; Xiao, Yuming; Guo, YiSong; Sturhahn, Wolfgang; Cramer, Stephen P.; Wieghardt, Karl; Neese, Frank. Characterization of a Genuine Iron(V)-Nitrido Species by Nuclear Resonant Vibrational Spectroscopy Coupled to Density Functional Calculations. J. Am. Chem. Soc. , 2007 , 129, 11053-11060.</li>
+<li style="list-style-type: '2. ';">Petrenko, T.; Sturhahn, W.; Neese, F. First principles calculation of Nuclear Resonance Vibrational Spectra. Hyperfine Interact. , 2008 , 175, 165-174.</li>
+</ol>
+<h2>B.3.33 Orbital Optimized MP2</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F.; Schwabe, T.; Kossmann, S.; Schirmer, B.; Grimme, S. J. Chem. Theory Comput. , 2009 , 5, 3060.</li>
+<li style="list-style-type: '2. ';">Shirazi, R. G.; Pantazis, D. A.; Neese, F. Performance of density functional theory and orbital-optimised second-order perturbation theory methods for geometries and singlet-triplet state splittings of aryl-carbenes. Mol. Phys. , 2020 , 118, e1750456.</li>
+<li style="list-style-type: '3. ';">Sandhoefer, B.; Kossmann, S.; Neese, F. Derivation and assessment of relativistic hyperfine-coupling tensors on the basis of orbital-optimized second-order Møller-Plesset perturbation theory and the second-order DouglasKroll-Hess transformation. J. Chem. Phys. , 2013 , 138, 104102.</li>
+<li style="list-style-type: '4. ';">Kossmann, S.; Neese, F. Correlated ab Initio Spin Densities for Larger Molecules: Orbital-Optimized SpinComponent-Scaled MP2 Method. J. Phys. Chem. A , 2010 , 114, 11768-11781.</li>
+</ol>
+<h2>B.3.34 Pair Natural Orbital Local Correlation Methods</h2>
+<ol>
+<li style="list-style-type: '1. ';">Kollmar, Christian; Neese, Frank. The relationship between double excitation amplitudes and Z vector components in some post-Hartree-Fock correlation methods. J. Chem. Phys. , 2011 , 135 (6), 064103. DOI: 10.1063/1.3618720.</li>
+<li style="list-style-type: '2. ';">Kollmar, Christian; Neese, Frank. An orbital-invariant and strictly size extensive post-Hartree-Fock correlation functional. J. Chem. Phys. , 2011 , 135 (8), 084102. DOI: 10.1063/1.3624567.</li>
+<li style="list-style-type: '3. ';">Huntington, Lee M. J.; Hansen, Andreas; Neese, Frank; Nooijen, Marcel. Accurate Thermochemistry from a Parameterized Coupled-Cluster Singles and Doubles Model and a Local Pair Natural Orbital Based Implementation for Applications to Larger Systems. J. Chem. Phys. , 2012 , 136, 064101. DOI: 10.1063/1.3682325.</li>
+<li style="list-style-type: '4. ';">Neese, F.; Hansen, A.; Liakos, D. G. J. Chem. Phys. , 2009 , 131, 064103.</li>
+<li style="list-style-type: '5. ';">Hansen, A.; Liakos, D. G.; Neese, F. J. Chem. Phys. , 2011 , 135, 214102.</li>
+<li style="list-style-type: '6. ';">Liakos, D. G.; Neese, F. Improved correlation energy extrapolation schemes based on local pair natural orbital methods. J. Phys. Chem. A , 2012 , 116 (19), 4801-4816. DOI: 10.1021/jp300997x.</li>
+<li style="list-style-type: '7. ';">Riplinger, C.; Neese, F. J. Chem. Phys. , 2013 , 138, 034106.</li>
+<li style="list-style-type: '8. ';">Neese, F.; Wennmohs, F.; Hansen, A. J. Chem. Phys. , 2009 , 130, 114108.</li>
+<li style="list-style-type: '9. ';">Riplinger, C.; Sandhoefer, B.; Hansen, A.; Neese, F. J. Chem. Phys. , 2013 , 139, 134101.</li>
+<li style="list-style-type: '10. ';">Izsák, R.; Hansen, A.; Neese, F. The resolution of identity and chain of spheres approximations for the LPNOCCSD singles Fock term. Mol. Phys. , 2012 , 110, 2413-2417.</li>
+<li style="list-style-type: '11. ';">Liakos, D. G.; Hansen, A.; Neese, F. Weak Molecular Interactions Studied with Parallel Implementations of the Local Pair Natural Orbital Coupled Pair and Coupled Cluster Methods. J. Chem. Theory Comput. , 2011 , 7, 76-87.</li>
+</ol>
+<h2>B.3.35 PBEh-3c method</h2>
+<ol>
+<li style="list-style-type: '1. ';">Grimme, S.; Brandenburg, J. G.; Bannwarth, C.; Hansen, A. Consistent structures and interactions by density functional theory with small atomic orbital basis sets. J. Chem. Phys. , 2015 , 143, 054107. DOI: 10.1063/1.4927476.</li>
+</ol>
+</div>
+</body>
+</html>

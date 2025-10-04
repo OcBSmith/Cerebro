@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part012</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">The FrozenCore options are applied to all post Hartree-Fock methods.</li>
+<li style="list-style-type: '· ';">If including all electrons is desired, the !NoFrozenCore keyword can be simply inserted. For MP2: Frozen virtual orbitals are not allowed in gradient runs or geometry optimization!</li>
+<li style="list-style-type: '· ';">If ECPs are used, the number for NewNCore has to include the electrons represented by the ECPs as well. E.g. if an element is supposed to have 60 electrons in the ECP and additional 8 electrons should be frozen in the correlation calculation, NewNCore should be 68.</li>
+<li style="list-style-type: '· ';">In ORCA we use rather conservative frozencore settings, i. e. a large number of electrons are included in the correlation treatment. Therefore, we recommend to use properly optimized correlating basis functions in all cases, such as the cc-pwCVXZ basis sets.</li>
+<li style="list-style-type: '· ';">For DLPNO calculations the virtual space for core-core and core-valence correlation is adjusted by default, which is described in detail in section Including (semi)core orbitals in the correlation treatment .</li>
+<li style="list-style-type: '· ';">In general, NewNCore only has an effect in calculations with FC_ELECTRONS . In calculations using the DLPNO approximation (except DLPNO-NEVPT2), NewNCore has also an effect in the other cases, as is described in section Including (semi)core orbitals in the correlation treatment .</li>
+<li style="list-style-type: '· ';">Double-hybrid density functional (section Double-Hybrid DFT ) calculations by default use the FrozenCore option for the perturbative part, as is the case for MP2.</li>
+</ul>
+<h2>2.22 CP-SCF Options</h2>
+<p>The coupled perturbed self-consistent field (CP-SCF) equations have to be solved in many cases, such as when second derivative properties (e.g. vibrational frequencies, polarizability, NMR shielding, indirect spin-spin coupling, hyperfine coupling, g-tensor) or the MP2 relaxed density (in this case they are referred to as Z-vector equations) are calculated. They are a set of linear equations generally expressed as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where U x is the vector of solutions for perturbation x , the right-hand side (RHS) matrix B x is perturbation-specific and the left-hand side (LHS) matrix A is perturbation-independent and contains, among other terms, the two-electron repulsion integrals ( ij | ab ) and ( ia | jb ) . The equations are solved iteratively and the LHS is reassembled at every step, while the RHS does not change. The generation and transformation of the two-electron integrals are therefore the most time-consuming parts of the CP-SCF solution.</p>
+<p>The ORCA module which solves these equations accepts several options given below with their default values:</p>
+<table><tbody><tr><th colspan="3">%method</th></tr><tr><td>Z_Solver</td><td>Pople DIIS CG</td><td># (default) Use the Pople algorithm to solve the equations # Use the DIIS algorithm # Use the conjugate gradient algorithm</td></tr><tr><td>Z_Tol</td><td>1e-3</td><td># Convergence tolerance for the residual norm. # Default is 1e-5 for VeryTightOpt # and varies from 3e-3 to 3e-6 from LooseSCF to ExtremeSCF</td></tr><tr><td>Z_MaxIter</td><td>128</td><td># Maximum number of iterations</td></tr><tr><td>Z_MaxDIIS</td><td>12</td><td># Maximum number of DIIS vectors</td></tr><tr><td>Z_Shift</td><td>0.3</td><td># Level shift for DIIS</td></tr><tr><td>Z_GridXC</td><td>1</td><td># XC angular grid used for the LHS</td></tr><tr><td>Z_IntAccXC</td><td>3.467</td><td># XC radial grid accuracy used for the LHS</td></tr><tr><td>Z_GridX</td><td>1</td><td># COSX angular grid used for the LHS</td></tr><tr><td>Z_IntAccX</td><td>3.067</td><td># COSX radial grid accuracy used for the LHS</td></tr><tr><td>Z_GridX_RHS</td><td>2</td><td># COSX grid used for the RHS of MP2 Z-vector eqs (see below)</td></tr><tr><td>Z_COSX_Alg</td><td>0 1</td><td># (default) choose the best COSX algorithm automatically # better prescreening, more efficient for few densities</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>2 # uses more memory, more efficient for many densities end</code></pre>
+<p>Since ORCA 6, the same settings are used for all electric response property calculations as well as for CIS/TD-DFT gradients and relaxed densities. For convenience, the keywords in the %elprop input block are still available but they modify the same internal variables as those in %method . For magnetic response properties, the solver and convergence tolerance are set separately in %eprnmr , because the convergence behavior of the magnetic response CP-SCF equations is sometimes different.</p>
+<pre><code>%elprop Solver # Alias, see: %method Z_Solver Tol # Alias, see: %method Z_Tol MaxIter # Alias, see: %method Z_MaxIter MaxDIIS # Alias, see: %method Z_MaxDIIS LevelShift # Alias, see: %method Z_Shift end %eprnmr Solver # Solver for magnetic response, see options at: %method Z_Solver Tol # Convergence tolerance for magnetic response MaxIter # Alias, see: %method Z_MaxIter MaxDIIS # Alias, see: %method Z_MaxDIIS LevelShift # Alias, see: %method Z_Shift end</code></pre>
+<p>The keywords Z_GridX and Z_IntAccX are applicable if the RIJCOSX approximation is chosen for the treatment of two-electron integrals. They determine the angular and radial COSX integration grids, as discussed in section Changing TD-DFT, CP-SCF and Hessian Grids . Analogously, the keywords Z_Grid and Z_IntAcc determine the integration grid for DFT XC functionals.</p>
+<p>Integrals on the RHS are evaluated differently for different perturbations - refer to sections RIJCOSX , EPRNMR keywords for magnetic properties , RIJCOSX-RI-MP2 Gradients , MP2 and RI-MP2 Second Derivatives and RI-MP2 and Double-Hybrid DFT Response Properties for SCF-level gradients, EPR/NMR calculations with GIAOs, MP2 gradients, and MP2 second derivatives, respectively. For MP2 Z-vector equations, the RIJCOSX Fock-response terms in the RHS are evaluated with the COSX grid specified by Z_GridX_RHS . Note that it is used differently to Z_GridX : instead, it selects one of the three grids used in the SCF (see Sections RIJCOSX , COSX Numerical Grids , Numerical Integration for details) and it is not recommended to change the default value of 2.</p>
+<p>If the RIJONX or RIJK approximation is used in the SCF, the same is also employed in the CP-SCF. Note, however, that the RI-K approximation is not efficient for these terms.</p>
+<h2>Note</h2>
+<p>When running RPA or the CP-SCF with COSX, the algorithm from ORCA-6.0.0 was hard-coded to a memoryhungry one, which was not the original intention. In ORCA-6.0.1 that was fixed, and the automatic one is now the default. This might cause very small differences to these results, specially if the number of densities is small. As a result, calculations give slightly different results with ORCA-6.0.0. This does not affect any 'normal' energy, gradient or etc. calculations. Only those particular cases of RPA and CP-SCF.</p>
+<h2>2.23 Numerical Gradients</h2>
+<p>If the analytic gradient is not available, the numerical gradient can simply be requested via:</p>
+<pre><code>! NumGrad</code></pre>
+<p>as in the following example:</p>
+<pre><code>!CCSD(T) TZVPP !Opt NumGrad * int 0 1 C 0 0 0 0 0 0 O 1 0 0 1.2 0 0 H 1 2 0 1.1 120 0 H 1 2 3 1.1 120 180 *</code></pre>
+<h2>NOTE</h2>
+<ul>
+<li style="list-style-type: '· ';">Be aware that the numerical gradient is quite expensive. The time for one gradient calculation is equal to 6 × (number of atoms) × (time for one single point calculation).</li>
+<li style="list-style-type: '· ';">The numerical gradient can be calculated in a multi-process run, using a maximum of three times the number of atoms (see section Parallel and Multi-Process Modules ).</li>
+</ul>
+<p>More details on various options, geometry convergence criteria and the like are found in section Geometry Optimizations .</p>
+<h2>2.23.1 Some Notes and Tricks</h2>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">TightSCF in the SCF part is set as default to avoid the buildup of too much numerical noise in the gradients.</li>
+<li style="list-style-type: '· ';">Even if the optimization does not converge, the ORCA output may still end with '****ORCA TERMINATED NORMALLY****'. Therefore do not rely on the presence of this line as an indicator of whether the geometry optimization is converged! Rather, one should instead rely on the fact that, an optimization job that terminates because the maximum number of iterations has been reached, will generate the following output message:</li>
+</ul>
+<h2>Á Warning</h2>
+<p>The optimization did not converge but reached the maximum number of optimization cycles. Please check your results very carefully.</p>
+<p>While a successfully converged job will generate the following message instead:</p>
+<pre><code>***********************HURRAY******************** *** THE OPTIMIZATION HAS CONVERGED *** *************************************************</code></pre>
+<h2>Tip</h2>
+<ul>
+<li style="list-style-type: '· ';">In rare cases the redundant internal coordinate optimization fails. In this case, you may try to use COPT (optimization in Cartesian coordinates). This will likely take many more steps to converge but should be stable.</li>
+<li style="list-style-type: '· ';">For optimizations in Cartesian coordinates the initial guess Hessian is constructed in internal coordinates and thus these optimizations should converge only slightly slower than those in internal coordinates. Nevertheless, if you observe a slow convergence behaviour, it may be a good idea to compute a Hessian initially (perhaps at a lower level of theory) and use InHess read in order to improve convergence.</li>
+<li style="list-style-type: '· ';">At the beginning of a TS optimization more information on the curvature of the PES is needed than a model Hessian can give. The best choice is analytic Hessian, available for HF, DFT and MP2. In other cases (e.g. CAS-SCF), the numerical evaluation is necessary. Nevertheless you do not need to calculate the full Hessian when starting such a calculation. With ORCA we have good experience with approximations to the exact Hessian. Here it is recommended to either directly combine the TS optimization with the results of a relaxed surface scan or to use the Hybrid Hessian as the initial Hessian, depending on the nature of the TS mode. Note that these approximate Hessians do never replace the exact Hessian at the end of the optimization, which is always needed to verify the minimum or first order saddle point nature of the obtained structure.</li>
+</ul>
+<h2>2.23.2 Numerical Gradients</h2>
+<p>If you want to use numerical instead of analytic gradients you have to use</p>
+<ul>
+<li>! NumGrad</li>
+</ul>
+<p>in your input file. Additionally the settings for the numerical differentiation can be changed:</p>
+<pre><code>%numgrad CentralDiff true # You should use two-sided numerical differentiation, but it # is possible to switch to one-sided numerical differentiation. DX 0.005 # Increment in Bohr for the differentiation. TransInvar true # Take advantage of translation invariance end</code></pre>
+<p>CHAPTER</p>
+<h2>THREE</h2>
+<h2>MODEL CHEMISTRIES</h2>
+<h2>3.1 Wavefunction Types: RHF/RKS, UHF/UKS, ROKS and more</h2>
+<p>The basic variable that controls the type of wavefunction to be computed is the variable HFTyp in the %scf block. If nothing is specified for HFTyp , the program will check the multiplicity given in the input: for closed-shell molecules with multiplicity 1, RHF/RKS is assumed; for open shell molecules with multiplicity larger than 1, UHF/UKS is invoked. RHF will lead to a spin restricted closed-shell type computation [180] whereas UHF does a spin unrestricted calculation.</p>
+<p>For DFT calculations, RKS , UKS and ROKS can be used as synonyms for RHF , UHF and ROHF . The restricted openshell DFT method ( ROKS ) is only operative for high-spin states that have n unpaired electrons and S = n /2 . UKS wavefunctions will not be spin-purified.</p>
+<pre><code>%scf HFTyp RHF # closed-shell (RKS for DFT) UHF # unrestricted open-shell (UKS for DFT) ROHF # restricted open-shell (ROKS for DFT) CASSCF # complete active space SCF end</code></pre>
+<p>In certain cases you may want to run open-shell systems with RHF/RKS to get a 'half-electron' type wavefunction [181]. The total energy is not corrected! Sometimes these half-electron computations lead to acceptable convergence, and the resulting orbitals may be used as input for ROHF, UHF or MRCI calculations. Special attention should be taken for transition metal complexes where the RHF/RKS orbitals are quite different from ROHF or UHF orbitals, so that it is not recommended to over-interpret the wavefunctions from such calculations. The calculation is set up in the following way:</p>
+<pre><code>%method AllowRHF true end # or simply: ! AllowRHF</code></pre>
+<h2>3.1.1 ROHF Options</h2>
+<p>For ROHF calculations[6, 7, 182, 183, 184, 185, 186, 187, 188] the program will try to figure out what type of open-shell situation is present on the basis of the initial guess orbitals and their energies. Most 'simple' cases are well recognized, but sometimes a little help from the user is needed.</p>
+<p>The simplest ROHF case is the HIGHSPIN case, where all unpaired electrons in the open-shell are ferromagnetically coupled (parallel to each other), resulting in the highest multiplicity possible. The user can request this case as follow:</p>
+<pre><code>%scf HFTyp ROHF ROHF_case HIGHSPIN ROHF_NEl[1] 4 # number of electrons in the open-shell end</code></pre>
+<p>The ROHF code also has a very powerful feature that goes back to insights of Mike Zerner [189, 190]. It can average over either all states of a given configuration ( CAHF ) or all states of a given spin for a given configuration ( SAHF ).</p>
+<p>Especially, the SAHF feature gives you easy access to most degenerate high symmetry situations and the orbitals resulting from such calculations will be very convenient as input for CI calculations.</p>
+<pre><code>%scf HFTyp ROHF ROHF_case CAHF # configuration averaged HF SAHF # spin averaged HF ROHF_NumOp 3 # number of operators (3, 2 or 1) ROHF_NOrb[1] 2,1 # number of orbitals in each open-shell ROHF_NEl[1] 1,1 # number of electrons in each open-shell end</code></pre>
+<p>The hypothetical example below could represent an excited state of an octahedral d 3 transition metal complex. In this case there are five open-shell orbitals. The first three open-shell orbitals contain two electrons and the last two one electron. The input for a SAHF calculation is identical, just replace CAHF with SAHF.</p>
+<pre><code>%scf HFTyp ROHF ROHF_case CAHF # configuration averaged HF ROHF_NumOp 3 # 3 operators in this case: closed, open1, open2 ROHF_NOrb[1] 3,2 # 3 orbitals in first open shell, 2 in the second ROHF_NEl[1] 2,1 # 2 electrons in first open shell, 1 in the second end</code></pre>
+<p>Another feature of the ROHF code is the ability to converge the SCF to a given Configuration State Function ( CSF-ROHF ) [191]. In this way one can approach results from MCSCF calculations. This can be requested in two ways.</p>
+<p>The user can give a specific coupling situation.</p>
+<pre><code>%scf HFTyp ROHF ROHF_CASE USER_CSF # User defined CSF ROHF_REF {1 1 -1 -1} end # CSF to be converged to a 2 open shell␣ ↪ → antiferromagnetically coupled end</code></pre>
+<p>Or the user can give how many orbitals per shell. Where each open-shell will couple with antiparallel spin with the previous one.</p>
+<pre><code>%scf HFTyp ROHF ROHF_CASE AF_CSF # User defined CSF ROHF_AFORBS 2,2 # Coupling Situation end</code></pre>
+<p>As an example, one can think of a Fe(III) dimer, where each center is locally high spin, but they couple antiferromagnetically to each other. In order to get the ROHF solution for this system, first one needs a set of initial guess orbitals. The guess orbitals can be obtained either from the QROs of an UHF calculation, or a high spin ROHF calculation, or even a SAHF or CAHF. Independently of the method used, the orbitals need to be localized and ordered in a way that the set of 3d orbitals of each iron are grouped together in sequence. From this, one can run a CSF-ROHF calculation for the antiferromagnetic CSF as shown bellow:</p>
+<pre><code>%scf HFTyp ROHF ROHF_CASE USER_CSF # User defined CSF ROHF_REF {1 1 1 1 1 -1 -1 -1 -1 -1} end # 2 open shells coupling antiparallel end or %scf</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>HFTyp ROHF ROHF_CASE AF_CSF # User defined CSF ROHF_AFORBS 5,5 # 2 open shells coupling antiparallel end</code></pre>
+<p>The CSF-ROHF procedure can recognize doubly occupied and virtual orbitals in the definition of the CSF when the USER_CSF case is invoked. When detected, these orbitals will be rotated out of the open-shell defined in the ROHF method and the calculation will run normally:</p>
+<pre><code>%scf HFTyp ROHF ROHF_CASE USER_CSF # User defined CSF ROHF_REF {1 1 2 1 -1 -1 0 -1} end # the DOMO will be rotated to the closed-↪ → shell and # the VMO will be rotated to the virtual␣ ↪ → space. end</code></pre>
+<p>The user can also directly input the ROHF variables by means of the ROHFOPT Case User keyword. For example, for the high spin case with three electrons in three orbitals, it gives two operators with vector coupling coefficients a = 1 and b = 2 (Zerner convention).</p>
+<pre><code>%scf HFTyp ROHF ROHFOP Case User # manual input of ROHF variables Nop 2 # number of operators Norb[1] 3 # number of open-shell orbitals Nel[1] 3 # number of open-shell electrons A[1,1] 1 # Coulomb vector in the open shell B[1,1] 2 # Exchange vector in the open shell end end</code></pre>
+<p>One awkward feature of the ROHF theory is that the Fock operator is somewhat arbitrarily defined. Different choices lead to the same wavefunction, but have different convergence properties that may vary from system to system. ORCA thus lets the user choose the desired variant. Playing around with these choices may turn a divergent or slowly converging ROHF calculation into a successful calculation!</p>
+<p>The ROHF_Restrict feature is another feature that may be useful. If you suspect that the ROHF calculation does not converge because an open-shell and a closed-shell orbital are flipping back and forth, you can try to avoid this behavior by choosing ROHF_Restrict true . Of course there is no guarantee that it will work, and no guarantee that the system stays in the desired state. However, it decreases the chances of large, uncontrolled steps.</p>
+<pre><code>%scf ROHF_Mode 0 # construct F according to Pulay (default) 1 # construct F as in the Gamess program 2 # construct F according to Kollmar ROHF_Restrict false # restrict orbital interchanges and off-diagonal elements # (default=false) # a complete list of ROHF variables ROHFOP Case User # manual input of ROHF variables Nop 2 # number of operators Norb[1] 3 # number of open-shell orbitals Nel[1] 3 # number of open-shell electrons A[1,1] 1 # Coulomb vector in the open shell B[1,1] 2 # Exchange vector in the open shell Mode 2 # use the Kollmar operator Restrict false # do not restrict</code></pre>
+<p>(continues on next page)</p>
+<pre><code>end end</code></pre>
+<h2>3.1.2 UHF Natural Orbitals</h2>
+<p>The program can produce the UHF natural orbitals (UNOs). With these, the open-shell wavefunction can be pictured conveniently. The syntax is simple:</p>
+<pre><code>%scf UHFNO true end # or simply: ! UNO</code></pre>
+<p>There are various printing options for UNOs described in the output section Population Analysis . The UNOs can also be plotted as described in the plots section Orbital and Density Plots . In general the program stores a file BaseName. uno , where BaseName is by default the name of your input file with .inp stripped off. Accordingly, the gbw file is named BaseName.gbw . The .uno file is a normal gbw file that contains the geometry, basis set and the UNO orbitals. It could be used, for example, to start a ROHF calculation.</p>
+<h2>3.1.3 UNO, UCO and QROs input</h2>
+<p>For calculations on open-shell systems we recommend to use the keywords !UNO !UCO in the input line. This will generate quasi-restricted molecular orbitals QRO , unrestricted natural spin-orbitals UNSO , unrestricted natural orbitals UNO and unrestricted corresponding orbitals UCO . Moreover, it will print the UCO overlaps in the output, which can provide very clear information about the spin-coupling in the system. Below an example of the input and section of the output is provided.</p>
+<pre><code>!B3LYP def2-SVP UNO UCO TightSCF</code></pre>
+<h2>The UCO overlap section in the output will look like:</h2>
+<pre><code>***UHF Corresponding Orbitals were saved in MyJob.uco*** ----------------------Orbital Overlap(*) ----------------------. . . 96: 0.99968 97: 0.99955 98: 0.99947 99: 0.99910 100: 0.99873 101: 0.99563 102: 0.74329 103: 0.00000</code></pre>
+<p>The overlap that corresponds to a value usually less than 0.85 denotes a spin-coupled pair. Whereas, values close to 1.00 and 0.00 refers to the doubly occupied and singly occupied orbitals respectively.</p>
+<p>(continued from previous page)</p>
+<h2>3.2 Hartree Fock Theory</h2>
+<p>The Hartree-Fock (HF) method[192, 193, 194] is a basic ab-initio quantum mechanical method that is used to approximate many-body electronic wavefunctions within mean field theory. Many post-Hartree-Fock methods like Coupled-Cluster typically make use of HF reference wavefunctions.</p>
+<p>A basic Hartree-Fock calculation can be invoked via the simple input keyword !HF</p>
+<pre><code>! HF</code></pre>
+<pre><code>or via the %method block.</code></pre>
+<pre><code>%method method HF # equivalent to method HFGTO end</code></pre>
+<p>By default, ORCA will make use of the def2-SVP basis set if not specified else. Hartree-Fock calculations can be accelerated drastically by using different RI approximations .</p>
+<h2>µ See also</h2>
+<p>ORCA provides several choices of wavefunction types like resticted (RHF), unresticted (UHF), or unrestricted open-shell HF (ROKS). These options are documented in Section 3.1. HF is also an integral part of hybridand double-hybrid DFT.</p>
+<h2>b Tip</h2>
+<p>Grimme and co-workers developed a low-cost method based on HF called HF-3c that can be employed for very large systems. Some HF-based semi-empirical methods like AM1 or PM3 are also available.</p>
+<h2>3.3 Density Functional Theory (DFT)</h2>
+<p>Due to its good cost-accuracy ratio, Kohn-Sham density functional theory (DFT) has become the workhorse of quantum chemistry. Over the last few decades, a whole zoo of density functionals has been developed that differ in terms of their construction and design philosophy. The so-called Jacob's Ladder picture (Fig. 3.1) coined by Perdew [195] categorizes density functionals according to their basic physical ingredients into rungs . With higher rungs. the cost of the given functionals increased but also higher accuracy is conceptionally expected. However, the accuracy of density functionals strongly varies and careful study of benchmark studies is generally recommended.</p>
+<figure><figcaption><div class="caption">Fig. 3.1: Jacob&#x27;s ladder picture of density functionals.</div></figcaption></figure>
+<p>ORCA features various density functionals of each rung either implemented natively or via the LibXC Functional Library . These functionals can be combined with various basis sets and relativistic approaches . Further, ORCA features a useful toolkit of resolution-of-identity (RI) methods to speed-up DFT calculations.</p>
+<p>For dispersion corrections that can be used with DFT and the respective available functional-specific parameters refer to the Dispersion Corrections section .</p>
+<p>Also note that some functionals like the SCAN and Minnesota families may require enhanced numerical integration grid settings .</p>
+<h2>3.3.1 Basic Usage</h2>
+<p>All implemented DFT methods can be invoked via their respective keywords, e.g. !PBE using the simple input line:</p>
+<table><tbody><tr><td>! PBE</td></tr></tbody></table>
+<p>Many functionals can also be invoked via the %method block even though double-hybrid functionals being not available due to technical reasons:</p>
+<pre><code>%method Method DFT # equivalent to method DFGTO Functional PBE end</code></pre>
+<p>ORCAfurther provides some more utility to construct and modify functionals via the %method block. These expert options are described in the respective sections of each functional rung. Various other functionals can also be invoked via the LibXC Functional Library .</p>
+<h2>3.3.2 Local Functionals</h2>
+<p>Local exchange-correlation functionals are the most basic examples of functionals constructed according to equation (3.1):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>They typically the original Slater exchange functional with different local correlations functionals like VWN-V[196] or PW-LDA[197]. All available local functional that are available in ORCA can be found in Table 3.1.</p>
+<table><caption><div class="caption">Table 3.1: List of available local functionals.</div></caption><tbody><tr><th>Functional</th><th>Keywords</th><th>Description</th></tr><tr><td>HFS</td><td>HFS</td><td>Hartree-Fock-Slater Exchange only functional</td></tr><tr><td>LDA or LSD</td><td>LDA , LSD</td><td>Local density approximation (defaults to VWN5)</td></tr><tr><td>VWN-V [196]</td><td>VWN , VWN5</td><td>Vosko-Wilk-Nusair local density approx. parameter set &#x27;V&#x27;</td></tr><tr><td>VWN-III [196]</td><td>VWN3</td><td>Vosko-Wilk-Nusair local density approx. parameter set &#x27;III&#x27;</td></tr><tr><td>PW-LDA [197]</td><td>PWLDA</td><td>Perdew-Wang parameterization of LDA</td></tr></tbody></table>
+<h2>3.3.3 Gradient Corrected Functionals: (meta-)GGAs</h2>
+<p>The next rung corresponds to gradient corrected functional of the generalized gradient approximation (GGA) and the meta-generalized gradient approximation (meta-GGA) types. A simplified exchange-correlation energy expression for these types of functionals is given in (3.2). (meta-)GGAs are specifically useful for geometry optimizations and screening purposes due to their comparably small computational cost.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Table 3.2: List of available (meta-)GGA functionals.</p>
+<table><tbody><tr><th>Functional</th><th>Keyword</th><th>Description</th></tr><tr><th>GGAs</th><td></td><td></td></tr><tr><td>BP86 [198, 199]</td><td>BP86</td><td>Becke &#x27;88 exchange and Perdew &#x27;86 correlation</td></tr><tr><td>BLYP [200]</td><td>BLYP</td><td>Becke &#x27;88 exchange and Lee-Yang-Parr correlation</td></tr><tr><td>OLYP [201]</td><td>OLYP</td><td>Handy&#x27;s &#x27;optimal&#x27; exchange and Lee-Yang-Parr correlation</td></tr><tr><td>GLYP [202]</td><td>GLYP</td><td>Gill&#x27;s &#x27;96 exchange and Lee-Yang-Parr correlation</td></tr><tr><td>XLYP [203]</td><td>XLYP</td><td>The Xu and Goddard exchange and Lee-Yang-Parr correlation</td></tr><tr><td>PW91 [204]</td><td>PW91</td><td>Perdew-Wang &#x27;91 GGA functional</td></tr><tr><td>mPWPW[205]</td><td>MPWPW</td><td>Modified PWexchange and PWcorrelation</td></tr><tr><td>mPWLYP [205]</td><td>MPWLYP</td><td>Modified PWexchange and LYP correlation</td></tr><tr><td>PBE [206]</td><td>PBE</td><td>Perdew-Burke-Erzerhoff GGA functional</td></tr><tr><td>RPBE [207]</td><td>RPBE</td><td>&#x27;Modified&#x27; PBE</td></tr><tr><td>revPBE [208]</td><td>REVPBE</td><td>&#x27;Revised&#x27; PBE</td></tr><tr><td>RPW86PBE [209]</td><td>RPW86PBE</td><td>PBE correlation with refitted Perdew &#x27;86 exchange</td></tr><tr><td>PWP [204]</td><td>PWP</td><td>Perdew-Wang &#x27;91 exchange and Perdew &#x27;86 correlation</td></tr><tr><th>composite</th><td></td><td></td></tr><tr><td>B97-3c [210] meta-GGAs</td><td>B97-3C</td><td>Composite DFT method by Grimme et al.</td></tr><tr><td>B97M-V [211] B97M-D3(BJ) [212]</td><td>B97M-V B97M-D3BJ</td><td>Head-Gordon&#x27;s DF B97M-V with VV10 nonlocal correlation Modified version of B97M-V with D3BJ correction by Najibi and Goerigk</td></tr><tr><td>B97M-D4 [213]</td><td>B97M-D4</td><td>Modified version of B97M-V with DFT-D4 correction by Najibi and Go- erigk</td></tr><tr><td>SCAN [214]</td><td>SCANFUNC</td><td>Perdew&#x27;s SCAN functional</td></tr><tr><td>rSCAN [215]</td><td>RSCAN</td><td>Regularized SCAN functional</td></tr><tr><td>r²SCAN [216]</td><td>R2SCAN</td><td>Regularized and restored SCAN functional by Furness, Sun et al.</td></tr><tr><td>M06-L [217]</td><td>M06L</td><td>The Minnesota M06-L meta-GGA functional</td></tr><tr><td>TPSS [218]</td><td>TPSS</td><td>The TPSS meta-GGA functional</td></tr><tr><td>revTPSS [219, 220] composite</td><td>REVTPSS</td><td>Revised TPSS meta-GGA functional</td></tr><tr><td>r²SCAN-3c [221]</td><td>R2SCAN-3C</td><td>Composite DFT method by Grimme et al.</td></tr></tbody></table>
+<h2>Customization of Basic Functionals</h2>
+<p>Basic exchange-correlation functionals can also be constructed from their components via the %method block using the Exchange , Correlation , and LDAOpt keywords. These controle the exchange and correlation parts of the functional as well as the local part of the correlation functional, respectively. For example BP86 ( !BP86 ) is constructed from Becke's '88 exchange via X_BECKE and Perdew's '86 correlation functional via C_P86 . In ORCA, it further employs Perdew and Wang's LDA reparameterization[197] PWLDA for the local part of the correlation functional via C_PWLDA :</p>
+<pre><code>%method Method DFT Exchange X_BECKE Correlation C_P86 LDAOpt C_PWLDA end</code></pre>
+<p>For a full list of available components see Table 3.3.</p>
+<p>The correct choice of the local part of the correlation functional is crucial to ensure reproducibility of the results. In ORCA, almost all functionals choose PWLDA [197] as the underlying LDA functional as it represents a slightly better fit to the uniform electron gas than VWN. For VWN (Vosko, Wilk, and Nusair[196]), several parameterizations exist.</p>
+<p>In their classic paper give two sets of parameters - one in the main body (parametrization of RPA results; known as VWN-III) and one in their table 5 of correlation energies (parametrization of the Ceperley/Alder Monte Carlo results; known as VWN-V). The results from PW-LDA are very similar to those of VWN-V, whereas VWN-III yields quite different values. Over the years, the usage of different parameterizations for the same functional name throughout different quantum chemistry programs caused some confusion and deviating results. A prominent example is the different implementation of the B3LYP hybrid functional within ORCA and Gaussian. While ORCA uses VNW-V consistent with the TURBOMOLE program[222, 223, 224], the Gaussian program[225] employs VWN-III. Using the LDAOpt keyword, both variants can be constructed:</p>
+<pre><code># consistent with TURBOMOLE %method Method DFT Functional B3LYP LDAOpt C_VWN5 end</code></pre>
+<pre><code># consistent with Gaussian %method Method DFT Functional B3LYP LDAOpt C_VWN3 end</code></pre>
+<p>For convenience both functionals can be invoked separately via the simple input keywords !B3LYP for the ORCA/TURBOMOLE variant and !B3LYP/G for the Gaussian variant.</p>
+<p>Aspecial situation arises if LYP is the correlation functional [226] since LYP is not a correction to the correlation, but rather includes the full correlation. It is therefore used in the B3LYP functional as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Some functionals further incorporate empirical parameters that can be changed to improve agreement with experiment. Currently, there are a few parameters that can be changed (other than the parameters used in the hybrid functionals , which are described later).</p>
+<p>The first of these parameters is α of Slater's X α method. Theoretically, it has a value of 2/3 and this is used in the HFS and LSD functionals. However, the exchange contribution is underestimated by about 10% by this approximation (quite significant!) and a value around 0.70-0.75 is recommended for molecules.</p>
+<p>The second parameter is the β for Becke's gradient-corrected exchange functional. Becke determined the value 0.0042 by fitting the exchange energies for rare gas atoms. There is some evidence that with smaller basis sets, a slightly smaller value such as 0.0039 gives improved results for molecules.</p>
+<p>The next parameter is the value κ , which occurs in the PBE exchange functional. It has been given the value 0.804 by Perdew et al. in order to satisfy the Lieb-Oxford bound. Since then, other workers have argued that a larger value for this parameter (around 1.2) gives better energetics, which is explored in the revPBE functional. Note, however, that while revPBE gives slightly better energetics, it also gives slightly poorer geometries.</p>
+<p>The last two parameters are also related to PBE. Within the PBE correlation functional, there is β C (not to be confused with the β exchange parameter in Becke's exchange functional), whose original value is β C = 0 . 066725 . Modified variants exist with different β C values, e.g., the PBEsol functional and the PBEh-3c composite method . Furthermore, the µ parameter in the PBE exchange functional may be modified. In the original formulation, it is related to β C via µ = β C π 2 3 , but has been modified in later variants as well.</p>
+<table><caption><div class="caption">Table 3.3: %method block input keywords to modify basic exchange-correlation functionals.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>Exchange</td><td>X_NOX</td><td>No exchange</td></tr><tr><td></td><td>X_SLATER</td><td>Slater&#x27;s local exchange</td></tr><tr><td></td><td>X_BECKE</td><td>Becke&#x27;s &#x27;88 exchange</td></tr><tr><td></td><td>X_wB88</td><td>Short-range Becke &#x27;88 exchange for range-separated functionals</td></tr><tr><td></td><td>X_G96</td><td>Gill &#x27;96 gradient exchange</td></tr><tr><td></td><td>X_PW91</td><td>Perdew-Wang (PW) &#x27;91 gradient exchange</td></tr><tr><td></td><td>X_mPW</td><td>Adamo-Barone modification of PWexchange</td></tr><tr><td></td><td>X_PBE</td><td>Perdew-Burke-Ernzerhof (PBE) exchange</td></tr><tr><td></td><td>X_RPBE</td><td>Revised PBE exchange</td></tr><tr><td></td><td>X_OPTX</td><td>Hoe/Cohen/Handy&#x27;s optimized exchange</td></tr><tr><td></td><td>X_X</td><td>Xu/Goddard exchange</td></tr><tr><td></td><td>X_TPSS</td><td>TPSS meta-GGA exchange</td></tr><tr><td></td><td>X_B97D</td><td>Grimme&#x27;s modified exchange for the B97-D GGA</td></tr><tr><td></td><td>X_B97BECKE</td><td>Becke&#x27;s original exchange for the B97 hybrid</td></tr><tr><td></td><td>X_SCAN</td><td>Perdew&#x27;s constrained exchange for the SCAN meta-GGA</td></tr><tr><td></td><td>X_RSCAN</td><td>Perdew&#x27;s constrained exchange for the rSCAN meta-GGA</td></tr><tr><td></td><td>X_R2SCAN</td><td>Perdew&#x27;s constrained exchange for the r²SCAN meta-GGA</td></tr><tr><td>Correlation</td><td>C_NOC</td><td>No correlation</td></tr><tr><td></td><td>C_VWN5</td><td>Local Vosko-Wilk-Nusair correlation (parameter set &#x27;V&#x27;)</td></tr><tr><td></td><td>C_VWN3</td><td>Local Vosko-Wilk-Nusair correlation (parameter set &#x27;III&#x27;)</td></tr><tr><td></td><td>C_PWLDA</td><td>Local PWcorrelation</td></tr><tr><td></td><td>C_P86</td><td>Perdew &#x27;86 correlation</td></tr><tr><td></td><td>C_PW91</td><td>PW&#x27;91 correlation</td></tr><tr><td></td><td>C_PBE</td><td>PBE correlation</td></tr><tr><td></td><td>C_LYP</td><td>LYP correlation</td></tr><tr><td></td><td>C_TPSS</td><td>TPSS meta-GGA correlation</td></tr><tr><td></td><td>C_B97D</td><td>Grimme&#x27;s modified correlation for the B97-D GGA</td></tr><tr><td></td><td>C_B97BECKE</td><td>Becke&#x27;s original correlation for the B97 hybrid</td></tr><tr><td></td><td>C_SCAN</td><td>Perdew&#x27;s constrained correlation for the SCAN meta-GGA</td></tr><tr><td></td><td>C_RSCAN</td><td>Perdew&#x27;s constrained correlation for the rSCAN meta-GGA</td></tr><tr><td></td><td>C_R2SCAN</td><td>Perdew&#x27;s constrained correlation for the r²SCAN meta-GGA</td></tr><tr><td>LDAOpt</td><td>C_NOC</td><td>Sets the local part of any correlation functional to no correlation</td></tr><tr><td></td><td>C_PWLDA</td><td>Sets the local part of any correlation functional to PWLDA</td></tr><tr><td></td><td>C_VWN5</td><td>Sets the local part of any correlation functional to VWN5</td></tr><tr><td></td><td>C_VWN3</td><td>Sets the local part of any correlation functional to VWN3</td></tr><tr><th>Specific Parameters</th><td></td><td></td></tr><tr><td>XAlpha</td><td>&lt;real&gt;</td><td>Modifies Slater&#x27;s α parameter (default 2/3)</td></tr><tr><td>XBeta</td><td>&lt;real&gt;</td><td>Modifies Becke&#x27;s β parameter (default 0.0042)</td></tr><tr><td>XKappa</td><td>&lt;real&gt;</td><td>Modifies the PBE(exchange) κ parameter (default 0.804)</td></tr><tr><td>XMuePBE</td><td>&lt;real&gt;</td><td>Modifies the PBE(exchange) κ parameter (default 0.21952)</td></tr><tr><td>CBetaPBE</td><td>&lt;real&gt;</td><td>Modifies the PBE(correlation) beta parameter (default 0.066725)</td></tr></tbody></table>
+<h2>3.3.4 Hybrid DFT</h2>
+<p>The idea of replacing a portion of the DFT exchange by exact exchange from Hartree-Fock theory (HFX) was introduced by Becke in 1993[227, 228]. This scheme is typically referred to as hybrid DFT and the most simple formulation of a one-parameter hybrid functional is depicted in equation (3.4)</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>A more general description is given by the adiabatic connection model (ACM). In the ACM, hybrid functionals are constructed with three parameters according to equation (3.5):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, E XC is the total exchange/correlation energy, E X HF is the Hartree-Fock exchange, E X LSD is the local (Slater) exchange, E X GGA is the gradient correction to the exchange, E C LSD is the local, spin-density based part of the correlation energy, and E C GGA is the gradient correction to the correlation energy.</p>
+<p>Over the years, various strategies to construct hybrid functionals have been developed. These range from physics motivated approaches relying on as few as possible parameters like the overall well-balanced PBE0 functional[229] to more empirical variants like the prominent three-parameter hybrid B3LYP[230]. Furthermore, various treatments of the HF exchange admixture were developed. The basic hybrids that use a static amount of HFX are typically referred to as global hybrids while functionals with variable amounts of HFX include range-separated hybrids and local hybrids. Various global and range-separated hybrid functionals are available in ORCA. Local hybrids may be implemented in a future version.</p>
+<p>ORCA also provides a sophisticated infrastructure to create and customize global and range-separated hybrid functionals .</p>
+<h2>® Note</h2>
+<p>As by theory hybrid functionals are significantly more costly than (meta-)GGAs, ORCA uses the sophisticated RIJCOSX algorithm as a default to speed up hybrid DFT calculations.</p>
+<h2>Global Hybrid Functionals</h2>
+<p>Global hybrid functionals employ a fixed amount of Hartree-Fock exact exchange. ORCA features various representatives with different compositions and amounts of HFX. The optimal amount of HFX is controversially discussed in the literature and many empirical functionals were constructed by fitting it to reproduce an experimental property. However, it has been argued from a theoretical viewpoint that the optimal mixing of HF exchange is 25% [231] and large amounts of HFX are known to be disadvantageous for transition metal complexes.</p>
+<p>A list of natively implemented global hybrid functionals is given in Table 3.4.</p>
+<p>Table 3.4: List of available global hybrid functionals.</p>
+<table><tbody><tr><th>Functional</th><th>Key- word</th><td></td><th>%HFXDescription</th></tr><tr><th>hybrid GGAs</th><td></td><td></td><td></td></tr><tr><td>B1LYP [232]</td><td>B1LYP</td><td>25</td><td>The one-parameter hybrid functional with Becke &#x27;88 exchange and Lee-Yang- Parr correlation (25% HF exchange)</td></tr><tr><td>B3LYP [230]</td><td>B3LYP</td><td>20</td><td>The popular B3LYP functional (20% HF exchange) as defined in the Turbo- Mole program system ( LDAOPT C_VWN5 )</td></tr><tr><td>B3LYP/G [230]</td><td>B3LYP/ G</td><td>20</td><td>The popular B3LYPfunctional (20% HFexchange) as defined in the Gaussian program system ( LDAOPT C_VWN3 )</td></tr><tr><td>O3LYP [233]</td><td>O3LYP</td><td>11.61</td><td>The Handy hybrid functional</td></tr><tr><td>X3LYP [203]</td><td>X3LYP</td><td>21.8</td><td>The Xu and Goddard hybrid functional</td></tr><tr><td>B1P86 [199]</td><td>B1P86</td><td>25</td><td>The one-parameter hybrid version of BP86</td></tr><tr><td>B3P86 [227]</td><td>B3P86</td><td>20</td><td>The three-parameter hybrid version of BP86</td></tr><tr><td>B3PW91 [227]</td><td>B3PW91</td><td>20</td><td>The three-parameter hybrid version of PW91</td></tr><tr><td>PW1PW [229]</td><td>PW1PW</td><td>25</td><td>One-parameter hybrid version of PW91</td></tr><tr><td>mPW1PW [205]</td><td>MPW1PW</td><td>25</td><td>One-parameter hybrid version ofmPWPW</td></tr><tr><td>mPW1LYP [205]</td><td>MPW1LYP</td><td>25</td><td>One-parameter hybrid version of mPWLYP</td></tr><tr><td>PBE0 [229] revPBE0</td><td>PBE0</td><td>25</td><td>One-parameter hybrid version of PBE</td></tr><tr><td>[234]</td><td>REVPBE0</td><td>25</td><td>&#x27;Revised&#x27; PBE0</td></tr><tr><td>revPBE38 [234]</td><td>REVPBE38</td><td>37.5</td><td>&#x27;Revised&#x27; PBE0 with 37.5% HF exchange</td></tr><tr><td>BHandHLYP [227]</td><td>BHANDHLYP</td><td>50</td><td>Half-and-half hybrid functional by Becke</td></tr><tr><th>hybrid meta-GGAs</th><td></td><td></td><td></td></tr><tr><td>M06 [235]</td><td>M06</td><td>27</td><td></td></tr><tr><td>M06-2X [235]</td><td>M062X</td><td>54</td><td></td></tr><tr><td>PW6B95 [236]</td><td>PW6B95</td><td>28</td><td></td></tr><tr><td>TPSSh [218]</td><td>TPSSH</td><td>10</td><td>The hybrid version of TPSS (10% HF exchange)</td></tr><tr><td>TPSS0 [237]</td><td>TPSS0</td><td>25</td><td>A 25% exchange version of TPSSh that yields improved energetics</td></tr><tr><td>r²SCANh [238]</td><td>R2SCANH</td><td>10</td><td>Global hybrid variant of r²SCAN with 10% HF exchange</td></tr><tr><td>r²SCAN0 [238]</td><td>R2SCAN0</td><td>25</td><td>Global hybrid variant of r²SCAN with 25% HF exchange</td></tr><tr><td>r²SCAN50 [238]</td><td>R2SCAN50</td><td>50</td><td>Global hybrid variant of r²SCAN with 50% HF exchange</td></tr><tr><th>composite</th><td></td><td></td><td></td></tr><tr><td>PBEh-3c [239]</td><td>PBEH-3C</td><td>42</td><td>Composite DFT approach by Grimme et al.</td></tr><tr><td>B3LYP-3c [240]</td><td>B3LYP-3C</td><td>20</td><td>Composite DFT approach by Grimme et al.</td></tr></tbody></table>
+<h2>Customization of Global Hybrids</h2>
+<p>Global hybrid functional parameters can be customized via the %method block. For the customization of the basic exchange and correlation components see the Customization of Basic Functionals section. The important parameters for hybrid functionals are those used in the ACM model (cf. equation (3.5)). In this case, we will recreate the PBE0 functional (25% HFX) by using the ACM syntax:</p>
+<pre><code>! RIJCOSX # PBE0 %method Method DFT Functional PBE ACM_A 0.25 # fraction of Hartree-Fock exchange ACM_B 0.75 # fraction of the GGA exchange ACM_C 1.00 # fraction of the GGA correlation ScalLDAC 1.00 # fraction of LDA correlation, must be equal to ACM_C end</code></pre>
+<p>For simplicity, the ACM parameters can also be given as one string.</p>
+<pre><code>! RIJCOSX # PBE0 %method Method DFT Functional PBE ACM 0.25, 1.00, 1.00 # as ACM ACM-A, ACM-B, ACM-C ScalLDAC 1.00 # fraction of LDA correlation, must be equal to␣ ↪ → ACM_C end</code></pre>
+<p>Asthe ACMformalism can be non-intutive, ORCA provides an equivalent syntax to control the respective parameters.</p>
+<pre><code>! RIJCOSX # PBE0 %method Method DFT Functional PBE ScalHFX 0.25 # fraction of Hartree-Fock exchange ScalDFX 0.75 # fraction of GGA exchange ScalGGAC 1.00 # fraction of GGA correlation ScalLDAC 1.00 # fraction of LDA correlation, must be equal to␣ ↪ → ScalGGAC end</code></pre>
+<h2>Á Warning</h2>
+<p>Note that Functional chooses specific predefined values for the variables Exchange , Correlation , LDAOpt and ACM described below. If given as a simple input keyword, in some cases, it will also activate a dispersion correction. You can explicitly give these variables instead or in addition to Functional . However, make sure that you specify these variables after you have assigned a value to Functional or the others will be reset to the values chosen by Functional .</p>
+<p>Table 3.5: %method block input keywords to modify global hybrid functionals.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>ACM</td><td>&lt;real, real, real&gt;</td><td>Defines the ACM-A, ACM-B, and ACM-C parameters</td></tr><tr><td>ACM_A</td><td>&lt;real&gt;</td><td>Defines the ACM-Aparameter (fraction of Hartree-Fock exchange)</td></tr><tr><td>ACM_B</td><td>&lt;real&gt;</td><td>Defines the ACM-B parameter (fraction of GGA exchange)</td></tr><tr><td>ACM_C</td><td>&lt;real&gt;</td><td>Defines the ACM-C parameter (fraction of GGA correlation)</td></tr><tr><td>ScalHFX</td><td>&lt;real&gt;</td><td>Controls the fraction of Hartree-Fock exchange, equiv. to ACM_A</td></tr><tr><td>ScalDFX</td><td>&lt;real&gt;</td><td>Controls the fraction of GGA exchange, equiv. to ACM_B</td></tr><tr><td>ScalGGAC</td><td>&lt;real&gt;</td><td>Controls the fraction of GGA correlation, equiv. to ACM_C</td></tr></tbody></table>
+<h2>Range-Separated Hybrid Functionals</h2>
+<p>Unlike global hybrids , range-separated hybrid (RSH) split the two-electron operator used for the exchange into a short-range (SR) and a long-range (LR) regime wherein the short-range part is typically described by DFT exchange and the long-range part by Hartree-Fock exchange. In ORCA, all range-separated hybrids use the error function splitting approach by Hirao and coworkers to distinguish both regimes (cf. equation (3.6)).[241] This allows the definition of DFT functionals that dominate the short-range part by an adapted exchange functional of LDA , GGA or meta-GGA level and the long-range part by Hartree-Fock exchange.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where erf ( x ) = 2 √ π ∫ x 0 exp ( -t 2 ) dt and erfc ( x ) = 1 -erf ( x ) . Note that the splitting is only applied to the exchange contribution; all other contributions (one-electron parts of the Hamiltonian, the electron-electron Coulomb interaction and the approximation for the DFT correlation) are not affected. Later, Handy and coworkers[242] generalized the ansatz to:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This form of the splitting used in ORCA is shown visually (according to Handy and coworkers) in Fig. 3.2.</p>
+<figure><figcaption><div class="caption">Fig. 3.2: Graphical description of the range-separation ansatz. The gray area corresponds to Hartree-Fock exchange. α and β follow Handy&#x27;s terminology [242].</div></figcaption></figure>
+<h2>ǩ Important</h2>
+<p>Currently, RSH functionals can be used for integral-direct single-point calculations, calculations involving the first nuclear gradient (i.e. geometry optimizations), frequency calculations, TDDFT, TDDFT nuclear gradient, and EPR/NMR calculations. As with the global hybrids , RIJCOSX is used by default to drastically speed up the calculations. Alternatively, only RIJONX can be used.</p>
+<p>A list of available range-separated hybrid functionals is given in Table 3.6</p>
+<p>Table 3.6: List of available range-separated hybrid functionals. µ is the range-separation parameter.</p>
+<table><tbody><tr><th>Functional</th><th>Keyword</th><th>%HFX</th><th>µ / bohr - 1</th><th>%fixed DFX</th></tr><tr><th>hybrid GGAs</th><td></td><td></td><td></td><td></td></tr><tr><th>ω B97 [243]</th><td>WB97</td><td>0 - 100</td><td>0.40</td><td>-</td></tr><tr><th>ω B97X [243]</th><td>WB97X</td><td>15.7706 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97X-V [244]</th><td>WB97X-V</td><td>16.7 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97X-D3 [245]</th><td>WB97X-D3</td><td>19.5728 - 100</td><td>0.25</td><td>-</td></tr><tr><th>ω B97X-D3(BJ) [212]</th><td>WB97X-D3BJ</td><td>16.7 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97X-D4 [213]</th><td>WB97X-D4</td><td>16.7 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97X-D4rev[49]</th><td>WB97X-D4REV</td><td>16.7 - 100</td><td>0.30</td><td>-</td></tr><tr><th>CAM-B3LYP [242]</th><td>CAM-B3LYP</td><td>19 - 65</td><td>0.33</td><td>35%</td></tr><tr><th>LC-BLYP [246]</th><td>LC-BLYP</td><td>0 - 100</td><td>0.33</td><td>-</td></tr><tr><th>LC-PBE [241]</th><td>LC-PBE</td><td>0 - 100</td><td>0.47</td><td>-</td></tr><tr><th>hybrid meta-GGAs</th><td></td><td></td><td></td><td></td></tr><tr><th>ω B97M-V [247]</th><td>WB97M-V</td><td>15 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97M-D3(BJ) [212]</th><td>WB97M-D3BJ</td><td>15 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97M-D4 [213]</th><td>WB97M-D4</td><td>15 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω B97M-D4rev [49]</th><td>WB97M-D4REV</td><td>15 - 100</td><td>0.30</td><td>-</td></tr><tr><th>ω r²SCAN [248]</th><td>WR2SCAN</td><td>0 - 100</td><td>0.30</td><td>-</td></tr><tr><th>composite</th><td></td><td></td><td></td><td></td></tr><tr><th>ω B97X-3c [49]</th><td>WB97X-3C</td><td>16.7 - 100</td><td>0.30</td><td>-</td></tr></tbody></table>
+<h2>Customizing Range-Separated Hybrids</h2>
+<p>Range-separated hybrid functional parameters can also be customized via the %method block. For the customization of the basic exchange and correlation components see the Customization of Basic Functionals section. Basic hybridrelated keywords and the respective ACM model are described in the Hybrid DFT and Customization of Global Hybrids sections.</p>
+<p>In this example, we will recreate the LC-PBE functional:</p>
+<pre><code>! RIJCOSX # LC-PBE %method Method DFT Exchange X_LRCPBE Correlation C_PBE LDAOpt C_PWLDA ACM_A 0.00 # fraction of static Hartree-Fock exchange ACM_B 0.00 # fraction of static GGA exchange ACM_C 1.00 # fraction of GGA correlation ScalLDAC 1.00 # fraction of LDA correlation, must be equal to ScalGGAC RangeSepEXX true # activates range-separated exchange RangeSepMu 0.47 # range-separation parameter, should be >0 RangeSepScal 1.00 # fraction of variable HFX, should sum to 1 with ACM-A and␣ ↪ → ACM-B end</code></pre>
+<p>Which is equivalent to the ScalX syntax described before.</p>
+<pre><code>! RIJCOSX # LC-PBE %method Method DFT Exchange X_LRCPBE Correlation C_PBE</code></pre>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part036</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>Fig. 4.11: Some products automatically found by GOAT-REACT using the input given above.</p>
+<h2>4.11.8 Exploring geometrical diversity: the GOAT-DIVERSITY option</h2>
+<p>Besides looking for an accurate ensemble around the global energy minimum, in some cases one might be looking only for structural diversity instead. For example, if you know your PES is too bad anyways for a given system, it might make sense to explore first the geometrical diversity and only later refine those on a higher level PES optimization.</p>
+<p>We have a special keyword for that called !GOAT-DIVERSITY , which will:</p>
+<ol>
+<li style="list-style-type: '1. ';">Ignore energy differences when filtering different conformers;</li>
+<li style="list-style-type: '2. ';">Set the RMSD difference value for the filtering from 0.125 to 0.5 Angs;</li>
+<li style="list-style-type: '3. ';">Set the geometry convergence criteria for SLOPPYOPT - we are not looking for very accurate energies;</li>
+<li style="list-style-type: '4. ';">Allow conformers up to 60 kcal/mol to be included.</li>
+</ol>
+<p>With all that, what effectively happens is that a set of structures within a radius of about 0.5 RMSD from each other are taken into the final ensemble, irrespective of energy differences. This distance can be controlled as usual by:</p>
+<p>%GOAT RMSD 1.5 END # RMSD here in angstroem</p>
+<p>Also, if some of the usual optimization flags are set like !NORMALOPT or !TIGHTOPT , these will overwrite the SLOPPYOPT set here automatically.</p>
+<h2>4.11.9 Automated coarse-grained with GOAT-COARSE</h2>
+<p>For large systems, we can also now combine GOAT with the RIGIDBODYOPT (Section 4.1.4) and the automatic fragmentation options to reduce the dimensionality of large system. The single input that controls that is called !GOAT-COARSE . Important is that it will not define the fragments by itself, that is something you have to do.</p>
+<p>For example, you can give phenyl groups, isopropyl, cyclohenane, terc-butyl and etc. as fragments using your own library, and the GOAT-COARSE will make sure that these will only rotate and translate as rigid bodies. Or you can split peptides into the individual amino-acids. There is a lot of room to work here!</p>
+<p>From the point of view of an algorithm like GOAT, that means reducing the 11 atoms of a phenyl group to essentially 1. Since the conformational search is an exponential-scaling problem, the effective time reduction can be very large, and actually more than a factor of 10.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>Currently, for large systems, the rate-limiting step using fast Hamiltonians (e.g. xTB) or force-fields is still the transformations necessary for the internal coordinate transformations. More on the will come with future ORCA versions.</p>
+<p>Feel free to be creative with the fragmentation, and as long as the GOAT-COARSE flag is there, GOAT will adapt for a significant speedup. This is essentially an automatically coarse-grained version of it.</p>
+<h2>4.11.10 Some general observations</h2>
+<h2>Default frozen coordinates during uphill step</h2>
+<p>During the uphill phase only, by default GOAT will freeze:</p>
+<ol>
+<li style="list-style-type: '1. ';">all bonds,</li>
+<li style="list-style-type: '2. ';">all angles involving two sp2 atoms within the same ring,</li>
+<li style="list-style-type: '3. ';">all dihedrals around a strong bond (d(B,C) &lt; [0.9 x (sum of covalent radii)]).</li>
+</ol>
+<p>'sp2 atoms' are here loosely defined only for C, N and O with less than 4,3 and 2 bonds respectively.</p>
+<p>The first freeze is to avoid change of topology by bond breaking. The second and third are to avoid going over very high energy barriers on changing these angles, which in practice, unless under very special circumstances will never flip anyway!</p>
+<p>These constraints are automatically lifted for GOAT-EXPLORE and can also be set to FALSE with their specific keywords.</p>
+<h2>Parallelization of GOAT</h2>
+<p>GOAT will profit from a large number of cores in a different way than most ORCA jobs, because it distributes the necessary work along different workers. It can also work multidone and distribute these workers through different nodes.</p>
+<p>Since there is usually a regular first optimization step before starting GOAT, which will not profit from a large number of cores, these are limited by the flag MAXCORESOPT and set to a maximum of 32. After that, GOAT will switch back to use all cores provided. We do not recommend changing that maximum number, because it will probably only make things slower, but it can be controlled inside the %GOAT block.</p>
+<h2>Tips and extra details</h2>
+<p>®</p>
+<h2>Note</h2>
+<ul>
+<li style="list-style-type: '· ';">GOAT will work with any method in ORCA, all you need is the gradient. That includes using DFT, QM/MM, ONIOM, broken-symmetry states, excited states etc.</li>
+<li style="list-style-type: '· ';">Be aware that DFT is much costlier than XTB. It is perfectly possible to run GOAT with R2SCAN-3C, but be prepared to use many cores or wait for a few days :D. We recommend at least %PAL NPROCS 32 END , to have 8 workers with 4 cores each. Hybrid DFT is even heavier, so if you want to use B3LYP,go with at least NPROCS 64 - and don't hurry. The aim is to do a global search here, it does not come for free!</li>
+<li style="list-style-type: '· ';">In many cases, it might be useful to use GFNUPHILL GFNFF to use the GFN-FF force-field PES during the uphill steps. There, an exact potential is not really needed as the main objective is to take structures out of their current minimum and GOAT will run much faster, only using the chosen method for the actual optimizations. GFN2XTB, GFN1XTB or GFN0XTB are also valid options.</li>
+<li style="list-style-type: '· ';">For methods that need bond breaking, such as GOAT-EXPLORE or GOAT-REACT , GFNUPHILL gfnff cannot be used because the GFN-FF will not allow for bond breaking. Choose GFN2-xTB ( gfn2xtb ), GFN1-xTB ( gfn1xtb ) or GFN0-xTB ( gfn0xtb ).</li>
+<li style="list-style-type: '· ';">You can always check what the workers are doing by looking into the Basename.goat.x.x.out files. The first number refers to the global iteration and the second to the specific worker. This is an ORCA output (with some suppressed printing to save space) that can be opened in most GUIs.</li>
+<li style="list-style-type: '· ';">GOAT automatically enables fragment detection at the very beginning of the process, even before the first geometry optimization. It also respects fragments defined via the %frag block. For a detailed explanation of fragment selection, see the Fragment Specification section.</li>
+<li style="list-style-type: '· ';">Amide bond chirality is not frozen by default, which means the input topology you gave for amides (cis or trans) may change. If you want to freeze it, set FREEZEAMIDES to TRUE .</li>
+<li style="list-style-type: '· ';">Similarly double bonds outside rings can also change their topology. Choose FREEZECISTRANS TRUE in order to freeze those dihedrals.</li>
+<li style="list-style-type: '· ';">For certain molecules, it might be interesting to limit the coordination number of certain atoms, in that case use MAXCOORDNUMBER .</li>
+<li style="list-style-type: '· ';">GOAT will respect the choices from the %GEOM block for the geometries so you can use all kinds of constraints you need for other types of coordinate freeze. It can also be combined with all kinds of arbitrary bias and wall potentials available (see Section 4.1.5).</li>
+<li style="list-style-type: '· ';">If you want to push only certain atoms uphill, you can give a list to UPHILLATOMS . In that case the uphill force shown in Fig. 4.6 will be applied only to the coordinates involving those atoms and the rest of the molecule will only react to that. This is useful for conformational searches on parts of a bigger system.</li>
+<li style="list-style-type: '· ';">By default conformers up to 12.0 kcal/mol from the global minimum are included, this can be changed by setting MAXEN .</li>
+</ul>
+<h2>4.11.11 Keywords</h2>
+<p>Acollection of GOAT related simple input keywords is given in Table 4.8. All %goat block options are summarized in Table 4.9.</p>
+<table><caption><div class="caption">Table 4.8: Simple input keywords for the GOAT algorithm.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>GOAT GOAT-ENTROPY GOAT-EXPLORE GOAT-REACT GOAT-DIVERSITY GOAT-COARSE</td><td>Request a default GOAT run Request a GOAT-ENTROPY run Request a GOAT-EXPLORE run Request a GOAT-REACT run Request a GOAT-DIVERSITY run Request a GOAT-COARSE run</td></tr></tbody></table>
+<table><caption><div class="caption">Table 4.9: %go</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>MAXITER</td><td>128</td><td>defines an arbitrary number of max GOAT geom</td></tr><tr><td>MAXOPTITER</td><td>256</td><td>maximum number of geometry optimizations per</td></tr><tr><td>SKIPINITIALOPT</td><td>true</td><td>if you want to skip the initial optimization (defau</td></tr><tr><td>RANDOMSEED</td><td>true</td><td>set it to false to have a deterministic GOAT run.</td></tr><tr><td>READENSEMBLE</td><td>&quot;name.xyz&quot;</td><td>an ensemble file to be read. the comment line sh</td></tr><tr><td>AUTOWALL</td><td>true</td><td>automatically create an ellipsoid wall potential ar</td></tr><tr><td>TEMPLIST</td><td>3000, 2000, 750, 500</td><td>a list of temperatures, defines the number of basi</td></tr><tr><td>MAXCORESOPT</td><td>32</td><td>the max. number of cores used during the very fi</td></tr><tr><td>PRINTINTERNALS</td><td>true</td><td>print all the internal coordinates on the worker o</td></tr><tr><th>Worker options:</th><td></td><td></td></tr><tr><td>NWORKERS</td><td>auto</td><td>define the number of workers (default auto). auto</td></tr><tr><td>MAXITERMULT</td><td>3</td><td>a simple keyword to multiply the number of geo</td></tr><tr><td>MINGLOBALITER</td><td>3</td><td>the minimum number of global iterations needed</td></tr><tr><td>KEEPWORKERDATA</td><td>false</td><td>set to true to keep the worker outputs (might be a</td></tr><tr><td>WORKERRANDOMSTART</td><td>true</td><td>after the first cycle, each worker starts with a ran</td></tr><tr><th>Uphill step:</th><td></td><td></td></tr><tr><td>UPHILLATOMS</td><td>{0:2 5 14:29} end</td><td>if given, only those atoms listed will be pushed, u</td></tr><tr><td>GFNUPHILL</td><td>gfnff</td><td>use GFN-FF ( gfnff ) only during the uphill ste</td></tr><tr><th>Filtering and screening:</th><td></td><td></td></tr><tr><td>ALIGN</td><td>false</td><td>align all final conformers with respect to the lowe</td></tr><tr><td>ENDIFF</td><td>0.1</td><td>minimum energy difference needed to differentia</td></tr><tr><td>MAXEN</td><td>6.0</td><td>the maximum relative energy of a conformer to b</td></tr><tr><td>RMSD</td><td>0.125</td><td>minimum RMSD to differentiate conformers, in</td></tr><tr><td>ROTCONSTDIFF</td><td>0.01</td><td>maximum difference for the rotational constant, i</td></tr><tr><td>RMSDMETRIC</td><td>eigenvalue</td><td>use eigenvalues of distance matrix for RMSD? d</td></tr><tr><td>BONDFACTOR</td><td>1.2</td><td>the multiplier for the sum of covalent radii which</td></tr><tr><th>GOAT-ENTROPY:</th><td></td><td></td></tr><tr><td>MAXENTROPY</td><td>false</td><td>add delta Gconf as convergence criteria (default f</td></tr><tr><td>CONFTEMP</td><td>298.15</td><td>temperature used to compute the free energy, in</td></tr><tr><td>MINDELS</td><td>0.1</td><td>the minimum entropy difference between two ite</td></tr><tr><td>CONFDEGEN</td><td>2 , auto , automax</td><td>set an arbitrary degeneracy per conformer? auto</td></tr><tr><th>Free topology:</th><td></td><td></td></tr><tr><td>FREEHETEROATOMS</td><td>false</td><td>free all atoms besides H and C.</td></tr><tr><td>FREENONHATOMS</td><td>false</td><td>free all non H atoms</td></tr><tr><td>FREEFRAGMENTS</td><td>false</td><td>free interfragment topology, i.e., bonds between</td></tr><tr><td>TOPOBREAK</td><td>1,5,6,13</td><td>a list of atom for which the topology might break</td></tr><tr><th>Freeze options (we don&#x27;t recommend changing these unless you really need to!):</th><td></td><td></td></tr><tr><td>FREEZEBONDS</td><td>false</td><td>freeze bonds uphill (default true)</td></tr><tr><td>FREEZEANGLES</td><td>false</td><td>freeze sp2 angles and dihedrals uphill (default tru</td></tr><tr><td>FREEZECISTRANS</td><td>false</td><td>freeze cis-trans isomers outside rings (default fals</td></tr><tr><td>FREEZEAMIDES</td><td>false</td><td>freeze amide cis/trans chirality (default false)</td></tr><tr><td>MAXCOORDNUMBER</td><td>10, 4, 11, 6</td><td>a list of &#x27;atom number, coordination number&#x27; th</td></tr><tr><th>GOAT-REACT:</th><td></td><td></td></tr><tr><td>MAXTOPODIFF</td><td>8</td><td>the maximum topological difference that is allow</td></tr></tbody></table>
+<h2>4.12 SOLVATOR: Automated Explicit Solvation</h2>
+<p>The SOLVATOR is an algorithm to automatically add explicit solvent molecules to a given system. By default, SOLVATOR makes use of the DOCKER algorithm. If a very large number of solvent molecules should be added, a very fast but less accurate stochastic method method is available. The ALPB solvation model is used to create an implicit continuum solvation around the generated clusters. Currently the SOLVATOR is only working with the GFN-xTB and GFN-FF methods . A complete list of available keywords and options can be found in Section 4.12.8.</p>
+<p>The DOCKER on ORCA 6.1 was significantly improved, in both speed and accuracy, when compared to ORCA 6.0. These changes can also alter the results of the SOLVATOR, but only because they will be even more accurate.</p>
+<h2>4.12.1 Basic Usage</h2>
+<p>The default SOLVATOR is invoked via the %SOLVATOR block by defining the number of solvent molecules via NSOLV &lt;integer&gt; . The solvent to be added can be either chosen from ORCA's internal solvent library in combination with the !ALPB(&lt;solvent&gt;) simple input keyword (cf. Table 3.24) or by providing a custom solvent .</p>
+<h2>ǩ Important</h2>
+<ul>
+<li style="list-style-type: '· ';">The SOLVATOR will by default make use of CLUSTERMODE DOCKING with settings that are equivalent to !QUICKDOCK (cf. DOCKER ). For more accurate results !NORMALDOCK or even !COMPLETEDOCK may be used, however these approaches will be much slower!</li>
+<li style="list-style-type: '· ';">All options related to the docking process can be controlled via the %DOCKER block as described in Section 4.13.</li>
+<li style="list-style-type: '· ';">All options given in the %GEOM block such as constraints etc., will be respected during the docking of the solvent, but can only be given for the solute.</li>
+</ul>
+<pre><code>!GFN2-XTB ALPB(<solvent>) %SOLVATOR NSOLV <integer> END</code></pre>
+<p>A simple example could be adding three water molecules to a Histidine molecule using the default settings and the GFN2-xTB method.</p>
+<pre><code>!GFN2-XTB ALPB(WATER) PAL16 %SOLVATOR NSOLV 3 END * XYZ 0 1 N 0.885996 -0.961304 -0.120339 C 1.798313 0.104987 0.275069 C 1.249714 0.744242 1.567548 O 1.573032 1.831447 1.951866 C 2.049102 1.187937 -0.781297 C 2.714441 0.645674 -1.999072 N 2.728606 1.335092 -3.185194 C 3.401683 0.571600 -4.081842 N 3.805612 -0.545068 -3.552995</code></pre>
+<p>(continues on next page)</p>
+<pre><code>C 3.389082 -0.516790 -2.258890 O 0.397674 -0.041862 2.212628 H 0.272440 -0.853698 1.671197 H 1.339440 -1.612664 -0.750009 H 0.086389 -0.572348 -0.612909 H 2.756495 -0.353470 0.548654 H 2.661849 1.969568 -0.321790 H 1.092545 1.646672 -1.057454 H 2.328734 2.246496 -3.338113 H 3.566873 0.866218 -5.098496 H 3.616501 -1.333139 -1.602802 *</code></pre>
+<p>The output report the solvent chosen, together with some details about its dimensions, the number of molecules to be added and the method. The structure from the internal database is also always printed.</p>
+<pre><code>***************** * ORCA Solvator * ***************** Solvent chosen: WATER Solvent radius: .... 1.69 Angs Solvent max dimensions (x,y,z): .... 2.73, 2.32, 1.52 Angs Number of solvent molecules to be added: .... 3 molecules Method used to add the solvent: .... docking Number of atoms of solvent molecule: .... 3 atoms Coordinates of solvent in Angstroem: O 0.000014 0.401429 0.000000 H 0.765192 -0.200729 0.000000 H -0.765206 -0.200700 0.000000 Solute radius: .... 5.27 Angs Ellipsoid potential radii: .... 8.37, 6.28, 5.76 Angs</code></pre>
+<p>Further, the solvation process is monitored per solvent molecule and the final result is printed to the file basename. solvator.xyz . There will be also an intermediate file named basename.solvator.solventbuild. xyz with the solvent molecules added one by one. On the output Einter is the interaction energy obtained from the DOCKER used within the SOLVATOR process and dE is the different between the current and the previous Einter .</p>
+<pre><code>Adding solvent molecules to the solute .... Iter Energy Einter dE Time (Eh) (kcal/mol) (kcal/mol) (min) -------------------------------------------------------1 -39.452446 -4.331670 -4.331670 0.26 2 -44.544347 -4.316639 0.015031 0.34 3 -49.636018 -4.171990 0.144649 0.40 Final radius after microsolvation: .... 4.88 Angs Time needed for microsolvation : .... 60.54 s Final structured saved to : HIS.solvator.xyz ****ORCA-SOLVATOR TERMINATED NORMALLY****</code></pre>
+<p>In contrast to the DOCKER , the solute is frozen by default in the SOLVATOR algorithm. Set FIXSOLUTE</p>
+<p>(continued from previous page)</p>
+<p>FALSE in the %SOLVATOR block to change that.</p>
+<p>The solvated Histidine molecule generated this way is depicted in Fig. 4.12.</p>
+<figure><figcaption><div class="caption">Fig. 4.12: Three water molecules added to Histidine by the SOLVATOR.</div></figcaption></figure>
+<h2>4.12.2 Custom Solvents</h2>
+<p>The SOLVATOR method itself is agnostic to the solvent, and in principle any other solvent can be used. If the desired solvent is not available in ORCA's internal solvent database , a custom solvent molecule can be provided in .xyz format via the SOLVENTFILE keyword in the %SOLVATOR block.</p>
+<pre><code>%SOLVATOR SOLVENTFILE "solvent_file_name.xyz" END</code></pre>
+<p>As with the DOCKER , the charge and multiplicty can be given to the solvent as two integers on the comment line of the solvent_file_name.xyz (default is neutral closed-shell). Since the ALPB method only has a limited number of available solvents , the the dielectric constant ϵ should be approximated to the next closest available solvent. Currently, it is not possible to define custom dielectric constants for ALPB.</p>
+<p>For example, isopropanol can be used as solvent by providing a isopropanol.xyz file. In this case, the dielectric constant of isopropanol is approximated to that of ethanol. As the ALPB implicit solvation is a quite crude implicit solvation model the results will be sufficiently similar. The resulting cluster is depicted in Fig. 4.13.</p>
+<pre><code>12 0 1 C -3.79410 2.24670 -0.09622 C -3.45574 0.76660 -0.18820 H -2.94382 2.85306 -0.42645 H -4.00575 2.53923 0.93817 H -4.66172 2.49512 -0.71492 C -4.60559 -0.10847 0.28691 H -4.84802 0.09429 1.33594 H -4.32886 -1.16657 0.22730 H -5.50341 0.05251 -0.31744 O -2.30376 0.49878 0.60542 H -3.20686 0.51239 -1.22373 H -2.51694 0.72259 1.52758</code></pre>
+<pre><code>!GFN2-XTB ALPB(ETHANOL) PAL16 %SOLVATOR SOLVENTFILE "isopropanol.xyz" NSOLV 3 END * XYZFILE 0 1 HIS.xyz</code></pre>
+<figure><figcaption><div class="caption">Fig. 4.13: Three iso-propanol molecules added by the solvator.</div></figcaption></figure>
+<h2>4.12.3 Stochastic Method</h2>
+<p>In case you want to add a really large number of explicit solvent molecules, the STOCHASTIC mode will be significantly faster. It can be invoked via the CLUSTERMODE STOCHASTIC keyword in the %SOLVATOR block.</p>
+<pre><code>Á Warning CLUSTERMODE STOCHASTIC is a probabilistic approach and is not nearly as accurate as CLUSTERMODE</code></pre>
+<p>DOCKING ! Nonetheless it is useful for quite a few applications.</p>
+<pre><code>!GFN2-XTB ALPB(WATER) PAL16 %SOLVATOR NSOLV 100 CLUSTERMODE STOCHASTIC END * XYZFILE 0 1 HIS.xyz</code></pre>
+<p>The output will slightly differ from that generated by default. For this example, hundred water molecules are added in seconds to the histidine molecule (Fig. 4.14).</p>
+<pre><code>Solvent chosen: WATER Solvent radius: .... 1.69 Angs Solvent max dimensions (x,y,z): .... 2.73, 2.32, 1.52 Angs Number of solvent molecules to be added: .... 100 molecules Method used to add the solvent: .... stochastic Number of atoms of solvent molecule: .... 3 atoms Coordinates of solvent in Angstroem:</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>O 0.000014 0.401429 0.000000 H 0.765192 -0.200729 0.000000 H -0.765206 -0.200700 0.000000 Solute radius: .... 5.27 Angs Adding solvent molecules to the solute .... Iter Target function Time (Coulomb) (min) -------------------------------1 -4.659435e-07 0.00 2 -4.604606e-07 0.00 3 -2.519684e-07 0.00 (...) Final radius after microsolvation: .... 9.79 Angs Time needed for microsolvation : .... 5.11 s Final structured saved to : HIS_STOCHASTIC.solvator.xyz ****ORCA-SOLVATOR TERMINATED NORMALLY****</code></pre>
+<h2>Details on the Stochastic Method</h2>
+<p>CLUSTERMODE STOCHASTIC basically uses random trial and error to assign the placing of the solvents. The algorithm actually uses information from self-consistent EEQ charges [159] as part of an simplistic potential to guide the placing of polar molecules in a more reasonable way.</p>
+<p>After trying to distribute the solvent molecule somewhere and checking for clashes, we first compute the electrostatic energy between solvent and solute:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and define our target function to be minimized ( V ) as a damped version of that, using the minimum distance R min between the solute and solvent atoms:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The STOCHASTIC mode then consists of finding the correct solvent placement that minimizes V for a given solute. The damping function is there to ensure that:</p>
+<ol>
+<li style="list-style-type: '1. ';">The electrostatic interaction decays strongly with distance,</li>
+<li style="list-style-type: '2. ';">Repulsive energies will be so unfavorable that only the distance will matter.</li>
+</ol>
+<p>The result is such that solvent molecules are placed as close as possible to the solute and maximizing electrostatic interactions. This helps to create the solvent shell such that is does look like the actual result one would expect from a more elaborate calculation, but with essentially zero cost.</p>
+<p>The best value for V found after each solvent was added is what is printed in the output as Target function :</p>
+<table><tbody><tr><th>Iter</th><th>Target function</th><th>Time (min)</th></tr><tr><td>1</td><td>-4.342597e-07</td><td>0.00</td></tr><tr><td>2</td><td>-3.166857e-07</td><td>0.00</td></tr><tr><td>3</td><td>-4.814590e-08</td><td>0.00</td></tr></tbody></table>
+<p>When using the DROPLET mode , the R min is defined as the distance to the centroid of the solute, instead of that of the closest atom pair instead.</p>
+<p>If you don't want to include the electrostatic component for any reason, just set %SOLVATOR USEEEQCHARGES FALSE END . In the future other charge models will be available as well.</p>
+<h2>4.12.4 Creating a Droplet</h2>
+<h2>Á Warning</h2>
+<p>The droplet mode and its variants are only available for CLUSTERMODE STOCHASTIC .</p>
+<p>The regular stochastic method will create a solvation sphere around the solute following its shape and topology. If required, the DROPLET mode can be activated to create spherical droplets whose sizes are controlled either by the number of solvent molecules added via NSOLV or by a predefined radius controlled via the RADIUS keyword. If a predefined radius is given, the solvator will add solvent molecules until the desired radius is reached.</p>
+<p>Spherical droplets are invoked by the DROPLET TRUE keyword. If the size is defined by NSOLV the resulting cluster will look like Fig. 4.15.</p>
+<pre><code>!XTB ALPB(WATER) PAL16 %SOLVATOR NSOLV 100 CLUSTERMODE STOCHASTIC DROPLET TRUE END * XYZFILE 0 1 HIS.xyz</code></pre>
+<p>If the maximum radius is defined by RADIUS the SOLVATOR will add as many molecules as necessary until the radius is reached. The radius is always taken from the centroid of the solute.</p>
+<pre><code>!GFN2-XTB ALPB(WATER) PAL16 %SOLVATOR RADIUS 15 # in angstroem CLUSTERMODE STOCHASTIC END * XYZFILE 0 1 HIS.xyz</code></pre>
+<p>For this example, the output print the actual droplet radius reached and the number of molecules required to reach it, in this case 668. The resulting cluster is depicted in Fig. 4.16</p>
+<pre><code>Desired sovent radius: .... 15.00 Angs Actual sovent radius: .... 15.18 Angs Final number of solvent molecules: .... 668 molecules</code></pre>
+<figure><figcaption><div class="caption">Fig. 4.16: A droplet created with 668 water molecules to achieve a radius of approximately 15 Angstroem.</div></figcaption></figure>
+<h2>4.12.5 The Wall Potential</h2>
+<p>If one uses the default approach using the CLUSTERMODE DOCKING , a fictitious wall potential is added to guarantee that the solvents are added such that they fill most of the first solvation sphere around the solute before being placed further.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>This resembles to some extent what was published recently by the group of Prof. Stefan Grimme (called 'quantum cluster growth'), but here only a single outer wall potential is used [572]. Otherwise, the present algorithm is independent and unrelated to it.</p>
+<p>As one can see from the output of the Histine example discussed in the previous sections, by default an ellipsoid potential is built with dimensions such that it will enclose the solute plus at least one molecule of the solvent in all directions (Fig. 4.17).</p>
+<p>Ellipsoid potential radii:</p>
+<p>.... 8.37, 6.28, 5.76 Angs</p>
+<figure><figcaption><div class="caption">Fig. 4.17: A simple scheme to show how the wall potential is built to keep the solvent molecules close to the solute space.</div></figcaption></figure>
+<p>A single parameter controlled by SOLVWALLFAC in the %SOLVATOR block defines how further this wall is built outside the solute. Its default value is 1.0, and increasing it to larger values will increase the default initial wall by about half the sum of the maximum dimensions of solute plus solvent for each unit.</p>
+<p>The initial wall potential is by default not changed, unless a) the algorithm can not place a solvent, or b) the energy of the placed solvent is higher than before. Only then the walls will be updated to help allocating the next solvent molecule, and a message will be printed with the current scaling factor.</p>
+<h2>4.12.6 Controlling Randomness</h2>
+<p>Both clustermodes, DOCKER and STOCHASTIC , are intrinsically dependent on random numbers. However, ORCA sets a fixed random seed such that the same results are always obtained on the same machine if calculations are repeated.</p>
+<p>In order to make both fully random, please use the RANDOMSOLVATION TRUE keyword in the %SOLVATOR block.</p>
+<h2>4.12.7 Vacuum Search</h2>
+<p>One option that might come in handy under certain conditions is to use the SOLVATOR to add the explicit solvent based on the implicit solvation information, but actually not use any implicit solvation while trying to place them.</p>
+<p>That is useful for instance when trying to generate aggregates of solute plus solvents that can form in gas-phase only, where there will be no other solvent molecules around. That can be set by the VACUUMSEARCH TRUE keyword in the %SOLVATOR block and the implicit solvation method will be ignored to compute energies and gradients. In the STOCHASTIC method, the ϵ solv will be set to 1.0.</p>
+<h2>ǩ Important</h2>
+<p>By the time of this release, this algorithm was still not published. Publications are under preparation.</p>
+<h2>4.12.8 Keywords</h2>
+<p>A collection of SOLVATOR related keywords can be fount in Table 4.10.</p>
+<table><caption><div class="caption">Table 4.10: %SOLVATOR block input keywords for the SOLVATOR algorithm.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>NSOLV</td><td>10</td><td>number of explicit solvent molecules to be added.</td></tr><tr><td>SOLVENTFILE</td><td>&quot;solvent_file_name.xyz&quot;</td><td>a file for custom solvents. NOT needed for the regular solvents avail- able via ALPB(solvent). charge and multipl. can be given on the comment.</td></tr><tr><td>CLUSTERMODE</td><td>docking stochastic</td><td>Docking method for adding new solvent molecules (default). Stochastic method for adding new solvent molecules. Default is docking .</td></tr><tr><td>PRINTLEVEL</td><td>low normal high</td><td>Low level of print verbosity. Default is normal . Normal level of print verbosity (default). High level of print verbosity. Default is normal .</td></tr><tr><td>RANDOMSOLV</td><td>false</td><td>Make it completely random (default = false ) .</td></tr><tr><td>FIXSOLUTE</td><td>true</td><td>keep the solute constrained? (default = true )</td></tr><tr><td>VACUUMSEARCH</td><td>false</td><td>Activate the search in vacuum. (default = false )</td></tr><tr><td>Stochastic method: USEEEQCHARGES</td><td>true</td><td>Use eeq charges during the stochastic mode? Default is true (default = true ).</td></tr><tr><td>DROPLET</td><td>false</td><td>Create a spherical droplet (default = false ).</td></tr><tr><td>RADIUS</td><td>10</td><td>Aradius in Angström for the droplet. Solvent molecules will be added until the target radius is reached.</td></tr><tr><td>Docking method: WALLFAC</td><td>1.0</td><td>Factor use to define the initial size of the wall potential.</td></tr></tbody></table>
+<p>®</p>
+<h2>Note</h2>
+<p>All other docking options are controlled as usual via the %docker block. Flags such as !NORMALDOCK and !COMPLETEDOCK will apply here as well.</p>
+<h2>4.13 DOCKER: Automated Docking Algorithm</h2>
+<p>The most important aspects of chemistry/physics do not occur with single molecules, but when they interact with each other. Now, given any two molecules, how to put them together in the best interacting 'pose'? That is what we try to answer when using the ORCA DOCKER. Docking here refers to the process of taking two systems and putting them together in their best possible interaction.</p>
+<p>®</p>
+<h2>Note</h2>
+<p>The DOCKER on ORCA 6.1 was significantly improved, in both speed and accuracy, when compared to ORCA 6.0. These changes can also alter the results, but only because they will be even more accurate.</p>
+<h2>4.13.1 Example 1: A Simple Water Dimer</h2>
+<p>Let us start with a very simple example. Given two water molecules, how to find the optimal dimer? With the DOCKER that is simple and can be done with:</p>
+<p>(continues on next page)</p>
+<pre><code>H -1.16698 2.61938 0.02397 H -2.41372 2.24598 0.82256 *</code></pre>
+<p>where the file water.xyz is a .xyz file which contains the same water structure, optionally with charge and multiplicity (in that order) on the comment line (the second line by default):</p>
+<pre><code>3 0 1 O -2.13487 2.63905 -0.01809 H -1.16698 2.61938 0.02397 H -2.41372 2.24598 0.82256</code></pre>
+<p>The molecule given on the regular ORCA input will be the HOST , and the GUEST is always given through an external file.</p>
+<p>The output will start with:</p>
+<pre><code>*************** * ORCA Docker * *************** Reading guests from file water.xyz Number of structures read from file 1 Charge and multiplicity of guest from file Docking approach independent Docking level normal Optimizing host .... -5.070544 Eh Optimizing guest .... -5.070544 Eh</code></pre>
+<p>where it writes the name of the file with the GUEST structure, the number of structures read, some extra info and will optimize both host and guest (in this case they are the same), here by default using GFN2-XTB.</p>
+<p>If no multiplicity or charge are given, the GUEST is assumed to be neutral and closed-shell.</p>
+<p>The DOCKER right now is only working with the GFN-XTB and GFN-FF methods and the ALPB solvation model. It will be expanded later to others.</p>
+<p>That is followed by some extra info that is explained in more details on its own detailed section (see DOCKER: Automated Docking Algorithm ):</p>
+<pre><code>Starting Docker ---------------Guest structure .... structure number 1 Guest charge and multiplicity .... (0 , 1) Final charge and multiplicity .... (0 , 1) PES used for swarm intelligence .... GFN2-XTB Setting random seed .... done Creating spatial grid Grid Max Dimension 5.50 Angs Angular Grid Step 32.73 degrees Cartesian Grid Step 0.50 Angs Points per Dimension 11 points</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>Initializing workers Population Density 0.50 worker/Ang^2 Population Size 57 Swarm intelligence search Minimization Algorithm mutant particle swarm Min, Max Iterations (3 , 10)</code></pre>
+<p>That is followed by the docking itself, which will stop after a few iterations:</p>
+<table><tbody><tr><th>Iter</th><th>Emin (Eh)</th><th>avDE</th><th>stdDE</th><th>Time</th></tr><tr><th>-------------------------------------------------------</th><td></td><th>(kcal/mol)</th><th>(kcal/mol)</th><th>(min)</th></tr><tr><td>1 -10.147462</td><td>2.756033</td><td>1.821981</td><td></td><td>0.03</td></tr><tr><td>2 -10.147462</td><td>2.121389</td><td></td><td>1.610208</td><td>0.03</td></tr><tr><td>3 -10.148583</td><td>2.313606</td><td></td><td>1.365227</td><td>0.03</td></tr><tr><td>4 -10.148583</td><td>1.846998</td><td></td><td>1.188680</td><td>0.02</td></tr><tr><td>5 -10.148583</td><td>1.587332</td><td></td><td>1.168207</td><td>0.02</td></tr></tbody></table>
+<p>The idea here is to collect as many local minima as possible, that is, collect a first guess for all possible modes of interaction between the different structures. We do this by allowing both structures to partially optimize, but it is important to say we will not look for multiple conformers of the host and guest here.</p>
+<p>With all solutions collected, we will take a fraction of them and do a final full optimization:</p>
+<pre><code>Running final optimization Maximum number of structures 7 Minimum energy difference 0.10 kcal/mol Maximum RMSD 0.25 Angs Optimization strategy regular Coordinate system redundant 2022 Fixed host false Struc Eopt Interaction Energy Time (Eh) (kcal/mol) (min) ------------------------------------------------1 -10.149006 -4.968378 0.01 2 -10.149005 -4.967965 0.01 3 -10.149007 -4.968825 0.01 4 -10.149007 -4.968641 0.01 5 -10.149007 -4.968743 0.01 6 -10.149006 -4.968116 0.01 7 -10.149007 -4.968678 0.01</code></pre>
+<p>And as you can see, we also automatically print the Interaction Energy , which is simple an energy difference between the final complex, host and guest. The final best structure with lowest interaction energy is then saved on the Basename.docker.xyz file. If needed, all other structures are saved on the Basename.docker.struc1. all.optimized.xyz , as written on the output:</p>
+<pre><code>All optimized structures saved to : Basename.docker.struc1.all.optimized.xyz -------------------------------------LOWEST INTERACTION ENERGY: -4.968825 kcal/mol (structure 3) -------------------------------------(...) The lowest energy structure was 1, with energy -10.149007. Docked structures saved to Basename.docker.xyz</code></pre>
+<p>(continued from previous page)</p>
+<p>We are all set, the output can be visualized and it is, as expected:</p>
+<figure><figcaption><div class="caption">Fig. 4.18: The final water dimer found using the GFN2-XTB PES.</div></figcaption></figure>
+<h2>4.13.2 Example 2: A Uracil Dimer</h2>
+<p>Now for a slightly more complex example, a uracil dimer:</p>
+<p>where the uracil.xyz is a simple repetition of the structure, as with the water before.</p>
+<p>In this case the output is more diverse, and in fact many different poses appear as candidates for the final optimization:</p>
+<table><tbody><tr><th>Struc</th><th>Eopt (Eh)</th><th>Interaction Energy (kcal/mol)</th><th>Time (min)</th></tr><tr><td>1</td><td>-49.248577</td><td>-11.723457</td><td>0.08</td></tr><tr><td>2</td><td>-49.250442</td><td>-12.893758</td><td>0.08</td></tr><tr><td>3</td><td>-49.245624</td><td>-9.870339</td><td>0.03</td></tr><tr><td>4</td><td>-49.252991</td><td>-14.493130</td><td>0.06</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>5</td><td>-49.248470</td><td>-11.656256</td><td>0.05</td></tr><tr><td>6</td><td>-49.259335</td><td>-18.474228</td><td>0.05</td></tr><tr><td>7</td><td>-49.259269</td><td>-18.432902</td><td>0.08</td></tr><tr><td>8</td><td>-49.254913</td><td>-15.699019</td><td>0.03</td></tr><tr><td>9</td><td>-49.254927</td><td>-15.708244</td><td>0.03</td></tr><tr><td>10</td><td>-49.241672</td><td>-7.390198</td><td>0.02</td></tr><tr><td>11</td><td>-49.246534</td><td>-10.441269</td><td>0.03</td></tr></tbody></table>
+<p>and structure number 6 is found to be the one with lowest interaction energy:</p>
+<pre><code>-------------------------------------LOWEST INTERACTION ENERGY: -18.474228 kcal/mol (structure 6) -------------------------------------</code></pre>
+<p>Here is a scheme with the structures found and their relative energies:</p>
+<p>Fig. 4.19: Uracil dimer structures generated by DOCKER (duplicates removed) with relative energies in kcal/mol.</p>
+<p>There might be duplicated results after the final optimization, these are currently not automatically removed. Here they were manually removed.</p>
+<h2>ǩ Important</h2>
+<p>The PAL16 flag means XTB will run in parallel, but the ORCA DOCKER could be parallelized in a much more efficient way by paralleizing over the workers. That will be done for the next versions and it will be significantly more efficient.</p>
+<h2>4.13.3 Example 3: Adding Multiple Copies of a Guest</h2>
+<p>Suppose you want to add multiple copies of the same guest, for example three water molecules on top of the uracil one after the other. That can be simply done with:</p>
+<pre><code>! XTB PAL16 %DOCKER GUEST "water.xyz" NREPEATGUEST 3 END *xyz 0 1 N -0.2707028 0.7632994 1.0276159 H -0.5957915 1.3097757 1.8163465 C -0.3386212 1.3810817 -0.2276640 O -0.7270425 2.5346295 -0.3329857 N 0.3638189 -1.2896563 0.1949192 H 0.0796815 0.9143946 -2.3190044 C 0.3781329 -0.7736192 -1.0714063 H 0.6499130 -1.4675080 -1.8526542 C 0.0669084 0.5154897 -1.3194961 H 0.4818502 -2.2779688 0.3498201 C -0.0016589 -0.5616540 1.3117092 O -0.0864879 -1.0482643 2.4227999 *</code></pre>
+<p>and the guests on water.xyz will be added on top of the previous best complex three times. Now, there will be files with names Basename.docker.struc1.all.optimized.xyz , Basename.docker.struc2.all. optimized.xyz and Basename.docker.struc3.all.optimized.xyz , one for each step. Still, the same final Basename.docker.xyz file and now a Basename.docker.build.xyz is also printed, with the best result after each iteration.</p>
+<p>That's how the results look like, from the Basename.docker.xyz :</p>
+<p>Fig. 4.20: Cumulative docking of three guests</p>
+<h2>Note</h2>
+<p>By default the HOST is always optimized. It can be changed with %DOCKER FIXHOST TRUE END .</p>
+<h2>4.13.4 Example 4: Find the Best Guest</h2>
+<p>Another common case would be: given a list of guests - or conformers of the same guest (see GOAT: global geometry optimization and ensemble generator ) - one might want to know what is the 'best guest', that is the one with the lowest interaction energy.</p>
+<p>In order to do that, simply pass a multixyz file and the DOCKER will try to dock all structures from that file, one by one:</p>
+<pre><code>! XTB %DOCKER GUEST "uracil_water.xyz" END *xyz 0 1 N -0.2707028 0.7632994 1.0276159 H -0.5957915 1.3097757 1.8163465 C -0.3386212 1.3810817 -0.2276640 O -0.7270425 2.5346295 -0.3329857 N 0.3638189 -1.2896563 0.1949192 H 0.0796815 0.9143946 -2.3190044 C 0.3781329 -0.7736192 -1.0714063 H 0.6499130 -1.4675080 -1.8526542 C 0.0669084 0.5154897 -1.3194961 H 0.4818502 -2.2779688 0.3498201 C -0.0016589 -0.5616540 1.3117092 O -0.0864879 -1.0482643 2.4227999 *</code></pre>
+<p>Here the file uracil_water.xyz looks like:</p>
+<pre><code>3 0 1 O -2.13487 2.63905 -0.01809 H -1.16698 2.61938 0.02397 H -2.41372 2.24598 0.82256 12 0 1 N -0.2707028 0.7632994 1.0276159 H -0.5957915 1.3097757 1.8163465 C -0.3386212 1.3810817 -0.2276640 O -0.7270425 2.5346295 -0.3329857 N 0.3638189 -1.2896563 0.1949192 H 0.0796815 0.9143946 -2.3190044 C 0.3781329 -0.7736192 -1.0714063 H 0.6499130 -1.4675080 -1.8526542 C 0.0669084 0.5154897 -1.3194961 H 0.4818502 -2.2779688 0.3498201 C -0.0016589 -0.5616540 1.3117092 O -0.0864879 -1.0482643 2.4227999</code></pre>
+<p>with a water followed by an uracil molecule. First, the water will be added, then the uracil, but both separately. The initial output is a bit different:</p>
+<pre><code>*************** * ORCA Docker * *************** Reading guests from file uracil_water.xyz Number of structures read from file 2 Charge and multiplicity of guests from file Docking approach independent Docking level normal</code></pre>
+</div>
+</body>
+</html>

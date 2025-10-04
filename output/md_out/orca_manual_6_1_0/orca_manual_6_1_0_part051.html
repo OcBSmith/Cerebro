@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part051</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<figure><figcaption><div class="caption">Fig. 5.51: The computed fluorescence spectrum of the lowest energy peak of the H 2 CO molecule</div></figcaption></figure>
+<p>The computed Resonance Raman (rR) excitation profiles of the three totally symmetric vibrational modes are plotted as shown in Figure Fig. 5.52.</p>
+<figure><figcaption><div class="caption">Fig. 5.52: The computed Resonance Raman excitation profiles of the three totally symmetric vibrational modes of the H 2 CO molecule</div></figcaption></figure>
+<p>As might be expected, the dominant enhancement occurs under the main peaks for the C = O stretching vibration. Higher energy excitations particularly enhance the C-H vibrations. The computed rR spectra at the vertical excitation energies are provided in Figure Fig. 5.53.</p>
+<figure><figcaption><div class="caption">Fig. 5.53: The computed Resonance Raman spectra at the vertical excitation energies of the H 2 CO molecule</div></figcaption></figure>
+<p>In this toy example, the dominant mode is the C = O stretching, and the spectra look similar for all excitation wavelengths. However, electronically excited states are mostly of different natures, yielding drastically different rR spectra. Thus, rR spectra serve as powerful fingerprints of the electronic excitation being studied. This is also true even if the vibrational structure of the absorption band is not resolved, which is usually the case for large molecules.</p>
+<p>The orca_asa program is much more powerful than described in this section. Please refer to section Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance Raman Excitation Profiles and Spectra with the orca_asa Program for a full description of its features. The orca_asa program can also be interfaced to other electronic structure codes that deliver excited state gradients and can be used to fit experimental data. It is thus a tool for experimentalists and theoreticians at the same time!</p>
+<h2>5.18 Vibrational Spectroscopy</h2>
+<p>The fundamental usage and several examples for computing vibrational frequencies in ORCA can be found here: Vibrational Frequencies . The following section is more spectroscopy focused.</p>
+<h2>5.18.1 IR Spectra</h2>
+<h2>**There were significant changes in the IR printing after ORCA 4.2.1!**</h2>
+<p>IR spectral intensities are calculated automatically in frequency runs. Thus, there is nothing to control by the user. Consider the following job:</p>
+<pre><code>! OPT FREQ BP86 def2-SVP *xyz 0 1 O 0.000000 0.000000 0.611880 C 0.000000 0.000000 -0.596849 H 0.952616 0.000000 -1.209311 H -0.952616 0.000000 -1.209311 *</code></pre>
+<p>which gives the following output:</p>
+<pre><code>-----------IR SPECTRUM -----------Mode freq eps Int T**2 TX TY TZ cm**-1 L/(mol*cm) km/mol a.u. ----------------------------------------------------------------------------6: 1146.68 0.000341 1.73 0.000093 (-0.000000 -0.009640 0.000000) 7: 1224.67 0.002004 10.13 0.000511 ( 0.022596 0.000000 0.000000) 8: 1485.77 0.001002 5.07 0.000211 ( 0.000000 -0.000000 0.014510) 9: 1806.49 0.020286 102.51 0.003504 ( 0.000000 -0.000000 0.059197) 10: 2769.13 0.014010 70.80 0.001579 ( 0.000000 0.000000 0.039734) 11: 2812.52 0.039321 198.71 0.004363 ( 0.066052 -0.000000 -0.000000)</code></pre>
+<p>The first column ('Mode') labels vibrational modes that increase in frequency from top to bottom.' The next column provides vibrational frequencies. The molar absorption coefficient ε of each mode is listed in the 'eps' column. This quantity is directly proportional to the intensity of a given fundamental in an IR spectrum, and thus it is used by the orca_mapspc utility program as the IR intensity.</p>
+<p>Thevalues under 'Int' are the integrated absorption coefficient 1 , and the 'T**2' column lists the norm of the transition dipole derivatives, already including the vibrational part.</p>
+<p>To obtain a plot of the spectrum, the orca_mapspc utility can be run calling the output file as:</p>
+<pre><code>orca_mapspc Test-Freq-H2CO.out ir -w25</code></pre>
+<p>or calling the Hessian file as:</p>
+<pre><code>orca_mapspc Test-Freq-H2CO.hess ir -w25</code></pre>
+<p>The basic options of orca_mapspc are listed below:</p>
+<pre><code>-w : a value for the linewidth (gaussian shape, fwhm) -x0 : start value of the spectrum in cm**-1 -x1 : end value of the spectrum in cm**-1 -n : number of points to use</code></pre>
+<p>1 Explained in more detail by Neugbauer [679]</p>
+<p>To see its options in detail, call orca_mapspc without any input. The above orca_mapspc runs of the H 2 CO molecule provide Test-NumFreq-H2CO.out.ir.dat file that contains intensity and wavenumber columns. Therefore, this file can serve as input for any graph plotting program. The plot of the computed IR spectrum of the H 2 CO molecule obtained with the above ORCA run is as given in Figure Fig. 5.54.</p>
+<figure><figcaption><div class="caption">Fig. 5.54: The predicted IR spectrum of the H 2 COmolecule plotted using the file generated by the orca_mapspc tool.</div></figcaption></figure>
+<h2>5.18.2 Overtones, Combination Bands and Near IR Spectra via NEARIR</h2>
+<p>Overtones and combination bands can also be incorporated to the computed IR or Near IR spectrum for completeness. The intensities of these bands are strongly dependent on anharmonic effects. ORCA can include these effects by means of the VPT2 approach [673]. The full cubic force field, anharmonic corrections to overtones and combination bands, and a broad range of methods are available in the orca_vpt2 module (see section Anharmonic Analysis and Vibrational Corrections using VPT2/GVPT2 and orca_vpt2 ).</p>
+<p>In particular, the NEARIR keyword calls a simpler semidiagonal approach, including only two modes ( i and j , also refered as 2MR-QFF in [674, 675]) and force constants up to cubic order ( k iij , k iji and k iii ). For now, only the intensities are corrected for anharmonic effects frequencies are not.</p>
+<h2>Overtones and Combination Bands</h2>
+<p>Since the calculation of these terms scale with N 2 modes , it can quickly become too expensive, thus we use by default the semiempirical GFN2-xTB [320] to compute the energies and dipole moments necessary to the higher order derivatives (which can be changed later). To request this, simply add !NEARIR in the main input. An example input for computing the fundamentals of toluene using B2PLYP double-hybrid functional and for computing the anharmonics using XTB is as follows:</p>
+<pre><code>! TightOPT NumFREQ RI-B2PLYP def2-TZVP def2-TZVP/C RIJCOSX NEARIR *xyzfile 0 1 toluene.xyz</code></pre>
+<h2>® Note</h2>
+<p>These anharmonic corrections are very sensitive to the geometry. Therefore, perform a conservative geometry optimization (at least TightOPT ) whenever possible.</p>
+<p>In the output, the characteristics of the regular IR spectrum are printed first. Then, the characteristics of overtones and combination bands are provided similarly to the fundamentals, as follows:</p>
+<table><tbody><tr><td colspan="8">------------------------------- OVERTONES AND COMBINATION BANDS</td></tr><tr><th>Mode</th><th>freq cm**-1</th><th>eps L/(mol*cm)</th><th>Int km/mol</th><th>T**2 a.u.</th><th>TX</th><th>TY</th><th>TZ</th></tr><tr><td>6+6:</td><td>64.71</td><td>0.000994</td><td>5.02</td><td>0.004792</td><td>(-0.009428</td><td>-0.066232</td><td>0.017796)</td></tr><tr><td>6+7:</td><td>241.83</td><td>0.000022</td><td>0.11</td><td>0.000028</td><td>(-0.005268</td><td>0.000255</td><td>0.000638)</td></tr><tr><td>6+8:</td><td>375.36</td><td>0.000048</td><td>0.24</td><td>0.000040</td><td>(-0.000740</td><td>0.001917</td><td>0.006007)</td></tr><tr><td>6+9:</td><td>442.49</td><td>0.000000</td><td>0.00</td><td>0.000000</td><td>( 0.000010</td><td>0.000001</td><td>0.000001)</td></tr><tr><td>6+10:</td><td>506.37</td><td>0.000003</td><td>0.01</td><td>0.000002</td><td>( 0.001078</td><td>-0.000061</td><td>0.000799)</td></tr></tbody></table>
+<p>The 'Mode' column shows the overtones, such as 6+6, and combination bands, such as 6+7 and 6+8. These new quantities are automatically detected and incorporated in the IR spectrum when the output file is called with the orca_mapspc utility as follows:</p>
+<table><tbody><tr><td>orca_mapspc toluene-nearir.out ir -w25</td></tr></tbody></table>
+<p>From the file orca_mapspc provided, the IR spectrum can be plotted as shown in Figure Fig. 5.55.</p>
+<figure><figcaption><div class="caption">Fig. 5.55: Calculated and experimental infrared spectrum of toluene in gas phase. While the red plot includes only the fundamentals, the blue plot includes also overtones and combination bands. The grey dashed plot is the experimental gas-phase spectrum obtained from the NIST database. The theoretical frequencies were scaled following literature values [676]</div></figcaption></figure>
+<p>'Benzene fingers', i.e., overtones and combination bands of the ring, are recovered in the computed spectrum. Note that the frequencies were scaled using literature values [676], and are not yet corrected using VPT2.</p>
+<h2>Near IR Spectra</h2>
+<p>Let us simulate near IR spectrum of methanol in CCl 4 , as published by Bec and Huck [677], using B3LYP for fundamentals, XTB for overtones, and CPCM for solvation. The input is as follows:</p>
+<pre><code>! TightOPT FREQ B3LYP def2-TZVP RIJCOSX NEARIR CPCM(CCl4) *xyz 0 1 O 0.39517 4.38840 -0.00683 C -0.50818 3.29837 0.00221 H -0.11943 5.18771 0.19752 H 0.03977 2.38083 -0.22470 H -1.27919 3.45664 -0.75583 H -0.96616 3.21170 0.99058 *</code></pre>
+<p>Calling the output with orca_mapspc by setting final point to about 8000 cm -1 in order to extend the spectrum to the near IR region, i.e.,</p>
+<pre><code>orca_mapspc toluene-nearir.out ir -w25 -x18000</code></pre>
+<p>one can simulate the spectrum from the generated 'toluene-nearir.dat' file. As seen in Figure Fig. 5.56 the computed spectrum plotted with scaled computational frequencies (not yet corrected using VPT2) according to [676] agrees reasonably well with the experimental spectrum.</p>
+<figure><figcaption><div class="caption">Fig. 5.56: Calculated and experimental near IR spectrum of methanol in CCl 4 . The blue plot is for overtones; the red plot is for combination bands; and the grey dashed plot is the experimental spectrum. Theoretical frequencies were scaled according to literature values [676].</div></figcaption></figure>
+<h2>Using Other Methods for the VPT2 Correction</h2>
+<p>Tocomputeovertones with the method chosen for the calculation of the fundamentals, one needs only to set XTBVPT2 option in the %freq block to false, i.e.,</p>
+<pre><code>%freq XTBVPT2 False end</code></pre>
+<p>To set a different method for the calculation of overtones and combinations than used for the calculation of fundamentals, one needs first to perform a frequency calculation, then call the resulting Hessian file in %geom block, and activate the PRINTTHERMOCHEM flag (see section Thermochemistry for details), i.e.,</p>
+<pre><code>! BP86 def2-TZVP NEARIR CPCM(CCl4) PRINTTHERMOCHEM %geom INHESSNAME "methanol.hess" end %freq XTBVPT2 False end *xyzfile 0 1 methanol_opt.xyz</code></pre>
+<p>In this example, the fundamental modes are read from the 'methanol.hess' file, but the anharmonics and intensities of the overtones and combinations are computed using BP86. Any combination of methods, such as B3LYP/BP86 and B2PLYP/AM1, is allowed. Note that this description is an approximation to full VPT2 or GVPT2. For a more complete treatment, see the VPT2 module described in section Anharmonic Analysis and Vibrational Corrections using VPT2/GVPT2 and orca_vpt2 .</p>
+<p>By default, a step size of 0.5 in dimensionless normal mode unit is used during the numerical calculations. This can be changed by setting DELQ in the %freq block:</p>
+<pre><code>%freq XTBVPT2 False DELQ 0.1 end</code></pre>
+<p>The complete list of options related to VPT2 and in general frequency calculations can be found in Sec. Vibrational Frequencies .</p>
+<h2>5.18.3 Vibrational Circular Dichroism (VCD) Spectra</h2>
+<p>Vibrational circular dichroism spectrum calculations are implemented analytically at the SCF (HF or DFT) level following the derivation of Weigend and coworkers [678]. The basic usage is shown in the following example:</p>
+<pre><code># AnFreq + doVCD triggers the VCD calculation ! AnFreq B3LYP def2-SVP %freq doVCD true end *xyz 0 1 C 1.231429 -0.226472 -0.084960 C -0.061893 0.507641 0.134338 C -1.358912 -0.147897 0.084831 O -0.902881 0.641038 -0.969176 H 1.070541 -1.118875 -0.689778 H 1.672013 -0.522768 0.869009 H 1.946503 0.413187 -0.605194 H 0.017832 1.411161 0.734623 H -1.417896 -1.212878 -0.118068 H -2.196737 0.255864 0.644375 *</code></pre>
+<p>Note that in addition to the Hessian, the VCD calculation requires the magnetic field response using GIAOs and the electric field response with the field origin placed at (0,0,0). The latter matches the hard-coded magnetic field gauge origin in the GIAO case and is necessary to ensure gauge-invariance of the results. ORCA does all of this automatically but it means that if VCD is requested together with electric and/or magnetic properties in the same job, the field origins cannot be changed.</p>
+<p>Other keywords that influence the VCD calculation include GIAO_1el and GIAO_2el in %eprnmr and CutOffFreq in %freq . Note also that VCD cannot be computed with NumFreq .</p>
+<h2>5.18.4 Raman Spectra</h2>
+<p>Starting with ORCA 6.1, calculation of Raman intensities has been implemented using analytical geometric derivatives of the polarizability tensor and is now compatible with analytical frequency runs for SCF methods (HF, DFT). If a frequency run ( !Freq ) is combined with a polarizability calculation, the Raman spectrum will be automatically calculated.</p>
+<p>Consider the following example:</p>
+<pre><code>! OPT RHF STO-3G TightSCF SmallPrint Freq %elprop Polar 1 end *xyz 0 1 C 0.000000 0.000000 -0.533905 O 0.000000 0.000000 0.682807 H 0.000000 0.926563 -1.129511 H 0.000000 -0.926563 -1.129511 *</code></pre>
+<p>The output provides the Raman scattering activity (in Å 4 /AMU) [679] and the Raman depolarization ratio of each mode:</p>
+<pre><code>--------------RAMAN SPECTRUM --------------Mode freq (cm**-1) Activity Depolarization -------------------------------------------------------------------6: 1278.43 0.007371 0.750000 7: 1397.30 3.043852 0.750000 8: 1767.07 16.391442 0.707250 9: 2099.28 6.704492 0.075590 10: 3498.60 38.681286 0.186510 11: 3645.53 24.527417 0.750000</code></pre>
+<p>The ORCA run also generates a .hess file that includes polarizability derivatives and Raman activities. The effect of isotope substitution on the Raman activities can be computed using the .hess file.</p>
+<p>As in the IR spectrum case, orca_mapspc provides a .dat file for plotting the computed Raman spectrum:</p>
+<pre><code>orca_mapspc Test-NumFreq-H2CO.out raman -w50</code></pre>
+<p>The Raman spectrum of H 2 CO plotted by using the corresponding .dat file is as given in Figure Fig. 5.57.</p>
+<figure><figcaption><div class="caption">Fig. 5.57: Calculated Raman spectrum of H 2 CO at the STO-3G level plotted using the .dat generated by the orca_mapspc utility from numerical frequencies and Raman activities.</div></figcaption></figure>
+<p>It is worth noting that Raman scattering activity S i of each mode i is related to but not directly equal to the Raman intensity I i of the corresponding mode, which is dependent on the excitation line ν 0 of the laser used in the Raman measurement(for Nd:YAG laser: ν 0 = 1064 nm = 9398.5 cm -1 ). To obtain significantly better agreement between experimental and simulated Raman spectra, I i of each mode needs to be computed with the following formula:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where f is a normalization constant common for all modes; h , c , k , and T are Planck's constant, speed of light, Boltzmann's constant, and temperature, respectively.</p>
+<ul>
+<li style="list-style-type: '· ';">It is still possible to calculate Raman intensities using numerical derivatives of the analytical polarizability, if the combination of !NumFreq and %elprop polar 1 end is specified. This is currently the only option for derivatives of the dynamical polarizability. In the static polarizability case, this is significantly less efficient and requires tighter accuracy settings than the analytical derivative.</li>
+<li style="list-style-type: '· ';">The analytical Raman intensities calculation is also implemented for implicit solvation, specified e.g. using !CPCM(solvent) in the simple input.</li>
+<li style="list-style-type: '· ';">The analytical Raman intensities make use of RI-J and/or COSX approximations in case these are used for the SCF. As a note of caution, we have observed that the error of the RI-J approximation may become larger with the default auxiliary basis in case you use a basis set with diffuse functions (e.g. def2-SVPD ).</li>
+</ul>
+<h2>5.18.5 Resonance Raman Spectra</h2>
+<p>Resonance Raman spectra (NRVS) and excitation profiles can be predicted or fitted using the procedures described in section Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance Raman Excitation Profiles and Spectra with the orca_asa Program . An example for obtaining the necessary orca_asa input is described in section Absorption and Fluorescence Bandshapes using ORCA_ASA .</p>
+<h2>5.18.6 NRVS Spectra</h2>
+<p>The details of the theory and implementation of NRVS spectrum are as described in ref. [680, 681]. The NRVS spectrum of iron-containing molecules can be simply calculated calling .hess file of a previous frequency calculation with the orca_vib utility. The output file of this utility can then be called with orca_mapspc utility to produce a .dat file for plotting the spectrum:</p>
+<pre><code>orca_vib MyJob.hess > MyJob.vib.out</code></pre>
+<pre><code>orca_mapspc MyJob.vib.out NRVS</code></pre>
+<p>For a the ferric-azide complex [680], the computed and experimental NRVS spectra are provided in Figure Fig. 5.58.</p>
+<figure><figcaption><div class="caption">Fig. 5.58: Experimental (a, black curve), fitted (a, red) and simulated (b) NRVS spectrum of the Fe(III)-azide complex obtained at the BP86/TZVP level (T = 20 K). Bar graphs represent the corresponding intensities of the individual vibrational transitions. The blue curve represents the fitted spectrum with a background line removed.</div></figcaption></figure>
+<p>As for the calculation of resonance Raman spectra described in section Simulation and Fit of Vibronic Structure in Electronic Spectra, Resonance Raman Excitation Profiles and Spectra with the orca_asa Program , the DFT estimations are usually excellent starting points for least-square refinements.</p>
+<p>Below we describe the procedure for computing such NRVS spectra on the Fe(SH) 1 -4 complex with the BP86 functional, which typically provides good NRVS spectra. One needs first to optimize the geometry of the complex and compute its vibrational structure:</p>
+<pre><code>! OPT FREQ BP86 def2-TZVP TightSCF SmallPrint *xyz -1 6 Fe -0.115452 0.019090 -0.059506 S -0.115452 1.781846 1.465006 S -0.115452 -1.743665 1.462801 S -1.908178 -0.072782 -1.518702 S 1.560523 0.154286 -1.656664 H 0.410700 2.760449 0.687716 H -0.674147 -2.708278 0.690223 H -2.905212 0.345589 -0.699907 H 2.647892 -0.211681 -0.932926 *</code></pre>
+<p>Now run the orca_vib utility on the .hess file generated by this job to obtain an output file that can be used with orca_mapspc utility:</p>
+<pre><code>orca_vib Test-FeIIISH4-NumFreq.hess > Test-FeIIISH4-NumFreq.out orca_mapspc Test-FeIIISH4-NumFreq.out NRVS</code></pre>
+<p>This orca_mapspc run generates Test-FeIIISH4-NumFreq.nrvs.dat file in the xy-format. This file contains phonon energy ( x , in cm -1 ) and NRVS intensity ( y , in atomic units) and thus can be directly used for visualizing the spectrum.</p>
+<p>The corresponding NRVS spectrum is given in Figure Fig. 5.59 together with the computational IR spectrum on the same frequency scale. NRVS reports the Doppler broadening of the Moessbauer signal due to resonant scattering of phonons (vibrations) dominated by the movements of Fe nuclei. This is a valuable addition to IR spectrum where the modes have very small intensities.</p>
+<figure><figcaption><div class="caption">Fig. 5.59: (a) Theoretical IR spectrum of Fe(SH) 1 -4 and arrow-pictures of the highest intensity modes around the peak maxima. (b) The corresponding NRVS scattering spectrum.</div></figcaption></figure>
+<h2>5.18.7 Animation of Vibrational Modes</h2>
+<p>For describing how to animate vibrational modes and generate their 'arrow-pictures', let us perform a frequency calculation on H 2 CO:</p>
+<pre><code>! OPT FREQ RHF STO-3G *xyz 0 1 C 0.000000 0.000000 -0.533905 O 0.000000 0.000000 0.682807 H 0.000000 0.926563 -1.129511 H 0.000000 -0.926563 -1.129511 *</code></pre>
+<p>The output of this job provides vibrational characteristics:</p>
+<table><tbody><tr><th>Mode</th><th>freq cm**-1</th><th>eps L/(mol*cm) ----------------------------------------------------------------------------</th><th>Int km/mol</th><th>T**2 a.u.</th><th>TX</th><th>TY</th><th>TZ</th></tr><tr><td>6:</td><td>1278.37</td><td>0.001222</td><td>6.18</td><td>0.000298</td><td>(-0.017272</td><td>0.000000</td><td>0.000000)</td></tr><tr><td>7:</td><td>1397.26</td><td>0.005844</td><td>29.53</td><td>0.001305</td><td>( 0.000000</td><td>0.036128</td><td>0.000000)</td></tr><tr><td>8:</td><td>1767.02</td><td>0.000828</td><td>4.18</td><td>0.000146</td><td>(-0.000000</td><td>0.000000</td><td>-0.012089)</td></tr><tr><td>9:</td><td>2099.24</td><td>0.001668</td><td>8.43</td><td>0.000248</td><td>( 0.000000</td><td>-0.000000</td><td>0.015749)</td></tr><tr><td>10:</td><td>3498.54</td><td>0.000356</td><td>1.80</td><td>0.000032</td><td>( 0.000000</td><td>-0.000000</td><td>-0.005636)</td></tr><tr><td>11:</td><td>3645.47</td><td>0.003922</td><td>19.82</td><td>0.000336</td><td>(-0.000000</td><td>0.018322</td><td>0.000000)</td></tr></tbody></table>
+<p>This output can be directly opened with ChemCraft to visualize normal modes of H 2 COand to extract their arrowpictures representing the direction of nuclear movements as shown in Figure Fig. 5.60. As an example, one can infer from this figure that the 1397 cm -1 mode corresponds to a rocking vibration.</p>
+<figure><figcaption><div class="caption">Fig. 5.60: Normal modes of H 2 CO with arrows indicating magnitude and direction of nuclear motions and the associated vibrational frequencies in cm -1 obtained from ORCA output file through the use of ChemCraft</div></figcaption></figure>
+<p>In order to animate vibrational modes and to create their 'arrow-pictures' by using free program packages like gOpenMol , the small utility program orca_pltvib can be used. This utility program generates a series of files from an ORCA output file of a frequency run, which can be openned with molecular visualization programs. The usage of orca_pltvib is as follows:</p>
+<p>orca_pltvib Test-FREQ-H2CO.out [list of vibrations or all]</p>
+<p>For example, let us animate the 1397 cm -1 mode labeled as 7:</p>
+<p>orca_pltvib Test-FREQ-H2CO.out 7</p>
+<p>This call will generate the Test-FREQ-H2CO.out.v007.xyz file. Open gOpenMol and read this file ( Import-&gt;coords ) in Xmol format. Then, go to the Trajectory-&gt;Main menu and import again the file in Xmol format. Now you are able to animate the mode. In order to generate a printable picture, press Dismiss and then type lulVectorDemo {4 0.1 black} into the gOpenMol command line window. The generated picture (see Figure Fig. 5.61) demonstrates that this mode corresponds to a rocking vibration.</p>
+<figure><figcaption><div class="caption">Fig. 5.61: The 1397 cm -1 mode of the H 2 CO molecule as obtained from the interface of ORCA to gOpenMol and the orca_pltvib tool to create the animation file.</div></figcaption></figure>
+<p>The appearence of the arrows can also be modified as described in the web tutorial of gOpenMol .</p>
+<h2>5.18.8 Isotope Shifts</h2>
+<p>The calculated isotope shifts greatly aid in the identification of vibrations, the interpretation of experiments, and the assessment of the reliability of the calculated vibrational normal modes. It would be a very bad practice to recalculate the Hessian for investigating isotope shift since Hessian calculations are typically expensive, and the Hessian itself is independent of the masses. Below we describe how to find the isotope effect without recomputing the Hessian.</p>
+<p>Let us suppose that you have calculated a Hessian as in the example discussed above, and you want to predict the effect of 18 Osubstitution. In this case you can use the small utility program orca_vib . First of all you need to edit the masses given in the .hess file by hand. For the example given above, the .hess file is as follows:</p>
+<pre><code>$orca_hessian_file ...................... $hessian 12 ... the cartesian Hessian in Eh/bohr**" $vibrational_frequencies 12 ...the vibrational frequencies (in cm-1) as in the output $normal_modes 12 12 ... the vibrational normal modes in Cartesian displacements # # The atoms: label mass x y z # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! # Here we have changed 15.999 for oxygen into # 18.0 in order to see the oxygen 18 effects # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! $atoms 4 C 12.0110 0.000000 0.000000 -1.149571 O 18.0000 -0.000000 -0.000000 1.149695 H 1.0080 -0.000000 1.750696 -2.275041 H 1.0080 -0.000000 -1.750696 -2.275041 $actual_temperature 0.000000 $dipole_derivatives 12 ... the dipole derivatives (Cartesian displacements) # # The IR spectrum # wavenumber T**2 TX TY TY # $ir_spectrum 12 ... the IR intensities</code></pre>
+<p>After changing the mass of O from 15.999 to 18.0 as shown above, let us call:</p>
+<pre><code>orca_vib Test-FREQ-H2CO.hess</code></pre>
+<p>This will recompute vibrational frequencies in the presence of 18 O. Let us compare vibrational frequencies in the output of this run with the original frequencies in cm -1 :</p>
+<pre><code>Mode H2C16O H2CO18O Shift -----------------------------------------</code></pre>
+<p>(continues on next page)</p>
+<pre><code>6: 1284.36 1282.82 -1.54 7: 1397.40 1391.74 -5.66 8: 1766.60 1751.62 -14.98 9: 2099.20 2061.49 -37.71 10: 3499.11 3499.02 -0.09 11: 3645.24 3645.24 0.00</code></pre>
+<p>Another way to analyze isotope shifts is to plot the two predicted spectra and then subtract one from the other. This will produce derivative-shaped peaks with zero crossings at the positions of the isotope-sensitive modes.</p>
+<p>® Note In the presence of point charges and/or an external electric field, the translational and rotational symmetries of the system may be broken. In such cases, you may prefer NOT to project out the translational and rotational degrees of freedom of the Hessian. This can be achieved as: orca_vib Test-FREQ-H2CO.hess -noproj</p>
+<h2>5.19 Anharmonic Analysis and Vibrational Corrections using VPT2/GVPT2 and orca_vpt2</h2>
+<p>Building upon (analytical) harmonic calculations of the Hessian, it is possible to calculate the cubic plus semi-quartic force field as well as higher-order property derivatives. For this purpose, the VPT2 module will compute the Hessian and then generate two displaced geometries for each degree of freedom and for each displacement another Hessian (and another property in case of vibrational corrections) will be computed. These are required for an anharmonic analysis according to second-order vibrational perturbation theory. So overall, using VPT2 is costly due to the number of calculations required for the numerical derivatives and is very sensitive to numerical noise due to convergence, approximations and other settings. The VPT2 calculation can be initiated either via the simple input command ! VPT2 or via the VPT2 keyword in the %vpt2 block. Finer control can be achieved through the %VPT2 block, as exemplified in this analysis of water.</p>
+<pre><code># VPT2 Analysis of H2O !RHF def2-SVP ExtremeSCF VPT2 %vpt2 VPT2 On # do a VPT2 analysis, same as !VPT2 (see above) AnharmDisp 0.05 # anharmonic displacement factor, default is 0.05 HessianCutoff 1e-12 # cut-off for Hessian elements, default is $10^{-↪ → 10}$ PrintLevel 1 # VPT2 print level [1, 2, 3, 4] MinimiseOrcaPrint True # Minimises the remaining orca output end %method Z_Tol 1e-14 end * xyz 0 1 O 0.00000000000000 0.06256176106279 0.06256176106280 H 0.00000000000000 -0.06185639479702 0.99929463373422 H 0.00000000000000 0.99929463373424 -0.06185639479703 *</code></pre>
+<p>After the analysis, a &lt;basename&gt;.vpt2 file should be present in the working directory. Within that file all the force field and property derivatives are saved. It is used as an input for the orca_vpt2 programme which is</p>
+<p>(continued from previous page)</p>
+<p>called automatically after the initial displacement calculations. The programme can also be called separately with the command orca_vpt2 &lt;basename&gt;.vpt2 .</p>
+<h2>A few remarks about VPT2 calculations:</h2>
+<ul>
+<li style="list-style-type: '· ';">A VPT2 starting geometry should always be tightly converged . For small molecules the !TightOPT option is not good enough ! Depending on your structure, you might want to experiment with the TolE , TolRMSG and TolMaxG keywords of the %geom block.</li>
+<li style="list-style-type: '· ';">Similarly, a well converged SCF is required. The use of the ExtremeSCF keyword or at least VeryTightSCF is recommended.</li>
+<li style="list-style-type: '· ';">The CP-SCF equations should be converged to at least 10 -12 (modified via the Z_Tol setting in the %method block.</li>
+<li style="list-style-type: '· ';">For DFT calculations, tight grids like DEFGRID3 are strongly recommended.</li>
+<li style="list-style-type: '· ';">Linear molecules are not supported yet</li>
+<li style="list-style-type: '· ';">Currently, only methods for which analytical Hessians are available are supported. Furthermore, VPT2 calculations with DFT functionals which do not provide analytical Hessians cannot be carried out .</li>
+<li style="list-style-type: '· ';">Bydefault, updated atomic masses are used to generate the semi-quartic force field (see Mass dependencies ). The masses are also printed in the &lt;basename&gt;.vpt2 file</li>
+<li style="list-style-type: '· ';">A VPT2 analysis can be repeated on a previous calculation by running orca_vpt2 &lt;basename&gt;. vpt2 .</li>
+<li style="list-style-type: '· ';">VPT2 does have limited restart capabilities. If the directory in which the VPT2 run is carried out already contains &lt;basename&gt;.hess or &lt;basename&gt;_eprnmr.property.txt files, the program will skip these points and use the information provided in the files.</li>
+</ul>
+<p>VPT2 provides a vibrational analysis and thus access to :</p>
+<ul>
+<li style="list-style-type: '· ';">mean and mean square displacement expectation values</li>
+<li style="list-style-type: '· ';">centrifugal distortion constants</li>
+<li style="list-style-type: '· ';">Watson's symmetrically and asymmetrically reduced Hamiltonian parameters</li>
+<li style="list-style-type: '· ';">anharmonic constants</li>
+<li style="list-style-type: '· ';">Fermi resonance analysis</li>
+<li style="list-style-type: '· ';">rotational and vibrational-rotational constants</li>
+<li style="list-style-type: '· ';">fundamental transition (anharmonic frequencies)</li>
+<li style="list-style-type: '· ';">zero-point ro-vibrational energies</li>
+<li style="list-style-type: '· ';">overtones and combination bands with intensities (in contrast to NEARIR with full VPT2/GVBT2 treatment)</li>
+<li style="list-style-type: '· ';">dedicated file interface for codes like SPCAT</li>
+</ul>
+<p>If the computed data should be used for the simulation of spectra with codes like SPCAT, ORCA can provide a dedicated file that can serve as a basis for an input. This is triggered in the %output block when a VPT2 calculation is run:</p>
+<pre><code>%output Pickettname "pickett.txt" end</code></pre>
+<p>This way, ORCA will generate a file called pickett.txt that contains the computed data and templates for .var which can be modified to serve as input for codes like SPCAT. Please note that this feature is still being refined and extended.</p>
+<h2>5.19.1 Vibrational corrections of molecular properties using VPT2</h2>
+<p>Using VPT2 it is also possible to compute zero-point vibrational corrections to molecular properties. Currently, this is available for NMR chemical shieldings, spin-spin coupling constants, g- and A-tensors and requires two successive calculations. The first calculation is a VPT2 calculation just as shown above ( &lt;basename&gt;.inp ) that contains the VPT2 command and the level of theory at which the Hessians are computed. The second calculation (let's call it &lt;basename&gt;_Prop.inp will compute the property derivatives with a final call to VPT2. In order for this to work, the property derivative calculation needs to read the &lt;basename&gt;.hess and &lt;basename&gt;.vpt2 file from the forcefield calculation. This is done by specifying the %geom inhess read with the command inhessname "&lt;basename&gt;.hess" . This scheme is necessary as properties other than energies, geometries or frequencies often require specialized methods and basis sets. For the numerical calculation of the force field and property derivatives different stepsizes can be used by specifying AnharmDisp and PropDisp in the VPT2 input block. The defaults are 0.05, and after the calculation, the displaced geometries are stored in files named myjob_DH001.xyz and myjob_DP001.xyz etc.</p>
+<p>A typical example for calculating the vibrational correction to the 13 C NMR chemical shifts of methanol with a B3LYP/def2-TZVP anharmonic forcefield and TPSS/pcSseg-2 shielding tensors would look like the following: the standard input file, in our case vpt2_methanol_FF.inp with the level of theory for the Hessian and the VPT2 input block :</p>
+<pre><code>!B3LYP D3 def2-TZVP def2/J def2/JK DEFGRID3 ExtremeSCF VPT2 %method Z_Tol 1e-12 end * xyz 0 1 C -1.09849212248373 0.14540972773089 -0.00000275092982 O 0.32138758531316 0.08706714755687 -0.00001212477411 H 0.66732439683790 0.98510769198508 0.00001819506998 H -1.45583606337199 -0.88374271593276 0.00000595999622 H -1.49206267729630 0.64725244577978 0.89143349761200 H -1.49208273899904 0.64724452288014 -0.89144277697426 *</code></pre>
+<p>and the next input file, say vpt2_methanol_NMR.inp with the same geometry and the level of theory for the shielding tensor will look like this:</p>
+<pre><code>!TPSS pcSseg-2 Autoaux ExtremeSCF NMR %geom inhess read inhessname "vpt2_methanol_FF.hess" end %vpt2 VPT2 on AvgProp NMR HessianCutoff 1e-12 end %method Z_Tol 1e-12 end * xyz 0 1 C -1.09849212248373 0.14540972773089 -0.00000275092982 O 0.32138758531316 0.08706714755687 -0.00001212477411 H 0.66732439683790 0.98510769198508 0.00001819506998 H -1.45583606337199 -0.88374271593276 0.00000595999622 H -1.49206267729630 0.64725244577978 0.89143349761200 H -1.49208273899904 0.64724452288014 -0.89144277697426 *</code></pre>
+</div>
+</body>
+</html>

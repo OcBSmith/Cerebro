@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part058</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>*xyz 0 C</td><td>1 10.13954933</td><td>10.09711395 10.09711395 10.09711395 10.09711395 10.09711395 10.09711395</td><td>12.38421108</td></tr><tr><td>C</td><td>11.34646202</td><td></td><td>13.07460199</td></tr><tr><td>C</td><td>8.93263664</td><td></td><td>13.07460199</td></tr><tr><td>C</td><td>10.13954933</td><td></td><td>15.16101197</td></tr><tr><td>C</td><td>11.34465495</td><td></td><td>14.46510328</td></tr><tr><td>C</td><td>8.93444370</td><td></td><td>14.46510328</td></tr><tr><td>C</td><td>10.13954933</td><td>11.21630306</td><td>10.16939448</td></tr><tr><td>C</td><td>10.13954933</td><td>8.97792484</td><td>10.16939448</td></tr><tr><td>C</td><td>10.13954933</td><td>10.80761594</td><td>8.85675649</td></tr><tr><td>C</td><td>10.13954933</td><td>9.38661196</td><td>8.85675649</td></tr><tr><td>N</td><td>10.13954933</td><td>10.09711395</td><td>10.96513494</td></tr><tr><td>H</td><td>12.26979504</td><td>10.09711395</td><td>12.51888639</td></tr><tr><td>H</td><td>8.00930362</td><td>10.09711395</td><td>12.51888639</td></tr><tr><td>H</td><td>12.27909865</td><td>10.09711395</td><td>15.00190089</td></tr><tr><td>H</td><td>8.00000000</td><td>10.09711395</td><td>15.00190089</td></tr><tr><td>H</td><td>10.13954933</td><td>10.09711395</td><td>16.23847837</td></tr><tr><td>H</td><td>10.13954933</td><td>12.19422790</td><td>10.60962753</td></tr><tr><td>H</td><td>10.13954933</td><td>8.00000000</td><td>10.60962753</td></tr><tr><td>H</td><td>10.13954933</td><td>11.45309491</td><td>8.00000000</td></tr><tr><td>H</td><td>10.13954933</td><td>8.74113299</td><td>8.00000000</td></tr></tbody></table>
+<p>FreezeAndRelease only works for SOSCF, so SOSCF , NoDIIS , and NoTRAH are implicite and do not need to be specified. We also apply a factor of 500 that the convergence criteria of the constrained minimization are multiplied by since the constrained minimization does not need to be converged as tightly as the subsequent unconstrained optimization. This strategy saves some iterations in the constrained part of the calculation without compromising the final result.</p>
+<p>This strategy yields an excitation energy of 194 mEh, a bit higher than the previous one, and a dipole moment difference to the ground state of 9.669 D. This is the desired result.</p>
+<p>Typically, the freeze-and-release approach takes a few more iterations than the regular SOSCF, but it avoids variational collapse much more reliably. In the presented case, the regular SOSCF converges in a total of 38 energy/gradient evaluations, while the freeze-and-release strategy takes only 21 energy/gradient evaluations.</p>
+<h2>Note</h2>
+<p>The statement Scaled step length from x to 0.100000 is indicating that a relatively large step was about to be taken. Scaling it down typically results in more robust but less efficient convergence. It can be adjusted to the challenges of the system under investigation.</p>
+<p>The freeze-and-release strategy can be combine with GMF yielding an even more robust strategy. In this case, the target saddle point order is estimated at the solution of the constrained minimization step since the quality of the estimate increases then. For hybrid functionals, the default estimate is obtained in the first Davidson run. Otherwise, the orbital energies are used.</p>
+<h2>5.36.4 Full keyword list</h2>
+<p>The simple input keywords related to ∆ SCF are collected in tab. Table 5.26.</p>
+<p>Table 5.26: Simple input keywords for ∆ SCF.</p>
+<table><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>DeltaSCF</td><td>Activates ∆ SCF</td></tr><tr><td>FreezeAndRelease or FRSOSCF</td><td>Activates freeze-and-release strategy</td></tr><tr><td>GMF</td><td>Activates generalized mode following</td></tr><tr><td>SCFLBFGS</td><td>Sets SOSCF quasi-Newton method to L-BFGS</td></tr><tr><td>SCFLSR1</td><td>Sets SOSCF quasi-Newton method to L-SR1</td></tr></tbody></table>
+<p>The input keywords of the %SCF block related to ∆ SCF are collected in tab. Table 5.27.</p>
+<table><caption><div class="caption">Table 5.27: %scf block input keywords for ∆ SCF with defaults in pare</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>SOSCFMaxStep (0.2) DeltaSCFFromGS (true) SOSCFBlockDiag (false)</td><td>&lt;real&gt;</td><td>Maximum step size</td></tr><tr><td></td><td>true/false true/false</td><td>Start DeltaSCF from an input converged ground state solution or as Perform a diagonalization of the occupied and virtual orbital block</td></tr><tr><td>DoMOM (true)</td><td>true/false</td><td>Use the maximum overlap method?</td></tr><tr><td>KeepInitialRef (true) PMOM (false)</td><td>true/false true/false</td><td>Always keep initial reference: IMOM? Use the PMOMmetric instead of the regular MOM?</td></tr><tr><td>AlphaConf and BetaConf</td><td>0,1 0,0,1</td><td>Define the occupation of the frontier orbitals in alpha and beta spin HOMO → LUMO excitation</td></tr><tr><td>IonizeAlpha and IonizeBeta SOSCFHessUp (LSR1) SOSCFConstraints (false) SOSCFConstrainedMaxStep (0.2) SOSCFConvFactor (1) SOSCFConstrainedHessUp</td><td>0,1,1 0,2 &lt;int&gt; true/false &lt;real&gt;</td><td>HOMO → LUMO+1 excitation HOMO-1 → LUMO excitation DoubleHOMO → LUMO excitation (only valid for RHF and Alph Remove electron from specified MOs in alpha and beta spin chann Activate freeze-and-release SOSCF? Maximum step size for the constrained minimization</td></tr><tr><td></td><td>LSR1 LBFGS LPOWELL LBOFILL</td><td>SOSCF quasi-Newton method for Hessian update Limited-memory symmetric rank-1 update Limited-memory Broyden-Fletcher-Goldfarb-Shanno update Limited-memory Powell update Limited-memory Bofill update, a combination of L-SR1 and L-Po</td></tr><tr><td>(LBFGS)</td><td>&lt;real&gt; LSR1 LBFGS LPOWELL</td><td>Factor to multiply convergence criteria with in the constrained min Hessian update for constrained minimization Limited-memory symmetric rank-1 update Limited-memory Broyden-Fletcher-Goldfarb-Shanno update Limited-memory Powell update Limited-memory Bofill update, a combination of L-SR1 and</td></tr><tr><td>SOSCFWriteConstrainedGBW (true) SOSCFGMF (false) SOSCFDavidsonMaxIt (100) SOSCFDavidsonTolR (0.01)</td><td>LBOFILL</td><td>L-Po Write a GBWfile for the constrained solution Use generalized mode following?</td></tr><tr><td>SOSCFDavidsonMaxRed (20)</td><td>true/false true/false &lt;int&gt;</td><td>Maximum number of Davidson iterations</td></tr><tr><td>SOSCFDavidsonFDMode ( Forward )</td><td>&lt;real&gt; &lt;int&gt; Forward</td><td>Davidson convergence tolerance for the maximum component of e Davidson maximum size of the Krylov subspace per target eigenve Davidson finite difference stencil to use One displaced gradient evaluation, linear accuracy in finite differen</td></tr><tr><td>SOSCFDavidsonFDStep (0.001) SOSCFSPO</td><td>Central &lt;real&gt; &lt;int&gt;</td><td>Two displaced gradient evaluations, quadratic accuracy in finite di Davidson finite difference step size Optional user-defined target saddle point order Target saddle point order estimate</td></tr><tr><td>SOSCFSPOEst (Auto)</td><td>Auto</td><td>GMF GMF Let the algorithm determine what is best</td></tr><tr><td></td><td>Excitation HDiag</td><td>Use the excitation configuration</td></tr><tr><td></td><td></td><td>Use the diagonal Hessian approximation (only different from</td></tr><tr><td></td><td>Davidson</td><td>Exc Use number of negative eigenvalues in first Davidson run (targets</td></tr></tbody></table>
+<h2>5.37 Extended Transition State with Natural Orbitals for Chemical Valence (ETS-NOCV/EDA-NOCV)</h2>
+<h2>Ϫ Caution</h2>
+<p>The NOCV implementation in ORCA 5.0 has been rewritten. Consequently, the generation of NOCVs no longer requires the user to run single-point calculations for the molecular fragments beforehand. This way of producing the NOCVs is deprecated.</p>
+<p>In ORCA chemical bonds can be analyzed using the EDA-NOCV framework. This framework combines the Extended Transition State (ETS) energy decomposition method with the Natural Orbitals for Chemical Valence (NOCV) to analyze the electron density rearrangement taking place upon bond formation [772]. The ETS method decomposes the energy associated with bond formation into four components:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This represents the 'instantaneous' interaction between two non-interacting molecular fragments that leads to the bond formation process. The molecular fragments are established by dividing the molecule into two fragments according to the bond that is being studied. By non-interacting, it is meant that the molecular fragments are considered to be at an infinite distance, and the electron density of each fragment is kept frozen. The first energy term corresponds to the electrostatic interaction that the two non-interacting molecular fragments experience when they are placed in the positions they would occupy in the molecule. The second term contains the total 'exchange repulsion' due to the Pauli exclusion principle and the change in the exchange-correlation energy of the fragments when brought together.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>It is important to highlight that the value reported in the EDA/ETS decomposition as Pauli Energy corresponds to ˜ E Pauli .</p>
+<p>The third term of the ETS decomposition corresponds to the energy associated with the interaction between the occupied and unoccupied orbitals of one molecular fragment and the other. Thus, it is associated with the change in electron density during bond formation. Finally, the last term represents a 'dispersion' contribution to the interaction and it is present only when semiclassical correction schemes (e.g., Grimme's D4 correction) are used.</p>
+<p>The EDA-NOCV method decomposes this term into contributions associated with pairs of orbitals. These orbitals are obtained by diagonalizing the difference density matrix between the molecule and the 'supermolecule' resulting from the non-interacting molecular fragments.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>5.37.1 Running an EDA-NOCV analysis in ORCA</h2>
+<p>Note</p>
+<p>The current implementation of the EDA-NOCV method in ORCA 6.1 supports mean-field methods for both open-shell and closed-shell calculations.</p>
+<p>To perform an EDA-NOCV analysis, three key components must be specified:</p>
+<ol>
+<li style="list-style-type: '1. ';">The type of calculation : this defines the overall computational framework and determines whether the analysis will be conducted using restricted or unrestricted mean-field methods.</li>
+<li style="list-style-type: '2. ';">The method used for each fragment : this includes the choice of basis sets and exchange-correlation functionals or other theoretical methods applied to each fragment individually. Typically, each fragment should be treated at the same level of theory as the adduct.</li>
+</ol>
+<ol>
+<li style="list-style-type: '3. ';">The atoms that correspond to each fragment : this requires defining which atoms belong to each fragment in the molecular system, allowing ORCA to partition the molecule accordingly.</li>
+</ol>
+<p>The EDA-NOCV analysis is performed using the EDA keyword in the simple input line. In the following example, we have the input file for an EDA-NOCV analysis of the bond between the two carbon atoms in an ethane molecule. The new implementation allows the study of this system by considering two methyl groups as molecular fragments, with opposite spins for the unpaired electrons.</p>
+<pre><code># # Example of an EDA-NOCV calculation for the CH3-CH3 system with triplet fragments # !BP86 TZVP EDA #EDA keyword %EDA #EDA block FRAG1 "BP86 TZVP" #Method for fragment 1 FRAG2 "BP86 TZVP" #Method for fragment 2 FRAG1_C 0 #Charge of fragment 1 FRAG1_M 2 #Multiplicity of fragment 1 FRAG1_SF TRUE #Flip spin option for fragment 1 FRAG2_C 0 #Charge of fragment 2 FRAG2_M 2 #Multiplicity of fragment 2 END *xyz 0 1 C 0.019664 -0.034069 0.009101 H 0.039672 -0.069395 1.109620 H 1.063205 -0.065727 -0.341092 H -0.474230 -0.953693 -0.341621 C -0.703210 1.217999 -0.497874 H -0.723753 1.252869 -1.598316 H -1.746567 1.250049 -0.147169 H -0.208833 2.137544 -0.147653 * %Frag #Fragment assignment using %frag block Definition 1 {0:3} end 2 {4:7} end end end</code></pre>
+<p>All the parameters associated with the EDA-NOCV calculation can be specified within the %EDA block. The method used for each fragment can be specified in two ways: by using keywords or by passing a file. The first method is done by using the FRAG1 and FRAG2 keywords for fragments 1 and 2, respectively. In quotes, you must specify the level of theory and basis set used for each fragment, as well as any other keyword options. It is standard to use the same level of theory for each fragment and for the molecule, but it is also possible to specify different ones.</p>
+<pre><code>Ϫ Caution The basis set used for each molecular fragment and the complete molecule must be consistent. Each molecular fragment may use a different basis set, but this must also be specified for the corresponding atoms/fragments in the molecule calculation using the %basis block. For example: !B3LYP EDA %basis FragBasis 1 "TZVP" FragBasis 2 "def2-SVP" end %EDA</code></pre>
+<pre><code>FRAG1 "B3LYP TZVP" FRAG2 "B3LYP def2-SVP" end . . .</code></pre>
+<p>If additional parameters are required for the calculations of the fragments it is possible to pass them in a separate file by using the keywords FRAG1_METHODFILE and FRAG2_METHODFILE .</p>
+<pre><code>%EDA FRAG1_METHODFILE "method.txt" FRAG2_METHODFILE "method.txt" END</code></pre>
+<p>This option should be used especially when a method cannot be specified by using only keywords, but a method block must be used. For example, to specify unsupported solvents in implicit solvation methods, such as C-PCM. In this case, the method file would look like:</p>
+<pre><code>BP86 TZVP %CPCM #CPCM block epsilon 80 #Dielectric constant refrac 1.0 #Refractive index END</code></pre>
+<p>The '!' symbol is not required when specifying methods for each fragment. Neither when using the FRAG1 and FRAG2 keywords in the %EDA block nor in the method file when using FRAG1_METHODFILE and FRAG2_METHODFILE .</p>
+<p>The current implementation allows for charged and open-shell fragments. To specify the charge of each fragment, the keywords FRAG1_C and FRAG2_C must be used. Similarly, the keywords FRAG1_M and FRAG2_M can be used to specify the multiplicity of each fragment. By default, each fragment is considered to be neutral and closed-shell unless specified otherwise. The total charge of the fragments must add up to the charge of the molecule.</p>
+<p>The new implementation also allows for specifying the spin of the unpaired electrons in one of the fragments. For example, in studying the CH 3 -CH 3 system, the previous ORCA implementation only allowed the use of charged closed-shell fragments, CH +1 3 and CH -1 3 . Now, it is possible to consider neutral open-shell methyl groups as molecular fragments. By default, the unpaired electrons in an open-shell system are considered spin-up electrons in ORCA, but this can be changed by using the keywords FRAG1_SF and FRAG2_SF . This adjustment allows for a reduction in Pauli repulsion between the two methyl fragments.</p>
+<p>The molecular fragments can be specified using the %Frag block or by indicating, next to each atom, to which molecular fragment they belong. This is done by placing the number 1 for the first fragment and the number 2 for the second fragment in parentheses next to each atom.</p>
+<pre><code># # Example of an EDA-NOCV calculation for Li-NH3 bonding # !BP86 TZVP EDA %EDA FRAG1 "BP86 TZVP" FRAG2 "BP86 TZVP" FRAG1_M 1 FRAG1_C 1</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td colspan="5">END</td></tr><tr><th colspan="5">*xyz 1 1</th></tr><tr><td>Li(1)</td><td>-0.212072</td><td>1.951867</td><td>0.003088</td><td></td></tr><tr><td></td><td>-0.424027</td><td>-0.022414</td><td>-0.010889</td><td>N (2)</td></tr><tr><td>H</td><td>-0.914047</td><td>-0.381589</td><td>-0.841562</td><td>(2)</td></tr><tr><td></td><td>-0.958117</td><td>-0.388240</td><td>0.789150</td><td>H (2)</td></tr><tr><td>H *</td><td>0.468043</td><td>-0.535155</td><td>0.011083</td><td>(2)</td></tr></tbody></table>
+<p>It is important to note that when using the %Frag block, the indices of the atoms start from 0. For example, in the previous input for Li + -NH 3 the fragments can alternatively be specified as:</p>
+<pre><code>%Frag #Fragment assignment using frag block Definition 1 {0} end 2 {1:4} end end end</code></pre>
+<h2>5.37.2 EDA-NOCV Output File</h2>
+<p>The EDA-NOCV output is divided into two sections. The first section corresponds to the ETS Energy Decomposition Analysis. In this section, each energy term of the ETS decomposition method is printed in Hartree and kcal/mol units. Additionally, if dispersion corrections are used in the calculation, the difference between the dispersion correction for the molecule and that for the molecular fragments is printed. Here is the EDA-NOCV results for the Li + -NH 3 input shown in the previous section:</p>
+<table><tbody><tr><th colspan="3">-------------------------------------------------------------------------------- Energy Decomposition Analysis --------------------------------------------------------------------------------</th></tr><tr><th>Energy Term</th><th>Hartree</th><th>Kcal/mol</th></tr><tr><td>Bond Energy</td><td>-0.0606951779</td><td>-38.09</td></tr><tr><td>Orbital Energy</td><td>-0.0181138301</td><td>-11.37</td></tr><tr><td>Electrostatic Energy</td><td>-0.0706162390</td><td>-44.31</td></tr><tr><td>Pauli Energy</td><td>0.0311314946</td><td>19.54</td></tr><tr><td>Delta E^0(XC)</td><td>-0.0030956196</td><td>-1.94</td></tr><tr><td>Delta Dispersion</td><td>0.0000000000</td><td>0.00</td></tr></tbody></table>
+<p>The second part corresponds to the orbital energy decomposition in terms of the NOCVs. In this section, the positive and negative eigenvalues associated with each NOCV pair are printed. The orbital energy contribution for each NOCV pair is given in kcal/mol. Additionally, each contribution is further divided into kinetic and potential energy components. The sum of all orbital contributions must match the total shown in the Energy Decomposition section.</p>
+<table><tbody><tr><td colspan="5">-------------------------------------------------------------------------------- NOCV analysis</td></tr><tr><td>-------------------------------------------------------------------------------- negative eigen. (e)</td><th>positive eigen. (e)</th><th>DE_k (Kcal/mol)</th><th>DT_k (Kcal/mol)</th><th>DV_k (Kcal/mol)</th></tr><tr><td>-0.1972432025</td><td>0.1972432025</td><td>-7.50</td><td>-104.45</td><td>96.96</td></tr><tr><td>-0.0804518243</td><td>0.0804518243</td><td>-1.84</td><td>37.57</td><td>-39.41</td></tr><tr><td>-0.0804301830</td><td>0.0804301830</td><td>-1.84</td><td>37.56</td><td>-39.40</td></tr><tr><td>-0.0193872139</td><td>0.0193872139</td><td>-0.16</td><td>7.73</td><td>-7.89</td></tr><tr><td>-0.0062264967</td><td>0.0062264967</td><td>-0.03</td><td>-14.21</td><td>14.19</td></tr><tr><td>-0.0006108673</td><td>0.0006108673</td><td>-0.00</td><td>1.68</td><td>-1.68</td></tr><tr><td colspan="2">Sum_k:</td><td>-11.37</td><td>-34.13</td><td>22.76</td></tr></tbody></table>
+<p>In the case that an open-shell system, or molecular fragment is used, the NOCV section is divided into two parts. One for the spin-up (Alpha) and other for the spin down (Beta) NOCV pairs. The Energy Decomposition section remains the same. Here is the EDA-NOCV results for the CH +1 3 and CH -1 3 input shown in the previous section:</p>
+<table><tbody><tr><td colspan="5">-------------------------------------------------------------------------------- Energy Decomposition Analysis</td></tr><tr><td colspan="2">Energy Term</td><td colspan="3">-------------------------------------------------------------------------------- Hartree Kcal/mol</td></tr><tr><td colspan="2">Bond Energy</td><td colspan="3">-------------------------------------------------------------------------------- -0.1776418532 -111.47</td></tr><tr><td></td><td></td><td colspan="3">--------------------------------------------------------------------------------</td></tr><tr><td colspan="2">-------------------------------------------------------------------------------- negative eigen. positive (e) (e)</td><td></td><td></td><td></td></tr><tr><td>negative eigen. (e)</td><td>eigen.</td><td>DE_k (Kcal/mol) DE_k (Kcal/mol)</td><td>DT_k (Kcal/mol)</td><td>DV_k (Kcal/mol)</td></tr><tr><td>-0.4750327845 0.4750327845 -0.0599933854 -0.0599917403 -0.0510118074 -0.0510053349</td><td>0.0599933854 0.0599917403 0.0510118074 0.0510053349 0.0412188369 0.0252608236</td><td>-75.83 -1.69 -1.69 -0.85 -0.85 -0.92</td><td>-------------------------------------------------------------------------------- -124.63 8.51 8.51 -32.69</td><td>48.80 -10.19 -10.20 31.84</td></tr><tr><td>-0.0412188369</td><td></td><td></td><td>-32.68 9.08 -19.31</td><td>31.83 -10.00</td></tr><tr><td>-0.0252608236 -0.0006887548 -0.0003325354</td><td>0.0006887548 0.0003325354</td><td>-0.28 -0.00</td><td>-6.18 4.22</td><td>19.04</td></tr><tr><td></td><td>Sum_k Alpha:</td><td>0.00 -82.09</td><td></td><td>6.18</td></tr><tr><td>-------------------------------------------------------------------------------- --------------------------------------------------------------------------------</td><td>NOCV</td><td>analysis Beta</td><td></td><td>-4.21</td></tr><tr><td></td><td></td><td></td><td></td><td>103.09</td></tr><tr><td></td><td></td><td></td><td>-185.17</td><td></td></tr><tr><td></td><td>(e) --------------------------------------------------------------------------------</td><td></td><td>DT_k (Kcal/mol)</td><td>DV_k</td></tr><tr><td></td><td>positive eigen.</td><td></td><td></td><td>(Kcal/mol)</td></tr><tr><td>-0.4750299362</td><td>0.4750299362</td><td>-75.83</td><td>-124.66</td><td>48.84</td></tr><tr><td>-0.0599969082</td><td>0.0599969082</td><td>-1.69</td><td>8.47</td><td></td></tr><tr><td>-0.0599919936</td><td></td><td></td><td></td><td>-10.16</td></tr><tr><td>-0.0510107218 -0.0510066746</td><td>0.0599919936 0.0510107218 0.0510066746</td><td>-1.69 -0.85</td><td>8.50 -32.65</td><td>-10.18 31.80</td></tr><tr><td>-0.0412230078 -0.0252605237</td><td>0.0412230078</td><td>-0.92</td><td>9.10</td><td>31.82 -10.01</td></tr><tr><td>-0.0003325489</td><td>0.0252605237</td><td>-0.85</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td>-32.66</td><td></td></tr><tr><td></td><td></td><td>-0.28</td><td>-19.31</td><td>19.04</td></tr><tr><td>-0.0006887767</td><td>0.0006887767</td><td>-0.00</td><td>-6.19</td><td>6.18</td></tr><tr><td></td><td>0.0003325489</td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>0.00</td><td>4.21</td><td>-4.21</td></tr><tr><td></td><td>Sum_k Beta:</td><td>-82.09</td><td>-185.20</td><td>103.11</td></tr></tbody></table>
+<p>Additionally, the NOCV orbitals are saved in a file named base_name.NOCV.gbw . These orbitals can be visualized with standard visualization programs such as Molden or Avogadro.</p>
+<h2>5.37.3 Visualization of deformation density contributions using orca_plot</h2>
+<p>The deformation density can be expressed as a set of contributions associated with the paired NOCVs: ∆ ρ ( r ) = ∑ n /2 k =1 v k [ -ψ 2 -k + ψ 2 k ] = ∑ n /2 k =1 ∆ ρ k ( r )</p>
+<p>The new ORCA implementation allows for the visualization of these deformation density contributions. These densities are saved in the density container generated during the EDA-NOCV analysis. It is possible to visualize these densities by converting them into a readable format for standard visualization programs using orca_plot . To do this, the following command needs to be used:</p>
+<pre><code>orca_plot gbwfilename -i</code></pre>
+<p>This will show a set of different options to generate the corresponding files.</p>
+<pre><code>1 Enter type of plot 2 Enter no of orbital to plot 3 Enter operator of orbital (0=alpha,1=beta) 4 - Enter number of grid intervals 5 Select output file format 6 - Plot CIS/TD-DFT difference densities 7 - Plot CIS/TD-DFT transition densities 8 Set AO(=1) vs MO(=0) to plot 9 - List all available densities 10 - Perform Density Algebraic Operations 11 - Generate the plot 12 - exit this program</code></pre>
+<p>Option 9 will list all the densities saved during the EDA-NOCV calculation. The densities corresponding to the NOCV pairs are denoted by base_name.NOCV0_0.tmp , where 'base_name' is the name of the input file, and the number before the .tmp extension corresponds to the contribution to the deformation density. The first five density contributions are saved, so this number ranges from 0 to 4. In the case of an open-shell calculation, the first five spin-up and spin-down contributions are saved. They are labeled .NOCV0 for spin-up and .NOCV1 for spin-down contributions.</p>
+<pre><code>Index: Name of Density ------------------------------------------------------------------------0: base_name.scfp 1: base_name.scfr 2: base_name.P0.tmp 3: base_name.P1.tmp 4: base_name.NOCV0_0.tmp 5: base_name.NOCV0_1.tmp 6: base_name.NOCV0_2.tmp 7: base_name.NOCV0_3.tmp 8: base_name.NOCV0_4.tmp 9: base_name.NOCV1_0.tmp 10: base_name.NOCV1_1.tmp 11: base_name.NOCV1_2.tmp 12: base_name.NOCV1_3.tmp 13: base_name.NOCV1_4.tmp</code></pre>
+<p>To generate the plot, first select option 1 -Enter type of plot from the main menu. Then a secondary menu will be open:</p>
+<pre><code>1 -molecular orbitals 2 -(scf) electron density ...... (scfp ) => AVAILABLE 3 -(scf) spin density ...... (scfr ) => AVAILABLE 4 -natural orbitals . . .</code></pre>
+<p>Here, we select the second option 2 -(scf) electron density . Then it will ask if base_name.scfp is the density we want to use or not. This corresponds to the total density so we must say no. Then, it will require the name of the density we decided to use. Here, we put the name of the NOCV contribution that we are interested that was listed when we select option 9 -List all available densities in the main menu.</p>
+<p>It is also possible to select the format of the file we are going to generate by using 5 Select output file format in the main menu as well as the grid used in option 4 -Enter number of grid intervals . Finally, the plot file is generated by using option 11 - Generate the plot . Fig. 5.68 shows the deformation density contributions of the first four NOCVs.</p>
+<h2>Ϫ Caution</h2>
+<p>Do not confuse base_name.gbw with base_name.NOCV.gbw when wanting to plot the deformation densities. The former contains the deformation density associated to the NOCVs while the later contains the NOCVs orbitals.</p>
+<figure><figcaption><div class="caption">Fig. 5.68: Deformation density associated to the first four NOCVs for the Li + -NH 3</div></figcaption></figure>
+<h2>5.37.4 Dealing with fragments with ground state degeneracy</h2>
+<p>In systems where the electronic configuration for the fragments ground state is degenerate one might be required to take additional precautions to obtain accurate results for the EDA-NOCV decomposition. When dealing with degenerate fragments, the partially occupied molecular orbitals of the promolecule and molecule might not have the same orientation. This is reflected by obtaining integer values for the eigenvalues of the NOCV decomposition and having a higher orbital energy. This is caused by having an inappropiate orbital occupation when creating the promolecule molecular orbitals from the fragments molecular orbitals due to the degeneracy of the ground state electron configuration of the fragments.</p>
+<p>One example of this is the C-O system when considering the C and O fragments in their triplet ground state. In this case, the C atom has an electron configuration 2 s 2 2 p 2 while the O atom has a configuration 2 s 2 2 p 4 . The 2p orbitals in both fragments are degenerate. When they come together to make a bond, the molecular fragments are combined as shown in Fig. 5.69. Thus, the orbitals containing unpaired electrons in one fragment should be consistent with the ones of the other fragment. This is done by ensuring that the partially occupied orbitals in both fragments are in the same orientation.</p>
+<figure><figcaption><div class="caption">Fig. 5.69: Molecular orbitals of CO molecule</div></figcaption></figure>
+<p>So in case of C-O system, we must ensure that the two unpaired electrons of C atom are in the corresponding 2 p 1 y and 2 p 1 z orbitals such as they can combine with the two corresponding unpaired electrons of the 2 p 1 y and 2 p 1 z orbitals of the O atom. In this case, it would correspond to exchange the first partially occupied 2 p 1 x with the unoccupied orbital 2 p 0 z of the C atoms. In order to do this we need to first run a single-point calculation for the fragment that needs to be modified. Then, we can use the orbitals of that calculation as input for the C fragment calculation within the EDA-NOCVanalysis by specifying the MOREAD keyword in the method file for the corresponding fragment and then passing the .gbw file by using the %moinp word. Then we need to specify the molecular orbitals of the fragment we want to exchange. This can be done by using the Rotate feature in the %scf block.</p>
+<pre><code>%scf Rotate { MO1, MO2, Angle } { MO1, MO2, Angle, Operator1, Operator2 } { MO1, MO2} # Shortcut to swap MO1 and MO2. Angle=90 degrees. end end</code></pre>
+<p>Where MO1 and MO2 refer to the indices of the molecular orbitals we want to exchange. For more detail see Section Changing the Order of Initial Guess MOs and Breaking the Initial Guess Symmetry .</p>
+<pre><code>® Note The indices for molecular orbitals starts at zero.</code></pre>
+<p>The next input corresponds to the calculation of the C-O system from fragment in their triplet ground state. The keyword FRAG1_FS is used to flip the spin of the unpaired electrons of the C atom.</p>
+<pre><code>!BP86 TZVPP EDA %EDA FRAG1_METHODFILE "frag1.method" FRAG2_METHODFILE "BP86 TZVPP" FRAG1_M 3 FRAG1_FS TRUE FRAG2_M 3 end *xyz 0 1 C(1) 0.00000000000000 0.00000000000000 0.0 O(2) 0.00000000000000 0.00000000000000 1.136 *</code></pre>
+<p>In order to have the right occupancies, it is needed to exchange the molecular orbitals of the C fragment. The next input corresponds to the method file for the C fragment. By using the keywords MOREAD in the simple input line and %moinp the .gbw file is passed that contains the molecular orbitals of a previous single point calculation for the C atom. In the Rotate subsection, the 2 p 1 x and 2 p 0 z orbitals are exchanged, which corresponds to the indeces 2 and 4. So that the p orbital of carbon goes from 2 p 1 x 2 p 1 y 2 p 0 z to 2 p 0 x 2 p 1 y 2 p 1 z that is aligned with the one of oxygen 2 p 2 x 2 p 1 y 2 p 1 z .</p>
+<pre><code>BP86 TZVPP MOREAD %moinp "carbon.gbw" %scf Rotate {2,4} end end</code></pre>
+<p>This ensures consistency between the promolecule and molecule orbitals and minimizes the orbital energy.</p>
+<h2>5.37.5 EDA-NOCV and Double-Hybrid Functionals</h2>
+<p>One of the new features in ORCA is the option to use double-hybrid functionals for the EDA-NOCV analysis. These functionals introduce MP2 correlation energy contribution to the energy obtained from the DFT calculation. When using these functionals a new term labeled MP2 correlation is added in the energy decomposition analysis. This term corresponds to the difference in the MP2 correlation components between the molecule and its fragments.</p>
+<p>When double-hybrid functionals are used it is important to specify the type of density that must be computed: either relaxed or unrelaxed , and must be specified for the molecule and the fragments by using the %mp2 block as shown here:</p>
+<p>!B2PLYP def2-TZVP def2-TZVP/C EDA %mp2 Density relaxed end</p>
+<p>The NOCV decomposition is carried out with the density from a DFT calculations. It is possible to also obtain and plot the density associated with the MP2 correlation to the deformation density matrix. This density contribution is defined as DP mp 2 _ contribution = ∆ P mp 2 _ level -∆ P DFT _ level . This density is saved as base_name.DP0.mp2 in case of restricted calculations or base_name.DP0.mp2 for spin-up contribution and base_name.DP1.mp2 for spin-down contribution in the case of unrestricted calculations.</p>
+<h2>5.37.6 List of Related Keywords</h2>
+<table><caption><div class="caption">Table 5.28: %eda block keywords for the EDA/ETS-NOCV decomposition analysis.</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>FRAG1</td><td>&quot;&lt;keywords&gt;&quot;</td><td>Method for fragment 1, given as simple input keywords</td></tr><tr><td>FRAG2</td><td>&quot;&lt;keywords&gt;&quot;</td><td>Method for fragment 2, given as simple input keywords</td></tr><tr><td>FRAG1_METHODFILE</td><td>&quot;&lt;filename&gt;&quot;</td><td>File that contains the method (simple and/or block) input for frag- ment 1</td></tr><tr><td>FRAG2_METHODFILE</td><td>&quot;&lt;filename&gt;&quot;</td><td>File that contains the method (simple and/or block) input for frag- ment 2</td></tr><tr><td>FRAG1_C</td><td>0</td><td>Charge of molecular fragment 1</td></tr><tr><td>FRAG2_C</td><td>0</td><td>Charge of molecular fragment 2</td></tr><tr><td>FRAG1_M</td><td>1</td><td>Multiplicity of molecular fragment 1</td></tr><tr><td>FRAG2_M</td><td>1</td><td>Multiplicity of molecular fragment 2</td></tr><tr><td>FRAG1_SF</td><td>false</td><td>If true, flip the spin of the uncoupled electrons in fragment 1</td></tr><tr><td>FRAG2_SF</td><td>false</td><td>If true, flip the spin of the uncoupled electrons in fragment 2</td></tr></tbody></table>
+<h2>5.38 Local Energy Decomposition</h2>
+<p>The DLPNO-CCSD(T) method provides very accurate relative energies and allows to successfully predict many chemical phenomena. In order to facilitate the interpretation of coupled cluster results, we have developed the Local Energy Decomposition (LED) analysis [773, 774, 775], which permits to divide the total DLPNO-CCSD(T) energy (including the reference energy) into physically meaningful contributions. A practical guide to the LED scheme is reported in Section Section 5.38.1 and Section Section 5.38.2.</p>
+<p>Examples of applications of this scheme can be found in Ref. [776, 777, 778, 779, 780, 781].</p>
+<p>As a word of caution we emphasize that only the total energy is an observable and its decomposition is, to some extent, arbitrary. Nevertheless, the LED analysis appears to be physically well grounded and logical to us, it is straightforward to apply and comes typically at a negligible computational cost compared to DLPNO-CCSD(T) calculations. Starting from ORCA 4.1, the LED scheme is available for both closed shell and open shell calculations. The code has also been made parallel and more efficient.</p>
+<p>The LED scheme makes no assumption about the strength of the intermolecular interaction and hence it remains valid and consistent over the entire potential energy surface. Alternative schemes, such as the popular symmetry adapted perturbation theory, are perturbative in nature and hence are best applied to weakly interacting systems.</p>
+<p>The idea of the LED analysis is rather simple. In local correlation methods occupied orbitals are localized and can be readily assigned to pre-defined fragments in the molecule. The same can be done for the correlation energy in terms of pair correlation energies that refer to pairs of occupied orbitals. In this way, both the correlation and the reference energy can be decomposed into intra- and interfragment contributions. The fragmentation is user defined. Anarbitrary number of fragments can be defined. In the case that more than 2 fragments are defined, the interfragment interaction is printed for each fragment pair.</p>
+<p>A very important feature of the LED scheme is the possibility to distinguish between dispersive and non-dispersive parts of the DLPNO-CCSD(T) correlation energy. In brief, we exploit the fact that each CCSD pair correlation energy contribution can be expressed as a sum of double excitations from pairs of occupied orbitals into the virtual space. As in the DLPNO-CCSD(T) scheme the virtual space is spanned by Pair Natural Orbitals (PNOs) that are essentially local, the entire correlation energy can be decomposed into double excitations types, depending on where occupied and virtual orbitals are localized. For each pair of fragments, the sum of all excitations corresponding to the interaction of instantaneous local dipoles located on different fragments defines the so called 'London dispersion' attraction between the two fragments in the LED framework.</p>
+<p>For a system of two fragments, one can use as a reference point the geometrically and electronically relaxed fragments that constitute the interacting super-molecule. Relative to this reference state, the binding energy between the fragments can be written as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ∆ E geo -prep is the energy needed to distort the fragments from their equilibrium configuration to the interacting geometry (also called 'strain' in other energy decomposition schemes). The ∆ E ref. el -prep term represents the electronic preparation energy and describes how much energy is necessary to bring the fragments into the electronic structure that is optimal for interaction. E ref. exch is the inter-fragment exchange interaction (it always gives a binding contribution in our formalism) and E ref. elstat is the electrostatic energy interaction between the distorted electronic clouds of the fragments. The sum of these terms gives the Hatree-Fock energy in the closed shell case and the energy of the QRO determinant in the open shell case. Finally, the correlation energy is decomposed into dispersive E C -CCSD dispersion and non-dispersive ∆ E C -CCSD non -dispersion contributions plus a triples correction term to the interaction energy ∆ E C -( T ) int .</p>
+<p>The E C -CCSD dispersion term contains the London dispersion contribution from the strong pairs described above plus the interfragment component of the weak pairs, which is essentially dispersive in nature. The ∆ E C -CCSD non -dispersion correlation term serves to correct the contributions to the binding energy approximately included in the reference energy, e.g it counteracts the overpolarization typical of the HF method. It contains the so called charge transfer excitations from the strong pairs E CT ( X → Y ) C -SP + E CT ( X ← Y ) C -SP , which represent the sum of all double excitation contributions that do not conserve the charge within each fragment. Moreover, the non-dispersive term also includes the electronic preparation from strong ( ∆ E C -SP el -prep ) and weak ( ∆ E C -WP el -prep ) pairs. Finally, ∆ E C -( T ) int represents the triples correction contribution to the interaction energy between the fragments. In the LED scheme, this term can be further decomposed into intra- and interfragment components. This can be useful, for example, to estimate the London dispersion contribution from the triples correction term, as suggested in Ref. [777].</p>
+<p>'Local Energy Decomposition' (LED) analysis [773, 774, 775] is a tool for obtaining insights into the nature of intermolecular interactions by decomposing the DLPNO-CCSD(T) energy into physically meaningful contributions. For instance, this approach can be used to decompose the DLPNO-CCSD(T) interaction energy between a pair of interacting fragments, as detailed in Section Section 5.38. A useful comparison of this scheme with alternative ways of decomposing interaction energies is reported in Ref. [782, 783, 784].</p>
+<h2>5.38.1 Closed shell LED</h2>
+<p>LEDdecomposes separately the reference (Hartree-Fock) and correlation parts of the DLPNO-CCSD(T) energy. By default, the decomposition of the reference energy makes use of the RI-JK approximation. An RIJCOSX variant, which is much more efficient and has a much more favorable scaling for large systems, is also available, as detailed in section Section 5.38.7, and in [782] .</p>
+<pre><code>® Note For weakly interacting systems, !TightPNO settings are typically recommended.</code></pre>
+<h2>Basic Usage</h2>
+<p>All that is required to obtain this decomposition in ORCA is to define the fragments and specify the !LED keyword in the simple input line.</p>
+<pre><code>dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk LED</code></pre>
+<h2>Example</h2>
+<p>As an example, the interaction of H 2 O with the carbene CH 2 at the PBE0-D3/def2-TZVP-optimized geometry can be analyzed within the LED framework using the following input file:</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO LED *xyz 0 1 C(1) 0.16044643459993 0.10093183177121 0.22603351276210 H(1) 1.04516129053973 -0.06834886965353 -0.41865951747519 H(1) -0.12579332868173 1.14737893892114 0.00305818518771 O(2) -1.48285705560792 -1.31933824653169 2.29891474420047 H(2) -0.91417368674145 -0.93085192992263 1.60917234463506 H(2) -1.15648922489703 -2.21246650333085 2.42094328175662 *</code></pre>
+<p>The corresponding output file is reported below. The DLPNO-CCSD(T) energy components are printed out in different parts of the output as follows:</p>
+<pre><code>E(0) ... -114.913309038 E(CORR)(corrected) ... -0.350582526 Triples Correction (T) ... -0.006098691 E(CCSD(T)) ... -115.269990255</code></pre>
+<p>At the beginning of the LED part of the output, information on the fragments and the assignment of localized MOs to fragments are provided.</p>
+<pre><code>=========================================================== LOCAL ENERGY DECOMPOSITION FOR DLPNO-CC METHODS =========================================================== Maximum Iterations for the Localization .. 600 Tolerance for the Localization .. 1.00e-06 Number of fragments = 2 Fragment 1: 0 1 2 Fragment 2: 3 4 5 Populations of internal orbitals onto Fragments: 0: 1.000 0.000 assigned to fragment 1</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>1:</td><td>0.000</td><td>1.000 assigned to fragment 2</td></tr><tr><td>2:</td><td>1.022</td><td>0.008 assigned to fragment 1</td></tr><tr><td>3:</td><td>0.001</td><td>0.999 assigned to fragment 2</td></tr><tr><td>4:</td><td>0.001</td><td>0.999 assigned to fragment 2</td></tr><tr><td>5:</td><td>1.018</td><td>0.000 assigned to fragment 1</td></tr><tr><td>6:</td><td>1.019</td><td>0.000 assigned to fragment 1</td></tr><tr><td>7:</td><td>0.006</td><td>1.013 assigned to fragment 2</td></tr><tr><td>8:</td><td>0.000</td><td>1.016 assigned to fragment 2</td></tr></tbody></table>
+<p>The decomposition of the Hatree-Fock energy into intra- and inter-fragment contributions follows. It is based on the localization of the occupied orbitals.</p>
+<table><tbody><tr><td colspan="7">----------------------------------------</td></tr><tr><td>Nuclear repulsion One electron energy ↪ → 329.255677319972)</td><td>= =</td><td>28.952049689006 -214.430545074583</td><td>(T=</td><td>114.825132245389,</td><td>V=</td><td>-</td></tr><tr><td>Two electron energy ↪ → -1.093728314816)</td><td>=</td><td>70.565186347093</td><td>(J=</td><td>71.658914661909,</td><td>K=</td><td>␣</td></tr><tr><td>Total energy</td><td>=</td><td>---------------------- -114.913309038483</td><td></td><td></td><td></td><td></td></tr><tr><td>Consistency check ↪ → energies)</td><td>=</td><td>-114.913309038483</td><td>(sum of</td><td>intra- and inter-fragment␣</td><td></td><td></td></tr><tr><td>Kinetic energy Potential energy</td><td>= =</td><td>114.825132245389 -229.738441283873</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>----------------------</td><td></td><td></td><td></td><td></td></tr><tr><td>Virial ratio</td><td>=</td><td>2.000767922417</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="7">------------------------------------------- INTRA-FRAGMENT REF. ENERGY FOR FRAGMENT 1 -------------------------------------------</td></tr><tr><td>Nuclear repulsion One electron energy ↪ → 102.423922713669)</td><td>= =</td><td>6.037208782874 -63.553431032444</td><td>(T=</td><td>38.870491681225,</td><td>V=</td><td>-</td></tr><tr><td>Two electron energy ↪ → -0.260228425495)</td><td>=</td><td>18.675214766985</td><td>(J=</td><td>18.935443192480,</td><td>K=</td><td>␣</td></tr><tr><td>Total energy</td><td>=</td><td>---------------------- -38.841007482585</td><td></td><td></td><td></td><td></td></tr><tr><td>Kinetic energy</td><td>=</td><td>38.870491681225</td><td></td><td></td><td></td><td></td></tr><tr><td>Potential energy</td><td>=</td><td>-77.711499163811</td><td></td><td></td><td></td><td></td></tr><tr><td>Virial ratio</td><td>=</td><td>---------------------- 1.999241476056</td><td></td><td></td><td></td><td></td></tr><tr><td colspan="7">------------------------------------------- INTRA-FRAGMENT REF. ENERGY FOR FRAGMENT 2 -------------------------------------------</td></tr><tr><td>Nuclear repulsion One electron energy ↪ → 198.980325189521)</td><td>= =</td><td>9.103529882464 -123.025684625357</td><td>(T=</td><td>75.954640564164,</td><td>V=</td><td>-</td></tr><tr><td>Two electron energy ↪ → -0.823207254620)</td><td>=</td><td>37.916781954190 ----------------------</td><td>(J=</td><td>38.739989208810,</td><td>K=</td><td>␣</td></tr><tr><td>Total energy</td><td>=</td><td>-76.005372788703</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Kinetic energy = 75.954640564164 Potential energy = -151.960013352867 ----------------------Virial ratio = 2.000667927913 ----------------------------------------------------INTER-FRAGMENT REF. ENERGY FOR FRAGMENTs 2 AND 1 ----------------------------------------------------Nuclear repulsion = 13.811311023669 Nuclear attraction = -27.851429416782 Coulomb repulsion = 13.983482260618 ----------------------Sum of electrostatics = -0.056636132494 ( -35.540 kcal/mol) Two electron exchange = -0.010292634701 ( -6.459 kcal/mol) ----------------------Total REF. interaction = -0.066928767195 ( -41.998 kcal/mol) Sum of INTRA-fragment REF. energies = -114.846380271288 Sum of INTER-fragment REF. energies = -0.066928767195 ---------------------Total REF. energy = -114.913309038483</code></pre>
+<p>Afterwards, a first decomposition of the correlation energy is carried out. The different energy contributions to the correlation energy (strong pairs, weak pairs and triples correction) are decomposed into intra- and inter-fragment contributions. This decomposition is carried out based on the localization of the occupied orbitals.</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Total interaction -0.004577411945 ( -2.872 kcal/mol) Sum of INTRA-fragment correlation energies = -0.352103804799 Sum of INTER-fragment correlation energies = -0.004577411945 ---------------------Total correlation energy = -0.356681216744</code></pre>
+<p>Afterwards, a summary with the decomposition of the total energy (reference energy + correlation) into intra- and inter-fragment contributions is printed.</p>
+<p>Hence, the decomposition reported above allows one to decompose all the components of the DLPNO-CCSD(T) energy into intrafragment and interfragment contributions simply based on the localization of the occupied orbitals. In order to convert the intra-fragment energy components into contributions to the binding energy, single point energy calculations must be carried out on the isolated monomers, frozen in the geometry they have in the adduct, and the corresponding terms must be subtracted. Note that one can also include the geometrical deformation energy (also called 'strain') by simply computing the energy of the geometrically relaxed fragments (see Section Section 5.38 for further information).</p>
+<p>For the DLPNO-CCSD strong pairs, which typically dominate the correlation energy, a more sophisticated decomposition, based on the localization of both occupied orbitals and PNOs, is also carried out and printed. Accordingly, the correlation energy from the strong pairs is divided into intra-fragment, dispersion and charge transfer components. Note that, due to the charge transfer excitations, the resulting intra-fragment contributions (shown below) differ from the ones obtained above.</p>
+<p>(continues on next page)</p>
+<pre><code>Intra fragment contributions: INTRA Fragment 1 -0.132849855 INTRA Fragment 2 -0.209493798 Charge transfer contributions: Charge Transfer 1 to 2 -0.005725404 Charge Transfer 2 to 1 -0.000899609 Dispersion contributions: Dispersion 2,1 -0.001594204 Singles contributions: Singles energy 0.000000002</code></pre>
+<p>More detailed information into the terms reported above can be found in Section Section 5.38 and in Ref. [773]. All the individual double excitations contributions constituting the terms reported above can be printed by specifying 'printlevel 3' in the %mdci block. Finally, a summary with the most important terms of the DLPNO-CCSD energy, which are typically discussed in standard applications, is printed.</p>
+<pre><code>-------------------------------------------------FINAL SUMMARY DLPNO-CCSD ENERGY DECOMPOSITION (Eh) -------------------------------------------------Intrafragment REF. energy: Intra fragment 1 (REF.) -38.841007483 Intra fragment 2 (REF.) -76.005372789 Interaction of fragments 2 and 1: Electrostatics (REF.) -0.056636132 Exchange (REF.) -0.010292635 Dispersion (strong pairs) -0.001594204 Dispersion (weak pairs) -0.000015771 Sum of non dispersive correlation terms: Non dispersion (strong pairs) -0.348968665 Non dispersion (weak pairs) -0.000003885</code></pre>
+<p>Note that the 'Non dispersion' terms include all the components of the correlation energy except London dispersion [776, 783]. For the strong pairs, 'Non dispersion' includes charge transfer, intrafragment double excitations and singles contributions. For the weak pairs, it corresponds to the intrafragment correlation contribution. In order to convert the non dispersion correlation components into contributions to the binding energy, single point energy calculations must be carried out on the isolated monomers.</p>
+<h2>5.38.2 Example: LED analysis of intermolecular interactions</h2>
+<p>The water-carbene example from the previous section will be used to demonstrate how to analyze intermolecular interactions between two fragments using the LED decomposition (note that all energies are given in a.u. if not denoted otherwise). As often done in practical applications, we will be using geometries optimized at the DFT (PBE0-D3/def2-TZVP) level of theory on which DLPNO-CCSD(T) (cc-pVDZ,TightPNO) single point energies are computed. Note that in practice, basis sets of triple-zeta quality or larger are recommended. In the first step, the geometries of the dimer, H 2 O and CH 2 are optimized and DLPNO-CCSD(T) energies are computed to yield E opt dimer and E opt monomers . The input examples for the single-point DLPNO-CCSD(T) energies of the monomers at their optimized geometries and the necessary energies from the output files of these runs are as follows:</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO # H2O optimized at the PBE0-D3/def2-TZVP level (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<pre><code>*xyz 0 1 O -1.47291471015599 -1.29006364761118 2.29452038079177 H -0.88264582939506 -0.99404999457575 1.59835337186103 H -1.22136730983407 -2.20010680974562 2.46533021449572 *</code></pre>
+<pre><code>E(0) ... -76.026656692 E(CORR)(corrected) ... -0.211428886 Triples Correction (T) ... -0.002932804 E(CCSD(T)) ... -76.241018382</code></pre>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO # CH2 optimized at the PBE0-D3/def2-TZVP level *xyz 0 1 C 0.16044643459993 0.10093183177121 0.22603351276210 H 1.04516129053973 -0.06834886965353 -0.41865951747519 H -0.12579332868173 1.14737893892114 0.00305818518771 *</code></pre>
+<pre><code>E(0) ... -38.881042677 E(CORR)(corrected) ... -0.138447953 Triples Correction (T) ... -0.002873032 E(CCSD(T)) ... -39.022363662</code></pre>
+<p>Single-point DLPNO-CCSD(T) energies of the monomers at their in-adduct geometries are also necessary. The corresponding inputs and the necessary output parts for these calculations are as follows:</p>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO # H2O at the CH2-H2O geometry optimized at the PBE0-D3/def2-TZVP level *xyz 0 1 O -1.48285705560792 -1.31933824653169 2.29891474420047 H -0.91417368674145 -0.93085192992263 1.60917234463506 H -1.15648922489703 -2.21246650333085 2.42094328175662 *</code></pre>
+<pre><code>E(0) ... -76.026011663 E(CORR)(corrected) ... -0.211931843 Triples Correction (T) ... -0.002963338 E(CCSD(T)) ... -76.240906844</code></pre>
+<pre><code>! dlpno-ccsd(t) cc-pvdz cc-pvdz/c cc-pvtz/jk rijk verytightscf TightPNO # CH2 at the CH2-H2O geometry optimized at the PBE0-D3/def2-TZVP level *xyz 0 1 C 0.16044643459993 0.10093183177121 0.22603351276210 H 1.04516129053973 -0.06834886965353 -0.41865951747519 H -0.12579332868173 1.14737893892114 0.00305818518771 *</code></pre>
+<pre><code>E(0) ... -38.881085139 E(CORR)(corrected) ... -0.138097323 Triples Correction (T) ... -0.002869022 E(CCSD(T)) ... -39.022051484</code></pre>
+<p>These energies are summarized in Table 5.29.</p>
+<table><caption><div class="caption">Table 5.29: Energies of the H 2 O-CH 2 example for illustrating how the different LED contributions are valuated. The superscript opt denotes energies of optimized structures, fixed denotes energies of isolated fragments in the dimer structure. In the last column the energy of the dimer is reported.</div></caption><tbody><tr><th>Energy [a.u.]</th><th>H 2 O opt</th><th>H 2 O fixed</th><th>CH opt 2</th><th>CH fixed 2</th><th>H 2 O- CH 2</th></tr><tr><td>E HF</td><td>-76.026656692</td><td>-76.026011663</td><td>-38.881042677</td><td>-38.881085139</td><td>-114.913309038</td></tr><tr><td>E c CCSD</td><td>-0.211428886</td><td>-0.211931843</td><td>-0.138447953</td><td>-0.138097323</td><td>-0.350582526</td></tr><tr><td>E c (T)</td><td>-0.002932804</td><td>-0.002963338</td><td>-0.002873032</td><td>-0.002869022</td><td>-0.006098691</td></tr><tr><td>E tot</td><td>-76.241018382</td><td>-76.240906844</td><td>-39.022363662</td><td>-39.022051484</td><td>-115.269990255</td></tr></tbody></table>
+<p>Note that for this example, we do not include any BSSE correction. For this system we obtain a binding energy of</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which is -4.147 kcal/mol.</p>
+<p>The basic principles and the details of the LED are discussed in section Local Energy Decomposition . The first contribution to the binding energy is the energy penalty for the monomers to distort into the geometry of the dimer (see in Equation (5.185)).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This contribution is computed as the difference of the DLPNO-CCSD(T) energy of the monomers in the structure of the dimer ( E fixed monomers ) and of the relaxed monomers ( E opt monomers ). The following energies are obtained:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which amounts to 0.266 kcal/mol. Typically, the triples correction is evaluated separately:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This contributes -0.167 kcal/mol. The next terms in Equation (5.185) concern the reference energy contributions. The first one is the electronic preparation in the reference, which is evaluated as the difference of the Intra REF. energy of the fragments (see previous section) and the reference energy of the separate molecules at the dimer geometry:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which amounts to 0.060716530712 a.u. or 38.100 kcal/mol. The next two contributions stem from the decomposition of the reference inter-fragment contributions E ref. elstat = -0 . 056636132 (-35.540 kcal/mol) and E ref. exch = -0 . 010292635 (-6.459 kcal/mol) and can be found directly in the LED output ( Electrostatics (REF.) and Exchange (REF.) ). The correlation energy also contains an electronic preparation contribution, but it is typically included in the correlation contribution ∆ E C -CCSD non -dispersion . Adding the non-dispersive strong and weak pairs contributions from the LED output ( Non dispersion (strong pairs) and Non dispersion (weak pairs) ) one obtains :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>from which we have to subtract the sum of the correlation contributions of the monomers at the dimer geometry</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>which is 0.663 kcal/mol. The dispersive contribution can be directly found in the LED output ( Dispersion (strong pairs) and Dispersion (weak pairs) ) and amounts to E C -CCSD dispersion = -0 . 001609975 which is -1.010 kcal/mol. So all terms that we have evaluated so far are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+</div>
+</body>
+</html>

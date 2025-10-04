@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part080</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>B.3.36 QM/MM</h2>
+<ol>
+<li style="list-style-type: '1. ';">Rokhsana, D.; Large, T. A. G.; Dienst, M. C.; Retegan, M.; Neese, F. A realistic in silico model for structure/function studies of molybdenum-copper CO dehydrogenase. Inorg. Chem. , 2016 , 21, 491-499.</li>
+<li style="list-style-type: '2. ';">Retegan, M.; Krewald, V.; Mamedov, F.; Neese, F.; Lubitz, W.; Cox, N.; Pantazis, D. A. A five-coordinate Mn(IV) intermediate in biological water oxidation: spectroscopic signature and a pivot mechanism for water binding. Chem. Sci. , 2016 , 7, 72-84.</li>
+<li style="list-style-type: '3. ';">Sundararajan, M.; Neese, F. Distal Histidine Modulates the Unusual O-Binding of Nitrite to Myoglobin: Evidence from the Quantum Chemical Analysis of EPR Parameters. Inorg. Chem. , 2015 , 54, 7209-7217.</li>
+</ol>
+<h2>B.3.37 QM/MM calculations with ORCA</h2>
+<ol>
+<li style="list-style-type: '1. ';">Schulz, C. E.; van Gastel, M.; Pantazis, D. A.; Neese, F. Converged Structural and Spectroscopic Properties for Refined QM/MM Models of Azurin. Inorg. Chem. , 2021 , 60 (10), 7399-7412. DOI: 10.1021/acs.inorgchem.1c00640.</li>
+<li style="list-style-type: '2. ';">Schulz, C. E.; Castillo, R. G.; Pantazis, D. A.; DeBeer, S.; Neese, F. Structure-Spectroscopy Correlations for Intermediate q of Soluble Methane Monooxygenase: Insights from QM/MM Calculations. J. Am. Chem. Soc. , 2021 , 143 (17), 6560-6577. DOI: 10.1021/jacs.1c01180.</li>
+<li style="list-style-type: '3. ';">Schöneboom, J.; Neese, F.; Thiel, W. Towards Identification of the Compound I Reactive Intermediate in Cytochrome P450 Chemistry: A QM/MM Study of its EPR and Mössbauer Parameters. J. Am. Chem. Soc. , 2005 , 127, 5840-5853.</li>
+<li style="list-style-type: '4. ';">Wanko, M.; Hoffmann, M.; Strodel, P.; Thiel, W.; Neese, F.; Frauenheim, T.; Elstner, M. Calculating Absorption Shifts for Retinal Proteins: Computational Challenges. J. Phys. Chem. B , 2005 , 109, 3606-3615.</li>
+<li style="list-style-type: '5. ';">Sundararajan, M.; Neese, F. Detailed QM/MM study of the Electron Paramagnetic Resonance Parameters of Nitrosyl Myoglobin. J. Chem. Theory Comput. , 2012 , 8, 563-574.</li>
+<li style="list-style-type: '6. ';">Radoul, M.; Sundararajan, M.; Potapov, A.; Riplinger, C.; Neese, F.; Goldfarb, D. Revisiting the nitrosyl complex of myoglobin by high-field pulse EPR spectroscopy and quantum mechanical calculations. Phys. Chem. Chem. Phys. , 2010 , 12, 7276-7289.</li>
+<li style="list-style-type: '7. ';">Sundararajan, M.; Riplinger, C.; Orio, M.; Wennmohs, F.; Neese, F. Spectroscopic Properties of ProteinBound Cofactors: Calculation by Combined Quantum Mechanical/Molecular Mechanical (QM/MM) Approaches. In Encyclopedia of Inorganic Chemistry . 2009 .</li>
+<li style="list-style-type: '8. ';">Altun, A.; Kumar, D.; Neese, F.; Thiel, W. Multi-reference Ab Initio QM/MM Study on Intermediates in the Catalytic Cycle of Cytochrome P450cam. J. Phys. Chem. , 2008 , 112, 12904-12910.</li>
+<li style="list-style-type: '9. ';">Sinnecker, S.; Neese, F. QM/MM Calculations with DFT for Taking into Account Protein Effects on the EPR and Optical Spectra of Metalloproteins. Plastocyanin as a Case Study. J. Comp. Chem. , 2006 , 27, 1463-1475.</li>
+<li style="list-style-type: '10. ';">Riplinger, C.; Neese, F. The Reaction Mechanism of Cytochrome P450 NO Reductase: A Detailed Quantum Mechanics/Molecular Mechanics Study. ChemPhysChem , 2011 , 12, 3192-3203.</li>
+<li style="list-style-type: '11. ';">Chalupský, J.; Neese, F.; Solomon, E. I.; Ryde, U.; Rulíšek, L. Identification of intermediates in the reaction cycle of multicopper oxidases by quantum chemical calculations of spectroscopic parameters. Inorg. Chem. , 2006 , 45, 11051-11059.</li>
+</ol>
+<h2>B.3.38 Relativity and SARC Basis Sets</h2>
+<ol>
+<li style="list-style-type: '1. ';">Pantazis, D. A.; Chen, X.-Y.; Landis, C. R.; Neese, F. J. Chem. Theory Comput. , 2008 , 4, 908-919.</li>
+<li style="list-style-type: '2. ';">Bühl, M.; Reimann, C.; Pantazis, D. A.; Bredow, T.; Neese, F. Geometries of Third-Row TransitionMetal Complexes from Density-Functional Theory. J. Chem. Theory Comput. , 2008 , 4, 1449-1459. DOI: 10.1021/ct800172j.</li>
+<li style="list-style-type: '3. ';">Pantazis, D. A.; Neese, F. J. Chem. Theory Comput. , 2009 , 5, 2229-2238.</li>
+<li style="list-style-type: '4. ';">Pantazis, D. A.; Neese, F. J. Chem. Theory Comput. , 2011 , 7, 677-684.</li>
+<li style="list-style-type: '5. ';">Pantazis, D. A.; Neese, F. Theor. Chem. Acc. , 2012 , 131, 1292.</li>
+<li style="list-style-type: '6. ';">Rolfes, Julian D.; Neese, Frank; Pantazis, Dimitrios A. All-Electron Scalar Relativistic Basis Sets for the Elements Rb-Xe. J. Comput. Chem. , 2020 , 41, 1842-1849. DOI: 10.1002/jcc.26355.</li>
+<li style="list-style-type: '7. ';">Aravena, D.; Neese, F.; Pantazis, Dimitrios A. Improved Segmented All-Electron Relativistically Contracted Basis Sets for the Lanthanides. J. Chem. Theory Comput. , 2016 , 12, 1148-1156. DOI: 10.1021/acs.jctc.5b01048.</li>
+</ol>
+<h2>B.3.39 Resonance Raman</h2>
+<ol>
+<li style="list-style-type: '1. ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Efficient Simulation of Overtones and Combination Bands in Resonant Raman Spectra. J. Chem. Phys. , 2019 , 150 (21), 044105. DOI: 10.1063/1.5099247.</li>
+<li style="list-style-type: '2. ';">Maganas, D.; Trunschke, A.; Schlogl, R.; Neese, F. A unified view on heterogeneous and homogeneous catalysts through a combination of spectroscopy and quantum chemistry. Faraday Discuss. , 2016 , 188, 181-197.</li>
+</ol>
+<h2>B.3.40 SOC on TD-DFT</h2>
+<ol>
+<li style="list-style-type: '1. ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Predicting Phosphorescence Rates of Light Organic Molecules Using Time-Dependent Density Functional Theory and the Path Integral Approach to Dynamics. J. Chem. Theory Comput. , 2019 , 15 (3), 1896-1904. DOI: 10.1021/acs.jctc.8b00841.</li>
+</ol>
+<h2>B.3.41 SOSCF Method</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F. Approximate Second Order Convergence for Spin Unrestricted Wavefunctions. Chem. Phys. Lett. , 2000 , 325, 93-98.</li>
+</ol>
+<h2>B.3.42 The Split-J, Split-RI-J, RIJCOSX and RI-JK methods</h2>
+<ol>
+<li style="list-style-type: '1. ';">Neese, F.; Wennmohs, F.; Hansen, A.; Becker, U. Chem. Phys. , 2009 , 356, 98-109.</li>
+<li style="list-style-type: '2. ';">Kossmann, Simone; Neese, Frank. Comparison of two efficient approximate Hartee-Fock approaches. Chem. Phys. Lett. , 2009 , 481 (4-6), 240-243. DOI: 10.1016/j.cplett.2009.10.007.</li>
+<li style="list-style-type: '3. ';">Izsák, Róbert; Neese, Frank. An Overlap Fitted Chain of Spheres Exchange Method. J. Chem. Phys. , 2011 , 135, 144105. DOI: 10.1063/1.3644029.</li>
+<li style="list-style-type: '4. ';">Izsák, R.; Neese, F. Speeding up spin-component-scaled third-order pertubation theory with the chain of spheres approximation: the COSX-SCS-MP3 method. Mol. Phys. , 2013 , 111, 1190.</li>
+<li style="list-style-type: '5. ';">Kossmann, S.; Neese, F. Efficient Structure Optimization with Second-Order Many-Body Perturbation Theory: The RIJCOSX-MP2 Method. J. Chem. Theory Comput. , 2010 , 6, 2325-2338.</li>
+<li style="list-style-type: '6. ';">Neese, F. An Improvement of the Resolution of the Identity Approximation for the Calculation of the Coulomb Matrix. J. Comp. Chem. , 2003 , 24, 1740-1747.</li>
+</ol>
+<h2>B.3.43 sTDA and sTD-DFT approaches for electronic spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Grimme, S. A simplified Tamm-Dancoff density functional approach for the electronic excitation spectra of very large molecules. J. Chem. Phys. , 2013 , 138, 244104. DOI: 10.1063/1.4811330.</li>
+<li style="list-style-type: '2. ';">Bannwarth, C.; Grimme, S. A simplified time-dependent density functional theory approach for electronic ultraviolet and circular dichroism spectra of very large molecules. Comp. Theor. Chem. , 2014 , 1040 -1041, 45-53. DOI: 10.1016/j.comptc.2014.02.023.</li>
+<li style="list-style-type: '3. ';">Risthaus, T.; Hansen, A.; Grimme, S. Phys. Chem. Chem. Phys. , 2014 , 16, 14408-14419.</li>
+</ol>
+<h2>B.3.44 XAS/XES</h2>
+<ol>
+<li style="list-style-type: '1. ';">Van Kuiken, B. E.; Hahn, A. W.; Maganas, D.; DeBeer, S. Measuring Spin-Allowed and Spin-Forbidden d-d Excitations in Vanadium Complexes with 2p3d Resonant Inelastic X-ray Scattering. Inorg. Chem. , 2016 , 55, 11497-11501.</li>
+<li style="list-style-type: '2. ';">Rees, J. A.; Wandzilak, A.; Maganas, D.; Wurster, N. I. C.; Hugenbruch, S.; Kowalska, J. K.; Pollock, C. J.; Lima, F. A.; Finkelstein, K. D.; DeBeer, S. Experimental and theoretical correlations between vanadium Kedge X-ray absorption and K emission spectra. J. Biol. Inorg. Chem. , 2016 , 21, 793-805.</li>
+<li style="list-style-type: '3. ';">Martin-Diaconescu, V.; Chacon, K. N.; Delgado-Jaime, M. U.; Sokaras, D.; Weng, T. C.; DeBeer, S.; Blackburn, N. J. K β Valence to Core X-ray Emission Studies of Cu(I) Binding Proteins with Mixed Methionine Histidine Coordination. Relevance to the Reactivity of the M- and H-sites of Peptidylglycine Monooxygenase. Inorg. Chem. , 2016 , 55, 3431-3439.</li>
+<li style="list-style-type: '4. ';">Kowalska, J. K.; Hahn, A. W.; Albers, A.; Schiewer, C. E.; Bjornsson, R.; Lima, F. A.; Meyer, F.; DeBeer, S. X-ray Absorption and Emission Spectroscopic Studies of L2Fe2S2 (n) Model Complexes: Implications for the Experimental Evaluation of Redox States in Iron-Sulfur Clusters. Inorg. Chem. , 2016 , 55, 4485-4497.</li>
+<li style="list-style-type: '5. ';">Rees, J. A.; Martin-Diaconescu, V.; Kovacs, J. A.; DeBeer, S. X-ray Absorption and Emission Study of Dioxygen Activation by a Small-Molecule Manganese Complex. Inorg. Chem. , 2015 , 54, 6410-6422.</li>
+<li style="list-style-type: '6. ';">Rees, J. A.; Bjornsson, R.; Schlesier, J.; Sippel, D.; Einsle, O.; DeBeer, S. The Fe-V Cofactor of Vanadium Nitrogenase Contains an Interstitial Carbon Atom. Angew. Chem. Int. Ed. , 2015 , 54, 13249-13252.</li>
+<li style="list-style-type: '7. ';">Maganas, D.; Trunschke, A.; Schlogl, R.; Neese, F. A unified view on heterogeneous and homogeneous catalysts through a combination of spectroscopy and quantum chemistry. Faraday Discuss. , 2016 , 188, 181-197.</li>
+</ol>
+<h2>B.3.45 X-Ray Absorption and X-Ray Emission Spectra</h2>
+<ol>
+<li style="list-style-type: '1. ';">Maganas, Dimitrios; Kowalska, Joanna K.; Nooijen, Marcel; DeBeer, Serena; Neese, Frank. Comparison of Multireference Ab Initio Wavefunction Methodologies for X-Ray Absorption Edges: A Case Study on [Fe(II/III)Cl₄]²⁻/¹⁻ Molecules. J. Chem. Phys. , 2019 , 150 (10), 104106. DOI: 10.1063/1.5051613.</li>
+<li style="list-style-type: '2. ';">Roemelt, M.; Beckwith, M. A.; Duboc, C.; Collomb, M.-N.; Neese, F.; DeBeer, S. Manganese K-Edge X-Ray Absorption Spectroscopy as a Probe of the Metal-Ligand Interactions in Coordination Compounds. Inorg. Chem. , 2012 , 51, 680-687.</li>
+<li style="list-style-type: '3. ';">Chandrasekaran, P.; Stieber, S. C. E.; Collins, T. J.; Que, L.; Neese, F.; DeBeer, S. Prediction of highvalent iron K-edge absorption spectra by time-dependent Density Functional Theory. Dalton Trans. , 2011 , 40, 11070-11079.</li>
+<li style="list-style-type: '4. ';">Beckwith, M. A.; Roemelt, M.; Collomb, M. N.; Duboc, C.; Weng, T. C.; Bergmann, U.; Glatzel, P.; Neese, F.; DeBeer, S. Manganese K beta X-ray Emission Spectroscopy As a Probe of Metal-Ligand Interactions. Inorg. Chem. , 2011 , 50, 8397-8409.</li>
+<li style="list-style-type: '5. ';">Lee, N.; Petrenko, T.; Bergmann, U.; Neese, F.; DeBeer, S. Probing Valence Orbital Composition with Iron K beta X-ray Emission Spectroscopy. J. Am. Chem. Soc. , 2010 , 132, 9715-9727.</li>
+<li style="list-style-type: '6. ';">DeBeer-George, S.; Neese, F. Calibration of Scalar Relativistic Density Functional Theory for the Calculation of Sulfur K-Edge X-ray Absorption Spectra. Inorg. Chem. , 2010 , 49, 1849-1853.</li>
+</ol>
+<ol>
+<li style="list-style-type: '7. ';">DeBeer-George, S.; Petrenko, T.; Neese, F. Prediction of Iron- K-edge Absorption Spectra using TimeDependent Density Functional Theory. J. Phys. Chem. A , 2008 , 112, 12936-12943.</li>
+<li style="list-style-type: '8. ';">DeBeer-George, S.; Petrenko, T.; Neese, F. Time-dependent density functional calculations of ligand K-edge X-ray absorption spectra. Inorg. Chim. Acta , 2008 , 361, 965-972.</li>
+</ol>
+<h2>B.4 Applications that make use of or include the following</h2>
+<ol>
+<li style="list-style-type: '1. ';">Atanasov, Mihail; Ganyushin, Dmitry; Pantazis, Dimitrios A.; Sivalingam, Kantharuban; Neese, Frank. Detailed Ab Initio First-Principles Study of the Magnetic Anisotropy in a Family of Trigonal Pyramidal Iron(II) Pyrrolide Complexes. Inorg. Chem. , 2011 , 50 (16), 7460-7477. DOI: 10.1021/ic200196k.</li>
+<li style="list-style-type: '2. ';">Maganas, Dimitrios; Sottini, Silvia; Kyritsis, Panayotis; Groenen, Edgar J. J.; Neese, Frank. Theoretical Analysis of the Spin Hamiltonian Parameters in Co(II)S₄ Complexes, Using Density Functional Theory and Correlated ab initio Methods. Inorg. Chem. , 2011 , 50 (18), 8741-8754. DOI: 10.1021/ic200299y.</li>
+<li style="list-style-type: '3. ';">Petrenko, T.; Ray, K.; Wieghardt, K.; Neese, F. Vibrational Markers for the Open-Shell Character of Metal bis-Dithiolenes: An Infrared, resonance Raman and Quantum Chemical Study. J. Am. Chem. Soc. , 2006 , 128, 4422-4436.</li>
+<li style="list-style-type: '4. ';">Neese, F.; Pantazis, D. A. What is not required to make a single molecule magnet. Faraday Discuss. , 2011 , 148, 229-238.</li>
+<li style="list-style-type: '5. ';">Kruse, H.; Mladek, A.; Gkionis, K.; Hansen, A.; Grimme, S.; Sponer, J. Quantum Chemical Benchmark Study on 46 RNA Backbone Families Using a Dinucleotide Unit. J. Chem. Theory Comput. , 2015 , 11, 4972.</li>
+<li style="list-style-type: '6. ';">Qu, Z.-W.; Hansen, A.; Grimme, S. Co-C Bond Dissociation Energies in Cobalamin Derivatives and Dispersion Effects: Anomaly or Just Challenging? J. Chem. Theory Comput. , 2015 , 11, 1037.</li>
+<li style="list-style-type: '7. ';">Hansen, A.; Bannwarth, C.; Grimme, S.; Petrović, P.; Werlé, C.; Djukic, J.-P. The Thermochemistry of London Dispersion-Driven Transition Metal Reactions: Getting the 'Right Answer for the Right Reason'. ChemistryOpen , 2014 , 3, 177.</li>
+<li style="list-style-type: '8. ';">Krewald, V.; Neese, F.; Pantazis, D. A. On the magnetic and spectroscopic properties of high-valent Mn₃CaO₄ cubanes as structural units of natural and artificial water oxidizing catalysts. J. Am. Chem. Soc. , 2013 , 135, 5726-5739.</li>
+<li style="list-style-type: '9. ';">Kampa, M.; Pandelia, M.-E.; Lubitz, W.; van Gastel, M.; Neese, F. A Metal-Metal Bond in the Light-Induced State of [NiFe] Hydrogenases with Relevance to Hydrogen Evolution. J. Am. Chem. Soc. , 2013 , 135, 39153925.</li>
+<li style="list-style-type: '10. ';">Pandelia, M.-E.; Bykov, D.; Izsák, R.; Infossi, P.; Giudici-Orticoni, M.-T.; Bill, E.; Neese, F.; Lubitz, W. Electronic structure of the unique [4Fe-3S] cluster in O₂-tolerant hydrogenases characterized by Fe-57 Mossbauer and EPR spectroscopy. Proc. Natl. Acad. Sci. USA , 2013 , 110, 483-488.</li>
+<li style="list-style-type: '11. ';">Atanasov, M.; Surawatanawong, P.; Wieghardt, K.; Neese, F. A theoretical study of zero-field splitting in Fe(IV)S₆ (S = 1) and Fe(III)S₆ (S = 1/2) core complexes, [Feᴵⱽ(Et₂dtc)₃₋2/7(mnt)2/7]⁽ⁿ⁻¹⁾⁻ and [Feᴵᴵᴵ(Et₂dtc)₃₋2/7(mnt)2/7]ⁿ⁻ (n=0, 1, 2, 3): The origin of the magnetic anisotropy. Coord. Chem. Rev. , 2013 , 257 (1), 27-41.</li>
+<li style="list-style-type: '12. ';">Retegan, M.; Collomb, M.-N.; Neese, F.; Duboc, C. A combined high-field EPR and quantum chemical study on a weakly ferromagnetically coupled dinuclear Mn(III) complex. A complete analysis of the EPR spectrum beyond the strong coupling limit. Phys. Chem. Chem. Phys. , 2013 , 15, 223-234.</li>
+<li style="list-style-type: '13. ';">Zadrozny, J. M.; Atanasov, M.; Bryan, A. M.; Lin, C. Y.; Rekken, B. D.; Power, P. P.; Neese, F.; Long, J. R. Slow magnetization dynamics in a series of two-coordinate iron(II) complexes. Chem. Sci. , 2013 , 4, 125-138.</li>
+<li style="list-style-type: '14. ';">Weber, K.; Krämer, T.; Shafaat, H. S.; Weyhermüller, T.; Bill, E.; van Gastel, M.; Neese, F.; Lubitz, W. A Functional [NiFe]-Hydrogenase Model Compound That Undergoes Biologically Relevant Reversible Thiolate Protonation. J. Am. Chem. Soc. , 2012 , 134, 20745-20755.</li>
+<li style="list-style-type: '15. ';">Kampa, M.; Lubitz, W.; van Gastel, M.; Neese, F. Computational study of the electronic structure and magnetic properties of the Ni-C state in [NiFe] hydrogenases including the second coordination sphere. J. Biol. Inorg. Chem. , 2012 , 17, 1269-1281.</li>
+</ol>
+<ol>
+<li style="list-style-type: '16. ';">Atanasov, M.; Comba, P.; Helmle, S.; Müller, D.; Neese, F. Zero-Field Splitting in a Series of Structurally Related Mononuclear Niᴵᴵ-Bispidine Complexes. Inorg. Chem. , 2012 , 51, 12324-12335.</li>
+<li style="list-style-type: '17. ';">Shafaat, H. S.; Weber, K.; Petrenko, T.; Neese, F.; Lubitz, W. Key Hydride Vibrational Modes in [NiFe] Hydrogenase Model Compounds Studied by Resonance Raman Spectroscopy and Density Functional Calculations. Inorg. Chem. , 2012 , 51, 11787-11797.</li>
+<li style="list-style-type: '18. ';">Argirevic, T.; Riplinger, C.; Stubbe, J.; Neese, F.; Bennati, M. ENDOR Spectroscopy and DFT Calculations: Evidence for the Hydrogen-Bond Network Within α2 in the PCET of E. coli Ribonucleotide Reductase. J. Am. Chem. Soc. , 2012 , 134, 17661-17670.</li>
+<li style="list-style-type: '19. ';">Albrecht, C.; Shi, L. L.; Perez, J. M.; van Gastel, M.; Schwieger, S.; Neese, F.; Streubel, R. Deoxygenation of Coordinated Oxaphosphiranes: A New Route to P=C Double-Bond Systems. Chem. Eur. J. , 2012 , 18, 9780-9783.</li>
+<li style="list-style-type: '20. ';">Maganas, D.; Krzystek, J.; Ferentinos, E.; Whyte, A. M.; Robertson, N.; Psycharis, V.; Terzis, A.; Neese, F.; Kyritsis, P. Investigating Magnetostructural Correlations in the Pseudooctahedral trans-Niᴵᴵ(OPPh₂) (EPPh₂)N₂(sol)₂ Complexes (E = S, Se; sol = DMF, THF) by Magnetometry, HFEPR, and ab Initio Quantum Chemistry. Inorg. Chem. , 2012 , 51, 7218-7231.</li>
+<li style="list-style-type: '21. ';">Ye, S. F.; Neese, F. How Do Heavier Halide Ligands Affect the Signs and Magnitudes of the Zero-Field Splittings in Halogenonickel(II) Scorpionate Complexes? A Theoretical Investigation Coupled to Ligand-Field Analysis. J. Chem. Theory Comput. , 2012 , 8, 2344-2351.</li>
+<li style="list-style-type: '22. ';">Nesterov, V.; Ozbolat-Schon, A.; Schnakenburg, G.; Shi, L. L.; Cangonul, A.; van Gastel, M.; Neese, F.; Streubel, R. An Unusal Case of Facile Non-Degenerate P-C Bond Making and Breaking. Chem. Asian J. , 2012 , 7, 1708-1712.</li>
+<li style="list-style-type: '23. ';">Bykov, D.; Neese, F. Reductive activation of the heme iron-nitrosyl intermediate in the reaction mechanism of cytochrome c nitrite reductase: a theoretical study. J. Biol. Inorg. Chem. , 2012 , 17, 741-760.</li>
+<li style="list-style-type: '24. ';">Lancaster, K. M.; Zaballa, M. E.; Sproules, S.; Sundararajan, M.; DeBeer, S.; Richards, J. H.; Vila, A. J.; Neese, F.; Gray, H. B. Outer-Sphere Contributions to the Electronic Structure of Type Zero Copper Proteins. J. Am. Chem. Soc. , 2012 , 134, 8241-8253.</li>
+<li style="list-style-type: '25. ';">Benkhauser-Schunk, C.; Wezisla, B.; Urbahn, K.; Kiehne, U.; Daniels, J.; Schnakenburg, G.; Neese, F.; Lutzen, A. Synthesis, Chiral Resolution, and Absolute Configuration of Functionalized Troger's Base Derivatives: Part II. ChemPlusChem , 2012 , 77, 396-403.</li>
+<li style="list-style-type: '26. ';">Ye, S. F.; Riplinger, C.; Hansen, A.; Krebs, C.; Bollinger, J. M.; Neese, F. Electronic Structure Analysis of the Oxygen-Activation Mechanism by Feᴵᴵ- and α-Ketoglutarate (αKG)-Dependent Dioxygenases. Chem. Eur. J. , 2012 , 18, 6555-6567.</li>
+<li style="list-style-type: '27. ';">Desrochers, P. J.; Sutton, C. A.; Abrams, M. L.; Ye, S. F.; Neese, F.; Telser, J.; Ozarowski, A.; Krzystek, J. Electronic Structure of Nickel(II) and Zinc(II) Borohydrides from Spectroscopic Measurements and Computational Modeling. Inorg. Chem. , 2012 , 51, 2793-2805.</li>
+<li style="list-style-type: '28. ';">Torres-Alacan, J.; Krahe, O.; Filippou, A. C.; Neese, F.; Schwarzer, D.; Vöhringer, P. The Photochemistry of [FeᴵᴵᴵN₃(cyclam-ac)]PF₆ at 266 nm. Chem. Eur. J. , 2012 , 18, 3043-3055.</li>
+<li style="list-style-type: '29. ';">Maekawa, M.; Römelt, M.; Daniliuc, C. G.; Jones, P. G.; White, P. S.; Neese, F.; Walter, M. D. Reactivity studies on [Cp'MnX(thf)]₂: manganese amide and polyhydride synthesis. Chem. Sci. , 2012 , 3, 2972-2979.</li>
+<li style="list-style-type: '30. ';">Pantazis, D. A.; Ames, W.; Cox, N.; Lubitz, W.; Neese, F. Two interconvertible structures that explain the spectroscopic properties of the oxygen-evolving complex of photosystem II in the S₂ state. Angew. Chem. Int. Ed. , 2012 , 51, 9935-9940. selected as cover article and VIP paper.</li>
+<li style="list-style-type: '31. ';">Vennekate, H.; Schwarzer, D.; Torres-Alacan, J.; Krahe, O.; Filippou, A. C.; Neese, F.; Vöhringer, P. Ultrafast primary processes of an iron-(III) azido complex in solution induced with 266 nm light. Phys. Chem. Chem. Phys. , 2012 , 14, 6165-6172.</li>
+<li style="list-style-type: '32. ';">Christian, G. J.; Ye, S.; Neese, F. Oxygen activation in extradiol catecholate dioxygenases - a density functional study. Chem. Sci. , 2012 , 3, 1600-1611.</li>
+<li style="list-style-type: '33. ';">Cowley, Ryan E.; Christian, Gemma J.; Brennessel, William W.; Neese, Frank; Holland, Patrick L. A Reduced (β-Diketiminato)iron Complex with End-On and Side-On Nitriles: Strong Backbonding or Ligand NonInnocence? Eur. J. Inorg. Chem. , 2012 , 2012 (3), 479-483. DOI: 10.1002/ejic.201100787.</li>
+</ol>
+<ol>
+<li style="list-style-type: '34. ';">Thiessen, A.; Wettach, H.; Meerholz, K.; Neese, F.; Hoger, S.; Hertel, D. Control of electronic properties of triphenylene by substitution. Organic Electronics , 2012 , 13, 71-83.</li>
+<li style="list-style-type: '35. ';">Lancaster, K. M.; Roemelt, M.; Ettenhuber, P.; Hu, Y. L.; Ribbe, M. W.; Neese, F.; Bergmann, U.; DeBeer, S. X-ray Emission Spectroscopy Evidences a Central Carbon in the Nitrogenase Iron-Molybdenum Cofactor. Science , 2011 , 334, 974-977.</li>
+<li style="list-style-type: '36. ';">Ames, W.; Pantazis, D. A.; Krewald, V.; Cox, N.; Messinger, J.; Lubitz, W.; Neese, F. Theoretical Evaluation of Structural Models of the S₂ State in the Oxygen Evolving Complex of Photosystem II: Protonation States and Magnetic Interactions. J. Am. Chem. Soc. , 2011 , 133, 19743-19757.</li>
+<li style="list-style-type: '37. ';">Antony, J.; Grimme, S.; Liakos, D. G.; Neese, F. Protein-Ligand Interaction Energies with Dispersion Corrected Density Functional Theory and High-Level Wave Function Based Methods. J. Phys. Chem. A , 2011 , 115, 11210-11220.</li>
+<li style="list-style-type: '38. ';">Radoul, M.; Bykov, D.; Rinaldo, S.; Cutruzzola, F.; Neese, F.; Goldfarb, D. Dynamic Hydrogen-Bonding Network in the Distal Pocket of the Nitrosyl Complex of Pseudomonas aeruginosa cd(1) Nitrite Reductase. J. Am. Chem. Soc. , 2011 , 133, 3043-3055.</li>
+<li style="list-style-type: '39. ';">Liakos, D. G.; Neese, F. Interplay of Correlation and Relativistic Effects in Correlated Calculations on Transition-Metal Complexes: The Cu₂O₂²⁺ Core Revisited. J. Chem. Theory Comput. , 2011 , 7, 1511-1523.</li>
+<li style="list-style-type: '40. ';">Riplinger, C.; Neese, F. The Reaction Mechanism of Cytochrome P450 NO Reductase: A Detailed Quantum Mechanics/Molecular Mechanics Study. ChemPhysChem , 2011 , 12, 3192-3203.</li>
+<li style="list-style-type: '41. ';">Surawatanawong, P.; Sproules, S.; Neese, F.; Wieghardt, K. Electronic Structures and Spectroscopy of the Electron Transfer Series Fe(NO)L₂ᶻ (z=1+, 0, 1-, 2-, 3-; L = Dithiolene). Inorg. Chem. , 2011 , 50, 1206412074.</li>
+<li style="list-style-type: '42. ';">Cox, N.; Ames, W.; Epel, B.; Kulik, L. V.; Rapatskiy, L.; Neese, F.; Messinger, J.; Wieghardt, K.; Lubitz, W. Electronic Structure of a Weakly Antiferromagnetically Coupled Mn(II)Mn(III) Model Relevant to Manganese Proteins: A Combined EPR, ⁵⁵Mn-ENDOR, and DFT Study. Inorg. Chem. , 2011 , 50, 8238-8251.</li>
+<li style="list-style-type: '43. ';">Rota, J. B.; Knecht, S.; Fleig, T.; Ganyushin, D.; Saue, T.; Neese, F.; Bolvin, H. Zero field splitting of the chalcogen diatomics using relativistic correlated wave-function methods. J. Chem. Phys. , 2011 , 135, 114106.</li>
+<li style="list-style-type: '44. ';">Cox, N.; Rapatskiy, L.; Su, J. H.; Pantazis, D. A.; Sugiura, M.; Kulik, L.; Dorlet, P.; Rutherford, A. W.; Neese, F.; Boussac, A.; Lubitz, W.; Messinger, J. Effect of Ca²⁺/Sr²⁺ Substitution on the Electronic Structure of the Oxygen-Evolving Complex of Photosystem II: A Combined Multifrequency EPR, ⁵⁵Mn-ENDOR, and DFT Study of the S₂ State. J. Am. Chem. Soc. , 2011 , 133, 3635-3648.</li>
+<li style="list-style-type: '45. ';">Maurice, R.; Sivalingam, K.; Ganyushin, D.; Guihery, N.; de Graaf, C.; Neese, F. Theoretical Determination of the Zero-Field Splitting in Copper Acetate Monohydrate. Inorg. Chem. , 2011 , 50, 6229-6236.</li>
+<li style="list-style-type: '46. ';">Su, J. H.; Cox, N.; Ames, W.; Pantazis, D. A.; Rapatskiy, L.; Lohmiller, T.; Kulik, L. V.; Dorlet, P.; Rutherford, A. W.; Neese, F.; Boussac, A.; Lubitz, W.; Messinger, J. The electronic structures of the S₂ states of the oxygen-evolving complexes of photosystem II in plants and cyanobacteria in the presence and absence of methanol. Biochim. Biophys. Acta-Bioenergetics , 2011 , 1807, 829-840.</li>
+<li style="list-style-type: '47. ';">Bykov, D.; Neese, F. Substrate binding and activation in the active site of cytochrome c nitrite reductase: a density functional study. J. Biol. Inorg. Chem. , 2011 , 16, 417-430.</li>
+<li style="list-style-type: '48. ';">Gennari, M.; Orio, M.; Pecaut, J.; Bothe, E.; Neese, F.; Collomb, M. N.; Duboc, C. Influence of Mixed Thiolate/Thioether versus Dithiolate Coordination on the Accessibility of the Uncommon +I and +III Oxidation States for the Nickel Ion: An Experimental and Computational Study. Inorg. Chem. , 2011 , 50, 3707-3716.</li>
+<li style="list-style-type: '49. ';">Ye, S. F.; Neese, F. Nonheme oxo-iron(IV) intermediates form an oxyl radical upon approaching the C-H bond activation transition state. Proc. Natl. Acad. Sci. USA , 2011 , 108, 1228-1233.</li>
+<li style="list-style-type: '50. ';">Gennari, M.; Pecaut, J.; DeBeer, S.; Neese, F.; Collomb, M. N.; Duboc, C. A Fully Delocalized MixedValence Bis-µ-(Thiolato) Dicopper Complex: A Structural and Functional Model of the Biological Cu(A) Center. Angew. Chem., Int. Ed. , 2011 , 50, 5661-5665.</li>
+<li style="list-style-type: '51. ';">Gennari, M.; Retegan, M.; DeBeer, S.; Pecaut, J.; Neese, F.; Collomb, M. N.; Duboc, C. Experimental and Computational Investigation of Thiolate Alkylation in Ni(II) and Zn(II) Complexes: Role of the Metal on the Sulfur Nucleophilicity. Inorg. Chem. , 2011 , 50, 10047-10055.</li>
+</ol>
+<ol>
+<li style="list-style-type: '52. ';">Atanasov, M.; Delley, B.; Neese, F.; Tregenna-Piggott, P. L.; Sigrist, M. Theoretical Insights into the Magnetostructural Correlations in Mn(3)-Based Single-Molecule Magnets. Inorg. Chem. , 2011 , 50, 2112-2124.</li>
+<li style="list-style-type: '53. ';">Lassalle-Kaiser, B.; Hureau, C.; Pantazis, D. A.; Pushkar, Y.; Guillot, R.; Yachandra, V. K.; Yano, J.; Neese, F.; Anxolabéhère-Mallart, E. Activation of a water molecule using a mononuclear Mn complex: from Mn-aquo, to Mn-hydroxo, to Mn-oxyl via charge compensation. Energy Environ. Sci. , 2010 , 3, 924-938.</li>
+<li style="list-style-type: '54. ';">Pantazis, D. A.; Krewald, V.; Orio, M.; Neese, F. Theoretical magnetochemistry of dinuclear manganese complexes: broken symmetry density functional theory investigation on the influence of bridging motifs on structure and magnetism. Dalton Trans. , 2010 , 39, 4959-4967.</li>
+<li style="list-style-type: '55. ';">Woertink, J. S.; Tian, L.; Maiti, D.; Lucas, H. R.; Himes, R. A.; Karlin, K. D.; Neese, F.; Wurtele, C.; Holthausen, M. C.; Bill, E.; Sundermeyer, J.; Schindler, S.; Solomon, E. I. Spectroscopic and Computational Studies of an End-on Bound Superoxo-Cu(II) Complex: Geometric and Electronic Factors That Determine the Ground State. Inorg. Chem. , 2010 , 49, 9450-9459.</li>
+<li style="list-style-type: '56. ';">McNaughton, R. L.; Roemelt, M.; Chin, J. M.; Schrock, R. R.; Neese, F.; Hoffman, B. M. Experimental and Theoretical EPR Study of Jahn-Teller-Active HIPTN(3)N MoL Complexes (L = N₂, CO, NH₃). J. Am. Chem. Soc. , 2010 , 132, 8645-8656.</li>
+<li style="list-style-type: '57. ';">Geng, C. Y.; Ye, S. F.; Neese, F. Analysis of Reaction Channels for Alkane Hydroxylation by Nonheme Iron(IV)-Oxo Complexes. Angew. Chem., Int. Ed. , 2010 , 49, 5717-5720.</li>
+<li style="list-style-type: '58. ';">Orio, M.; Jarjayes, O.; Kanso, H.; Philouze, C.; Neese, F.; Thomas, F. X-Ray Structures of Copper(II) and Nickel(II) Radical Salen Complexes: The Preference of Galactose Oxidase for Copper(II). Angew. Chem., Int. Ed. , 2010 , 49, 4989-4992.</li>
+<li style="list-style-type: '59. ';">Gennari, M.; Orio, M.; Pecaut, J.; Neese, F.; Collomb, M. N.; Duboc, C. Reversible Apical Coordination of Imidazole between the Ni(III) and Ni(II) Oxidation States of a Dithiolate Complex: A Process Related to the Ni Superoxide Dismutase. Inorg. Chem. , 2010 , 49, 6399-6401.</li>
+<li style="list-style-type: '60. ';">Ye, S. F.; Price, J. C.; Barr, E. W.; Green, M. T.; Bollinger, J. M.; Krebs, C.; Neese, F. Cryoreduction of the NO-Adduct of Taurine:alpha-Ketoglutarate Dioxygenase (TauD) Yields an Elusive FeNO Species. J. Am. Chem. Soc. , 2010 , 132, 4739-4751.</li>
+<li style="list-style-type: '61. ';">Maganas, D.; Grigoropoulos, A.; Staniland, S. S.; Chatziefthimiou, S. D.; Harrison, A.; Robertson, N.; Kyritsis, P.; Neese, F. Tetrahedral and Square Planar Ni(SPR₂)₂N₂ complexes, R = Ph &amp; iPr Revisited: Experimental and Theoretical Analysis of Interconversion Pathways, Structural Preferences, and Spin Delocalization. Inorg. Chem. , 2010 , 49, 5079-5093.</li>
+<li style="list-style-type: '62. ';">Anoop, A.; Thiel, W.; Neese, F. A Local Pair Natural Orbital Coupled Cluster Study of Rh Catalyzed Asymmetric Olefin Hydrogenation. J. Chem. Theory Comput. , 2010 , 6, 3137-3144.</li>
+<li style="list-style-type: '63. ';">Duboc, C.; Collomb, M.-N.; Pecaut, J.; Deronzier, A.; Neese, F. Understanding the Zero-Field Splitting of Mononuclear Manganese(II) Complexes from Combined EPR Spectroscopy and Quantum Chemistry. Appl. Magn. Res. , 2010 , 37, 229-245.</li>
+<li style="list-style-type: '64. ';">Ye, S. F.; Neese, F. The Unusual Electronic Structure of Dinitrosyl Iron Complexes. J. Am. Chem. Soc. , 2010 , 132, 3646-3647.</li>
+<li style="list-style-type: '65. ';">Kochem, A.; Orio, M.; Jarjayes, O.; Neese, F.; Thomas, F. Unsymmetrical one-electron oxidized Ni(II)bis(salicylidene) complexes: a protonation-induced shift of the oxidation site. Chem. Commun. , 2010 , 46, 6765-6767.</li>
+<li style="list-style-type: '66. ';">Ozbolat-Schon, A.; Bode, M.; Schnakenburg, G.; Anoop, A.; van Gastel, M.; Neese, F.; Streubel, R. Insights into the Chemistry of Transient P-Chlorophosphanyl Complexes. Angew. Chem., Int. Ed. , 2010 , 49, 68946898.</li>
+<li style="list-style-type: '67. ';">Vancoillie, S.; Chalupsky, J.; Ryde, U.; Solomon, E. I.; Pierloot, K.; Neese, F.; Rulisek, L. Multireference Ab Initio Calculations of g tensors for Trinuclear Copper Clusters in Multicopper Oxidases. J. Phys. Chem. B , 2010 , 114, 7692-7702.</li>
+<li style="list-style-type: '68. ';">Grote, D.; Finke, C.; Kossmann, S.; Neese, F.; Sander, W. 3,4,5,6-Tetrafluorophenylnitren-2-yl: A GroundState Quartet Triradical. Chem. Eur. J. , 2010 , 16, 4496-4506.</li>
+<li style="list-style-type: '69. ';">Ye, S. F.; Neese, F.; Ozarowski, A.; Smirnov, D.; Krzystek, J.; Telser, J.; Liao, J. H.; Hung, C. H.; Chu, W. C.; Tsai, Y. F.; Wang, R. C.; Chen, K. Y.; Hsu, H. F. Family of V(III)-Tristhiolato Complexes Relevant to</li>
+</ol>
+<ul>
+<li>Functional Models of Vanadium Nitrogenase: Synthesis and Electronic Structure Investigations by Means of High-Frequency and -Field Electron Paramagnetic Resonance Coupled to Quantum Chemical Computations. Inorg. Chem. , 2010 , 49, 977-988.</li>
+<li style="list-style-type: '70. ';">Hegele, P.; Santhamma, B.; Schnakenburg, G.; Frohlich, R.; Kataeva, O.; Nieger, M.; Kotsis, K.; Neese, F.; Dotz, K. H. Hydroquinoid Chromium Complexes Bearing an Acyclic Conjugated Bridge: ChromiumTemplated Synthesis, Molecular Structure, and Haptotropic Metal Migration. Organometallics , 2010 , 29, 6172-6185.</li>
+<li style="list-style-type: '71. ';">Ye, S. F.; Neese, F. Accurate Modeling of Spin-State Energetics in Spin-Crossover Systems with Modern Density Functional Theory. Inorg. Chem. , 2010 , 49, 772-774.</li>
+<li style="list-style-type: '72. ';">Orio, M.; Philouze, C.; Jarjayes, O.; Neese, F.; Thomas, F. Spin Interaction in Octahedral Zinc Complexes of Mono- and Diradical Schiff and Mannich Bases. Inorg. Chem. , 2010 , 49, 646-658.</li>
+<li style="list-style-type: '73. ';">Pantazis, D. A.; Orio, M.; Petrenko, T.; Zein, S.; Lubitz, W.; Messinger, J.; Neese, F. Structure of the OxygenEvolving Complex of Photosystem II: Information on the S₂ state through Quantum Chemical Calculation of its Magnetic Properties. Phys. Chem. Chem. Phys. , 2009 , 11, 6788-6798.</li>
+<li style="list-style-type: '74. ';">Baffert, C.; Orio, M.; Pantazis, D. A.; Duboc, C.; Blackman, A. G.; Blondin, G.; Neese, F.; Deronzier, A.; Collomb, M.-N. A trinuclear terpyridine frustrated spin system with a Mnᴵⱽ₃O₄ core: synthesis, physical characterization and quantum chemical modeling of its magnetic properties. Inorg. Chem. , 2009 , 48, 1028110288.</li>
+<li style="list-style-type: '75. ';">Liakos, D.; Neese, F. A multiconfigurational ab initio study of the zero-field splitting in the di- and trivalent hexaquo-chromium complexes. Inorg. Chem. , 2009 , 48, 10572-10580.</li>
+<li style="list-style-type: '76. ';">Astashkin, A. V.; Klein, E. C.; Ganyushin, D.; Johnson.Winters, K.; Neese, F.; Kappler, U.; Enemark, J. H. Exchangeable oxygens in the vicinity of the molybdenum center of the high-pH form of sulfite oxidase and sulfite dehydrogenase. Phys. Chem. Chem. Phys. , 2009 , 11, 6733-6742.</li>
+<li style="list-style-type: '77. ';">Orio, M.; Pantazis, D. A.; Petrenko, T.; Neese, F. Magnetic and spectroscopic properties of mixed valence manganese(III,IV) dimers: a systematic study using broken symmetry density functional theory. Inorg. Chem. , 2009 , 48, 7251-7260.</li>
+<li style="list-style-type: '78. ';">Klein, E. L.; Astashkin, A. V.; Ganyushin, D.; Johnson-Winters, K.; Wilson, H. L.; Rajagopalan, K. V.; Neese, F.; Enemark, J. H. Direct Detection and Characterization of Chloride in the Active Site of the Low-pH Form of Sulfite Oxidase Using ESEEM Spectroscopy, Isotopic Labeling, and DFT Calculations. Inorg. Chem. , 2009 , 48 (11), 4743-4752.</li>
+<li style="list-style-type: '79. ';">Vancoillie, S.; Rulisek, L.; Neese, F.; Pierloot, K. Theoretical description of the structure and magnetic properties of nitroxide-Cu(II)-nitroxide spin triads. J. Phys. Chem. , 2009 , 113, 6149-6157.</li>
+<li style="list-style-type: '80. ';">Cowley, R. E.; Bill, E.; Neese, F.; Brennessel, W. W.; Holland, P. L. Iron(II) Complexes With Redox-Active Tetrazene (RNNNNR) Ligands. Inorg. Chem. , 2009 , 48, 4828-4836.</li>
+<li style="list-style-type: '81. ';">Gansäuer, A.; Fleckhaus, A.; Lafon, A.; Okkel, M.; Anakuthil, A.; Kotsis, K.; Neese, F. Catalysis via Homolytic Substitutions with C-O and Ti-O Bonds: Oxidative Additions and Reductive Eliminations in Single Electron Steps. J. Am. Chem. Soc. , 2009 , 131, 16989-16999.</li>
+<li style="list-style-type: '82. ';">Ye, S.; Neese, F. Quantum Chemical Studies of C-H Activation Reactions by High-Valent Nonheme Iron Centers. Curr. Op. Chem. Biol. , 2009 , 13 (1), 89-98.</li>
+<li style="list-style-type: '83. ';">Krahe, O.; Neese, F.; Streubel, R. The quest for ring-opening of oxaphosphirane complexes: a coupled cluster and density functional study of CH₃PO isomers and their Cr(CO)₅ complexes. Chem. Eur. J. , 2009 , 15, 2594-2601.</li>
+<li style="list-style-type: '84. ';">Romain, S.; Duboc, C.; Neese, F.; Riviere, E.; Hanton, L. R.; Blackman, A. G.; Philouze, C.; Lepretre, J. C.; Deronzier, A.; Collomb, M. N. An Unusual Stable Mononuclear Mn(III) Bis-terpyridine Complex Exhibiting Jahn-Teller Compression: Electrochemical Synthesis, Physical Characterisation and Theoretical Study. Chem. Eur. J. , 2009 , 15, 980-988.</li>
+<li style="list-style-type: '85. ';">Zein, S.; Neese, F. Ab initio and Coupled Perturbed DFT Calculation of Zero-Field Splittings in Mn(II) Transition Metal complexes. J. Phys. Chem. A , 2008 , 112, 7976-7983.</li>
+</ul>
+<ol>
+<li style="list-style-type: '86. ';">Ye, S.; Tuttle, T.; Bill, E.; Gross, Z.; Thiel, W.; Neese, F. The Noninnocence of Iron Corroles: A combined Experimental and Quantum Chemical Study. Chem. Eur. J. , 2008 , 34, 10839-10851. selected as very important paper.</li>
+<li style="list-style-type: '87. ';">Duboc, C.; Collomb, M.-N.; Pecaut, J.; Deronzier, A.; Neese, F. Definition of Magneto-Structural Correlations for the Mn(II) Ion. Chem. Eur. J. , 2008 , 21, 6498-6509.</li>
+<li style="list-style-type: '88. ';">Berry, J. F.; DeBeer-George, S.; Neese, F. Electronic Structure and Spectroscopy of 'Superoxidized' Iron Centers in Model Systems: Theoretical and Experimental Trends. Phys. Chem. Chem. Phys. , 2008 , 10, 4361-4374.</li>
+<li style="list-style-type: '89. ';">Sander, W.; Grote, D.; Kossmann, S.; Neese, F. 2.3.5.6-Tetrafluorophenylnitren-4-yl: EPR Spectroscopic Characterization of a Quartet Ground State Nitreno Radical. J. Am. Chem. Soc. , 2008 , 130, 4396-4403.</li>
+<li style="list-style-type: '90. ';">Scheifele, Q.; Riplinger, C.; Neese, F.; Weihe, H.; Barra, A. L.; Jurany, F.; Podlesnyak, A.; Tregenna-Piggot, P. W. L. Spectroscopic and Theoretical Study of a Mononuclear Mn(III) Bioinorganic Complex Exhibiting a Compressed Jahn-Teller Octahedron. Inorg. Chem. , 2008 , 47, 439-447.</li>
+<li style="list-style-type: '91. ';">Zein, S.; Kulik, L. V.; Yano, J.; Kern, J.; Zouni, A.; Yachandra, V. K.; Lubitz, W.; Neese, F.; Messinger, J. Focussing the View on Nature's Water Splitting Catalyst. Phil. Trans. Roy. Soc. London B , 2008 , 363, 1167-1177.</li>
+<li style="list-style-type: '92. ';">Zein, S.; Duboc, C.; Lubitz, W.; Neese, F. Theoretical Characterization of zero-Field Splittings in Mn(II) Complexes. Inorg. Chem. , 2008 , 47, 134-142.</li>
+<li style="list-style-type: '93. ';">Parker, D. J.; Hammond, D.; Davies, E. S.; Garner, C. D.; Benisvy, L.; McMaster, J.; Wilson, C.; Neese, F.; Bothe, E.; Bittl, R.; Teutloff, C. A stable H-bonded ortho-Thioether Phenoxyl-Radical: A Chemical and Spectroscopic Analogue of ·Tyr₂₇₂ in apo-Galactose Oxidase. J. Biol. Inorg. Chem. , 2007 , 101, 1859-1864.</li>
+<li style="list-style-type: '94. ';">Chlopek, K.; Muresan, N.; Neese, F.; Wieghardt, K. Electronic Structures of Five-Coordinate Complexes of Iron Containing Zero, One, or Two π Radical Ligands: A Broken Symmetry Density Functional Theoretical Study. Chem. Eur. J. , 2007 , 13, 8391-8403.</li>
+<li style="list-style-type: '95. ';">Muresan, N.; Chlopek, K.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Bis(α-diimine)nickel Complexes: Molecular and Electronic Structure of Three Members of the Electron-Transfer Series [Ni(L)₂]ᶻ (z = 0, 1+, 2+) (L = 2-Phenyl-1,4-bis(isopropyl)-1,4-diazabutadiene). A Combined Experimental and Theoretical Study. Inorg. Chem. , 2007 , 46, 4905-4916.</li>
+<li style="list-style-type: '96. ';">Ray, K.; Petrenko, T.; Wieghardt, K.; Neese, F. Joint Spectroscopic and Theoretical Investigations of Transition Metal Complexes Involving Non-Innocent Ligands. Dalton Trans. , 2007 , 16, 1552-1566. DOI: 10.1039/B700096K.</li>
+<li style="list-style-type: '97. ';">Sinnecker, S.; Svensen, N.; Barr, E. W.; Ye, S.; Bollinger, J. M.; Neese, F.; Krebs, C. Spectroscopic and Theoretical Evaluation of the Structure of the High-Spin Fe(IV)-Oxo Intermediates in Taurine:α-Ketoglutarate Dioxygenase from Escherichia coli and its His99Ala Ligand Variant. J. Am. Chem. Soc. , 2007 , 129, 61686179.</li>
+<li style="list-style-type: '98. ';">Duboc, C.; Phoeung, T.; Zein, S.; Pécaut, J.; Collomb, M.-N.; Neese, F. Origin of the zero field splitting in mononuclear dihalide Mn(II) complexes: an investigation by multifrequency high-field EPR and density functional theory (DFT). Inorg. Chem. , 2007 , 46, 4905-4916.</li>
+<li style="list-style-type: '99. ';">DeBeer-George, S.; Petrenko, T.; Aliaga-Alcade, N.; Bill, E.; Mienert, B.; Sturhan, W.; Ming, Y.; Wieghardt, K.; Neese, F. Characterization of a Genuine Iron(V)Nitrido Species by Nuclear Resonant Vibrational Spectroscopy Coupled to Density Functional Calculations. J. Am. Chem. Soc. , 2007 , 129, 11053-11060.</li>
+<li style="list-style-type: '100. ';">Lehnert, N. M.; Cornelissen, U.; Neese, F.; Ono, T.; Noguchi, Y.; Okamoto, K.-I.; Fujisawa, K. Synthesis and Spectroscopic Characterization of Cu(II)-Nitrite Complexes with Hydrotris(pyrazolyl)borate and Related Ligands. Inorg. Chem. , 2007 , 46, 3916-3933.</li>
+<li style="list-style-type: '101. ';">Carmieli, R.; Larsen, T.; Reed, G. H.; Zein, S.; Neese, F.; Goldfarb, D. The Catalytic Mn²⁺ Sites in the Enolase-Inhibitor Complex - Crystallography, Single Crystal EPR and DFT calculations. J. Am. Chem. Soc. , 2007 , 129, 4240-4252.</li>
+<li style="list-style-type: '102. ';">Kokatam, S.; Ray, K.; Pap, J.; Bill, E.; Geiger, W. E.; LeSuer, R. J.; Rieger, P. H.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Molecular and Electronic Structure of Square Planar Gold Complexes Containing Two</li>
+</ol>
+<ul>
+<li>1,2-di(4-tert-butylphenyl)ethylene-1,2-dithiolato Ligands: [Au(L)₂]¹⁺/⁰/¹⁻/²⁻. A Combined Experimental and Computational Study. Inorg. Chem. , 2007 , 46, 1100-1111.</li>
+<li style="list-style-type: '103. ';">Ray, K.; DeBeer-George, S.; Solomon, E. I.; Wieghardt, K.; Neese, F. Description of the Ground State Covalencies of the Bis(dithiolato)Transition Metal Complexes Using X-ray Absorption Spectral and TimeDependent-Density-Functional Studies. Chem. Eur. Journal , 2007 , 13 (10), 2753. selected for cover picture.</li>
+<li style="list-style-type: '104. ';">Chalupský, J.; Neese, F.; Solomon, E. I.; Ryde, U.; Rulíšek, L. Identification of intermediates in the reaction cycle of multicopper oxidases by quantum chemical calculations of spectroscopic parameters. Inorg. Chem. , 2006 , 45, 11051-11059.</li>
+<li style="list-style-type: '105. ';">Bart, S. C.; Chłopek, K.; Bill, E.; Bouwkamp, B. W.; Lobkovsky, E.; Neese, F.; Wieghardt, K.; Chirik, P. J. Electronic Structure of Bis(imino)pyridine Iron Dichloride, Monochloride and Neutral Ligand Complexes: A Combined Structural, Spectroscopic and Computational Study. J. Am. Chem. Soc. , 2006 , 128, 13901-13912.</li>
+<li style="list-style-type: '106. ';">Patra, A. K.; Bill, E.; Bothe, E.; Chlopek, K.; Neese, F.; Weyhermüller, T.; Stobie, K.; Ward, M. D.; McCleverty, J. A.; Wieghardt, K. The Electronic Structure of Mononuclear Bis(1,2-diaryl-1,2-ethylenedithiolate)iron Complexes Containing a Fifth Cyanide or Phosphite Ligand: A Combined Experimental and Computational Study. Inorg. Chem. , 2006 , 45, 7877-7890.</li>
+<li style="list-style-type: '107. ';">Berry, J. F.; Bill, E.; Bothe, E.; DeBeer-George, S.; Mienert, B.; Neese, F.; Wieghardt, K. An Octahedral Coordination Complex of Iron(VI) - One Step Ahead of Nature? Science , 2006 , 312, 1937-1941.</li>
+<li style="list-style-type: '108. ';">Chłopek, K.; Bothe, E.; Neese, F.; Weyhermüller, T.; Wieghardt, K. The Molecular and Electronic Structures of Tetrahedral Complexes of Nickel and Cobalt Containing N,N'-Disubstituted, Bulky oDiiminobenzosemiquinonate(1-) π-Radical Ligands. Inorg. Chem. , 2006 , 45, 6298-6307.</li>
+<li style="list-style-type: '109. ';">Kababya, S.; Nelson, J.; Calle, C.; Neese, F.; Goldfarb, D. The electronic structure of bi-nuclear mixed valent copper azacryptates derived from integrated advanced EPR and DFT calculations. J. Am. Chem. Soc. , 2006 , 128, 2017-2029.</li>
+<li style="list-style-type: '110. ';">Berry, J. F.; Bill, E.; Neese, F.; Garcia-Serres, R.; Weyhermüller, T.; Wieghardt, K. Effect of N-Methylation of Macrocyclic Amine Ligands on the Spin State of Fe(III): A Tale of Two Fluoro Complexes. Inorg. Chem. , 2006 , 45, 2027-2037.</li>
+<li style="list-style-type: '111. ';">Kapre, R.; Ray, K.; Sylvestre, I.; Weyhermüller, T.; DeBeer-George, S.; Neese, F.; Wieghardt, K. The Molecular and Electronic Structure of Oxo-bis(benzene-1,2-dithiolato)chromate(V) Monoanions. A Combined Experimental and Density Functional Study. Inorg. Chem. , 2006 , 45, 3499-3509.</li>
+<li style="list-style-type: '112. ';">Zhu, W.; Marr, A. C.; Wang, Q.; Neese, F.; Spencer, J. E.; Blake, A. J.; Cooke, P. A.; Wilson, C.; Schröder, M. Modulation of the Electronic Structure and the Ni-Fe Distance in Heterobimetallic Models for the Active Site in [NiFe]Hydrogenase: Is there a Ni-Fe Bond? Proc. Natl. Acad. Sci. (USA) , 2005 , 102, 18280-18285.</li>
+<li style="list-style-type: '113. ';">Astashkin, A. V.; Neese, F.; Raitsimaring, A. M.; Cooney, J. J. A.; Bultman, E.; Enemark, J. H. Pulsed EPR investigation of systems modelling molybdenum enzymes: hyperfine and quadrupole parameters of oxo-¹⁷O in [Mo¹⁷O(SPh)₄]⁻. J. Am. Chem. Soc. , 2005 , 127, 16713-16722.</li>
+<li style="list-style-type: '114. ';">Benisvy, L.; Bittl, R.; Bothe, E.; Garner, C. D.; McMaster, J.; Ross, S.; Teutloff, C.; Neese, F. Phenoxyl Radicals Hydrogen-Bonded to Imidazolium - Analogues of Tyrosyl D· of Photosystem II: High-Field EPR and DFT Studies. Angew. Chem. Int. Ed. , 2005 , 44, 5314-5317.</li>
+<li style="list-style-type: '115. ';">Praneeth, V. K. K.; Neese, F.; Lehnert, N. Spin Density Distribution in Five- and Six-Coordinate Iron(II)Porphyrin NO Complexes Evidenced by Magnetic Circular Dichroism Spectroscopy. Inorg. Chem. , 2005 , 44, 2570-2572.</li>
+<li style="list-style-type: '116. ';">Sinnecker, S.; Neese, F.; Lubitz, W. Dimanganese Catalase - Spectroscopic Parameters from Broken Symmetry Density Functional Theory of the Superoxidized Mnᴵᴵᴵ/Mnᴵⱽ state. J. Biol. Inorg. Chem. , 2005 , 10, 231-238.</li>
+<li style="list-style-type: '117. ';">Blanchard, S.; Neese, F.; Bothe, E.; Bill, E.; Weyhermüller, T.; Wieghardt, K. Square Planar vs. Tetrahedral Coordination in Diamagnetic Complexes of Nickel(II) Containing Two Bidentate π Radical Monoanions. Inorg. Chem. , 2005 , 44, 3636-3656.</li>
+<li style="list-style-type: '118. ';">Mader-Cosper, M.; Neese, F.; Astashkin, A. V.; Carducci, M. A.; Raitsimring, A. M.; Enemark, J. H. Determination of the Magnitude and Orientation of the g-Tensors for cis,trans-(L-N₂S₂)MoⱽOX (X = Cl, SCH₂Ph) by Single Crystal EPR and Molecular Orbital Calculations. Inorg. Chem. , 2005 , 44, 1290-1301.</li>
+</ul>
+<ol>
+<li style="list-style-type: '119. ';">Fouqueau, A.; Casida, M. E.; Lawson, L. M.; Hauser, A.; Neese, F. Comparison of Density Functionals for Energy and Structural Differences Between the High-⁵T2g: (t2g⁴)(eg²) and Low-¹A1g: (t2g⁶)(eg⁰) Spin States of Iron(II) Coordination Compounds: II. Comparison of Results for More than Ten Modern Functionals with Ligand Field Theory and Ab Initio Results for Hexaquoferrous Dication, [Fe(H₂O)₆]²⁺ and Hexaminoferrous Dication [Fe(NH₃)₆]²⁺. J. Chem. Phys. , 2005 , 122, 044110.</li>
+<li style="list-style-type: '120. ';">Aliaga-Alcade, N.; DeBeer George, S.; Bill, E.; Wieghardt, K.; Neese, F. The Geometric and Electronic Structure of [(Cyclam-acetato)Fe(N)]⁺: a Genuine Iron(V) Species with Ground State Spin S = 1/2. Angew. Chem. Int. Ed. , 2005 , 44, 2908-2912.</li>
+<li style="list-style-type: '121. ';">Bill, E.; Bothe, E.; Chaudhuri, P.; Chlopek, K.; Herebian, D.; Kokatam, S.; Ray, K.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Molecular and Electronic Structure of Four- and Five-Coordinate Cobalt Complexes Containing Two o-Phenylendiamine- or Two o-Aminophenol-Type Ligands at Various Oxidation Levels: An Experimental, Density Functional and Correlated ab initio Study. Chem. Eur. J. , 2004 , 11, 204-224.</li>
+<li style="list-style-type: '122. ';">Paine, T.; Bothe, W.; Bill, E.; Weyhermüller, T.; Slep, L.; Neese, F.; Chaudhuri, P. Nonoxo Vanadium(IV) and Vanadyl(V) Complexes with Mixed O,X,O-Donor Ligand (X = S, Se, P, PO). Inorg. Chem. , 2004 , 43, 7324-7338.</li>
+<li style="list-style-type: '123. ';">Baute, D.; Arieli, D.; Zimmermann, H.; Neese, F.; Weckhuysen, B.; Goldfarb, D. The Structure of Copper Histidine Complexes in Solution and in Zeolite Y: A Combined X- and W-Band Pulsed EPR/ENDOR and DFT Study. J. Am. Chem. Soc. , 2004 , 126, 11733-11745.</li>
+<li style="list-style-type: '124. ';">Garcia Serres, R.; Grapperhaus, C. A.; Bothe, E.; Bill, E.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Structural, Spectroscopic and Computational Study of an Octahedral, Non-heme FeNO⁶ ⁷ ⁸ Series: [Fe(NO)(cyclamac)]²⁺/¹⁺/⁰. J. Am. Chem. Soc. , 2004 , 126, 5138-5153.</li>
+<li style="list-style-type: '125. ';">Sinnecker, S.; Noodleman, L.; Neese, F.; Lubitz, W. Calculation of the EPR Parameters of a Mixed Valence Mn(III)/Mn(IV) Model Complex with Broken Symmetry Density Functional Theory. J. Am. Chem. Soc. , 2004 , 126, 2613-2622.</li>
+<li style="list-style-type: '126. ';">Sinnecker, S.; Neese, F.; Lubitz, W. Benzosemichinone Solvent Interactions. A Density Functional Study of Electric and Magnetic Properties for Probing Hydrogen Bond Strengths and Geometries. J. Am. Chem. Soc. , 2004 , 126, 3280-3290.</li>
+<li style="list-style-type: '127. ';">van Gastel, M.; Fichtner, C.; Neese, F.; Lubitz, W. EPR Experiments to Elucidate the Structure of the Ready and Unready States of the [NiFe] Hydrogenase of Desulfovibrio vulgaris Miyazaki F. Biochem. Soc. Trans. , 2005 , 33, 7-11.</li>
+<li style="list-style-type: '128. ';">van Gastel, M.; Lassman, G.; Lubitz, W.; Neese, F. The unusual EPR parameters of the cysteine radical: a DFT and correlated ab initio study. J. Am. Chem. Soc. , 2004 , 126, 2237-2246.</li>
+<li style="list-style-type: '129. ';">Fouqueau, A.; Mer, S.; Casida, M. E.; Daku, L. M. L.; Hauser, A.; Mieva, T.; Neese, F. Comparison of Density Functionals for Energy and Structural Differences between the High-⁵T2g: t2g⁴eg² and Low-¹A1g: t2g⁶eg⁰ Spin States of the Hexaquo-Ferrous Ion, [Fe(H²O)⁶]²⁺. J. Chem. Phys. , 2004 , 120, 9473-9486.</li>
+<li style="list-style-type: '130. ';">Slep, L. D.; Mijovilovich, A.; Meyer-Klaucke, W.; Weyhermüller, T.; Bill, E.; Bothe, E.; Neese, F.; Wieghardt, K. The Mixed-valent Feᴵⱽ(µ-O)(µ-carboxylato)₂Feᴵᴵᴵ³⁺ Core. J. Am. Chem. Soc. , 2003 , 125, 15554-15570.</li>
+<li style="list-style-type: '131. ';">Herebian, D.; Wieghardt, K.; Neese, F. Analysis and Interpretation of Metal-Radical Coupling in a Series of Square Planar Nickel Complexes. Correlated Ab Initio and Density Functional Investigation of [Ni(L(ISQ))₂] (L(ISQ)=3,5-di-tert-butyl-odiiminobenzosemquinone). J. Am. Chem. Soc. , 2003 , 125, 10997-11005.</li>
+<li style="list-style-type: '132. ';">Herebian, D.; Bothe, E.; Neese, F.; Weyhermüller, T.; Wieghardt, K. The Molecular and Electronic Structures of Bis(o-diiminobenzosemiquinonato)metal(II) Complexes (Ni, Pd, Pt), their Monocations and Anions, and their Dimeric Dications Containing Weak Metal-Metal Bonds. J. Am. Chem. Soc. , 2003 , 125, 9116-9128.</li>
+<li style="list-style-type: '133. ';">Ghosh, P.; Bill, E.; Weyhermüller, T.; Neese, F.; Wieghardt, K. The non-Innocence of the Ligand Glyoxal-bis (2-mercaptoanil). The Electronic Structures of [Fe(gma)]₂, [Fe(gma)(py)]·py, [Fe(gma)(CN)]¹⁻/⁰, [Fe(gma)I], [Fe(gma)(PR₃)2/7] (n=1,2). Experimental and Theoretical Evidence for 'Excited State' Coordination. J. Am. Chem. Soc. , 2003 , 125, 1293-1308.</li>
+<li style="list-style-type: '134. ';">Einsle, O.; Messerschmidt, A.; Huber, R.; Kroneck, P. M. H.; Neese, F. Mechanism of the Six Electron Reduction of Nitrite to Ammonia by Cytochrome c Nitrite Reductase (CCNIR). J. Am. Chem. Soc. , 2002 , 124, 11737-11745.</li>
+</ol>
+<ol>
+<li style="list-style-type: '135. ';">Sun, X.; Chun, H.; Hildenbrand, K.; Bothe, E.; Weyhermüller, T.; Neese, F.; Wieghardt, K. oIminobenzosemiquinonato(1-) and o-Amidophenolato(2-) Complexes of Palladium(II) and Plantinum(II): A Combined Experimental and Density Functional Theoretical Study. Inorg. Chem. , 2002 , 41, 4295-4303.</li>
+<li style="list-style-type: '136. ';">Li, M.; Bonnet, D.; Bill, E.; Neese, F.; Weyhermüller, T.; Blum, N.; Sellmann, D.; Wieghardt, K. Tuning the Electronic Structure of Octahedral Iron Complexes [FeL(X)] (L = 1-alkyl-4,7-bis(4-tert-butyl-2mercaptobenzyl)-1,4,7-triazacyclo-nonane, X = Cl, CH₃O, CN, CO). The S=1/2 to S=3/2 Spin-Equilibrium of [FeL(Pr)(NO)]. Inorg. Chem. , 2002 , 41, 3444-3456.</li>
+<li style="list-style-type: '137. ';">Lehnert, N.; Neese, F.; Ho, R. Y. N.; Que Jr., L.; Solomon, E. I. Electronic Structure and Reactivity of LowSpin Fe(III)-Hydroperoxo Complexes: Comparison to Activated Bleomycin. J. Am. Chem. Soc. , 2002 , 124, 10810-10822.</li>
+<li style="list-style-type: '138. ';">Grapperhaus, C. A.; Bill, E.; Weyhermüller, T.; Neese, F.; Wieghardt, K. Electronic and Geometric Structure and Spectroscopy of a High Valent Manganese(V) Nitrido Complex. An Experimental and DFT Study. Inorg. Chem. , 2001 , 41, 4191-4198.</li>
+<li style="list-style-type: '139. ';">Neese, F.; Solomon, E. I. Detailed Spectroscopic and Theoretical Studies on [Fe(EDTA)(O₂)]³⁻: the Electronic Structure of the Side-On Ferric Peroxide Bond and its Relevance to Reactivity. J. Am. Chem. Soc. , 1998 , 120, 12829-12848.</li>
+</ol>
+<h2>B.5 Reviews of interest</h2>
+<ol>
+<li style="list-style-type: '1. ';">Atanasov, M.; Aravena, D.; Suturina, E.; Bill, E.; Maganas, D.; Neese, F. First principles approach to the electronic structure, magnetic anisotropy and spin relaxation in mononuclear 3d-transition metal single molecule magnets. Coord. Chem. Rev. , 2015 , 289, 177-214.</li>
+<li style="list-style-type: '2. ';">Bursch, Markus; Mewes, Jan-Michael; Hansen, Andreas; Grimme, Stefan. Best-Practice DFT Protocols for Basic Molecular Computational Chemistry. Angew. Chem. Int. Ed. , 2022 , 61 (42), e202205735. DOI: 10.1002/anie.202205735.</li>
+<li style="list-style-type: '3. ';">Bannwarth, Christoph; Caldeweyher, Eike; Ehlert, Sebastian; Hansen, Andreas; Pracht, Philipp; Seibert, Jakob; Spicher, Sebastian; Grimme, Stefan. Extended tight-binding quantum chemistry methods. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2021 , 11 (2), e1493. DOI: 10.1002/wcms.1493.</li>
+<li style="list-style-type: '4. ';">Ray, K.; Petrenko, T.; Wieghardt, K.; Neese, F. Joint Spectroscopic and Theoretical Investigations of Transition Metal Complexes Involving Non-Innocent Ligands. Dalton Trans. , 2007 , 16, 1552-1566. DOI: 10.1039/B700096K.</li>
+<li style="list-style-type: '5. ';">Neese, F.; Liakos, D. G.; Ye, S. F. Correlated Wavefunction Methods in Bioinorganic Chemistry. J. Biol. Inorg. Chem. , 2011 , 16, 821-829.</li>
+<li style="list-style-type: '6. ';">Neese, F.; Ames, W.; Christian, G.; Kampa, M.; Liakos, D. G.; Pantazis, D. A.; Roemelt, M.; Surawatanawong, P.; Ye, S. F. Dealing with Complexity in Open-Shell Transition Metal Chemistry from a Theoretical Perspective: Reaction Pathways, Bonding, Spectroscopy, and Magnetic Properties. Adv. Inorg. Chem. , 2010 , 62, 301-349.</li>
+<li style="list-style-type: '7. ';">Orio, M.; Pantazis, D. A.; Neese, F. Density Functional Theory. Photosynth. Res. , 2009 , 102, 443-453.</li>
+<li style="list-style-type: '8. ';">Neese, F. Density Functional Theory and EPR Spectroscopy: a guided tour. EPR Newsletter , 2009 , 18 (4), Pro &amp;Contra section. Pro &amp; Contra section.</li>
+<li style="list-style-type: '9. ';">Neese, F. Prediction of Molecular Spectra and Molecular Properties with Density Functional Theory: from Fundamental Theory to Exchange Coupling. Coord. Chem. Rev. , 2009 , 253, 526-563.</li>
+<li style="list-style-type: '10. ';">Neese, Frank. Spin-Hamiltonian Parameters from First Principle Calculations: Theory and Application , pages 175-229. Springer New York, New York, NY, 2009 . DOI: 10.1007/978-0-387-84856-3_5.</li>
+<li style="list-style-type: '11. ';">Kirchner, B.; Wennmohs, F.; Ye, S.; Neese, F. Theoretical Bioinorganic Chemistry: Electronic Structure Makes a Difference. Curr. Op. Chem. Biol. , 2007 , 11, 131-141.</li>
+<li style="list-style-type: '12. ';">Neese, F.; Petrenko, T.; Ganyushin, D.; Olbrich, G. Advanced Aspects of ab initio Theoretical Spectroscopy of Open-Shell Transition Metal Ions. Coord. Chem. Rev. , 2007 , 205, 288-327.</li>
+</ol>
+<ol>
+<li style="list-style-type: '13. ';">Ye, S.; Neese, F. Combined Quantum Chemical and Spectroscopic Studies on Transition Metal Complexes with Coordinating Radicals. Chemtracts (Special Volume on Computational Inorganic Chemistry) , 2006 , 19, 77-86.</li>
+<li style="list-style-type: '14. ';">Sinnecker, S.; Neese, F. Theoretical Bioinorganic Spectroscopy. In Reiher, M., editor, Current Topics in Chemistry . Springer, Heidelberg, 2006 .</li>
+<li style="list-style-type: '15. ';">Neese, F. Quantum Chemical Approaches to Spin-Hamiltonian Parameters. Specialist Periodical Reports on EPR Spectroscopy Vol. 20, (Ed. B. Gilbert) Royal Society Press, 2006 .</li>
+<li style="list-style-type: '16. ';">Neese, F. A Critical Evaluation of DFT, including Time-Dependent DFT, Applied to Bioinorganic Chemistry. J. Biol. Inorg. Chem. , 2006 , 11, 702-711. commentary on invitation.</li>
+<li style="list-style-type: '17. ';">Neese, F.; Munzarova, M. L. Historical Aspects of EPR Parameter Calculations. In Kaupp, M.; Bühl, M.; Malkin, V., editors, Calculation of NMR and EPR Parameters. Theory and Applications , pages 21-32. WileyVCH, 2004 .</li>
+<li style="list-style-type: '18. ';">Neese, F. Zero-Field Splitting. In Kaupp, M.; Bühl, M.; Malkin, V., editors, Calculation of NMR and EPR Parameters. Theory and Applications , pages 541-564. Wiley-VCH, 2004 .</li>
+<li style="list-style-type: '19. ';">Neese, F. Application of EPR Parameter Calculations in Bioinorganic Chemistry. In Kaupp, M.; Bühl, M.; Malkin, V., editors, Calculation of NMR and EPR Parameters. Theory and Applications , pages 581-591. Wiley-VCH, 2004 .</li>
+<li style="list-style-type: '20. ';">Neese, F. Quantum Chemical Calculations of Spectroscopic Properties of Metalloproteins and Model Compounds: EPR and Mössbauer Properties. Curr. Op. Chem. Biol. , 2003 , 7, 125-135.</li>
+<li style="list-style-type: '21. ';">Neese, F.; Solomon, E. I. Calculation and Interpretation of Spin-Hamiltonian Parameters in Transition Metal Complexes. In Miller, J. S.; Drillon, M., editors, Magnetoscience - From Molecules to Materials , volume IV, pages 345-466. Wiley, 2003 .</li>
+</ol>
+<h2>A</h2>
+<p>ADEX</p>
+<p>Atomic Decomposition of Exchange</p>
+<p>ADFT</p>
+<p>Analytic Density Functional Theory</p>
+<p>ADLD</p>
+<p>Atomic Decomposition of London Dispersion</p>
+<p>ALPB</p>
+<p>Analytical Linearized Poisson-Boltzmann</p>
+<p>B</p>
+<p>BB</p>
+<p>Boys-Bernardi</p>
+<p>BSSE</p>
+<p>Basis Set Superposition Error</p>
+<p>BUPO</p>
+<p>Bubblepoles</p>
+<p>C</p>
+<p>CC</p>
+<p>Coupled-Cluster</p>
+<h2>cc-pVXZ</h2>
+<p>Dunning's Corrleation Consistent Polarized Valence Basis Set Family of x-tuple Zeta Quality</p>
+<p>CCSD</p>
+<p>Coupled-Cluster with Singles and Doubles</p>
+<h2>CCSD(T)</h2>
+<p>Coupled-Cluster with Singles, Doubles and Perturbative Triples</p>
+<p>CI</p>
+<p>Configuration Interaction</p>
+<p>CNDO</p>
+<p>Complete Neglect of Differential Overlap</p>
+<p>CP-SCF</p>
+<p>Coupled Perturbed Self Consisten Field</p>
+<p>CPCM</p>
+<p>Conductor-like Continuum Polarization Model</p>
+<p>CSF</p>
+<p>Configuration State Function</p>
+<p>D</p>
+<h2>GLOSSARY</h2>
+<p>DFT</p>
+<p>Density Functional Theory</p>
+<p>DIIS</p>
+<p>Direct Inversion in Iterative Subspace</p>
+<h2>DLPNO</h2>
+<p>Domain-Based Local Pair Natural Orbital</p>
+<h2>DMRG</h2>
+<p>Density Matrix Renormalization Group</p>
+<p>E</p>
+<p>ECP</p>
+<p>Effective Core Potential</p>
+<p>EPR</p>
+<p>Electron Paramagnetic Resonance</p>
+<p>F</p>
+<p>FB</p>
+<p>Foster Boys Orbital Localization</p>
+<p>FCI</p>
+<p>Full Configuration Interaction</p>
+<p>G</p>
+<p>gCP</p>
+<p>Geometrical Counterpoise</p>
+<p>GGA</p>
+<p>Generalized Gradient Approximation</p>
+<h2>GS-ROCIS</h2>
+<p>General-spin Restricted Open-Shell Configuration Interaction Singles</p>
+<h2>GVPT2</h2>
+<p>Generalized Vibrational Perturbation Theory of Second Order</p>
+<p>H</p>
+<p>HF</p>
+<p>Hartree-Fock</p>
+<h2>HOMO</h2>
+<p>Highest Occupied Molecular Orbital</p>
+<p>I</p>
+<p>ICE</p>
+<p>Iterative Configuration Expansion</p>
+<p>INDO</p>
+<p>Intermediate Neglect of Differential Overlap</p>
+<p>K</p>
+<p>KDIIS</p>
+<p>Kolmar's DIIS</p>
+<p>L</p>
+<p>LED</p>
+<p>Local Energy Decomposition</p>
+<h2>LMO</h2>
+<p>Localized Molecular Orbital</p>
+<h2>LUMO</h2>
+<p>Lowest Unoccupied Molecular Orbital</p>
+<p>M</p>
+<p>MNDO</p>
+<p>Modified Neglect of Diatomic Overlap</p>
+<p>MO</p>
+<p>Molecular Orbital</p>
+<p>MP2</p>
+<p>M\oller-Plesset Perturbation Theory of Second Order</p>
+<p>N</p>
+<p>NBO</p>
+<p>Natural Bond Orbitals</p>
+<p>NCS</p>
+<p>Natural Chemical Shielding Analysis</p>
+<p>NDDO</p>
+<p>Neglect of Diatomic Differential Overlap</p>
+<p>NDO</p>
+<p>Neglect of Differential Overlap</p>
+<p>NMR</p>
+<p>Nuclear Magnetic Resonance</p>
+<p>O</p>
+<p>OO</p>
+<p>Orbital-optimized</p>
+<p>OPI</p>
+<p>ORCA Python Interface</p>
+<p>P</p>
+<p>PCM</p>
+<p>Polarizable Continuum Model</p>
+<p>PM</p>
+<p>Pipek Mezey Orbital Localization</p>
+<p>PNO</p>
+<p>Pair Natural Orbital</p>
+<p>PP</p>
+<p>Pseudopotential</p>
+<p>Q</p>
+<p>QRO</p>
+<p>Quasi-restricted Orbitals</p>
+<p>R</p>
+<p>RHF</p>
+<p>Restricted Hartree Fock</p>
+<p>RI</p>
+<p>Resolution of the Identity</p>
+<p>RIXS</p>
+<p>Resonant Inelastic X-ray Scattering</p>
+<h2>ROCIS</h2>
+<p>Restricted Open-Shell Configuration Interaction Singles</p>
+<h2>ROHF</h2>
+<table><tbody><tr><td></td><td colspan="4">Restricted Open-Shell Hartree Fock</td></tr><tr><td>RPA</td><td colspan="4">Random Phase Approximation</td></tr><tr><td>SCF</td><td colspan="4">Self-consistent Field</td></tr><tr><td>SOC</td><td colspan="4">Spin-orbit Coupling</td></tr><tr><td>SSC</td><td colspan="4">Spin-spin Coupling</td></tr><tr><td>T</td><td></td><td></td><td></td><td></td></tr><tr><td>TDA</td><td colspan="4">Tamm-Dancoff Approximation</td></tr><tr><td>TRAH</td><td colspan="4">Trust-Region Augmented Hessian</td></tr><tr><td>UCO</td><td colspan="4">Unrestricted Corresponding Orbital</td></tr><tr><td></td><td colspan="4">Unrestricted Hartree-Fock</td></tr><tr><td>UKS</td><td></td><td></td><td></td><td></td></tr><tr><td>UNO</td><td colspan="4">Unrestricted Natural Orbital</td></tr><tr><td>VCD</td><td colspan="4">Vibrational Circular Dichroism</td></tr><tr><td>VPT2</td><td colspan="4">W</td></tr><tr><td>WBO</td><td colspan="4">Wiberg Bond Order</td></tr><tr><td></td><td colspan="4">Wave Function Theory</td></tr><tr><td>X2C</td><td colspan="4">Exact Two-Component</td></tr><tr><td>XAS</td><td colspan="4">X-ray Absorption Spectroscopy</td></tr><tr><td>XES</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td colspan="4">X-ray Emission Spectroscopy</td></tr><tr><td></td><td colspan="4">X-ray Magnetic Circular Dichroism</td></tr><tr><td></td><td colspan="4">X-ray Photoelectron</td></tr><tr><td></td><td colspan="4">Spectroscopy</td></tr><tr><td>XPS</td><td></td><td></td><td></td><td></td></tr><tr><td>XMCD</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<h2>Z</h2>
+<h2>ZORA</h2>
+<h2>ZPE</h2>
+<p>Zeroth-Order Regular Approximation</p>
+<p>Zero-Point Energy</p>
+</div>
+</body>
+</html>

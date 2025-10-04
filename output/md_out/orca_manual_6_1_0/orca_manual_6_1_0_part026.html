@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part026</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>3.16.10 Unrelaxed Densities and Natural Orbitals</h2>
+<p>For the FIC-NEVPT2 ansatz, it is possible to request state-specific unrelaxed densities</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where Ψ I refers to NEVPT2 wave function of the I'th state and consists of the zeroth- and first-order wave function</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The code is implemented using the ORCA AGE tool-chain.[362] The exact unrelaxed density requires higher-order reduced density matrices (RDMs) of the the CAS-CI reference wave function. The latter can be avoided, when the unrelaxed density is approximated at first order using the keyword FirstOrder . In that case, the expensive second-order contribution ⟨ 1 | E p q ) | 1 ⟩ is omitted. A cost-effective alternative, that keeps the second-order term, is the cumulant approximation Cu4 and Cu34 . Here, the 4-RDM and optionally the 3-RDM themselves are approximated to accelerate their computation.</p>
+<p>The unrelaxed density can be used to generate natural orbitals with the keyword NatOrbs true . For each state, ORCA stores the resulting orbitals in a separate GBW file with the suffix '.mult.A.root.B.pt2.nat', where 'A' flags its multiplicity and 'B' its root count. In case of !UseSymmetry , the suffix will also include the irreducible representation of the state. NEVPT2 natural orbital are mandatory for various analysis tools, for instance the MultiWFN program. The orbitals can also be used for natural orbital iterations ( !MORead NoIter ) or to systematically extend the active space.[484]</p>
+<pre><code>%casscf ... PTMethod FIC_NEVPT2 # detailed settings (optional) PTSettings # densities are disabled by default Density Unrelaxed # unrelaxed density <0+1|E(p,q)|0+1> Cu4 # cumulant 4-rdm approximated unrel. density Cu34 # cumulant 3/4-rdm approximated unrel. density FirstOrder # approximate unrel. density <0|E(p,q)|1> NatOrbs True # produces the natural orbitals (default=False) end end</code></pre>
+<p>Note that ORCA repeats the population analysis for each state. With the added keyword !KeepDens the NEVPT2 density is stored in the density container ( .densities file on disk) with the prefix 'Tdens-CASNEV'. The latter can be used to create density plots interactively (see Section orca_plot ).</p>
+<p>Below is a snapshot of a typical output:</p>
+<pre><code>Unrelaxed Density ... Incorizing ADC ... done in 0.6 sec Norm <Psi|Psi> ... done in 0.1 sec (NORM= 1.064186836) RDM1 <Psi|E|Psi> ... done in 0.7 sec Reference Weight ... 0.939684618 Trace RDM1 ... 20.000000000 (prior correction) *** Repeating the population analysis with unrelaxed density. Orbital energies/occupations assumed diagonal. *** (Note: Temporarily storing unrelaxed densities as cas.scfp) ------------------------------------------------------------------------------ORCA POPULATION ANALYSIS ------------------------------------------------------------------------------... Natural Orbital Occupation Numbers:</code></pre>
+<p>(continues on next page)</p>
+<pre><code>... N[ 4] = 1.98812992 N[ 5] = 1.98308480 N[ 6] = 1.93858508 N[ 7] = 1.49303660 N[ 8] = 1.49303660 N[ 9] = 1.48519842 N[ 10] = 1.48519842 N[ 11] = 0.05922342 N[ 12] = 0.00921465 N[ 13] = 0.00921465 N[ 14] = 0.00794869 N[ 15] = 0.00620254 ... =============================================================== NEVPT2 Results =============================================================== ...</code></pre>
+<h2>3.16.11 State-averaged SC-NEVPT2</h2>
+<p>In the definition of the Dyall Hamiltonian,[469] the CASSCF orbitals are chosen to diagonalize the Fock operator (pseudo-canonicalized). Therefore, using a state-averaged CASSCF wave function, the NEVPT2 procedure involves the construction and diagonalization of the 'state-specific' Fock operators and is thus resulting in a unique set of orbitals for each state. This becomes quickly inefficient for large numbers of states or larger molecules since each orbital set implies an integral transformation. This is the default setting for NEVPT2 and is printed in the output</p>
+<pre><code>NEVPT2-SETTINGS: Orbitals ... canonical for each state</code></pre>
+<p>For the SC-NEVPT2 , other orbital options can be set using the keyword canonstep .</p>
+<pre><code>%casscf ... # detailed settings (optional) PTSettings # SC-NEVPT2 specific options canonstep 0 # state-averaged orbitals and specific orbital energies canonical # canonical for each state (default) averaged # state-averaged orbitals and orbital energies relaxed # 1-step orbital relaxation # and canonical for each state (partially relaxed) end end</code></pre>
+<p>The final orbitals of the state-averaged CASSCF diagonalize the state-averaged Fock operator. Large computational savings can be made if these orbitals are employed for all of the states. canonstep 0 chooses orbital energies as diagonal elements of the state-specific Fock operators. In release versions ORCA 3.0 and older, this has been the default setting. These options work best if the averaged states are similar in nature. For SC-NEVPT2, we have implemented two more canonsteps , which trade accuracy for speed and vice versa . canonstep averaged is more approximate and employs orbital energies from the state-averaged calculation. Thus there is no contribution to excitation energies from the 2-hole-2-particle perturber class (denoted as 'V_ijab' or 'IJAB') at this level of approximation.</p>
+<p>If the states under consideration are substantially different, these approximations will be of poor quality and should be turned off. Better results can be achieved, if the state-averaged orbitals are partially relaxed for each state before the actual SC-NEVPT2 calculation. [485] Often it is not possible to optimize the orbitals of each excited state separately. Thus, canonstep relaxed will try a single steepest descent step for each state before running the actual SCNEVPT2 calculation with canonicalized orbitals. Optionally, instead of a steepest descent using an approximate</p>
+<p>(continued from previous page)</p>
+<p>diagonal Hessian, a single Newton-Raphson step can be made.</p>
+<pre><code>%casscf ... PTMethod SC_NEVPT2 # detailed settings PTSettings canonstep relaxed # orbital relaxation for each state gstep SOSCF true # steepest descent step NR false # Newton-Raphson step end end</code></pre>
+<p>Despite a converged state-averaged calculation, the gradient for the individual states can be surprisingly large. As a consequence, the orbital relaxation may fail, when both methods are outside their convergence radius. ORCA will retry the relaxation with an increased damping. If the orbital update still fails, the program will stick with the initial orbitals. Setting an overall damping manually may help the relaxation procedure.</p>
+<pre><code>%casscf ... PTMethod SC_NEVPT2 # detailed settings PTSettings gscaling 0.5 # damp gradient with a pre-factor end end</code></pre>
+<h2>3.16.12 Quasi-Degenerate SC-NEVPT2</h2>
+<p>The NEVPT2 approach presented in the previous subsections follows the recipe of 'diagonalize and perturb'. The 0th order wave function is determined by the diagonalization of the CAS-CI matrix. The space spanned by the CASCI vectors is often referred to as 'model space'. The subsequent perturbation theory is constructed based on the assumption that the states under consideration are well described within the model space. Consequently, the first order correction to the wave function Ψ (1) I does not affect the composition of the reference state | I ⟩ . Corrections to the wave function and energy arise from the interaction of the reference state with the functions | k ⟩ of the contributing first order interacting space</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This is problematic, when the interaction/mixing of states are falsely described at the CASSCF level. A typical example is the dissociation of lithium fluoride.</p>
+<pre><code>!def2-tzvp nevpt2 nofrozencore %casscf nel 2 norb 2 #Li(2s), F(2pz) mult 1 nroots 2 end # unrelaxed scan r=3 to r=7 %paras r = 3,7,200 end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>*xyz 0 1 Li 0 0 0 F 0 0 {r} *</code></pre>
+<p>Here, the ground and first excited state of Σ + should not cross. However, at the NEVPT2 level, an erratic double crossing is observed instead.</p>
+<figure><figcaption><div class="caption">Fig. 3.39: SC-NEVPT2 and QD-SC-NEVPT2 Li-F dissociation curves of the ground and first excited states for a CAS(2,2) reference</div></figcaption></figure>
+<p>A re-organizing of the reference states can be introduced in the framework of quasi-degenerate perturbation theory. In practice, an effective Hamiltonian is constructed allowing 'off-diagonal' corrections to the second-order energy</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Diagonalization of this eff. Hamiltonian yields improved energies and a rotation matrix (right eigenvectors) that introduces the desired re-mixing of the reference states. The quasi-degenerate extension to SC-NEVPT2 [486] can be switched on with the keyword QDType .</p>
+<pre><code>%casscf ... PTMethod SC_NEVPT2 # Must be SC_NEVPT2 PTSettings PrintLevel 1 # default printing # mandatory QDType QD_VanVleck # QD_VanVleck: Hermitian eff. Hamiltonian (recommended) # QD_Bloch : non-Hermitian eff.</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<pre><code># 0: disabled (default) # optional: compute the QD-Corrected density. QDPopulationAnalysis True # Repeat population analysis with the corrected␣ ↪ → density QDNatOrbs True # Get natural orbitals with the corrected density end end</code></pre>
+<p>ORCAwill print the eff. Hamiltonian matrix and its eigenvectors at the end of the calculation for PrintLevel 4 .</p>
+<pre><code>=============================================================== QD-NEVPT2 Results =============================================================== ********************* MULT 1, ********************* Total Hamiltonian to be diagonalized 0 1 0 -107.074594 -0.012574 1 -0.011748-107.003810 Right Eigenvectors 0 1 0 -0.987232 0.170171 1 -0.159292 -0.985414 --------------------------ROOT = 0 --------------------------Total Energy Correction : dE = -0.25309172934720 Zero Order Energy : E0 = -106.82353108218946 Total Energy (E0+dE) : E = -107.07662281153667 --------------------------ROOT = 1 --------------------------Total Energy Correction : dE = -0.23103459727281 Zero Order Energy : E0 = -106.77074682157986 Total Energy (E0+dE) : E = -107.00178141885267</code></pre>
+<p>By construction the Hamiltonian is non-Hermitian ( QDType QD_Bloch ). Hence, the computation of properties with the revised wave function, e.g., expectation values require left- and right eigenvectors. The diagonalization of the general matrices appearing in the Bloch formulations may occasionally lead to complex eigenpairs - an undesirable artifact. Although, the eigenvalues have typically only a small imaginary component, the results are not reliable and ORCA prints a warning.</p>
+<pre><code>--- complex eigenvalues and eigenvectors</code></pre>
+<pre><code>WARNING! QD-Matrix has eigenvalues with imaginary component! iE(0)=-0.000016 WARNING! QD-Matrix has eigenvalues with imaginary component! iE(1)=0.000016</code></pre>
+<p>The QD_VanVleck option avoids the general eigenvalue decomposition. The equations are derived from secondorder Van Vleck perturbation theory, which results in a Hermitian effective Hamiltonian.[473] The methodology is equivalent to the symmetrization of the Bloch Hamiltonian. The solution is always real and properties are easily accessible. Thus, QD_VanVleck is the recommended approach in ORCA . For a more detailed comparison of the different eff. Hamiltonian theories, we refer to the literature.[487, 488]</p>
+<p>In all formulations, the energy denominator in the quasi-degenerate NEVPT2 is very sensitive to approximations. The canonicalization options with averaged orbitals and orbitals energies ( canonstep 0/2 ) have the tendency to lessen the energy denominator. To avoid artifacts, the calculation is restricted to canonstep 1 , where each state has its own set of orbitals.</p>
+<p>If properties are requested within the casscf module, i.e. zero-field splitting , there will be an additional printing with the revised CI vectors and energies.</p>
+<p>In addition, with QDPopulationAnalysis true the population analysis is repeated with the unrelaxed densities using the revised reference wave function. Using the directive !KeepDens these densities are stored and kept in the density container as 'Tdens-CAS-DPDICPT2' together with a suffix containing the state details (multiplicity and root). Following the ORCA convention, the suffix ends with '.p' and '.r' for densities and spin-densities respectively. For clarity, we added a snapshot of the density container ('orca_plot jobname.densities'). Note that properties , such as Mössbauer , that are processed in orca_prop , will be re-computed with the revised densities, when it is available/allowed.</p>
+<pre><code>Index: Name of Density ------------------------------------------------------------------------0: cas.scfp 1: Tdens-CAS-DPDICPT2MO.mult.1.iroot.0.p 2: Tdens-CAS-DPDICPT2.mult.1.iroot.0.p 3: Tdens-CAS-DPDICPT2MO.mult.1.iroot.1.p 4: Tdens-CAS-DPDICPT2.mult.1.iroot.1.p 5: Tdens-CAS-DPDICPT2.mult.1.iroot.0.r 6: Tdens-CAS-DPDICPT2.mult.1.iroot.1.r</code></pre>
+<p>The revised densities can also be used to form natural orbitals setting QDNatorbs true . The resulting orbitals are stored in a GBW file with the suffix 'mult.A.iroot.B.QD-NEVPT2.natorbs', where 'A' denotes the multiplicity and 'B' the root count.</p>
+<h2>3.16.13 Keywords</h2>
+<p>NEVPT2 can also be set using the PTMethod keyword in the %casscf block. Beware of the underscore in the keywords using the block input. Refined settings are adjusted in the PTSettings subblock. The methods require higher order reduced density matrices, which are not implemented for all of the CISteps. In addition to the default CIStep, ACCCI , ICE and DMRGCI are supported.</p>
+<pre><code>%casscf # usual CASSCF settings defining the active space and states of interest ... MULT 3,1 # multiplicity block NRoots 2,3 # number of roots for the MULT blocks CIStep ICE # CSFCI : default (recommended) # ACCCI : fast, but memory intense # ICE : larger active spaces with ICE FIC-NEVPT2 # DMRGCI : larger active spaces with DMRG SC-NEVPT2 TrafoStep RI # RI approximation for CASSCF and NEVPT2 # calling the PT2 method of choice PTMethod SC_NEVPT2 # strongly contracted NEVPT2 FIC_NEVPT2 # fully internally contracted / partially contracted␣ ↪ → NEVPT2 DLPNO_NEVPT2 # FIC-NEVPT2 using the DLPNO framework for large␣ ↪ → molecules # detailed settings (optional) for the PT2 approaches PTSettings PrintLevel 1 # default printing EWIN -3,1000 # Energy window for the frozencore setting fc_ewin NThresh 1e-6 # FIC-NEVPT2 cut off for linear dependencies</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># handling of reduced density matrices: D4Step efficient # efficient: default 4-RDM handling # fly : memory saving algorithm for larger active spaces # cu4 : cumulant approximation of the 4-RDM # cu34: cumulant approximation of the 3-RDM and 4-RDM D4Tpre 1e-12 # PS approximation of the 4-pdm D3Tpre 1e-14 # PS approximation of the 3-pdm # false intruder state related options: TSMallDenom 1e-2 # printing thresh for small denominators MaxWarnings 5 # max number of warning before going silent imaginary 0.0 # imaginary shift for FIC-NEVPT2 # option to skip the PT2 correction for all states except for the ones # specified for a selected multiplicity block and root # selectedRoots[block] = root number counting from 0. selectedRoots[1]=0,1 # compute MULT=1 root=0,1 and skip all others. # SC-NEVPT2 specific features: QDType QD_VanVleck # QD_VanVleck: Van Vleck (recommended) # QD_Bloch: Bloch Hamiltonian # 0: disabled QDNatOrbs True # get revised density and natural orbitals QDPopulationAnalysis True # get revised density and repeat population analysis # SC-NEVPT2 state-average orbital canonicalization options: CanonStep canonical # canonical for each state (default) averaged # state-average relaxed # canonical and partially relaxed for each state. 0 # state-average, but state-specific orbital energies # canonstep=relaxed additional control parameters: GScaling 0.5 # damping factor for the stepsize GStep NR # relax with NR SOSCF # relax with SOSCF SUPERCI_PT # relax with perturbation based SuperCI # FIC-NEVPT2 specific features: F12 true # add F12 correction and CABSSingles correction for CASSCF Density unrelaxed # unrelaxed density generated for each state. NatOrbs true # computes the natural orbitals # DLPNO specific settings for expert users (see DLPNO-NEVPT2 article): TCutPNO 1e-8 # cutoff for PNO occupation numbers TCutPNO_Core 1e-2 # cutoff for PNO occupation numbers for core orbitals TCutMKN 1e-3 # cutoff for Mulliken populations in the PNO integral␣ ↪ → transformation TCutDO 1e-2 # cutoff for the sparse map construction of domain TCutDOij 1e-5 # cutoff for the differential overlap matrix of ij pairs in␣ ↪ → the Prescreen step # DLPNO DIIS solver settings: MaxIter 30 # maximum number of iterations MaxDIIS 7 # DIIS max. dimension DIISDamp1 0.5 # damping of the residual before DIIS is switched ON DIISDamp2 0 # damping of the residual after DIIS is switched ON LevelShift 0.2 # LevelShift during update LMP2Damp 1.0 # damping for the LMP2 amplitude update LMP2TolE 1e-7 # energy convergence criteria LMP2TolR 5e-7 # residual convergence criteria end</code></pre>
+<p>(continues on next page)</p>
+<p>end</p>
+<h2>3.17 Complete Active Space Peturbation Theory (CASPT2 and CASPT2-K)</h2>
+<p>The fully internally contracted CASPT2 (FIC-CASPT2) approach is available with real, imaginary and IPEA shifts.[489, 490, 491]. The ORCA implementation employs a reformulation of the CASPT2, that completely avoids the fourth order reduced density matrix, that would appear in the canonical implementation.[479] Some concepts are shared by a recent development reported by Sokolov and coworkers.[480] The modification allows calculations with large active spaces without approximating the results e.g. with the cumulant expansion.</p>
+<p>It should be noted that the IPEA shift in OpenMOLCAS slightly deviates from ORCA.[492]. Here, the IPEA shift, λ , is added to the matrix elements of the internally contracted CSFs Φ pr qs = E p q E r s | Ψ 0 &gt; with the generalized Fock operator</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where γ p q = &lt; Ψ 0 | E p q | Ψ 0 &gt; is the expectation value of the spin-traced excitation operator.[493] The labels p,q,r,s refer to general molecular orbitals (inactive, active and virtual). Irrespective of the ORCA implementation, the validity of the IPEA shift in general remains questionable and is thus by default disabled.[494] ORCA features an alternative formulation, named CASPT2-K , that revises the zeroth order Hamiltonian itself.[495] Here, two additional Fock matrices are introduced for excitation classes that add or remove electrons from the active space. The new Fock matrices are derived from the generalized Koopmans' matrices corresponding to electron ionization and attachment processes. The resulting method is less prone to intruder states and the same time more accurate compared to the canonical CASPT2 approach. For more a detailed discussion, we refer to the paper by Kollmar et al.[495]</p>
+<p>CASPT2 and CASPT2-K belong to the same family of approaches as NEVPT2 . Both methods are called in complete analogy to the FIC-NEVPT2 approach. Note that the methodology can be combined with the RI approximation . However, unlike NEVPT2, the CASPT2 formulations require the storage of the entire wave function. Hence, the scope of accessible systems is far more limited compared to the NEVPT2 implementation in ORCA. Below is concise list with the accessible options .</p>
+<pre><code>%casscf ... # mandatory PTMethod FIC_CASPT2 # canonical CASPT2 approach FIC_CASPT2K # CASPT2-K with revised H0 # optional TrafoStep RI # optional for RI approximation for CASSCF and CASPT2 PTSettings CASPT2_ishift 0.0 # imaginary level-shift CASPT2_rshift 0.0 # real level-shift CASPT2_IPEAshift 0.0 # IPEA shift. end end</code></pre>
+<p>CASPT2 can also be set using the simple keywords on top of any valid CASSCF input.</p>
+<pre><code>!CASPT2 # FIC-CASPT2 !CASPT2K # FIC-CASPT2-K !RI-CASPT2 # FIC-CASPT2 with RI approximation !RI-CASPT2K # FIC-CASPT2-K with RI approximation %casscf ...</code></pre>
+<p>(continued from previous page)</p>
+<h2>3.17.1 Example Nitrogen molecule</h2>
+<p>In this short section, we add the CASPT2 results to the previously computed NEVPT2 potential energy surface of the N 2 molecule.</p>
+<pre><code>! def2-svp nofrozencore %casscf nel 6 norb 6 mult 1 PTMethod FIC_CASPT2 # fully internally contracted CASPT2 end # scanning from the outside to the inside %paras R = 2.5,0.7, 30 end *xyz 0 1 N 0.0 0.0 0.0 N 0.0 0.0 {R} *</code></pre>
+<p>The CASPT2 output lists the settings prior to the computation. The printed reference weights should be checked. Small reference weights indicate intruder states. Along the lines, the program also prints the smallest denominators in the perturbation expression (highlighted in the snippet below). Small denominator may lead to intruder states.</p>
+<pre><code>---------------------------------------------------------------ORCA-CASSCF ---------------------------------------------------------------... PT2-SETTINGS: A PT2 calculation will be performed on top of the CASSCF wave function (PT2 =␣ ↪ → CASPT2) CASPT2 Real Levelshift ... 0.00e+00 CASPT2 Im. Levelshift ... 0.00e+00 CASPT2 IPEA Levelshift ... 0.00e+00 ... ---------------------------------------------------------------< CASPT2 > ---------------------------------------------------------------... -----------------------------------CASPT2-D Energy = -0.171839049 -----------------------------------Class V0_ijab: dE= -0.013891923 Class Vm1_iab: dE= -0.034571085 Class Vm2_ab : dE= -0.040985427 Class V1_ija : dE= -0.003511548 Class V2_ij : dE= -0.000579508 Class V0_ia : dE= -0.075176596 Class Vm1_a : dE= -0.002917335 Class V1_i : dE= -0.000205627 smallest energy denominator IJAB = 3.237539973 smallest energy denominator ITAB = 2.500295823 smallest energy denominator IJTA = 2.339868413 smallest energy denominator TUAB = 1.664398302 smallest energy denominator IJTU = 1.342421639 smallest energy denominator ITAU = 1.496042538 smallest energy denominator TUVA = 0.706288250</code></pre>
+<p>(continues on next page)</p>
+<pre><code>smallest energy denominator ITUV = 0.545304334 ... Iter EPT2 EHylleraas residual norm Time 1 -0.17183905 -0.17057203 0.03246225 0.0 2 -0.17057203 -0.17119523 0.00616509 0.0 3 -0.17117095 -0.17121211 0.00086389 0.0 4 -0.17120782 -0.17121281 0.00013292 0.0 5 -0.17121273 -0.17121282 0.00000990 0.0 6 -0.17121283 -0.17121282 0.00000159 0.0 7 -0.17121282 -0.17121282 0.00000020 0.0 CASPT2 calculation converged in 7 iterations ... =============================================================== CASPT2 Results =============================================================== ********************* MULT 1, ROOT 0 ********************* Class V0_ijab : dE = -0.013831560889 Class Vm1_iab : dE = -0.034124733943 Class Vm2_ab : dE = -0.041334010085 Class V1_ija : dE = -0.003446396316 Class V2_ij : dE = -0.000584401134 Class V0_ia : dE = -0.074688029120 Class Vm1_a : dE = -0.002962355569 Class V1_i : dE = -0.000241331405 ---------------------------------------------------------------Total Energy Correction : dE = -0.17121281846205 ---------------------------------------------------------------Reference Energy : E0 = -108.66619981448225 Reference Weight : W0 = 0.94765190644139 ---------------------------------------------------------------Total Energy (E0+dE) : E = -108.83741263294431 ---------------------------------------------------------------</code></pre>
+<p>Note that the program prints CASPT2-D results prior entering the CASPT2 iterations.[489] In case of intruder states, the residual equation may not converge. The program will not abort. Hence, it is important to check convergence for every CASPT2 run. In this particular example with the small basis sets, there are no intruder states.</p>
+<p>(continued from previous page)</p>
+<figure><figcaption><div class="caption">Fig. 3.40: Potential Energy Surface of the N 2 molecule from CASSCF(6,6) and CASPT2 calculations (def2-SVP).</div></figcaption></figure>
+<p>The potential energy surface in Fig. 3.40 is indeed very similar to the FIC-NEVPT2 approach, which is more efficient (no iterations) and robust (absence of intruder states). The figure also shows the CASPT2-K results, which is typically a compromise between the two methods. As expected, the largest deviation from CASPT2 is observed at the dissociation limit, where the open shell character dominates the reference wave function. In this example, the discrepancy between the three methods is rather subtle. However, the results may differ substantially on some challenging systems, such as Chromium dimer studied in the CASPT2-K publication. [495]. Despite its flaws, the CASPT2 method is of historical importance and remains a popular methodology. In the future we might consider further extension such as the (X)MS-CASPT2.[496]</p>
+<h2>3.17.2 Keywords</h2>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>MaxIter 20 # maximum for the CASPT2 iterations MaxDIIS 7 # maximum dimension of the DIIS expansion # intruder state warnings TSmallDenom 1e-2 # printing thresh for small denominators # general settings NThresh 1e-6 # FIC-CASPT2 cut off for linear dependencies D4Tpre 1e-12 # truncation of the 4-pdm D3Tpre 1e-14 # truncation of the 3-pdm EWIN -3,1000 # Energy window for the frozencore setting fc_ewin # option to skip the PT2 correction for all states except for the ones # specified for a selected multiplicity block and root # selectedRoots[block] = root number counting from 0. selectedRoots[0]=0,1 # compute MULT=1 root=0,1 and skip all others. #CASPT2-K specific options TReg 1e-2 # default for the Tikhonov reguralization end end</code></pre>
+<h2>3.18 CASSCF and DFT</h2>
+<p>The Complete Active Space Self-Consistent Field ( CASSCF ) method is effective at describing static correlation effects, which occur in cases such as open-shell molecules or the dissociation of covalent bonds. However, CASSCF is insufficient for describing dynamic correlation and is often too inaccurate for realistic predictions of energies and molecular properties.</p>
+<p>Hybrid approaches that combine CASSCF with Density Functional Theory ( DFT ) have been developed as alternatives to traditional second-order perturbation theory methods like NEVPT2 and CASPT2 .</p>
+<p>Since ORCA 6.1, the following hybrid CASSCF-DFT methods are available:</p>
+<ul>
+<li style="list-style-type: '· ';">Long-range CASSCF short-range DFT ( srDFT )</li>
+<li style="list-style-type: '· ';">Multi-Configurational Pair Density Functional Theory ( MCPDFT )</li>
+</ul>
+<h2>3.18.1 General Description</h2>
+<h2>Multi-Configurational Pair Density Functional Theory</h2>
+<p>MCPDFT evaluates the Kohn-Sham DFT energy</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>using the one-body density matrix ( D pq ) and the two-body density matrix ( d pqrs ), both obtained from a preceding CASSCF calculation.</p>
+<p>Toaccount for spin polarization in open-shell systems and to improve the accuracy in general, the exchange-correlation (xc) energy employs the on-top pair density Π( r )</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This enables the computation of alpha and beta electron densities:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For spatial points r where dynamic correlation is suppressed ( ρ 2 ≥ 2Π ), well-established exchange-correlation functionals from single-reference DFT can be applied directly using Eq. (3.132). This technique is known as functional translation .[497]</p>
+<p>In the original MCPDFT method,[497] regions where ρ 2 &lt; 2Π were approximated by setting ρ α / β = 1 2 ρ . MCPDFT functionals based on this approach are prefixed with t , e.g., tLDA for translated LDA.</p>
+<p>However, in many systems, regions with ρ 2 &lt; 2Π contain important information and should not be neglected or approximated. Since ρ α / β becomes complex in these regions, dedicated exchange-correlation functionals and their functional derivatives are required.[498, 499] Using Eq. (3.132) without approximation is called complex functional translation .[499] These functionals are prefixed with ct , e.g., ctLDA .</p>
+<p>In ORCA 6.1 the folloing MCPDFT functionals are available:</p>
+<table><caption><div class="caption">Table 3.48: List of available MCPDFT functionals.</div></caption><tbody><tr><th>MCPDFT Functional</th><th>Description</th></tr><tr><td>tLDA tPBE tPBE0 ctLDA ctPBE ctPBE0</td><td>translated local density approximation (defaults to VWN5) translated Perdew, Becke, Ernzerhofer (PBE) translated PBE0, 75 %PBE exchange, 25 %exact HF exchange complex translated local density approximation (defaults to VWN5) complex translated Perdew, Becke, Ernzerhofer (PBE) complex translated PBE0, 75 %PBE exchange, 25 %exact HF exchange</td></tr></tbody></table>
+<h2>Note</h2>
+<p>The original MCPDFT is not variational. A variational form that minimizes the MCPDFT energy[500] is not yet available in ORCA.</p>
+<p>For excited-state MCPDFT methods, see Sec. Excited States .</p>
+<h2>Long-Range CASSCF Short-Range DFT</h2>
+<p>Dynamic electron correlation is most significant when electrons are close together, making it a short-range phenomenon. The srDFT method[501] addresses this by applying DFT to the short-range part of the interaction and CASSCF to the long-range (static correlation) component.</p>
+<p>The srDFT energy expression is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ˆ H lr is the long-range Hamiltonian evaluated with the CASSCF wavefunction | 0 ⟩ , and E sr-H and E sr-xc are the short-range Hartree and exchange-correlation energies.</p>
+<p>Range separation of explicit two-electron interactions for CASSCF and DFT affects two quantities:</p>
+<ul>
+<li style="list-style-type: '· ';">the Coulomb operator that is now split into a lr and sr part</li>
+</ul>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>leading to range-separated two-electron integrals</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>and g sr pqrs .</p>
+<ul>
+<li style="list-style-type: '· ';">dedicated short-range xc functionals in E sr-xc that are damped for an increasing fraction of CASSCF</li>
+</ul>
+<p>An empirical short-range damping parameter µ controls the balance between the short-range and long-range mixing. Setting µ to 0 (zero) restores the single-reference Kohn-Sham DFT energy, as appropriate for a state-specific ground-state calculation. In contrast, increasing µ to very large values ( µ &gt; 100 ) effectively recovers the CASSCF solution.</p>
+<p>Unlike MCPDFT , srDFT is variationally minimized with respect to orbital and CI coefficients. Currently, this is only implemented for exchange-correlation functionals dependent on one-electron densities. For singlets, only total electron density ρ is used; for other spin multiplicities, both ρ , spin-density m , and their derivatives are considered.[502]</p>
+<p>After convergence, the final srDFT energies can be re-evaluated using the on-top pair density as in MCPDFT</p>
+<p>The following srDFT functionals are available in ORCA 6.1:</p>
+<table><caption><div class="caption">Table 3.49: List of available srDFT functionals.</div></caption><tbody><tr><th>MCPDFT Functional</th><th>Description</th></tr><tr><td>srLDA srPBE srPBE0 sr-ctLDA sr-ctPBE sr-ctPBE0</td><td>short-range LDA (defaults to VWN5)[241, 503] short-range PBE, also known as Goll, Werner, Stoll (GWS) [504, 505] short-range PBE0, 75 %srPBE exchange, 25 %exact sr HF exchange complex translated srLDA complex translated srPBE complex translated srPBE0</td></tr></tbody></table>
+<h2>3.18.2 Computational Aspects</h2>
+<p>In ORCA 6.1 the CASDFT methods MCPDFT and srDFT are implemented in the TRAH-CASSCF module. They can be invoked by adding the desired functional to the standard CASSCF input.</p>
+<p>For example, a state-averaged CASDFT calculation on ethylene with π and π ∗ orbitals in the active space:</p>
+<pre><code>! TRAH ! ctPBE %casscf nel 2 norb 2 mult 1 nroots 3 end</code></pre>
+<pre><code>! TRAH ! sr-ctPBE %method RangeSepMu 0.40 # Default value end %casscf nel 2 norb 2 mult 1 nroots 3 end</code></pre>
+<p>Note that the RIJK approximation is not yet available for CASDFT.</p>
+<p>Note that translated sr functionals are also available. In that case, complex translation has to be switched off in the %method block</p>
+<pre><code>! TRAH ! sr-ctLDA %method CASDFT ComplexTranslation false end end</code></pre>
+<p>In contrast to single-reference DFT , the RIJ and RIJCOSX approximations are not activated by default . If desired, they must be explicitly given in the ORCA input file:</p>
+<pre><code>! TRAH ! ctPBE0 ! RIJCOSX def2-TZVP/C DefGrid3 %casscf nel 2 norb 2 mult 3 nroots 1 end</code></pre>
+<h2>3.18.3 Excited States</h2>
+<p>Excited states can be calculated using state-averaged (SA) methods as in standard CASSCF calculations.</p>
+<p>For MCPDFT, energies are evaluated from state-specific one- and two-body densities of a converged SA-CASSCF calculation.[497]</p>
+<p>For srDFT, an approximate energy is first minimized using the averaged densities. Final srDFT energies are then evaluated from state-specific (SS) densities.[506]</p>
+<figure><figcaption><div class="caption">Fig. 3.41: Three lowest potential energy curves of ethylene twist calculated with various srLDA methods.</div></figcaption></figure>
+<p>As shown in Fig. 3.41, srDFT with SS densities may produce false minima for twisted ethylene. MCPDFT suffers from similar issues.</p>
+<p>To mitigate this, one can diagonalize a linearized CI-DFT Hamiltonian that accounts for deviations from averaged</p>
+<p>densities:[506, 507]</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>As shown in Fig. 3.41, the CI-DFT variant (e.g., sr-ctLDA ) resolves the false-minimum problem and yields the best agreement with the highly correlated MRCI+Q method.</p>
+<p>The CI-DFT approach can be specified via the simple keyword input</p>
+<pre><code>! TRAH ! CI-sr-ctPBE %casscf nel 2 norb 2 mult 1 nroots 3 end</code></pre>
+<h2>or via the method block</h2>
+<pre><code>! TRAH ! sr-ctPBE %method CASDFT OrthogonalCI true end end %casscf nel 2 norb 2 mult 1 nroots 3 end</code></pre>
+<p>In ORCA 6.1 the following CI-DFT keywords are available:</p>
+<pre><code>CI-DFT Keyword CI-ctLDA CI-ctPBE CI-ctPBE0 CI-srLDA CI-srPBE CI-srPBE0 CI-sr-ctLDA CI-sr-ctPBE CI-sr-ctPBE0</code></pre>
+<h2>3.19 Multireference Configuration Interaction and Pertubation Theory (uncontracted)</h2>
+<p>The multireference correlation module ( orca_mrci ) is designed for traditional (uncontracted) approaches (configuration interaction, MR-CI, and perturbation theory, MR-PT), which is the main focus of this section. For clarification, these approaches have in common that they consider excitations from each and every configuration state function (CSF) of the reference wavefunction. Hence, the computational cost of such approaches grows rapidly with the size of the reference space (e.g. CAS-CI). Furthermore, all integrals must be kept in memory to be efficient, which further limits the field of application.</p>
+<p>Internally contracted multireference approaches, such as N-electron Valence State Perturbation Theory (NEVPT2) , do not share these bottlenecks. Here, excitations are defined with respect to the entire reference wavefunction. A number of internally contracted approaches ( NEVPT2 , NEVPT4(SD) , FIC-MRCC and FIC-MRCI ) are available and described elsewhere in the manual.</p>
+<h2>® Note</h2>
+<p>NEVPT2 is typically the method of choice as it is fast and easy to use. It is highly recommended to check the respective section, when new to the field. The following chapter focuses on the traditional multi-reference approaches as part of the orca_mrci module.</p>
+<h2>3.19.1 Introductory Remarks</h2>
+<p>All of the approaches in orca_mrci are uncontracted and start with a reference wavefunction that consists of multiple configurations (orbital occupation patterns). While the molecular orbitals typically arise from a CASSCF calculation, the reference wavefunction is not restricted to a complete active space (CAS). Restrictive active spaces (RAS) or arbitrary list of configurations can be defined in the refs sub-block.</p>
+<p>The total wavefunction is constructed by considering single and double excitations out of the reference configurations. These excited configurations are then used to generate configuration state functions (CSF) that have the proper spin and spatial symmetry. The number of wavefunction parameters rapidly grows with the number of reference functions. Theorca_mrci module features a set of truncation criteria ( TSel, TPre, TNat ) that help to reduce the number of wavefunction parameters. Furthermore, by default, the program only considers reference configurations that already have the target spin and spatial symmetry. There are situations, where this is undesired and the restrictions can be lifted with the keyword rejectinvalidrefs false . For more information on the theory, the program module as well as its usage we recommend the review article by Neese et al.[508]. A tutorial type introduction to the subject is presented in chapter Multireference Configuration Interaction and Pertubation Theory (uncontracted) of the manual and more examples in the CASSCF tutorial.</p>
+<p>Although there has been quite a bit of experience with it, this part of the program is still somewhat hard to use and requires patience and careful testing before the results should be accepted. While we try to make your life as easy as possible, you have to be aware that ultimately any meaningful multireference ab initio calculation requires more insight and planning from the user side than standard SCF or DFT calculation or single reference correlation approaches like MP2 - so don't be fainthearted! You should also be aware that with multireference methods it is very easy to let a large computer run for a long time and still to not produce a meaningful result - your insight is a key ingredient to a successful application! Below a few examples illustrate some basic uses of the orca_mrci module.</p>
+<h2>3.19.2 RI-approximation</h2>
+<p>First of all, it is important to understand that the default mode of the MR-CI module in its present implementation performs a full integral transformation from the AO to the MO basis. This becomes very laborious and extremely memory intensive beyond approximately 200 MOs that are included in the CI. Alternatively, one can construct molecular electron-electron repulsion integrals from the resolution of the identity (RI) approximation. Thus a meaningful auxiliary basis set must be provided if this option is chosen . We recommend the fitting bases developed by the TurboMole developers for MP2 calculations. These give accurate transition energies; however, the error in the total energies is somewhat higher and may be on the order of 1 mEh or so. Check IntMode to change the default mode for the integral transformation. Note that in either way, the individually selecting MRCI module requires to have all integrals in memory which sets a limit on the size of the molecule that can be studied.</p>
+<h2>3.19.3 Individual Selection</h2>
+<p>Secondly, it is important to understand that the MR-CI module is of the individually selecting type. Thus, only those excited configuration state functions (CSFs) which interact more strongly than a given threshold ( T sel ) with the 0 th order approximations to the target states will be included in the variational procedure. The effect of the rejected CSFs is estimated using second order perturbation theory. The 0 th order approximations to the target states are obtained from the diagonalization of the reference space configurations. A further approximation is to reduce the size of this reference space through another selection - all initial references which contribute less than a second threshold ( T pre ) to the 0 th order states are rejected from the reference space.</p>
+<h2>Single excitations</h2>
+<p>One important aspect concerns the single excitations. If the reference orbitals come from a CASSCF calculation the matrix elements between the reference state and the single excitations vanishes and the singles will not be selected. However, they contribute to fourth and higher orders in perturbation theory and may be important for obtaining smooth potential energy surfaces and accurate molecular properties. Hence, the default mode of the MRCI module requires to include all of the single excitations via the flag AllSingles =true . This may lead to lengthy computations if the reference spaces becomes large!</p>
+<h2>Reference Spaces</h2>
+<p>Third, the reference spaces in the MR-CI module can be of the complete active space ( CAS(n-electrons,m-orbitals) ) or restricted active space ( RAS , explained later) type. It is important to understand that the program uses the orbitals around the HOMO-LUMO gap as provided by the user to build up the reference space! Thus, if the orbitals that you want to put in the active space are not coming 'naturally' from your SCF calculation in the right place you have to reorder them using the ' moread ' and ' rotate ' features together with the NoIter directive. To select the most meaningful and economic reference space is the most important step in a multireference calculation. It always requires insight from the user side and also care and, perhaps, a little trial and error.</p>
+<h2>Size Consistency</h2>
+<p>Fourth, it is important to understand that CI type methods are not size consistent. Practically speaking the energy of the supermolecule A-B with noninteracting A and B fragments is not equal to the energies of isolated A and isolated B. There are approximate ways to account for this ( ACPF, AQCC and CEPA methods) but the effect will be present in the energies, the more so the more electrons are included in the treatment. The same is not true for the perturbation theory based methods which are size consistent as long as the reference wavefunction is.</p>
+<h2>Performance</h2>
+<p>There are many flags that control the performance of the MR-CI program. Please refer to chapter 0 for a description of possible flags, thresholds and cut-offs. The most important thresholds are T sel and Tpre, and for SORCI also Tnat.</p>
+<figure><figcaption><div class="caption">Fig. 3.42: Zwitter-ionic form of Serine.</div></figcaption></figure>
+<p>For some methods, like ACPF, it is possible to compare the performance of the MRCI module with the performance of the MDCI module. The MDCI module has been written to provide optimum performance if no approximations are introduced. The MRCI module has ben written more with the idea of flexibility rather than the idea of performance. Let us compare the performance of the two programs in a slightly nontrivial calculation - the zwitter-ionic form of serine. We compare the selecting MRCI approach with the approximation free MDCI module. The molecular size is such that still all four index integrals can be stored in memory.</p>
+<table><caption><div class="caption">Table 3.51: Comparison of the performance of the MRCI and MDCI modules for a single reference calculation with the bn-ANO-DZP basis set on the zwitter-ionic form of serine (14 atoms, 133 basis functions).</div></caption><tbody><tr><th>Module</th><th>Method</th><th>T sel (Eh)</th><th>Time (sec)</th><th>Energy (Eh)</th></tr><tr><td>MRCI</td><td>ACPF</td><td>10 - 6</td><td>3277</td><td>-397.943250</td></tr><tr><td>MDCI</td><td>ACPF</td><td>0</td><td>1530</td><td>-397.946429</td></tr><tr><td>MDCI</td><td>CCSD</td><td>0</td><td>2995</td><td>-397.934824</td></tr><tr><td>MDCI</td><td>CCSD(T)</td><td>0</td><td>5146</td><td>-397.974239</td></tr></tbody></table>
+<p>The selecting ACPF calculation selects about 15% of the possible double excitations and solves a secular problem of size ≈ 360,000 CSFs. The MDCI module ACPF calculation optimizes approximately 2.5 million wavefunction amplitudes - and this is not a large molecule or a large basis set! Despite the fact that the MDCI module makes no approximation, it runs twice as fast as the selected MRCI module and an estimated 50 times faster than the unselected MRCI module! This will become even more pronounced for the larger and more accurate basis sets that one should use in such calculations anyways. The error of the selection is on the order of 3 mEh or 2 kcal/mol in the total energy. One can hope that at least part of this error cancels upon taking energy differences. 1 The more rigorous CCSD</p>
+<p>1 Depending on whether one wants to take a pessimistic or an optimistic view one could either say that this result shows what can be achieved with a code that is dedicated to a single determinant reference. Alternatively one could (and perhaps should) complain about the high price one</p>
+<p>calculation takes about a factor of two longer than the ACPF calculation which seems reasonable. The triples add another factor of roughly 2 in this example but this will increase for larger calculations since it has a steeper scaling with the system size. The ACPF energy is intermediate between CCSD and CCSD(T) which is typical - ACPF overshoots the effects of disconnected quadruples which partially compensates for the neglect of triples.</p>
+<p>These timings will strongly depend on the system that you run the calculation on. Nevertheless, what you should take from this example are the message that if you can use the MDCI module, do it.</p>
+<p>TheMDCImodulecanavoidafullintegral transformation for larger systems while the MRCI module can use selection and the RI approximation for larger systems. Both types of calculation will become very expensive very quickly! Approximate MDCI calculations are under development.</p>
+<h2>Symmetry</h2>
+<p>The MRCIprogram really takes advantage of symmetry adapted orbitals. In this case the MRCI matrix can be blocked according to irreducible representations and be diagonalized irrep by irrep. This is a big computational advantage and allows one to converge on specific excited states much more readily than if symmetry is not taken into account.</p>
+<p>The syntax is relatively easy. If you specify:</p>
+<pre><code>newblock 1 * nroots 8 refs cas(4,4) end end</code></pre>
+<p>Then the '*' indicates that this is to be repeated in each irrep of the point group. Thus, in C 2 v the program would calculate 8 singlet roots in each of the four irreps of the C 2 v point group thus leading to a total of 32 states.</p>
+<p>Alternatively, you can calculate just a few roots in the desired irreps:</p>
+<pre><code>newblock 1 0 nroots 3 refs cas(4,4) end end newblock 1 2 nroots 5 refs cas(4,4) end end newblock 3 1 nroots 1 refs cas(4,4) end end</code></pre>
+<p>In this example, we would calculate 3 singlet roots in the irrep '0' (which is A 1 ) , then five roots in irrep '2' (which is B 1 ) and then 1 triplet root in irrep 1 (which is B 2 ) .</p>
+<p>Obviously, the results with and without symmetry will differ slightly. This is due to the fact that without symmetry the reference space will contain references that belong to 'wrong' symmetry but will carry with them excited configurations of 'right' symmetry. Hence, the calculation without use of symmetry will have more selected CSFs and hence a slightly lower energy. This appears to be unavoidable. However, the effects should not be very large for well designed reference spaces since the additional CSFs do not belong to the first order interacing space.</p>
+<p>pays for the generality of the MRCI approach. In any case, the name of the game would be to develop MR approaches that are equally efficient to single reference approaches. See FIC-MRCI chapter for more information.</p>
+</div>
+</body>
+</html>

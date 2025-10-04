@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part077</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<table><tbody><tr><td>g_DSO</td><td>AD N N</td><td>N</td></tr><tr><td>g_PSO</td><td>AD</td><td>N</td></tr><tr><td>g_Tot g_iso</td><td>AD N</td><td>N</td></tr><tr><td></td><td>D N</td><td>N</td></tr><tr><td>Delta_g</td><td>AD N D</td><td>N N</td></tr><tr><td>Delta_g_iso orientation</td><td>N N</td><td>N</td></tr><tr><td>AD S</td><td></td><td></td></tr><tr><td>Method</td><td>N</td><td>N</td></tr><tr><td>Level Mult</td><td>S N I N</td><td>N N</td></tr><tr><td>State Irrep</td><td>I N I N</td><td>N N</td></tr><tr><td>numOfFragments sumNonDisStrong</td><td>I N D N</td><td>N The number of fragments N Sum of non dispersive correlation strong pairs</td></tr><tr><td>sumNonDisWeak</td><td>D N</td><td>N Sum of non dispersive correlation weak pairs</td></tr><tr><td>electrostRef</td><td>AD N</td><td>N Electrostatics reference</td></tr><tr><td>exchangeRef AD</td><td></td><td>N Exchange reference</td></tr><tr><td>dispContr AD</td><td>N N</td><td>N Strong pair dispersion contribution</td></tr><tr><td>dispWeak AD</td><td>N</td><td>N Weak pair dispersion contribution</td></tr><tr><td>AD</td><td>N</td><td></td></tr><tr><td>refInt corrInt AD</td><td>N</td><td>N Interaction reference N Interaction correlation</td></tr><tr><td>totInt AD</td><td></td><td>N</td></tr><tr><td>I</td><td>N</td><td>Interaction total</td></tr><tr><td>I</td><td></td><td></td></tr><tr><td>NEL NSOMO</td><td>N</td><td>N</td></tr><tr><td>I</td><td>N</td><td>N</td></tr><tr><td>NDOMO</td><td>N</td><td>N</td></tr><tr><td>NVMO</td><td>N</td><td></td></tr><tr><td>I I</td><td>N N</td><td>N N</td></tr><tr><td>NNatoOrbs OccUno</td><td>AD</td><td>N Occupation of natural or- bitals</td></tr><tr><td>OccUnso</td><td>AD N D</td><td>N Occupation of spin natu- ral orbitals</td></tr><tr><td>GTOINT</td><td>Y Y Y</td><td>N N</td></tr><tr><td></td><td>D</td><td></td></tr><tr><td>STOINT SCF SCFGRAD</td><td></td><td>N</td></tr><tr><td>D D D</td><td></td><td>N</td></tr><tr><td>GSTEP</td><td>Y Y Y</td><td>N</td></tr><tr><td>D</td><td></td><td>N</td></tr><tr><td></td><td>Y Y</td><td>N</td></tr><tr><td>PLOT MOM</td><td>D D</td><td></td></tr><tr><td>MP2</td><td></td><td>N N</td></tr><tr><td>CPSCF LOC</td><td>D Y D</td><td>N</td></tr><tr><td>CIS</td><td>Y</td><td>N N</td></tr><tr><td></td><td>D Y D</td><td></td></tr><tr><td>MRCI</td><td>Y</td><td></td></tr><tr><td>REL SOC</td><td>D Y Y</td><td>N</td></tr><tr><td>EPRNMR CASSCF</td><td>D D Y D</td><td>N</td></tr><tr><td></td><td>Y</td><td>N N</td></tr><tr><td></td><td>Y</td><td>N</td></tr><tr><td></td><td>D D Y</td><td>N</td></tr><tr><td>MDCI CHELPG ROCIS</td><td>Y</td><td>N</td></tr><tr><td>MRCC FCI</td><td>D D Y D</td><td>N N</td></tr><tr><td></td><td>Y</td><td></td></tr><tr><td></td><td>Y</td><td>N N</td></tr><tr><td>MD</td><td>D Y</td><td>N</td></tr><tr><td>FREQ FREQ_NUM COMPOUND</td><td>D D Y D</td><td>N</td></tr><tr><td>CIPSI</td><td>Y D Y</td><td>N</td></tr><tr><td></td><td>Y</td><td>N</td></tr><tr><td>AUTOCI ESD DLPNOCC</td><td>D D Y D</td><td>N</td></tr><tr><td>MCRPA</td><td>Y</td><td>N</td></tr><tr><td></td><td>Y</td><td>N</td></tr><tr><td>NEB CONFSC</td><td>D D Y</td><td>N</td></tr><tr><td>ANMR</td><td>Y</td><td>N</td></tr><tr><td></td><td>D D Y</td><td>N</td></tr><tr><td></td><td></td><td>N</td></tr><tr><td></td><td></td><td>N</td></tr><tr><td></td><td>D</td><td></td></tr><tr><td>XTB</td><td>D</td><td>N</td></tr><tr><td></td><td>Y Y</td><td></td></tr><tr><td>MMGRAD</td><td></td><td></td></tr><tr><td></td><td>D</td><td></td></tr><tr><td>MM</td><td></td><td></td></tr><tr><td></td><td>Y</td><td></td></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 9.1 - continued from previous page</div></caption><tbody><tr><td></td><th>XTBGRAD</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>LFT</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>EXT</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ONIOM_S</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ONIOM_M</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ONIOM_L</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>PROPINT</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>RESPONSE</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>PROP</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>CASRESP</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>MP2RESP</th><th>D</th><th>Y Y</th><th colspan="9">N</th></tr><tr><td></td><th>COSMORS</th><th>D</th><td></td><th colspan="9">N</th></tr><tr><td></td><th>AUTOCIRESP</th><th>D</th><th>Y Y</th><th colspan="9">N</th></tr><tr><td></td><th>GOAT</th><th>D D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>CISRESP</th><td></td><td></td><th colspan="9">N</th></tr><tr><td></td><th>EDA</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>SUM</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td>SCF_Timings</td><td>TOTAL</td><td>D</td><td>Y</td><td colspan="9">N</td></tr><tr><td></td><th>PREP</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><td></td><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>GUESS FOCK</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>DENS</th><th>D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>DIAG</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ETOT</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>POP</th><th>D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>TRAFO</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>ORTHO</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>DIIS</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>SOSCF NR</th><th>D</th><th>Y Y</th><th colspan="9">N N</th></tr><tr><td></td><td></td><th>D</th><td></td><th colspan="9">N</th></tr><tr><td></td><th>J X</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><td></td><th>D</th><th>Y Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>XC</th><th>D</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>GRID</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>FSYMMETR</th><th>D</th><th>Y Y</th><th colspan="9">N</th></tr><tr><td></td><th>PSYMMETR</th><th>D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>FOCKSTART</th><th>D</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>SOLV</th><th>D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><td></td><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>SOLV_INIT</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>SOLV_FINAL</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_PREP</th><td></td><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>INT_PRESCREEN</th><th>D</th><td></td><th colspan="9">N</th></tr><tr><td></td><td></td><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_BF</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_DENS</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_DENSIO INT_FUNC</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_POT</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>INT_POTIO</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>D</th><th>Y</th><th colspan="9">N N</th></tr><tr><td></td><th>INT_SUM</th><td></td><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>SPLITRIJ</th><th>D D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>COSX COSX1C</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>RIJK</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><td></td><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>STABANA</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>DFET</th><td></td><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ADFT_GUESS</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ADFT_JDENS</th><th>D D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ADFT_JMAT ADFT_XDENS</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ADFT_XMAT</th><th>D</th><th>Y Y</th><th colspan="9">N N</th></tr><tr><td></td><th>ADFT_TMAT</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ADFT_EQNSOLV</th><th>D</th><td></td><th colspan="9">N</th></tr><tr><td></td><th>ECRISM</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ECRISM_QESP</th><th>D</th><th>Y</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>ECRISM_TOOL</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><th>ECRISM_FOCK</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td></td><th>FROZCORE</th><th>D</th><th>Y</th><th colspan="9">N</th></tr><tr><td>Solvation_Details</td><th>Solvent Epsilon</th><th>S</th><th>N</th><th colspan="9">N N</th></tr><tr><td></td><th>Refrac</th><th>D D</th><th>N</th><th colspan="9">N</th></tr><tr><td></td><th>RSolv</th><td></td><th>N</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><th>D</th><th>N</th><th colspan="9">N</th></tr></tbody></table>
+<p>continues on next page</p>
+<table><caption><div class="caption">Table 9.1 - continued from previous page</div></caption><tbody><tr><th>Geometry</th><td>SurfaceType</td><td>S</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>CPCMDielEnergy</td><td>D</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>NPoints</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>SurfaceArea</td><td>D</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>NAtoms</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>NCorelessECP</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>NGhostAtoms</td><td>I</td><td>N</td><td>N</td><td></td></tr><tr><td></td><td>Coordinates</td><td>CC</td><td>N</td><td>N</td><td>Bohr</td></tr><tr><td></td><td>ATNO coreless_ECP</td><td>AI</td><td>N Y</td><td>N N</td><td>Non-zero for cECPs</td></tr><tr><td></td><td>ghostAtoms</td><td>AI</td><td>Y</td><td>N</td><td>Non-zero for ghost atoms</td></tr><tr><td></td><td></td><td>AI</td><td></td><td></td><td></td></tr><tr><td></td><td>fragments</td><td>AI</td><td>Y</td><td>N</td><td>Fragment ID</td></tr></tbody></table>
+<p>1 The name in brackets (if given) is the base property name, which is used for JSON export.</p>
+<p>2 Are multiple properties with the same base property name allowed. If so, the JSON value is a list of properties.</p>
+<p>3 Type, abbreviated as follows: D: Double , C: Complex , I: Integer , B: Boolean , S: String , AD: ArrayOfDoubles , AC: ArrayOfComplex , AI: ArrayOfIntegers , AB: ArrayOfBooleans , CC: Coordinates ,</p>
+<p>4 Whether the component is optional (only stored if applicable).</p>
+<p>5 Whether there are multiple entries of the component. In JSON, these will be stored as a list.</p>
+<h2>10.1 ORCA Structure</h2>
+<h2>10.1.1 Program Components</h2>
+<p>The program system ORCA consists of several separate programs that call each other during a run. The following basic modules are included in this release (listed in alphabetical order):</p>
+<table><tbody><tr><td>orca</td><td>Main input+driver program</td></tr><tr><td>orca_ailft</td><td>Ab Initio Ligand Field Theory</td></tr><tr><td>orca_autoci</td><td>CI type program using the automated generation environment (ORCA-AGE)</td></tr><tr><td>orca_casscf</td><td>Main program for CASSCF driver</td></tr><tr><td>orca_casscfresp</td><td>CASSCF static linear response</td></tr><tr><td>orca_cclib</td><td>Precalculation of one particle coupling coefficients for ACCCI</td></tr><tr><td>orca_chelpg</td><td>Calculation of different kinds of ESP charges</td></tr><tr><td>orca_ciprep</td><td>Preparation of data for MRCI calculations (frozen core matrices and the like)</td></tr><tr><td>orca_cipsi</td><td>Iterative Configuration Expansion Configuration Interaction (ICE-CI)</td></tr><tr><td>orca_cis</td><td>Excited states via CIS and TD-DFT</td></tr><tr><td>orca_cisresp</td><td>CIS response calculation</td></tr><tr><td>orca_compound</td><td>General driver of the ORCA compound language</td></tr><tr><td>orca_crystalprep</td><td>Set up an embedding calculation from a crystal structure file</td></tr><tr><td>orca_eca</td><td>Auxiliary program for solving magnetic model Hamiltonians</td></tr><tr><td>orca_eda</td><td>Energy decomposition analysis module</td></tr><tr><td>orca_esd</td><td>Excited state dynamics program for calculating vibronic spectra, resonance Raman,…</td></tr><tr><td>orca_grad</td><td>General gradient module</td></tr><tr><td>orca_guess</td><td>Generation of an intial guess for SCF and CASSCF</td></tr><tr><td>orca_leanscf</td><td>Self consistent field program for HF and DFT</td></tr><tr><td>orca_lft</td><td>Ligand Field Theory</td></tr><tr><td>orca_loc</td><td>Calculation of localized molecular orbitals</td></tr><tr><td>orca_mcrpa</td><td>CASSCF linear response for excited states</td></tr><tr><td>orca_md</td><td>Molecular dynamics program</td></tr><tr><td>orca_mdci</td><td>Matrix driven correlation program: CI, CEPA, CPF, QCISD, CCSD(T)</td></tr><tr><td>orca_mm</td><td>Classical forcefield components</td></tr><tr><td>orca_mp2</td><td>MP2 program (conventional, direct and RI)</td></tr><tr><td>orca_mrci</td><td>MRCI and MRPT calculations (individually selecting)</td></tr><tr><td>orca_ndoint</td><td>Calculates semiempirical integrals and gradients</td></tr><tr><td>orca_nmrspectrum</td><td>Simulates NMRspectra from calculated NMRparameters</td></tr><tr><td>orca_numfreq</td><td>Numerical Hessian computation</td></tr><tr><td>orca_pc</td><td>Addition of point charge terms to the one-electron matrix</td></tr><tr><td>orca_plot</td><td>Generation of orbital and density plots</td></tr><tr><td>orca_pop</td><td>External program for population analysis on a given density</td></tr><tr><td>orca_prop</td><td>Calculation of molecular properties</td></tr><tr><td>orca_propint</td><td>Calculation of property integrals</td></tr></tbody></table>
+<p>continues on next page</p>
+<h2>ARCHITECTURE OF ORCA</h2>
+<table><caption><div class="caption">Table 10.1 - continued from previous page</div></caption><tbody><tr><td>orca_rel</td><td>(Quasi) Relativistic corrections</td></tr><tr><td>orca_rocis</td><td>Excited states via the ROCIS method</td></tr><tr><td>orca_scfgrad</td><td>Analytic derivatives of SCF energies (HF and DFT)</td></tr><tr><td>orca_scfresp</td><td>self consistent field response</td></tr><tr><td>orca_startup</td><td>Calculation of startup data before each single point</td></tr><tr><td>orca_vpot</td><td>Calculation of the electrostatic potential on a given molecular surface</td></tr><tr><td>orca_vpt2</td><td>VPT2 analysis</td></tr></tbody></table>
+<h2>10.2 The Architecture of ORCA</h2>
+<p>In this chapter we describe the broad features of ORCA's internal structure. This knowledge is not necessary to carry out calculations with ORCA. It may, however, help to understand which modules are being called in which order and why this is happening in the sequence it does.</p>
+<h2>10.2.1 The structure of the ORCA source code</h2>
+<p>The source code of ORCA is broadly structured in three parts:</p>
+<ol>
+<li style="list-style-type: '1) ';">The main program.</li>
+<li style="list-style-type: '2) ';">The code for the 'ORCA tool library'.</li>
+<li style="list-style-type: '3) ';">The code for individual modules.</li>
+</ol>
+<p>The code in the ORCA tool library is being compiled into one library file that subsequently is linked with all ORCA modules. The code for the individual modules can make use of everything that is in the library, but the modules are not supposed to link to or use any code of the main program or any other module. This way of structuring the code ensures that the modules remain maintainable and that there are no complex and unwanted interdependencies that would make it eventually impossible to exchange modules for new code.</p>
+<h2>10.2.2 The shell structure of ORCA</h2>
+<p>The whole organization of the code and the information flow can be thought of as consisting of a shell structure where a shell is a layer of software with well-defined functions and a well-defined interface to the shells above and below it.</p>
+<p>The lowest layer of the shell consists of the SHARK integral package. This is the 'motor' of the program that takes care of most compute intensive tasks and essentially all parts that involve integrals over basis functions. This amounts to calculating all one- and two-electron integrals, forming Fock and Fock-like matrices and performing integral transformations using all kinds of basis sets and kernels. Most of the SHARK code is independent of the remaining ORCA source code infrastructure.</p>
+<p>The layer above SHARK is the actual ORCA source code. ORCA interacts with the user through the interface and it orchestrates the entire workflow of the calculation. At this point in time, it also performs compute intensive tasks like forming diagonalizing and handling Fock-operators , solving large linear equation systems, forming sigma vectors, densities etc in correlated calculations and similar tasks. The ORCA source code interacts with SHARK through a small set of DRIVERS. The drivers feature genuine ORCA data structures as well as SHARK infrastructure. The DRIVERS call the genuine SHARK functions (ORCA calls SHARK directly only in a few places) and, most importantly, the DRIVERS take care of finding their way through the approximation jungle. By this we mean they handle the necessary basis sets, auxiliary basis sets, grids, integral approximations, solvation, relativity, point charges etc.</p>
+<p>Concentrating these important and highly error prone tasks in a number of well documented routines provides a highly transparent way of identifying and properly maintaining the functionality that is at the heart of the program.</p>
+<p>Above the ORCA software layer there are tools that orchestrate workflows. Workflows typically consisting of a number of interdepend computational steps that are later combined into a single meaningful chemical result. For example, one may optimize the geometry with a DFT functional and calculate zero-point and thermodynamic corrections at the same level and follow it up with a single point calculation at the coupled cluster level that may or may not feature another correction for core correlation at the MP2 level or complete basis set extrapolation. Such tasks and many others, like running series of calculations on a test-sets of molecules or permuting calculation options like functionals or basis sets on a given test system can be addressed with workflow tools. Inside ORCA, there is the very powerful compound scripting language to achieve and organize such tasks. On the commercial branch, FAccTs develops the Weasel tool that is a powerful and highly reliable workflow organizer.</p>
+<p>At the final layer, one might envision a graphical user interface (GUI) that helps building molecules and facilitates running calculations and analyzing results. At this point in time, ORCA does not have a dedicated GUI. There are many free and commercial solutions that interface to ORCA. This form of interfacing is facilitated by the orca_2json interface and the property file that ORCA produces. We hope that the transparency of this interface motivates GUI developers to provide ever improved GUIs that interface ORCA. We do not exclude the possibility that ORCA will feature it's own GUI sometime down the road.</p>
+<h2>10.2.3 The master/slave concept and the calling sequence</h2>
+<p>Within ORCA, the code follows a 'master/slave' concept in which the main program is allowed to know everything about every module while the modules are not allowed to know anything about the main program. Thus, the main program is the piece of software that orchestrates the entire ORCA run and the interaction with the user. The main program is, however, not supposed to carry out compute intensive tasks or even parallelized tasks by itself.</p>
+<p>An ORCA calculation commences with reading and analyzing the ORCA input file. The plausibility of this input is checked by an elaborate 'maincheck' routine. Quite obviously, the number of possible combinations of ORCA features is far larger than what could possibly be checked with realistic effort. However, the maincheck routine has evolved over the year in a way that allows to detect the most common combinations of invalid or inconsistent input keywords and take appropriate action (that can be changing some parameters or aborting the job).</p>
+<p>After through maincheck the basis sets used in the calculations and the coordinates are completely known. This is then the time to initialize the SHARK integral package and will then carry out the bulk of the computation heavy tasks.</p>
+<p>The first module that is being called is orca_startup . This module takes care of calculating the one electron integrals such as the HCORE and overlap matrices, the metric matrices in RI calculations, the pre-screening matrices for direct SCF and possibly also the two-electron integrals for integral conventional runs.</p>
+<p>The next module downstream is the orca_guess program. This module has the task to produce an initial set of molecular orbitals and also an initial density matrix from these orbitals. To this end, there are a number of options out of which the most common ones are to a model density guess (PMODEL) or to read orbitals from a previous</p>
+<p>calculation (MOREAD). In the latter case, the calculation may feature a different geometry and/or a different basis set but the number, nature and ordering of atoms need to be consistent with the target system.</p>
+<p>In the third step, the program branches out into either the SCF or the CASSCF module ( orca_leanscf or orca_casscf ). These modules produces converged orbitals and a self-consistent field energy as well as oneparticle density matrix. The latter is stored in in the DensityContainer , which is a centralized storage facility for densities that will also be left over after the calculation and can be accessed by the users.</p>
+<p>The next step of the calculation consists of calling various post-SCF programs like orca_mp2 , orca_mdci or orca_autoci . NEVPT2 and CASPT2 are calculated by code that is integrated with orca_casscf . These calculate correlation energies and excited states among many other things.</p>
+<p>There are many different pathways that the program can take next, for example geometry optimization or embedding calculations or molecular dynamics to only name a few. Rather than going into each and every one of the possible pathways, we will describe the calculation of molecular properties inside ORCA.</p>
+<h2>10.2.4 The calculation of molecular properties</h2>
+<p>For the calculation of molecular properties, ORCA has a fairly unique and strongly streamlined infrastructure that is focusing on the commonalities in the calculated properties and that are independent of the underlying electronic structure method used.</p>
+<p>There are three qualitatively different sets of properties that are covered in ORCA property calculations:</p>
+<ol>
+<li style="list-style-type: '1) ';">Response properties. These are properties that can be formulated as derivatives of the total energy.</li>
+<li style="list-style-type: '2) ';">QDPT properties. These are properties that are calculated by quasi-degenerate perturbation theory (QDPT). This amount to diagonalizing the Hamiltonian containing external fields and relativistic corrections over a number of roots delivered by the underlying electronic structure method</li>
+<li style="list-style-type: '3) ';">Excited state properties: these are, at least at this point in time, transition moments between different electronic states of the system.</li>
+</ol>
+<h2>Response properties</h2>
+<p>A large number of properties can be written as derivatives of the total energy. These are first order properties:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, P ± µν is the first-order electron ('+') or spin ('-') density ̂ h M is the operator that is describing the property of interest (e.g. the dipole moment operator) and the basis set is { µ } .</p>
+<p>Second order properties are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here the important quantity is ∂P ± µν ∂N , the first derivative (or 'response') of the electron or spin density with respect to perturbation N . It can be shown that the order of perturbations M and N is immaterial and hence one can choose the more convenient perturbation to calculate the response density for.</p>
+<p>It is important to point out that the equations for response properties can always be brought into this form, irrespective of whether the calculation is a Hartree-Fock, DFT, MP2, coupled cluster, CASSCF or full-CI wavefunction.</p>
+<p>Given the considerable generality of the property equations, it seems logical to create an infrastructure in which these similarities are exploited to the largest possible extent. In ORCA the central place where all densities and response densities are stored is the DensityContainer . This is used intensely throughout the actual calculation and left on disk as BaseName.densities where it can be used for visualization.</p>
+<p>In terms of the calculation flow the main program contains all the logic to drive this calculation. It first drives the SCF and possibly the post-SCF calculations. After this is done, the SCF program collects the information about</p>
+<p>which property integrals will be needed down the road and call the property integral program orca_propint that will calculate the necessary integrals and stores them in another central storage container, the 'property integral container'.</p>
+<p>The next step of the calculation is that the main program determines for which properties response densities are needed. It collects these perturbations and calls the response modules. In the case of a SCF wavefunction (HF or DFT), this is the orca_scfresp program. This program will divide the requested perturbations into different types like, real-symmetric, imaginary-antisymmetric, triplet etc. Then it solves the response equations for all types of perturbations simultaneously. This leads to large efficiency gains since the same integrals are needed on the left-hand side of the coupled-perturbed SCF (CP-SCF) equations irrespective of the actual perturbations. Hence, pooling all perturbations of a given type together is much more efficient than treating these perturbations one at a time. This leads to high efficiency gains, in particular for properties like NMR parameters where nucleus dependent perturbations are required.</p>
+<p>For a number of other electronic structure methods like MP2, CASSCF or AutoCI the respective modules can be run in 'response mode' where instead of solving the equations for the energy, they pick up the amplitudes that were determined in the energy run and use them together with the property integrals in order to produce response densities.</p>
+<p>The response densities are then stored in the density container too. At this point, one has everything that is required in order to calculate the actual properties - a task that is performed by orca_prop .</p>
+<p>The orca_prop program works by browsing through the density container and looks for densities that are appropriate for calculating a requested property. As soon as it finds an appropriate density (or combination of unperturbed and response density), it will calculate the property. For example, if you have calculated SCF, MP2 and CCSD in the same calculation and have asked for the calculation of all three densities, orca_prop will calculate three dipole moments and print them right next to each other.</p>
+<p>One beneficial side effect of this organization is that it is very well suited for future extensions. If a new method becomes available in ORCA that is able to produce densities and possibly response densities, the properties for this method will be fully available without any programmer needing to write a single line of additional code. It also ensures that all properties are calculated in a consistent fashion and with a consistent printout.</p>
+<p>The results of all property calculations are stored in the central property file that will be left after the calculation. Users interested in reading properties, it should be read from the property file or its JSON translation.</p>
+<h2>QDPT properties</h2>
+<p>Someproperties are not calculated as energy derivatives but from quasi degenerate perturbation theory. In this method one diagonalizes the QDPT matrix:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The diagonalization produces the complex valued relativistic eigenstates as linear combinations of the non-relativistic or scalar relativistic eigenstates. Using the eigenstates relativistic densities or transition densities can be calculated that subsequently can be used to calculate magnetic properties or 'relativistic' optical or magneto-optical spectra.</p>
+<p>Here ∣ ∣ Ψ SM I 〉 are the roots of a given method that can generate excited states with energy E I . For example, these can be TD-DFT roots, CASSCF roots, CASSCF roots with energy corrections from NEVPT2 or CASPT2, MRCI-roots, EOM-CCSD roots etc. and ̂ H SOC is the spin-orbit coupling (SOC) operator, ̂ H SS the electron-electron spin-spin coupling operator, ̂ H LB the molecular Zeeman operator etc. In practice, only the principle component M = S (i. e. Ψ SS I ) is calculated and the necessary matrix elements are generated using the Wigner-Eckart theorem.</p>
+<p>The procedure obviously suffers from a truncation error because only a finite number of roots can be calculated in practice. However, results indicate that the QDPT generated properties compare often very favorable with experimental data provided that the underlying electronic structure method delivers reasonable results.</p>
+<p>In ORCA, all QDPT properties are calculated in a consistent infrastructure and then also leads to consistent printing and reporting of the results.</p>
+<h2>Excited state properties</h2>
+<p>Closely related to the QDPT infrastructure is the 'one-photon spectroscopy' ( OPS ) infrastructure. This is an infrastructure that coordinates the calculation of transition moments using a set of transition densities as input. These might have been stored on disk or might have been generated on the fly. In a similar way to the QDPT infrastructure, these transition moments are generated in a consistent manner throughout all modules of ORCA that can generate excited states.</p>
+<p>The exact field/matter coupling Hamiltonian is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here k is the wavevector of the radiation with frequency ω and ε is its polarization. A 0 is the intensity of the radiation, r the electronic coordinate and t is the time.</p>
+<p>Evaluation of the matrix element 〈 Ψ SM I ∣ ∣ ∣ ∑ i A ( r i , t ) ∣ ∣ ∣ Ψ S ′ M ′ J 〉 amount to generating the 'exact' field-matter transition moments. This can be requested by setting the flag DoFullSemiClassical = true in the appropriate ORCA input block.</p>
+<p>A series expansion of the cosine term yields the familiar electric dipole, electric quadrupole, magnetic dipole etc. contributions. Interestingly, the direct evaluation of the electric dipole term would yield it in the gauge independent 'velocity' form. They are related to the more familiar 'length' form dipole matrix elements by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The results of the length and velocity transition moment evaluation are expected to match in the basis set limit if the electronic structure method at hand satisfies certain conditions. In practice, they usually do not agree very well, even if large basis sets are used.</p>
+<p>In order to generate electric length and velocity as well as higher moment evaluations, you can use the keywords</p>
+<pre><code>DoDipoleLength = true DoDipoleVelocity = true DecomposeFosc = true</code></pre>
+<p>in the appropriate ORCA input blocks that trigger the respective excited state calculation.</p>
+<h2>10.3 Units and Conversion Factors</h2>
+<p>Internally the program uses atomic units. This means that the unit of energy is the Hartree (Eh) and the unit of length is the Bohr radius ( a 0 ). The following conversion factors to other units are used:</p>
+<table><tbody><tr><td>1 Eh</td><td>=</td><td>27.2113834 eV</td></tr><tr><td>1 eV</td><td>=</td><td>8065.54477 cm - 1 = 23.0605 kcal mol</td></tr><tr><td>1 cm - 1</td><td>=</td><td>29979.2458 MHz</td></tr><tr><td>1 a 0</td><td>=</td><td>0.5291772083 Å</td></tr><tr><td>1 a.t.u.</td><td>=</td><td>2.4188843 10 - 17 s</td></tr></tbody></table>
+<h2>A.1 Changes ORCA 6.1</h2>
+<h2>A.1.1 New Features</h2>
+<h2>Startup, Guess, LeanSCF</h2>
+<ul>
+<li style="list-style-type: '· ';">BUPO algorithm.</li>
+<li style="list-style-type: '· ';">Significant memory improvements in Startup, Guess and LeanSCF.</li>
+</ul>
+<h2>DFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Added B3LYP-3c method.</li>
+<li style="list-style-type: '· ';">Extension of HF-3c, PBEh-3c, B97-3c, and B3LYP-3c for elements Fr-Pu (using original D3 parameters) and r2SCAN-3c up to Lr (Z=103).</li>
+<li style="list-style-type: '· ';">ADFT (Energies, gradient, response, TD-DFT, NOT GIAO, NOT analytic Hessian).</li>
+<li style="list-style-type: '· ';">RPA correlation energy a la Andreas Görling (no gradient, density or response yet; NumGrad, NumFreq).</li>
+<li style="list-style-type: '· ';">Simple input keyword for B2NC-PLYP double-hybrid.</li>
+<li style="list-style-type: '· ';">Added various simple input LibXC(method) keywords for DFT functionals, e.g. TASK-LDA, revTM, HSE06, GAS22.</li>
+</ul>
+<h2>Native xTB Methods</h2>
+<ul>
+<li style="list-style-type: '· ';">Native implementation of GFN1-xTB with energy &amp; gradient.</li>
+<li style="list-style-type: '· ';">Native implementation of GFN2-xTB with energy &amp; gradient.</li>
+<li style="list-style-type: '· ';">Native xTB methods can use the ORCA SCF and plotting infrastructure. Plotting of molecular orbitals, densities, and fractional occupation densities (FODs) can be done with orca_plot .</li>
+<li style="list-style-type: '· ';">Spin-polarized methods spGFN1-xTB and spGFN2-xTB.</li>
+<li style="list-style-type: '· ';">JSON parameter file for custom parameterizations of GFN1- and GFN2-xTB.</li>
+<li style="list-style-type: '· ';">Native implementation of the ALPB solvation model for xTB methods.</li>
+</ul>
+<h2>DETAILED CHANGE LOG</h2>
+<h2>Solvation</h2>
+<ul>
+<li style="list-style-type: '· ';">Analytical DRACO gradient.</li>
+</ul>
+<h2>SCF Linear Response</h2>
+<ul>
+<li style="list-style-type: '· ';">Analytical Raman intensities: HF, DFT up to meta-GGAs, RIJ and COSX, implicit solvation, external point charges. Significantly faster than NumFreq.</li>
+<li style="list-style-type: '· ';">Static dip/dip/dip hyperpolarizability: same range of validity as Raman intensities.</li>
+</ul>
+<h2>Orbital localization</h2>
+<ul>
+<li style="list-style-type: '· ';">IAO-based valence virtual orbital localization methods ( PMVVO , LIVVO ).</li>
+<li style="list-style-type: '· ';">Different options for IAO minimal basis.</li>
+<li style="list-style-type: '· ';">Optionally use a different localization method for virtual MOs via %loc .</li>
+<li style="list-style-type: '· ';">LMO plotting enabled in input file.</li>
+</ul>
+<h2>Optimization</h2>
+<ul>
+<li style="list-style-type: '· ';">New redesigned L-OPT - an L-BFGS optimizer for geometry optimization of large systems - more efficient than before.</li>
+<li style="list-style-type: '· ';">!RIGIDBODYOPT for optimization of structures/fragments as rigid bodies.</li>
+<li style="list-style-type: '· ';">Replaced frozen coordinates ( $ syntax) with X/Y/Z Cartesian constraints.</li>
+</ul>
+<h2>NEB</h2>
+<ul>
+<li style="list-style-type: '· ';">More robust initial path generation using S-IDPP.</li>
+</ul>
+<h2>Excited states</h2>
+<ul>
+<li style="list-style-type: '· ';">Core ionization/excitation energies using UHF IP-EOM-CCSD and STEOM-CCSD.</li>
+<li style="list-style-type: '· ';">Multi-core calculations for RHF/UHF Canonical and BT-PNO IP-EOM and STEOM-CCSD (DLPNO for now can only do 1 core at the time).</li>
+</ul>
+<h2>GS-ROCIS:</h2>
+<ul>
+<li style="list-style-type: '· ';">Spin-orbit coupling is now implemented.</li>
+</ul>
+<h2>DeltaSCF</h2>
+<ul>
+<li style="list-style-type: '· ';">Generalized mode following method.</li>
+<li style="list-style-type: '· ';">Freeze-and-release method.</li>
+</ul>
+<h2>MDCI</h2>
+<ul>
+<li style="list-style-type: '· ';">Add DT_in_Triples correction for RHF reference with a check to skip for small F ia .</li>
+</ul>
+<h2>AutoCI</h2>
+<ul>
+<li style="list-style-type: '· ';">Third order NEVPT (NEVPT3).</li>
+<li style="list-style-type: '· ';">Fourth order NEVPT restricted to singles and double excitation (NEVPT4(SD)).</li>
+<li style="list-style-type: '· ';">Export single-reference CI/CC 2RDM to JSON.</li>
+<li style="list-style-type: '• ';">UHF CCSDTQ.</li>
+</ul>
+<h2>AutoCI Response</h2>
+<ul>
+<li style="list-style-type: '· ';">RHF CCSD dipole-dipole polarizability, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">RHF and UHF CCSD(T) dipole-dipole polarizability, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">RHF and UHF CCSD quadrupole-quadrupole polarizability, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">RHF and UHF CCSD(T) quadrupole-quadrupole polarizability, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">RHF and UHF GIAO-CCSD NMR shielding, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">RHF and UHF GIAO-CCSD(T) NMR shielding, with and without orbital relaxtion.</li>
+<li style="list-style-type: '· ';">UHF GIAO-CCSD EPR g-Tensor, with and without orbital relaxation.</li>
+<li style="list-style-type: '· ';">UHF GIAO-CCSD(T) EPR g-Tensor, with and without orbital relaxation.</li>
+</ul>
+<h2>CASSCF Module</h2>
+<ul>
+<li style="list-style-type: '· ';">ICE NEVPT2 using the full ranked formulation (ICE-FR-NEVPT2).</li>
+<li style="list-style-type: '· ';">Multiconfiguration pair density functional theory (MCPDFT)</li>
+<li>-with translated functionals tLDA, tPBE, and tPBE0</li>
+<li>-and with complex translated functionals ctLDA, ctPBE, and ctPBE0</li>
+<li style="list-style-type: '· ';">Long-range CASSCF short-range DFT (srDFT)</li>
+<li>-with short-range functionals sr-LDA, sr-PBE, and sr-PBE0</li>
+<li>-short-range pair density functionals: sr-ctLDA, sr-ctPBE, and sr-ctPBE0</li>
+<li>-robust RI approximation for range-separated integrals used for RI-J and RI integral transformation</li>
+<li style="list-style-type: '· ';">Effective Hamiltonian CI-DFT approach for excited states with MCPDFT and srDFT.</li>
+</ul>
+<h2>CASSCF Linear Response</h2>
+<ul>
+<li style="list-style-type: '· ';">New options to toggle the orbital response, solution locking, and Olsen preconditioner in %casresp block.</li>
+<li style="list-style-type: '· ';">Nuclear-orbit perturbation implemented (allows for calculation of Aorb contribution to EPR A-tensor).</li>
+<li style="list-style-type: '· ';">Block preconditioner to reduce the number of iterations and computation time.</li>
+</ul>
+<h2>MR methods</h2>
+<ul>
+<li style="list-style-type: '• ';">RASCI / ORMAS module.</li>
+</ul>
+<h2>MCRPA module</h2>
+<ul>
+<li style="list-style-type: '· ';">Block preconditioner to reduce the number of iterations and computation time.</li>
+<li style="list-style-type: '· ';">Orbital response can be turned off. This corresponds to a CAS-CI calculation.</li>
+</ul>
+<h2>Multiscale</h2>
+<ul>
+<li style="list-style-type: '· ';">Automated generation of QM and active regions.</li>
+<li style="list-style-type: '· ';">MM-only calculations can now make use of active atoms keyword.</li>
+<li style="list-style-type: '· ';">Added fast Simple_Eq option for topology preparation of QM/QM2 runs.</li>
+</ul>
+<h2>MD Module</h2>
+<ul>
+<li style="list-style-type: '· ';">Langevin thermostats are now available (random force and drag term can be switched on separately).</li>
+<li style="list-style-type: '· ';">Constraints: Can now automatically constraint all bonds/angles involving a certain element (e.g. H).</li>
+<li style="list-style-type: '· ';">Restraints: Can now define custom restraint function by arbitrary mathematical expression.</li>
+<li style="list-style-type: '· ';">Added new 'Radius of Gyration' Colvar (can restrain the system to spherical shape, e.g. a drop).</li>
+<li style="list-style-type: '· ';">Metadynamics: Can now define custom Colvars by arbitrary mathematical expression.</li>
+<li style="list-style-type: '· ';">Can now modify atom masses during MD simulation.</li>
+<li style="list-style-type: '· ';">Many more options for velocity initialization (e.g. let certain molecules rotate or translate).</li>
+<li style="list-style-type: '· ';">'Reference trajectory' feature to re-compute snapshots from an existing trajectory. Can also compute work along a path.</li>
+<li style="list-style-type: '· ';">Wavefunction extrapolation (ASPC) to reduce number of required SCF cycles.</li>
+<li style="list-style-type: '· ';">Possibility to apply additional arbitrary forces to atoms (e.g. for experiments with own bias potentials).</li>
+</ul>
+<h2>Thermochemistry</h2>
+<ul>
+<li style="list-style-type: '· ';">Diagonal Born-Oppenheimer correction.</li>
+<li style="list-style-type: '· ';">Spin orbit coupling correction to the total energy via approximate 2 components.</li>
+</ul>
+<h2>NMR</h2>
+<ul>
+<li style="list-style-type: '· ';">Enabled shielding calculations with X2C and the finite nucleus model.</li>
+</ul>
+<h2>Energy Decomposition and Wavefunction Analysis</h2>
+<ul>
+<li style="list-style-type: '· ';">Atomic decomposition of London dispersion (ADLD).</li>
+<li style="list-style-type: '· ';">Atomic decomposition of exchange energy (ADEX).</li>
+<li style="list-style-type: '· ';">LED for covalent bonds (COVALED).</li>
+<li style="list-style-type: '· ';">New implementation of ETS-NOCV.</li>
+<li style="list-style-type: '· ';">Enabled LED with X2C Hamiltonian.</li>
+<li style="list-style-type: '· ';">RIJCOSX can now be used for DLPNO-CCSD(T)-LED with non-hybrid DFT as reference wavefunction.</li>
+</ul>
+<h2>AILFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Extended Spaces AILFT (ESAILFT).</li>
+</ul>
+<h2>Magnetic Relaxation Rates</h2>
+<ul>
+<li style="list-style-type: '· ';">Orbach and Raman II pathways ( orca_magrelax ).</li>
+</ul>
+<h2>RESP/CHELPG charges</h2>
+<ul>
+<li style="list-style-type: '· ';">RESP charges with parabolic and hyperbolic constraints.</li>
+<li style="list-style-type: '· ';">Can now define sets of equivalent atoms which will have identical charges.</li>
+</ul>
+<h2>ANISO</h2>
+<ul>
+<li style="list-style-type: '· ';">Update of the ANISO interface in ORCA to support MRCI.</li>
+</ul>
+<h2>Basis Sets</h2>
+<ul>
+<li style="list-style-type: '· ';">6-31G* for Ga-Kr.</li>
+<li style="list-style-type: '• ';">CRENBL basis and CRENBL-ECP.</li>
+<li style="list-style-type: '· ';">New Jensen basis sets: pcX-n, aug-pcX-n, pcH-n, aug-pcH-n (n = 1,2,3,4).</li>
+<li style="list-style-type: '· ';">Reimplemented def-SVP, def-SV(P), def-TZVP, def-TZVPP (H-Lr).</li>
+<li style="list-style-type: '· ';">Extended def2-mSVP, def2-mTZVP, and MINIX up to Lr.</li>
+<li style="list-style-type: '· ';">Extended def2/J option for elements Fr-Lr.</li>
+<li style="list-style-type: '· ';">Extended def2/JK option for elements La-Lu, Fr-Lr.</li>
+</ul>
+<h2>Property File</h2>
+<ul>
+<li style="list-style-type: '· ';">Added SCF and job timings.</li>
+<li style="list-style-type: '· ';">Added DBOC, gCP, and SOC energy contributions.</li>
+<li style="list-style-type: '· ';">Added ESD fluorescence rates.</li>
+<li style="list-style-type: '· ';">Easier conversion to JSON via %output JSONPropFile=true .</li>
+</ul>
+<h2>orca_2json</h2>
+<ul>
+<li style="list-style-type: '· ';">Compute and export AO-basis Fock matrix as well as separate J, K, XC, and CPCM terms.</li>
+<li style="list-style-type: '· ';">Convert JSON property files back to native ORCA format (with limited support for 6.0 files).</li>
+<li style="list-style-type: '· ';">Added SOC integrals.</li>
+</ul>
+<h2>Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">Geometry input from GBW files.</li>
+<li style="list-style-type: '· ';">TransInvar for Numerical Hessian.</li>
+<li style="list-style-type: '· ';">Thermochemistry Compound script for the HEAT protocol by Stanton et al.</li>
+</ul>
+<h2>A.1.2 Improvements</h2>
+<h2>TDDFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Improved FollowIRoot stability.</li>
+<li style="list-style-type: '· ';">TD-DFT amplitudes now stored in GBW file.</li>
+<li style="list-style-type: '· ';">TD-DFT calculations are restartable from a GBW file.</li>
+</ul>
+<h2>GOAT</h2>
+<ul>
+<li style="list-style-type: '· ';">GOAT-COARSE option for automated coarse-grained conformational search.</li>
+<li style="list-style-type: '· ';">GOAT-DIVERSITY for a conformational search looking for maximal structure diversity.</li>
+</ul>
+<h2>DOCKER/SOLVATOR</h2>
+<ul>
+<li style="list-style-type: '· ';">Faster by about 100x, with many improvements and updates.</li>
+<li style="list-style-type: '· ';">DOCKER can now do the search only on limited region of the host by defining a center and extent of the search.</li>
+</ul>
+<h2>AutoCI</h2>
+<ul>
+<li style="list-style-type: '· ';">Significantly improved scaling and runtime performance (speed, memory and disk space requirements) for AUTOCI-MP5 energy.</li>
+<li style="list-style-type: '· ';">Improved RHF CCSD(T) 2RDM performance.</li>
+<li style="list-style-type: '· ';">UHFCCSD(T)gradient accuracy (disconnected 3rd and 4th order contributions were missing, now corrected).</li>
+<li style="list-style-type: '· ';">Response: UHF CCSD Polarizability, solver performance improved significantly.</li>
+<li style="list-style-type: '· ';">Response: switched to sequential handling of response equations (less disk requirements for large calculations, compared to solving all perturbations together).</li>
+<li style="list-style-type: '· ';">Printing improvements.</li>
+</ul>
+<h2>CASSCF</h2>
+<ul>
+<li style="list-style-type: '· ';">Aborts at beginning if CASSCF is requested with a dispersion correction.</li>
+<li style="list-style-type: '· ';">General warnings added about number of roots when CASSCF LR is run.</li>
+<li style="list-style-type: '· ';">TRAH submodule: final active orbitals are the same and sorted the same as in other CAS convergers.</li>
+</ul>
+<h2>CASSCF Linear Response</h2>
+<ul>
+<li style="list-style-type: '· ';">More reasonable threshold for LR equation solution is determined by default.</li>
+<li style="list-style-type: '· ';">Uses solution locking by default.</li>
+<li style="list-style-type: '· ';">Checking at start that there are response parameters with which to perform LR calculation.</li>
+</ul>
+<h2>OpenCOSMO-RS</h2>
+<ul>
+<li style="list-style-type: '· ';">Gas-phase orbitals can be used for the calculations in solution.</li>
+</ul>
+<h2>MD Module</h2>
+<ul>
+<li style="list-style-type: '· ';">Added many more warnings (e.g. when two atoms come too close during a simulation).</li>
+<li style="list-style-type: '· ';">Added many different options how to handle non-converged SCF.</li>
+<li style="list-style-type: '· ';">Random velocity initialization now yields a zero angular momentum by default (i.e. system will not rotate).</li>
+</ul>
+<h2>Thermochemistry</h2>
+<ul>
+<li style="list-style-type: '· ';">Extended max number of allowed temperatures and pressures to 100.</li>
+</ul>
+<h2>DKH</h2>
+<ul>
+<li style="list-style-type: '· ';">Only compute the shell-pair data once.</li>
+</ul>
+<h2>X2C</h2>
+<ul>
+<li style="list-style-type: '· ';">Skip grid setup if not needed.</li>
+</ul>
+<h2>OPS refactor</h2>
+<ul>
+<li style="list-style-type: '· ';">Important: keywords to request multipolar spectrum has been simplified. Some Orca 6.0 keywords are no longer available.</li>
+</ul>
+<h2>QDPT module</h2>
+<ul>
+<li style="list-style-type: '· ';">g-tensor g(OZ/SOC) now includes QED correction factor.</li>
+<li style="list-style-type: '· ';">g-tensor ggauge and g(OZ/SOC) can now be printed in molecular frame (with higher print level associated with QDPT).</li>
+<li style="list-style-type: '· ';">Enabled sum-over-states for CAS and MRCI.</li>
+<li style="list-style-type: '· ';">Reduced memory usage for SSC ZFS calculation.</li>
+</ul>
+<h2>Property File</h2>
+<ul>
+<li style="list-style-type: '· ';">All properties and components now documented in the manual.</li>
+<li style="list-style-type: '· ';">Some components are now stored optionally/conditionally.</li>
+<li style="list-style-type: '· ';">Disable property file storage by default for !MM and !GFN-FF (in addition to !GOAT and !MD-L-Opt ).</li>
+<li style="list-style-type: '· ';">Common component structure for energy properties:. SCF_Energy , AutoCI_Energies , CAS_SCF_Energies , CAS_DCD_Energies , CAS_PT2_Energies , CIS_Energies , MDCI_Energies , MP2_Energies .</li>
+<li style="list-style-type: '· ';">Calculation_info : Removed (unassigned) NumOfFCElectrons and NumOfCorrElectrons ; moved 'final single point energy' to geometry-dependent Single_Point_Data property.</li>
+<li style="list-style-type: '· ';">Stored MR-AUTOCI energies.</li>
+<li style="list-style-type: '· ';">Method-specific population analyses.</li>
+<li style="list-style-type: '· ';">Method- and state-specific nuclear gradient, removed ATNO component.</li>
+<li style="list-style-type: '· ';">G_Tensor : also store g_PSO , g_DSO , Delta_g components.</li>
+<li style="list-style-type: '· ';">A_Tensor , EFG_Tensor : removed activeNucs .</li>
+</ul>
+<h2>Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">Default MaxCore increased to 4GB.</li>
+<li style="list-style-type: '· ';">UCO/UNO generation performance improvement.</li>
+<li style="list-style-type: '· ';">Allowed simple input of DSD-PBEP86, DSD-BLYP and DSD-PBEB95 with D4.</li>
+<li style="list-style-type: '· ';">DeltaSCF: improved preconditioner with SOSCF.</li>
+<li style="list-style-type: '· ';">NEB: fragment preparation.</li>
+<li style="list-style-type: '· ';">Various improvements in orca_mapspc .</li>
+<li style="list-style-type: '· ';">Various fixes, additions, and improvements in Compound.</li>
+</ul>
+<h2>A.1.3 Fixed</h2>
+<h2>TDDFT</h2>
+<ul>
+<li style="list-style-type: '· ';">DCORR should now respect MaxCore and abort neatly if it is insufficient.</li>
+<li style="list-style-type: '· ';">Wrong JSON output of TDDFT/TDA amplitudes and TDA excitation energy.</li>
+<li style="list-style-type: '· ';">Fix bug of TDDFT calculations with semiempirical methods.</li>
+<li style="list-style-type: '· ';">Fixed GS energy storage when SOC is enabled.</li>
+</ul>
+</div>
+</body>
+</html>

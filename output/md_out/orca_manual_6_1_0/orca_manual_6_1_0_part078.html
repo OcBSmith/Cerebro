@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part078</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<h2>MDCI</h2>
+<ul>
+<li style="list-style-type: '· ';">Respect MaxCore when building CPCM containers for PTE(S) and PTES.</li>
+<li style="list-style-type: '· ';">UHF-based CCSD producing wrong results with !CONV .</li>
+<li style="list-style-type: '· ';">Race condition resulting in wrong results in parallel for PTE(S) and PTES.</li>
+<li style="list-style-type: '· ';">S-diagnostic for canonical RHF and UHF.</li>
+<li style="list-style-type: '· ';">Fixed integral transformation problems.</li>
+<li style="list-style-type: '· ';">Fixed problems with Brückner and orbital optimized UHF CCD.</li>
+<li style="list-style-type: '· ';">Estimate required memory in RI/DLPNO exchange-like integral half-transformation to prevent OOM death.</li>
+<li style="list-style-type: '· ';">Stop calculation if MDCI equations do not converge (same as for SCF).</li>
+<li style="list-style-type: '· ';">Rare pair-pair integral crash.</li>
+</ul>
+<h2>MP2</h2>
+<ul>
+<li style="list-style-type: '· ';">MP2 with ANOs works now.</li>
+</ul>
+<h2>CASSCF/NEVPT2</h2>
+<ul>
+<li style="list-style-type: '· ';">FIX: Custom EDIAG failed due to wrong unit conversion - the input energies should now be in Eh.</li>
+<li style="list-style-type: '· ';">FIX: Increased number of states for custom EDIAG (hard-wired).</li>
+<li style="list-style-type: '· ';">FIX: Abort if an unsupported CI solver is requested with TRAH.</li>
+<li style="list-style-type: '· ';">CABSSinglesCorrection is now default in a DLPNO-F12-NEVPT2 (DoCABSSingles=1).</li>
+<li style="list-style-type: '· ';">FIX: MaxIter not properly passed in DLPNO-NEVPT2.</li>
+<li style="list-style-type: '· ';">FIX: QD-NEVPT2 densities not properly used in property calculations.</li>
+<li style="list-style-type: '· ';">FIX: NEVPT2 property calculations now track ground state changes.</li>
+</ul>
+<h2>MCRPA module</h2>
+<ul>
+<li style="list-style-type: '· ';">Removed runtime bottleneck in final CI wave function printing that became an issue for many roots and long CI expansions.</li>
+</ul>
+<h2>QDPT Module</h2>
+<ul>
+<li style="list-style-type: '· ';">ggauge was still using CenterOfNucCharge for magnetic gauge origin; now uses globally set magnetic origin.</li>
+<li style="list-style-type: '· ';">Other g-tensor fixes to first-order contributions (now consistent with orca_prop ).</li>
+<li style="list-style-type: '· ';">Issues with QDPT transition densities from ROCIS.</li>
+</ul>
+<h2>CASSCF QDPT properties</h2>
+<ul>
+<li style="list-style-type: '· ';">Corrected indexing of transition densities and ground-state spin densities.</li>
+<li>-Affected properties: EFG tensor, RHO, first-order g-tensor contributions, SOS properties.</li>
+<li style="list-style-type: '· ';">Memory issue in SSC calculation.</li>
+</ul>
+<h2>QDPT Module Sum-over-states</h2>
+<ul>
+<li style="list-style-type: '· ';">Runs now if g-tensor is requested with DoSOS true (before, A-tensor had to also be requested).</li>
+<li style="list-style-type: '· ';">SOS g-tensor now gives full agreement with CAS LR (without orbital response) when all roots are included in CAS/MRCI QDPT calculation.</li>
+<li style="list-style-type: '· ';">Corrected general retrieval of transition spin densities.</li>
+<li>-NOTE: SOS is thus only available for methods where transition spin densities are available (now: MRCI, CASSCF, CASSCF+NEVPT2, CASSCF+Custom diagonal energies)</li>
+</ul>
+<h2>MD Module</h2>
+<ul>
+<li style="list-style-type: '· ';">External forces on Colvars are now properly computed (relevant e.g. for thermodynamic integration).</li>
+<li style="list-style-type: '· ';">Many bugfixes (e.g. for the 'too many arguments' bug).</li>
+<li style="list-style-type: '· ';">Gradients were not computed for CIS and broken symmetry.</li>
+</ul>
+<h2>Solvation</h2>
+<ul>
+<li style="list-style-type: '· ';">Various options for CPCM: analytic, numeric RI, multipole.</li>
+<li style="list-style-type: '· ';">DRACO keyword not ignored anymore for QM/MM calculations.</li>
+<li style="list-style-type: '· ';">Fix crash for calculations requesting CPCM (bare CPCM / SMD / openCOSMO-RS) if the atomic number of an element in the solute is &gt;= 106.</li>
+</ul>
+<h2>Dispersion</h2>
+<ul>
+<li style="list-style-type: '· ';">Additional !ATM alias for the Axilrod-Teller-Muto type three-body-dispersion treatment available via !ABC .</li>
+</ul>
+<h2>EPR</h2>
+<ul>
+<li style="list-style-type: '· ';">Crash in orca_euler when number of EFG and HFC nuclei differ.</li>
+</ul>
+<h2>NMR</h2>
+<ul>
+<li style="list-style-type: '· ';">ZORA NMR now automatically triggers numeric GIAO 1-el integrals, as in ORCA 5.</li>
+<li style="list-style-type: '· ';">Fixed parallel race condition in DLU-X2C NMR leading to wrong results.</li>
+<li style="list-style-type: '· ';">Tau=Dobson default now correctly applied to GIAO calculations.</li>
+<li style="list-style-type: '· ';">Abort for NMR couplings with ZORA (not implemented).</li>
+<li style="list-style-type: '· ';">Fixed hanging of DSO coupling term with X2C when shieldings are also requested.</li>
+<li style="list-style-type: '· ';">Fixed GIAO XC integration for B97-3c with XCFun.</li>
+</ul>
+<h2>Optimization</h2>
+<ul>
+<li style="list-style-type: '· ';">The 'big step' fallback should also work if only Cartesian constraints are used.</li>
+<li style="list-style-type: '· ';">Switch off group parallelization if (Re)CalcHess is needed.</li>
+</ul>
+<h2>Relaxed Surface Scan</h2>
+<ul>
+<li style="list-style-type: '· ';">Now it allows negative dihedrals on input, improved error report.</li>
+</ul>
+<h2>DOCKER/SOLVATOR</h2>
+<ul>
+<li style="list-style-type: '· ';">Issue when swarming the best structures.</li>
+<li style="list-style-type: '· ';">Fix the chirality of the moment of inertia to avoid creating stereoisomers.</li>
+<li style="list-style-type: '· ';">Wall potential issue when some atoms are very far from the centroid.</li>
+<li style="list-style-type: '· ';">Small fix for solvent dimensions.</li>
+</ul>
+<h2>Hessian</h2>
+<ul>
+<li style="list-style-type: '· ';">Fix for NearIR in PrintThermoChem if InHessName is different from BaseName.hess .</li>
+<li style="list-style-type: '· ';">Fixed issue when writing the IR spectrum multiple times.</li>
+</ul>
+<h2>X2C</h2>
+<ul>
+<li style="list-style-type: '· ';">Disable general contraction for decontracted ANO basis, which led to slowdown.</li>
+<li style="list-style-type: '· ';">CIS/TDDFT gradients with X2C were not picture-change corrected.</li>
+</ul>
+<h2>Thermochemistry</h2>
+<ul>
+<li style="list-style-type: '· ';">D(inf)h point group was not correctly parsed for rotational entropy contribution.</li>
+</ul>
+<h2>Inertia Tensor</h2>
+<ul>
+<li style="list-style-type: '· ';">VPT2 and PAF : Fixed Inertia Tensor calculation.</li>
+</ul>
+<h2>Rotational Constants</h2>
+<ul>
+<li style="list-style-type: '· ';">Minor fixed on unit transformation constants.</li>
+</ul>
+<h2>Basis sets</h2>
+<ul>
+<li style="list-style-type: '· ';">All of SHARK and ORCA now works up to L=10 (except Hessian).</li>
+</ul>
+<h2>SCF Linear Response</h2>
+<ul>
+<li style="list-style-type: '· ';">Fixed issue with initialization of BHP22 solver.</li>
+</ul>
+<h2>Windows</h2>
+<ul>
+<li style="list-style-type: '· ';">Windows-specific crash in orca_mapspc fixed.</li>
+<li style="list-style-type: '· ';">Parallel subcalculations in NumCalc (NEB, NumGrad, VPT2, …) now also available on Windows</li>
+</ul>
+<h2>Property File</h2>
+<ul>
+<li style="list-style-type: '· ';">Re-implemented JSON output via the N. Lohmann library (version 3.11.3) to guarantee valid syntax.</li>
+<li style="list-style-type: '· ';">Alleviated memory and timing overhead.</li>
+<li style="list-style-type: '· ';">Respect %output PropFile=false / !NoPropFile keywords.</li>
+<li style="list-style-type: '· ';">Quadrupole_Moment : EXZ and NUCXZ components held YZ value instead.</li>
+<li style="list-style-type: '· ';">Hessian was stored incorrectly in XTB jobs.</li>
+<li style="list-style-type: '· ';">CIS/TDDFT gradient root was stored incorrectly.</li>
+<li style="list-style-type: '· ';">Chemical_Shift components SPSO , SDSO , and saniso were not stored.</li>
+<li style="list-style-type: '· ';">Calculation_Info was not stored in some calculations.</li>
+<li style="list-style-type: '· ';">MM, XTB, and ExtOpt jobs now store the geometry and final energy.</li>
+<li style="list-style-type: '· ';">Geometry in JSON output was missing ghost, fragment, and ECP data.</li>
+</ul>
+<h2>Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">Crash in SOSCF.</li>
+<li style="list-style-type: '· ';">Cleanup leftover files of stability analysis with DFT.</li>
+<li style="list-style-type: '· ';">Atomic fitting density not working with partial general contraction.</li>
+<li style="list-style-type: '· ';">Occasional crash in integral loop.</li>
+<li style="list-style-type: '· ';">Missing PDB file output in QM/MM NEB.</li>
+<li style="list-style-type: '· ';">Prevent crash when reading the nodefile in GOAT, NumFreq, etc.</li>
+<li style="list-style-type: '· ';">Bug in one-sided numerical gradient TransInvar=true .</li>
+<li style="list-style-type: '· ';">Restored functionality of !AIM .</li>
+<li style="list-style-type: '· ';">Removed leftover temporary files in AUTOCI.</li>
+<li style="list-style-type: '· ';">Restore original irreps if the prediagonalization is skipped in SCF.</li>
+<li style="list-style-type: '· ';">Crash in Hessian for systems with no beta electrons.</li>
+<li style="list-style-type: '· ';">Restored functionality of the !DoEQ keyword.</li>
+<li style="list-style-type: '· ';">Opt+NumFreq or Opt+IRC jobs with !ExtOpt were stopping after the optimization.</li>
+<li style="list-style-type: '· ';">Print headers for all monitored internals in IRC.</li>
+<li style="list-style-type: '· ';">Fixed HFLD when no pairs are identified.</li>
+<li style="list-style-type: '· ';">Removed RIJCOSX-only restriction for wB97X-3c.</li>
+<li style="list-style-type: '· ';">CP-SCF now aborts if unconverged.</li>
+<li style="list-style-type: '· ';">RI Trafo in CIPSI works now.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">Fixed memory leaks in AO-MP2, QDPT, orca_2json , ECPs, ROCIS, LFT, and others.</li>
+<li style="list-style-type: '· ';">Spectrum intensity printing and decomposition in orca_mapspc for cases beyond the dipole approximation.</li>
+<li style="list-style-type: '· ';">orca_vpot : Fixed ESP calculation when contraction change.</li>
+</ul>
+<h2>A.1.4 Removed</h2>
+<h2>CASSCF/NEVPT2</h2>
+<ul>
+<li style="list-style-type: '· ';">QD-NEVPT2 with Cloiszeaux Hamiltonian (QDType=QD_Cloiszeaux).</li>
+<li style="list-style-type: '· ';">Some options for the handling of reduced density matrices in NEVPT2 (D4Step=core, D4Step=D4PT).</li>
+</ul>
+<h2>MCRPA module</h2>
+<ul>
+<li style="list-style-type: '· ';">If the eigenvalue equations fail to converge, the connection to CASSCF wave function instability is not mentioned anymore. The manual section has also been removed.</li>
+</ul>
+<h2>A.2 Changes ORCA 6.0.1</h2>
+<h2>A.2.1 Fixed</h2>
+<h2>DFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Crash when XCFun functional was overwritten with LibXC.</li>
+<li style="list-style-type: '· ';">Hessian fixed for DFT GGA, NoRI, RKS.</li>
+<li style="list-style-type: '· ';">VV10 Hessian is blocked even if invoked with CALC_HESS=TRUE and similar.</li>
+<li style="list-style-type: '· ';">Wrong orbitals for non-self-consistent DFT-NL calculations (wB97M-V, wB97X-V, B97M-V).</li>
+<li style="list-style-type: '· ';">X_WR2SCAN :</li>
+<li>-Exchange can now be specified individually in the %method block.</li>
+<li>-Fixed crashes when second derivatives are requested.</li>
+<li>-TRAH is now disabled per default when using X_WR2SCAN .</li>
+<li>-If second derivatives are requested, will now automatically switch to numerical second derivatives.</li>
+<li>-Added appropriate warnings for the above changes.</li>
+<li style="list-style-type: '· ';">Fixed PBEh-3c gCP parameters for Krypton and Lithium to be consistent with Grimme's stand-alone.</li>
+<li style="list-style-type: '· ';">gCP is now fixed (and extended) for r2SCAN-3c up to Z=103.</li>
+<li style="list-style-type: '· ';">Remove restriction to COSX for wB97X-3c .</li>
+</ul>
+<h2>TD-DFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Ground state gradient for TDDFT calculations with sgradlist was wrong.</li>
+<li style="list-style-type: '· ';">DCORR 2/3 with DoSCS giving wrong results in parallel.</li>
+<li style="list-style-type: '· ';">(D)-Correction not available for full TDDFT.</li>
+<li style="list-style-type: '· ';">Fix for memory estimates for Hessian/TDDFT when running without COSX.</li>
+<li style="list-style-type: '· ';">FollowIRoot was not supposed to do anything if the overlap was to small, was still updating.</li>
+<li style="list-style-type: '· ';">Fixed interface to BHP22 solver in CIS.</li>
+</ul>
+<h2>MP2</h2>
+<ul>
+<li style="list-style-type: '· ';">Crash in conventional U-MP2.</li>
+<li style="list-style-type: '· ';">Parallel crash in RI-MP2 density.</li>
+<li style="list-style-type: '· ';">Crash in (RI-)MP2 gradient with SMD.</li>
+<li style="list-style-type: '· ';">Crash in (RI-)MP2 density with PGC and RIJK.</li>
+<li style="list-style-type: '· ';">MP2+CPCM gradient was wrong.</li>
+<li style="list-style-type: '· ';">Crash in NearIR + B2PLYP.</li>
+<li style="list-style-type: '· ';">Bug with MP2 gradient in property file.</li>
+</ul>
+<h2>MDCI</h2>
+<ul>
+<li style="list-style-type: '· ';">SemiCore was not applied correctly if ECP is present.</li>
+<li style="list-style-type: '· ';">ECP-related crashes.</li>
+<li style="list-style-type: '· ';">Fixed redundant integral generation for specific problems.</li>
+<li style="list-style-type: '· ';">Restored old CITrafos to address reported performance issues.</li>
+<li style="list-style-type: '· ';">Added missing 4th-order doubles term in (T) for RKS reference (already present in UKS-(T), RKS-DLPNO(T), and UKS-DLPNO-(T) and zero for RHF/UHF reference).</li>
+<li style="list-style-type: '· ';">UHF CIS/STEOM calculation with UseCISUpdate is set to false .</li>
+<li style="list-style-type: '· ';">RHF STEOM: TD-DFT initial guess.</li>
+</ul>
+<h2>AutoCI</h2>
+<ul>
+<li style="list-style-type: '· ';">Fixed large stack allocation, e.g., in MRCC.</li>
+<li style="list-style-type: '· ';">Fixed runtime behavior for !Moread Noiter (falsely reporting 'not converged').</li>
+<li style="list-style-type: '· ';">Fixed !UseSym falsely aborting.</li>
+<li style="list-style-type: '· ';">AutoCI gradients: abort at start of a calculation when RI is requested instead of after coupled cluster iterations.</li>
+</ul>
+<h2>CASSCF/NEVPT2/QD-NEVPT2</h2>
+<ul>
+<li style="list-style-type: '· ';">Issue running LR over SA-CASSCF solution.</li>
+<li style="list-style-type: '· ';">Incorrect setting of gauge origin in CASSCF QDPT led to misleading output and in some cases complained about not being able to find densities for the origin evaluation.</li>
+<li style="list-style-type: '· ';">Canonicalize the inactive and virtual spaces of AVAS guesses, to avoid spurious warnings about core orbitals in the following CASSCF calculation.</li>
+<li style="list-style-type: '· ';">AVAS: fixed wrong number of occupied orbitals in case no occupied orbitals should have been selected.</li>
+<li style="list-style-type: '· ';">TRAH-CASSCF: compute generalized Fock matrix which is needed for the CASSCF nuclear gradient.</li>
+<li style="list-style-type: '· ';">Fixed redundant generation of coupling coefficients in the CI guess.</li>
+<li style="list-style-type: '· ';">Fixed ABS/CD spectra in calculation with !UseSym and QD-NEVPT2: The wrong densities were picked for the CASSCF transition moments.</li>
+<li style="list-style-type: '· ';">Fixed ABS/CD when the NEVPT/QD-NEVPT2 ground state differs from CASSCF. Respecitve transition were missing.</li>
+<li style="list-style-type: '· ';">Fixed MCD spectra not using transition densities from QD-NEVPT2 for the flag DoFullSemiclassical=true .</li>
+<li style="list-style-type: '· ';">Updated manual: Reported D4TPre are updated to the new default value 1e-12. ORCA 5 used D4TPre=1e-10 .</li>
+<li style="list-style-type: '· ';">Fixed closed-shell case, e.g. CAS(6,3), crashing in NEVPT2.</li>
+<li style="list-style-type: '· ';">Fixed NEVPT2/FIC-NEVPT2 wrong energies or crashing for the Vija class to wrong addressing.</li>
+<li style="list-style-type: '· ';">Fixed ICE densities not stored in density container.</li>
+</ul>
+<h2>ANISO</h2>
+<ul>
+<li style="list-style-type: '· ';">Fixed T and L matrices passed to the single-aniso.</li>
+<li style="list-style-type: '· ';">Fixed wrong number of non-relativistic states passed to single-aniso.</li>
+</ul>
+<h2>QDPT</h2>
+<ul>
+<li style="list-style-type: '· ';">Corrected QDPT transition density for excitations beyond 'none'.</li>
+<li style="list-style-type: '· ';">Information added to QDPT AMatrix.</li>
+<li style="list-style-type: '· ';">Issues in QDPT properties in orca_lft have been addressed.</li>
+</ul>
+<h2>QM/MM</h2>
+<ul>
+<li style="list-style-type: '· ';">Speed issue for QMMM optimizations.</li>
+<li style="list-style-type: '· ';">Crystal-QMMM and compound crashed.</li>
+<li style="list-style-type: '· ';">Removed leftover files from QMMM-IRC amd QMMM-NEB.</li>
+</ul>
+<h2>Relativity</h2>
+<ul>
+<li style="list-style-type: '· ';">Crash for F12 + X2C/ZORA/DKH.</li>
+<li style="list-style-type: '· ';">Unnecessary abort in AutoCI gradients with X2C/DKH/ZORA.</li>
+<li style="list-style-type: '· ';">Disabled X2C+GIAO+FiniteNuc (not yet implemented).</li>
+<li style="list-style-type: '· ';">2nd-order PC correction to DKH gDSO now skipped when fpFWtrafo==false due to numerical instability.</li>
+</ul>
+<h2>Solvation</h2>
+<ul>
+<li style="list-style-type: '· ';">Disabled analytical gradient and Hessian for XTB calculations requesting CPCMX (not implemented).</li>
+<li style="list-style-type: '· ';">FINAL SINGLE POINT ENERGY for calculations requesting CPCMX was wrong.</li>
+<li style="list-style-type: '· ';">Crash for calculations requesting Freq + CPCM + dummy atoms.</li>
+<li style="list-style-type: '· ';">Crash for QM/QM2 calculations with CPCM requesting excited states.</li>
+<li style="list-style-type: '· ';">Crash for multiple XYZ File Scans for DRACO.</li>
+<li style="list-style-type: '· ';">Crash with CPCM + NoIter + Pal + open-shell.</li>
+<li style="list-style-type: '· ';">Fix for GC and CPCM.</li>
+</ul>
+<h2>Optimization</h2>
+<ul>
+<li style="list-style-type: '· ';">Multi-XYZ optimization crash.</li>
+<li style="list-style-type: '· ';">Random possible break when using GFN-xTB Hessian.</li>
+<li style="list-style-type: '· ';">Random crashes for RECALC_HESS=TRUE .</li>
+<li style="list-style-type: '· ';">COPT was saving wrong Cartesian Hessian under certain conditions, would break.</li>
+<li style="list-style-type: '· ';">Maximum number of angles that can be included is fixed + better error message.</li>
+<li style="list-style-type: '· ';">Analytic Hessian as initial Hessian option crashed with IRC.</li>
+<li style="list-style-type: '· ';">Crash in NEB-TS with subsequent Hessian, caused by change of number of parallel processes for NEB (max 32).</li>
+<li style="list-style-type: '· ';">NEB parallelization (will - again - automatically start in parallel, if enough processes are available).</li>
+</ul>
+<h2>GOAT</h2>
+<ul>
+<li style="list-style-type: '• ';">GOAT/DOCKER/SOLVATOR now running on Windows.</li>
+<li style="list-style-type: '· ';">WorkerRandomStart fixed and working as intended.</li>
+<li style="list-style-type: '· ';">-REACT and -EXPLORE were (by mistake) not included sqrt(NFrag) to number of opts.</li>
+<li style="list-style-type: '· ';">Missing timings for GOAT.</li>
+</ul>
+<h2>DOCKER</h2>
+<ul>
+<li style="list-style-type: '· ';">Abort if all final optimizations fail, was ending normally.</li>
+<li style="list-style-type: '· ';">Do not switch to COPT if constraints are given.</li>
+</ul>
+<h2>Stability analysis</h2>
+<ul>
+<li style="list-style-type: '· ';">Stability analysis + closed-shell systems + post-processing (Hirshfeld, NBO, …).</li>
+<li style="list-style-type: '· ';">SkipSecondSTAB was still checking for energy differences between steps. Now will move on regardless.</li>
+</ul>
+<h2>orca_2json</h2>
+<ul>
+<li style="list-style-type: '· ';">Exported relativistic integrals were wrong in, HMO and angular momentum were missing.</li>
+<li style="list-style-type: '· ';">Choice of origin corrected.</li>
+<li style="list-style-type: '· ';">Empty [] and [""] are no longer crashing but disabling the options.</li>
+<li style="list-style-type: '· ';">Invalid property JSON syntax in the following cases:</li>
+<li>-multiple geometries (e.g. optimizations);</li>
+<li>-some jobs with multiple properties of the same kind;</li>
+<li>-CIPSI energies;</li>
+<li>-MDCI EOM energies;</li>
+<li>-XTB jobs;</li>
+<li>-energy extrapolation.</li>
+</ul>
+<h2>orca_mapspc</h2>
+<ul>
+<li style="list-style-type: '· ';">XAS/XES broadening functions satisfy FWHM.</li>
+<li style="list-style-type: '· ';">Adjusted .stk files normalization to report band integrals.</li>
+</ul>
+<h2>Compound</h2>
+<ul>
+<li style="list-style-type: '· ';">MORead with same type and number of atoms but different arrangement.</li>
+<li style="list-style-type: '· ';">Bugs in statistical functions.</li>
+</ul>
+<h2>Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">SOMF(1X) parallel bug in semi-numeric Coulomb.</li>
+<li style="list-style-type: '· ';">Dummy/ghost atoms lead to crash in Hessian (partial fix).</li>
+<li style="list-style-type: '· ';">Fixed bug of Fermi smearing calculations of two-electron systems.</li>
+<li style="list-style-type: '· ';">Hangup in leanscf_aftermath when using F12 and ECPs.</li>
+<li style="list-style-type: '· ';">Issues in RIXSSOC, XESSOC spectra in ROCIS have been addressed.</li>
+<li style="list-style-type: '· ';">Issues in computing RI-SSC Integrals have been addressed. This property is now turned on in CASSCF, LFT and MRCI modules.</li>
+<li style="list-style-type: '· ';">Fixed a crash in MD and L-OPT when the input file name was 'orca'.</li>
+<li style="list-style-type: '· ';">Default COSX algorithm is set to AUTO everywhere, as originally intended.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">Disable frozen-core approximation when no frozen-core electrons are present.</li>
+<li style="list-style-type: '· ';">orca_vib was not able to read hess file from AnFreq run.</li>
+<li style="list-style-type: '· ';">For very small systems restart Hessian could crash.</li>
+<li style="list-style-type: '· ';">Small deviations between the Guess CI Matrix and the Sigma Vector in GS-ROCIS.</li>
+<li style="list-style-type: '· ';">DCD-CAS: Removed left-over files.</li>
+<li style="list-style-type: '· ';">Uncontracted MRCI: Fixed partial general contraction calls in the MRCI integral transformation (crashed before).</li>
+<li style="list-style-type: '· ';">Crash for geometry optimization followed by a vibrational frequency calculation with fixed point group Ci.</li>
+<li style="list-style-type: '· ';">Removal of posix_memalign , due to glibc/kernel bug.</li>
+<li style="list-style-type: '· ';">NBO communication fixed.</li>
+<li style="list-style-type: '· ';">Fixes a crash in the integral transformation.</li>
+<li style="list-style-type: '· ';">Crash in orca_vpot due to missing prescreening matrix.</li>
+</ul>
+<h2>A.2.2 Improvements</h2>
+<h2>Output</h2>
+<ul>
+<li style="list-style-type: '· ';">Print all orbital energies for !PrintMOs and !LargePrint .</li>
+<li style="list-style-type: '· ';">Removed redundant warning when using gCP for elements Z &gt; 36 (Kr).</li>
+<li style="list-style-type: '· ';">Added citations for wr2SCAN and DFT-D4 extension.</li>
+<li style="list-style-type: '· ';">Better printing of the spin coupling situation of the states resulting from GS-ROCIS calculations.</li>
+<li style="list-style-type: '· ';">Prepended a counter to irrep labels when printing vibrational frequencies.</li>
+</ul>
+<h2>orca_2json</h2>
+<ul>
+<li style="list-style-type: '· ';">Citations added to json output file.</li>
+<li style="list-style-type: '· ';">Absolute path in basename possible.</li>
+</ul>
+<h2>orca_mapspc</h2>
+<ul>
+<li style="list-style-type: '· ';">Added support for VCD, XASSOCV and XESSOCV spectrum processing.</li>
+</ul>
+<h2>Symmetry</h2>
+<ul>
+<li style="list-style-type: '· ';">Ensured correctness of gradient cleanup, geometry optimizations with fixed point groups and calculations of vibrational frequencies (for point groups with real irreps using pure Hartree-Fock).</li>
+<li style="list-style-type: '· ';">Ensured correctness of the petite-list algorithm for SCF energy and gradient.</li>
+</ul>
+<h2>Compound</h2>
+<ul>
+<li style="list-style-type: '· ';">Implemented automatic knowledge of basenames.</li>
+<li style="list-style-type: '· ';">Added GOAT interface.</li>
+</ul>
+<h2>Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">Added ASCII checker to input file.</li>
+<li style="list-style-type: '· ';">Add the possibility to read multi-XYZ files with no '&gt;'.</li>
+<li style="list-style-type: '· ';">QDPT in CASSCF now uses the magnetic origin as defined in %eprnmr (if not set, defaults to CenterOfNucCharge for backwards compatibility).</li>
+<li style="list-style-type: '· ';">Reduced disk usage and optimized performance for CASSCF (transition) densities in density container.</li>
+<li style="list-style-type: '· ';">Keep topology in initial IDPP path generation.</li>
+<li style="list-style-type: '· ';">Add CIS Gradient in property file.</li>
+</ul>
+<h2>A.3 Changes ORCA 6.0.0</h2>
+<h2>A.3.1 SCF and Infrastructure</h2>
+<ul>
+<li style="list-style-type: '· ';">Significant improvements to the SOSCF solver to make it more robust, preventing huge steps that break the SCF. Overall improvements on the DIIS solvers.</li>
+<li style="list-style-type: '· ';">Due to the SCF updates, the AutoTRAH is now not so often needed and will start now only from above 50 cycles ( AutoTRAHIter ).</li>
+<li style="list-style-type: '· ';">Improvements to the memory handling of TD-DFT, CP-SCF and the Hessian</li>
+</ul>
+<h2>A.3.2 Basis sets</h2>
+<ul>
+<li style="list-style-type: '· ';">def-TZVP and ma-def-TZVP pseudo-potential basis sets for the actinides (Z = 89, Ac - 103, Lr)</li>
+<li style="list-style-type: '· ';">Lehtola's hydrogenic gaussian basis set family (HGBS) including polarized (HGBSP) and augmented (AHGBS, AHGBSP) variants for all elements up to Oganesson (Z = 118)</li>
+<li style="list-style-type: '· ';">def2-SVPD, def2-TZVPD, def2-TZVPPD, def2-QZVPD, def2-QZVPPD basis sets for lanthanoids</li>
+<li style="list-style-type: '· ';">vDZP Grimme's double-zeta valence basis set</li>
+<li style="list-style-type: '· ';">!MINIX now correctly activates the corresponding ECP</li>
+<li style="list-style-type: '· ';">Added user-specified L-limit to AutoAux AutoAuxLLimit</li>
+<li style="list-style-type: '· ';">Fixed segfault in dhf-ECP</li>
+<li style="list-style-type: '· ';">Fix for DelECP in %coords</li>
+<li style="list-style-type: '· ';">Added ReadFragBasis keywords read fragment-specific basis sets from a file</li>
+</ul>
+<h2>A.3.3 Solvation</h2>
+<ul>
+<li style="list-style-type: '· ';">New charge correction / compensation algorithm (corrected charges printed in an additional file)</li>
+<li style="list-style-type: '· ';">C-PCM/B scheme for QM/MM calculations</li>
+<li style="list-style-type: '· ';">DDCOSMO and CPCM/X available for XTB calculations and QM/MM calculations</li>
+<li style="list-style-type: '· ';">Generalization of names within all solvation models (C-PCM/SMD/ALPB/DDCOSMO/CPCM-X)</li>
+<li style="list-style-type: '· ';">New discretization scheme for the cavity (C-PCM) based on a constant number of charges per unit of area</li>
+</ul>
+<h2>A.3.4 DFT</h2>
+<ul>
+<li style="list-style-type: '· ';">Allow LibXC functional customization via external parameters</li>
+<li style="list-style-type: '· ';">Simple input keywords added for some LibXC functionals</li>
+<li style="list-style-type: '· ';">Added wB97M(2) functional parameters: must be used with wB97M-V orbitals in a two-step job (compound script available)</li>
+<li style="list-style-type: '· ';">D4 for elements 87 (Fr) - 103 (Lr)</li>
+<li style="list-style-type: '· ';">r2SCAN-3c extension to elements 87 (Fr) - 103 (Lr)</li>
+<li style="list-style-type: '· ';">Simple input keyword for functionals with revised D4 parameters by Grimme (wB97X-D4rev, wB97M-D4rev)</li>
+<li style="list-style-type: '· ';">New hybrid functionals: r2SCANh, r2SCAN0, r2SCAN50, wr2SCAN, wB97X-3c</li>
+<li style="list-style-type: '· ';">New double-hybrid functionals: Pr2SCAN50, Pr2SCAN69, wPr2SCAN50, kPr2SCAN50</li>
+<li style="list-style-type: '· ';">Simple input keywords for 2021 variants of revDSD-PBEP86-D4 and revDOD-PBEP86-D4</li>
+<li style="list-style-type: '· ';">Bugfixes for LibXC combined *_xc_* functionals</li>
+<li style="list-style-type: '· ';">Fixed crash for D4 + ghost atoms</li>
+</ul>
+<h2>A.3.5 Excited states</h2>
+<ul>
+<li style="list-style-type: '· ';">Analytical gradient for meta-GGA functionals</li>
+<li style="list-style-type: '· ';">Small bugfix to spin-adapted triplets and NACMEs.</li>
+<li style="list-style-type: '· ';">The FolllowIRoot for excited state optimization uses now a much more robust algorithm.</li>
+<li style="list-style-type: '• ';">New implementation for UHF EOM-CCSD and STEOM-CCSD.</li>
+<li style="list-style-type: '· ';">Core ionization/excitation energies using UHF IP-EOM-CCSD and STEOM-CCSD.</li>
+</ul>
+<h2>A.3.6 Relativity</h2>
+<ul>
+<li style="list-style-type: '· ';">Enabled NumGrad with relativistic methods</li>
+<li style="list-style-type: '· ';">Second order DKH picture-change correction of contact density</li>
+<li style="list-style-type: '· ';">Minor fixes in DKH picture-change corrections of magnetic properties</li>
+<li style="list-style-type: '· ';">Picture change corrections are activated automatically</li>
+</ul>
+<h2>A.3.7 Multiscale</h2>
+<ul>
+<li style="list-style-type: '· ';">Reading PDB files for 10k+ atoms with HETATMs now possible</li>
+<li style="list-style-type: '· ';">Enabled correct FlipSpin behavior with QMMM</li>
+<li style="list-style-type: '· ';">More efficient MM Module</li>
+<li style="list-style-type: '· ';">Implemented wall potential</li>
+</ul>
+<h2>A.3.8 Coupled cluster / DLPNO</h2>
+<ul>
+<li style="list-style-type: '· ';">Implemented energy ordering for PNO generation</li>
+<li style="list-style-type: '· ';">Added semicore treatment for DLPNO</li>
+<li style="list-style-type: '· ';">Enable DLPNO-CCSD(T) calculations to run DLPNO-CCSD unrelaxed densities</li>
+</ul>
+<h2>A.3.9 MP2</h2>
+<ul>
+<li style="list-style-type: '· ';">Corrected memory estimates and batching in response and gradient</li>
+<li style="list-style-type: '· ';">Removed the slow and limited analytic (RI-)MP2 Hessian code</li>
+<li style="list-style-type: '· ';">Removed non-default Gamma-in-core option for RI-MP2 response</li>
+<li style="list-style-type: '· ';">Disabled single-precision calculations</li>
+<li style="list-style-type: '· ';">Disabled SemiDirect option in AO-MP2</li>
+<li style="list-style-type: '· ';">Enabled range-separated DHDFT gradients with RIJDX</li>
+</ul>
+<h2>A.3.10 NEB</h2>
+<ul>
+<li style="list-style-type: '· ';">Improved IDPP initial path</li>
+<li style="list-style-type: '· ';">More efficient GFN-xTB runs for NEB</li>
+</ul>
+<h2>A.3.11 COSX</h2>
+<ul>
+<li style="list-style-type: '· ';">Improvements to numerical integration grids, both for DFT and COSX</li>
+<li style="list-style-type: '· ';">Faster grid step</li>
+<li style="list-style-type: '· ';">Improved performance and accuracy in COSX, also for the gradient and Hessian</li>
+</ul>
+<h2>A.3.12 Properties</h2>
+<ul>
+<li style="list-style-type: '· ';">NMRspin-spin coupling:</li>
+<li>-Added SpinSpinElemPairs and SpinSpinAtomPairs keywords to limit which couplings are computed</li>
+<li>-Reduced the number of CP-SCF perturbations necessary via a stochastic selection</li>
+<li>-DSO term was transposed.</li>
+<li>-Off-diagonal PSO elements had the wrong sign</li>
+<li>-Efficiency improvement: solve SD/FC CP-SCF equations in restricted mode for RHF, instead of always using UHF</li>
+<li style="list-style-type: '· ';">Optimized numeric integration for HFC gauge correction</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">Removed RITRAFO option for CP-SCF</li>
+<li style="list-style-type: '· ';">Switched to tau=Dobson as default handling of the kinetic energy density in meta-GGA magnetic properties with GIAOs</li>
+</ul>
+<h2>A.3.13 Hessian</h2>
+<ul>
+<li style="list-style-type: '· ';">Improvements to the Hessian to avoid accumulation on numerical noise and reduce the number of spurious negative frequencies.</li>
+</ul>
+<h2>A.3.14 Geometry Optimization</h2>
+<ul>
+<li style="list-style-type: '· ';">Several improvements to the geometry optimization, making is much more stable. Complete redesign of the Cartesian optimizer (!COPT), making it quick enough to be used together with faster methods.</li>
+<li style="list-style-type: '· ';">Fallbacks in the geometry optimization in case something fails, e.g. if the internal coordinates are unacceptable.</li>
+<li style="list-style-type: '· ';">Arbitrary spherical, ellipsoidal or box-like wall potentials can be added, which will reflect on the energy and gradients and can be used during geometry optimization.</li>
+</ul>
+<h2>A.3.15 Miscellaneous</h2>
+<ul>
+<li style="list-style-type: '· ';">CHELPG charges that reproduce the ESP together with the molecular dipole moment</li>
+<li style="list-style-type: '· ';">Fixed issues with constraints in multi-step jobs</li>
+<li style="list-style-type: '· ';">Molden output: store ECP info in [Pseudo] block, set point charge atomic number to 0, handling of ghost atoms</li>
+<li style="list-style-type: '· ';">Made the ExtOpt interface easier to use</li>
+<li style="list-style-type: '· ';">Store energy from NEB and IRC in the XYZ file</li>
+</ul>
+<h2>The generic references for ORCA are:</h2>
+<ul>
+<li style="list-style-type: '· ';">Neese, Frank. The ORCA program system. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2012 , 2 (1), 73-78. DOI: http://doi.wiley.com/10.1002/wcms.81.</li>
+<li style="list-style-type: '· ';">Neese, Frank. Software update: the ORCA program system, version 4.0. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2018 , 8 (1), e1327. DOI: http://doi.wiley.com/10.1002/wcms.1327.</li>
+<li style="list-style-type: '· ';">Neese, Frank. Software update: The ORCA program system-Version 5.0. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2022 , 12 (5), e1606. DOI: 10.1002/wcms.1606.</li>
+<li style="list-style-type: '· ';">Neese, Frank. Software Update: The ORCA Program System-Version 6.0. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2025 , 15 (2), e70019. DOI: 10.1002/wcms.70019.</li>
+<li style="list-style-type: '· ';">Neese, Frank; Wennmohs, Frank; Becker, Ute; Riplinger, Christoph. The ORCA quantum chemistry program package. J. Chem. Phys. , 2020 , 152 (22), 224108. DOI: https://aip.scitation.org/doi/10.1063/5.0004608.</li>
+</ul>
+<p>Please do not only cite the above generic reference, but also cite in addition the original papers that report the development and implementation of the methods you have used in your studies! The following publications describe functionality implemented in . We would highly appreciate if you cite them when you use the program.</p>
+<h2>B.1 Method development</h2>
+<h2>B.1.1 2025</h2>
+<ol>
+<li style="list-style-type: '1. ';">Wittmann, Lukas; Garcia-Ratés, Miquel; Riplinger, Christoph. Analytical First Derivatives of the SCF Energy for the Conductor-like Polarizable Continuum Model with Non-Static Radii. J. Comput. Chem., 2025 . DOI: 10.1002/jcc.70099.</li>
+<li style="list-style-type: '2. ';">Müller, Simon; Nevolianis, Thomas; Garcia-Ratés, Miquel; Riplinger, Christoph; Leonhard, Kai; Smirnova, Irina. Predicting solvation free energies for neutral molecules in any solvent with openCOSMO-RS. Fluid Phase Equilibria , 2025 , 589, 114250. DOI: 10.1016/j.fluid.2024.114250.</li>
+<li style="list-style-type: '3. ';">Kempfer, Emily M.; Sivalingam, Kantharuban; Neese, Frank. Efficient Implementation of Approximate Fourth Order N-Electron Valence State Perturbation Theory. J. Chem. Theory Comput. , 2025 , 21 (8), 39533967. DOI: 10.1021/acs.jctc.4c01735.</li>
+<li style="list-style-type: '4. ';">Guo, Yang; Sivalingam, Kantharuban; Chilkuri, Vijay Gopal; Neese, Frank. Approximations of density matrices in N-electron valence state second-order perturbation theory (NEVPT2). III. Large active space calculations with selected configuration interaction reference. J. Chem. Phys. , 2025 , 162 (14), 144110. DOI: 10.1063/5.0262473.</li>
+<li style="list-style-type: '5. ';">Helmich-Paris, Benjamin; Kjellgren, Erik Rosendahl; Jensen, Hans Jørgen Aa. Excited-State Methods Based on State-Averaged Long-Range CASSCF Short-Range DFT. under review in Phys. Chem. Chem. Phys., 2025 .</li>
+<li style="list-style-type: '6. ';">de Souza, Bernardo. GOAT: A Global Optimization Algorithm for Molecules and Atomic Clusters. Angew. Chem. Int. Ed. , 2025 , 64 (18), e202500393. DOI: 10.1002/anie.202500393.</li>
+</ol>
+<h2>PUBLICATIONS RELATED TO ORCA</h2>
+<ol>
+<li style="list-style-type: '7. ';">Leyser da Costa Gouveia, Tiago; Maganas, Dimitrios; Neese, Frank. General Spin-Restricted Open-Shell Configuration Interaction Approach: Application to Metal K-Edge X-ray Absorption Spectra of Ferro- and Antiferromagnetically Coupled Dimers. The Journal of Physical Chemistry A , 2025 , 129 (1), 330-345. PMID: 39680653. arXiv:https://doi.org/10.1021/acs.jpca.4c05228, DOI: 10.1021/acs.jpca.4c05228.</li>
+<li style="list-style-type: '8. ';">Casanova-Páez, M.; Neese, F. Core-Excited States for Open-Shell Systems in Similarity-Transformed Equation-of-Motion Theory. J. Chem. Theory Comput. , 2025 , 21 (3), 1306-1321. DOI: 10.1021/acs.jctc.4c01181.</li>
+<li style="list-style-type: '9. ';">Regni, Gianluca; Baldinelli, Lorenzo; Bistoni, Giovanni. A Quantum Chemical Method for Dissecting London Dispersion Energy into Atomic Building Blocks (In press). 2025 . DOI: 10.1021/acscentsci.5c00356.</li>
+<li style="list-style-type: '10. ';">Colinet, Pauline; Neese, Frank; Helmich-Paris, Benjamin. Improving the Efficiency of Electrostatic Embedding Using the Fast Multipole Method. J. Comput. Chem. , 2025 , 46 (1), e27532. DOI: 10.1002/jcc.27532.</li>
+<li style="list-style-type: '11. ';">Neese, Frank; Colinet, Pauline; DeSouza, Bernardo; Helmich-Paris, Benjamin; Wennmohs, Frank; Becker, Ute. The 'Bubblepole' (BUPO) Method for Linear-Scaling Coulomb Matrix Construction with or without Density Fitting. J. Phys. Chem. A , 2025 , 129 (10), 2618-2637. DOI: 10.1021/acs.jpca.4c07415.</li>
+<li style="list-style-type: '12. ';">Lang, Lucas; Chilkuri, Vijay Gopal; Neese, Frank. Treating Spin-Orbit Coupling and Spin-Spin Coupling in the Framework of the Iterative Configuration Expansion Selected CI method (In press). 2025 . DOI: 10.1021/acs.jctc.5c00463.</li>
+</ol>
+<h2>B.1.2 2024</h2>
+<ol>
+<li style="list-style-type: '1. ';">Leyser da Costa Gouveia, Tiago; Maganas, Dimitrios; Neese, Frank. Restricted Open-Shell Hartree-Fock Method for a General Configuration State Function Featuring Arbitrarily Complex Spin-Couplings. J. Phys. Chem. A , 2024 , 128 (25), 5041-5053. PMID: 38886177. DOI: 10.1021/acs.jpca.4c00688.</li>
+<li style="list-style-type: '2. ';">Lechner, M. H.; Papadopoulos, A.; Sivalingam, K.; Auer, A. A.; Koslowski, A.; Becker, U.; Wennmohs, F.; Neese, F. Code generation in ORCA: Progress, Efficiency and Tight integration. Phys. Chem. Chem. Phys. , 2024 , 26 (21), 15205-15220.</li>
+<li style="list-style-type: '3. ';">Rao, Shashank V.; Maganas, Dimitrios; Sivalingam, Kantharuban; Atanasov, Mihail; Neese, Frank. Extended Active Space Ab Initio Ligand Field Theory: Applications to Transition-Metal Ions. Inorg. Chem. , 2024 , 63 (52), 24672-24684. Publisher: American Chemical Society. DOI: 10.1021/acs.inorgchem.4c03893.</li>
+<li style="list-style-type: '4. ';">Casanova-Páez, M.; Neese, F. Assessment of the similarity-transformed equation of motion (STEOM) for open-shell organic and transition metal molecules. J. Chem. Phys. , 2024 , 161, 1444120-XXXX. DOI: 10.1063/5.0234225.</li>
+<li style="list-style-type: '5. ';">Wittmann, Lukas; Gordiy, Igor; Friede, Marvin; Helmich-Paris, Benjamin; Grimme, Stefan; Hansen, Andreas; Bursch, Markus. Extension of the D3 and D4 London dispersion corrections to the full actinides series. Phys. Chem. Chem. Phys. , 2024 , 26, 21379-21394. DOI: 10.1039/D4CP01514B.</li>
+</ol>
+<h2>B.1.3 2023</h2>
+<ol>
+<li style="list-style-type: '1. ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+<li style="list-style-type: '2. ';">Foglia, Nicolás; De Souza, Bernardo; Maganas, Dimitrios; Neese, Frank. Including vibrational effects in magnetic circular dichroism spectrum calculations in the framework of excited state dynamics. J. Chem. Phys. , 2023 , 158 (15), 154108. DOI: 10.1063/5.0144845.</li>
+<li style="list-style-type: '3. ';">Neese, Frank. The SHARK integral generation and digestion system. J. Comp. Chem. , 2023 , 44 (3), 381-396. arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1002/jcc.26942, DOI: 10.1002/jcc.26942.</li>
+</ol>
+<h2>B.1.4 2022</h2>
+<ol>
+<li style="list-style-type: '1. ';">Helmich-Paris, Benjamin. A trust-region augmented Hessian implementation for state-specific and stateaveraged CASSCF wave functions. J. Chem. Phys. , 2022 , 156 (20), 204104. Publisher: American Institute of Physics. DOI: 10.1063/5.0090447.</li>
+<li style="list-style-type: '2. ';">Guo, Yang; Pavošević, Fabijan; Sivalingam, Kantharuban; Becker, Ute; Valeev, Edward F.; Neese, Frank. SparseMaps-A systematic infrastructure for reduced-scaling electronic structure methods. VI. Linear-scaling explicitly correlated N-electron valence state perturbation theory with pair natural orbital. J. Chem. Phys. , 2023 , 158 (12), 124120. DOI: 10.1063/5.0144260.</li>
+<li style="list-style-type: '3. ';">Foglia, Nicolás O.; Maganas, Dimitrios; Neese, Frank. Going beyond the electric-dipole approximation in the calculation of absorption and (magnetic) circular dichroism spectra including scalar relativistic and spin-orbit coupling effects. J. Chem. Phys. , 2022 , 157 (8), 084120. arXiv:10.1063/5.0094709, DOI: 10.1063/5.0094709.</li>
+</ol>
+<h2>B.1.5 2021</h2>
+<ol>
+<li style="list-style-type: '1. ';">Helmich-Paris, Benjamin. A Trust-Region Augmented Hessian Implementation for Restricted and Unrestricted Hartree-Fock and Kohn-Sham Methods. J. Chem. Phys. , 2021 , 154 (16), 164104. DOI: 10.1063/5.0040798.</li>
+<li style="list-style-type: '2. ';">Helmich-Paris, Benjamin; de Souza, Bernardo; Neese, Frank; Izsák, Róbert. An improved chain of spheres for exchange algorithm. J. Chem. Phys. , 2021 , 155 (10), 104109. DOI: 10.1063/5.0058766.</li>
+<li style="list-style-type: '3. ';">Garcia-Ratés, M.; Becker, U.; Neese, F. Implicit Solvation in Domain Based Pair Natural Orbital Coupled Cluster (DLPNO-CCSD) Theory. J. Comput. Chem. , 2021 , 42 (27), 1959-1973. DOI: 10.1002/jcc.26726.</li>
+<li style="list-style-type: '4. ';">Stoychev, Georgi L.; Auer, Alexander A.; Gauss, Jürgen; Neese, Frank. DLPNO-MP2 Second Derivatives for the Computation of Polarizabilities and NMR Shieldings. J. Chem. Phys. , 2021 , 154 (16), 164110. DOI: 10.1063/5.0047125.</li>
+<li style="list-style-type: '5. ';">Guo, Y.; Li, W.; Li, S. Improved Cluster-in-Molecule Local Correlation Approach for Electron Correlation Calculation of Large Systems. J. Phys. Chem. A , 2014 , 118 (39), 8996-9004. DOI: 10.1021/jp501976x.</li>
+<li style="list-style-type: '6. ';">Guo, Yang; Sivalingam, Kantharuban; Neese, Frank. Approximations of Density Matrices in N-Electron Valence State Second-Order Perturbation Theory (NEVPT2). I. Revisiting the NEVPT2 Construction. J. Chem. Phys. , 2021 , 154 (21), 214111. DOI: 10.1063/5.0051211.</li>
+<li style="list-style-type: '7. ';">Guo, Yang; Sivalingam, Kantharuban; Kollmar, Christian; Neese, Frank. Approximations of Density Matrices in N-Electron Valence State Second-Order Perturbation Theory (NEVPT2). II. The Full Rank NEVPT2 (FRNEVPT2) Formulation. J. Chem. Phys. , 2021 , 154 (21), 214113. DOI: 10.1063/5.0051218.</li>
+<li style="list-style-type: '8. ';">Chilkuri, Vijay Gopal; Neese, Frank. Comparison of Many-Particle Representations for Selected-CI I: A Tree Based Approach. J. Comput. Chem. , 2021 , 42 (14), 982-1005. DOI: 10.1002/jcc.26518.</li>
+<li style="list-style-type: '9. ';">Chilkuri, Vijay Gopal; Neese, Frank. Comparison of Many-Particle Representations for Selected Configuration Interaction: II. Numerical Benchmark Calculations. J. Chem. Theory Comput. , 2021 , 17 (5), 2868-2885. DOI: 10.1021/acs.jctc.1c00081.</li>
+<li style="list-style-type: '10. ';">Kollmar, Christian; Sivalingam, Kantharuban; Guo, Yang; Neese, Frank. An efficient implementation of the NEVPT2 and CASPT2 methods avoiding higher-order density matrices. J. Chem. Phys. , 2021 , 155 (23), 234104. DOI: 10.1063/5.0072129.</li>
+<li style="list-style-type: '11. ';">Helmich-Paris, Benjamin. Simulating X-ray absorption spectra with complete active space self-consistent field linear response methods. Int. J. Quantum Chem. , 2021 , 121 (3), e26559. DOI: 10.1002/qua.26559.</li>
+<li style="list-style-type: '12. ';">Ni, Z. G.; Guo, Y.; Neese, F.; Li, W.; Li, S. H. Cluster-in-Molecule Local Correlation Method with an Accurate Distant Pair Correction for Large Systems. J. Chem. Theo. Comp. , 2021 , 17, 756-766.</li>
+</ol>
+<h2>B.1.6 2020</h2>
+<ol>
+<li style="list-style-type: '1. ';">Rolfes, Julian D.; Neese, Frank; Pantazis, Dimitrios A. All-Electron Scalar Relativistic Basis Sets for the Elements Rb-Xe. J. Comput. Chem. , 2020 , 41, 1842-1849. DOI: 10.1002/jcc.26355.</li>
+<li style="list-style-type: '2. ';">Garcia-Ratés, M.; Neese, F. Effect of the Solute Cavity on the Solvation Energy and its Derivatives within the Framework of the Gaussian Charge Scheme. J. Comput. Chem. , 2020 , 41 (9), 922-939. DOI: 10.1002/jcc.26139.</li>
+<li style="list-style-type: '3. ';">Tran, Van Anh; Neese, Frank. Double-Hybrid Density Functional Theory for g-Tensor Calculations Using Gauge Including Atomic Orbitals. J. Chem. Phys. , 2020 , 153 (5), 054105. DOI: 10.1063/5.0013799.</li>
+<li style="list-style-type: '4. ';">Lang, Lucas; Atanasov, Mihail; Neese, Frank. Improvement of Ab Initio Ligand Field Theory by Means of Multistate Perturbation Theory. J. Phys. Chem. A , 2020 , 124 (5), 1025-1037. DOI: 10.1021/acs.jpca.9b11227.</li>
+<li style="list-style-type: '5. ';">Lang, Lucas; Sivalingam, Kantharuban; Neese, Frank. The Combination of Multipartitioning of the Hamiltonian with Canonical Van Vleck Perturbation Theory Leads to a Hermitian Variant of Quasidegenerate NElectron Valence Perturbation Theory. J. Chem. Phys. , 2020 , 152 (1), 014109. DOI: 10.1063/1.5133746.</li>
+<li style="list-style-type: '6. ';">Kollmar, Christian; Sivalingam, Kantharuban; Neese, Frank. An Alternative Choice of the Zeroth-Order Hamiltonian in CASPT2 Theory. J. Chem. Phys. , 2020 , 152 (21), 214110. DOI: 10.1063/5.0010019.</li>
+<li style="list-style-type: '7. ';">Lang, Lucas; Ravera, Enrico; Parigi, Giacomo; Luchinat, Claudio; Neese, Frank. Solution of a Puzzle: HighLevel Quantum-Chemical Treatment of Pseudocontact Chemical Shifts Confirms Classic Semiempirical Theory. J. Phys. Chem. Lett. , 2020 , 11 (20), 8735-8744.</li>
+<li style="list-style-type: '8. ';">Altun, A.; Neese, F.; Bistoni, G. Extrapolation to the Limit of a Complete Pair Natural Orbital Space in Local Coupled-Cluster Calculations. J. Chem. Theory Comput. , 2020 , 16 (10), 6142-6149. DOI: 10.1021/acs.jctc.0c00344.</li>
+<li style="list-style-type: '9. ';">Auer, A. A.; Tran, V. A.; Sharma, B.; Stoychev, G. L.; Marx, D.; Neese, F. A case study of density functional theory and domain-based local pair natural orbital coupled cluster for vibrational effects on EPR hyperfine coupling constants: vibrational perturbation theory versus ab initio molecular dynamics. Mol. Phys. , 2020 , 118 (19-20), e1797916. DOI: 10.1080/00268976.2020.1797916.</li>
+<li style="list-style-type: '10. ';">Datta, Dipayan; Saitow, Masaaki; Sandhöfer, Barbara; Neese, Frank. 57Fe Mössbauer parameters from domain based local pair-natural orbital coupled-cluster theory. J. Chem. Phys. , 2020 , 153 (20), 204101. DOI: 10.1063/5.0022215.</li>
+<li style="list-style-type: '11. ';">Dittmer, A.; Stoychev, G. L.; Maganas, D.; Auer, A. A.; Neese, F. Computation of NMR Shielding Constants for Solids Using an Embedded Cluster Approach with DFT, Double-Hybrid DFT, and MP2. J. Chem. Theory Comput. , 2020 , 16 (11), 6950-6967. DOI: 10.1021/acs.jctc.0c00067.</li>
+<li style="list-style-type: '12. ';">Guo, Yang; Riplinger, Christoph; Liakos, Dimitrios G.; Becker, Ute; Saitow, Masaaki; Neese, Frank. Linear scaling perturbative triples correction approximations for open-shell domain-based local pair natural orbital coupled cluster singles and doubles theory [DLPNO-CCSD(T/T)]. J. Chem. Phys. , 2020 , 152 (2), 024116. DOI: 10.1063/1.5127550.</li>
+<li style="list-style-type: '13. ';">Kumar, A.; Neese, F.; Valeev, E. F. Explicitly correlated coupled cluster method for accurate treatment of open-shell molecules with hundreds of atoms. J. Chem. Phys. , 2020 , 153 (9), 17. DOI: 10.1063/5.0012753.</li>
+<li style="list-style-type: '14. ';">Liakos, D. G.; Guo, Y.; Neese, F. Comprehensive Benchmark Results for the Domain Based Local Pair Natural Orbital Coupled Cluster Method (DLPNO-CCSD(T)) for Closed- and Open-Shell Systems. J. Phys. Chem. A , 2020 , 124 (1), 90-100. DOI: 10.1021/acs.jpca.9b05734.</li>
+<li style="list-style-type: '15. ';">Neese, Frank; Wennmohs, Frank; Becker, Ute; Riplinger, Christoph. The ORCA quantum chemistry program package. J. Chem. Phys. , 2020 , 152 (22), 224108. DOI: https://aip.scitation.org/doi/10.1063/5.0004608.</li>
+</ol>
+<h2>B.1.7 2019</h2>
+<ol>
+<li style="list-style-type: '1. ';">Pinski, Peter; Neese, Frank. Analytical Gradient for the Domain-Based Local Pair Natural Orbital Second Order Møller-Plesset Perturbation Theory Method (DLPNO-MP2). J. Chem. Phys. , 2019 , 150, 164102.</li>
+<li style="list-style-type: '2. ';">Kollmar, Christian; Sivalingam, Kantharuban; Helmich-Paris, Benjamin; Angeli, Celestino; Neese, Frank. A perturbation-based super-CI approach for the orbital optimization of a CASSCF wave function. J. Comput. Chem. , 2019 , 40 (14), 1463-1470. DOI: 10.1002/jcc.25801.</li>
+<li style="list-style-type: '3. ';">Lang, Lucas; Neese, Frank. Spin-Dependent Properties in the Framework of the Dynamic Correlation Dressed Complete Active Space Method. J. Chem. Phys. , 2019 , 150 (10), 104104. DOI: 10.1063/1.5085203.</li>
+<li style="list-style-type: '4. ';">Maganas, Dimitrios; Kowalska, Joanna K.; Nooijen, Marcel; DeBeer, Serena; Neese, Frank. Comparison of Multireference Ab Initio Wavefunction Methodologies for X-Ray Absorption Edges: A Case Study on [Fe(II/III)Cl₄]²⁻/¹⁻ Molecules. J. Chem. Phys. , 2019 , 150 (10), 104106. DOI: 10.1063/1.5051613.</li>
+<li style="list-style-type: '5. ';">Helmich-Paris, Benjamin. CASSCF Linear Response Calculations for Large Open-Shell Molecules. J. Chem. Phys. , 2019 , 150 (17), 174121. DOI: 10.1063/1.5092613.</li>
+<li style="list-style-type: '6. ';">de Souza, Bernardo; Farias, Giliandro; Neese, Frank; Izsak, Robert. Efficient Simulation of Overtones and Combination Bands in Resonant Raman Spectra. J. Chem. Phys. , 2019 , 150 (21), 044105. DOI: 10.1063/1.5099247.</li>
+<li style="list-style-type: '7. ';">Altun, Ahmet; Neese, Frank; Bistoni, Giovanni. HFLD: A Nonempirical London Dispersion-Corrected Hartree-Fock Method for the Quantification and Analysis of Noncovalent Interaction Energies of Large Molecular Systems. J. Chem. Theory Comput. , 2019 , 15 (11), 5894-5907. arXiv:10.1021/acs.jctc.9b00425, DOI: 10.1021/acs.jctc.9b00425.</li>
+<li style="list-style-type: '8. ';">Altun, A.; Neese, F.; Bistoni, G. Open-Shell Variant of the London Dispersion-Corrected Hartree-Fock Method HFLD for the Quantification and Analysis of Noncovalent Interaction Energies. J. Chem. Theory Comput. , 2022 , 18 (4), 2292-2307. DOI: 10.1021/acs.jctc.1c01295.</li>
+<li style="list-style-type: '9. ';">Dutta, Achintya Kumar; Saitow, Masaaki; Demoulin, Baptiste; Neese, Frank; Izsák, Róbert. A domain-based local pair natural orbital implementation of the equation of motion coupled cluster method for electron attached states. J. Chem. Phys. , 2019 , 150 (16), 164123. DOI: 10.1063/1.5089637.</li>
+<li style="list-style-type: '10. ';">Garcia-Ratés, M.; Neese, F. Efficient implementation of the analytical second derivatives of hartree-fock and hybrid DFT energies within the framework of the conductor-like polarizable continuum model. J. Comput. Chem. , 2019 , 40 (20), 1816-1828. DOI: 10.1002/jcc.25833.</li>
+<li style="list-style-type: '11. ';">Haldar, S.; Riplinger, C.; Demoulin, B.; Neese, F.; Izsak, R.; Dutta, A. K. Multilayer Approach to the IPEOM-DLPNO-CCSD Method: Theory, Implementation, and Application. J. Chem. Theory Comput. , 2019 , 15 (4), 2265-2277. DOI: 10.1021/acs.jctc.8b01263.</li>
+<li style="list-style-type: '12. ';">Lang, J.; Brabec, J.; Saitow, M.; Pittner, J.; Neese, F.; Demel, O. Perturbative triples correction to domainbased local pair natural orbital variants of Mukherjee's state specific coupled cluster method. Phys. Chem. Chem. Phys. , 2019 , 21 (9), 5022-5038. DOI: 10.1039/c8cp03577f.</li>
+<li style="list-style-type: '13. ';">Saitow, M.; Dutta, A. K.; Neese, F. Accurate Ionization Potentials, Electron Affinities and Electronegativities of Single-Walled Carbon Nanotubes by State-of-the-Art Local Coupled-Cluster Theory. Bull. Chem. Soc. Jpn. , 2019 , 92 (1), 170-174. DOI: 10.1246/bcsj.20180254.</li>
+</ol>
+<h2>B.1.8 2018</h2>
+<ol>
+<li style="list-style-type: '1. ';">Stoychev, Georgi L.; Auer, Alexander A.; Neese, Frank. Efficient and Accurate Prediction of Nuclear Magnetic Resonance Shielding Tensors with Double-Hybrid Density Functional Theory. J. Chem. Theory Comput. , 2018 , 14 (9), 4756-4771. DOI: 10.1021/acs.jctc.8b00624.</li>
+<li style="list-style-type: '2. ';">Pinski, Peter; Neese, Frank. Communication: Exact Analytical Derivatives for the Domain-Based Local Pair Natural Orbital MP2 Method (DLPNO-MP2). J. Chem. Phys. , 2018 , 148, 031101. DOI: 10.1063/1.5011204.</li>
+<li style="list-style-type: '3. ';">Guo, Yang; Becker, Ute; Neese, Frank. Comparison and Combination of 'Direct' and Fragment Based Local Correlation Methods: Cluster in Molecules and Domain Based Local Pair Natural Orbital Perturbation and Coupled Cluster Theories. J. Chem. Phys. , 2018 , 148 (12), 124117. DOI: 10.1063/1.5021898.</li>
+</ol>
+<ol>
+<li style="list-style-type: '4. ';">Guo, Yang; Riplinger, Christoph; Becker, Ute; Liakos, Dimitrios G.; Minenkov, Yury; Cavallo, Luigi; Neese, Frank. Communication: An Improved Linear Scaling Perturbative Triples Correction for the Domain Based Local Pair-Natural Orbital Based Singles and Doubles Coupled Cluster Method [DLPNO-CCSD(T)]. J. Chem. Phys. , 2018 , 148 (1), 011101. DOI: 10.1063/1.5011798.</li>
+<li style="list-style-type: '5. ';">de Souza, Bernardo; Neese, Frank; Izsak, Robert. On the Theoretical Prediction of Fluorescence Rates from First Principles Using the Path Integral Approach. J. Chem. Phys. , 2018 , 148 (3), 034104. DOI: 10.1063/1.5010895.</li>
+<li style="list-style-type: '6. ';">Maganas, D.; DeBeer, S.; Neese, F. Pair Natural Orbital Restricted Open-Shell Configuration Interaction (PNO-ROCIS) Approach for Calculating x-Ray Absorption Spectra of Large Chemical Systems. J. Phys. Chem. A , 2018 , 122 (5), 1215-1227. DOI: 10.1021/acs.jpca.7b10880.</li>
+<li style="list-style-type: '7. ';">Stoychev, Georgi L; Auer, Alexander A; Izsák, Róbert; Neese, Frank. Self-Consistent Field Calculation of Nuclear Magnetic Resonance Chemical Shielding Constants Using Gauge-Including Atomic Orbitals and Approximate Two-Electron Integrals. J. Chem. Theory Comput. , 2018 , 14 (2), 619-637. DOI: 10.1021/acs.jctc.7b01006.</li>
+<li style="list-style-type: '8. ';">Saitow, Masaaki; Neese, Frank. Accurate Spin-Densities Based on the Domain-Based Local Pair-Natural Orbital Coupled-Cluster Theory. J. Chem. Phys. , 2018 , 149, 034104. DOI: 10.1063/1.5027114.</li>
+<li style="list-style-type: '9. ';">Bistoni, G.; Polyak, I.; Sparta, M.; Thiel, W.; Neese, F. Toward Accurate QM/MM Reaction Barriers with Large QM Regions Using Domain Based Pair Natural Orbital Coupled Cluster Theory. J. Chem. Theory Comput. , 2018 , 14 (7), 3524-3531. DOI: 10.1021/acs.jctc.8b00348.</li>
+<li style="list-style-type: '10. ';">Brabec, J.; Lang, J.; Saitow, M.; Pittner, J.; Neese, F.; Demel, O. Domain-Based Local Pair Natural Orbital Version of Mukherjee's State-Specific Coupled Cluster Method. J. Chem. Theory Comput. , 2018 , 14 (3), 1370-1382. DOI: 10.1021/acs.jctc.7b01184.</li>
+<li style="list-style-type: '11. ';">Dutta, A. K.; Neese, F.; Izsak, R. Accelerating the Coupled-Cluster Singles and Doubles Method Using the Chain-of-Sphere Approximation. Mol. Phys. , 2018 , 116 (11), 1428-1434. DOI: 10.1080/00268976.2017.1416201.</li>
+<li style="list-style-type: '12. ';">Dutta, A. K.; Saitow, M.; Riplinger, C.; Neese, F.; Izsak, R. A Nearlinear Scaling Equation of Motion Coupled Cluster Method for Ionized States. J. Chem. Phys. , 2018 , 148 (24), 13. DOI: 10.1063/1.5029470.</li>
+<li style="list-style-type: '13. ';">Dutta, A. K.; Nooijen, M.; Neese, F.; Izsak, R. Exploring the Accuracy of a Low Scaling Similarity Transformed Equation of Motion Method for Vertical Excitation Energies. J. Chem. Theory Comput. , 2018 , 14 (1), 72-91. DOI: 10.1021/acs.jctc.7b00802.</li>
+<li style="list-style-type: '14. ';">Melo, M. C. R.; Bernardi, R. C.; Rudack, T.; Scheurer, M.; Riplinger, C.; Phillips, J. C.; Maia, J. D. C.; Rocha, G. B.; Ribeiro, J. V.; Stone, J. E.; Neese, F.; Schulten, K.; Luthey-Schulten, Z. NAMD Goes Quantum: An Integrative Suite for Hybrid Simulations. Nat. Methods , 2018 , 15 (5), 351-354. DOI: 10.1038/nmeth.4638.</li>
+<li style="list-style-type: '15. ';">Neese, Frank. Software update: the ORCA program system, version 4.0. Wiley Interdiscip. Rev. Comput. Mol. Sci. , 2018 , 8 (1), e1327. DOI: http://doi.wiley.com/10.1002/wcms.1327.</li>
+<li style="list-style-type: '16. ';">Sen, Avijit; de Souza, Bernardo; Huntington, Lee M. J.; Krupička, Martin; Neese, Frank; Izsák, Róbert. An Efficient Pair Natural Orbital Based Configuration Interaction Scheme for the Calculation of Open-Shell Ionization Potentials. J. Chem. Phys. , 2018 , 149 (11), 114108.</li>
+</ol>
+<h2>B.1.9 2017</h2>
+<ol>
+<li style="list-style-type: '1. ';">Stoychev, Georgi L.; Auer, Alexander A.; Neese, Frank. Automatic Generation of Auxiliary Basis Sets. J. Chem. Theory Comput. , 2017 , 13 (2), 554. DOI: 10.1021/acs.jctc.6b01041.</li>
+<li style="list-style-type: '2. ';">Sparta, Manuel; Retegan, Marius; Pinski, Peter; Riplinger, Christoph; Becker, Ute; Neese, Frank. Multilevel Approaches within the Local Pair Natural Orbital Framework. J. Chem. Theory Comput. , 2017 , 13 (7), 31983207. DOI: 10.1021/acs.jctc.7b00260.</li>
+<li style="list-style-type: '3. ';">Krupička, Martin; Sivalingam, Kantharuban; Huntington, Lee; Auer, Alexander A.; Neese, Frank. A toolchain for the automatic generation of computer codes for correlated wavefunction calculations. J. Comput. Chem. , 2017 , 38 (21), 1853-1868. DOI: 10.1002/jcc.24833.</li>
+<li style="list-style-type: '4. ';">Saitow, M.; Becker, U.; Riplinger, C.; Valeev, E. F.; Neese, F. J. Chem. Phys. , 2017 , 146, 164105.</li>
+</ol>
+</div>
+</body>
+</html>

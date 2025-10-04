@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part029</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>(the absorption spectrum), the ratio between the MCD and absorption intensities, and the last three columns represent the 'sticks' of the corresponding transitions.</p>
+<table><tbody><tr><th>Energy</th><th>C</th><th>D</th><th>C/D</th><th>C</th><th>D</th><th>E/D</th></tr><tr><td>24310.8</td><td>0.6673</td><td>980.2678</td><td>0.0006</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr><tr><td>24340.1</td><td>0.8471</td><td>1174.3637</td><td>0.0007</td><td>-0.0001</td><td>0.0129</td><td>-0.0112</td></tr><tr><td>24369.5</td><td>1.0664</td><td>1408.5788</td><td>0.0007</td><td>0.0001</td><td>0.0281</td><td>0.0033</td></tr><tr><td>24398.8</td><td>1.3325</td><td>1690.5275</td><td>0.0007</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr><tr><td>24428.1</td><td>1.6542</td><td>2029.0152</td><td>0.0008</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr><tr><td>24457.4</td><td>2.0416</td><td>2434.1699</td><td>0.0008</td><td>0.0000</td><td>0.0332</td><td>0.0003</td></tr></tbody></table>
+<p>Now the MCD and the absorption spectra can be plotted with a suitable graphical program, for instance with the Origin program.</p>
+<figure><figcaption><div class="caption">Fig. 3.47: Calculated MCD and absorption spectra of [Fe(CN) 6 ] 3 -(dash lines) compared to experimental spectra (solid lines).</div></figcaption></figure>
+<h2>Addition of Magnetic Fields</h2>
+<p>The inclusion of the Zeeman contribution into the QDPT procedure allows to obtain the splittings of the magnetic levels in an external magnetic field. The switch for this calculation and the magnetic field strength are defined in the soc subblock of the mrci block. Optionally the wave function decomposition can be printed for MagneticField_PrintLevel larger 0. The latter employs the thresh TPrint to omit small contributions from the printing:</p>
+<table><tbody><tr><td>%mrci</td><td></td></tr><tr><td>soc</td><td></td></tr><tr><td></td><td>(continues on next page)</td></tr></tbody></table>
+<pre><code>DoSOC true # DoSSC true # MagneticField true # default false B 1,10,100,1000 # Strengh of the magnetic field in Gauss. # 4000 is the default value # Optional printing of the wave function for each # magnetic field settings MagneticField_PrintLevel 0 # default (disabled) TPrint 1e-3 end end</code></pre>
+<p>Then, the output contains three sets of data of splittings of the magnetic levels with the magnetic field applied parallel to x, y, and z directions:</p>
+<pre><code>End B (Gauss) Energy levels (cm-1) and populations for B || x 1.0 -0.030 0.333 0.012 0.333 0.018 0.333 10.0 -0.030 0.333 0.012 0.333 0.018 0.333 100.0 -0.031 0.333 0.012 0.333 0.020 0.333 1000.0 -0.102 0.333 0.012 0.333 0.091 0.333 B (Gauss) Energy levels (cm-1) and populations for B || y 1.0 -0.030 0.333 0.012 0.333 0.018 0.333 10.0 -0.030 0.333 0.012 0.333 0.018 0.333 100.0 -0.032 0.333 0.014 0.333 0.018 0.333 1000.0 -0.105 0.334 0.018 0.333 0.087 0.333 B (Gauss) Energy levels (cm-1) and populations for B || z 1.0 -0.030 0.333 0.012 0.333 0.018 0.333 10.0 -0.030 0.333 0.011 0.333 0.018 0.333 100.0 -0.030 0.333 0.005 0.333 0.025 0.333 1000.0 -0.079 0.333 -0.030 0.333 0.108 0.333</code></pre>
+<p>Here the number in a row represents the strength of the magnetic field (in Gauss), and the following pairs of numbers denote the energy of the magnetic level (in cm -1 ) with its occupation number. This table can be readily plotted with any suitable graphical program.</p>
+<h2>Relativistic Picture Change in Douglas-Kroll-Hess SOC and Zeeman Operators</h2>
+<p>The DKH correction to the SOC operator is implemented in ORCA as a correction to the one-electron part of the SOMF operator. The DKH transformation is performed up to the second order, and the two-electron part in our implementation is left untransformed. However, the electronic density employed for evaluating the SOMF matrix elements is obtained from a scalar relativistic calculation. The inclusion of the DKH correction is controlled by the picturechange key in the rel block:</p>
+<pre><code>%rel method DKH # relativistic method picturechange 2 # include the DKH correction to SOC end</code></pre>
+<p>The 'picturechange' key can be set to 0, 1, and 2 for no picture change, the first order, and the second order DKH transformations of the SOC operator.</p>
+<p>With 'picturechange' set to 1 or 2 the DKH correction are applied in the first order to the Zeeman operator. This correction has a visible effect on calculated g-tensors for molecules containing third-row and heavier atoms.</p>
+<p>(continued from previous page)</p>
+<h2>X-ray Spectroscopy</h2>
+<p>Likewise to the CASCI/NEVPT2 computational protocol presented in section Core Excited Spectra: CAS-CI/RAS-CI XAS/RIXS starting from ORCA 4.2 the MRCI module can be used to compute core excited spectra, namely X-ray absorption (XAS) and resonant inelastic scattering (RIXS) spectra.</p>
+<p>As discussed in the case of CASCI/NEVPT2 protocol Core Excited Spectra: CAS-CI/RAS-CI XAS/RIXS a similar strategy is followed to compute XAS/RIXS spectra within the MRCI module. In principle the XAS/RIXS spectra calculations require two steps:</p>
+<ul>
+<li style="list-style-type: '· ';">In a first step one needs to optimize the valence active space orbitals in the framework of SA-CASSCF calculations, e.g. including valence excited states in the range between 6 to 15 eV.</li>
+<li style="list-style-type: '· ';">In a second step the relevant core orbitals are rotated into the active space and the MRCI problem is solved by saturating the excitation space with singly core-excited electronic configurations using the previously optimized sets of orbitals.</li>
+<li style="list-style-type: '· ';">The core orbitals are also included in the XASMOs definition. The use of this keyword is two fold. At first it effecteively reduces the number of the generated configuration state functions (CSFs) to those that exclusively contain contributions from the defined core orbitals. In the case of RIXS also XES (see below) the specified XASMOs are used to define intermediate or core ionized states.</li>
+</ul>
+<p>A representative input for the case of Fe(Cl) 4 is provided bellow:</p>
+<ul>
+<li style="list-style-type: '· ';">In the first step one performs a SA-CASSCF calculation for the 5 and 15 quintet and triplet states (FeIICl4.casscf.inp).</li>
+<li style="list-style-type: '· ';">In a second step the core orbitals are rotated in the active space and the MRCI problem is solved by saturating the excitation space with all the quintet and triplet states that involve single excitations from the core orbitals (FeIICl4-mrci.inp)</li>
+</ul>
+<pre><code>!cc-PWCVTZ-DK cc-pVTZ/C RIJCOSX SARC/J TightSCF DKH2 %rel FiniteNuc true end %basis newgto Cl "cc-pVTZ-DK" end newauxgto Cl "cc-pVTZ/C" end end %method FrozenCore FC_NONE end %casscf nel 6 norb 5 mult 5,3 nroots 5,15 switchstep nr end * xyz -2 5 Fe -17.84299991694815 -0.53096694321123 6.09104775508499 Cl -19.84288422845700 0.31089495619796 7.04101319789001 Cl -17.84298666758073 0.11868125024595 3.81067954087770 Cl -17.84301352218429 -2.87052442818457 6.45826391412877 Cl -15.84311566482982 0.31091516495189 7.04099559201853 *</code></pre>
+<pre><code>!MORead CC-PWCVTZ-DK cc-pVTZ/C RIJCOSX SARC/J TightSCF DKH2 %moinp "FeIICl4-casscf.gbw" (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>%rel FiniteNuc true end %method FrozenCore FC_NONE end %scf rotate { 6,42,90} { 7,43,90} { 8,44,90} end end %basis newgto Cl "cc-pVTZ-DK" end newauxgto Cl "cc-pVTZ/C" end end %casscf nel 12 norb 8 mult 5,3 nroots 34,195 maxiter 1 switchstep nr end %mrci CIType MRCI intmode fulltrafo XASMOs 42, 43, 44 newblock 5 * nroots 34 excitations cisd refs CAS(12,8) end end newblock 3 * nroots 195 excitations cisd refs CAS(12,8) end end maxiter 100 soc printlevel 3 dosoc true end end * xyz -2 5 Fe -17.84299991694815 -0.53096694321123 6.09104775508499 Cl -19.84288422845700 0.31089495619796 7.04101319789001 Cl -17.84298666758073 0.11868125024595 3.81067954087770 Cl -17.84301352218429 -2.87052442818457 6.45826391412877 Cl -15.84311566482982 0.31091516495189 7.04099559201853 *</code></pre>
+<p>In a similar fashion Multireference Equation of Motion Couple Cluster MR-EOM-CC (see next section) can also be used to compute X-ray spectra. Further information can be found in reference[514]</p>
+<p>As it is explicitly described in the respective ROCIS section RIXS spectra can be requested by the following keywords:</p>
+<pre><code>RIXS true # Request RIXS calculation (NoSOC) RIXSSOC true # Request RIXS calculation (with SOC) Elastic true # Request RIXS calculation (Elastic)</code></pre>
+<p>Please consult section Resonant Inelastic Scattering Spectroscopy for processing and analyzing the generated spectra</p>
+<p>Likewise to TDDFT ( Excited States via RPA, CIS, TD-DFT and SF-TDA ) ROCIS ( Excited States with Restricted Openshell CIS - ROCIS ) and CASSCF ( Core Excited Spectra: CAS-CI/RAS-CI XAS/RIXS ) the computed transition densities also in the presence of SOC can be taken beyond the dipole approximation by using the OPS tool for details.</p>
+<ol>
+<li style="list-style-type: '1. ';">by performing a multipolar expantion</li>
+<li style="list-style-type: '2. ';">by computing the full semiclassical transition moments</li>
+</ol>
+<p>The whole set of spectroscopy tables can be requested with the following commands:</p>
+<pre><code>%mrci DoDipoleLength true DoDipoleVelocity true DecomposeFosc true DoFullSemiclassical true end</code></pre>
+<p>More details can be found in TDDFT ( Excited States via RPA, CIS, TD-DFT and SF-TDA ) ROCIS ( Excited States with Restricted Open-shell CIS - ROCIS ) and CASSCF ( Core Excited Spectra: CAS-CI/RAS-CI XAS/RIXS ) sections.</p>
+<p>Starting from ORCA 4.2 the previously reported RASCI-XES protocol reference[515], which can compute K β Mainline XES spectra, can be processed entirely within the ORCA modules. In ORCA 5.0 a similar protocol (CASCIXES) exist in the CASSCF module ( Core Excited Spectra: CAS-CI/RAS-CI XAS/RIXS )</p>
+<ul>
+<li style="list-style-type: '· ';">Like above or in the CASCI/NEVPT2 case in a first step one needs to optimize the valence active space orbitals in the framework of SA-CASSCF calculations, e.g. including valence excited states in the range between 6 to 15 eV for the N electron system.</li>
+<li style="list-style-type: '· ';">In a second step the metal 1s and 3p orbitals are rotated in the active space and the 1s MO is defined in the XASMOs list</li>
+<li style="list-style-type: '· ';">Computes the XES spectrum in the RASCI framework for the N-1 electron system in the presence of SOC if the XESSOC keyword for all the states that are dominated by 3p-1s electron decays.</li>
+</ul>
+<p>A representative input sequence for the case of Fe(Cl) 6 is provided bellow:</p>
+<p>As described in reference[515] at first for a CAS(5,5) the excitation space is saturated by the sextet as well as the 24 quartet and the 75 doublet states which are optimized in the SA-CASSCF fashion.</p>
+<pre><code>X2c x2c-TZVPall x2c/J def2-TZVP/C %scf MaxDisk 40000 end %casscf nel 5 norb 5 mult 6,4,2 nroots 1,24,75 shiftup 0.5 shiftdn 0.5 trafostep RI maxiter 150 end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>*xyz -3 6 Fe 0.0000 0.0000 0.000000 Cl 2.478 0.0000 0.000 Cl -2.478 0.0000 0.000 Cl 0.000005 2.478 0.00000 Cl 0.000005 -2.478 -0.0000 Cl -0.000 -0.000 2.478 Cl 0.000 -0.0000 -2.478 *</code></pre>
+<p>In following the 1s and 3p Fe based MOs are rotated in the active space and the XES spectra are computed for the [Fe(Cl) 6 ] + system for the 4 septet and 81 quintet states.</p>
+<pre><code>! X2c x2c-TZVPall x2c/J def2-TZVP/C MORead AllowRHF ! NormalPrint ! NoLoewdin NoMulliken %moinp "fecl6_casscf.gbw" %scf MaxDisk 40000 end %scf #Rotate the 1s and 3p orbitals below the SOMOs by using the rotate option rotate {0,59,90} {36,60,90} {37,61,90} {38,62,90} end end %casscf nel 5 norb 5 mult 6,4 nroots 1,24 shiftup 0.5 shiftdn 0.5 trafostep exact maxiter 1 end %mrci citype mrci UseIVOs false Etol 1e-8 IntMode fulltrafo PrintLevel 3 newblock 7 * excitations none nroots 4 refs ras(12:4 1/5/0 0) end end newblock 5 * excitations none nroots 81 refs ras(12:4 1/5/0 0) end end XASMOS 59 soc dosoc true</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<p>As a result the X-ray emission spectrum is calculated and the intensities are computed on the basis of the transition electric dipole moments</p>
+<table><tbody><tr><th colspan="11">-----------------------------------------------------------------------------------</th></tr><tr><td></td><th colspan="2">--------------------- Transition |DY|</th><th>Energy</th><td></td><th>Energy Wavelength</th><th>----------------------------------------------------------------------------------- fosc(D2)</th><td></td><th>D2 |DX|␣</th><td></td><td></td></tr><tr><td></td><td></td><th>(au)</th><th>(eV)</th><th>(cm-1)</th><th>(nm)</th><td></td><td></td><th>(au**2)</th><th>(au)␣</th><td></td></tr><tr><th colspan="11">----------------------------------------------------------------------------------- ↪ → ---------------------</th></tr><tr><td colspan="2">426-7.0A ↪ → 0.00002</td><td>-&gt; 420-5.0A 0.00002</td><td>7083.210737 0.00002</td><td>57129953.4</td><td></td><td>0.2</td><td colspan="2">0.000000203</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">427-7.0A</td><td>-&gt; 420-5.0A</td><td>7083.210737</td><td></td><td>57129953.4</td><td>0.2</td><td colspan="2">0.000003409</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">↪ → 0.00003 426-7.0A</td><td>0.00014 -&gt; 419-5.0A 0.00004</td><td>0.00000 0.00002</td><td>7083.210739</td><td>57129953.4</td><td>0.2</td><td colspan="2">0.000000626</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">↪ → 0.00004 427-7.0A ↪ 0.00000</td><td>-&gt; 419-5.0A 0.00001</td><td>0.00003</td><td>7083.210739</td><td>57129953.4</td><td>0.2</td><td colspan="2">0.000000169</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">→ 426-7.0A</td><td>-&gt; 418-5.0A</td><td>0.00002</td><td>7083.210756</td><td>57129953.5</td><td>0.2</td><td colspan="2">0.000000867</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">↪ → 0.00003 427-7.0A ↪ 0.00000</td><td>0.00006 -&gt; 418-5.0A 0.00000</td><td>0.00004</td><td>7083.210756</td><td>57129953.5</td><td>0.2</td><td colspan="2">0.000000228</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">→ 426-7.0A 0.00001</td><td>-&gt; 417-5.0A 0.00003</td><td>0.00006</td><td>7083.210911</td><td>57129954.8</td><td>0.2</td><td colspan="2">0.000000824</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">↪ → 427-7.0A</td><td>-&gt; 417-5.0A 0.00004</td><td>7083.210911 0.00000</td><td></td><td>57129954.8</td><td>0.2</td><td colspan="2">0.000001296</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">↪ → 0.00008 426-7.0A ↪ → 0.00000</td><td>-&gt; 416-5.0A 0.00002</td><td>7083.211098 0.00002</td><td></td><td>57129956.3</td><td>0.2</td><td colspan="2">0.000000159</td><td>0.00000</td><td>␣</td><td></td></tr><tr><td colspan="2">... 428-5.0A ↪ → 00000</td><td>-&gt; 0-5.0A 0.00000</td><td>7159.092436 0.00000</td><td></td><td>57741980.6</td><td>0.2</td><td colspan="2">0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td colspan="2">430-5.0A 00000</td><td>-&gt; 0-5.0A 0.00000</td><td>7159.092436 0.00000</td><td></td><td>57741980.6</td><td>0.2</td><td colspan="2">0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td colspan="2">↪ → 429-5.0A ↪ → 00000 431-5.0A</td><td>-&gt; 0-5.0A 0.00000</td><td>7159.092436 0.00000</td><td></td><td>57741980.6</td><td>0.2</td><td colspan="2">0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td colspan="2">00000</td><td>-&gt; 0-5.0A 0.00000</td><td>0.00000</td><td>7159.092436</td><td>57741980.6</td><td>0.2</td><td colspan="2">0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr><tr><td colspan="2">↪ → 432-5.0A ↪ → 00000 -----------------------------------------------------------------------------------</td><td>-&gt; 0-5.0A</td><td>7159.092436</td><td></td><td>57741980.6</td><td>0.2</td><td colspan="2">0.000000000</td><td>0.00000</td><td>0.</td><td></td></tr></tbody></table>
+<p>The resulted XES spectrum can be visualized by processing the above output file with the orca_mapspc</p>
+<p>orca_mapspc fecl6_xes.out XESSOC -x07000 -x17200 -w4.0 -eV -n10000</p>
+<p>It is in general not recomended to compute rasci XES spectra on the basis of mrci module.</p>
+<ul>
+<li style="list-style-type: '· ';">In fact K α : Fe 2 p → Fe 1 s and K α : Fe 2 p → Fe 1 s (Mainline XES) spectra are extreme state demanding and require a large number of releativistic transition densities to be generate which brings a lot of stress to the mrci module.</li>
+<li style="list-style-type: '· ';">Amore direct and computationally efficient alternative is provided by the rasci xes protocol via the %casscf module as described in Core Excited Spectra: CAS-CI/RAS-CI XES . This in principle provides suitable protocols for the computation of all X-ray emission</li>
+<li style="list-style-type: '· ';">K α : Fe 2 p → Fe 1 s</li>
+<li style="list-style-type: '· ';">K β 1 , 3 : Fe 3 p → Fe 1 s (Mainline XES)</li>
+<li style="list-style-type: '· ';">K β 2 , 5 / K β ′ : ( Cl 2 p + Fe 3 d ) → Fe 1 s (VtC-XES)</li>
+</ul>
+<p>as well the respective resonant XES (RIXS) spectra.</p>
+<ul>
+<li style="list-style-type: '· ';">We also recall that within the limits of their applicability XES and RIXS spectra can also be computed on the basis of Static Ground State DFT (SGS-DFT), see discussion in Static Ground State DFT (SGS-DFT) and ROCIS family of methods, see discussion in Resonant Inelastic Scattering Spectroscopy .</li>
+<li style="list-style-type: '· ';">A general discussion regarding X-ray spectroscopy experiements and how to approach them on the basis of modern computational spectroscopy methodologies is provided in reference [458]</li>
+</ul>
+<p>Hence by processing the above spectra one obtains the exact similar spectrum as presented in Fig. 3.23</p>
+<h2>3.19.15 Keywords</h2>
+<h2>Ϫ Caution</h2>
+<p>The MRCI program is considered legacy.</p>
+<p>Simple input keywords for the MRCI module are given in Table 3.52. Note that if these are used, all information about reference spaces, number of roots etc. is taken from the CASSCF module that is assumed to be run in advance. In general, these calculations are of the individually selecting type and are very time consuming. Very many flags can be set and modified for these methods and in general using these methods requires expert users! See the variables Tsel , Tpre and Tnat that define the individual selection process. All of these methods can be used with RI integrals by using RI-&lt;Method&gt; etc. However, then the calculations become even more time consuming since integrals are made one- by one on the fly. Non-RI calculations will be pretty much limited to about 200-300 orbitals included in the CI. A reasonably complete list of %mrci block keywords and their meaning follows below.</p>
+<table><caption><div class="caption">Table 3.52: Simple input keywords for the MRCI module.</div></caption><tbody><tr><th>Keyword</th><th>Description</th></tr><tr><td>MRCI</td><td>Initiates a multireference configuration interaction calculation with single and double excitations</td></tr><tr><td>MRCI+Q</td><td>Same with multireference Davidson correction for unlinked quadruples</td></tr><tr><td>MRACPF</td><td>Average coupled-pair functional</td></tr><tr><td>MRAQCC</td><td>Average quadratic coupled-cluster</td></tr><tr><td>MRDDCI1</td><td>Difference dedicated CI with one degree of freedom</td></tr><tr><td>MRDDCI2</td><td>Same with two degrees of freedom</td></tr><tr><td>MRDDCI3</td><td>Same with three degrees of freedom</td></tr><tr><td>MRDDCI&lt;n&gt;+Q</td><td>MRDDCI with Davidson correction ( n = 1-3)</td></tr><tr><td>SORCI</td><td>Spectroscopy oriented CI</td></tr></tbody></table>
+<pre><code>%mrci # -----------------------------------------------------------# Orbital selection # NOTE: The orbitals are used as supplied. Thus, the ORDER of # orbitals is critical. Say you have # nact electrons in the active space # nint electrons in the internal space # nfrozen electrons # * The first nfrozen/2 orbitals will not be included in the CI # * The next nint/2 orbitals will be doubly occupied in all # references # * the nact electrons are distributed over the,say, mact # orbitals according to the active space definitions. # The remaining orbitals are external. # IT IS YOUR RESPONSIBILITY THAT THE ORBITAL ORDERING MAKES # SENSE! # A sensible two-step procedure is: # * generate some orbitals and LOOK AT THEM. Decide which ones # to include in the CI. # * re-read these orbitals with ! MORead NoIter. Perhaps use # the "rotate" feature to reorder the MOs # Then jump right into the CI which is defined in this se-# cond job # # NOTE: the MRCI module respects the %method FrozenCore settings # -----------------------------------------------------------Loc 0,0,0 # Localize orbitals in the internal (first flag), active # (second flag) and external space (third flag). UseIVOs false # Use improved virtual orbitals in the CI # orbital energy window for the frozencore option FC_EWIN EWIN -40,1000 # alternative MO definition MORanges First_internal, Last_Internal, First_active, Last_Active, First-↪ → Virtual,Last_virtual XASMOs x1,x2,x3,... # List of XAS donor MOs (see above) # ---------------------------------# Method selection # ---------------------------------CIType MRCI # Multireference CI (default) MRDDCI1 # Difference dedicated CI 1-degree of freedom MRDDCI2 # Difference dedicated CI 2-degrees of freedom MRDDCI3 # Difference dedicated CI 3-degrees of freedom MRACPF # Average coupled-pair functional MRACPF2 # Modified version of ACPF MRACPF2a # A slightly modified version of ACPF-2a MRAQCC # Average quadratic coupled-cluster MRCEPA_R # Multireference CEPA due to Ruttink MRCEPA_0 # CEPA-0 approximation SORCI # Spectroscopy oriented CI SORCP # Spectroscopy oriented couplet pair approx. MRMP2 # Multireference Moeller-Plesset at second order MRMP3 # Multireference Moeller-Plesset at third order MRMP4 # Multireference Moeller-Plesset at fourth order # but keeping only singles and doubles relative to # the reference configurations. # ---------------------------------# Selection thresholds # ---------------------------------</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>Tsel 1e-6 # Selection threshold for inclusion in the CI based # 2nd order MP perturbation theory <0|H|I>/DE(MP) Tpre 1e-4 # Selection of configurations in the reference space # after the initial diagonalization of the reference # space only configurations with a weight large>Tpre # to any root are included AllSingles false # include ALL SINGLES in the CI. Default is now TRUE!!! # perturbative estimate of the effect of the rejected configurations EunselOpt 0 # no correction 1 # based on the overlap with the 0th order wavefunction 2 # calculation with the relaxed reference space # coefficients. This is the most accurate and only # slightly more expensive # For CIType=MRCI,MRDDCI and SORCI the approximate correction for # higher excitations DavidsonOpt Davidson1 # default Davidson2 # modified version Siegbahn # Siegbahn's approximation Pople # Pople's approximation # For MRACPF,MRACPF2,MRAQCC and SORCP NelCorr 0 # Number of electrons used for computing the average coupled# pair correction. # =0 : set equal to ALL electrons in the CI # =-1: set equal to all ACTIVE SPACE electrons # =-2: set equal to ACTIVE SPACE electrons IF inactive doubles # are excluded (as in MRDDCI) # >0 : set equal to user defined input value LinearResponse false # Use ground state correlation energy to compute the shift for # higher roots (not recommended) # ---------------------------------# Natural Orbital Iterations # ---------------------------------NatOrbIters 0 # default # number of average natural orbital iterations Tnat 1e-4 # cutoff of natural orbitals. NOs with an occupation number less # then Tnat will not be included in the next iteration # Also, orbitals with occupation number closer than Tnat to 2.0 # will be frozen in the next iteration Tnat2 -1 # if chosen >0 then Tnat2 is the threshold for freezing the # almost doubly occupied orbitals. Otherwise it is set equal # to Tnat # ----------------------------------# Additional flags and algorithmic # details # ----------------------------------PrintLevel 2 # default. Values between 1 and 4 are possible DoDDCIMP2 false # for DDCI calculations: if set to true the program computes # a MP2 like correction for the effect of inactive double # excitations which are not explicitly included in the CI. This</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># is necessary if you compare molecules at different geometries # or compute potential energy surfaces. # ----------------------------------# The SORCP model # ----------------------------------CIType_in # First step CIType CIType_fi # Second step CIType Exc_in # First step excitation scheme Exc_fi # Second step excitation scheme Tsel_in # First step Tsel Tsel_fi # Second step Tsel Tpre_in # First step Tsel Tpre_fi # Second step Tpre # Thus, the SORCI model corresponds to CIType=SORCP with # CIType_in MRCI CIType_fi MRCI # Exc_in DDCI2 Cexc_fi DDCI3 # Tsel_in 1e-5 Tsel_fi 1e-5 # Tpre_in 1e-2 Tpre_fi 1e-2 # ----------------------------------# Multirerence perturbation theory # ----------------------------------MRPT_b 0.02 # Intruder state avoidance PT after Hirao (default 0.0) # with this flag individual intruders are shifted away to # to some extent from the reference space MRPT_shift 0.3 # Level shift introduced by Roos which shifts the entire # excited manifold away in order to avoid intruder states. # A correction is applied afterwards but results do depend # on this (arbitrary) value to some extent. H0Opt projected # use an off-diagonal definition of H0 Diagonal # use a diagonal definition of H0 (much faster but maybe # a little less reliable Partitioning MP # Moeller plesset partitioning EN # Epstein-Nesbet partitioning (not recommended) RE # Fink's partitioning Fopt Standard # Standard definition of MR Fock operators G3 # uses Anderson's g3 correction also used in CASPT2 UsePartialTrafo true/false # speedups MRMP2 #---------------------------------------# restrict reference configurations #---------------------------------------RejectInvalidRefs true # by default reference CSFs are restricted # to target spin and spatial symmetry # ====================================== # Definitions of blocks of the CI Matrix # ====================================== NewBlock 2 * # generate a Block with doublet(=2) multiplicity Nroots 1 # number of roots to be generated Excitations cis # CI with single excitations cid # CI with double excitations cisd # CI with single and double excitations ddci1 # DDCI list with one degree of freedom ddci2 # DDCI list with two degrees of freedom ddci3 # DDCI list with three degrees of freedom Flags[_class_] 0 or 1 # Turn excitation classes on or off individually # ``s'' stands for any SOMO, ``i'',``j'' for internal orbitals␣ ↪ → and</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># ``a'',``b'' for external orbitals # Singles _class_ = ss, sa, is, ia # Doubles _class_ = ijss, ijsa, ijab, # isss, issa, isab, # ssss, sssa, ssab # ``Flags'' takes priority over ``Excitations''. In fact␣ ↪ → ``Excitations'' # does nothing but to set ``Flags''. So, you can use␣ ↪ → ``Excitations'' # to provide initial values for ``Flags'' and then modify them # with subsequent ``Flags'' assignments refs # # First choice -complete active space # CAS(nel,norb) # CAS-CI reference with nel electrons in # Norb orbitals # # Second choice -restricted active space # RAS(nel: m1 h/ m2 / m3 p) # RAS-reference with nel electrons # m1= number orbitals in RAS-1 # h = max. number of holes in RAS-1 # m2= number of orbitals in RAS-2 (any number of # electrons or holes) # m3= number of orbitals in RAS-3 # p = max. number of particles in RAS-3 # # Third choice -individually defined configurations # \{ 2 0 1 0\} \{ 1 1 1 0\} etc. # define as many configurations as you want. Doubly occupied MOs # singly occupied MOs and empty MOs. Important notes: # a) the number of electrons must be the same in all references # b) the number of orbitals is determined from the number of # definitions. Thus, in the example above we have three␣ ↪ → active # electrons and four active orbitals despite the fact that␣ ↪ → the # highest orbital is not occupied in any reference. # The program determines the internal, active and external␣ ↪ → spaces # automatically from the number of active electrons and orbitals end end # there can be as many blocks as you want!!! # ----------------------------------# Density matrix generation flags # First Key= State densities <I|D|I> # =0: none # =1: Ground state only (lowest root of all blocks; Electron only) # =2: Ground state only (Electron and spin density) # =3: Lowest root from each block (Electron density) # =4: Lowest root from each block (Electron and spin density) # =5: All states (Electron density) # =6: All states (Electron and spin density) # Second Key= Transition densities <I|D|J></code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># needed for all transition intensities, g-tensor etc # =0: none # =1: from the ground state into all excited states (el) # =2: from the ground state into all excited states (el+spin) # =3: from all lowest states into all excited states (el) # =4: from all lowest states into all excited states (el+spin) # =5: all state pairs (el) # =6: all state pairs (el+spin) # Note that for perturbation theory the density is computed as # an expectation value over the first (second) order wavefunction. # which is renormalized for this purpose # ----------------------------------Densities 1,1 # ----------------------------------# Complete printing of the wavefunction # ----------------------------------PrintWF 1 # CFG based printing (default) det # Determinant based wavefunction printing TPrintWF 3e-3 # Threshold for the printing of the CFGs/Dets # ----------------------------------# Algorithm for the solver # ----------------------------------Solver Diag # Davidson like solver DIIS # DIIS like solver # both solvers have their pros and cons. The DIIS may converge # better or use less time since it only recomputes the vectors that # have not yet converged; The DIIS may be less sensitive to root flipping # effects but occasionally it converges poorly and states of the same # symmetry are occasionally a little problematic # For perturbation theory DIIS is always used. # For both solvers MaxIter 100 # the maximum number of iterations Etol 1e-6 # convergence tolerance for energies in Eh Rtol 1e-6 # convergence tolerance for residual # For Solver=Diag (Davidson solver) Otol 1e-16 # Orthogonality threshold for Schmidt process NGuessMat 512 # Dimension of the guess matrix 512x512 # be used to compute the initial guess of the actual MRCI␣ ↪ → calculation NGuessMatRefCI 512 # Dimension of the guess matrix # for the reference CI MaxDim 3 # Davidson expansion space = MaxDim * NRoots # For the Solver=DIIS. Particularly recommended for anything else but # straightforward CI and also for calculations in direct2 mode! MaxDIIS 5 # Maximum number of old vectors to be used in DIIS RelaxRefs true # Relax reference space coefficients in the CI or # freeze them to their zeroth order values LevelShift 0.4 # Level Shift for stabilizing the DIIS procedure # ----------------------------------# RI Approximation # ----------------------------------IntMode RITrafo #Use RI integrals FullTrafo #No RI (default) # ----------------------------------# Integral storage, memory and files</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code># ----------------------------------FourIndexInts false (default) True # Store ALL four index integrals over Mos in main memory # only possible for relatively small systems, perhaps up # to 150-200 MOs included in the CI MaxMemInt 256 # Maximum amount of core memory devoted to the storage of # integrals. If NOT all three index integrals fit into main # memory the program fails MaxMemVec 16 # Maximum amount of memory used for section of the trial and # sigma vectors. This is not a particularly critical variable KeepFiles false # Keep integrals and CI program input file (.mrciinp). Then # you can manually edit the .mrciinp file which is a standard # ASCII file and run the MRCI program directly. The only thing # you cannot change is the orbital window. end</code></pre>
+<h2>3.20 Multireference Equation of Motion Coupled-Cluster (MREOM-CC)</h2>
+<p>The Multireference Equation of Motion Coupled-Cluster (MR-EOM-CC ) methodology [516, 517, 518, 519, 520, 521] has been implemented in ORCA. The strength of the MR-EOM-CC methodology lies in its ability to calculate many excited states from a single state-averaged CASSCF solution, for which only a single set of amplitudes needs to be solved and the final transformed Hamiltonian is diagonalized over a small manifold of excited states only through an uncontracted MRCI problem. Hence, a given MR-EOM-CC calculation involves three steps, performed by three separate modules in ORCA :</p>
+<ol>
+<li style="list-style-type: '1. ';">a state-averaged CASSCF calculation (CASSCF module),</li>
+<li style="list-style-type: '2. ';">the solution of amplitude equations and the calculation of the elements of the similarity transformed Hamiltonians (MDCI module),</li>
+<li style="list-style-type: '3. ';">and the uncontracted MRCI diagonalization of the final similarity transformed Hamiltonian (MRCI module).</li>
+</ol>
+<p>The current implementation allows for MR-EOM-T|T † -h-v, MR-EOM-T|T † |SXD-h-v and MR-EOM-T|T † |SXD|Uh-v calculations. A more detailed description of these methods and the available input parameters will be given in Sec. Section 3.20.4. We also note that the theoretical details underlying these methods can be found in Ref. [521]. In Sec. Section 3.20.4, we will discuss a strategy for the selection of the state-averaged CAS and other steps for setting up an MR-EOM-CC calculation in more detail. Furthermore, we will discuss how spin-orbit coupling effects can be included in MR-EOM-CC calculations, a projection scheme to aid with convergence difficulties in the iteration of the T amplitude equations, an orbital selection scheme to reduce the size of the inactive core and virtual subspaces in the calculation of excitation energies and a strategy for obtaining nearly size-consistent results in MR-EOM-CC The purpose of this section is simply to provide a simple example which illustrates the most basic usage of the MR-EOM-CC implementation in ORCA.</p>
+<h2>3.20.1 A Simple MR-EOM-CC Calculation</h2>
+<p>Let us consider an MR-EOM-T|T † |SXD|U-h-v calculation on formaldehyde. An MR-EOM-T|T † |SXD|U-h-v calculation is specified via the MR-EOM keyword along with the specification of a state-averaged CASSCF calculation (i.e. CASSCF(nel, norb) calculation with the number of roots of each multiplicity to be included in the state-averaging for the reference state) and the number of desired roots in each multiplicity block for the final MRCI diagonalization. We note that the CASSCF module is described in section Section 3.13 and that a description of the MRCI module is given in section Section 3.19. Here, we have a state-averaged CAS(6,4) calculation, comprised of 3 singlets and 3 triplets and we request 6 singlet roots and 6 triplet roots in our final MRCI diagonalization (i.e. the roots to be computed in the MR-EOM-T|T † |SXD|U-h-v calculation):</p>
+<pre><code>!MR-EOM def2-TZVP VeryTightSCF %casscf # reference state nel 6 norb 4 mult 1,3 nroots 3,3 end %mdci STol 1e-7 end %mrci # final roots newblock 1 * nroots 6 refs cas(6,4) end end newblock 3 * nroots 6 refs cas(6,4) end end end * xyz 0 1 H 0.000000 0.934473 -0.588078 H 0.000000 -0.934473 -0.588078 C 0.000000 0.000000 0.000000 O 0.000000 0.000000 1.221104 *</code></pre>
+<p>One can alternatively perform an MR-EOM-T|T † -h-v or MR-EOM-T|T † |SXD-h-v calculation by replacing the MR-EOM keyword, in the first line of the input above, by MR-EOM-T|Td or MR-EOM-T|Td|SXD , respectively. Namely, replacing the first line of the input above with</p>
+<pre><code>!MR-EOM-T|Td def2-TZVP VeryTightSCF</code></pre>
+<pre><code>runs the MR-EOM-T|T † -h-v calculation, while</code></pre>
+<pre><code>!MR-EOM-T|Td|SXD def2-TZVP VeryTightSCF</code></pre>
+<p>runs the MR-EOM-T|T † |SXD-h-v calculation.</p>
+<p>The final MRCI diagonalization manifold includes 2h1p, 1h1p, 2h, 1h and 1p excitations in MR-EOM-T|T † -h-v calculations, 2h, 1p and 1h excitations in MR-EOM-T|T † |SXD-h-v calculations and 1h and 1p excitations in MREOM-T|T † |SXD|U-h-v calculations. Note that in the %mdci block, we have set the convergence tolerance ( STol ) for the residual equations for the amplitudes to 10 -7 , as this default value is overwritten with the usage of the TightSCF , VeryTightSCF , etc. keywords. It is always important to inspect the values of the largest T , S (here, we use S to denote the entire set of S , X and D amplitudes) and U amplitudes. If there are amplitudes that are large (absolute values &gt; 0 . 15 ), the calculated results should be regarded with suspicion. For the above calculation, we obtain:</p>
+<table><tbody><tr><td>LARGEST</td><td>T</td><td>AMPLITUDES</td><td></td></tr><tr><td>8-&gt;</td><td>13</td><td>8-&gt; 13</td><td>0.060331</td></tr><tr><td>4-&gt;</td><td>17</td><td>4-&gt; 17</td><td>0.029905</td></tr><tr><td>8-&gt;</td><td>9</td><td>8-&gt; 9</td><td>0.028160</td></tr><tr><td>8-&gt;</td><td>16</td><td>8-&gt; 16</td><td>0.027266</td></tr><tr><td>6-&gt;</td><td>20</td><td>6-&gt; 20</td><td>0.025885</td></tr><tr><td>8-&gt;</td><td>21</td><td>8-&gt; 21</td><td>0.025308</td></tr><tr><td>4-&gt;</td><td>16</td><td>4-&gt; 16</td><td>0.024803</td></tr><tr><td>8-&gt;</td><td>12</td><td>8-&gt; 12</td><td>0.023915</td></tr><tr><td>5-&gt;</td><td>18</td><td>5-&gt; 18</td><td>0.023553</td></tr><tr><td>8-&gt;</td><td>23</td><td>8-&gt; 23</td><td>0.023384</td></tr><tr><td>3-&gt;</td><td>16</td><td>3-&gt; 16</td><td>0.023182</td></tr><tr><td>7-&gt;</td><td>19</td><td>7-&gt; 19</td><td>0.023043</td></tr><tr><td>8-&gt;</td><td>13</td><td>4-&gt; 11</td><td>0.022010</td></tr><tr><td>3-&gt;</td><td>19</td><td>3-&gt; 19</td><td>0.021987</td></tr><tr><td>8-&gt;</td><td>16</td><td>8-&gt; 9</td><td>0.021230</td></tr><tr><td>8-&gt;</td><td>9</td><td>8-&gt; 16</td><td>0.021230</td></tr></tbody></table>
+<h2>for the T amplitudes,</h2>
+<table><tbody><tr><td>LARGEST</td><td>S</td><td colspan="3">-------------------- AMPLITUDES</td></tr><tr><td>4-&gt;</td><td>8</td><td>8-&gt;</td><td>11</td><td>0.074048</td></tr><tr><td>3-&gt;</td><td>8</td><td>8-&gt;</td><td>9</td><td>0.064886</td></tr><tr><td>4-&gt;</td><td>5</td><td>5-&gt;</td><td>11</td><td>0.045479</td></tr><tr><td>3-&gt;</td><td>8</td><td>8-&gt;</td><td>16</td><td>0.042657</td></tr><tr><td>4-&gt;</td><td>7</td><td>7-&gt;</td><td>11</td><td>0.042598</td></tr><tr><td>4-&gt;</td><td>5</td><td>5-&gt;</td><td>17</td><td>0.042076</td></tr><tr><td>4-&gt;</td><td>5</td><td>8-&gt;</td><td>11</td><td>0.039958</td></tr><tr><td>4-&gt;</td><td>8</td><td>8-&gt;</td><td>17</td><td>0.037532</td></tr><tr><td>3-&gt;</td><td>5</td><td>8-&gt;</td><td>9</td><td>0.035907</td></tr><tr><td>4-&gt;</td><td>7</td><td>7-&gt;</td><td>17</td><td>0.035767</td></tr><tr><td>2-&gt;</td><td>6</td><td>6-&gt;</td><td>19</td><td>0.034148</td></tr><tr><td>3-&gt;</td><td>5</td><td>5-&gt;</td><td>10</td><td>0.033339</td></tr><tr><td>2-&gt;</td><td>6</td><td>6-&gt;</td><td>10</td><td>0.032691</td></tr><tr><td>4-&gt;</td><td>6</td><td>6-&gt;</td><td>11</td><td>0.032181</td></tr><tr><td>8-&gt;</td><td>8</td><td>3-&gt;</td><td>16</td><td>0.031775</td></tr><tr><td>2-&gt;</td><td>7</td><td>7-&gt;</td><td>22</td><td>0.031238</td></tr></tbody></table>
+<h2>for the S amplitudes, and</h2>
+<table><tbody><tr><td colspan="5">--------------------</td></tr><tr><td>LARGEST -------------------- 3-&gt;</td><td>U 8</td><td>AMPLITUDES 3-&gt;</td><td>8</td><td>0.026128</td></tr><tr><td>3-&gt;</td><td>8</td><td>3-&gt;</td><td>5</td><td>0.007683</td></tr><tr><td>2-&gt;</td><td>8</td><td>2-&gt;</td><td>8</td><td>0.006182</td></tr><tr><td>3-&gt;</td><td>8</td><td>2-&gt;</td><td>5</td><td>0.006154</td></tr><tr><td>2-&gt;</td><td>8</td><td>3-&gt;</td><td>5</td><td>0.004954</td></tr><tr><td>3-&gt;</td><td>5</td><td>3-&gt;</td><td>5</td><td>0.004677</td></tr><tr><td>4-&gt;</td><td>8</td><td>4-&gt;</td><td>8</td><td>0.003989</td></tr><tr><td>3-&gt;</td><td>8</td><td>2-&gt;</td><td>8</td><td>0.002040</td></tr><tr><td>2-&gt;</td><td>8</td><td>3-&gt;</td><td>8</td><td>0.002040</td></tr><tr><td>2-&gt;</td><td>8</td><td>2-&gt;</td><td>5</td><td>0.001818</td></tr><tr><td>4-&gt;</td><td>8</td><td>4-&gt;</td><td>5</td><td>0.001173</td></tr><tr><td>2-&gt;</td><td>5</td><td>2-&gt;</td><td>5</td><td>0.001107</td></tr><tr><td>4-&gt;</td><td>5</td><td>4-&gt;</td><td>5</td><td>0.000714</td></tr><tr><td>3-&gt;</td><td>7</td><td>3-&gt;</td><td>7</td><td>0.000607</td></tr><tr><td>3-&gt;</td><td>6</td><td>3-&gt;</td><td>6</td><td>0.000521</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<pre><code>2-> 5 3-> 5 0.000365</code></pre>
+<p>for the U amplitudes. Hence, one can see that there are no unusually large amplitudes for this calculation. We note that there can be convergence issues with the T amplitude iterations and that in such cases, the flag:</p>
+<pre><code>DoSingularPT true</code></pre>
+<p>should be added to the %mdci block. The convergence issues are caused by the presence of nearly singular T 2 amplitudes and setting the DoSingularPT flag to true activates a procedure which projects out the offending amplitudes (in each iteration) and replaces them by suitable perturbative amplitudes. For more information, see the examples in section Section 3.20.4.</p>
+<p>After the computation of the amplitudes and the elements of the similarity transformed Hamiltonians, within the MDCI module, the calculation enters the MRCI module. For a complete, step by step description of the output of an MRCI calculation, we refer the reader to the example described in section Section 3.19.4. Let us first focus on the results for the singlet states ( CI-BLOCK 1 ). Following the convergence of the Davidson diagonalization (default) or DIIS procedure, the following results of the MRCI calculation for the singlet states are printed:</p>
+<pre><code>----------CI-RESULTS ----------The threshold for printing is 0.30 percent The weights of configurations will be printed. The weights are summed over all CSFs that belong to a given configuration before printing STATE 0: Energy= -114.321368425 Eh RefWeight= 0.9781 0.00 eV 0.0 cm**-1 0.0137 : h---h---[0222] 0.0756 : h---h---[1221] 0.8879 : h---h---[2220] STATE 1: Energy= -114.176866027 Eh RefWeight= 0.9765 3.93 eV 31714.6 cm**-1 0.0039 : h---h---[1122] 0.9726 : h---h---[2121] 0.0071 : h---h 4[1222] 0.0085 : h---h 4[2221] STATE 2: Energy= -113.988050555 Eh RefWeight= 0.9774 9.07 eV 73154.8 cm**-1 0.0044 : h---h---[1212] 0.9730 : h---h---[2211] 0.0063 : h---h 3[1222] 0.0041 : h---h 3[2221] STATE 3: Energy= -113.963862283 Eh RefWeight= 0.8810 9.73 eV 78463.5 cm**-1 0.7459 : h---h---[1221] 0.0807 : h---h---[2022] 0.0533 : h---h---[2220] 0.0228 : h---h 4[2122] 0.0034 : h---h---[1220]p13 0.0072 : h---h---[1220]p18 0.0236 : h---h---[2120]p11 0.0148 : h---h---[2120]p14 0.0069 : h---h---[2120]p17 0.0056 : h---h---[2120]p20 0.0098 : h---h---[2210]p19 STATE 4: Energy= -113.931144468 Eh RefWeight= 0.0003 10.62 eV 85644.3 cm**-1 0.0045 : h---h---[0122]p9 0.0089 : h---h---[1121]p9 0.9333 : h---h---[2120]p9 0.0243 : h---h---[2120]p10 0.0080 : h---h---[2120]p12 0.0113 : h---h---[2120]p16 STATE 5: Energy= -113.929056780 Eh RefWeight= 0.6857 10.68 eV 86102.5 cm**-1 0.0061 : h---h---[0222]</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>0.0918 : h---h---[1221] 0.5784 : h---h---[2022] 0.0048 : h---h---[2202] 0.0047 : h---h---[2220] 0.2905 : h---h 4[2122] 0.0045 : h---h---[2021]p13</code></pre>
+<p>For each state, the total energy is given in E h ; the weight of the reference configurations ( RefWeight ) in the given state is provided, and the energy differences from the lowest lying state are given in eV and cm -1 . Also, in each case, the weights and a description of the configurations which contribute most strongly to the given state are also provided. See section Section 3.19.4 for a discussion of the notation that is used for the description of the various configurations. To avoid confusion, we note that in the literature concerning the MR-EOM methodology [517, 518, 519, 520, 521, 522, 523], the term '%active' is used to denote the reference weight multiplied by 100%. In general, RefWeight should be &gt; 0 . 9 , such that the states are dominated by reference space configurations. This criterion is satisfied for the first three states and the reference weight of the fourth state is sufficiently close to 0 . 9 . However, the reference weights of the two higher lying states (especially state 4) are too small and these states should be discarded as the resulting energies will be inaccurate (i.e. states with significant contributions from configurations outside the reference space cannot be treated accurately) .</p>
+<p>In the case of the triplet states ( CI-BLOCK 2 ), we obtain the following results:</p>
+<pre><code>----------CI-RESULTS ----------The threshold for printing is 0.30 percent The weights of configurations will be printed. The weights are summed over all CSFs that belong to a given configuration before printing STATE 0: Energy= -114.190840989 Eh RefWeight= 0.9693 0.00 eV 0.0 cm**-1 0.9691 : h---h---[2121] 0.0079 : h---h 4[1222] 0.0115 : h---h 4[2221] STATE 1: Energy= -114.106733017 Eh RefWeight= 0.9941 2.29 eV 18459.6 cm**-1 0.9941 : h---h---[1221] STATE 2: Energy= -114.015150051 Eh RefWeight= 0.9787 4.78 eV 38559.7 cm**-1 0.9786 : h---h---[2211] 0.0050 : h---h 3[1222] STATE 3: Energy= -113.939299674 Eh RefWeight= 0.0006 6.84 eV 55206.9 cm**-1 0.0044 : h---h---[0122]p9 0.0084 : h---h---[1121]p9 0.9419 : h---h---[2120]p9 0.0131 : h---h---[2120]p10 0.0043 : h---h---[2120]p12 0.0173 : h---h---[2120]p16 STATE 4: Energy= -113.925571130 Eh RefWeight= 0.4017 7.22 eV 58220.0 cm**-1 0.3863 : h---h---[1122] 0.0154 : h---h---[2121] 0.1722 : h---h 4[1222] 0.4098 : h---h 4[2221] 0.0045 : h---h---[2120]p13 STATE 5: Energy= -113.910479339 Eh RefWeight= 0.0009 7.63 eV 61532.3 cm**-1 0.0088 : h---h---[0122]p10 0.0030 : h---h---[1121]p10 0.0120 : h---h---[2120]p9 0.9408 : h---h---[2120]p10 0.0106 : h---h---[2120]p16 0.0112 : h---h---[2120]p19</code></pre>
+<p>Here, we see that the first three states have reference weights which are &gt; 0 . 9 , while the reference weights of the final three states are well below that threshold. Hence, the latter three states should be discarded from any meaningful</p>
+<p>(continued from previous page)</p>
+<p>analysis.</p>
+<p>Following the printing of the CI results for the final CI block, the states are ordered according to increasing energy and the vertical transition energies are printed:</p>
+<pre><code>-------------------TRANSITION ENERGIES -------------------The lowest energy is -114.321368425 Eh State Mult Irrep Root Block mEh eV 1/cm 0 1 -1 0 0 0.000 0.000 0.0 1 3 -1 0 1 130.527 3.552 28647.5 2 1 -1 1 0 144.502 3.932 31714.6 3 3 -1 1 1 214.635 5.841 47107.0 4 3 -1 2 1 306.218 8.333 67207.2 5 1 -1 2 0 333.318 9.070 73154.8 6 1 -1 3 0 357.506 9.728 78463.5 7 3 -1 3 1 382.069 10.397 83854.4 8 1 -1 4 0 390.224 10.619 85644.3 9 1 -1 5 0 392.312 10.675 86102.5 10 3 -1 4 1 395.797 10.770 86867.5 11 3 -1 5 1 410.889 11.181 90179.7</code></pre>
+<p>Furthermore, following the generation of the (approximate) densities, the absorption and CD spectra are printed:</p>
+<p>(continues on next page)</p>
+</div>
+</body>
+</html>

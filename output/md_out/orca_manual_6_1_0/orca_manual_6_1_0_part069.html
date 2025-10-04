@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part069</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<table><tbody><tr><td>13 -</td><td>MP2 relaxed spin density</td><td>......</td><td>(rmp2re ␣</td></tr><tr><td colspan="4">----------------------------------------------------------------------- Searching for State or Transition State AO Electron Densities: ...</td></tr><tr><td>↪ → 24 ↪ → ROCIS 25 ↪ → 26 ↪ → 27 ↪ → 28 ↪ → 29</td><td>) - NOT AVAILABLE ROCIS unrelaxed transition AO density ) - NOT AVAILABLE CAS unrelaxed transition AO density ) - NOT AVAILABLE ICE unrelaxed transition AO density ) - NOT AVAILABLE MRCI unrelaxed transition AO density ) - NOT AVAILABLE LFT unrelaxed transition AO density ) - NOT AVAILABLE State or Transition State MO Electron</td><td>......</td><td>(Tdens-CIS ␣ (Tdens- (Tdens-CAS ␣</td></tr><tr><td colspan="4">----------------------------------------------------------------------- 23 - CIS unrelaxed transition AO density - ...... - ...... - ...... (Tdens-ICE ␣ - ...... (Tdens-MRCI␣ - ...... (Tdens-LFT ␣ ----------------------------------------------------------------------- Searching for Densities: ...</td></tr><tr><td>- ↪ → CISMO 30 - ↪ → 31 - ↪ → CASMO 32 - ↪ → ICEMO 33 -</td><td>----------------------------------------------------------------------- CIS unrelaxed transition MO density ) - NOT AVAILABLE ROCIS unrelaxed transition MO density ) - NOT AVAILABLE CAS unrelaxed transition MO density ) - NOT AVAILABLE ICE unrelaxed transition MO density ) - NOT AVAILABLE</td><td>...... ...... ......</td><td>(Tdens- (Tdens-</td></tr><tr><td>ROCISMO</td><td></td><td></td><td>(Tdens-</td></tr><tr><td colspan="4">...... MRCI unrelaxed transition MO density ...... (Tdens- ↪ → MRCIMO ) - NOT AVAILABLE 34 - LFT unrelaxed transition MO density ...... (Tdens- ↪ → LFTMO ) - NOT AVAILABLE ----------------------------------------------------------------------- Searching for State or Transition State QDPT AO Electron Densities: ...</td></tr><tr><td></td><td></td><td></td><td>(Tdens-</td></tr><tr><td></td><td>CAS QDPT unrelaxed transition AO density</td><td></td><td></td></tr><tr><td>----------------------------------------------------------------------- 35 - ↪ → CASQDSOC ) - NOT AVAILABLE 36 - DCDCAS QDPT unrelaxed transition AO density ↪ → CASDCDQDSOC ) - NOT AVAILABLE</td><td>CAS CUSTOM E QDPT unrelaxed transition AO density ) - NOT AVAILABLE NEVPT2 QDPT unrelaxed transition AO density ) - NOT AVAILABLE QDNEVPT2 QDPT unrelaxed transition AO density</td><td>...... ......</td><td>(Tdens- (Tdens-</td></tr><tr><td>37 - ↪ → CASCUSTOMEQDSOC 38 -</td><td></td><td></td><td>(Tdens-</td></tr><tr><td>↪ → CASPTQDSOC 39 - ↪ → 40 -</td><td>) - NOT AVAILABLE</td><td>......</td><td></td></tr><tr><td></td><td></td><td></td><td>(Tdens-</td></tr><tr><td></td><td>MRCI QDPT unrelaxed transition AO density</td><td></td><td></td></tr><tr><td></td><td></td><td>......</td><td></td></tr><tr><td></td><td></td><td>......</td><td></td></tr><tr><td></td><td></td><td>......</td><td>(Tdens-</td></tr><tr><td></td><td></td><td></td><td>(Tdens-</td></tr><tr><td>CASQDPTQDSOC</td><td></td><td></td><td></td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>Fig. 9.1: The π ∗ orbital of H 2 CO as calculated by the RI-BP/VDZP method.</p>
+<h2>Interface to gOpenMol</h2>
+<p>Here is a short summary of how to produce these plots with gOpenMol:</p>
+<ul>
+<li style="list-style-type: '· ';">First of all the molecular geometry must be save by choosing XYZFile=true in the [OUTPUT] block. This will produce a straightforward ascii file containing the molecular geometry (or simply ! XYZFile ).</li>
+<li style="list-style-type: '· ';">After having produced the plot files start gOpenMol and choose File-Import-Coords . In the dialog choose the XYZ format and select the file. Then press apply and dismiss . The molecule should now be displayed in the graphics window.</li>
+<li style="list-style-type: '· ';">You can change the appearance by choosing View-Atom type .</li>
+<li style="list-style-type: '· ';">The color of the background can be changed with Colour-Background .</li>
+<li style="list-style-type: '· ';">After having done all this choose Plot-Contour and select the Browse button to select the appropriate file. Then press Import File to read it in. NOTE: you can only directly read files that were produced in gOpenMol_bin format. If you have chosen gOpenMol_ascii you must first use the gOpenMol file conversion utility under Run-Pltfile (conversion) to produce the binary plt file.</li>
+<li style="list-style-type: '· ';">After having read the plt file choose the appropriate isocontour value (one for the positive and one for the negative lobes of an orbital) and select suitable colors via Colour(n) to the right of the isocontour value. The Details button allows you to choose between solid and mesh representation and other things.</li>
+<li style="list-style-type: '· ';">Once the plot looks the way you like, use File-Hardcopy to produce a publication quality postscript or bitmap picture that can be imported into any word processing or graphics software.</li>
+</ul>
+<h2>Interface to Molekel</h2>
+<p>The Molekel program (http://ugovaretto.github.io/molekel/) is another beautiful and easy-to-use graphics tool that is recommended in combination with ORCA. You may even find it a little easier to use than gOpenMol but this may be a matter of personal taste. In order to produce plots with Molekel follow the following procedure:</p>
+<ul>
+<li style="list-style-type: '· ';">Produce Gaussian-Cube files (and optionally also an XYZ file) with ORCA as described above.</li>
+<li style="list-style-type: '· ';">Start Molekel and use the right mouse button to obtain the Load menu.</li>
+<li style="list-style-type: '· ';">Choose the format xyz to load your coordinates</li>
+<li style="list-style-type: '· ';">Use the right mouse button again to select the Surface menu</li>
+<li style="list-style-type: '· ';">Choose the format 'Gaussian Cube' and click Load Surface</li>
+<li style="list-style-type: '· ';">Click on Both Signs if you visualize an orbital or spin density</li>
+<li style="list-style-type: '· ';">Select a suitable contour value in the Cutoff box.</li>
+<li style="list-style-type: '· ';">Click on Create Surface . That's it!</li>
+<li style="list-style-type: '· ';">In the Color menu (also available via the right mouse button) you can adjust the colors and in the main menu the display options for your molecule. Default settings are in a startup file that you can modify to suit your taste. More details are in the Molekel manual - check it out; it can do many other useful things for you too!</li>
+</ul>
+<p>Visualization of three-dimensional representation of MOs, natural orbitals, electron densities, and spin densities is usually more intuitive than examining MO coefficients and it is is described in detail in section Orbital and Density Plots . The files necessary for such visualizations can be readily generated with ORCA in various ways and then opened in visualization software such as gOpenMol and Molekel . 2 In the following example, we briefly describe visualization of MOs.</p>
+<p>To visualize MOs with gOpenMol , the plt file of MOs can be generated in the gOpenMol_bin format from the gbw file using orca_plot utility program or directly from the ORCA run through the %plots block of the input file:</p>
+<p>2 The Molekel developers ask for the following citation - please do as they ask:</p>
+<p>MOLEKEL 4.2, P. Flukiger, H.P. Lüthi, S. Portmann, J. Weber, Swiss Center for Scientific Computing, Manno (Switzerland), 2000-2006.</p>
+<p>S. Portmann, H.P.Łüthi. MOLEKEL: An Interactive Molecular Graphics Tool. CHIMIA (2000), 54, 766-770. The program appears to be maintained by Ugo Varetto at this time.</p>
+<pre><code>! HF def2-SVP XYZFile %plots Format gOpenMol_bin MO("CO-4.plt",4,0); MO("CO-8.plt",8,0); end *xyz 0 1 C 0 0 0 O 0 0 1.13 *</code></pre>
+<p>In this input file, the MO("CO-4.plt",4,0); command is used to evaluare MO labeled as 4 for operator 0 and then to strore it in the 'CO-4.plt' file. For RHF and ROHF, one should always use operator 0. For UHF, operators 0 and 1 correspond to spin-up and spin-down orbitals, respectively.</p>
+<p>When the produced plt files are opened with gOpenMol (see section Surface Plots for details), the textbook-like π and π ∗ MOs of the CO molecule are visualized as in Figure Fig. 9.2.</p>
+<figure><figcaption><div class="caption">Fig. 9.2: (a) π and (b) π ∗ MOs of the CO molecule obtained from the interface of ORCA to gOpenMol .</div></figcaption></figure>
+<p>If the gOpenMol_ascii file format was requested, gOpenMol conversion utility or some other tools might then be needed to convert this human-readable file to the machine-readable gOpenMol_bin format.</p>
+<p>In order to use the interface to Molekel , an ASCII file in the Cube or Gaussian_Cube format needs to be generated. Such ASCII files can be actually transferred between platforms. The Cube format can be requested in the %plots block as:</p>
+<pre><code>! HF def2-SVP XYZFile %plots Format Cube MO("CO-4.cube",4,0); MO("CO-8.cube",8,0); end *xyz 0 1 C 0 0 0</code></pre>
+<p>(continues on next page)</p>
+<pre><code>O 0 0 1.13 *</code></pre>
+<p>To visualize MOs strored in the *.cube file, start Molekel and, via a right mouse click, load the *.xyz file and/or the *.cube file. lternatively, navigate to the surface menu, select the 'gaussian-cube' format, and load the surface. For orbitals, click the 'both signs' button and select a countour value in the 'cutoff' field. Then, click 'create surface'. The colour schemes and other fine details of the plots can be easily adjusted as desired. Finally, create files via the 'snapshot' feature of Molekel . Figure Fig. 9.3 demonstrates a Molekel variant of Figure Fig. 9.2.</p>
+<figure><figcaption><div class="caption">Fig. 9.3: (a) π and (b) π ∗ MOs of the CO molecule obtained from the interface of ORCA to Molekel .</div></figcaption></figure>
+<p>It is worth noting that there are several other freeware programs, such as UCSF CHIMERA , that can read Gaussian_Cube files and provide high-quality plots.</p>
+<p>In some situations, visualization of the electronic structure in terms of localized molecular orbitals might be quite helpful. As unitary transformations among occupied orbitals do not change the total wavefunction, such transformations can be applied to the canonical SCF orbitals with no change of the physical content of the SCF wavefunction. The localized orbitals correspond more closely to the pictures of orbitals that chemists often enjoy to think about. Localized orbitals according to the Pipek-Mezey population-localization scheme are quite easy to compute. For example, the following run reproduces the calculations reported by Pipek and Mezey in their original paper for the N 2 O 4 molecule.</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>O</td><td>2.050381</td><td>-2.530377</td><td>0.000000</td></tr><tr><td>O</td><td>-2.050381</td><td>2.530377</td><td>0.000000</td></tr><tr><td>O</td><td>2.050381</td><td>2.530377</td><td>0.000000</td></tr></tbody></table>
+<p>Based on the output file of this job, localized MOs consist of six core like orbitals (one for each N and one for each O), two distinct lone pairs on each oxygen, a σ - and a π -bonding orbital for each N-O bond and one N-N σ -bonding orbital which corresponds to the dominant resonance structure of this molecule. You will also find a file with the extension .loc in the directory where you run the calculation. Like the standard gbw file, it can used to extract files for plotting or as input for another calculation (warning! The localized orbitals have no well defined orbital energy. If you do use them as input for another calculation use GuessMode=CMatrix in the %scf block).</p>
+<h2>9.2 Utility Programs</h2>
+<table><tbody><tr><td>orca_2aim</td><td>Produces WFN and WFX files suitable for AIM analysis</td></tr><tr><td>orca_2json</td><td>Converts information from the gbw-file into JSON files</td></tr><tr><td>orca_2mkl</td><td>Produces an ASCII file to be read by molekel, molden or other visualization programs</td></tr><tr><td>orca_asa</td><td>Calculates band shapes of absorption, fluorescence and resonance Raman spectra</td></tr><tr><td>orca_chelpg</td><td>Calculates electrostatic potential derived charges</td></tr><tr><td>orca_euler</td><td>Calculates Euler angles from .property.txt file</td></tr><tr><td>orca_exportbasis</td><td>Prints out any basis set in ORCA or GAMESS-US format</td></tr><tr><td>orca_fitpes</td><td>Fits potential energy curves of diatomics</td></tr><tr><td>orca_mapspc</td><td>Produces files for transfer into plotting programs</td></tr><tr><td>orca_mergefrag</td><td>Merges MOcoefficients from two independent .gbw files</td></tr><tr><td>orca_pltvib</td><td>Produces files for the animation of vibrations</td></tr><tr><td>orca_pnmr</td><td>Calculates paramagnetic NMRshielding tensors</td></tr><tr><td>orca_vib</td><td>Calculates vibrational frequencies from a completed frequency run (also used for isotope shift calculations)</td></tr><tr><td>otool_gcp</td><td>Calculates Geometrical Counterpoise Correction (GCP)</td></tr><tr><td>otool_xtb</td><td>Allows using standalone xTB code from the Grimme lab with ORCA</td></tr></tbody></table>
+<p>Friends of ORCA:</p>
+<table><tbody><tr><td>gennbo</td><td>The NBO analysis package of Weinhold. It must be purchased separately from the Uni- versity of Wisconsin. Older versions available for free on the internet may also work.</td></tr><tr><td>Molekel</td><td>Molecular visualization program (see Interface to Molekel )</td></tr><tr><td>gOpenMol</td><td>Molecular visualization program (see Interface to gOpenMol )</td></tr><tr><td>Avogadro</td><td>Molecular builder and visualization program with ORCAsupport (loginintoORCAForum and then navigate to Downloads. See also original repository)</td></tr><tr><td>Chemcraft</td><td>Molecular builder and visualization program with ORCA support (see download page)</td></tr><tr><td>SEQCROW</td><td>Molecular builder and visualization program with ORCA support (see repository)</td></tr></tbody></table>
+<p>Each module is capable of standalone execution; however, it is typically more convenient to perform all operations through the main ORCA driver, which handles the workflow automatically.</p>
+<p>ORCA is distributed as a set of precompiled executables, so no formal installation is required. You can simply place the files in a directory of your choice. To ensure that the components can interact correctly, the directory should be added to your system's PATH environment variable. Alternatively, the locations of individual components can be specified manually in the input file.</p>
+<p>The xtb tool (recommended version 6.7.1 or higher) must be downloaded separately from the Grimme lab's repository. Once downloaded, the xtb executable should be placed in the same directory as the ORCA binaries.</p>
+<p>Wemake extensive use of Chemcraft for visualization and analysis. Although it is a Windows-based program, it runs well on macOS and Linux systems using Wine a virtual machine, or remote desktop.</p>
+<p>Another popular visualization program is ChimeraX together with the SEQCROW plugin.</p>
+<p>OpenBabel is a versatile and widely used tool for converting between various chemical file formats.</p>
+<p>Finally, Avogadro is an excellent tool to edit molecular geometries. It is also able to generate ORCA input files. The Avogadro version with the latest ORCA modifications is available on the ORCA download site.</p>
+<p>Finally, Avogadro is an excellent tool for editing molecular geometries. It can also generate ORCA input files directly. A version of Avogadro that includes the latest ORCA-specific modifications is available on the ORCA Downloads page, which can be accessed after logging into theORCA Forum.</p>
+<p>For more information and suggestions, please visit the ORCA Forum.</p>
+<h2>9.2.1 orca_mapspc</h2>
+<p>The utility program orca_mapspc prepares input files for standard graphics software to plot both the calculated line spectrum and the corresponding convoluted continuous band shape. For examples of plotted spectra generated using the files provided by orca_mapspc , see the following sections: Semiempirical Methods , IR Spectra , Raman Spectra and Resonant Inelastic Scattering Spectroscopy ):</p>
+<p>The symbolic command structure of orca_mapspc is as follows:</p>
+<pre><code>orca_mapspc Output-file Spectrum Options</code></pre>
+<h2>where</h2>
+<pre><code>Outfile-file = name of an ORCA output file name of an ORCA Hessian file (for IR and Raman) Spectrum = abs -Absorption spectra cd -CD spectra ir -IR spectra raman -Raman spectra Options -x0value: Start of the x-axis for the plot -x1value: End of the x-axis for the plot -wvalue : Full-width at half-maximum height in cm**-1 for each transition -nvalue : Number of points to be used</code></pre>
+<p>For a complete list of supported spectrum types and advanced options, run orca_mapspc without arguments in a terminal.</p>
+<pre><code>orca_mapspc</code></pre>
+<p>This will display all supported spectrum types and options:</p>
+<pre><code>-----------------------------------------------------------------------------------↪ → -------------------------------------------------------------------------usage: orca_mapspc Output-file {ABS, ABSV, ABSQ, ABSFFMIO, CD, IR, VCD, RAMAN,␣ ↪ → NRVS, VDOS, MCD, CDV, CDFFMIO, SOCCD, SOCCDV,SOCCDFFMIO, SOCABS, SOCABSV,␣ ↪ → SOCABSQ, SOCABSFFMIO, XES, XESV, XESQ, XESFFMIO, XAS, XASV,␣ ↪ → XASQ, XASFFMIO, XESSOC, XESSOCV, XESSOCQ, XESSOCFFMIO, XASSOC, XASSOCV, XASSOCQ, XASSOCFFMIO, RIXS,␣ ↪ → RIXSSOC, TRANSABS, TRANSCD, TRANSSOCABS} -options -----------------------------------------------------------------------------------↪ → -----------------------------------------------------------------------------General options ----</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>-o output file -cm use cm**-1 (default) -eV use eV (default cm**-1) -g0 use Gaussian lineshape default -l0 use Lorentz lineshape (only for ABS, ABSV, ABSQ, ABSFFMIO, SOCABS, SOCABSV, ↪ → SOCABSQ, SOCABSFFMIO, XES, XESV, XESQ,XESFFMIO, XAS, XASV, XASQ, XASFFMIO,␣ ↪ → XESSOC, XASSOC, RIXS, RIXSSOC or Transient spectra) -v0 use Voigt lineshape (only for ABS, ABSV, ABSQ, ABSFFMIO, SOCABS, SOCABSV,␣ ↪ → SOCABSQ, SOCABSFFMIO, XES, XESV, XESQ,XESFFMIO, XAS, XASV, XASQ, XASFFMIO,␣ ↪ → XESSOC, XASSOC, RIXS, RIXSSOC, or Transient spectra) -x0 initial point of spectrum -x1 final point of spectrum -w line width for Gaussian/Lorenzian linewidth -q line width for the Gaussian part of Voigt linewidth -kw coeffitient for the line width calculated as kw*sqrt(energy) -n number of points ----The following additional options are for IR/VCD/RAMAN spectra types----fac number for shifting the frequencies ----The following additional options are for RIXS and RIXSSOC spectra types----x2 initial point of the spectrum along y axis -x3 final point of the spectrum along yaxis -g1, -l1, -v1 line width for Gaussian/Lorenzian linewidth along y axis -m number of points for the emission spectrum -eaxis plot option for the emission axis: (1) for Energy transfer (2) for␣ ↪ → emission spectrum -uex number of user defined cuts at constant Excitation Energy axis -udw number of user defined cuts at constant Emission/ Energy Transfer axis -dx number for shifting the spectra along the Excitation /Emission Energy axis -kg coeffitient for the line width calculated as kg*sqrt(energy) -umem control the memory demand ----Using external files---paras.inp: a list of energy ranges with desired broadening parameters for x axis: E_start E_stop Width for y axis: 0 0 0 E_start E_stop Width for xy axis: E_start1 E_stop1 Width1 E_start2 E_stop2 Width2 udex.inp: a list of energies for taking cuts at constant Excitation Energy axis␣ ↪ → (Only for RIXS/RIXSOC) udem.inp: a list of energies for taking cuts at constant Emission/ Energy␣ ↪ → Transfer axis (Only for RIXS/RIXSOC) gfsp.inp: a list of ground-final state pairs to generate individual state pair␣ ↪ → RIXS planes and respective analysis planes (Only for ROCIS RIXS/RIXSOC) -----------------------------------------------------------------------------------↪ → -------------------------------------------------------------------------------</code></pre>
+<p>This document provides a detailed explanation of the spectroscopic keywords supported by orca_mapspc , grouped by category.</p>
+<h2>Optical/X-ray Absorption Spectra</h2>
+<p>These keywords compute absorption spectra for optical or X-ray regions, describing how a molecule absorbs light at specific energies.</p>
+<h2>Dipole Approximation</h2>
+<p>The dipole approximation assumes that the interaction is dominated by the electric dipole term.</p>
+<ul>
+<li style="list-style-type: '· ';">ABS (Absorption Optical/X-ray Spectra in Dipole Length Representation)</li>
+<li>-Description : Plots absorption spectra using the electric dipole operator in length representation ( µ = -er ) .</li>
+<li>-Purpose : Suitable for UV-Vis or X-ray absorption spectroscopy (XAS) where dipole transitions dominate.</li>
+<li>-Use Case : Common for any chemical system in the UV-visible range or XAS.</li>
+<li>-Output : Intensity (oscillator strength, or Absorbance ϵ for UV/Vis spectra) vs. energy (e.g. wavelength)</li>
+<li>-Notes : More accurate for low-energy transitions; less reliable for high-energy X-ray transitions.</li>
+<li>-Convensions : Oscilator strength f osc = 4 . 31 ∗ 10 -9 ∗ ϵ</li>
+<li style="list-style-type: '· ';">ABSV (Absorption Optical Spectra in Dipole Velocity Representation)</li>
+<li>-Description : Uses the dipole operator in velocity representation ( µ ∝ p ) .</li>
+<li>-Purpose : Alternative to ABS for numerical stability or cross-checking.</li>
+<li>-Use Case : Validation of ABS results.</li>
+<li>-Output : Similar to ABS .</li>
+<li>-Notes : Equivalent to ABS for exact wavefunctions but may differ with approximate methods.</li>
+</ul>
+<h2>Beyond Dipole Approximation</h2>
+<p>These methods include higher-order interactions (e.g., quadrupole, magnetic dipole) for improved accuracy.</p>
+<ul>
+<li style="list-style-type: '· ';">ABSFFMIO (Absorption Spectra with Semiclassical Full Matter Interaction Operator)</li>
+<li>-Description : Plots spectra on the basis of the semiclassical full matter interaction operator including terms beyond dipole approximation.</li>
+<li>-Purpose : Accurate for systems with significant quadrupole or magnetic dipole contributions</li>
+<li>-Use Case : Recommended for routine X-ray absorption spectra (e.g., K-edge XAS …) or optical spectra bearing electric dipole forbidden transitions</li>
+<li>-Output : Conventional spectrum table with dipole and beyond contributions. Intensity (oscillator strength, or Absorbance ϵ for UV/Vis spectra) vs. energy (e.g. wavelength)</li>
+<li>-Notes : Recomended and robust for most applications.</li>
+<li style="list-style-type: '· ';">ABSQ (Absorption Spectra with Dipole, Quadrupole, and Magnetic Dipole)</li>
+<li>-Description : Includes electric dipole (length), electric quadrupole, and magnetic dipole contributions multipolar formulations beyond dipole.</li>
+<li>-Purpose : Detailed spectra for expert users, especially for forbidden transitions.</li>
+<li>-Use Case :X-ray absorption (e.g., transition metal K-edges) where one needs to do complex/advanced analysis.</li>
+<li>-Output : Process all available tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+</ul>
+<ol>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+</ol>
+<h2>Optical/X-ray Circularly Polarized Spectra</h2>
+<p>These keywords process spectra for circularly polarized light, relevant for circular dichroism (CD) and magnetic circular dichroism ((X)MCD).</p>
+<ul>
+<li style="list-style-type: '· ';">CD (Circular Dichroism)</li>
+<li>-Description : Plots differential absorption of left- and right-circularly polarized light.</li>
+<li>-Purpose : Probes chiral molecules or asymmetric transitions.</li>
+<li>-Use Case : UV-Vis spectroscopy for enantiomers or chiral complexes.</li>
+<li>-Output : (∆ ϵ ) vs. energy (e.g. wavelength)</li>
+<li>-Notes : Requires a chiral system.</li>
+<li>-Convensions : Rotatory strength: R = 22 . 94 ∗ ∆ ϵ</li>
+<li style="list-style-type: '· ';">MCD (Magnetic Circular Dichroism)</li>
+<li>-Description : Plots the computed differential of left- and right-circularly polarized light in the presence of magnetic field.</li>
+<li>-Purpose : Probes spin-orbit coupling or Zeeman effects in the MCD process</li>
+<li>-Use Case : Optical (MCD) or X-ray spectroscopic (XMCD) properies of transition metal complexes or magnetic materials.</li>
+<li>-Output : Left-Right (X)MCD intensity vs. energy (e.g. wavelength) and Left+Right ABS/XAS intesity vs. energy (e.g. wavelength)</li>
+<li>-Notes : Requires magnetic field simulation runs through DoMCD keyword accross the elligible modules (TD-DFT, CASSCF, MRCI, RASCI, ROCIS, LFT…)</li>
+<li style="list-style-type: '· ';">CDV (Circular Dichroism in Velocity Representation)</li>
+<li>-Description : CD in velocity representation.</li>
+<li>-Purpose : Alternative formulation for numerical stability.</li>
+<li>-Use Case : Validation of CD results.</li>
+<li>-Output : Similar to CD .</li>
+<li style="list-style-type: '· ';">CDFFMIO (Circular Dichroism with Full Matter Interaction Operator)</li>
+<li>-Description : Plots CD spectra generated employing the semiclassical full matter interaction operator including terms beyond dipole approximation..</li>
+<li>-Purpose : Improved accuracy beyond dipole approximation, for CD spectra of nimianally dipole forbidden transitions</li>
+<li>-Use Case : Suitable for CD spectroscopy dominated by electric dipole forbidden transitions.</li>
+<li>-Output : CD spectrum beyond dipole approximation, (∆ ϵ ) vs. energy (e.g. wavelength)</li>
+</ul>
+<h2>Spin-Orbit Coupling (SOC) Variants</h2>
+<p>These keywords include spin-orbit coupling</p>
+<ol>
+<li style="list-style-type: '1. ';">for chemical systems with significant multiplet structure, (L-edge XAS)</li>
+<li style="list-style-type: '2. ';">for chemical systems bearing heavy elements (Lanthanides, Actinides)</li>
+<li style="list-style-type: '3. ';">in order to probe spin-forbidden transitions.</li>
+<li style="list-style-type: '· ';">SOCABS (SOC Absorption Spectra)</li>
+<li>-Description : Absorption spectra with SOC in dipole length representation.</li>
+<li>-Purpose : Accounts for SOC effects in optical/X-ray absorption.</li>
+<li>-Use Case : ABS/XAS spectra where SOC effects dominate.</li>
+<li>-Output : Absorption spectrum with SOC effects. Intensity (oscillator strength, or Absorbance ϵ for UV/Vis spectra) vs. energy (e.g. wavelength)</li>
+<li style="list-style-type: '· ';">SOCABSV (SOC Absorption Spectra in Velocity Representation)</li>
+<li>-Description : SOCABS in velocity representation.</li>
+<li>-Purpose : Alternative formulation for SOCABS for numerical stability or cross-checking</li>
+<li>-Use Case : Validation of SOCABS results.</li>
+<li>-Output : Similar to SOCABS .</li>
+<li style="list-style-type: '· ';">SOCABSFFMIO (SOC Absorption Spectra with Full Matter Interaction Operator)</li>
+<li>-Description : SOCABS employing beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Recommended for routine SOC-ABS/XAS beyond dipole approximation.</li>
+<li>-Use Case : e.g. XAS for high symmetry TM or heavy element elements chemical systems</li>
+<li>-Output : Conventional ABS spectrum beyond dipole approximation of FFMIO operator including SOC corrections. Intensity (oscillator strength, or Absorbance ϵ for UV/Vis spectra) vs. energy (e.g. wavelength)</li>
+<li style="list-style-type: '· ';">SOCABSQ (SOC Absorption Spectra with Dipole, Quadrupole, and Magnetic Dipole contributions)</li>
+<li>-Description : SOCABS beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Detailed tables of SOC absorption spectra in multipolar formulation.</li>
+<li>-Use Case : X-ray absorption with SOC (e.g., L-edges) where one needs to do complex/advanced analysis</li>
+</ol>
+<p>.</p>
+<ul>
+<li>-Output : Process all avalable tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+<li style="list-style-type: '· ';">SOCCD (SOC Circular Dichroism)</li>
+<li>-Description : CD with spin-orbit coupling.</li>
+<li>-Purpose : Captures SOC in chiral systems.</li>
+<li>-Use Case : Optical CD for chemical systems with comple multiple structure, e.g. bering Lanthanide, Actinide metal centers.</li>
+<li>-Output : CD spectrum with SOC effects. (∆ ϵ ) vs. energy (e.g. wavelength)</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">SOCCDV (SOC Circular Dichroism in Velocity Representation)</li>
+<li>-Description : SOCCD in velocity representation.</li>
+<li>-Purpose : Alternative formulation for SOCCD .</li>
+<li>-Use Case : Validation or numerical stability.</li>
+<li>-Output : Similar to SOCCD .</li>
+<li style="list-style-type: '· ';">SOCCDFFMIO (SOC Circular Dichroism with Full Matter Interaction Operator)</li>
+<li>-Description : SOCCD employing beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Recommended for processing routine SOC-CD spectra beyond dipole approximation.</li>
+<li>-Use Case : CD studies of high symmetry TM or heavy element elements chemical systems, with complex multiple structure</li>
+<li>-Output : CDspectrum beyond dipole approximation of FFMIO operator including SOC corrections. (∆ ϵ ) vs. energy (e.g. wavelength)</li>
+</ul>
+<h2>X-ray Emission Spectroscopy (XES)</h2>
+<p>These keywords plot X-ray emission spectra, generated within the %xes module or correlated methods that can generate XES spectra within the OPE framework.</p>
+<ul>
+<li style="list-style-type: '· ';">XES (X-ray Emission Spectra)</li>
+<li>-Description : Processing XES in dipole length representation.</li>
+<li>-Purpose : Processing spectra generated on the basis X-ray electron decay upon core electron ionization.</li>
+<li>-Use Case : X-ray spectroscopy of materials.</li>
+<li>-Output : Emission spectrum, Intensity (oscillator strenth) vs. energy (e.g. electron volt)</li>
+<li style="list-style-type: '· ';">XESV (X-ray Emission Spectra in Velocity Representation)</li>
+<li>-Description : XES in velocity representation.</li>
+<li>-Purpose : Alternative formulation for XES .</li>
+<li>-Output : Similar to XES .</li>
+<li style="list-style-type: '· ';">XESFFMIO (X-ray Emission Spectra with Full Matter Interaction Operator)</li>
+<li>-Description : XES employing beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Recommended for processing routine XES spectra beyond dipole approximation.</li>
+<li>-Output : XES spectrum beyond dipole approximation of FFMIO operator. Intensity (oscillator strenth) vs. energy (e.g. electron volt)</li>
+<li style="list-style-type: '· ';">XESQ (X-ray Emission Spectra with Dipole, Quadrupole, and Magnetic Dipole)</li>
+<li>-Description : XES Including electric dipole (length), electric quadrupole, and magnetic dipole contributions multipolar formulations beyond dipole.</li>
+<li>-Purpose : Detailed XES spectra for expert users, where one needs to do complex/advanced analysis.</li>
+<li>-Output : As in ABSQ process all avalable tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">XESSOC (SOC X-ray Emission Spectra)</li>
+<li>-Description : XES with spin-orbit coupling.</li>
+<li>-Purpose : Processing spectra generated on the basis of X-ray electron decay upon core electron ioniztion including SOC effects.</li>
+<li>-Use Case : Recommended for processing routine SOC-XES spectra.</li>
+<li>-Output : Emission spectrum with SOC effects. Intensity (oscillator strenth) vs. energy (e.g. electron volt)</li>
+<li style="list-style-type: '· ';">XESSOCV (SOC X-ray Emission Spectra in Velocity Representation)</li>
+<li>-Description : XESSOC in velocity representation.</li>
+<li>-Purpose : Alternative formulation for XESSOC .</li>
+<li>-Output : Similar to XESSOC .</li>
+<li style="list-style-type: '· ';">XESSOCFFMIO (SOC X-ray Emission Spectra with Full Matter Interaction Operator)</li>
+<li>-Description : XESSOC employing beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Recommended for processing routine SOC-XESbeyond dipole approximation.</li>
+<li>-Output : X-ray emission spectrum beyond dipole approximation of FFMIO operator including SOC corrections plotted in terms of Intensity (oscillator strenth) vs. energy (e.g. electron volt)</li>
+<li style="list-style-type: '· ';">XESSOCQ (SOC X-ray Emission Spectra with Dipole, Quadrupole, and Magnetic Dipole)</li>
+<li>-Description : XESSOC with non-dipole contributions.</li>
+<li>-Purpose : Detailed SOC-XES spectra where one needs to do complex/advanced analysis.</li>
+<li>-Output : As in SOCABSQ process all avalable tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+</ul>
+<h2>X-ray Absorption Spectroscopy (XAS)</h2>
+<p>These keywords plot X-ray absorption spectra, generated within the %xes module.</p>
+<ul>
+<li style="list-style-type: '· ';">XAS (X-ray Absorption Spectra)</li>
+<li>-Description : Plots XAS in dipole length representation.</li>
+<li>-Purpose : Processing spectra probing core electron excitations (e.g., K-edge).</li>
+<li>-Use Case : 1 electron DFT X-ray Absoprtion spectra.</li>
+<li>-Output : Absorption spectrum for X-ray energies. (Intensity (oscillator strenth) vs. energy (e.g. electron volt))</li>
+<li style="list-style-type: '· ';">XASV (X-ray Absorption Spectra in Velocity Representation)</li>
+<li>-Description : XAS in velocity representation.</li>
+<li>-Purpose : Alternative formulation for XAS .</li>
+<li>-Output : Similar to XAS .</li>
+<li style="list-style-type: '· ';">XASFFMIO (X-ray Absorption Spectra with Full Matter Interaction Operator)</li>
+<li>-Description : XAS employing beyond dipole approximation intensity contributions.</li>
+</ul>
+<ul>
+<li>-Purpose : Recommended for processing routine XAS spectra beyond dipole approximation.</li>
+<li>-Output : XAS spectrum beyond dipole approximation of FFMIO operator (Intensity (oscillator strenth) vs. energy (e.g. electron volt)).</li>
+<li style="list-style-type: '· ';">XASQ (X-ray Absorption Spectra with Dipole, Quadrupole, and Magnetic Dipole)</li>
+<li>-Description : XASS Including electric dipole (length), electric quadrupole, and magnetic dipole contributions multipolar formulations beyond dipole.</li>
+<li>-Purpose : Detailed XAS spectra for expert users, where one needs to do complex/advanced analysis.</li>
+<li>-Output : As in ABSQ process all avalable tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+<li style="list-style-type: '· ';">XASSOC (SOC X-ray Absorption Spectra)</li>
+<li>-Description : XAS with spin-orbit coupling.</li>
+<li>-Purpose : Processing spectra generated on the basis of X-ray ABSORPTION upon core electron ioniztion including SOC effects.</li>
+<li>-Use Case : Recommended for processing routine SOC-XAS spectra.</li>
+<li>-Output : Absorption spectrum with SOC effects (Intensity (oscillator strenth) vs. energy (e.g. electron volt))</li>
+<li style="list-style-type: '· ';">XASSOCV (SOC X-ray Absorption Spectra in Velocity Representation)</li>
+<li>-Description : XASSOC in velocity representation.</li>
+<li>-Purpose : Alternative formulation for XASSOC .</li>
+<li>-Output : Similar to XASSOC .</li>
+<li style="list-style-type: '· ';">XASSOCFFMIO (SOC X-ray Absorption Spectra with Full Matter Interaction Operator)</li>
+<li>-Description : XASSOC employing beyond dipole approximation intensity contributions.</li>
+<li>-Purpose : Recommended for processing routine SOC-XAS spectra beyond dipole approximation.</li>
+<li>-Output : X-ray absorption beyond dipole approximation of FFMIO operator including SOC corrections (Intensity (oscillator strenth) vs. energy (e.g. electron volt))</li>
+<li style="list-style-type: '· ';">XASSOCQ (SOC X-ray Absorption Spectra with Dipole, Quadrupole, and Magnetic Dipole)</li>
+<li>-Description : XASSOC Including electric dipole (length), electric quadrupole, and magnetic dipole contributions multipolar formulations beyond dipole.</li>
+<li>-Purpose : Detailed XASSOC spectra for expert users, where one needs to do complex/advanced analysis.</li>
+<li>-Output : As in SOCABSQ process all avalable tables including:</li>
+<li style="list-style-type: '1. ';">Origin-dependent tables</li>
+<li style="list-style-type: '2. ';">Origin-adjusted tables [670].</li>
+<li style="list-style-type: '3. ';">Origin-independent tables using corrected higher moments from second-order terms in the multipole expansion [647].</li>
+<li>-Notes : Produces comprehensive data for advanced/expert analysis provided that the DecomposeFosc has been requested in the input run.</li>
+</ul>
+<h2>Resonant Inelastic X-ray Scattering (RIXS)</h2>
+<p>These keywords process RIXS spectra generated by a variety of methods</p>
+<ul>
+<li style="list-style-type: '· ';">RIXS (Resonant Inelastic X-ray Scattering)</li>
+<li>-Description : Processes RIXS spectra (energy loss of scattered X-rays, along incident and Emission/Energy Loss Axis).</li>
+<li>-Purpose : Probes electronic and vibrational structure.</li>
+<li>-Use Case : Transition metals, catalysts.</li>
+<li>-Output : 2D spectrum as well as 1D profile spectra along constant Emission/Incident Axis.</li>
+<li>-Notes : See section Resonant Inelastic Scattering Spectroscopy</li>
+<li style="list-style-type: '· ';">RIXSSOC (SOC Resonant Inelastic X-ray Scattering)</li>
+<li>-Description : RIXS with spin-orbit coupling.</li>
+<li>-Purpose : Accounts for SOC in RIXS spectra.</li>
+<li>-Use Case : RIXS for chemical systems with significant multiple structure (2p3d RIXS).</li>
+<li>-Output : 2D spectrum as well as 1D profile spectra along constant Emission/Incident Axis with SOC effects.</li>
+<li>-Notes : See section Resonant Inelastic Scattering Spectroscopy</li>
+</ul>
+<h2>Transient Spectroscopy</h2>
+<p>These keywords compute time-resolved spectra for pump-probe experiments.</p>
+<ul>
+<li style="list-style-type: '· ';">TRANSABS (Transient Absorption Spectra)</li>
+<li>-Description : Processing transient absorption spectra.</li>
+<li>-Purpose : Models time-dependent absorption changes.</li>
+<li>-Use Case : Photochemistry or Time-resolved or Pump-probe UV absorption studies.</li>
+<li>-Output : Transient absorption spectrum, (Intensity vs. energy).</li>
+<li style="list-style-type: '· ';">TRANSCD (Transient Circular Dichroism)</li>
+<li>-Description : Processing transient CD spectra.</li>
+<li>-Purpose : Models time-dependent CD changes.</li>
+<li>-Use Case : Time-resolved or Pump-probe CD spectra in chiral systems.</li>
+<li>-Output : (∆ ϵ ) vs. energy.</li>
+<li style="list-style-type: '· ';">TRANSSOCABS (SOC Transient Absorption Spectra)</li>
+<li>-Description : TRANSABS with spin-orbit coupling.</li>
+<li>-Purpose : Accounts for SOC in transient absorption.</li>
+<li>-Use Case : Time-resolved or Pump-probe ABS/XAS/XUV for chemical systems with complex multiple structure</li>
+<li>-Output : Transient absorption spectrum with SOC (Intensity vs. energy)</li>
+</ul>
+<h2>Vibrational Spectroscopy</h2>
+<p>These keywords compute spectra related to vibrational transitions.</p>
+<ul>
+<li style="list-style-type: '· ';">IR (Infrared Spectroscopy)</li>
+<li>-Description : Processing infrared absorption spectra.</li>
+<li>-Purpose : Models vibrational transitions.</li>
+<li>-Use Case : Molecular vibrational analysis/Structural analysis.</li>
+<li>-Output : Intensity vs. wavenumber.</li>
+<li style="list-style-type: '· ';">VCD (Vibrational Circular Dichroism)</li>
+<li>-Description : Processing vibrational CD spectra.</li>
+<li>-Purpose : Probes chiral vibrational transitions.</li>
+<li>-Use Case : Chiral molecules (e.g., biomolecules).</li>
+<li>-Output : (∆ ϵ ) vs. wavenumber.</li>
+<li style="list-style-type: '· ';">RAMAN (Raman Spectroscopy)</li>
+<li>-Description : Processing Raman scattering spectra.</li>
+<li>-Purpose : Models vibrational transitions via Raman scattering.</li>
+<li>-Use Case : Molecular vibrational analysis/Structural analysis.</li>
+<li>-Output : Intensity vs. wavenumber.</li>
+<li style="list-style-type: '· ';">NRVS (Nuclear Resonant Vibrational Spectroscopy)</li>
+<li>-Description : Processing nuclear resonant vibrational spectra.</li>
+<li>-Purpose : Probes vibrational modes coupled to nuclear transitions (e.g., Fe-57).</li>
+<li>-Use Case : Usefull in Bioinorganic chemistry analysis.</li>
+<li>-Output : Intensity vs. energy.</li>
+<li style="list-style-type: '· ';">VDOS (Vibrational Density of States)</li>
+<li>-Description : Processing vibrational density of states.</li>
+<li>-Purpose : Provides distribution of vibrational modes.</li>
+<li>-Use Case : Usefull in Solids or large systems analysis.</li>
+<li>-Output : Density vs. energy.</li>
+</ul>
+<h2>General Notes</h2>
+<ul>
+<li style="list-style-type: '· ';">Dipole vs. Velocity : Length ( ABS ) and velocity ( ABSV ) representations are equivalent for exact wavefunctions but may differ in approximate calculations.</li>
+<li style="list-style-type: '· ';">Beyond Dipole : FFMIO and Q keywords include quadrupole and magnetic dipole terms, critical for X-ray spectroscopy.</li>
+<li style="list-style-type: '· ';">Spin-Orbit Coupling : SOC keywords are essential for heavy elements or spin-forbidden transitions.</li>
+<li style="list-style-type: '· ';">Expert vs. Conventional : Q variants produce detailed output for experts; FFMIO variants should be used for routine analysis.</li>
+<li style="list-style-type: '· ';">ORCA Requirements : Some keywords require specific settings (e.g., relativistic methods for SOC , request DOTRANS true/all for transient Absorption methods).</li>
+</ul>
+<h2>Example Usage</h2>
+<h2>NOTE:</h2>
+<ul>
+<li style="list-style-type: '· ';">The input to the orca_mapspc program can be either a standard ORCA output file or .hess file for vibrational spectra such as IR and Raman.</li>
+<li style="list-style-type: '· ';">Unless specified otherwise, the line shape is assumed to be Gaussian.</li>
+<li style="list-style-type: '· ';">The orca_mapspc program generates two output files:</li>
+<li>-Input-file.spc.dat (spc = abs, cd, ir, or raman): This file contains the data required to plot the continuous band-shape spectrum.</li>
+<li>-Input-file.spc.stk : This file contains the individual transitions (wavenumber and intensity) to plot the line spectrum.</li>
+<li style="list-style-type: '· ';">In the case of absorption spectra, the .dat file contains five columns: wavenumber in reciprocal centimeters, total intensity, polarization components along the -x, y-, and z-axes of the electric field vector of the incoming beam. The polarization components are especially useful for interpreting polarized single crystal spectra.</li>
+<li style="list-style-type: '· ';">When more than one spectra of the same kind is present in the ORCA output file, orca_mapspc will automatically process all these spectral datasets. For example, if the ORCA output includes both CASSCF and NEVPT2 excitations, spectral data corresponding to both methods will be processed. To illustrate this, assume the CASSCF and NEVPT2 absorption data are both oresent in an ORCA output file named My-NEVPT2.out. Let us pass this file to orca_mapspc :</li>
+</ul>
+<pre><code>orca_mapspc My-NEVPT2.out SOCABS -x07000 -x18000 -eV -n10000 -w2.0 -l</code></pre>
+<h2>orca_mapspc will then print out:</h2>
+<pre><code>Mode is SOCABS Entering SOC-ABS reading Using eV units Using Lorentzian shape Multiple SOCABS (2) spectra detected ... ----------------------------------Plotting SOCABS Spectrum 0 ----------------------------------Cannot read the paras.inp file ... taking the line width parameter from the command line Number of peaks ... 4455 Start energy [eV] ... 7000.00 Stop energy [eV] ... 8000.00 Peak FWHM [eV] ... 2.00 Number of points ... 10000 ----------------------------------Plotting SOCABS Spectrum 1 ----------------------------------Cannot read the paras.inp file ... taking the line width parameter from the command line Number of peaks ... 4455 Start energy [eV] ... 7000.00 Stop energy [eV] ... 8000.00 Peak FWHM [eV] ... 2.00 Number of points ... 10000</code></pre>
+<p>Finally, it will produce data files for both CASSCF and NEVPT2 flags:</p>
+<pre><code>CASSCF: My-NEVPT2.out.0.socabs.dat My-NEVPT2.out.0.socabs.stk NEVPT2:</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>My-NEVPT2.out.1.socabs.dat</td></tr><tr><td>My-NEVPT2.out.1.socabs.stk</td></tr></tbody></table>
+<p>Other available spectral data in the My-NEVPT2.out file, such as CD spectra, can also be processed in the same way.</p>
+<h2>9.2.2 orca_chelpg</h2>
+<p>The orca_chelpg program calculates CHELPG atomic charges according to Breneman and Wiberg[582]. The atomic charges are fitted to reproduce the electrostatic potential (ESP) on a regular grid surrounding the molecule, while constraining the sum of all atomic charges to the molecule's total charge. More information on the defaults is available in CHELPG Charges .</p>
+<p>In order to run the program from the terminal, only one argument needs to be provided; the gbw filename:</p>
+<pre><code>orca_chelpg MyJob.gbw</code></pre>
+<p>as an optional argument one can provide the total solute density matrix via a file name.</p>
+<h2>9.2.3 orca_pltvib</h2>
+<p>The orca_pltvib program is used in conjunction with gOpenMol (or xmol) to generate animations or plots of vibrational modes following a frequency calculation. Its usage is straightforward and is described in the section Animation of Vibrational Modes , along with a brief guide on how to produce these plots in gOpenMol.</p>
+<p>The program generates 20 animation frames per vibrational mode. The first and last frames correspond to the TS, while the intermediate frames are computed as sin (2 πframe /20 -1) ∗ displacement . This produces a smooth oscillation pattern centered on the equilibrium geometry.</p>
+<h2>9.2.4 orca_vib</h2>
+<p>orca_vib is a small 'standalone' program for performing vibrational analyses. It gives users control over parameters such as atomic masses, which influence the predicted vibrational frequencies but are independent of the electronic structure calculation itself.</p>
+<p>The program takes a ' .hess ' file as input and generates output that is essentially equivalent to that produced by a standard ORCA frequency calculation. The key advantage is that the .hess file is a user-editable plain text file, which allows manual modifications, e.g., for isotope shift predictions or custom mass adjustments.</p>
+<p>Usage of orca_vib , along with an example, is provided in the section Isotope Shifts . By piping the screen output to a text file, you can further process the vibrational data using orca_mapspc to generate data files for plotting IR, Raman, or NRVS spectra from the modified Hessian.</p>
+<h2>9.2.5 orca_loc</h2>
+<p>Localization is a widely used technique in quantum chemistry. By defining different functionals, various localization methods have been developed. Among the most widely used are the Foster-Boys (FB) and Pipek-Mezey (PM) methods. In ORCA, six localization methods are available: Pipek-Mezey method (PM), Foster-Boys method (FB), intrinsic atomic orbitals (IAO)-based PM method, IAO-based FB method, PM loclization of valence virtual orbitals (PMVVO), and Localized intrinsic valence virtual orbitals (LIVVO).</p>
+<p>Three algorithms are available for FB localizaton: the conventional algorithm ( FB ), a faster alternative NEWBOYS , recommended for localizing virtual MOs in large systems, and augmented Hessian FB ( AHFB ) algorithm, ideal for obtaining tightly converged orbitals (e.g., for local correlation methods with an appropriate tolerance).</p>
+<p>The AHFB algorithm, which systematically converges towards a local minimum, rather than a different type of stationary point, proceeds in three stages: (i) An initial set of NEWBOYS localized orbitals is obtained. (ii) This is</p>
+<p>followed by an augmented Hessian maximization (rational function optimization) using direct or Davidson diagonalization, depending on the number of orbitals to make it efficient for both small and large systems. (iii) If the optimization fails but the augmented Hessian has the correct eigenvalue structure, a Newton-Raphson maximization is triggered.</p>
+<p>The only user-adjustable parameter in AHFB is the tolerance Tol. Convergence is signalled when the eigenvalue structure is correct, and the largest element of the orbital gradient, 4 ⟨ i | r | j ⟩ ( ⟨ j | r | j ⟩ - ⟨ i | r | i ⟩ ) , is below Tol. This differs from other localization methods, which use the sum of changes in the localization functional between two successive iterations as the convergence criterion.</p>
+<p>The intrinsic atomic orbitals and intrinsic bond orbitals ( IAOIBO ) localization method, developed by Gerald Knizia [820], proceeds as follows: (i) The occupied MOs are projected onto a minimal basis set to get the IAOs. In ORCA, IAOs are generated from the converged SCF MO of atoms by default, instead of the MINI or STO-3G basis sets as in the original method. However, the IAO charges computed by ORCA default are very similar to the original IAO charges. The default behaviour can be changed using the IAOBasis keyword. (ii) The PM functional is used to localize these IAOs into IBOs. (iii) The IBOs are back-transformed to their original basis set.</p>
+<p>NOTE: IAO partial charges for canonical MOs are printed before the IAOIBO localization. Be sure to include all occupied MOs, as missing any will render the IAO charges meaningless.</p>
+<p>An improved version of this approach in ORCA replaces PM with FB as the localization functional, resulting in the IAOBOYS method. For large systems, IAOBOYS is computationally more efficient than the standard FB method. However, it is worth noting that IAO-based localization is currently only available for occupied MOs.</p>
+<p>Valence virtual orbitals (VVOs) can be localized following a method described in ref. [821]. Thus method can be briefly described as follows: The VVOs are obtained via singular value decomposition of the overlap between IAOs and virtual MOs. The difference between the number of IAOs and occupied MOs is the number of VVOs. However, the full virtual orbital window must be provided as input to orca_loc ! The final window of VVOs is printed in the output. The remaining virtual MOs are not modified and thus not orthogonal to the VVOs. The VVOs can then be localized using the PM or IBO criterion using the PMVVO and LIVVO keyword, respectively. The latter option corresponds to the localized intrinsic VVOs of ref. [821].</p>
+<p>There are two ways to request MO localization in ORCA: (i) Inline in the input file using the %loc block and (ii) using the orca_loc utility on precomputed MOs.</p>
+<p>When requested in the %loc block of the input file, the following options can be set:</p>
+<table><tbody><tr><td colspan="3">%loc</td></tr><tr><td>LocMet</td><td>PM</td><td># Localization method e.g. PIPEK-MEZEY</td></tr><tr><td></td><td>FB</td><td># FOSTER-BOYS</td></tr><tr><td></td><td>IAOIBO</td><td># IAOIBO</td></tr><tr><td></td><td>IAOBOYS</td><td># IAOBOYS</td></tr><tr><td></td><td>NEWBOYS</td><td># FOSTER-BOYS</td></tr><tr><td></td><td>AHFB</td><td># Augmented Hessian Foster-Boys</td></tr><tr><td></td><td>PMVVO</td><td># PM-localized valence virtual orbitals</td></tr><tr><td></td><td>LIVVO</td><td># localized intrinsic valence virtual orbitals</td></tr><tr><td>LocMetVirt</td><td>0</td><td># If given, used for the virtual space instead of LocMet;</td></tr><tr><td></td><td></td><td># the same options are available</td></tr><tr><td>Tol</td><td>1e-6</td><td># absolute convergence tolerance for the localization sum # default value is 1e-6 # In the case of AHFB, however, this is the gradient␣</td></tr><tr><td colspan="3">↪ → threshold!</td></tr><tr><td>Random</td><td>0</td><td># Always take the same seed for start for localization # (For testing/debug purpose,optional)</td></tr><tr><td></td><td>1</td><td># Take a random seed for start of localization (default)</td></tr><tr><td>PopMethod</td><td>MULLIKEN</td><td># Population method for the final analysis</td></tr><tr><td></td><td>LOEWDIN</td><td># of the localized orbitals (default: Mulliken)</td></tr><tr><td>PrintLevel</td><td>2</td><td># Amount of printing</td></tr><tr><td>OrbSpread ↪ → spread:</td><td>false</td><td># Whether to compute and print the localized orbital␣</td></tr><tr><td></td><td></td><td># sqrt(&lt;i|(r-&lt;i|r|i&gt;)^2|i&gt;)</td></tr><tr><td>MaxIter</td><td>64</td><td># Max number of iterations</td></tr><tr><td>T_Bond</td><td>0.85</td><td># Thresh that classifies orbitals in bond-like at the␣</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>↪ → printing T_Strong 0.95 # Thresh that classifies orbitals into strongly-↪ → localized at # the printing OCC true # Localize the occupied space T_CORE -99.9 # The Energy window for the first OCC MO to be localized␣ ↪ → (in a.u.) # Here, we localize all occupied MOs including core␣ ↪ → orbitals. VIRT true # Localize the virtual space IAOBasis SCF_SV # (default) Basis of MOs obtained from HF/SV calculations STO_3G # STO-3G MINI # MINI ANO_SZ # ANO-SZ ANO_RCC_MB # ANO-RCC-MB MINAO_AUTO_PP # MINAO-AUTO-PP basis (presumes ECPs beyond Kr) end</code></pre>
+<p>MOs are localized in ORCA iteratively. Convergence is achieved when the localization functional value becomes self-consistent, as controlled by the Tol parameter. If the flag OCC or VIRT is set to true in the %loc block, the localization is performed for the corresponding occupied or virtual orbital subspace. If both OCC and VIRT flags are set to true, two consecutive localizations are carried out-one for each subspace. The localization method used for virtual orbitals is specified via the LocMetVirt keyword (if provided); otherwise, it defaults to LocMet . The localized orbitals are stored in a standard .gbw file format, but with the extension .loc.gbw .</p>
+<p>NOTE: The use of localized occupied orbitals may alter the total energy. For RHF and UHF, this typically does not cause issues. However, for CASSCF, the OCC flag alone is not sufficient, because CASSCF is not invariant under rotations of all occupied orbitals.</p>
+<p>When orca_loc program is called from the command line, it requires a separate text-based input file containing all necessary parameters. If no input is specified, orca_loc returns a help message listing all available options. Typically one needs to specify in the orca_loc input the input and output gbw fies, along with orbital ranges and the localization method to be used. A source of confusion is the operator line op (alpha = 0 or beta = 1). For RHF(ROHF) and CASSCF, this should be set to zero. The input file of orca_loc looks as follows:</p>
+<pre><code>Myjob.gbw # input orbitals Myjob.loc.gbw # output orbitals 10 # orbital window: first orbital to be localized e.g. first active 15 # orbital window: last orbital to be localized e.g. last active 0 # localization method: # 1=PIPEK-MEZEY,2=FOSTER-BOYS,3=IAO-IBO,4=IAO-BOYS,5=NEW-BOYS,6=AHFB, ↪ → 7=PMVVO,8=LIVVO # The following parameters are optional # However, if you want to change one of them, all preceding ones have to be set, ␣ ↪ → too. 0 # operator: 0 for alpha, 1 for beta 128 # maximum number of iterations 1e-6 # convergence tolerance of the localization functional value 0.0 # relative convergence tolerance of the localization functional value 0.95 # printing thresh to call an orbital strongly localized 0.85 # printing thresh to call an orbital bond-like 2 # printlevel 1 # use Cholesky Decomposition (0=false, 1=true) 1 # randomize seed for localization (0=false, 1=true) 0 # IAO basis (0-5 in the order given above) 0 # Population analysis method (0=Mulliken, 1=Lowedin) 0 # Print orbital spread (0=false, 1=true)</code></pre>
+<p>If this input file is named as myloc.inp, running 'orca_loc myloc.inp' will produce the Myjob.loc.gbw file containing the localized orbitals. Please make sure the Myjob.gbw is in the same directory as myloc.inp.</p>
+</div>
+</body>
+</html>

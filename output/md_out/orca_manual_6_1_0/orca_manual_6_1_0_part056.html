@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part056</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<ol>
+<li style="list-style-type: '2. ';">Powder magnetic susceptibility function χ ( T ) .</li>
+<li style="list-style-type: '3. ';">Magnetisation vector ⃗ M ( ⃗ H ) for specified directions of the applied magnetic field ⃗ H .</li>
+<li style="list-style-type: '4. ';">Powder magnetisation M mol ( H,T ) .</li>
+<li style="list-style-type: '5. ';">Magnetisation torque function ⃗ τ mol ( H,T ) .</li>
+</ol>
+<p>The magnetic Hamiltonians are defined for a desired group of N low-lying electronic states obtained in CASSCF/ SOC calculation to which a pseudospin ˜ S is subscribed according to the relation N = 2 ˜ S + 1 . The pseudospin ˜ S reduces to a true spin S in the absence of spin-orbit coupling. For instance, the two wave functions of a Kramers doublet correspond to the pseudospin ˜ S = 1/2 . The implementation is done for any dimension of the pseudospin ˜ S , and controlled by the keyword MLTP .</p>
+<p>The calculation of magnetic properties takes into account the contribution of excited states (the ligand-field and charge transfer states of the complex or mononuclear fragment which were included in the CASSCF/CASPT2 calculation) via their thermal population and Zeeman admixture. The effect of intermolecular exchange interaction between magnetic molecules on the resulting magnetic properties in a crystal is described by a phenomenological parameter zJ specified by the user.</p>
+<h2>5.34.2 Running SINGLE_ANISO Calculations</h2>
+<p>The SINGLE_ANISO is, in principle, a stand-alone utility ( otool_single_aniso ) that can be called directly from the shell with its own input file, provided that the ab initio datafile is available:</p>
+<pre><code>bash:$ bash:$ $ORCA/x86_64/otool_single_aniso < single_aniso.input > single_aniso.output bash:$</code></pre>
+<p>However, this usage may not be so convenient, as the file single_aniso.input must include the true name of the datafile. For the user's convenience, a deeper integration between SINGLE_ANISO and CASSCF program in ORCA was implemented, as described below.</p>
+<p>As a prerequisite for using the SINGLE_ANISO module to calculate the magnetic properties of the investigated compound, spin-orbit coupling and other relativistic effects are already taken fully into account at the stage of quantum chemistry calculation of the investigated compound . The necessary information of the ab initio calculation is provided in a form of a 'datafile': energy spectra, angular momentum integrals, etc. The interface with ORCA generates the required datafile automatically. The following naming conventions were adopted for the datafile in function of the employed computational method:</p>
+<ul>
+<li style="list-style-type: '· ';">CASSCF+SOC+SINGLE_ANISO = &gt; "$orca_input_name.CASSCF.anisofile"</li>
+<li style="list-style-type: '· ';">CASSCF+QD-NEVPT2+SOC+SINGLE_ANISO = &gt; "$orca_input_name.NEVPT2.anisofile"</li>
+</ul>
+<p>Note that if the CASSCF+QD-NEVPT2+SOC+SINGLE_ANISO calculation is requested, then the SINGLE_ANISO will be executed twice, and the above two datafiles will be generated. The interface will generate the SINGLE_ANISO input file with the keywords information provided in the CASSCF/aniso subblock. These filename of the datafile is included automatically in the input file for the SINGLE_ANISO utility (keyword DATA ), also generated automatically by the interface. The naming convention for the generated input files for the SINGLE_ANISO utility is '$orca_input_name.anisofile'.</p>
+<p>All keywords of the SINGLE_ANISO program are possible to be specified within the CASSCF/ANISO subblock. They are referenced in Section Reference List of CASSCF/ANISO Keywords . Optionally, a working SINGLE_ANISO input file can be passed directly to the CASSCF module setting the filename with keyword InputNameOnDisk in the ANISO subblock.</p>
+<p>An example of the full ORCA input for performing magnetic properties calculations within the CASSCF/SOC/ SINGLE_ANISO methodology for a hypothetical Co(II) compound is provided below:</p>
+<pre><code>! 6-31G TightSCF # basis set and other global ORCA settings %maxcore 2000 (continues on next page)</code></pre>
+<p>(continued from previous page)</p>
+<pre><code>%casscf nel 7 norb 5 # 7 electrons in 5 orbitals (3d shell) mult 4, 2 nroots 10, 40 # 10 quartet and 40 doublet states rel dosoc true # include spin-orbit coupling end ANISO doaniso true # generate datafile/input and call # the SINGLE_ANISO module MLTP 2,2,2,2 # group of spin-orbit states for which the pseudospin # Hamiltonian is computed: 4 low-lying spin-orbit doublet␣ ↪ → states. TINT 0, 300, 301 # 301 steps in the temperature interval [0-300] # for magnetic susceptibility (in Kelvin) HINT 0, 7.0, 71 # 71 steps in the field interval [0-7] # for molar magnetisation (in Tesla) TMAG 1.0,1.2,1.8,2.5,3.6 # temperature points for which molar magnetisation # is computed CRYS_element "Co" CRYS_charge 2 PLOT true # requires the ANISO to produce gnuplot scripts, # datafiles and plots of various quantities # Alternative to the snippet above. Provide separate input file: # InputFile "$orca_input_name.anisoinput" end end *xyz 0 4 # charge is 0 for this neutral compound Co -2.80118000 9.91634000 19.40386000 O -3.59660000 12.00284000 20.51731000 O -5.12835000 10.85934000 19.53431000 O -5.70975000 12.39302000 20.99406000 O -1.30202341 11.67611386 19.17300658 O -3.84191000 9.45315000 21.48634000 O -1.27500262 8.12582233 19.18634310 O -3.94611990 9.65426823 17.48476360 N -4.85020000 11.78071000 20.36823000 H -1.23636310 12.09677337 18.41017549 H -1.07910455 7.59540828 19.85227241 H -3.30514987 9.28034259 22.26327382 H -4.79957696 9.43862752 21.55163236 H -4.64801074 9.00163025 17.42987361 H -3.73273676 10.19508893 16.72083912 H -0.75470916 11.94100908 19.91589125 *</code></pre>
+<p>The input above utilises the following keywords: MLTP keyword requires the computation of the g tensor for 4 groups of spin-orbit states, the dimensionality of each group being 2 (Kramers or Ising doublets). TINT requires computation of the magnetic susceptibility in the temperature interval 0 K - 300 K distributed equally in 300 temperature intervals. TMAG requires computation of powder molar magnetisation at 6 temperature points, in Kelvin (K): 1.0 K, 1.2 K, 1.8 K, 2.5 K, 2.9 K and 3.6 K. HINT defines the range for the magnetic field strength, in Tesla. PLOT keyword invokes the plotting function of the module. CRYS_element + CRYS_charge request for the computation of the crystal field parameters for the ground term of the Co 2+ ion. For more information about the keywords in SINGLE_ANISO module, you can refer to section Reference List of CASSCF/ANISO Keywords .</p>
+<p>Please always check the obtained orbitals after CASSCF calculation . In this particular case, the active orbitals</p>
+<h2>(45-49) are localised on the Co site and display dominant 3 d character.</h2>
+<table><tbody><tr><td></td><td>45 -0.37264 1.40513 --------</td><td>46 -0.36672 1.40270 --------</td><td>47 -0.36520 1.39998 --------</td><td>48 -0.36153 1.39823 --------</td><td>49 -0.35018 1.39395 --------</td></tr><tr><td>0 Co s</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.2</td></tr><tr><td>0 Co</td><td>pz 0.1</td><td>0.1</td><td>0.1</td><td>0.0</td><td>0.0</td></tr><tr><td>0 Co px</td><td>0.0</td><td>0.2</td><td>0.0</td><td>0.0</td><td>0.1</td></tr><tr><td>0 Co py</td><td>0.1</td><td>0.1</td><td>0.0</td><td>0.0</td><td>0.1</td></tr><tr><td>0 Co dz2</td><td>23.6</td><td>39.5</td><td>10.0</td><td>2.0</td><td>23.5</td></tr><tr><td>0 Co dxz</td><td>12.8</td><td>30.8</td><td>48.6</td><td>4.4</td><td>2.2</td></tr><tr><td>0 Co dyz</td><td>46.5</td><td>10.4</td><td>19.3</td><td>20.8</td><td>2.4</td></tr><tr><td>0 Co dx2y2</td><td>6.9</td><td>0.3</td><td>21.2</td><td>69.2</td><td>1.6</td></tr><tr><td>0 Co dxy</td><td>9.5</td><td>17.6</td><td>0.2</td><td>2.8</td><td>68.0</td></tr></tbody></table>
+<p>We see that in the above output section, the five active orbitals have dominant contribution from the Co-3 d basis functions. This is OK and is expected for common transition metal compounds. For lanthanide compounds, the seven active orbitals should have dominant contribution from the 4 f shell. Larger active spaces must be carefully inspected and analysed. We refer here to the respective section of this manual describing the CASSCF method and how to achieve convergence Complete and Incomplete Active Space Self-Consistent Field (CASSCF and RAS/ORMAS) .</p>
+<p>The results calculated by using SINGLE_ANISO module are placed after the SOC section in ORCA output. Here is the explanation for these results.</p>
+<pre><code>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CALCULATION OF PSEUDOSPIN HAMILTONIAN TENSORS FOR THE MULTIPLET 1 ( effective S = ␣ ↪ → 1/2) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The pseudospin is defined in the basis of the following spin-orbit states: spin-orbit state 1. energy(1) = 0.000 cm-1. spin-orbit state 2. energy(2) = 0.000 cm-1. g TENSOR: |--------------------------------------------------------| | MAIN VALUES | MAIN MAGNETIC AXES | x , y , z -- initial␣ ↪ → Cartesian axes |-------------------|----|-----x -------y -------z ---| Xm, Ym, Zm --main␣ ↪ → magnetic axes | gX = 0.09871069 | Xm | -0.456536 -0.363638 0.811998 | | gY = 0.11729280 | Ym | 0.643532 0.495246 0.583605 | | gZ = 11.21949040 | Zm | -0.614361 0.788985 0.007914 | |--------------------------------------------------------| The sign of the product gX * gY * gZ for multiplet 1: < 0.</code></pre>
+<p>The section above shows the g tensor for the ground Kramers doublet. Since the g X and g Y are much smaller than the g Z component, the Zm axis is denoted as the mainmagneticaxis of the computed molecule. The 'Zm | -0.614361 0.788985 0.007914 | ' denotes the Cartesian components of the Zm vector.</p>
+<p>In the case the computation of the parameters of the crystal field is requested by CRYS_element and CRYS_charge , the following section will be found in the output:</p>
+<pre><code>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CALCULATION OF CRYSTAL-FIELD PARAMETERS OF THE GROUND ATOMIC TERM, L = 3. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The parameters of the Crystal Field matrix are written in the coordinate system: (Xm, Ym, Zm) --the main magnetic axes of the ground pseudo-L = | 3> orbital␣ ↪ → multiplet. Rotation matrix from the initial coordinate system to the employed coordinate␣ ↪ → system is: -------------------------------------------------------------------| x , y , z -- initial Cartesian axes |</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<p>(continued from previous page)</p>
+<p>In the above section, the low-lying CASSCF states of the Co 2+ site originating from the free ion 4 F term are transformed towards the eigenstates of the ( ˜ L = 3 ), and the low-lying CASSCF diagonal 7 × 7 energy matrix is re-written in this basis. The non-diagonal 'Ab Initio Crystal-Field Splitting Matrix' is printed in the above section. In the subsequent output sections, the obtained crystal field matrix is decomposed in a linear combination of Irreducible Tensorial Operators (ITOs) and the obtained expansion coefficients are listed in the output.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The parameters are given for several sets of ITOs.</p>
+<pre><code>******************************************************************************** The Crystal-Field Hamiltonian: Hcf = SUM_{k,q} * [ B(k,q) * O(k,q) ]; where: O(k,q) = Extended Stevens Operators (ESO)as defined in: 1. Rudowicz, C.; J.Phys.C: Solid State Phys.,18(1985) 1415-1430. 2. Implemented in the "EasySpin" function in MATLAB, www.easyspin.org. k -the rank of the ITO, = 2, 4, 6, 8, 10, 12. q -the component of the ITO, = -k, -k+1, ... 0, 1, ... k; Knm are proportionality coefficients between the ESO and operators defined in J. Chem. Phys., 137, 064112 (2012). ------------------------------------------------| k | q | (K)^2 | B(k,q) | ----|-----|-------------|-----------------------| 2 | -2 | 1.50 | 0.44029016547734E-03 | 2 | -1 | 6.00 | 0.24547763681975E-08 | 2 | 0 | 1.00 | -0.43693326103120E+02 | 2 | 1 | 6.00 | -0.84162317914775E-08 | 2 | 2 | 1.50 | 0.12672200639220E-02 | ----|-----|-------------|-----------------------|</code></pre>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<table><tbody><tr><td>4 | |</td><td>-4</td><td>17.50</td><td>| 0.20185049671189E-03 |</td></tr><tr><td>4 | |</td><td>-3</td><td>140.00</td><td>| -0.24080325997038E-08 |</td></tr><tr><td>4 | | |</td><td>-2</td><td>10.00</td><td>0.53646717565242E-04 |</td></tr><tr><td>4 | | |</td><td>-1</td><td>20.00</td><td>0.99248109880376E-09 |</td></tr><tr><td>4 | | |</td><td>0</td><td>1.00</td><td>-0.67496280141952E+00 |</td></tr><tr><td>4 | |</td><td>1</td><td>20.00</td><td>| -0.53708624488205E-09 |</td></tr><tr><td>4 | | |</td><td>2</td><td>10.00</td><td>0.33333801678482E-03 |</td></tr><tr><td>4 | |</td><td>3</td><td>140.00</td><td>| -0.66502585057483E-09 |</td></tr><tr><td>4 | | |</td><td>4</td><td>17.50</td><td>0.24311509626065E-03 |</td></tr><tr><td>----|-----|-------------|-----------------------| 6 | | |</td><td>-6</td><td>57.75</td><td>-0.48493356946616E-09 |</td></tr><tr><td>6 | |</td><td>-5</td><td>693.00</td><td>| 0.45219078679397E-09 |</td></tr><tr><td>6 | | |</td><td>-4</td><td>31.50</td><td>0.11222605476277E-05 |</td></tr><tr><td>6 | |</td><td>-3</td><td>105.00</td><td>| -0.14936428088413E-09 |</td></tr><tr><td>6 | |</td><td>-2</td><td>26.25</td><td>| 0.68538037767693E-06 |</td></tr><tr><td>6 | |</td><td>-1</td><td>42.00</td><td>| -0.24067665895440E-09 |</td></tr><tr><td>6 | |</td><td>0</td><td>1.00</td><td>| -0.18259217459128E-02 |</td></tr><tr><td>6 | | |</td><td>1</td><td>42.00</td><td>0.11394843516111E-11 |</td></tr><tr><td>6 | | |</td><td>2</td><td>26.25</td><td>0.48314159464149E-05 |</td></tr><tr><td>6 | |</td><td>3</td><td>105.00</td><td>| -0.33636623245296E-10 |</td></tr><tr><td>6 | | |</td><td>4</td><td>31.50</td><td>0.13517294099051E-05 |</td></tr><tr><td>6 | |</td><td>5</td><td>693.00</td><td>| 0.95637007025194E-10 |</td></tr><tr><td>6 | |</td><td>6</td><td>57.75</td><td>| -0.77284500243776E-09 |</td></tr></tbody></table>
+<p>In the sections below, the weight of various expansion terms on the total energy splitting of the corresponding term or multiplet is analysed.</p>
+<table><tbody><tr><th>CUMULATIVE O2 O2 + O2 + O4 +</th><th>:------------------------------------------: O4 :-------------------------------------: O6 :--------------------------------:</th><th>WEIGHT OF ON</th><th>INDIVIDUAL-RANK OPERATORS</th><th>THE CRYSTAL FIELD 70.094642 %. 99.417093 %. 100.000000 %.</th><th>SPLITTING:</th></tr><tr><th>ENERGY</th><td></td><th>SPLITTING INDUCED</th><th>BY CUMULATIVE INDIVIDUAL-RANK ----------|---------------|---------------|---------------|---------------|</th><th>OPERATORS (in</th><th>cm-1).</th></tr><tr><td>| w.f. | | w.f. 6 |</td><td>INITIAL | 1 2</td><td>O2 | O2+O4 | 0.00000000 | 0.00000000 | 0.00000220 | |</td><td>| 0.00000000 | 0.00000000 | 655.39989137 | 655.39989157 | 1048.63177735 | 1048.64787570 | 1179.71980502</td><td>O2+O4+O6 ----------|---------------|---------------|---------------|---------------| 0.00000000 0.00000220 1062.65990786 1062.69656233 1065.12848829 1125.02338078 1125.04470493 ----------|---------------|---------------|---------------|---------------| SPLITTING: %.</td><td>| | | | | | |</td></tr><tr><td>w.f. | w.f. | w.f. | w.f.</td><td>3 4 5</td><td>| 0.00000149 | 1062.65990786 | 1062.69656233 | 1065.12848829 1125.02338078</td><td></td><td>1058.22649805 | 1060.35861560 | 1060.39653667 | 1129.62295551 |</td><td></td></tr><tr><td>WEIGHT O2 O4</td><td></td><td>INDIVIDUAL-RANK</td><td>ON :-----------------------------------------:</td><td>CRYSTAL FIELD 70.094642 29.322451 0.582907</td><td>%.</td></tr><tr><td></td><td></td><td></td><td>OPERATORS THE :-----------------------------------------: :-----------------------------------------:</td><td>1129.64777494</td><td></td></tr><tr><td></td><td>OF</td><td></td><td></td><td>|</td><td></td></tr><tr><td>w.f. |</td><td>7</td><td>1125.04470493 |</td><td></td><td></td><td>|</td></tr><tr><td>O6</td><td></td><td>SPLITTING INDUCED BY</td><td></td><td>%.</td><td></td></tr><tr><td>ENERGY |</td><td></td><td>OPERATORS RASSCF | ONLY</td><td>INDIVIDUAL-RANK ----------|---------------|---------------|---------------|---------------| |</td><td>(in cm-1). ONLY</td><td>|</td></tr><tr><td>L = |</td><td>3 |</td><td>INITIAL | O4 ----------|---------------|---------------|---------------|---------------|</td><td>ONLY O2</td><td>| |</td><td>O6 |</td></tr><tr><td>w.f. |</td><td>1 |</td><td>0.00000000</td><td>0.00000000 |</td><td>0.00000000 |</td><td>0.00000000 | 0.00351330</td></tr><tr><td>w.f. |</td><td>2 |</td><td>0.00000220</td><td>0.00000000 |</td><td>121.49328633 |</td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>|</td></tr></tbody></table>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>w.f. 3 | 1062.65990786 | 655.39989137 | 121.49330341 | 4.60307936 | w.f. 4 | 1062.69656233 | 655.39989157 | 202.46860036 | 4.60307986 | w.f. 5 | 1065.12848829 | 1048.63177735 | 202.50909974 | 6.90310777 | w.f. 6 | 1125.02338078 | 1048.64787570 | 526.45202593 | 6.90437338 | w.f. 7 | 1125.04470493 | 1179.71980502 | 526.48994463 | 11.50506445 | ----------|---------------|---------------|---------------|---------------| WEIGHT OF INDIVIDUAL CRYSTAL FIELD PARAMETERS ON THE CRYSTAL FIELD SPLITTING: (in␣ ↪ → descending order): CFP are given in ITO used in J. Chem. Phys. 137, 064112 (2012). -------------------------------------------------------| k | q | B(k,q) | Weight (in %) | ----|-----|-----------------------|--------------------| 2 | 0 | -0.43693326103120E+02 | 70.08577012260780 | 4 | 0 | -0.67496280141952E+00 | 29.31873954450217 | 6 | 0 | -0.18259217459128E-02 | 0.58283348856981 | 4 | 2 | 0.10541073637635E-03 | 0.00457878555457 | 4 | 4 | 0.58115623682363E-04 | 0.00252440109385 | 4 | -4 | 0.48251497695683E-04 | 0.00209592749496 | 2 | 2 | 0.10346808494753E-02 | 0.00165966774870 | 4 | -2 | 0.16964581649793E-04 | 0.00073690009261 | 2 | -2 | 0.35949541472835E-03 | 0.00057664442705 | 6 | 2 | 0.94299583491020E-06 | 0.00030100389209 | 6 | 4 | 0.24084325388052E-06 | 0.00007687706999 | 6 | -4 | 0.19995783180553E-06 | 0.00006382645967 | 6 | -2 | 0.13377255211448E-06 | 0.00004270014495 | 6 | 6 | -0.10169893585902E-09 | 0.00000003246226 | 6 | -6 | -0.63812572794630E-10 | 0.00000002036895 | 6 | -1 | -0.37137214734348E-10 | 0.00000001185418 | 4 | -1 | 0.22192552033089E-09 | 0.00000000963990 | 4 | -3 | -0.20351589971646E-09 | 0.00000000884023 | 2 | 1 | -0.34359122410183E-08 | 0.00000000551133 | 6 | -5 | 0.17177307577593E-10 | 0.00000000548299 | 4 | 1 | -0.12009613533364E-09 | 0.00000000521668 | 6 | -3 | -0.14576461261073E-10 | 0.00000000465280 | 4 | 3 | -0.56204942711777E-10 | 0.00000000244141 | 2 | -1 | 0.10021582557877E-08 | 0.00000000160750 | 6 | 5 | 0.36329494838219E-11 | 0.00000000115964 | 6 | 3 | -0.32825983078827E-11 | 0.00000000104780 | 6 | 1 | 0.17582625268298E-12 | 0.00000000005612 | ----|-----|-----------------------|--------------------|</code></pre>
+<p>In the case of lanthanide compounds, the same keywords ( CRYS_element and CRYS_charge ) trigger the energy decomposition of the lowest energy matrix corresponding to the ground J -multiplet of the respective lanthanide ion.</p>
+<pre><code>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ↪ → %%%%%%%%%%%% CALCULATION OF THE MAGNETIC SUSCEPTIBILITY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ↪ → %%%%%%%%%%%% Temperature dependence of the magnetic susceptibility will be calculated in 301␣ ↪ → points, equally distributed in temperature range 0.0 ---300.0 K. |----------------------------------------------------------------------------------↪ → ------| | | T | STATISTICAL | X*T | X*T | X | 1/ ↪ → X |</code></pre>
+<p>(continues on next page)</p>
+<p>This section shows the computed magnetic susceptibility. The formula used for this calculation assumes the zero-field limit, i.e.H = 0 . 0 Tesla. A picture called 'XT_no_field.png' using the above data will be created in the working directory whenever the PLOT keyword is included in the SINGLE_ANISO input. The picture shows the temperature dependence of the magnetic susceptibility.</p>
+<p>(continues on next page)</p>
+<p>(continued from previous page)</p>
+<pre><code>|----------|-|-----x ---------y ---------z ---|---------------|------x --------↪ → - y ---------z ----| | |x| 4.465674 -5.715898 -0.057290 | X: 0.013344 | -0.49137357 -0. ↪ → 39055217 0.77847352 | | 2.000000 |y| -5.715898 7.354486 0.075093 | Y: 0.015261 | 0.61731357 0. ↪ → 47435127 0.62762635 | | |z| -0.057290 0.075093 0.014856 | Z: 11.806411 | -0.61439073 0. ↪ → 78896126 0.00800947 | ...</code></pre>
+<p>The section above shows how the main axes of the susceptibility tensor evolves with temperature.</p>
+<pre><code>HIGH-FIELD POWDER MAGNETIZATION (Units: Bohr magneton) |-----------|---------------|---------------|---------------|---------------|------↪ → ---------| | H(T) |STATISTICAL SUM| 1.000 K. | 1.200 K. | 1.800 K. | ␣ ↪ → 2.500 K. | |-----------|---------------|---------------|---------------|---------------|------↪ → ---------| | 0.000100 | 1.9995371 | 0.0007055560 | 0.0005880989 | 0.0003923371 | 0. ↪ → 0002827105 | | 0.100000 | 1.6293687 | 0.6863212310 | 0.5768343572 | 0.3889480349 | 0. ↪ → 2814379254 | | 0.200000 | 1.3961049 | 1.2730827904 | 1.0928431358 | 0.7585259147 | 0. ↪ → 5554332924 | | 0.300000 | 1.2492960 | 1.7176941099 | 1.5137449727 | 1.0936561795 | 0. ↪ → 8154486026 | | 0.400000 | 1.1568991 | 2.0312460704 | 1.8358752195 | 1.3858429640 | 1. ↪ → 0565149122 | | 0.500000 | 1.0987474 | 2.2456644189 | 2.0736324473 | 1.6329635867 | 1. ↪ → 2755212118 | | 0.600000 | 1.0621485 | 2.3917509695 | 2.2464760254 | 1.8374994655 | 1. ↪ → 4711430994 | | 0.700000 | 1.0391143 | 2.4924803644 | 2.3720174309 | 2.0044495622 | 1. ↪ → 6435265950 | | 0.800000 | 1.0246173 | 2.5633469179 | 2.4639356325 | 2.1396808073 | 1. ↪ → 7938697856 | | 0.900000 | 1.0154934 | 2.6144012337 | 2.5321303741 | 2.2489088878 | 1. ↪ → 9240150206 | | 1.000000 | 1.0097510 | 2.6521008670 | 2.5835380488 | 2.3371993536 | 2. ↪ → 0361143785 | | 1.100000 | 1.0061370 | 2.6806180412 | 2.6229602467 | 2.4088035375 | 2. ↪ → 1323879997 | | 1.200000 | 1.0038624 | 2.7026854246 | 2.6537186141 | 2.4671744880 | 2. ↪ → 2149684436 | | 1.300000 | 1.0024309 | 2.7201250266 | 2.6781249799 | 2.5150622492 | 2. ↪ → 2858129074 | | 1.400000 | 1.0015299 | 2.7341759016 | 2.6978046065 | 2.5546323752 | 2. ↪ → 3466634357 | ...</code></pre>
+<p>This section shows the field dependence of the powder molar magnetisation. A picture named 'MH.png' can be created by using the PLOT keyword in the SINGLE_ANISO input file.</p>
+<p>Running CASSCF calculations on lanthanides compounds in ORCA might be a bit more cumbersome compared to transition metal compounds, due to the convergence of this method. However, following the instructions in the Complete and Incomplete Active Space Self-Consistent Field (CASSCF and RAS/ORMAS) section and the related tips in this manual and on the Forum, the calculations could be performed. From our experience, the main reason for the poor convergence of CASSCF calculation originates from the wrong orbitals occupying the active space. This issue can be overcame by performing a proper rotation of the molecular orbitals such that the seven orbitals with dominant</p>
+<ul>
+<li>4 f contribution are placed in the active space. As soon as the active orbitals acquire the dominant 4 f weight, the convergence is quite straightforward.</li>
+</ul>
+<p>Below we describe the calculation on a lanthanide fragment [Ce(COT) 2 ] -(COT=(C 8 H 8 ) 2 -) as an example:</p>
+<pre><code>!DKH DKH-DEF2-SVP slowconv KDIIS BP %basis newgto Ce "SARC2-DKH-QZVP" end end %scf MaxIter 500 end *xyz -1 2 Ce 5.97600100 5.09133100 13.17268800 C 5.47882500 2.98632700 11.42941100 C 4.38424700 3.88677900 11.27367600 H 4.21867900 4.06431900 10.35453600 C 3.47138800 4.59373300 12.09958800 H 2.87027600 5.12178400 11.58692300 C 3.21937800 4.72005000 13.49499100 C 3.84198900 4.08874200 14.61728000 H 3.46926600 4.38472800 15.43857500 C 4.86395700 3.14327700 14.81900800 H 4.97094200 2.92197400 15.73690500 C 5.77247800 2.44085400 13.98883400 H 6.34594800 1.86846400 14.48498500 C 6.03182900 2.38537000 12.60408600 H 6.75450600 1.80396200 12.40022700 C 6.40698800 7.65195200 12.14877700 C 6.11546300 7.83965300 13.53689900 H 5.47247100 8.52635500 13.66635300 C 6.52698400 7.27593700 14.77461400 H 6.07344100 7.67704500 15.50605500 C 7.44425200 6.26569500 15.21837900 C 8.37896000 5.47470700 14.49350900 H 8.88315100 4.90771300 15.06566300 C 8.74883600 5.31701900 13.13468700 H 9.45277500 4.68873000 13.02529900 C 8.32602800 5.86701900 11.90372100 H 8.81295200 5.51473700 11.16784000 C 7.36115600 6.80638600 11.50204100 H 7.33662500 6.90506000 10.55697400 H 5.93270067 2.68976505 10.50694264 H 5.83417492 8.22959522 11.45371334 H 2.43475960 5.39234559 13.77300645 H 7.40021961 6.07954201 16.27114118 *</code></pre>
+<p>This is the first step of the calculation. For heavier elements like lanthanides, we must consider relativistic effect by using DKH keyword. We explicitly use KDIIS in the calculation to smoothen out convergence. The orbital file called 'CeCOT2_1.gbw' will be generated after this step. We further use this gbw file to do the CASSCF calculation.</p>
+<pre><code>!DKH DKH-DEF2-SVP TightSCF conv Moread %moinp "CeCOT2_1.gbw" %basis newgto Ce "SARC2-DKH-QZVP" end end</code></pre>
+<p>(continues on next page)</p>
+<pre><code>%casscf nel 1 norb 7 # 1 electrons in 7 f orbitals mult 2 nroots 7 # 7 doublet states rel dosoc true # include spin-orbit coupling end end *xyz -1 2 ...... *</code></pre>
+<p>We need to check the orbitals after the CASSCF step with the orbital file named 'CeCOT2_2.gbw' obtained.</p>
+<table><tbody><tr><td></td><th>85</th><th>86</th><th>87</th><th>88</th><th>89</th><th>90</th><th>91</th></tr><tr><td></td><td>0.45543</td><td>0.45310</td><td>0.27655</td><td>0.45085</td><td>0.45251</td><td>0.45760</td><td>0.45713</td></tr><tr><td></td><td>0.14286</td><td>0.14286</td><td>0.14286</td><td>0.14286</td><td>0.14286</td><td>0.14286</td><td>0.14286</td></tr><tr><td>0 Ce f0</td><td>26.2</td><td>0.9</td><td>0.0</td><td>1.3</td><td>3.3</td><td>0.5</td><td>6.6</td></tr><tr><td>0 Ce f+1</td><td>5.4</td><td>20.2</td><td>0.0</td><td>24.0</td><td>3.4</td><td>5.6</td><td>39.1</td></tr><tr><td>0 Ce f-1</td><td>0.4</td><td>30.4</td><td>0.0</td><td>52.8</td><td>10.7</td><td>0.6</td><td>3.9</td></tr><tr><td>0 Ce f+2</td><td>3.8</td><td>0.2</td><td>0.7</td><td>1.4</td><td>4.7</td><td>76.7</td><td>10.7</td></tr><tr><td>0 Ce f-2</td><td>50.7</td><td>0.7</td><td>0.0</td><td>2.1</td><td>4.2</td><td>4.0</td><td>1.3</td></tr><tr><td>0 Ce f+3</td><td>8.2</td><td>22.0</td><td>0.0</td><td>1.2</td><td>55.8</td><td>0.0</td><td>11.6</td></tr><tr><td>0 Ce f-3</td><td>4.7</td><td>25.3</td><td>0.0</td><td>16.5</td><td>17.1</td><td>10.1</td><td>25.2</td></tr></tbody></table>
+<p>Orbitals 85, 86, 88-91 and 130 are occupied and strongly metal based 4 f -orbitals. For comparison, the converged CASSCF orbitals are pure 4 f -orbitals (99% metal-based). The orbitals need to be rotated in order to fit the active space (85-91). Then we can use the results of CASSCF/SOC calculation to call for the SINGLE_ANISO program.</p>
+<pre><code>!DKH DKH-DEF2-SVP TightSCF conv Moread %moinp "CeCOT2_2.gbw" %basis newgto Ce "SARC2-DKH-QZVP" end end %scf rotate {87,130,90} end end %casscf nel 1 norb 7 mult 2 nroots 7 rel dosoc true end ANISO doaniso true MLTP 2,2,2 # 3 Kramers doublets, J=5/2 MAVE 1, 12 # nsym=1, Lebedev grid number 12 XFIE 0.1 # the applied magnetic field is 0.1 T CRYS_element "Ce" CRYS_charge 3 NCUT 14 ABCC_abc 11.0735, 12.6738, 22.4854, 84.436, 86.690, 83.969 ABCC_center 0.82682, 0.31234, 0.78619</code></pre>
+<p>(continued from previous page)</p>
+<p>(continues on next page)</p>
+<pre><code>ZJPR -0.120 HEXP_temp 2.0, 3.0 HEXP_H 0.0, 1.0, 2.0, 3.0, 4.0 HEXP_M[0]= 0.0, 2.46, 2.86, 2.95, 2.98 HEXP_M[1]= 0.0, 2.04, 2.68, 2.87, 2.94 TEXP_temp 0.0, 10.0, 20.0, 30.0, 40.0, 50.0 TEXP_chiT 4.5, 4.5, 4.58, 4.62, 4.66, 4.70 UBAR true PLOT true ZEEM[0]=1.0, 0.0, 0.0 ZEEM[1]=0.0, 0.0, 1.0 ZEEM[2]=0.0, 1.0, 0.0 ZEEM[3]=0.75, 0.0, 0.25 end end *xyz -1 2 ...... *</code></pre>
+<p>The order of the keywords listed in the CASSCF/ANISO subblock does not matter.</p>
+<h2>5.34.3 Reference List of CASSCF/ANISO Keywords</h2>
+<p>The only required keyword for SINGLE_ANISO is the DATA , specifying the name of the datafile containing the ab initio information. The ORCA interface includes this keyword automatically and therefore it is not referenced here. All other keywords are extra and allow various customisation of the execution. For the computation of the EPR g -tensor, the only unknown variable for SINGLE_ANISO is the dimension (multiplicity) of the pseudospin(s). This information can be provided by the MLTP keyword. For example, in cases where spin-orbit coupling is weak, the multiplicity of the effective spin Hamiltonian is usually the same as the multiplicity of the lowest term (e.g. high spin Fe 3+ : S = ˜ S = 5/2 ), while in the cases with strong anisotropy (lanthanide, actinide complexes, Co 2+ complexes, cases with near-orbital degeneracy, etc.) the lowest energy levels form a group of states which may differ drastically from the spins of the lowest term. In these cases the user should specify the multiplicity corresponding to a chosen value of pseudospin ( 2 ˜ S +1 ). For instance, in Dy 3+ the spin of the ground state term is S = 5/2 , but in most of real compounds only the ground Kramers doublet is considered. In such case, the multiplicity of the pseudospin equals to 2 (see MLTP keyword). For the calculation of the parameters of the crystal field corresponding to the ground atomic multiplet J for lanthanides should be requested with the keywords CRYS_element and CRYS_charge . Similarly, the parameters of the crystal field corresponding to the ground atomic term L for lanthanides and transition metals compounds can be requested with same keywords: CRYS_element and CRYS_charge .</p>
+<p>Note that the keywords/syntax in the ORCA CASSCF/ANISO block are slightly different from the genuine SINGLE_ANISO input, where some of the keywords are grouped together. We aimed at keeping the control keywords as close as possible.</p>
+<p>Optional general keywords to control the input within the ORCA interface (CASSCF/ANISO subblock):</p>
+<h2>InputNameOnDisk</h2>
+<p>This keyword reads the name of the input file for SINGLE_ANISO , a string given between quotations. Example:</p>
+<pre><code>InputNameOnDisk "my_input_for_aniso.inp"</code></pre>
+<p>The interface with ORCA will add the DATA keyword with specific name of the datafile for the performed calculation. All the other keywords provided inside this file must follow their original names, as in MOLCAS .</p>
+<p>The number of molecular multiplets ( i.e. groups of spin-orbital eigenstates) for which g , D and higher magnetic tensors will be calculated (default MLTP =1). With MLTP an comma separated list of numbers specifying the dimension of each multiplet is passed. The default is to select one multiplet which has the dimension equal</p>
+<h2>MLTP</h2>
+<p>(continued from previous page)</p>
+<h2>TINT</h2>
+<h2>HINT</h2>
+<h2>TMAG</h2>
+<h2>ENCU</h2>
+<p>to the multiplicity of the ground term. In cases of strong spin-orbit coupling the usage of this keyword is mandatory. Example:</p>
+<pre><code>MLTP 4, 4, 2, 2</code></pre>
+<p>SINGLE_ANISO will compute the g tensor for 4 groups of states: 2 groups having the effective spin S = | 3/2 &gt; , and other 2 groups of states being Kramers doublets.</p>
+<p>Specifies the temperature points for the evaluation of the magnetic susceptibility. The program will read three numbers: T min , T max , and nT .</p>
+<ul>
+<li style="list-style-type: '· ';">T min - the minimal temperature (Default 0.0K)</li>
+<li style="list-style-type: '· ';">T max - the maximal temperature (Default 300.0K)</li>
+<li style="list-style-type: '· ';">nT - number of temperature points (Default 101)</li>
+</ul>
+<h2>Example:</h2>
+<pre><code>TINT 0.0, 330.0, 331</code></pre>
+<p>SINGLE_ANISO will compute temperature dependence of the magnetic susceptibility in 331 points evenly distributed in temperature interval: 0.0K - 330.0K.</p>
+<p>Specifies the field points for the evaluation of the magnetisation in a certain direction. The program will read three numbers: H min , H max and nH .</p>
+<ul>
+<li style="list-style-type: '· ';">H min - the minimal field (Default 0.0T)</li>
+<li style="list-style-type: '· ';">H max - the maximal filed (Default 10.0T)</li>
+<li style="list-style-type: '· ';">nH - number of field points (Default 101)</li>
+</ul>
+<h2>Example:</h2>
+<pre><code>HINT 0.0, 20.0, 201</code></pre>
+<p>SINGLE_ANISO will compute the molar magnetisation in 201 points evenly distributed in field interval: 0.0T - 20.0T.</p>
+<p>Specifies the temperature(s) at which the field-dependent magnetisation is calculated. The program will read the temperatures (in Kelvin) at which magnetisation is to be computed. Default is to compute magnetisation at one temperature point (2.0 K). Example:</p>
+<pre><code>TMAG 1.8, 2.0, 3.0, 4.0, 5.0</code></pre>
+<p>SINGLE_ANISO will compute the molar magnetisation at 5 temperature points (1.8 K, 2.0 K, 3.4 K, 4.0 K, and 5.0 K).</p>
+<p>The keyword expects to read two integer numbers. The two parameters ( NK and MG ) are used to define the cut-off energy for the lowest states for which Zeeman interaction is taken into account exactly. The contribution to the magnetisation coming from states that are higher in energy than E (see below) is done by second order perturbation theory. The program will read two integer numbers: NK and MG . Default values are: NK = 100 , MG = 100 .</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The field-dependent magnetisation is calculated at the maximal temperature value given by TMAG keyword. Example:</p>
+<h2>NCUT</h2>
+<h2>ERAT</h2>
+<h2>ZEEM</h2>
+<p>ENCU 250, 150</p>
+<p>If H max = 10 T and TMAG = 1.8 K, then the cut-off energy is: $ E = 250 · k Boltz · 1 . 8 + 150 · µ Bohr · 10 = 1013 . 06258( cm -1 ) $</p>
+<p>This means that the magnetisation arising from all spin-orbit states with energy lower than E = 1013 . 06258( cm -1 ) will be computed exactly (i.e. are included in the exact Zeeman diagonalisation) The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<p>This flag is used to define the cut-off energy for the low-lying spin-orbit states for which Zeeman interaction is taken into account exactly. The contribution to the magnetisation arising from states that are higher in energy than lowest N CUT states, is done by second-order perturbation theory. The program will read one integer number. In case the number is larger than the total number of spin-orbit states( N SS , then the N CUT is set to N SS (which means that the molar magnetisation will be computed exactly, using full Zeeman diagonalisation for all field points). The field-dependent magnetisation is calculated at the temperature value(s) defined by TMAG . Example:</p>
+<p>NCUT 32</p>
+<p>The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<p>This flag is used to define the cut-off energy for the low-lying spin-orbit states for which Zeeman interaction is taken into account exactly. The program will read one single real number specifying the ratio of the energy states which are included in the exact Zeeman Hamiltonian. As example, a value of 0.5 means that the lowest half of the energy states included in the spin-orbit calculation are used for exact Zeeman diagonalisation.</p>
+<h2>Example:</h2>
+<p>ERAT 0.333</p>
+<p>The keywords NCUT , ERAT and ENCU have similar purpose. If two of them are used at the same time, the following priority is defined: NCUT &gt; ENCU &gt; ERAT .</p>
+<h2>MVEC_x MVEC_y MVEC_z</h2>
+<p>MVEC_x , MVEC_y and MVEC_z define a number of directions for which the magnetisation vector will be computed. The directions are given as unitary vectors specifying the direction i of the applied magnetic field).</p>
+<h2>Example:</h2>
+<pre><code>MVEC_x 0.00, 1.57, 1.57, 0.425 MVEC_y 0.00, 0.00, 1.57, 0.418 MVEC_z 0.00, 0.00, 1.57, 0.418</code></pre>
+<p>This keyword allows to compute Zeeman splitting spectra along certain directions of applied field. Directions of applied field are given as three real number for each direction, specifying the projections along each direction: Example:</p>
+<pre><code>ZEEM[0] 1.0, 0.0, 0.0 ZEEM[1] 0.0, 1.0, 0.0 ZEEM[2] 0.0, 0.0, 1.0 ZEEM[3] 0.0, 1.0, 1.0 ZEEM[4] 1.0, 0.0, 1.0 ZEEM[5] 1.0, 1.0, 0.0</code></pre>
+<p>The above input will request computation of the Zeeman spectra along six directions: Cartesian axes X, Y, Z (directions 1,2 and 3), and between any two Cartesian axes: YZ, XZ and XY, respectively. The program will renormalise the input vectors according to unity length. In combination with PLOT keyword, the corresponding zeeman_energy_xxx.png images will be produced.</p>
+<h2>MAVE</h2>
+<h2>ZJPR</h2>
+<h2>TORQ</h2>
+<p>The keyword requires two integer numbers, denoted MAVE_nsym and MAVE_ngrid . The parameters MAVE_nsym and MAVE_ngrid specify the grid density in the computation of powder molar magnetisation. The program uses Lebedev-Laikov distribution of points on the unit sphere. The parameters are integer numbers: n sym and n grid . The n sym defines which part of the sphere is used for averaging. It takes one of the three values: 1 (half-sphere), 2 (a quarter of a sphere) or 3 (an octant of the sphere). n grid takes values from 1 (the smallest grid) till 32 (the largest grid, i.e. the densest). The default is to consider integration over a half-sphere (since M ( H ) = -M ( -H ) ): n sym = 1 and n sym = 15 (i.e 185 points distributed over half-sphere). In case of symmetric compounds, powder magnetisation may be averaged over a smaller part of the sphere, reducing thus the number of points for the integration. The user is responsible to choose the appropriate integration scheme. Note that the program's default is rather conservative.</p>
+<h2>Example:</h2>
+<pre><code>MAVE 1, 8</code></pre>
+<h2>TEXP_temp TEXP_chiT</h2>
+<p>The parameters TEXP_temp and TEXP_chiT allow the computation of the magnetic susceptibility χT ( T ) at experimental points. The experimental temperature (in K ) and the experimental magnetic susceptibility (in cm 3 Kmol -1 ) are read as comma separated list. In the case both TEXP and TINT keywords are given, the TEXP will be used while the TINT input will be ignored.</p>
+<h2>Example:</h2>
+<pre><code>TEXP_temp 0.0, 10.0, 20.0, 30.0, 40.0, 50.0 TEXP_chiT 4.5, 4.5, 4.58, 4.62, 4.66, 4.70</code></pre>
+<h2>HEXP_temp HEXP_H HEXP_M</h2>
+<p>The three keywords HEXP_temp , HEXP_H and HEXP_M enable the computation of the molar magnetisation M mol ( H ) at experimental points. The experimental field strength (in Tesla) and the experimental magnetisation (in µ Bohr ) are read as a comma separated list. In the case both HEXP and HINT keywords are given, the HEXP will be used while the HINT input will be ignored. The magnetisation routine will print the standard deviation from the experiment. Example:</p>
+<pre><code>HEXP_temp 2.0, 3.0 HEXP_H 0.0, 1.0, 2.0, 3.0, 4.0 HEXP_M[0]= 0.0, 2.46, 2.86, 2.95, 2.98 # exp. M at T=2.0 K HEXP_M[1]= 0.0, 2.04, 2.68, 2.87, 2.94 # exp. M at T=3.0 K</code></pre>
+<p>This keyword specifies the value (in cm -1 ) of a phenomenological parameter of a mean molecular field acting on the spin of the complex (the average intermolecular exchange constant). It is used in the calculation of all magnetic properties (not for spin Hamiltonians) (Default is 0.0).</p>
+<pre><code>ZJPR -0.02</code></pre>
+<p>This keyword specifies the number of angular points for the computation of the magnetisation torque function, ⃗ τ α as function of the temperature, field strength and field orientation.</p>
+<pre><code>TORQ 55</code></pre>
+<p>The torque is computed at all temperature given by TMAG or HEXP_temp inputs. Three rotations around Cartesian axes X, Y and Z are performed.</p>
+<h2>PrintLevel</h2>
+<p>This keyword controls the print level.</p>
+<ul>
+<li style="list-style-type: '· ';">2 - normal. (Default)</li>
+<li style="list-style-type: '· ';">3 or larger (debug)</li>
+</ul>
+<h2>CRYS_element CRYS_charge</h2>
+<p>The keywords CRYS_element and CRYS_charge request the computation of all 27 Crystal-Field parameters acting on the ground atomic multiplet of a lanthanide. With CRYS_element the chemical symbol of the lanthanide is set. Note that the element symbol must be enclosed in quotation marks . The charge is defined with CRYS_charge . By default the program will not compute the parameters of the Crystal-Field.</p>
+<h2>Example:</h2>
+<p>CRYS_element "Dy" CRYS_charge 3</p>
+<p>This keyword controls the quantisation axis for the computation of the Crystal-Field parameters acting on the ground atomic multiplet of a lanthanide. On the next line, the program will read one of the three values: 1, 2 or 3.</p>
+<ul>
+<li style="list-style-type: '· ';">1 - quantisation axis is the main magnetic axis Zm of the ground pseudospin multiplet, whose size is specified within the MLTP keyword. (Default)</li>
+<li style="list-style-type: '· ';">2 - quantisation axis is the main magnetic axis Zm of the entire atomic multiplet | J, M J &gt; .</li>
+<li style="list-style-type: '· ';">3 - quantisation axis is the original Cartesian Z axis. Rotation matrix is unity.</li>
+</ul>
+<h2>Example:</h2>
+<p>QUAX 3</p>
+<p>With UBAR set to 'true', the blocking barrier of a single-molecule magnet is estimated. The default is not to compute it. The method prints transition matrix elements of the magnetic moment according to the Figure below:</p>
+<p>In this figure, a qualitative performance picture of the investigated single-molecular magnet is estimated by the strengths of the transition matrix elements of the magnetic moment connecting states with opposite magnetisaskytions ( n + → n -). The height of the barrier is qualitatively estimated by the energy at which the</p>
+<h2>QUAX</h2>
+<h2>UBAR</h2>
+<h2>XFIE</h2>
+<h2>PLOT</h2>
+<p>matrix element ( n + → n -) is large enough to induce significant tunnelling splitting at usual magnetic fields (internal) present in the magnetic crystals (0.01-0.1 Tesla). For the above example, the blocking barrier closes at the state ( 8+ → 8 -).</p>
+<p>All transition matrix elements of the magnetic moment are given as (( | µ X | + | µ Y | + | µ Z | )/3) . The data is given in Bohr magnetons ( µ Bohr ).</p>
+<h2>Example:</h2>
+<p>UBAR true</p>
+<h2>ABCC_abc ABCC_center</h2>
+<p>The keywords ABCC_abc and ABCC_center set the computation of magnetic and anisotropy axes in the crystallographic abc system. With ABCC_abc , the program reads six real values, namely a, b, c, α, β , and γ , defining the crystal lattice. The values must be separated by a comma. With ABCC_center , the program reads the fractional coordinates of the magnetic center (from the CIF file) - again separated by comma. It is assumed that the XYZ coordinates used for the ab initio calculations did not rotate or translate the molecule from its crystallographic position. This input will ensure that all tensors computed by SINGLE_ANISO are given also in the abc system. The computed values in the output correspond to the crystallographic position of three 'dummy atoms' located on the corresponding anisotropy axes, at the distance of 1.0 ˚ A from the metal site. Example:</p>
+<pre><code>ABCC_abc 12.977, 12.977, 16.573, 90, 90, 120 ABCC_center 0.666667, 0.333333, 0.20413</code></pre>
+<p>This keyword specifies the value (in T) of applied magnetic field for the computation of magnetic susceptibility by dM / dH and M / H formulas. A comparison with the usual formula (in the limit of zero applied field) is provided. (Default is 0.0). Example:</p>
+<pre><code>XFIE 0.35</code></pre>
+<p>This keyword together with the keyword PLOT will enable the generation of two additional plots: XT_with_field_dM_over_dH.png and XT_with_field_M_over_H.png , one for each of the two above formula used, alongside with respective gnuplot scripts and gnuplot datafiles.</p>
+<p>Set to 'true', the program generates a few plots (png or eps format) via an interface to the linux program gnuplot . The interface generates a datafile, a gnuplot script and attempts execution of the script for generation of the image. The plots are generated only if the respective function is invoked. The magnetic susceptibility, molar magnetisation and blocking barrier ( UBAR ) plots are generated. The files are named: XT_no_field. dat , XT_no_field.plt , XT_no_field.png , MH.dat , MH.plt , MH.png , BARRIER_TME.dat ,</p>
+<p>BARRIER_ENE.dat , BARRIER.plt and BARRIER.png , zeeman_energy_xxx.png etc. All files produced by SINGLE_ANISO are referenced in the corresponding output section. Example:</p>
+<p>PLOT true</p>
+<h2>5.34.4 How to cite</h2>
+<p>We would appreciate if you cite the following papers in publications resulting from the use of SINGLE_ANISO :</p>
+<ul>
+<li style="list-style-type: '· ';">Chibotaru, L. F.; Ungur, L. J. Chem. Phys. , 2012 , 137 , 064112.</li>
+<li style="list-style-type: '· ';">Ungur, L. Chibotaru, L. F. Chem. Eur. J. , 2017 , 23 , 3708-3718.</li>
+</ul>
+<p>In addition, useful information like the definition of pseudospin Hamiltonians and their derivation can be found in this paper.</p>
+<h2>5.35 Interface to POLY_ANISO Module</h2>
+<h2>5.35.1 General Description</h2>
+<p>The POLY_ANISO is a stand-alone utility allowing for a semiab initio description of the (low-lying) electronic structure and magnetic properties of polynuclear compounds. The model behind it is based on the localised nature of the magnetic orbitals (i.e. the d and f orbitals containing unpaired electrons). For many compounds of interest, the localised character of the magnetic orbitals leads to very weak character of the exchange interaction between magnetic centers. Due to this weakness of the inter-site interaction, the molecular orbitals and corresponding localised ground and excited states may be optimized in the absence of the magnetic interaction at all. For this purpose, various fragmentation models may be applied. The most commonly used fragmentation model is exemplified in Fig. 5.66:</p>
+<figure><figcaption><div class="caption">Fig. 5.66: Fragmentation model of a polynuclear compound.</div></figcaption></figure>
+<p>The upper scheme shows a schematic overview of a tri-nuclear compound and the resulting three mononuclear fragments obtained by diamagnetic atom substitution method . By this scheme, the neighbouring magnetic centers, containing unpaired electrons are computationally replaced by their diamagnetic equivalents. As example, transition metal (TM) sites are best described by either a diamagnetic Zn(II) or Sc(III), in function of which one is the closest (in terms of charge and atomic radius). For lanthanides (LN), the same principle is applicable, La(III), Lu(III) or Y(III) are best suited to replace a given magnetic lanthanide. Individual mononuclear metal fragments are then investigated by the common CASSCF + SOC / NEVPT2 + SOC / SINGLE_ANISO computational method. A single datafile for each magnetic site, produced by the SINGLE_ANISO run, is needed by the POLY_ANISO code as input.</p>
+<p>Magnetic interaction between metal sites is very important for accurate description of low-lying states and their properties. While the full exchange interaction is quite complex (e.g. requiring a multipolar description employing a large set of parameters [755, 756]), in a simplified model it can be viewed as a sum of various interaction mechanisms: magnetic exchange, dipole-dipole interaction, antisymmetric exchange, etc. In the POLY_ANISO code we have implemented several mechanisms, which can be invoked simultaneously for each interacting pair.</p>
+<p>The description of the magnetic exchange interaction is done within the Lines model[757]. This model is exact in three cases:</p>
+<ol>
+<li style="list-style-type: '1. ';">interaction between two isotropic spins (Heisenberg),</li>
+<li style="list-style-type: '2. ';">interaction between one Ising spin (only S Z component) and one isotropic (i.e. usual) spin, and</li>
+<li style="list-style-type: '3. ';">interaction between two Ising spins.</li>
+</ol>
+<p>In all other cases when magnetic sites have intermediate anisotropy (i.e. when the spin-orbit coupling and crystal field effects are of comparable strengths), the Lines model represents an approximation. However, it was successfully applied for a wide variety of polynuclear compounds so far.</p>
+<p>In addition to the magnetic exchange, magnetic dipole-dipole interaction can be accounted exactly, by using the ab initio computed magnetic moment for each metal site (as available inside the datafile ). In the case of strongly anisotropic lanthanide compounds (like Ho 3+ or Dy 3+ ), the magnetic dipole-dipole interaction is usually the dominant one. For example, a system containing two magnetic dipoles ⃗ µ 1 and ⃗ µ 2 , separated by distance ⃗ r have a total</p>
+<p>energy:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where ⃗ µ 1 , 2 are the magnetic moments of sites 1 and 2, respectively; r is the distance between the two magnetic dipoles, ⃗ n 1 , 2 is the directional vector connecting the two magnetic dipoles (of unit length). µ 2 Bohr is the square of the Bohr magneton; with an approximate value of 0.43297 in cm -1 /T. As inferred from the above Equation, the dipolar magnetic interaction depends on the distance and on the angle between the magnetic moments on magnetic centers. Therefore, the Cartesian coordinates of all non-equivalent magnetic centers must be provided in the input.</p>
+<p>In brief, the POLY_ANISO is performing the following operations:</p>
+<ol>
+<li style="list-style-type: '1. ';">read the input and information from the datafiles</li>
+<li style="list-style-type: '2. ';">build the exchange coupled basis</li>
+<li style="list-style-type: '3. ';">compute the magnetic exchange, magnetic dipole-dipole, and other magnetic Hamiltonians using the ab initio -computed spin and orbital momenta of individual magnetic sites and the input parameters</li>
+<li style="list-style-type: '4. ';">sum up all the magnetic interaction Hamiltonians and diagonalise the total interaction Hamiltonian</li>
+<li style="list-style-type: '5. ';">rewrite the spin and magnetic moment in the exchange-coupled eigenstates basis</li>
+<li style="list-style-type: '6. ';">use the obtained spin and magnetic momenta for the computation of the magnetic properties of entire polynuclear compound</li>
+</ol>
+<p>The actual values of the inter-site magnetic exchange could be derived from e.g. broken-symmetry DFT calculations. Alternatively, they could be regarded as fitting parameters, while their approximate values could be extracted by minimising the standard deviation between measured and calculated magnetic data.</p>
+<h2>5.35.2 Files</h2>
+<p>POLY_ANISO is called independently of ORCA for now. In the future versions of ORCA we will aim for a deeper integration, for a better experience.</p>
+<pre><code>bash:$ bash:$ $ORCA/x86_64/otool_poly_aniso < poly_aniso.input > bash:$</code></pre>
+<pre><code>poly_aniso.output</code></pre>
+<p>The actual names of the poly_aniso.input and poly_aniso.output are not hard coded, and can take any names. A bash script for a more convenient usage of POLY_ANISO can be provided upon request or made available on the Forum.</p>
+<h2>Input Files</h2>
+<p>The program POLY_ANISO needs the following files:</p>
+<h2>aniso_i.input</h2>
+<p>This is an ASCII text file generated by the CASSCF / SOC / SINGLE_ANISO run. It should be provided for POLY_ANISO as aniso_i.input (i=1,2,3, etc.): one file for each magnetic center. In cases when the entire polynuclear cluster or molecule has exact point group symmetry, only aniso_i.input files for crystallographically non-equivalent centers should be given. This saves computational time since equivalent metal sites do not need to be computed ab initio .</p>
+<h2>poly_aniso.input</h2>
+<p>The standard input file defining the computed system and various input parameters. This file can take any name.</p>
+<h2>Output Files</h2>
+<h2>5.35.3 List of Keywords</h2>
+<p>This section describes the keywords used to control the POLY_ANISO input file. Only two keywords NNEQ , PAIR (and SYMM if the polynuclear cluster has symmetry) are mandatory for a minimal execution of the program, while the other keywords allow customisation of the execution of the POLY_ANISO .</p>
+<p>The format of the 'poly_aniso.input' file resembles to a certain extent the input file for SINGLE_ANISO program. The input file must start with ' &amp;POLY_ANISO ' text.</p>
+<h2>Mandatory Keywords Defining the Calculation</h2>
+<h2>Keywords defining the polynuclear cluster:</h2>
+<p>NNEQ This keyword defines several important parameters of the calculation. On the first line after the keyword the program reads 2 values: 1) the number of types of different magnetic centers (NON-EQ) of the cluster and 2) a letter T or F in the second position of the same line. The number of NON-EQ is the total number of magnetic centers of the cluster which cannot be related by point group symmetry. In the second position the answer to the question: 'Have all NON-EQ centers been computed ab initio ?' is given: T for True and F for False. On the following line the program will read NON-EQ values specifying the number of equivalent centers of each type. On the following line the program will read NON-EQ integer numbers specifying the number of low-lying spin-orbit functions from each center forming the local exchange basis.</p>
+<p>Some examples valid for situations where all sites have been computed ab initio (case T, True):</p>
+<pre><code>NNEQ 2 T 1 2 2 2</code></pre>
+<p>There are two kinds of magnetic centers in the cluster; both have been computed ab initio ; the cluster consists of 3 magnetic centers: one center of the first kind and two centers of the second kind. From each center we take into the exchange coupling only the ground doublet. As a result, the N exch = 2 1 × 2 2 = 8 , and the two datafiles aniso_1.input (for-type 1) and aniso_2.input (for-type 2) files must be present.</p>
+<pre><code>NNEQ 3 T 2 1 1 4 2 3</code></pre>
+<p>There are three kinds of magnetic centers in the cluster; all three have been computed ab initio ; the cluster consists of four magnetic centers: two centers of the first kind, one center of the second kind and one center of the third kind. From each of the centers of the first kind we take into exchange coupling four spin-orbit states, two states from the second kind and three states from the third center. As a result the N exch = 4 2 × 2 1 × 3 1 = 96 . Three files aniso_i.input for each center ( i = 1 , 2 , 3 ) must be present.</p>
+<pre><code>NNEQ 6 T 1 1 1 1 1 1 2 4 3 5 2 2</code></pre>
+<p>There are six kinds of magnetic centers in the cluster; all six have been computed ab initio ; the cluster consists of 6 magnetic centers: one center of each kind. From the center of the first kind we take into exchange coupling two spin-orbit states, four states from the second center, three states from the third center, five states from the fourth center and two states from the fifth and sixth centers. As a result the N exch = 2 1 × 4 1 × 3 1 × 5 1 × 2 1 × 2 1 = 480 . Six files aniso_i.input for each center ( i = 1 , 2 , ..., 6 ) must be present.</p>
+<p>Only in cases when some centers have NOT been computed ab initio (i.e. for which no aniso_i.input file exists), the program will read an additional line consisting of NON-EQ letters ( A or B ) specifying the type of each of the NON-EQ centers: A - the center is computed ab initio and B - the center is considered isotropic. On the</p>
+</div>
+</body>
+</html>

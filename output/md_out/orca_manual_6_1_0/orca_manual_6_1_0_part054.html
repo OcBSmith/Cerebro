@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>orca_manual_6_1_0_part054</title>
+<meta name="generator" content="Docling HTML Serializer"/>
+<style>
+    html {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #333;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3em;
+    }
+    table {
+        border-collapse: collapse;
+        margin: 1em 0;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    figure {
+        margin: 1.5em 0;
+        text-align: center;
+    }
+    figcaption {
+        color: #666;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 1em;
+        overflow: auto;
+    }
+    code {
+        font-family: monospace;
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    pre code {
+        background-color: transparent;
+        padding: 0;
+    }
+    .formula {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background-color: #f9f9f9;
+    }
+    .formula-not-decoded {
+        text-align: center;
+        padding: 0.5em;
+        margin: 1em 0;
+        background: repeating-linear-gradient(
+            45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #f9f9f9 10px,
+            #f9f9f9 20px
+        );
+    }
+    .page-break {
+        page-break-after: always;
+        border-top: 1px dashed #ccc;
+        margin: 2em 0;
+    }
+    .key-value-region {
+        background-color: #f9f9f9;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .key-value-region dt {
+        font-weight: bold;
+    }
+    .key-value-region dd {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 1em;
+        border-radius: 4px;
+        margin: 1em 0;
+    }
+    .form-item {
+        margin-bottom: 0.5em;
+    }
+    .image-classification {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+</style>
+</head>
+<body>
+<div class='page'>
+<p>For the second derivative, the perturbed orbitals are required. However, in the presence of a spin-dependent perturbation they can no longer be taken as pure spin-up or spin-down orbitals. With respect to the L 'th component of the perturbation for spin-component m , the orbitals are expanded as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Since the matrix elements of the spin-vector operator components are purely real and the spatial part of the SOC operator has purely imaginary matrix elements, it follows that the first order coefficients are purely imaginary. The second derivative of the total SCF energy becomes:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Examination of the three cases m = 0 , ± 1 leads to the following equations for the D -tensor components:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Where a special form of the perturbed densities has been chosen. They are given in the atomic orbital basis as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The special form of the coupled perturbed equations are implemented in ORCArun as follows: The perturbation is of the general form h K ˆ s m . The equations (5.133)-(5.138) and (5.139)-(5.144) below have been written in such a way that the spin integration has been performed but that the spin-dependent factors have been dropped from the right-hand sides and included in the prefactors of eqs. (5.133)-(5.135). The explicit forms of the linear equations to be solved are:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>m = +1 :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>m = -1 :</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Note that these coupled-perturbed (CP) equations contain no contribution from the Coulomb potential or any other local potential such as the exchange-correlation potential in DFT. Hence, in the absence of HF exchange, the equations are trivially solved:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>It is interesting that the 'reverse spin flip coefficients' U K (+1) a β i α and U K ( -1) a α i β are only nonzero in the presence of HF exchange. In a perturbation expansion of the CP equations they arise at second order (V 2 / ∆ ε 2 ) while the other coefficients are of first order (V/ ∆ ε ; V represents the matrix elements of the perturbation). Hence, these contributions are of the order of α 4 and one could conceive dropping them from the treatment in order to stay consistently at the level of α 2 . These terms were nevertheless kept in the present treatment.</p>
+<p>Equations (5.139)-(5.144) are referred to as CP-SOC (coupled-perturbed spin-orbit coupling) equations. They can be solved by standard techniques and represent the desired analogue of the CP-SCF magnetic response equations solved for the determination of the g-tensor and discussed in detail earlier [710]. It is readily confirmed that in the absence of HF exchange, eqs. (5.145)-(5.150) inserted into eqs. (5.133)-(5.138) lead back to a modified Pederson-Khanna type treatment of the SOC contributions to the D -tensor [206]. In the framework of the formalism developed above, the Pederson-Khanna formula can be re-written in the form:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This equation was derived from second-order non-self-consistent perturbation theory without recourse to spincoupling. For the special case of no Hartree-Fock exchange, the main difference to the treatment presented here is that the correct prefactors from eqs. (5.122)-(5.124) occur in front of the spin-flip contributions rather than ± 1/(4 S 2 ) in eq. (5.151). In the presence of HF exchange it is suggested that the consistent generalization of the PK method are eqs. (5.133)-(5.135) with the ± 1/(4 S 2 ) prefactors and this way the method has been implemented as an option into the ORCA program.</p>
+<p>For completeness, the evaluation of the spin-spin term in the SCF case proceeds conveniently through:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>as derived by McWeeny and Mizuno and discussed in some detail by Sinnecker and Neese.[708] In this reference it was found that DFT methods tend to overestimate the spin-spin contribution if the calculations are based on a spin-unrestricted SCF treatment. A much better correlation with experiment was found for open-shell spin restricted calculations. The origin of this effect proved to be difficult to understand but it was shown in ref [207] that in the case of small spin-contamination, the results of ROKS calculations and of those that are obtained on the basis of the spin-unrestricted natural orbital (UNO) determinant are virtually indistinguishable. It is therefore optionally possible in the ORCA program to calculate the spin-spin term on the basis of the UNO determinant.</p>
+<h2>ZFS Keywords</h2>
+<table><caption><div class="caption">Table 5.16: %eprnmr block input keywords relevant for ZFS calculations</div></caption><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>dtensor</td><td>ss</td><td>Calculate spin-spin part</td></tr><tr><td></td><td>so</td><td>Calculate spin-orbit part</td></tr><tr><td></td><td>ssandso</td><td>Calculate both parts</td></tr><tr><td>DSOC</td><td>qro</td><td>quasi-restricted method for SOC, must be combined with !UNO</td></tr><tr><td></td><td>pk</td><td>Pederson-Khanna method for SOC</td></tr><tr><td></td><td>cp</td><td>coupled-perturbed method for SOC (default)</td></tr><tr><td></td><td>cvw</td><td>van Wüllen method for SOC</td></tr><tr><td>DSS</td><td>direct uno</td><td>directly use the canonical orbitals for the spin density use spin density from UNOs</td></tr><tr><td>printEuler</td><td>true/false</td><td>Whether to calculate Euler angles via orca_euler</td></tr></tbody></table>
+<h2>5.25 MP2 Level Magnetic Properties</h2>
+<p>Presently, hyperfine couplings (excluding the A orb term), g-tensors, and shielding tensors without GIAOs can be calculated for both canonical and RI-MP2 and double-hybrid DFT without the frozen core approximation. The A orb term of the hyperfine couplings is available only for RI-MP2 and double-hybrid DFT with and without frozen core approximation. In case the RIJCOSX approximation is used, the keywords Z_GridX , Z_GridX_RHS , KCOpt , KC_GridX and KC_IntAccX are relevant - see sections RIJCOSX-RI-MP2 Gradients and MP2andRI-MP2Second Derivatives . NMRshielding and g-tensor calculations with GIAOs are available for RI-MP2 and double-hybrid DFT with or without a frozen core. The implementation is described in detail in refs [347, 348] and the available options are shown in section RI-MP2 and Double-Hybrid DFT Response Properties . Note that for double-hybrid DFT the correct properties are printed after the density heading containing 'Method : MP2' and 'Level : Relaxed density'. DLPNO-MP2 (and double-hybrid) shielding tensors are also available - see section Local MP2 Second Derivatives and Response Properties .</p>
+<h2>5.25.1 Calculating Properties from Existing Densities</h2>
+<p>Occasionally, one may calculate a density matrix using an expensive correlated method such as CCSD and realize afterwards that a certain property such as the quadrupole moment or a hyperfine coupling constant (HFCC) is also required. Rather than start the whole calculation from scratch, one may wish to use the existing density matrix to calculate the properties. For this purpose, we have experimentally introduced a 'properties only' calculation mode, whereby the MOs are read from an existing BaseName.gbw file and the densities are read from an existing BaseName.densities file and only the property calculations are performed. Note however, that this presents many possibilities for error, so only use it as a last resort and be very careful with the results !</p>
+<p>Take, for example, this CCSD calculation:</p>
+<pre><code>! CCSD def2-SVP %base "BO-CCSD" %mdci density unrelaxed end *xyz 0 2 B 0 0 0 O 0 0 1.2049 *</code></pre>
+<p>This produces the files BO-CCSD.gbw and BO-CCSD.densities . To obtain the CCSD quadrupole moment and HFCCs without repeating the whole calculation, we can copy these two files into a new directory (highly recommended!) and start a second job with the !PropertiesOnly keyword. Note that the basename of the second job must be identical!</p>
+<pre><code>! CCSD def2-SVP %base "BO-CCSD" %mdci density unrelaxed end *xyz 0 2 B 0 0 0 O 0 0 1.2049 * # Everything above must be the same as in the first job! # Request the property calculations ! PropertiesOnly %elprop quadrupole true end %eprnmr Nuclei = all B { Aiso, Adip } Nuclei = all O { Aiso, Adip } end</code></pre>
+<h2>5.26 CASSCF Linear Response</h2>
+<h2>5.26.1 Introduction</h2>
+<p>Similar to the SCF linear response (see CP-SCF Options ), second-derivative properties can be calculated at the CASSCF level by solving the coupled perturbed (CP-)CASSCF equations for the linear response of the wavefunction parameters to a perturbation. These linear response equations are expressed as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where λ are the CASSCF wavefunction parameters and R are the perturbations for which the response equations are being solved [711, 712]. The property gradient on the right-hand side (RHS) is a known perturbation-dependent quantity, but the left-hand side (LHS) depends on the solution of the response of the wavefunction parameters to R . Therefore, the response to the perturbation must be solved for iteratively, which is done using the trial vectors X . This leads to the LHS being computed as a sigma-vector, which is reassembled at every iteration. The linear response equation for perturbation R i can then be written as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where H is the perturbation-independent Hessian matrix and G is the perturbation-specific RHS matrix. Once the linear equation converges, the solution vector of the response parameters can then be contracted with the electronand spin-density matrices to yield the AO response density matrices, [ P α ± β ] ( R ) . The response densities can then be contracted with appropriate AO 1-electron property integrals to compute the second-order contributions to secondderivative properties.</p>
+<p>In ORCA these equations are solved by the orca_casscfresp program and the underlying solver is BHP22 , a Davidson-type linear equation solver. The RHS is built from the property integrals calculated in the orca_propint program. After the solution converges and the response densities are made and stored, the orca_prop program is called, wherein the appropriate densities and response densities are contracted with the necessary property integrals (also from orca_propint ). This use of densities keeps the response property calculations in orca_prop generally applicable to all methods as the densities house the method-specific information.</p>
+<h2>5.26.2 Technical Notes</h2>
+<p>It should be noted that CASSCF linear response uses the optimized CASSCF wavefunction as a starting point. Thus, a %casscf block with the appropriate inputs (see CASSCF ) must be provided in the input. State-specific (SS)CASSCF response is run on SS ( NRoots 1 ) CASSCF wavefunctions. If the CASSCF wavefunction is stateaveraged (SA), the response is run over the averaged manifold of states and not on a specific root. In this case, one should analyze the output carefully. It is wise to only average states which are (nearly-)degenerate.</p>
+<p>By default, a CASSCF calculation will be run from scratch before running the CASSCF Response. Alternatively, orbitals from a previously converged CASSCF calculation may be used with !MOREAD NoIter and supplying the appropriate .gbw file via %moinp . In this case, be sure that the input in the %casscf block matches that from the same input block of the previously converged calculation and be sure to check the orbitals well!</p>
+<p>The linear response equations are solved iteratively until the convergence threshold for the residual norm ( TolR ) is reached. This value can be set by the user, but ORCA will set it by default to the tightest reasonable convergence criteria, taking into account the orbital- and CI-gradient tolerances of the underlying CASSCF calculation. This should be the most reasonable setting; be careful if trying to tighten this threshold!</p>
+<p>The appropriate property flags in the %elprop and %eprnmr blocks must be set to calculate the properties that are wanted (see Electrical Properties - Electric Moments and Polarizabilities and EPRNMR - keywords for magnetic properties ). While all first-derivative properties work with CASSCF, not all second-derivative properties are currently available with CASSCF. The static properties currently available (sorted by perturbation taken for the response) include:</p>
+<ul>
+<li style="list-style-type: '· ';">Electric ( E ) Field</li>
+<li>-Dipole/dipole Polarizability</li>
+</ul>
+<ul>
+<li>-Dipole/quadrupole Polarizability</li>
+</ul>
+<pre><code>· Quadrupole ( Q ) Field -Quadrupole/Quadrupole Polarizability · Velocity ( v ) -Velocity Polarizability · Magnetic ( B ) Field ( without GIAOs) -EPR g-Tensor -NMRChemical Shieldings · Nuclear Magnetic Moment ( I ( A ) ) -EPR A-matrix (Aorb contribution)</code></pre>
+<p>The magnetic properties are currently implemented without gauge-including atomic orbitals (GIAOs). Thus, an appropriate gauge-origin must be provided in the %eprnmr block! For the EPR g-tensor, using a large basis set with a chemically relevant gauge origin is recommended. However, one should in general be wary of NMR chemical shieldings without GIAOs.</p>
+<h2>5.26.3 Basic Usage</h2>
+<p>The following is an overview of the blocks required for a property calculation with</p>
+<pre><code>! def2-TZVP AutoAux # (or other appropriate basis & auxiliary) %casscf ... end %casresp # only required to change solver, printing, or preconditioner options ... end %elprop # only required if electric property requested ... end %eprnmr # only required if magnetic property requested ... ORI ... end * xyzfile ...</code></pre>
+<h2>5.26.4 Troubleshooting</h2>
+<p>If the %casresp block is specified and the calculation does not run through the CASSCF Response section, then the properties requested are not second-derivatives and therefore do not require linear response equations to be solved. If, however, the job aborts, watch for these possibilities:</p>
+<ul>
+<li style="list-style-type: '· ';">At least one of the second-derivative properties requested is not available at the CASSCF level (see list above of those currently implemented)</li>
+<li style="list-style-type: '· ';">MaxIter may need to be increased or TolR loosened</li>
+<li style="list-style-type: '· ';">If one or more perturbations meet convergence criteria and then later do not, try turning off solution locking.</li>
+<li>-This may point to TolR being too tight</li>
+</ul>
+<ul>
+<li style="list-style-type: '· ';">A magnetic field property is requested without setting the gauge-origin in the %eprnmr block</li>
+<li style="list-style-type: '· ';">An appropriate auxiliary basis (or the !AutoAux keyword) may be required, especially for:</li>
+<li>-The trial vector preconditioner (which is on by default)</li>
+<li>-TrafoStep RI in the %casscf block</li>
+<li>-RIJCOSX, RIJONX</li>
+<li style="list-style-type: '· ';">RIJK was specified (this is NOT supported)</li>
+</ul>
+<p>Note that the solver-related options in the %elprop and %eprnmr blocks do not affect the solution of the CPCASSCF equations.</p>
+<h2>5.26.5 Notes on Printing</h2>
+<p>The information on the types of property integrals computed can be found in the ORCA PROPERTY INTEGRAL CALCULATIONS section of the output file. The orca_casscfresp output begins with the header ORCA CASSCF RESPONSE CALCULATION . After information about the types and number of perturbations, the calculation splits into the major types of perturbations: real and imaginary. All response equations of the same type can be solved simultaneously.</p>
+<p>Each of these types has its own section in the output file. These sections begin with information on the orbital ranges and the CI space, then go into the iterative solution of the equations. The printout here gives an overview of the iteration number, the residual norm of each response equation, and if that response equation has met the convergence criteria. The following is an example of this output (with iterations 3-7 removed for simplicity):</p>
+<p>Before going on to the necessary property modules, the significant contributions to the RHS and/or response vectors will be outputted if they were requested (via PrintRHSVec and PrintRspVec ). Here, outputs such as the following can be seen.</p>
+<pre><code>---------------------------------CASSCF Response Vector Analysis ---------------------------------square of coefficients of particle-hole and CAS-CI excitations are printed if␣ ↪ → larger than 1.0e-02 IPERT: 0 (-) I 9 ( 9) -> V 0 ( 17) : 0.07167 (c= -0.26772137) (...) (-) A 1 ( 14) -> V 13 ( 30) : 0.07323 (c= 0.27061481) (...) (-) I 4 ( 4) -> A 0 ( 13) : 0.02915 (c= 0.17074032) (...) (-) CI 1.65592 [ 7]: 1201 (...)</code></pre>
+<p>The majority of the output has been removed for the sake of simplicity. Here, the significant contributions to the response vector are printed if the square of the vector element is larger than 1.0e-02 (the default value for TolPrintVec ). Each line begins with either a (+) or (-) , which denote the Hermiticity of the excitation operator. With static CASSCF linear response, (+) always denotes an imaginary perturbation and (-) a real perturbation. For the first vector (i.e. IPERT: 0 ), four contributions have been listed here.</p>
+<p>The first three are from particle-hole excitations going from the left size of the arrow to the right. On each side of the arrow has three things: a letter designating if it is an inactive ( I ), active ( A ), or virtual ( V ) orbital; a number designating the index within that orbital subblock, and a number in parentheses designating the overall orbital number. Further to the right, the coefficient (i.e. the vector element) is given in parentheses and the square of that value is given to the left of it. This is how the relative contributions of each excitation can be analyzed.</p>
+<p>The final contribution shown is from a CI excitation. Its weight is listed, followed by the index in brackets and the corresponding configuration of the active electrons among the active orbitals.</p>
+<h2>5.26.6 Keywords</h2>
+<p>Table 5.17: %casresp block input keywords.</p>
+<table><tbody><tr><th>Keyword</th><th>Options</th><th>Description</th></tr><tr><td>TolR</td><td>&lt;real&gt;</td><td>Convergence threshold (residual norm of LR equations) (default) uses tightest reasonable threshold</td></tr><tr><td>MaxIter</td><td>64</td><td>Maximum number of iterations</td></tr><tr><td>MaxRed</td><td>100</td><td>Maximum size of the reduced space per RHS</td></tr><tr><td>PrintRHSVec</td><td>false</td><td>Print significant contributions to the RHS vector</td></tr><tr><td>PrintRspVec</td><td>false</td><td>Print significant contributions to the response vector</td></tr><tr><td>PrintWF</td><td>CFG</td><td>(default) Print CI part of RHS/rsp vector in configuration basis</td></tr><tr><td></td><td>DET</td><td>Print CI part of RHS/rsp vector in determinant basis</td></tr><tr><td>TolPrintVec</td><td>1.e-2</td><td>Threshold to print a contribution to the RHS/response vector</td></tr><tr><td></td><td>none</td><td>No preconditioning of trial vector</td></tr><tr><td>PreCondMaxRed</td><td>400</td><td>Hessian precondition subset size</td></tr><tr><td>DoOrbResp</td><td>true</td><td>Include orbital response</td></tr><tr><td>DoLocking</td><td>true</td><td>Lock solutions to perturbations as they meet convergence criteria</td></tr><tr><td>DoOlsen</td><td>false</td><td>Use Olsen preconditioner</td></tr></tbody></table>
+<h2>5.27 Mössbauer Parameters</h2>
+<p>57 Fe Mössbauer spectroscopy probes the transitions of the nucleus between the I = 1 2 ground state and the I = 3 2 excited state at 14.4 keV above the ground state. The important features of the Mössbauer spectrum are the isomer shift ( δ ) and the quadrupole splitting ( ∆ E Q). An idealized spectrum is shown in Fig. 5.64.</p>
+<figure><figcaption><div class="caption">Fig. 5.64: An idealized Mössbauer spectrum showing both the isomer shift, δ , and the quadrupole splitting, ∆ E Q.</div></figcaption></figure>
+<h2>5.27.1 Isomer Shift</h2>
+<p>The isomer shift measures the shift in the energy of the γ -ray absorption relative to a standard, usually Fe foil. The isomer shift is sensitive to the electron density at the nucleus, and indirectly probes changes in the bonding of the valence orbitals due to variations in covalency and 3d shielding. Thus, it can be used to probe oxidation and spin states, and the coordination environment of the iron.</p>
+<p>Both the isomer shift and quadrupole splitting can be successfully predicted using DFT methods. The isomer shift is directly related to the s electron density at the nucleus and can be calculated using the formula</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where α is a constant that depends on the change in the distribution of the nuclear charge upon absorption, and ρ 0 is the electron density at the nucleus [713]. The constants α and β are usually determined via linear regression analysis of the experimental isomer shifts versus the theoretically calculated electron density for a series of iron compounds with various oxidation and spin states. Since the electron density depends on the functional and basis set employed, fitting must be carried out for each combination used. A compilation of calibration constants ( α , β and C ) for various methods was assembled.[714] Usually an accuracy of better than 0.10 mm s -1 can be achieved for DFT with reasonably sized basis sets.</p>
+<h2>5.27.2 Quadrupole splitting</h2>
+<p>The quadrupole splitting arises from the interaction of the nuclear quadrupole moment of the excited state with the electric field gradient at the nucleus. The former is related to the non-spherical charge distribution in the excited state. As such it is extremely sensitive to the coordination environment and the geometry of the complex.</p>
+<p>The quadrupole splitting is proportional to the largest component of the electric field gradient (EFG) tensor at the nucleus and can be calculated using the formula:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where e is the electrical charge of an electron and Q is the nuclear quadrupole moment of Fe (approximately 0.16 barns). V xx , V yy and V zz are the electric field gradient tensors and η , defined as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>is the asymmetry parameter in a coordinate system chosen such that | V zz | ≥ | V yy | ≥ | V xx | .</p>
+<p>The electric field gradient tensor is closely related to the dipole contribution to the hyperfine coupling. The main differences are that the electron instead of the spin density enters its calculation and that it contains a nuclear contribution due to the surrounding nuclei. It is calculated from</p>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with Z A as the nuclear charge of nucleus A and ⃗ R AN as a vector of magnitude R AN that points from nucleus A to nucleus N . P is the first order density matrix.</p>
+<h2>5.27.3 Basic usage</h2>
+<p>An example of how to calculate the electron density and quadrupole splitting of an iron center is as follows:</p>
+<pre><code>%eprnmr nuclei = all Fe {fgrad, rho} end</code></pre>
+<p>If a basis set with tight functions such as the CP(PPP) is employed, one might have to increase the radial integration accuracy for the iron atom. From ORCA 5.0, this is considered during grid construction and the defaults should work very well. However for very problematic cases it can be increased by controlling the SPECIALGRIDINTACC flag under %METHOD (see Sec. The Radial Grid Scheme for details).</p>
+<p>The output file should contain the following lines, where you obtain the calculated quadrupole splitting directly and the RHO(0) value (the electron density at the iron nucleus). To obtain the isomer shift one has to insert the RHO(0) value into the appropriate linear equation (Eq. (5.153)).</p>
+<pre><code>Moessbauer quadrupole splitting parameter (proper coordinate system) e**2qQ = -0.406 MHz = -0.035 mm/s eta = 0.871 Delta-EQ=(1/2{e**2qQ}*sqrt(1+1/3*eta**2) = -0.227 MHz = -0.020 mm/s RHO(0)= 11581.352209571 a.u.**-3 # the electron density at the Fe nucleus.</code></pre>
+<ul>
+<li style="list-style-type: '· ';">Following the same procedure, Mössbauer parameters can be computed with the CASSCF wavefunction. In case of a state-averaged CASSCF calculation, the averaged density is used in the subsequent Mössbauer calculation.</li>
+</ul>
+<h2>5.27.4 Keywords</h2>
+<p>All properties tied to a given nucleus in the molecule (NMR shielding, hyperfine coupling, quadrupolar coupling) share a common input syntax. This syntax consists of a selection (the nuclei for which you want to do something) and a list of actions you want the program to take for these nuclei inside curly brackets. A complete list of possible keywords for the eprnmr module can be found in EPRNMR - keywords for magnetic properties . It's best explained on an example. The following</p>
+<pre><code>%eprnmr nuclei = all O { aiso, adip, fgrad, shift, ist=17 } end</code></pre>
+<p>would select all oxygen atoms in the molecule, pick the 17 O isotope, and request isotropic + spin-dipolar hyperfine couplings, the electric field gradient, and NMR shielding to be calculated for them.</p>
+<pre><code>Á Warning All nuclei specified on one line will be assigned with the same isotopic mass (and other parameters)!</code></pre>
+<p>Table 5.18: %eprnmr block input keywords relevant for Mössbauer calculations</p>
+<table><tbody><tr><th>Key- word</th><th>Selection</th><th>What to do</th><th>Description</th></tr><tr><td>nuclei</td><td>all &lt;type&gt;</td><td></td><td>Selects all nuclei of element &lt;type&gt;</td></tr><tr><td></td><td>i1,i2,i3.. .</td><td></td><td>Selects atoms i1 , i2 , i3 …(starts at 1!)</td></tr><tr><td></td><td></td><td>{ rho }</td><td>Calculates density at nucleus for selection</td></tr><tr><td></td><td></td><td>{ fgrad }</td><td>Calculates EFG for selection</td></tr><tr><td></td><td></td><td>{ ist=&lt;N&gt; }</td><td>Selects isotope &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ QQQ=&lt;N&gt; }</td><td>Sets quadrupole moment to &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ III=&lt;N&gt; }</td><td>Sets nuclear spin to &lt;N&gt; for selection</td></tr><tr><td></td><td></td><td>{ fgrad, rho, ist=57 }</td><td>Example requesting multiple actions for selec- tion</td></tr></tbody></table>
+<h2>5.28 The Spin-Orbit Coupling Operator</h2>
+<p>Several variants of spin-orbit coupling operators can be used for property calculations [715]. They are based on effective potential and mean-field approaches, and have various parameters that can be selected via the %rel block. Note that the SOMF operator depends on the density matrix, so the operator itself can differ for example between a CASSCF and an MRCI calculation.</p>
+<p>Note : The defaults have slightly changed in ORCA 5.0, see SOCFlags in the following.</p>
+<p>(continued from previous page)</p>
+<pre><code>1 # effective nuclear charge 2 # DEPRECATED 3 # mean-field/effective potential (default) 4 # DEPRECATED # ---------------------------------------------------# Flags for construction of potential; operative # only for SOCType 3. # ---------------------------------------------------SOCFlags 1,4,3,0 # default if nothing is specified # 1,3,3,0 default if RI is applied and AuxJ available # e.g. when using !RIJCOSX (default for DFT) or !RIJONX # Flag 1 = 0 -do not include 1-electron terms # = 1 -do include 1-electron terms # Flag 2 = 0 -do not include Coulomb terms # = 1 -compute Coulomb terms fully numeric # = 2 -compute Coulomb term seminumeric # = 3 -compute Coulomb term with RI approx # = 4 -compute Coulomb term exactly # Flag 3 = 0 -do not include exchange terms # = 1 -do include local X-alpha exchange # the X-Alpha parameter can be chosen via # % rel Xalpha 0.7 (default) # = 2 -same as 1 but with sign reversed # = 3 -exchange via one-center exact # integrals including the spin-other # orbit interaction # = 4 -all exchange terms full analytic # (this is expensive) # Flag 4 = 0 -do not include DFT local correlation # terms # = 1 -do include local DFT correlation (here # this is done with VWN5) # SOCMaxCenter 4 # max. number of centers to include in # the integrals (not fully consistently # implemented yet; better leave equal to 4) # The following simple input equivalents can also be used: # SOMF(1X) = SOCType 3, SOCFlags 1,2,3,0 and SOCMaxCenter 4 # RI-SOMF(1X) = SOCType 3, SOCFlags 1,3,3,0 and SOCMaxCenter 4 # VEFF-SOC = SOCType 3, SOCFlags 1,3,1,1 and SOCMaxCenter 4 # VEFF(-2X)-SOC = SOCType 3, SOCFlags 1,3,2,1 and SOCMaxCenter 4 # AMFI = SOCType 3, SOCFlags 1,4,3,0 and SOCMaxCenter 1 # NOTE: If you choose the RI option you need to specify an auxiliary basis␣ ↪ → set # even if the underlying SCF calculation does not make use of any form # of RI! # -----------------------------------------------# For the effective nuclear charge SOC operator # the nuclear charges can be adjusted. # -----------------------------------------------Zeff[26] 0.0 # set the effective nuclear charge # of iron (Z = 26) to zero # -----------------------------------------------# Neglecting SOC contributions from particular # atoms # -----------------------------------------------SOCOff 0,5 # turn off the SOC for atoms 0 and 5 # this makes sense if the SOC operator # has only one center contributions # (e.g. effective nuclear charge)</code></pre>
+<p>Simple input equivalents are listed in Table 5.19 and described in more detail in [715]. More details on the (depre-</p>
+<p>cated) AMFI-A approach which uses pre-calculated atomic densities can be found in [716].</p>
+<p>The Breit-Pauli spin-orbit coupling operator is given by:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>with the one- and two-electron contributions</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+<h2>Note</h2>
+<p>One attractive possibility is to represent the SOC by the spin-orbit mean-field (SOMF) method developed by Hess et al.,[717] widely used in the AMFI program by Schimmelpfennig [718] and discussed in detail by Berning et al.[719] as well as in ref. [715]. In terms of an (orthonormal) one-electron basis, the matrix elements of the SOMF operator are:</p>
+<p>and:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>^ l iA = ( ^ r i -R A ) × ^ p i is the angular momentum of the i 'th electron relative to nucleus A . The vector ^ r iA = ^ r i -R A of magnitude r iA is the position of the i 'th electron relative to atom A . Likewise, the vector ^ r ij = ^ r i -^ r j of magnitude r ij is the position of the i th electron relative to electron j and ^ l ij = ( ^ r i -^ r j ) × ^ p i is its angular momentum relative to this electron. P is the charge density matrix of the electron ground state ( P pq = 〈 0 SS ∣ ∣ E p q ∣ ∣ 0 SS 〉 with E p q = a + pβ a qβ + a + pα a qα where a + pσ and a qσ are the usual Fermion creation and annihilation operators).</p>
+<p>This operator would be hard to handle exactly; therefore it is common to introduce mean field and/or effective potential approaches in which the operator is written as an effective one-electron operator:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The simplest approximation is to simply use the one-electron part and regard the nuclear charges as adjustable parameters. Reducing their values from the exact nuclear charge is supposed to account in an average way for the screening of the nuclear charge by the electrons. In our code we use the effective nuclear charges of Koseki et al. ([720, 721, 722]) This approximation introduces errors which are usually smaller than 10% but sometimes are larger and may approach 20% in some cases. The approximation is best for first row main group elements and the first transition row (2p and 3d elements). For heavier elements it becomes unreliable.</p>
+<p>Amuch better approximation is to take the two-electron terms into account precisely. Without going into details here - the situation is as in Hartree-Fock (or density functional) theory and one gets Coulomb, exchange and correlation terms. The correlation terms (evaluated in a local DFT fashion) are negligible and can be safely neglected. They are optionally included and are not expensive computationally. The Coulomb terms is (after the one-electron term) the</p>
+<p>second largest contribution and is expensive to evaluate exactly. The situation is such that in the Coulomb-part the spin-other orbit interaction (the second term in the two-electron part) does not contribute and one only has to deal with the spin-own-orbit contribution. The exact evaluation is usually too expensive to evaluate. The RI and seminumeric approximation are much more efficient and introduce only minimal errors (on the order of usually not more than 1 ppm in g-tensor calculations for example) and are therefore recommended. The RI approximation is computationally more efficient. Please note that you have to specify an auxiliary basis set to take advantage of the RI approximation, even if the preceding SCF calculation does not make use of any form of RI. The one-center approximation to the Coulomb term introduces much larger errors. The fully numeric method is both slower and less accurate and is not recommended.</p>
+<p>The exchange term has contributions from both the spin-own-orbit and spin-other-orbit interaction. These are taken both into account in the mean-field approximation which is accessed by Flag 3 = 3 . Here a one-center approximation is much better than for the Coulomb term since both the integrals and the density matrix elements are short ranged. Together with the Coulomb term this gives a very accurate SOC operator which is recommended. The DFTVeff operator suffers from not treating the spin-other-orbit part in the exchange which gives significant errors (also, local DFT underestimates the exchange contributions from the spin-same-orbit interaction by some 10% relative to HF but this is not a major source of error). However, it is interesting to observe that in the precise analytical evaluation of the SOMF operator, the spin-other-orbit interaction is exactly -2 times the spin-own-orbit interation. Thus, in the DFT framework one gets a much better SOC operator if the sign of the DFT exchange term is simply reversed! This is accessed by Flag 3 = 2 .</p>
+<h2>5.28.1 Exclusion of Atomic Centers</h2>
+<p>In ORCA it is possible to change the spin-orbit coupling operator in order to exclude contributions from user-defined atoms. This approach can be useful, for example, in quantifying the contribution of the ligands to the zero-field splitting (ZFS); for an application of this method see Ref. [723].</p>
+<p>This is illustrated for the calculation of the SOC contribution to the ZFS of the triplet oxygen molecule. Using the input below we start by a normal calculation of the ZFS, including both oxygen atoms. Note that we use here the effective nuclear charge operator. This is required as not all implemented SOC operators are compatible with the decomposition in terms of individual centers contributions.</p>
+<pre><code>! def2-TZVP def2-TZVP/c %casscf nel 8 norb 6 mult 3,1 nroots 1,3 rel dosoc true end end %rel SOCType 1 end *xyz 0 3 O 0 0 0 O 0 0 1.207 *</code></pre>
+<p>The calculated value of the D parameter is approximately 2.573 cm -1 . In a second calculation we exclude the contribution from the first oxygen atom. For this we change the %rel block to the one below.</p>
+<pre><code>%rel SOCType 1 SOCOff 0 end</code></pre>
+<p>Nowthe D parameter is calculated to be approximately 0.643 cm -1 , a result that deviates quite significantly from half of the value calculated previously, implying that non-additive effects are important. In addition to the effective nuclear</p>
+<p>charge operator, the AMFI-A operator described previously can be used. Given that this is based on precalculated atomic densities, it might be preferred for heavier elements where the effective nuclear charge operator becomes unreliable. The method is not limited to CASSCF calculations as described above, and can be used in DFT, MRCI and ROCIS calculations.</p>
+<h2>5.28.2 Simple Input Keywords</h2>
+<table><caption><div class="caption">Table 5.19: Simple input keywords to choose the SOC operator handling and their equivalent %rel block settings</div></caption><tbody><tr><th>Keyword</th><th>SOCType</th><th>SOCFlags</th><th>SOCMaxCenter</th></tr><tr><td>ZEFF-SOC</td><td>1</td><td></td><td></td></tr><tr><td>SOMF</td><td>3</td><td>1,4,4,0</td><td>4</td></tr><tr><td>SOMF(1X)</td><td>3</td><td>1,2,3,0</td><td>4</td></tr><tr><td>RI-SOMF</td><td>3</td><td>1,3,3,0</td><td>4</td></tr><tr><td>RI-SOMF(1X)</td><td>3</td><td>1,3,3,0</td><td>4</td></tr><tr><td>SOMF(4X)</td><td>3</td><td>1,2,4,0</td><td>4</td></tr><tr><td>RI-SOMF(4X)</td><td>3</td><td>1,3,4,0</td><td>4</td></tr><tr><td>VEFF-SOC</td><td>3</td><td>1,3,1,1</td><td>4</td></tr><tr><td>VEFF(-2X)-SOC</td><td>3</td><td>1,3,2,1</td><td>4</td></tr><tr><td>AMFI</td><td>3</td><td>1,4,3,0</td><td>1</td></tr></tbody></table>
+<h2>5.29 Broken-Symmetry Wavefunctions and Exchange Couplings</h2>
+<p>Apopular way to estimate the phenomenological parameter J AB that enters the Heisenberg-Dirac-van Vleck Hamiltonian which parameterizes the interaction between two spin systems is the 'broken-symmetry' formalism. The phenomenological Hamiltonian is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>It is easy to show that such a Hamiltonian leads to a 'ladder' of spin states from S = S A + S B down to S = | S A -S B | . If the parameter J AB is positive the systems 'A' and 'B' are said to be ferromagnetically coupled because the highest spin-state is lowest in energy while in the case that J AB is negative the coupling is antiferromagnetic and the lowest spin state is lowest in energy.</p>
+<p>In the broken symmetry formalism one tries to obtain a wavefunction that breaks spatial (and spin) symmetry. It may be thought of as a 'poor man's MC-SCF' that simulates a multideterminantal character within a single determinant framework. Much could be said about the theoretical advantages, disadvantages, problems and assumptions that underly this approach. Here, we only want to show how this formalism is applied within ORCA.</p>
+<p>For N A unpaired electrons localized on 'site A' and N B unpaired electrons localized on a 'site B' one can calculate the parameter J AB from two separate spin-unrestricted SCF calculations: (a) the calculation for the high-spin state with S = ( N A + N B ) 2 and (b) the 'broken symmetry' calculation with M S = ( N A -N B ) 2 that features N A spin-up electrons that are quasi-localized on 'site A' and N B spin-down electrons that are quasi-localized on 'site B'. Several formalisms exist to extract J AB: [724, 725, 726, 727, 728, 729].</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>We prefer the last definition (Eq. (5.167)) because it is approximately valid over the whole coupling strength regime while the first equation implies the weak coupling limit and the second the strong coupling limit.</p>
+<p>In order to apply the broken symmetry formalism use:</p>
+<pre><code>%scf BrokenSym NA,NB end</code></pre>
+<p>The program will then go through a number of steps. Essentially it computes an energy and wavefunction for the high-spin state, localizes the orbitals and reconverges to the broken symmetry state.</p>
+<h2>Ϫ Caution</h2>
+<p>Make sure that in your input coordinates 'site A' is the site that contains the larger number of unpaired electrons!</p>
+<p>Most often the formalism is applied to spin coupling in transition metal complexes or metal-radical coupling or to the calculation of the potential energy surfaces in the case of homolytic bond cleavage. In general, hybrid DFT methods appear to give reasonable semiquantitative results for the experimentally observed splittings.</p>
+<p>As an example consider the following simple calculation of the singlet-triplet splitting in a stretched Li 2 molecule:</p>
+<pre><code># # Example of a broken symmetry calculation # ! B3LYP DEF2-SVP TightSCF %scf BrokenSym 1,1 end * xyz 0 3 Li 0 0 0 Li 0 0 4 *</code></pre>
+<p>There is a second mechanism for generating broken-symmetry solutions in ORCA. This mechanism uses the individual spin densities and is invoked with the keywords FlipSpin and FinalMs . The strategy is to exchange the α and β spin blocks of the density on certain user-defined centers after converging the high-spin wavefunction. With this method arbitrary spin topologies should be accessible. The use is simple:</p>
+<pre><code># # Example of a broken symmetry calculation using the "FlipSpin" feature # ! B3LYP DEF2-SVP TightSCF %scf FlipSpin 1 # Flip spin is a vector and you can give a list of atoms # on which you want to have the spin flipped. For example # FlipSpin 17,38,56 # REMEMBER: counting starts at atom 0! FinalMs 0 # The desired Ms value of the broken symmetry determinant. # This value MUST be given since the program cannot determine it by itself. end * xyz 0 3 Li 0 0 0 Li 0 0 4 *</code></pre>
+<p>Finally, you may attempt to break the symmetry by using the SCF stability analysis feature (see Section SCF Stability Analysis ). The ground spin state can be obtained by diagonalizing the above spin Hamiltonian through ORCA-ECA utility (see orca_eca ).</p>
+<h2>5.29.1 Approximate Spin Projection Method</h2>
+<p>The approximate spin projection (AP) method, proposed by Yamaguchi and co-workers, is a technique to remove the spin contamination from exchange coupling constants.[728, 730, 731] In this scheme, the energy of a system is given by</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, S BS Z is the z -component of the total spin for the BS state ( S BS Z = ( N α -N β )/2 ). Alternatively, one can adopt Noodleman's scheme,[726] where α is calculated as follows</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>or Ruiz's scheme,[732] with α equal to</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The AP method is requested via the tag APMethod in the %scf block:</p>
+<pre><code>%scf BrokenSym NA,NB APMethod 3 # 1 = Noodleman # 2 = Ruiz # 3 = Yamaguchi end</code></pre>
+<p>The default is APMethod 0 , which corresponds to a normal BS calculation. Yamaguchi's AP method is available for single point energy calculations and geometry optimizations. If we run a geometry optimization in the context of Yamaguchi's AP method, then, the gradient of equation (5.168) w.r.t a nuclear displacement X reads as</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The last term contains the derivative ∂α ∂X . ORCA uses the formalism proposed by Saito and Thiel, which involves solving the CP-SCF equations in each geometry optimization cycle.[733] The cost of such a calculation is higher than using Noodleman's or Ruiz's schemes, where ∂α ∂X = 0 .</p>
+<h2>5.30 Decomposition of the Magnetic Exchange Coupling</h2>
+<p>The Decomposition method ([734, 735, 736, 737]) aims to extract the main physical contributions to the magnetic exchange coupling J ab between two magnetic sites A and B based on successive relaxation of high-spin (HS) and broken symmetry determinants. The present implementation in ORCA refers to systems involving two magnetic centres and is based on the use of the Yamaguchi formula. For systems involving more centres, the Yamaguchi formula is invalid, and the decomposition implies a different strategy for which an input file generator to perform the decomposition with ORCA is available here.([738, 739])</p>
+<p>Based on the Heisenberg-Dirac-van Vleck Hamiltonian,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>magnetic exchange coupling may be decomposed into three main physical contributions: i) the ferromagnetic direct exchange J 0 between the magnetic centres, ii) the antiferromagnetic kinetic exchange contribution ∆ J KE reflecting</p>
+<p>The parameter α is calculated as</p>
+<p>the relaxation of the magnetic centres in the low-spin state, and iii) the spin polarisation effects ∆ J SP which corresponds to the differential response of the core (non-magnetic) orbitals in the HS and BS determinants and which may be ferro- or antiferromagnetic, depending on the system.</p>
+<p>To extract these contributions from DFT or HF calculations, a set of starting orbital is obtained from an HS state calculation, either in the restricted open-shell formalism (HS.RO) or the quasi-restricted open-shell formalism (HS.qRO). This defines a set of doubly occupied molecular orbitals and a set of singly-occupied orbitals (SOMOs) according to the number of unpaired electrons. The SOMOs are then localised using by default the Pipek-Mezey method resulting in a set of localised magnetic orbitals. By flipping the spin of the electrons associated with one centre, a first BS determinant is obtained for which the energy is computed without optimising any orbital (BS.NOpt). Using the HS.RO and BS.NOpt determinants, the first direct exchange contribution may be calculated as,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>To compute the second kinetic exchange contribution, from the BS.NOpt determinant, magnetic orbitals are relaxed in the field of the frozen core (non-magnetic) orbitals, resulting in a new BS frozen core determinant (BS.FC). Using the BS.FC and HS.RO or HS.qRO determinants and retrieving the direct exchange contribution, the kinetic exchange may be computed,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The contribution from the spin polarisation effects is computed by allowing the relaxation of the core orbitals while keeping the magnetic orbitals frozen (FM) from the HS.RO/HS.qRO and the BS.NOpt determinants, resulting in the HS.FM and BS.FM determinants, respectively. Using these two new determinants and retrieving the direct exchange contribution, the spin polarisation effects may be evaluated as,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In addition to the usual use of the Yamaguchi formula with fully relaxed HS and BS determinants, the magnetic exchange coupling may be evaluated by summing these three contributions up, the so-called Recomposition method,</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Or with the HS.qRO,</p>
+<p>In order to use the decomposition:</p>
+<pre><code>%scf DecompositionPath NA,NB end</code></pre>
+<p>with NA and NB the number of unpaired eletrons in the sites A and B , respectively. The program will then go through several steps to perform the decomposition as described above. To use the HS.RO as reference definition of the orbitals, HFTyp=ROHF must be used whilst, for HS.qRO, it must be HFTyp=UHF.</p>
+<h2>Ϫ Caution</h2>
+<p>Make sure that in your input coordinates 'site A' is the site that contains the larger number of unpaired electrons!</p>
+<h2>5.31 Magnetic Properties Through Quasi Degenerate Perturbation Theory</h2>
+<h2>5.31.1 Quasi Degenerate Perturbation Theory (QDPT) in a nutshell</h2>
+<p>Quasi Degenerate Perturbation Theory offers a versatile and accurate approach to to a number of magnetic properties for basically every wavefunction-based excited state method.</p>
+<p>In a nutshell, at the non-relativistic limit for every excited state single- or multi-reference wavefunction-based method, bearing a CASSCF, MRCI, or a ROCIS type of zeroth order wavefunction, one can set up an excitation problem that is a combination of the zeroth order wavefunction and excited spin-adapted configuration state functions (CSFs) ∣ ∣ Φ SS µ 〉 . That takes the form:</p>
+<p>Here, the upper indices SS stand for a wavefunction of the spin quantum number S and spin projection M S = S . Since the BO Hamiltonian does not contain any complex-valued operator, the solutions ∣ ∣ Ψ SS I 〉 may be chosen to be real-valued.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Obtaining a solution to the above eigenvalue problem provides the coefficients with which the CSFs enter into the chosen wavefunction, as well as the eigenstates of the spin-free operator. These eigenstates may be used to expand towards the respective relativistic eigenstates by setting up the relevant quasi-degenerate eigenvalue problem. In fact, the spin-orbit coupling (SOC) and spin-spin coupling (SSC) effects along with the Zeeman interaction can be included by means of the quasi-degenerate perturbation theory (QDPT). In this approach, the SOC, SSC, and Zeeman operators are calculated in the basis of pre-selected solutions of the BO Hamiltonian { Ψ SM I } .</p>
+<p>Diagonalization of this matrix yields the energy levels and eigenvectors of the coupled states. These eigenvectors in fact represent linear combinations of the solutions of ˆ H BO with complex coefficients.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>The effective one-electron SOC operator in second quantized form can be written as [715]:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Here, ˆ a ↑ p and ˆ b ↑ p stand for creation of α and β electrons, respectively; ˆ a p and ˆ b p represent the corresponding annihilation operators. The matrix elements z -pq = z x pq -iz y pq , z + pq = z x pq + iz y pq , and z 0 pq = z z pq (upper x , y , z indices denote the Cartesian components) are constructed from the matrix elements described in section Zero-Field Splitting .</p>
+<p>In this concept, the SOC Hamiltonian reads:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where m represents the standard vector operator components. ( S ′ 1 M ′ m ∣ ∣ ∣ ∣ S M ) is a Clebsch-Gordon coefficient that has a single numerical value that is tabulated. It satisfies certain selection rules and contains all of the M-dependence of the SOC matrix elements. The quantity Y SS ′ II ′ ( m ) is a reduced matrix element. It only depends on the standard components of the two states involved. There are only three cases of non-zero Y SS ′ II ′ ( m ) , which arise from state pairs that either have the same total spin or differ by one unit.[656]</p>
+<p>The SSC Hamiltonian reads:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p≯</p>
+</div>
+</body>
+</html>
